@@ -9,5 +9,5 @@ import com.fairagora.verifik8.v8web.data.domain.reg.farm.RegEntityFarmPond;
 public interface RegEntityFarmPondRepository extends JpaRepository<RegEntityFarmPond, Long> {
 
 	List<RegEntityFarmPond> findByFarmId(Long id);
-
+ 
 }

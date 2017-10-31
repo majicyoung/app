@@ -34,7 +34,7 @@ public class FarmPondsController extends AbstractV8Controller {
 		preparePage(farm, mv);
 
 		FarmPondDto dto = new FarmPondDto();
-		dto.setFarmId(id);
+		dto.setFarm(id);
 		mv.addAttribute("pondDto", dto);
 
 		return "farms/ponds";
@@ -59,7 +59,7 @@ public class FarmPondsController extends AbstractV8Controller {
 
 		preparePage(farm, mv);
 
-		dto.setFarmId(id);
+		dto.setFarm(id);
 		mv.addAttribute("pondDto", dto);
 
 		return "redirect:/farm/" + id + "/ponds.html";

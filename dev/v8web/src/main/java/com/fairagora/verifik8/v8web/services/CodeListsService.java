@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.fairagora.verifik8.v8web.data.domain.cl.CLCommodities;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLCompanyPositionType;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLCountry;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLHazardousWorkType;
@@ -13,6 +14,7 @@ import com.fairagora.verifik8.v8web.data.domain.cl.CLPondType;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLProductType;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLQuantityUnit;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLSpecies;
+import com.fairagora.verifik8.v8web.data.repo.cl.CLCommoditiesRepository;
 import com.fairagora.verifik8.v8web.data.repo.cl.CLCompanyPositionTypeRepository;
 import com.fairagora.verifik8.v8web.data.repo.cl.CLCountryRepository;
 import com.fairagora.verifik8.v8web.data.repo.cl.CLHazardousWorkTypeRepository;
@@ -33,6 +35,9 @@ public class CodeListsService {
 
 	@Autowired
 	private CLPoundTypeRepository pondTypesRepository;
+
+	@Autowired
+	private CLCommoditiesRepository commoditiesRepository;
 
 	@Autowired
 	private CLHazardousWorkTypeRepository hazardousWorkTypeRepository;
@@ -131,6 +136,10 @@ public class CodeListsService {
 
 	public List<CLPondType> listActivePondTypes() {
 		return pondTypesRepository.findByEnabledTrueOrderByName();
+	}
+
+	public List<CLCommodities> listActiveCommodities() {
+		return commoditiesRepository.findByEnabledTrueOrderByName();
 	}
 
 }

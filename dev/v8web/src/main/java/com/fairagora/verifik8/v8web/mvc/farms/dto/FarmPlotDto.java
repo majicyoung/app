@@ -2,8 +2,7 @@ package com.fairagora.verifik8.v8web.mvc.farms.dto;
 
 import com.fairagora.verifik8.v8web.mvc.infra.dtomapping.commons.V8MeasureDto;
 
-public class FarmPondDto {
-
+public class FarmPlotDto {
 	protected Long id;
 
 	protected Long farm;
@@ -12,13 +11,11 @@ public class FarmPondDto {
 
 	protected String description;
 
-	protected Long type;
+	protected Long commodities;
 
-	protected Long species;
+	protected boolean irrigated;
 
-	protected V8MeasureDto volume;
-
-	protected String comment;
+	protected V8MeasureDto size;
 
 	public Long getId() {
 		return id;
@@ -52,35 +49,28 @@ public class FarmPondDto {
 		this.description = description;
 	}
 
-	public Long getType() {
-		return type;
+	public Long getCommodities() {
+		return commodities;
 	}
 
-	public void setType(Long type) {
-		this.type = type;
+	public void setCommodities(Long commodities) {
+		this.commodities = commodities;
 	}
 
-	public Long getSpecies() {
-		return species;
+	public boolean isIrrigated() {
+		return irrigated;
 	}
 
-	public void setSpecies(Long species) {
-		this.species = species;
+	public void setIrrigated(boolean irrigated) {
+		this.irrigated = irrigated;
 	}
 
-	public V8MeasureDto getVolume() {
-		return volume;
+	public V8MeasureDto getSize() {
+		return size;
 	}
 
-	public void setVolume(V8MeasureDto volume) {
-		this.volume = volume;
+	public void setSize(V8MeasureDto size) {
+		this.size = size;
 	}
 
-	public String getComment() {
-		return comment;
-	}
-
-	public void setComment(String comment) {
-		this.comment = comment;
-	}
 }

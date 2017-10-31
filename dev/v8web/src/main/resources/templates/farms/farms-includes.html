@@ -10,8 +10,8 @@
 			<li id="farmtab_staff"><a th:href="@{${'/farm/'+farmId+'/staff.html'}}" th:text="#{farm.contact_staff}">farm.contact_staff</a></li>
 			<li id="farmtab_environmental"><a th:href="@{${'/farm/'+farmId+'/environmental.html'}}" th:text="#{farm.env_details}">farm.env_details</a></li>
 			<li id="farmtab_suppliers"><a th:href="@{${'/farm/'+farmId+'/suppliers.html'}}" th:text="#{default.suppliers}">default.suppliers</a></li>
-			<li id="fartab_ponds"><a th:href="@{${'/farm/'+farmId+'/ponds.html'}}" th:text="#{default.ponds}">default.ponds</a></li>
-			<li id="fartab_fields"><a th:href="@{${'/farm/'+farmId+'/plots.html'}}" th:text="#{default.plots}">default.plots</a></li>
+			<li id="farmtab_ponds"><a th:href="@{${'/farm/'+farmId+'/ponds.html'}}" th:text="#{default.ponds}">default.ponds</a></li>
+			<li id="farmtab_plots"><a th:href="@{${'/farm/'+farmId+'/plots.html'}}" th:text="#{default.plots}">default.plots</a></li>
 		</th:block>
 		<th:block th:if="${newEntity!=null AND newEntity}">
 			<li><a href="#tab_1" data-toggle="tab" th:text="#{farm.profile}">farm.profile</a></li>

@@ -1,5 +1,7 @@
 package com.fairagora.verifik8.v8web.mvc.farms;
 
+import com.fairagora.verifik8.v8web.data.domain.cl.CLCommodities;
+
 import com.fairagora.verifik8.v8web.data.domain.cl.CLCountry;
 
 import com.fairagora.verifik8.v8web.data.domain.cl.CLPondType;
@@ -16,6 +18,8 @@ import com.fairagora.verifik8.v8web.data.domain.reg.RegEntity;
 
 import com.fairagora.verifik8.v8web.data.domain.reg.farm.RegEntityFarmDetails;
 
+import com.fairagora.verifik8.v8web.data.domain.reg.farm.RegEntityFarmPlot;
+
 import com.fairagora.verifik8.v8web.data.domain.reg.farm.RegEntityFarmPond;
 
 import com.fairagora.verifik8.v8web.data.domain.reg.farm.RegEntityStaffManagement;
@@ -23,6 +27,8 @@ import com.fairagora.verifik8.v8web.data.domain.reg.farm.RegEntityStaffManagemen
 import com.fairagora.verifik8.v8web.mvc.farms.dto.FarmEnvironmentalDto;
 
 import com.fairagora.verifik8.v8web.mvc.farms.dto.FarmFormDto;
+
+import com.fairagora.verifik8.v8web.mvc.farms.dto.FarmPlotDto;
 
 import com.fairagora.verifik8.v8web.mvc.farms.dto.FarmPondDto;
 
@@ -44,7 +50,7 @@ import org.springframework.stereotype.Component;
 
     value = "org.mapstruct.ap.MappingProcessor",
 
-    date = "2017-10-31T14:29:44+0100",
+    date = "2017-10-31T16:16:07+0100",
 
     comments = "version: 1.1.0.Final, compiler: javac, environment: Java 1.8.0_112 (Oracle Corporation)"
 
@@ -303,6 +309,8 @@ public class RegFarmDTOMapperImpl implements RegFarmDTOMapper {
 
         dto.setId( m.getId() );
 
+        dto.setFarm( entityDtoMapper.toReference( m.getFarm() ) );
+
         dto.setNumber( m.getNumber() );
 
         dto.setDescription( m.getDescription() );
@@ -340,6 +348,8 @@ public class RegFarmDTOMapperImpl implements RegFarmDTOMapper {
 
         m.setId( dto.getId() );
 
+        m.setFarm( entityDtoMapper.resolve( dto.getFarm(), RegEntity.class ) );
+
         m.setType( entityDtoMapper.resolve( dto.getType(), CLPondType.class ) );
 
         m.setSpecies( entityDtoMapper.resolve( dto.getSpecies(), CLSpecies.class ) );
@@ -364,6 +374,80 @@ public class RegFarmDTOMapperImpl implements RegFarmDTOMapper {
         m.setNumber( dto.getNumber() );
 
         m.setDescription( dto.getDescription() );
+    }
+
+    @Override
+
+    public void toDto(RegEntityFarmPlot m, FarmPlotDto dto) {
+
+        if ( m == null ) {
+
+            return;
+        }
+
+        dto.setId( m.getId() );
+
+        dto.setFarm( entityDtoMapper.toReference( m.getFarm() ) );
+
+        dto.setNumber( m.getNumber() );
+
+        dto.setDescription( m.getDescription() );
+
+        dto.setCommodities( entityDtoMapper.toReference( m.getCommodities() ) );
+
+        dto.setIrrigated( m.isIrrigated() );
+
+        if ( m.getSize() != null ) {
+
+            if ( dto.getSize() == null ) {
+
+                dto.setSize( new V8MeasureDto() );
+            }
+
+            toDto( m.getSize(), dto.getSize() );
+        }
+
+        else {
+
+            dto.setSize( null );
+        }
+    }
+
+    @Override
+
+    public void fillEntity(FarmPlotDto dto, RegEntityFarmPlot m) {
+
+        if ( dto == null ) {
+
+            return;
+        }
+
+        m.setId( dto.getId() );
+
+        m.setFarm( entityDtoMapper.resolve( dto.getFarm(), RegEntity.class ) );
+
+        m.setNumber( dto.getNumber() );
+
+        m.setDescription( dto.getDescription() );
+
+        m.setCommodities( entityDtoMapper.resolve( dto.getCommodities(), CLCommodities.class ) );
+
+        m.setIrrigated( dto.isIrrigated() );
+
+        if ( dto.getSize() != null ) {
+
+            if ( m.getSize() == null ) {
+
+                m.setSize( new V8Measure() );
+            }
+
+            fillEntity( dto.getSize(), m.getSize() );
+        }
+
+        else {
+
+            m.setSize( null );
+        }
     }
 
     @Override

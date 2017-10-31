@@ -63,7 +63,7 @@
 											<form th:action="@{'/farm/'+${farmId}+'/pond.html'}" th:object="${pondDto}" id="pondEditorForm" method="post">
 												<h4 class="form-pond-title" th:text="#{farm.add_pond}"></h4>
 												<input type="hidden" id="pondId" th:field="*{id}" />
-												<input type="hidden" id="farmId" th:field="*{farmId}" />
+												<input type="hidden" id="farm" th:field="*{farm}" />
 												<div class="form-group row">
 													<label for="number" class="col-xs-3 control-label" th:text="|#{farm.pond_number}*|">farm.pond_number*</label>
 													<div class="col-xs-9">

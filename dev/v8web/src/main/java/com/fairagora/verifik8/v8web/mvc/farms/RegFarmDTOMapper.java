@@ -10,10 +10,12 @@ import com.fairagora.verifik8.v8web.data.domain.commons.Attachment;
 import com.fairagora.verifik8.v8web.data.domain.commons.V8Measure;
 import com.fairagora.verifik8.v8web.data.domain.reg.RegEntity;
 import com.fairagora.verifik8.v8web.data.domain.reg.farm.RegEntityFarmDetails;
+import com.fairagora.verifik8.v8web.data.domain.reg.farm.RegEntityFarmPlot;
 import com.fairagora.verifik8.v8web.data.domain.reg.farm.RegEntityFarmPond;
 import com.fairagora.verifik8.v8web.data.domain.reg.farm.RegEntityStaffManagement;
 import com.fairagora.verifik8.v8web.mvc.farms.dto.FarmEnvironmentalDto;
 import com.fairagora.verifik8.v8web.mvc.farms.dto.FarmFormDto;
+import com.fairagora.verifik8.v8web.mvc.farms.dto.FarmPlotDto;
 import com.fairagora.verifik8.v8web.mvc.farms.dto.FarmPondDto;
 import com.fairagora.verifik8.v8web.mvc.farms.dto.StaffGeneralInfoSto;
 import com.fairagora.verifik8.v8web.mvc.infra.dtomapping.EntityDtoMapper;
@@ -44,6 +46,10 @@ public interface RegFarmDTOMapper {
 	void toDto(RegEntityFarmPond m, @MappingTarget FarmPondDto dto);
 
 	void fillEntity(FarmPondDto dto, @MappingTarget RegEntityFarmPond m);
+
+	void toDto(RegEntityFarmPlot m, @MappingTarget FarmPlotDto dto);
+
+	void fillEntity(FarmPlotDto dto, @MappingTarget RegEntityFarmPlot m);
 
 	void toDto(V8Measure m, @MappingTarget V8MeasureDto dto);
 
