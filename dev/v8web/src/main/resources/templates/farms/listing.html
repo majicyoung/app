@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html layout:decorator="inc/main-layout" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+ <div layout:fragment="content">
+ 
+ <div class="row">
+    <div class="col-xs-12">
+      <div class="box">
+        <div class="box-header with-border">
+          <h3 class="box-title pull-left" th:text="#{farm.list}">user.list</h3>
+          <div class="alert-wrapper col-xs-6">
+            <div class="alert alert-success alert-dismissible" th:if="${v8p.message != null}">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                <h4 class="pull-left"><i class="icon fa fa-check"></i> <span th:text="#{default.success}">default.success</span> &nbsp;&nbsp;</h4> <span th:text="${v8p.message}">{{ Session::get('message') }}</span>
+            </div>
+          </div>
+          <div class="box-tools">
+            <a th:href="@{'/farms/create.html'}" class="btn btn-sm btn-flat btn-success"><i class="fa fa-plus"></i> <span th:text="#{farm.add}">farm.add</span></a>
+          </div>
+        </div>
+        <div class="box-body">
+          <table class="table table-hover table-striped table-bordered datatable">
+            <thead>
+            <tr>
+              <th>#</th>
+              <th th:text="#{farm.name}">farm.name</th>
+              <th th:text="#{default.location}">default.location</th>
+              <th th:text="#{farm.staffCount}">staff.number</th>
+              <th th:text="#{farm.pondsCount}">default.ponds_number</th>
+              <th th:text="#{default.fieldsCount}">default.fields_number</th>
+              <th th:text="#{default.area}">default.area</th>
+              <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="farm : ${farms}">
+              <td th:inline="text" th:text="${farm.id}">[[${farm.id}]]</td>
+              <td th:inline="text" th:text="${farm.name}">[[${farm.name}]]</td>
+              <td th:inline="text">[[${farm.address.city}]]</td>              
+              <td th:inline="text">[[${farm.staffCount}]]</td>
+              <td th:inline="text">[[${farm.pondsCount}]]</td>
+              <td th:inline="text">[[${farm.fieldsCount}]]</td>
+              <td th:inline="text">[[${farm.size}]]</td>              
+              <td align="center">
+                <a th:href="@{'/farm/'+${farm.id}+'/edit.html'}" class="btn btn-sm btn-flat btn-primary"><i class="fa fa-edit"></i></a>
+                <form class="form-horizontal" th:action="@{'/farm/'+${farm.id}+'/delete.html'}" method="post" style="display:inline-block;" onsubmit="return confirm('Do you want to delete this farm?');">
+               	 	<button type="submit" class="btn btn-sm btn-flat btn-danger"><i class="fa fa-trash"></i></button>
+                </form>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+</div>
+ 
+ </div>
+
+</html>

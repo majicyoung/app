@@ -1,0 +1,56 @@
+package com.fairagora.verifik8.v8web.mvc.farms;
+
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
+import org.mapstruct.ReportingPolicy;
+
+import com.fairagora.verifik8.v8web.data.domain.commons.Address;
+import com.fairagora.verifik8.v8web.data.domain.commons.Attachment;
+import com.fairagora.verifik8.v8web.data.domain.commons.V8Measure;
+import com.fairagora.verifik8.v8web.data.domain.reg.RegEntity;
+import com.fairagora.verifik8.v8web.data.domain.reg.farm.RegEntityFarmDetails;
+import com.fairagora.verifik8.v8web.data.domain.reg.farm.RegEntityFarmPond;
+import com.fairagora.verifik8.v8web.data.domain.reg.farm.RegEntityStaffManagement;
+import com.fairagora.verifik8.v8web.mvc.farms.dto.FarmEnvironmentalDto;
+import com.fairagora.verifik8.v8web.mvc.farms.dto.FarmFormDto;
+import com.fairagora.verifik8.v8web.mvc.farms.dto.FarmPondDto;
+import com.fairagora.verifik8.v8web.mvc.farms.dto.StaffGeneralInfoSto;
+import com.fairagora.verifik8.v8web.mvc.infra.dtomapping.EntityDtoMapper;
+import com.fairagora.verifik8.v8web.mvc.infra.dtomapping.commons.AddressDto;
+import com.fairagora.verifik8.v8web.mvc.infra.dtomapping.commons.V8MeasureDto;
+
+@Mapper(componentModel = "spring", uses = EntityDtoMapper.class, unmappedTargetPolicy = ReportingPolicy.IGNORE)
+public interface RegFarmDTOMapper {
+
+	void toDto(RegEntity farm, @MappingTarget FarmFormDto dto);
+
+	@Mapping(target = "id", ignore = true)
+	void toDto(RegEntityFarmDetails farm, @MappingTarget FarmFormDto dto);
+
+	void fillEntity(FarmFormDto dto, @MappingTarget RegEntity farm);
+
+	@Mapping(target = "id", ignore = true)
+	void fillEntity(FarmFormDto dto, @MappingTarget RegEntityFarmDetails farm);
+
+	void fillEntity(AddressDto dto, @MappingTarget Address adr);
+
+	void toDto(RegEntityFarmDetails farm, @MappingTarget FarmEnvironmentalDto dto);
+
+	void toDto(Address adr, @MappingTarget AddressDto dto);
+
+	void toDto(RegEntityStaffManagement findByFarmId, @MappingTarget StaffGeneralInfoSto dto);
+
+	void toDto(RegEntityFarmPond m, @MappingTarget FarmPondDto dto);
+
+	void fillEntity(FarmPondDto dto, @MappingTarget RegEntityFarmPond m);
+
+	void toDto(V8Measure m, @MappingTarget V8MeasureDto dto);
+
+	void fillEntity(V8MeasureDto dto, @MappingTarget V8Measure m);
+
+	default String map(Attachment at) {
+		return at.getResourcePath();
+	}
+
+}

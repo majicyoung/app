@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:text="#{global.hello}">TITLE</title>
+</head>
+
+<body>
+	<h1 th:text="#{global.hello}">Hi There</h1>
+	
+	<ul>
+		<li><a th:href="@{/hello.html}">Hi again</a></li>
+		<li><a th:href="@{/logout}">Log out</a></li>
+	</ul>
+</body>
+</html>

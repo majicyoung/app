@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<object th:include="inc/includes :: head" th:remove="tag"></object>
+<title th:text="|${v8App.appName} ${'|'} #{page.home.title}|"></title>
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+<header class="main-header" th:include="inc/includes :: main-header"></header>
+<aside class="main-sidebar" th:include="inc/includes :: main-sidebar"></aside>
+
+ <div class="content-wrapper">
+    <section class="content-header">
+      <h1 >
+        <span th:text="#{${v8p.title}}"></span>
+        <small th:text="#{${v8p.description}}">{{ $page_description or null }}</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a th:href="@{'/home.html}"><i class="fa fa-dashboard"></i> <span th:text="#{default.home}">default.home</span></a></li>
+        @yield('breadcrumb')
+      </ol>
+    </section>
+    <section class="content">
+      <div layout:fragment="content">
+        <!-- ============================================================================ -->
+        <!-- This content is only used for static prototyping purposes (natural templates)-->
+        <!-- and is therefore entirely optional, as this markup fragment will be included -->
+        <!-- from "fragments/header.html" at runtime.                                     -->
+        <!-- ============================================================================ -->
+        <h1>Static content for prototyping purposes only</h1>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+          Praesent scelerisque neque neque, ac elementum quam dignissim interdum.
+          Phasellus et placerat elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+          Praesent scelerisque neque neque, ac elementum quam dignissim interdum.
+          Phasellus et placerat elit.
+        </p>
+      </div>
+    </section>
+  </div>
+</div>
+<th:block th:include="inc/includes :: footer-scripts" th:remove="tag"></th:block>
+<th:block layout:fragment="page-scripts" th:remove="tag"></th:block>
+<script type="text/javascript" th:inline="javascript">
+	/*<![CDATA[*/
+		$(document).ready(function() {
+			var activeLi=[[${activeTab}]];
+			$('#farmtab_'+activeLi).addClass('active');			
+		});
+		/*]]>*/
+	</script>
+</body>
+</html>

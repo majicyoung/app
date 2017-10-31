@@ -1,0 +1,10 @@
+IP: 212.47.233.6
+
+Software
+	- Java
+	- Maven
+
+
+MySQL
+	root	verifik8-isA-Go0dSoftWAr3
+

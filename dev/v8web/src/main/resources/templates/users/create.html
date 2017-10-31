@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html layout:decorator="inc/main-layout" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<div layout:fragment="content">
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="box" id="user-box">
+				<div class="box-header with-border">
+					<h3 class="box-title" th:text="#{user.add}" th:if="${newEntity}">user.add</h3>
+					<h3 class="box-title" th:text="#{user.edit}" th:if="${!newEntity}">user.edit</h3>
+					<div class="box-tools">
+						<a href="{{ url('/users') }}" class="btn btn-sm btn-flat btn-warning"><i class="fa fa-backward"></i> <span th:text="#{default.back}"></span></a>
+					</div>
+				</div>
+				<form role="form" th:action="@{${newEntity ? '/users/create.html' : '/user/'+userDto.id+'/update.html'}}" th:object="${userDto}" method="post" autocomplete="off"
+					onsubmit="return !hasEmptyFields('#user-box form .form-control[required]');">
+					<input type="hidden" th:field="*{id}"/>
+					<div class="box-body" id="bloc-user-form">
+						<div class="row">
+							<div class="col-md-6 col-sm-6 col-xs-12">
+								<div class="form-group">
+									<label th:text="#{default.name}+'*'">default.name*</label> 
+									<input type="text" class="form-control" th:placeholder="#{default.name}" required="required" th:field="*{name}"></input>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6 col-sm-6 col-xs-12">
+								<div class="form-group">
+									<label th:text="#{default.email}+'*'">default.email</label> 
+									<input type="email" class="form-control" th:placeholder="#{default.email}" autocomplete="off" required="required" th:field="*{email}" />
+								</div>
+							</div>
+							<div class="col-md-6 col-sm-6 col-xs-12">
+								<div class="form-group">
+									<label th:text="#{default.password}+'*'">default.password*</label>
+									<input type="password" name="password" class="form-control" th:placeholder="#{default.password}" autocomplete="off" required="required" th:value="${userDto.password}" />
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6 col-sm-6 col-xs-12">
+								<div class="form-group">
+									<label th:text="#{default.role}+'*'">default.role</label> 
+									<select th:field="*{role}" th:id="role" class="form-control" onchange="changeRole(this);" required="required">
+										<option th:value="${null}"></option>
+										<option th:each="role : ${applicationRoles}"  th:attr="data-code=${role.code}" th:value="${role.id}" th:text="${role.label}"></option>
+									</select>
+								</div>
+							</div>
+							<div class="col-md-6 col-sm-6 col-xs-12 bloc-role" id="bloc-role-country" style="display: none;">
+								<div class="form-group">
+									<label th:text="#{default.country}">default.country</label> 
+									<select class="form-control" th:field="*{country}">
+										<option value="" th:text="#{default.select_country}">default.select_country</option>
+										<option th:each="country : ${allCountries}" th:value="${country.id}" th:text="${country.name}"></option>
+									</select>
+								</div>
+							</div>
+							<div class="col-md-6 col-sm-6 col-xs-12 bloc-role" id="bloc-role-coop" style="display: none;">
+								<div class="form-group">
+									<label th:text="#{default.cooperative}">default.cooperative</label> 
+									<select class="form-control" th:field="*{coop}">
+										<option value="" th:text="#{cooperative.select}"></option>
+										<option th:each="coop : ${allCooperatives}" th:value="${coop.id}" th:text="${coop.name}"></option>
+									</select>
+								</div>
+							</div>
+							<div class="col-md-6 col-sm-6 col-xs-12 bloc-role" id="bloc-role-farm" style="display: none;">
+								<div class="form-group">
+									<label th:text="#{farm.select}">farm.select</label> 
+									<select class="form-control" th:field="*{farm}">
+										<option value="" th:text="#{farm.select}"></option>
+										<option th:each="farm : ${allFarms}" th:value="${farm.id}" th:text="${farm.name}"></option>
+									</select>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="box-footer text-center">
+						<small th:text="'*'+#{default.mandatory_field}">*default.mandatory_field</small> 
+						<a th:href="@{/users.html}" class="btn btn-warning"><i class="fa fa-times"></i> 
+						<span th:text="#{default.cancel}">default.cancel</span></a>
+						
+						<button type="submit" class="btn btn-success">
+							<span th:text="#{default.submit}">default.submit</span> <i class="fa fa-check"></i>
+						</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+</div>
+
+
+<th:block layout:fragment="page-scripts">
+	<script type="text/javascript">
+		//we need to know if the doc is ready to set values to null on hiding select, if doc not ready, then keep values
+		var docReady = false;
+		function changeRole(obj) {
+			var cod = $(obj).find('option:selected').data('code');
+			$('#bloc-user-form .bloc-role').hide();
+			if(docReady)
+				$('#bloc-user-form .bloc-role select').val("");
+			$('#bloc-role-' + cod).show();
+		}
+
+		function hasEmptyFields(selector) {
+			var hasError = false;
+			$(selector).each(function(index, element) {
+				if ($(element).val() == '') {
+					hasError = true;
+					$(element).closest('.form-group').addClass('has-error');
+				} else
+					$(element).closest('.form-group').removeClass('has-error');
+			});
+			return hasError;
+		}
+		
+		$( document ).ready(function() {
+			changeRole($('#role'));
+			docReady=true;
+		});
+	</script>
+</th:block>
+
+</html>

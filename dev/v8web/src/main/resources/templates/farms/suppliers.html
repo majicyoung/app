@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html layout:decorator="inc/main-layout" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<div layout:fragment="content">
+	<div class="row">
+		 <div class="col-xs-12">
+      <div class="box" id="farm-box">
+        <div class="box-header with-border">
+          <h3 class="box-title" th:text="#{farm.create}">farm.create</h3>
+        </div>
+        <div class="box-body" style="padding:0;">
+          <div class="nav-tabs-custom">
+           <ul th:include="farms/farms-includes :: farms-tabs" class="nav nav-tabs"></ul>
+            <div class="tab-content">
+              <div class="tab-pane active" id="tab_1">
+				<div class="row">
+                    <div class="col-xs-12">
+                    	<div class="col-xs-12">
+                        	<h4 th:text="#{farm.suppliers}">farm.suppliers</h4>
+                        </div>
+                        
+                        <!-- Listing Table -->
+                        <div class="col-xs-12">
+                            <table class="table table-bordered table-striped table-hover table-farm-staff" style="margin:10px 0;">
+                                <tr>
+                                    <th th:text="#{default.product_type}">default.product_type</th>
+                                    <th th:text="#{default.name}">supplier.name</th>
+                                    <th th:text="#{default.city}"></th>
+                                    <th width="90"></th>
+                                </tr>
+                                <tr th:each="supplier:${suppliersListing}">
+                                    <td th:text="${supplier.productType.name}"></td>
+                                    <td th:text="${supplier.supplier.name}"></td>
+                                    <td th:text="${supplier.supplier.address.city}">?</td>
+                                    <td align="center">
+                                        <form th:action="@{'/farm/'+${farmId}+'/delete-supplier-for-producttype.html'}" method="post">
+                                        	<input type="hidden" th:value="${supplier.supplier.id}" th:name="supplier" />
+                                        	<input type="hidden" th:value="${supplier.productType.id}" th:name="productType" />
+                                        	<button type="submit" class="btn btn-xs btn-flat btn-danger">
+												<i class="fa fa-remove"></i> 
+											</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            </table>
+                    	</div>
+                    	
+                    	<div class="col-xs-12">
+	                        <div class="col-xs-6">
+	                            <h4 class="form-supplier-title" th:text="#{supplier.add}">supplier.add</h4>
+	                            <form th:action="@{'/farm/'+${farmId}+'/supplier-for-producttype.html'}" method="post">
+		                            <div class="form-group row">
+		                                <label for="inputFarmSupplierProducts" class="col-xs-3 control-label" th:text="|#{default.select_product}*|">default.select_product*</label>
+		                                <div class="col-xs-9">
+		                                    <select class="form-control form-supplier" id="inputFarmSupplierProducts" th:name="productType">
+		                                        <option value="" th:text="|-- #{default.select_product} --|"> -- default.select_product -- </option>
+		                                        <option th:each="product:${allProductTypes}" th:value="${product.id}" th:text="${product.name}"></option>
+		                                    </select>
+		                                </div>
+		                            </div>
+		                            <div class="form-group row">
+		                                <label for="inputFarmSupplier" class="col-xs-3 control-label" th:text="|#{default.name}*|">*</label>
+		                                <div class="col-xs-9 no-padding">
+		                                    <div class="col-xs-10">
+		                                        <select class="form-control form-supplier" id="inputFarmSupplier" th:name="supplier">
+		                                            <option value="" th:text="|-- #{supplier.select} --|">supplier.select</option>
+		                                            <option th:each="comp:${allCompanies}" th:value="${comp.id}" th:attr="data-name=${comp.name},data-city=${comp.address.city}" th:text="${comp.name}"></option>
+		                                        </select>		
+		                                    </div>
+		                                    <div class="col-xs-2">
+		                                        <a href="javascript:void(0);" class="btn btn-flat btn-primary" th:title="#{supplier.add}" onclick="openNewSupplier();"><i class="fa fa-plus"></i></a>
+		                                    </div>
+		                                </div>
+		                            </div>
+		                            <div class="form-group row">
+		                                <div class="col-xs-9 col-xs-offset-3 text-left" style="margin-top:20px;">
+			                                  <button type="submit" class="btn btn-flat btn-primary btn-form-supplier">
+												<i class="fa fa-plus"></i> <span th:text="#{supplier.save}">#{supplier.save}</span> 
+											</button>
+		                                </div>
+		                            </div>
+	                            </form>
+	                        </div>
+                    	</div>
+                    	
+                    </div>
+                  </div>
+				</div>
+			</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+	</div>
+
+</div>
+
+
+<th:block layout:fragment="page-scripts">
+	<script type="text/javascript">
+	
+		$( document ).ready(function() {
+		});
+	</script>
+</th:block>
+
+</html>

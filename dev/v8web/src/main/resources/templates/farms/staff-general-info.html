@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html layout:decorator="inc/main-layout" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<div layout:fragment="content">
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="box" id="farm-box">
+				<div class="box-header with-border">
+					<h3 class="box-title" th:text="#{farm.create}">farm.create</h3>
+				</div>
+				<div class="box-body" style="padding: 0;">
+					<div class="nav-tabs-custom">
+						<ul th:include="farms/farms-includes :: farms-tabs" class="nav nav-tabs"></ul>
+						<div class="tab-content">
+							<div class="tab-pane active" id="tab_1">
+								<form th:action="@{'/farm/'+${farmId}+'/staff-general-info.html'}" th:object="${farmDto}" method="post">
+									<div class="row">
+										<!-- general info -->
+										<div class="col-xs-6">
+											<h4 th:text="#{farm.staff_general_info}">staff-general-info</h4>
+											<div class="form-group row col-xs-12">
+												<label for="numberOfStaffAsToday" class="col-xs-6 control-label" th:text="|#{staffgeneralinfo.numberOfStaffAsToday}*|">default.name*</label>
+												<div class="col-xs-6">
+													<input type="text" class="form-control" th:field="*{numberOfStaffAsToday}" th:placeholder="#{staffgeneralinfo.numberOfStaffAsToday}" required="required" />
+												</div>
+											</div>
+
+											<div class="form-group row col-xs-12">
+												<label for="nbRestDays" class="col-xs-6 control-label" th:text="|#{staffgeneralinfo.nbRestDays}*|">nbRestDays</label>
+												<div class="col-xs-6">
+													<input type="text" class="form-control" th:field="*{nbRestDays}" th:placeholder="#{staffgeneralinfo.nbRestDays}" required="required" />
+												</div>
+											</div>
+											<div class="form-group row col-xs-12">
+												<label for="workersRepresentativeGroup" class="col-xs-6 control-label">&nbsp;</label>
+												<div class="col-xs-6">
+													<input type="checkbox" th:field="*{workersRepresentativeGroup}" /> <span th:text="|#{staffgeneralinfo.workersRepresentativeGroup}*|"></span>
+												</div>
+											</div>
+										</div>
+
+										<!-- ROW 1 :: 2ND COLUMN child labor-->
+										<div class="col-xs-6">
+											<h4 th:text="#{staffgeneralinfo.child-labor}">child labor</h4>
+											<div class="form-group row col-xs-12">
+												<label for="nbWorkersChildLivingInFarm" class="col-xs-9 control-label" th:text="|#{staffgeneralinfo.nbWorkersChildLivingInFarm}|">default.name</label>
+												<div class="col-xs-3">
+													<input type="text" class="form-control" th:field="*{nbWorkersChildLivingInFarm}" th:placeholder="#{staffgeneralinfo.nbWorkersChildLivingInFarm}" />
+												</div>
+											</div>
+											<div class="form-group row col-xs-12">
+												<label for="nbWorkersChildHelpingInFarm" class="col-xs-9 control-label" th:text="#{staffgeneralinfo.nbWorkersChildHelpingInFarm}">default.name</label>
+												<div class="col-xs-3">
+													<input type="text" class="form-control" th:field="*{nbWorkersChildHelpingInFarm}" th:placeholder="#{staffgeneralinfo.nbWorkersChildHelpingInFarm}" />
+												</div>
+											</div>
+											<div class="form-group row col-xs-12">
+												<label for="nbWorkersChildEnrolledSchool" class="col-xs-9 control-label" th:text="|#{staffgeneralinfo.nbWorkersChildEnrolledSchool}|">default.name</label>
+												<div class="col-xs-3">
+													<input type="text" class="form-control" th:field="*{nbWorkersChildEnrolledSchool}" th:placeholder="#{staffgeneralinfo.nbWorkersChildEnrolledSchool}" />
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<div class="row">
+										<div class="col-xs-12">
+											<h4 th:text="#{staffgeneralinfo.hazards-protection}">#{staffgeneralinfo.hazards-protection}</h4>
+											<div class="col-xs-6">
+												<div class="form-group row col-xs-12">
+													<label for="numberOfStaffAsToday" class="col-xs-6 control-label" th:text="|#{staffgeneralinfo.existenceHazardousWork}|">default.name*</label>
+													<div class="col-xs-6">
+														<input type="checkbox" th:field="*{existenceHazardousWork}" /> <select th:field="*{hazardousWorkType}">
+															<option th:each="wtype:${allHazardousWorkType}" th:value="${wtype.id}" th:text="${wtype.name}"></option>
+														</select>
+													</div>
+												</div>
+												<div class="form-group row col-xs-12">
+													<label for="accessToProtectiveEquipment" class="col-xs-6 control-label" th:text="#{staffgeneralinfo.accessToProtectiveEquipment}">default.name</label>
+													<div class="col-xs-6">
+														<input type="checkbox" th:field="*{accessToProtectiveEquipment}" />
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<div class="row">
+										<div class="col-xs-12">
+											<h4 th:text="#{staffgeneralinfo.farmrecords}">staffgeneralinfo.farmrecords</h4>
+											<div class="col-xs-6">
+												<div class="form-group row col-xs-12">
+													<label for="existenceWorkAccidentRecord" class="col-xs-9 control-label" th:text="#{staffgeneralinfo.existenceWorkAccidentRecord}">existenceWorkAccidentRecord</label>
+													<div class="col-xs-3">
+														<input type="checkbox" th:field="*{existenceWorkAccidentRecord}" />
+													</div>
+												</div>
+												<div class="form-group row col-xs-12">
+													<label for="workAccidentRecord" class="col-xs-9 control-label" th:text="#{staffgeneralinfo.existenceWorkAccidentRecordUpload}">existenceWorkAccidentRecordUpload</label>
+													<div class="col-xs-3">
+														<input type="file" th:field="*{workAccidentRecord}" />
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<div class="row">
+										<div class="col-xs-12">
+											<h4 th:text="#{staffgeneralinfo.farmPolicies}">staffgeneralinfo.policies</h4>
+											<div class="col-xs-6">
+												<div class="form-group row col-xs-12">
+													<label for="existenceFarmPolicies" class="col-xs-9 control-label" th:text="#{staffgeneralinfo.existenceFarmPolicies}">existenceFarmPolicies</label>
+													<div class="col-xs-3">
+														<input type="checkbox" th:field="*{existenceFarmPolicies}" />
+													</div>
+												</div>
+												<div class="form-group row col-xs-12">
+													<label for="farmPolicies" class="col-xs-9 control-label" th:text="#{staffgeneralinfo.existenceFarmPoliciesUpload}">#{staffgeneralinfo.existenceFarmPoliciesUpload}</label>
+													<div class="col-xs-3">
+														<input type="file" th:field="*{farmPolicies}" />
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+</div>
+
+
+<th:block layout:fragment="page-scripts">
+	<script type="text/javascript">
+		$(document).ready(function() {
+		});
+	</script>
+</th:block>
+
+</html>

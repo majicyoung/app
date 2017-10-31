@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html layout:decorator="inc/main-layout" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<div layout:fragment="content">
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="box" id="farm-box">
+				<div class="box-header with-border">
+					<h3 class="box-title" th:text="#{farm.create}">farm.create</h3>
+				</div>
+				<div class="box-body" style="padding: 0;">
+					<div class="nav-tabs-custom">
+						<ul th:include="farms/farms-includes :: farms-tabs" class="nav nav-tabs"></ul>
+						<div class="tab-content">
+							<div class="tab-pane active" id="tab_1">
+								<div class="row">
+									<div class="col-xs-12">
+										<div class="col-xs-12">
+											<h4 th:text="#{farm.ponds}">farm.ponds</h4>
+										</div>
+										<div class="col-xs-12">
+											<script type="text/javascript" th:inline="javascript">
+				                            	var ponds = [];    	        	
+				                            </script>
+											<table class="table table-bordered table-striped table-hover table-farm-staff" style="margin: 10px 0;">
+												<tr>
+													<th th:text="#{farm.pond_number}">farm.pond_number</th>
+													<th th:text="#{default.description}">default.description</th>
+													<th th:text="#{default.area}"></th>
+													<th th:text="#{default.unit}"></th>
+													<th th:text="#{farm.pond_type}"></th>
+													<th th:text="#{default.species}"></th>
+													<th width="120"></th>
+												</tr>
+												
+												<tr th:each="pond:${pondListing}">
+													<td th:text="${pond.number}"></td>
+													<td th:text="${pond.description}"></td>
+													<td th:text="${pond.volume.quantity}"></td>
+													<td th:text="${pond.volume.unit.name}"></td>
+													<td th:text="${pond.type.name}"></td>
+													<td th:text="${pond.species.name}"></td>
+													<td align="center">
+														<a href="javascript:void(0);" th:attr="data-id=${pond.id}" class="btn btn-xs btn-flat btn-info addPondDataBtn"><i class="fa fa-plus"></i></a> 
+														<a href="javascript:void(0);" th:attr="data-id=${pond.id}" class="btn btn-xs btn-flat btn-primary editPondBtn"><i class="fa fa-edit"></i></a> 
+														 <form th:action="@{'/farm/'+${farmId}+'/pond/delete.html'}" method="post" style="display: inline;">
+				                                        	<input type="hidden" th:value="${pond.id}" th:name="pondId" />
+				                                        	<button type="submit" class="btn btn-xs btn-flat btn-danger">
+																<i class="fa fa-remove"></i> 
+															</button>
+				                                        </form>
+				                                        <script type="text/javascript" th:inline="javascript">
+				                                        	var i=[[${pond.id}]];
+				                                        	ponds[i]=([[${pond}]]);
+				                                        </script>
+													</td>
+												</tr>
+											</table>
+										</div>
+									</div>
+									<div class="col-xs-12">
+										<div class="col-xs-6">
+											<form th:action="@{'/farm/'+${farmId}+'/pond.html'}" th:object="${pondDto}" id="pondEditorForm" method="post">
+												<h4 class="form-pond-title" th:text="#{farm.add_pond}"></h4>
+												<input type="hidden" id="pondId" th:field="*{id}" />
+												<input type="hidden" id="farmId" th:field="*{farmId}" />
+												<div class="form-group row">
+													<label for="number" class="col-xs-3 control-label" th:text="|#{farm.pond_number}*|">farm.pond_number*</label>
+													<div class="col-xs-9">
+														<input type="text" class="form-control form-pond form-pond-required" th:field="*{number}" th:placeholder="#{farm.pond_number}" maxlength="10" />
+													</div>
+												</div>
+												<div class="form-group row">
+													<label for="inputFarmPondDesc" class="col-xs-3 control-label" th:text="#{default.description}"></label>
+													<div class="col-xs-9">
+														<input type="text" class="form-control form-pond" id="inputFarmPondDesc" th:placeholder="#{default.description}" th:field="*{description}" />
+													</div>
+												</div>
+												<div class="form-group row">
+													<label for="inputFarmPondArea" class="col-xs-3 control-label" th:text="|#{default.area}*|">default.area*</label>
+													<div class="col-xs-9 no-padding">
+														<div class="col-xs-6">
+															<input type="text" class="form-control form-pond form-pond-required" id="inputFarmPondArea" th:placeholder="#{default.area}" th:field="*{volume.quantity}" />
+														</div>
+														<div class="col-xs-6">
+															<select class="form-control form-pond form-pond-required" id="inputFarmPondAreaUnit" th:field="*{volume.unit}">
+																<option value="" th:text="|-- #{default.select_unit} --|"></option>
+																<option th:each="unit : ${allQuantityUnits}" th:value="${unit.id}" th:text="${unit.name}"></option>
+															</select>
+														</div>
+													</div>
+												</div>
+												<div class="form-group row">
+													<label for="inputFarmPondType" class="col-xs-3 control-label" th:text="#{farm.pond_type}"></label>
+													<div class="col-xs-9">
+														<select class="form-control form-pond" id="inputFarmPondType" th:field="*{type}">
+															<option value="|-- #{farm.select_pond_type} --|">farm.select_pond_type</option>
+															<option th:each="ptype : ${allPondTypes}" th:value="${ptype.id}" th:text="${ptype.name}"></option>
+														</select>
+													</div>
+												</div>
+												<div class="form-group row">
+													<label for="inputFarmPondSpecies" class="col-xs-3 control-label" th:text="#{default.species}">default.species</label>
+													<div class="col-xs-9">
+														<select class="form-control form-pond" id="inputFarmPondSpecies" th:field="*{species}">
+															<option value="|-- #{farm.select_pond_species} --|">farm.select_pond_species</option>
+															<option th:each="sp : ${allSpecies}" th:value="${sp.id}" th:text="${sp.name}"></option>
+														</select>
+													</div>
+												</div>
+												<div class="form-group row">
+													<div class="col-xs-9 col-xs-offset-3 text-left" style="margin-top: 20px;">
+														<a href="javascript:void(0);" class="btn btn-flat btn-primary btn-form-pond" onclick="addFarmPond();"><i class="fa fa-plus"></i> <span th:text="#{farm.add_pond}"></span></a>
+														<a href="javascript:void(0);" class="btn btn-flat btn-warning btn-form-pond hide" th:title="#{default.cancel}" onclick="resetForm(5,'pond');"><i class="fa fa-times"></i> <span th:text="#{default.cancel}"></span></a>
+													</div>
+												</div>
+											</form>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+</div>
+
+
+<th:block layout:fragment="page-scripts">
+	<script type="text/javascript">
+		$(document).ready(function() {
+			
+			$(".editPondBtn").click(function(){
+				var id = $(this).attr("data-id");
+				var p = ponds[id];
+				if(p!=null){
+					$('#pondId').val(p.id);
+					$('#number').val(p.number);
+					$('#inputFarmPondDesc').val(p.description);
+					if(p.volume!=null){
+						$('#inputFarmPondArea').val(p.volume.quantity);
+						$('#inputFarmPondAreaUnit').val(p.volume.unit.id);
+					}
+					if(p.type!=null){
+						$('#inputFarmPondType').val(p.type.id);
+						$('#inputFarmPondSpecies').val(p.species.id);
+					}
+				}
+			});
+		});
+		
+		function addFarmPond(){
+			$("#pondEditorForm").submit();
+		}
+		
+	</script>
+</th:block>
+
+</html>

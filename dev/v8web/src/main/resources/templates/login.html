@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport"/>
+  <title>Log in</title>
+  <link rel='stylesheet' th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}" />
+  <link rel="stylesheet" th:href="@{/webjars/font-awesome/4.5.0/css/font-awesome.min.css}"/>  
+  <link rel="stylesheet" th:href="@{/webjars/ionicons/2.0.1/css/ionicons.min.css}"/>  
+  <link rel="stylesheet" th:href="@{/static/dist/css/AdminLTE.min.css}"/>
+  
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+</head>
+<body class="hold-transition login-page">
+<div class="login-box">
+  <div class="login-logo">
+    <a th:href="@{'/home'}"><b>Verifik</b>8</a>
+  </div>
+  <div class="login-box-body">
+    <p class="login-box-msg">Sign in to start your session</p>
+    <form class="form" role="form" method="POST" th:action="@{/login}">
+      <div class="form-group has-feedback">
+       <p th:if="${param.error}" class="error help-block">
+            Bad Credentials  
+        </p>
+        <input type="email" name="username" class="form-control" placeholder="E-Mail Address" required="required" autofocus="autofocus" />
+        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+      </div>
+      <div class="form-group has-feedback {{ $errors->has('password') ? ' has-error' : '' }}">
+        <input type="password" name="password" class="form-control" placeholder="Password" required="required" />
+        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+      </div>
+      <div class="row">
+        <div class="col-xs-8">
+          <br/><a th:href="@{/password-reset.html}">Forgot Your Password?</a><br/>
+        </div>
+        <div class="col-xs-4">
+          <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<script th:src="@{/webjars/jquery/2.2.4/jquery.min.js}"></script>
+<script type="text/javascript" th:src="@{/webjars/bootstrap/3.3.7/js/bootstrap.min.js}"></script>
+<script type="text/javascript" th:inline="javascript">
+	function setSubmitUrl(form) {
+		var hash = unescape(self.document.location.hash.substring(1));
+		var root=/*[[@{/}]]*/;
+		form.action = root+"login#" + hash;
+		return true;
+	}
+</script>		
+</body>
+</html>
