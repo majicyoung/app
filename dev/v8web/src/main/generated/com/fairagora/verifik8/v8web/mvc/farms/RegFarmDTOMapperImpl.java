@@ -26,6 +26,8 @@ import com.fairagora.verifik8.v8web.data.domain.dt.DTFarmPlotActivity;
 
 import com.fairagora.verifik8.v8web.data.domain.dt.DTFarmPlotMeasurement;
 
+import com.fairagora.verifik8.v8web.data.domain.dt.DTFarmPondMeasurement;
+
 import com.fairagora.verifik8.v8web.data.domain.reg.RegEntity;
 
 import com.fairagora.verifik8.v8web.data.domain.reg.farm.RegEntityFarmDetails;
@@ -58,6 +60,10 @@ import com.fairagora.verifik8.v8web.mvc.plots.dto.PlotListingDto;
 
 import com.fairagora.verifik8.v8web.mvc.plots.dto.PlotMeasurementDto;
 
+import com.fairagora.verifik8.v8web.mvc.ponds.dto.PondListingDto;
+
+import com.fairagora.verifik8.v8web.mvc.ponds.dto.PondMeasurementDto;
+
 import javax.annotation.Generated;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,7 +74,7 @@ import org.springframework.stereotype.Component;
 
     value = "org.mapstruct.ap.MappingProcessor",
 
-    date = "2017-11-01T19:35:02+0100",
+    date = "2017-11-02T00:26:00+0100",
 
     comments = "version: 1.1.0.Final, compiler: javac, environment: Java 1.8.0_112 (Oracle Corporation)"
 
@@ -759,6 +765,104 @@ public class RegFarmDTOMapperImpl implements RegFarmDTOMapper {
         plotListingDto.setCommodities( entityDtoMapper.toName( p.getCommodities() ) );
 
         return plotListingDto;
+    }
+
+    @Override
+
+    public PondListingDto toListing(RegEntityFarmPond p) {
+
+        if ( p == null ) {
+
+            return null;
+        }
+
+        PondListingDto pondListingDto = new PondListingDto();
+
+        pondListingDto.setId( p.getId() );
+
+        pondListingDto.setFarm( entityDtoMapper.toName( p.getFarm() ) );
+
+        pondListingDto.setNumber( p.getNumber() );
+
+        pondListingDto.setDescription( p.getDescription() );
+
+        pondListingDto.setVolume( toDto( p.getVolume() ) );
+
+        pondListingDto.setType( entityDtoMapper.toName( p.getType() ) );
+
+        pondListingDto.setSpecies( entityDtoMapper.toName( p.getSpecies() ) );
+
+        return pondListingDto;
+    }
+
+    @Override
+
+    public void toDto(DTFarmPondMeasurement act, PondMeasurementDto dto) {
+
+        if ( act == null ) {
+
+            return;
+        }
+
+        dto.setId( act.getId() );
+
+        dto.setPond( entityDtoMapper.toReference( act.getPond() ) );
+
+        dto.setMeasureDate( act.getMeasureDate() );
+
+        dto.setMeasureType( entityDtoMapper.toReference( act.getMeasureType() ) );
+
+        if ( act.getMeasure() != null ) {
+
+            if ( dto.getMeasure() == null ) {
+
+                dto.setMeasure( new V8MeasureDto() );
+            }
+
+            toDto( act.getMeasure(), dto.getMeasure() );
+        }
+
+        else {
+
+            dto.setMeasure( null );
+        }
+
+        dto.setComment( act.getComment() );
+    }
+
+    @Override
+
+    public void fillEntity(PondMeasurementDto dto, DTFarmPondMeasurement measure) {
+
+        if ( dto == null ) {
+
+            return;
+        }
+
+        measure.setId( dto.getId() );
+
+        measure.setPond( entityDtoMapper.resolve( dto.getPond(), RegEntityFarmPond.class ) );
+
+        measure.setMeasureDate( dto.getMeasureDate() );
+
+        measure.setMeasureType( entityDtoMapper.resolve( dto.getMeasureType(), CLMeasureType.class ) );
+
+        if ( dto.getMeasure() != null ) {
+
+            if ( measure.getMeasure() == null ) {
+
+                measure.setMeasure( new V8Measure() );
+            }
+
+            fillEntity( dto.getMeasure(), measure.getMeasure() );
+        }
+
+        else {
+
+            measure.setMeasure( null );
+        }
+
+        measure.setComment( dto.getComment() );
     }
 
     private String mActivityTypeName(DTFarmPlotActivity dTFarmPlotActivity) {

@@ -10,6 +10,7 @@ import com.fairagora.verifik8.v8web.data.domain.commons.Attachment;
 import com.fairagora.verifik8.v8web.data.domain.commons.V8Measure;
 import com.fairagora.verifik8.v8web.data.domain.dt.DTFarmPlotActivity;
 import com.fairagora.verifik8.v8web.data.domain.dt.DTFarmPlotMeasurement;
+import com.fairagora.verifik8.v8web.data.domain.dt.DTFarmPondMeasurement;
 import com.fairagora.verifik8.v8web.data.domain.reg.RegEntity;
 import com.fairagora.verifik8.v8web.data.domain.reg.farm.RegEntityFarmDetails;
 import com.fairagora.verifik8.v8web.data.domain.reg.farm.RegEntityFarmPlot;
@@ -26,6 +27,8 @@ import com.fairagora.verifik8.v8web.mvc.infra.dtomapping.commons.V8MeasureDto;
 import com.fairagora.verifik8.v8web.mvc.plots.dto.PlotActivityDto;
 import com.fairagora.verifik8.v8web.mvc.plots.dto.PlotListingDto;
 import com.fairagora.verifik8.v8web.mvc.plots.dto.PlotMeasurementDto;
+import com.fairagora.verifik8.v8web.mvc.ponds.dto.PondListingDto;
+import com.fairagora.verifik8.v8web.mvc.ponds.dto.PondMeasurementDto;
 
 @Mapper(componentModel = "spring", uses = EntityDtoMapper.class, unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface RegFarmDTOMapper {
@@ -80,5 +83,10 @@ public interface RegFarmDTOMapper {
 
 	PlotListingDto toListing(RegEntityFarmPlot p);
 
+	PondListingDto toListing(RegEntityFarmPond p);
+
+	void toDto(DTFarmPondMeasurement act, @MappingTarget PondMeasurementDto dto);
+
+	void fillEntity(PondMeasurementDto dto, @MappingTarget DTFarmPondMeasurement measure);
 
 }

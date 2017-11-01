@@ -94,7 +94,7 @@
 													<label for="inputFarmPondType" class="col-xs-3 control-label" th:text="#{farm.pond_type}"></label>
 													<div class="col-xs-9">
 														<select class="form-control form-pond" id="inputFarmPondType" th:field="*{type}">
-															<option value="|-- #{farm.select_pond_type} --|">farm.select_pond_type</option>
+															<option value="" th:text="|-- #{farm.select_pond_type} --|">farm.select_pond_type</option>
 															<option th:each="ptype : ${allPondTypes}" th:value="${ptype.id}" th:text="${ptype.name}"></option>
 														</select>
 													</div>
@@ -103,7 +103,7 @@
 													<label for="inputFarmPondSpecies" class="col-xs-3 control-label" th:text="#{default.species}">default.species</label>
 													<div class="col-xs-9">
 														<select class="form-control form-pond" id="inputFarmPondSpecies" th:field="*{species}">
-															<option value="|-- #{farm.select_pond_species} --|">farm.select_pond_species</option>
+															<option value="" th:text="|-- #{farm.select_pond_species} --|">farm.select_pond_species</option>
 															<option th:each="sp : ${allSpecies}" th:value="${sp.id}" th:text="${sp.name}"></option>
 														</select>
 													</div>

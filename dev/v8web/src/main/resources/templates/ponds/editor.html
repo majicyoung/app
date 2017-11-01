@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html layout:decorator="inc/main-layout" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<div layout:fragment="content">
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="box" id="pond-box">
+				<div class="box-header with-border">
+					<h3 class="box-title" th:text="farm.create_pond"></h3>
+					<div class="box-tools">
+						<a th:href="@{'/ponds/browser.html}" class="btn btn-sm btn-flat btn-warning"><i class="fa fa-backward"></i> <span th:text="#{default.back}"></span></a>
+					</div>
+				</div>
+				<form th:action="@{'/ponds/'+${pondId}+'/update.html'}" th:object="${pondDto}" id="pondEditorForm" method="post">
+					<input type="hidden" id="pondId" th:field="*{id}" />
+					<div class="box-body">
+						<div class="row">
+							<div class="col-md-6 col-sm-6 col-xs-12">
+								<div class="form-group ">
+									<label th:text="|#{default.farm}#|">default.farm*</label>
+									<select class="form-control" id="inputFarmPond" th:field="*{farm}" required="required">
+										<option value="" th:text="|-- #{default.select_farm} --|">-- default.select_farm --</option> 
+										<option th:each="farm:${allFarmsForUser}" th:value="${farm.id}" th:text="${farm.name}"></option> 
+									</select>
+								</div>
+								<div class="form-group ">
+									<label for="number" class="control-label" th:text="|#{farm.pond_number}*|">farm.pond_number*</label>
+									<input type="text" class="form-control form-pond form-pond-required" th:field="*{number}" th:placeholder="#{farm.pond_number}" maxlength="10" />
+								</div>
+								<div class="form-group">
+									<label for="inputFarmPondDesc" class="control-label" th:text="#{default.description}"></label>
+									<input type="text" class="form-control form-pond"  th:placeholder="#{default.description}" th:field="*{description}" />
+								</div>
+								
+								<div class="form-group row">
+									<label for="inputFarmPondArea" class="col-xs-3 control-label" th:text="|#{default.area}*|">default.area*</label>
+									<div class="col-xs-9 no-padding">
+										<div class="col-xs-6">
+											<input type="text" class="form-control form-pond form-pond-required" id="inputFarmPondArea" th:placeholder="#{default.area}" th:field="*{volume.quantity}" />
+										</div>
+										<div class="col-xs-6">
+											<select class="form-control form-pond form-pond-required" id="inputFarmPondAreaUnit" th:field="*{volume.unit}">
+												<option value="" th:text="|-- #{default.select_unit} --|"></option>
+												<option th:each="unit : ${allQuantityUnits}" th:value="${unit.id}" th:text="${unit.name}"></option>
+											</select>
+										</div>
+									</div>
+								</div>
+								
+								<div class="form-group row">
+									<label for="inputFarmPondType" class="col-xs-3 control-label" th:text="#{farm.pond_type}"></label>
+									<div class="col-xs-9">
+										<select class="form-control form-pond" id="inputFarmPondType" th:field="*{type}">
+											<option value="" th:text="|-- #{farm.select_pond_type} --|">farm.select_pond_type</option>
+											<option th:each="ptype : ${allPondTypes}" th:value="${ptype.id}" th:text="${ptype.name}"></option>
+										</select>
+									</div>
+								</div>
+								<div class="form-group row">
+									<label for="inputFarmPondSpecies" class="col-xs-3 control-label" th:text="#{default.species}">default.species</label>
+									<div class="col-xs-9">
+										<select class="form-control form-pond" id="inputFarmPondSpecies" th:field="*{species}">
+											<option value="" th:text="|-- #{farm.select_pond_species} --|">farm.select_pond_species</option>
+											<option th:each="sp : ${allSpecies}" th:value="${sp.id}" th:text="${sp.name}"></option>
+										</select>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="box-footer text-center">
+						<small>* <span th:text="#{default.mandatory_field}"></span></small> 
+						
+						<a th:href="@{'/ponds/browser.html}" class="btn btn-warning"><i class="fa fa-times"></i><span th:text="#{default.cancel}"></span></a>
+						<button type="submit" class="btn btn-success">
+							<span th:text="#{default.submit}"></span> <i class="fa fa-check"></i>
+						</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+<th:block layout:fragment="page-scripts">
+	<script type="text/javascript">
+		$(document).ready(function() {
+
+		});
+
+		function hasEmptyFields(selector) {
+			var hasError = false;
+			$(selector).each(function(index, element) {
+				if ($(element).val() == '') {
+					hasError = true;
+					$(element).closest('.form-group').addClass('has-error');
+				} else
+					$(element).closest('.form-group').removeClass('has-error');
+			});
+			return hasError;
+		}
+	</script>
+</th:block>
+</html>

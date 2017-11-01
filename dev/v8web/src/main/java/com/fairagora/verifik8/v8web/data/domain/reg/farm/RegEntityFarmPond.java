@@ -14,6 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fairagora.verifik8.v8web.data.domain.V8Entity;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLPondType;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLSpecies;
 import com.fairagora.verifik8.v8web.data.domain.commons.V8Measure;
@@ -21,7 +22,7 @@ import com.fairagora.verifik8.v8web.data.domain.reg.RegEntity;
 
 @Entity
 @Table(name = "reg_entity_farmaq_ponds")
-public class RegEntityFarmPond {
+public class RegEntityFarmPond implements V8Entity{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -117,6 +118,11 @@ public class RegEntityFarmPond {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	@Override
+	public String getName() {
+		return getNumber();
 	}
 
 }

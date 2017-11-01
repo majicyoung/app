@@ -14,13 +14,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.fairagora.verifik8.v8web.data.application.V8Page;
 import com.fairagora.verifik8.v8web.data.domain.dt.DTFarmPlotMeasurement;
-import com.fairagora.verifik8.v8web.data.domain.reg.farm.RegEntityFarmPlot;
 import com.fairagora.verifik8.v8web.data.repo.dt.DTFarmPlotMeasurementRepository;
 import com.fairagora.verifik8.v8web.data.repo.reg.RegEntityFarmPlotRepository;
 import com.fairagora.verifik8.v8web.mvc.AbstractV8Controller;
 import com.fairagora.verifik8.v8web.mvc.farms.RegFarmDTOMapper;
-import com.fairagora.verifik8.v8web.mvc.farms.dto.FarmPlotDto;
-import com.fairagora.verifik8.v8web.mvc.plots.dto.PlotActivityDto;
 import com.fairagora.verifik8.v8web.mvc.plots.dto.PlotMeasurementDto;
 
 @Controller
