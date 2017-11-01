@@ -4,7 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "cl_product")
+@Table(name = "cl_products")
 public class CLProduct extends CodeListSupport {
 
 

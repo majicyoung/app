@@ -143,11 +143,14 @@
 			<version>1.10.15</version>
 		</dependency>
 
-		<dependency>
-			<groupId>org.webjars</groupId>
-			<artifactId>datetimepicker</artifactId>
-			<version>2.5.1</version>
-		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.webjars.bower/datetimepicker -->
+<dependency>
+    <groupId>org.webjars.bower</groupId>
+    <artifactId>datetimepicker</artifactId>
+    <version>2.5.11</version>
+</dependency>
+
+
 
 	</dependencies>
 

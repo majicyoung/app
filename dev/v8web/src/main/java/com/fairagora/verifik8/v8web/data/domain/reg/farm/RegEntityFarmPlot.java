@@ -14,14 +14,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fairagora.verifik8.v8web.data.domain.V8Entity;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLCommodities;
-import com.fairagora.verifik8.v8web.data.domain.cl.CLSpecies;
 import com.fairagora.verifik8.v8web.data.domain.commons.V8Measure;
 import com.fairagora.verifik8.v8web.data.domain.reg.RegEntity;
 
 @Entity
 @Table(name = "reg_entity_farmag_plots")
-public class RegEntityFarmPlot {
+public class RegEntityFarmPlot implements V8Entity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID")
@@ -40,7 +40,6 @@ public class RegEntityFarmPlot {
 	@ManyToOne(optional = true)
 	@JoinColumn(name = "CL_COMMODITIES_ID")
 	protected CLCommodities commodities;
-
 
 	@Column(name = "IS_IRRIGATED", length = 255)
 	protected boolean irrigated;
@@ -107,6 +106,9 @@ public class RegEntityFarmPlot {
 		this.size = size;
 	}
 
- 
+	@Override
+	public String getName() {
+		return getNumber();
+	}
 
 }

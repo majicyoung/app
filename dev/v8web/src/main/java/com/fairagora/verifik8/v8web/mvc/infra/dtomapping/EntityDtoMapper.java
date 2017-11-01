@@ -18,6 +18,10 @@ public class EntityDtoMapper {
 		return entity != null ? entity.getId() : null;
 	}
 
+	public String toName(V8Entity entity) {
+		return entity == null ? null : entity.getName();
+	}
+
 	public <T extends V8Entity> T resolve(Long reference, @TargetType Class<T> entityClass) {
 		return reference != null ? entityManager.find(entityClass, reference) : null;
 	}

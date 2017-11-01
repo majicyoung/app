@@ -10,19 +10,27 @@ import com.fairagora.verifik8.v8web.data.domain.cl.CLCompanyPositionType;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLCountry;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLHazardousWorkType;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLHvHeExpensionType;
+import com.fairagora.verifik8.v8web.data.domain.cl.CLMeasureType;
+import com.fairagora.verifik8.v8web.data.domain.cl.CLPlotActivityType;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLPondType;
+import com.fairagora.verifik8.v8web.data.domain.cl.CLProduct;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLProductType;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLQuantityUnit;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLSpecies;
+import com.fairagora.verifik8.v8web.data.domain.cl.CLTilingActivityType;
 import com.fairagora.verifik8.v8web.data.repo.cl.CLCommoditiesRepository;
 import com.fairagora.verifik8.v8web.data.repo.cl.CLCompanyPositionTypeRepository;
 import com.fairagora.verifik8.v8web.data.repo.cl.CLCountryRepository;
 import com.fairagora.verifik8.v8web.data.repo.cl.CLHazardousWorkTypeRepository;
 import com.fairagora.verifik8.v8web.data.repo.cl.CLHvHeExpensionTypeRepository;
+import com.fairagora.verifik8.v8web.data.repo.cl.CLMeasureTypeRepository;
+import com.fairagora.verifik8.v8web.data.repo.cl.CLPlotActivityTypeRepository;
 import com.fairagora.verifik8.v8web.data.repo.cl.CLPoundTypeRepository;
+import com.fairagora.verifik8.v8web.data.repo.cl.CLProductRepository;
 import com.fairagora.verifik8.v8web.data.repo.cl.CLProductTypesRepository;
 import com.fairagora.verifik8.v8web.data.repo.cl.CLQuantityUnitRepository;
 import com.fairagora.verifik8.v8web.data.repo.cl.CLSpeciesRepository;
+import com.fairagora.verifik8.v8web.data.repo.cl.CLTilingActivityTypeRepository;
 
 @Service
 public class CodeListsService {
@@ -57,6 +65,15 @@ public class CodeListsService {
 	@Autowired
 	private CLHvHeExpensionTypeRepository highValueExpensionTypeRepository;
 
+	@Autowired
+	private CLPlotActivityTypeRepository plotActivityTypesRepository;
+
+	@Autowired
+	private CLProductRepository productRepository;
+
+	@Autowired
+	private CLTilingActivityTypeRepository tilingActivityTypeRepository;
+	
 	/**
 	 * 
 	 * @return
@@ -141,5 +158,25 @@ public class CodeListsService {
 	public List<CLCommodities> listActiveCommodities() {
 		return commoditiesRepository.findByEnabledTrueOrderByName();
 	}
+
+	public List<CLPlotActivityType> listActiveActivityTypes() {
+		return plotActivityTypesRepository.findByEnabledTrueOrderByName();
+	}
+
+	public List<CLProduct> listActiveProducts() {
+		return productRepository.findByEnabledTrueOrderByName();
+	}
+	
+	public List<CLTilingActivityType> listActiveTilingActivityTypes(){
+		return tilingActivityTypeRepository.findByEnabledTrueOrderByName();
+	}
+
+	@Autowired
+	private CLMeasureTypeRepository measureTypeRepository;
+	
+	public List<CLMeasureType> listActiveMeasureTypes() {
+		return measureTypeRepository.findByEnabledTrueOrderByName();
+	}
+	
 
 }

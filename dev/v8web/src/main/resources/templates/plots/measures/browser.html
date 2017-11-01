@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html layout:decorator="inc/main-layout" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<div layout:fragment="content">
+
+
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="box">
+				<div class="box-header with-border">
+					<h3 class="box-title pull-left" th:text="#{farm.plot_measures_title}"></h3>
+					<div class="alert-wrapper col-xs-6">
+						<!-- messages here -->
+					</div>
+					<div class="box-tools">
+						<a th:href="@{'/plots/'+${plotId}+'/measures/create.html'}" class="btn btn-sm btn-flat btn-success"><i class="fa fa-plus"></i> <span th:text="#{farm.plot_measure_add}">farm.plot_measure_add</span></a>
+					</div>
+				</div>
+				<div class="box-body">
+					<table class="table table-hover table-striped table-bordered datatable" id="datatables-plot-data">
+						<thead>
+							<tr>
+								<th th:text="#{default.date}">default.date</th>
+								<th class="measure_type" th:text="#{default.measure_type}">default.measure_type</th>
+								<th th:text="#{default.measure_value}">default.measure_value</th>
+								<th th:text="#{default.unit}">default.unit</th>
+								<th width="120"></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="mes:${measures}">
+								<td th:text="${#dates.format(mes.measureDate,'yyyy-MM-dd HH:mm:ss')}"></td>
+								<td th:text="${mes.measureType.name}"></td>
+								<td th:text="${mes.measure.quantity}"></td>
+								<td th:text="${mes.measure.unit.name}"></td>
+								<td align="center">
+									<a href="javascript:void(0);" th:attr="data-id=${mes.id}" class="btn btn-xs btn-flat btn-primary editActBtn"><i class="fa fa-edit"></i></a>
+									<form th:action="@{'/plots/'+${plotId}+'/measures/delete.html'}" method="post" style="display: inline;">
+										<input type="hidden" th:value="${mes.id}" th:name="activityId" />
+										<button type="submit" class="btn btn-xs btn-flat btn-danger">
+											<i class="fa fa-remove"></i>
+										</button>
+									</form>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				
+				 <div class="box-footer">
+              <div class="row">
+                <div class="col-md-2 col-sm-3 col-xs-6">
+            		<label th:text="#{default.show_measure_graph}">default.show_measure_graph</label>
+                </div>
+                <div class="col-md-3 col-sm-4 col-xs-6">
+                    <select class="form-control" onchange="changeMeasure(this);">
+                        <option value="" th:text="|-- #{default.select_measure_type} --|"> </option>
+                        <option th:each="mType:${measureTypes}" th:value="${mType.name}" th:text="${mType.name}"></option>
+                    </select>
+              	</div>
+              </div>
+              <div class="row">
+              	<div class="col-md-12 col-sm-12 col-xs-12">
+                    <div id="wrapper-chart" class="chart"></div>
+                </div>
+              </div>
+            </div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<th:block layout:fragment="page-scripts">
+	<script th:src="@{/static/dist/js/Chart.bundle.min.js}"></script>
+	<script type="text/javascript" th:inline="javascript">
+	
+		var myDataTableData = null;
+	
+		
+		function changeMeasure(obj){
+			var q = $(obj).val();
+			console.log(q);
+			myDataTableData.columns('.measure_type').search(q).draw();
+			showMeasureChart(q);
+		}
+		
+		function showMeasureChart(ms){
+			$("#wrapper-chart").empty();
+			if(ms=='') return false;
+			$("#wrapper-chart").append('<canvas id="areaChart" style="height:300px;"></canvas>')
+			var areaChartCanvas = $("#areaChart").get(0).getContext("2d");
+			var arLabels = [];
+			var arData = [];
+			myDataTableData.rows({page:'current'}).data().each(function(value,index){
+				arData.unshift(value[2]);
+				arLabels.unshift(value[0]);
+			});
+			var areaChartData = {
+		      labels: arLabels,
+		      datasets: [
+		        {
+		          label: ms,
+		          fillColor: "rgba(60,141,188,0.9)",
+		          strokeColor: "rgba(60,141,188,0.8)",
+		          pointColor: "#3b8bba",
+		          pointStrokeColor: "rgba(60,141,188,1)",
+		          pointHighlightFill: "#fff",
+		          pointHighlightStroke: "rgba(60,141,188,1)",
+		          data: arData
+		        }
+		      ]
+		    };
+
+		    var areaChartOptions = {
+		      responsive:true,
+			  scales: {
+				  xAxes: [{
+					type: 'time',
+					unit: 'day',
+					unitStepSize: 1,
+					time: {
+					  displayFormats: {
+						'day': 'MMM DD',
+					  }
+					}
+				  }],
+				},
+		    };
+			var areaChart = new Chart(areaChartCanvas,{type:'line',data:areaChartData,options:areaChartOptions});
+		}
+		
+		$(document).ready(function() {
+			$('.editActBtn').click(function(){
+				var id = $(this).attr("data-id");
+				document.location=[[@{/plots/}]]+'/'+[[${plotId}]]+'/measures/'+id+'/edit.html';
+			});
+		
+			
+			myDataTableData = $('#datatables-plot-data').DataTable({
+				"order": [[ 0, "desc" ]],
+				"columnDefs": [{"orderable":false,"targets":4}],
+			});
+			
+		});
+		
+	</script>
+</th:block>
+</html>

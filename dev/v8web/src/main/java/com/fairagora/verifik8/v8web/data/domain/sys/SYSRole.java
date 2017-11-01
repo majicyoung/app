@@ -45,6 +45,11 @@ public class SYSRole implements V8Entity {
 		this.label = label;
 	}
 
+	@Override
+	public String getName() {
+		return getLabel();
+	}
+	
 	
 
 }

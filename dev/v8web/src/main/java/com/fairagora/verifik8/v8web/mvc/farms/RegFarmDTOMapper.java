@@ -8,6 +8,8 @@ import org.mapstruct.ReportingPolicy;
 import com.fairagora.verifik8.v8web.data.domain.commons.Address;
 import com.fairagora.verifik8.v8web.data.domain.commons.Attachment;
 import com.fairagora.verifik8.v8web.data.domain.commons.V8Measure;
+import com.fairagora.verifik8.v8web.data.domain.dt.DTFarmPlotActivity;
+import com.fairagora.verifik8.v8web.data.domain.dt.DTFarmPlotMeasurement;
 import com.fairagora.verifik8.v8web.data.domain.reg.RegEntity;
 import com.fairagora.verifik8.v8web.data.domain.reg.farm.RegEntityFarmDetails;
 import com.fairagora.verifik8.v8web.data.domain.reg.farm.RegEntityFarmPlot;
@@ -21,6 +23,9 @@ import com.fairagora.verifik8.v8web.mvc.farms.dto.StaffGeneralInfoSto;
 import com.fairagora.verifik8.v8web.mvc.infra.dtomapping.EntityDtoMapper;
 import com.fairagora.verifik8.v8web.mvc.infra.dtomapping.commons.AddressDto;
 import com.fairagora.verifik8.v8web.mvc.infra.dtomapping.commons.V8MeasureDto;
+import com.fairagora.verifik8.v8web.mvc.plots.dto.PlotActivityDto;
+import com.fairagora.verifik8.v8web.mvc.plots.dto.PlotListingDto;
+import com.fairagora.verifik8.v8web.mvc.plots.dto.PlotMeasurementDto;
 
 @Mapper(componentModel = "spring", uses = EntityDtoMapper.class, unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface RegFarmDTOMapper {
@@ -49,14 +54,31 @@ public interface RegFarmDTOMapper {
 
 	void toDto(RegEntityFarmPlot m, @MappingTarget FarmPlotDto dto);
 
+	void toDto(RegEntityFarmPlot m, @MappingTarget PlotListingDto dto);
+
 	void fillEntity(FarmPlotDto dto, @MappingTarget RegEntityFarmPlot m);
 
+	void toDto(DTFarmPlotMeasurement m, @MappingTarget PlotMeasurementDto dto);
+
+	void fillEntity(PlotMeasurementDto dto, @MappingTarget DTFarmPlotMeasurement m);
+
+	@Mapping(source = "m.activityType.name", target = "activityName")
+	void toDto(DTFarmPlotActivity m, @MappingTarget PlotActivityDto dto);
+
+	void fillEntity(PlotActivityDto dto, @MappingTarget DTFarmPlotActivity m);
+
 	void toDto(V8Measure m, @MappingTarget V8MeasureDto dto);
+
+	@Mapping(source = "m.unit.name", target = "unitName")
+	V8MeasureDto toDto(V8Measure m);
 
 	void fillEntity(V8MeasureDto dto, @MappingTarget V8Measure m);
 
 	default String map(Attachment at) {
 		return at.getResourcePath();
 	}
+
+	PlotListingDto toListing(RegEntityFarmPlot p);
+
 
 }

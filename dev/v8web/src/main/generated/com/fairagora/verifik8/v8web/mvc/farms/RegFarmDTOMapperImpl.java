@@ -4,15 +4,27 @@ import com.fairagora.verifik8.v8web.data.domain.cl.CLCommodities;
 
 import com.fairagora.verifik8.v8web.data.domain.cl.CLCountry;
 
+import com.fairagora.verifik8.v8web.data.domain.cl.CLMeasureType;
+
+import com.fairagora.verifik8.v8web.data.domain.cl.CLPlotActivityType;
+
 import com.fairagora.verifik8.v8web.data.domain.cl.CLPondType;
+
+import com.fairagora.verifik8.v8web.data.domain.cl.CLProduct;
 
 import com.fairagora.verifik8.v8web.data.domain.cl.CLQuantityUnit;
 
 import com.fairagora.verifik8.v8web.data.domain.cl.CLSpecies;
 
+import com.fairagora.verifik8.v8web.data.domain.cl.CLTilingActivityType;
+
 import com.fairagora.verifik8.v8web.data.domain.commons.Address;
 
 import com.fairagora.verifik8.v8web.data.domain.commons.V8Measure;
+
+import com.fairagora.verifik8.v8web.data.domain.dt.DTFarmPlotActivity;
+
+import com.fairagora.verifik8.v8web.data.domain.dt.DTFarmPlotMeasurement;
 
 import com.fairagora.verifik8.v8web.data.domain.reg.RegEntity;
 
@@ -40,6 +52,12 @@ import com.fairagora.verifik8.v8web.mvc.infra.dtomapping.commons.AddressDto;
 
 import com.fairagora.verifik8.v8web.mvc.infra.dtomapping.commons.V8MeasureDto;
 
+import com.fairagora.verifik8.v8web.mvc.plots.dto.PlotActivityDto;
+
+import com.fairagora.verifik8.v8web.mvc.plots.dto.PlotListingDto;
+
+import com.fairagora.verifik8.v8web.mvc.plots.dto.PlotMeasurementDto;
+
 import javax.annotation.Generated;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,7 +68,7 @@ import org.springframework.stereotype.Component;
 
     value = "org.mapstruct.ap.MappingProcessor",
 
-    date = "2017-10-31T16:16:07+0100",
+    date = "2017-11-01T19:35:02+0100",
 
     comments = "version: 1.1.0.Final, compiler: javac, environment: Java 1.8.0_112 (Oracle Corporation)"
 
@@ -415,6 +433,41 @@ public class RegFarmDTOMapperImpl implements RegFarmDTOMapper {
 
     @Override
 
+    public void toDto(RegEntityFarmPlot m, PlotListingDto dto) {
+
+        if ( m == null ) {
+
+            return;
+        }
+
+        dto.setId( m.getId() );
+
+        dto.setFarm( entityDtoMapper.toName( m.getFarm() ) );
+
+        dto.setNumber( m.getNumber() );
+
+        dto.setDescription( m.getDescription() );
+
+        if ( m.getSize() != null ) {
+
+            if ( dto.getSize() == null ) {
+
+                dto.setSize( new V8MeasureDto() );
+            }
+
+            toDto( m.getSize(), dto.getSize() );
+        }
+
+        else {
+
+            dto.setSize( null );
+        }
+
+        dto.setCommodities( entityDtoMapper.toName( m.getCommodities() ) );
+    }
+
+    @Override
+
     public void fillEntity(FarmPlotDto dto, RegEntityFarmPlot m) {
 
         if ( dto == null ) {
@@ -452,6 +505,190 @@ public class RegFarmDTOMapperImpl implements RegFarmDTOMapper {
 
     @Override
 
+    public void toDto(DTFarmPlotMeasurement m, PlotMeasurementDto dto) {
+
+        if ( m == null ) {
+
+            return;
+        }
+
+        dto.setId( m.getId() );
+
+        dto.setPlot( entityDtoMapper.toReference( m.getPlot() ) );
+
+        dto.setMeasureDate( m.getMeasureDate() );
+
+        dto.setMeasureType( entityDtoMapper.toReference( m.getMeasureType() ) );
+
+        if ( m.getMeasure() != null ) {
+
+            if ( dto.getMeasure() == null ) {
+
+                dto.setMeasure( new V8MeasureDto() );
+            }
+
+            toDto( m.getMeasure(), dto.getMeasure() );
+        }
+
+        else {
+
+            dto.setMeasure( null );
+        }
+
+        dto.setComment( m.getComment() );
+    }
+
+    @Override
+
+    public void fillEntity(PlotMeasurementDto dto, DTFarmPlotMeasurement m) {
+
+        if ( dto == null ) {
+
+            return;
+        }
+
+        m.setId( dto.getId() );
+
+        m.setPlot( entityDtoMapper.resolve( dto.getPlot(), RegEntityFarmPlot.class ) );
+
+        m.setMeasureDate( dto.getMeasureDate() );
+
+        m.setMeasureType( entityDtoMapper.resolve( dto.getMeasureType(), CLMeasureType.class ) );
+
+        if ( dto.getMeasure() != null ) {
+
+            if ( m.getMeasure() == null ) {
+
+                m.setMeasure( new V8Measure() );
+            }
+
+            fillEntity( dto.getMeasure(), m.getMeasure() );
+        }
+
+        else {
+
+            m.setMeasure( null );
+        }
+
+        m.setComment( dto.getComment() );
+    }
+
+    @Override
+
+    public void toDto(DTFarmPlotActivity m, PlotActivityDto dto) {
+
+        if ( m == null ) {
+
+            return;
+        }
+
+        dto.setActivityName( mActivityTypeName( m ) );
+
+        dto.setId( m.getId() );
+
+        dto.setPlot( entityDtoMapper.toReference( m.getPlot() ) );
+
+        dto.setActivityStartDate( m.getActivityStartDate() );
+
+        dto.setActivityEndDate( m.getActivityEndDate() );
+
+        dto.setActivityType( entityDtoMapper.toReference( m.getActivityType() ) );
+
+        dto.setProduct( entityDtoMapper.toReference( m.getProduct() ) );
+
+        if ( m.getMeasure() != null ) {
+
+            if ( dto.getMeasure() == null ) {
+
+                dto.setMeasure( new V8MeasureDto() );
+            }
+
+            toDto( m.getMeasure(), dto.getMeasure() );
+        }
+
+        else {
+
+            dto.setMeasure( null );
+        }
+
+        if ( m.getAdditionalMeasure() != null ) {
+
+            if ( dto.getAdditionalMeasure() == null ) {
+
+                dto.setAdditionalMeasure( new V8MeasureDto() );
+            }
+
+            toDto( m.getAdditionalMeasure(), dto.getAdditionalMeasure() );
+        }
+
+        else {
+
+            dto.setAdditionalMeasure( null );
+        }
+
+        dto.setTilingActivityType( entityDtoMapper.toReference( m.getTilingActivityType() ) );
+
+        dto.setComment( m.getComment() );
+    }
+
+    @Override
+
+    public void fillEntity(PlotActivityDto dto, DTFarmPlotActivity m) {
+
+        if ( dto == null ) {
+
+            return;
+        }
+
+        m.setId( dto.getId() );
+
+        m.setPlot( entityDtoMapper.resolve( dto.getPlot(), RegEntityFarmPlot.class ) );
+
+        m.setActivityStartDate( dto.getActivityStartDate() );
+
+        m.setActivityEndDate( dto.getActivityEndDate() );
+
+        m.setActivityType( entityDtoMapper.resolve( dto.getActivityType(), CLPlotActivityType.class ) );
+
+        m.setProduct( entityDtoMapper.resolve( dto.getProduct(), CLProduct.class ) );
+
+        if ( dto.getMeasure() != null ) {
+
+            if ( m.getMeasure() == null ) {
+
+                m.setMeasure( new V8Measure() );
+            }
+
+            fillEntity( dto.getMeasure(), m.getMeasure() );
+        }
+
+        else {
+
+            m.setMeasure( null );
+        }
+
+        if ( dto.getAdditionalMeasure() != null ) {
+
+            if ( m.getAdditionalMeasure() == null ) {
+
+                m.setAdditionalMeasure( new V8Measure() );
+            }
+
+            fillEntity( dto.getAdditionalMeasure(), m.getAdditionalMeasure() );
+        }
+
+        else {
+
+            m.setAdditionalMeasure( null );
+        }
+
+        m.setTilingActivityType( entityDtoMapper.resolve( dto.getTilingActivityType(), CLTilingActivityType.class ) );
+
+        m.setComment( dto.getComment() );
+    }
+
+    @Override
+
     public void toDto(V8Measure m, V8MeasureDto dto) {
 
         if ( m == null ) {
@@ -466,6 +703,26 @@ public class RegFarmDTOMapperImpl implements RegFarmDTOMapper {
 
     @Override
 
+    public V8MeasureDto toDto(V8Measure m) {
+
+        if ( m == null ) {
+
+            return null;
+        }
+
+        V8MeasureDto v8MeasureDto = new V8MeasureDto();
+
+        v8MeasureDto.setUnitName( mUnitName( m ) );
+
+        v8MeasureDto.setQuantity( m.getQuantity() );
+
+        v8MeasureDto.setUnit( entityDtoMapper.toReference( m.getUnit() ) );
+
+        return v8MeasureDto;
+    }
+
+    @Override
+
     public void fillEntity(V8MeasureDto dto, V8Measure m) {
 
         if ( dto == null ) {
@@ -476,6 +733,80 @@ public class RegFarmDTOMapperImpl implements RegFarmDTOMapper {
         m.setQuantity( dto.getQuantity() );
 
         m.setUnit( entityDtoMapper.resolve( dto.getUnit(), CLQuantityUnit.class ) );
+    }
+
+    @Override
+
+    public PlotListingDto toListing(RegEntityFarmPlot p) {
+
+        if ( p == null ) {
+
+            return null;
+        }
+
+        PlotListingDto plotListingDto = new PlotListingDto();
+
+        plotListingDto.setId( p.getId() );
+
+        plotListingDto.setFarm( entityDtoMapper.toName( p.getFarm() ) );
+
+        plotListingDto.setNumber( p.getNumber() );
+
+        plotListingDto.setDescription( p.getDescription() );
+
+        plotListingDto.setSize( toDto( p.getSize() ) );
+
+        plotListingDto.setCommodities( entityDtoMapper.toName( p.getCommodities() ) );
+
+        return plotListingDto;
+    }
+
+    private String mActivityTypeName(DTFarmPlotActivity dTFarmPlotActivity) {
+
+        if ( dTFarmPlotActivity == null ) {
+
+            return null;
+        }
+
+        CLPlotActivityType activityType = dTFarmPlotActivity.getActivityType();
+
+        if ( activityType == null ) {
+
+            return null;
+        }
+
+        String name = activityType.getName();
+
+        if ( name == null ) {
+
+            return null;
+        }
+
+        return name;
+    }
+
+    private String mUnitName(V8Measure v8Measure) {
+
+        if ( v8Measure == null ) {
+
+            return null;
+        }
+
+        CLQuantityUnit unit = v8Measure.getUnit();
+
+        if ( unit == null ) {
+
+            return null;
+        }
+
+        String name = unit.getName();
+
+        if ( name == null ) {
+
+            return null;
+        }
+
+        return name;
     }
 }
 

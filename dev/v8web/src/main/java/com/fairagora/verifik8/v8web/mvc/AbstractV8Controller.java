@@ -1,11 +1,16 @@
 package com.fairagora.verifik8.v8web.mvc;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.data.domain.Sort;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 import com.fairagora.verifik8.v8web.config.functional.Verifik8AppConfig;
@@ -47,6 +52,7 @@ public class AbstractV8Controller {
 	public Verifik8AppConfig appConfig() {
 		return v8App;
 	}
+
 
 	@ModelAttribute("loggedUser")
 	public SYSUser loggedUser() {

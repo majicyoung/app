@@ -5,6 +5,7 @@ public class V8MeasureDto {
 	protected float quantity;
 
 	protected Long unit;
+	protected String unitName;
 
 	public float getQuantity() {
 		return quantity;
@@ -22,5 +23,12 @@ public class V8MeasureDto {
 		this.unit = unit;
 	}
 
-	
+	public String getUnitName() {
+		return unitName;
+	}
+
+	public void setUnitName(String unitName) {
+		this.unitName = unitName;
+	}
+
 }

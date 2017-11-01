@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html layout:decorator="inc/main-layout" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<div layout:fragment="content">
+
+
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="box">
+				<div class="box-header with-border">
+					<h3 class="box-title pull-left" th:text="#{farm.plots_list}"></h3>
+					<div class="alert-wrapper col-xs-6">
+						<!-- messages here -->
+					</div>
+					<div class="box-tools">
+						<a th:href="@{/plots/create.html}" class="btn btn-sm btn-flat btn-success"><i class="fa fa-plus"></i> <span th:text="#{farm.add_pond}">farm.add_pond</span></a>
+					</div>
+				</div>
+				<div class="box-body">
+					<table class="table table-hover table-striped table-bordered datatable">
+						<thead>
+							<tr>
+								<th th:text="#{default.name}">farm.plot_number</th>
+								<th th:text="#{farm.plot_number}">farm.plot_number</th>
+								<th th:text="#{default.description}">default.description</th>
+								<th th:text="#{default.area}"></th>
+								<th th:text="#{default.unit}"></th>
+								<th th:text="#{farm.plot_commodities}"></th>
+								<th width="120"></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="plot:${listing}">
+								<td th:text="${plot.farm}"></td>
+								<td th:text="${plot.number}"></td>
+								<td th:text="${plot.description}"></td>
+								<td th:text="${plot.size.quantity}"></td>
+								<td th:text="${plot.size.unitName}"></td>
+								<td th:text="${plot.commodities}"></td>
+								<td align="center">
+									<a href="javascript:void(0);" th:attr="data-id=${plot.id}" class="btn btn-xs btn-flat btn-info addPlotDataBtn"><i class="fa fa-plus"></i></a> 
+									<a href="javascript:void(0);" th:attr="data-id=${plot.id}" class="btn btn-xs btn-flat btn-info viewActivitiesPlotDataBtn"><i class="fa fa-eye"></i></a> 
+									<a href="javascript:void(0);" th:attr="data-id=${plot.id}" class="btn btn-xs btn-flat btn-info viewDataPlotDataBtn"><i class="fa fa-bar-chart"></i></a> 
+									<a href="javascript:void(0);" th:attr="data-id=${plot.id}" class="btn btn-xs btn-flat btn-primary editPlotBtn"><i class="fa fa-edit"></i></a>
+									<form th:action="@{/plots/delete.html}" method="post" style="display: inline;">
+										<input type="hidden" th:value="${plot.id}" th:name="plotId" />
+										<button type="submit" class="btn btn-xs btn-flat btn-danger">
+											<i class="fa fa-remove"></i>
+										</button>
+									</form>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<th:block layout:fragment="page-scripts">
+	<script type="text/javascript" th:inline="javascript">
+		$(document).ready(function() {
+			
+			$('.editPlotBtn').click(function(){
+				var id = $(this).attr("data-id");
+				document.location=[[@{/plots/}]]+id+'/edit.html';
+			});
+
+			$('.viewActivitiesPlotDataBtn').click(function(){
+				var id = $(this).attr("data-id");
+				document.location=[[@{/plots/}]]+id+'/activities/browser.html';
+			});
+			
+
+			$('.viewDataPlotDataBtn').click(function(){
+				var id = $(this).attr("data-id");
+				document.location=[[@{/plots/}]]+id+'/measures/browser.html';
+			});
+		 
+		});
+		
+	</script>
+</th:block>
+</html>
