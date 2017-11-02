@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html layout:decorator="inc/main-layout" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<div layout:fragment="content">
+
+
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="box">
+				<div class="box-header with-border">
+					<h3 class="box-title pull-left" th:text="#{farm.suppliers_list}"></h3>
+					<div class="alert-wrapper col-xs-6">
+						<!-- messages here -->
+					</div>
+					<div class="box-tools">
+						<a th:href="@{/suppliers/create.html}" class="btn btn-sm btn-flat btn-success"><i class="fa fa-plus"></i> <span th:text="#{farm.add_supplier}">farm.add_supplier</span></a>
+					</div>
+				</div>
+				<div class="box-body">
+					<table class="table table-hover table-striped table-bordered datatable" id="datatables-browser">
+						<thead>
+							<tr>
+								<th th:text="#{default.farm}">default.product_type</th>
+                                <th th:text="#{default.name}">supplier.name</th>
+								<th th:text="#{default.product_type}">default.product_type</th>
+                                <th th:text="#{default.city}"></th>
+                                <th width="90"></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="supplier:${listing}">
+								<td th:text="${supplier.farm}"></td>
+								<td th:text="${supplier.supplier}"></td>
+								<td th:text="${supplier.productType}"></td>
+								<td th:text="${supplier.city}"></td>
+								<td align="center">
+									<a href="javascript:void(0);" th:attr="data-id=${supplier.id}" class="btn btn-xs btn-flat btn-primary editSupplierBtn"><i class="fa fa-edit"></i></a>
+									<form th:action="@{/suppliers/delete.html}" method="post" style="display: inline;">
+										<input type="hidden" th:value="${supplier.id}" th:name="supplierId" />
+										<button type="submit" class="btn btn-xs btn-flat btn-danger">
+											<i class="fa fa-remove"></i>
+										</button>
+									</form>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<th:block layout:fragment="page-scripts">
+	<script type="text/javascript" th:inline="javascript">
+		$(document).ready(function() {
+			
+			
+			$('.editSupplierBtn').click(function(){
+				var id = $(this).attr("data-id");
+				document.location=[[@{/suppliers/}]]+id+'/edit.html';
+			});
+
+			
+			 $('#datatables-browser').DataTable({
+				"order": [[ 0, "desc" ]],
+				"columnDefs": [{"orderable":false,"targets":4}],
+			});
+		 
+		});
+		
+	</script>
+</th:block>
+</html>

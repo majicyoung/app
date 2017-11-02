@@ -84,7 +84,7 @@
 	            <li th:class="${v8p.getNavActive('/users')}"><a th:href="@{'/users.html'}"><i class="fa fa-caret-right"></i><span th:text="#{default.users}">default.users</span></a></li>
 	          </ul>
 	        </li>
-	        <li class="{{ Request::is('/settings')?'active':'' }}"><a href="#"><i class="fa fa-cogs"></i> <span>{{ trans('default.configuration') }}</span></a></li>
+	        <li style="display: none" class="{{ Request::is('/settings')?'active':'' }}"><a href="#"><i class="fa fa-cogs"></i> <span>{{ trans('default.configuration') }}</span></a></li>
 	      </ul>
 	    </section>
 	</aside>

@@ -36,6 +36,8 @@ import com.fairagora.verifik8.v8web.data.domain.reg.farm.RegEntityFarmPlot;
 
 import com.fairagora.verifik8.v8web.data.domain.reg.farm.RegEntityFarmPond;
 
+import com.fairagora.verifik8.v8web.data.domain.reg.farm.RegEntityFarmSupplierAssignment;
+
 import com.fairagora.verifik8.v8web.data.domain.reg.farm.RegEntityStaffManagement;
 
 import com.fairagora.verifik8.v8web.mvc.farms.dto.FarmEnvironmentalDto;
@@ -64,6 +66,8 @@ import com.fairagora.verifik8.v8web.mvc.ponds.dto.PondListingDto;
 
 import com.fairagora.verifik8.v8web.mvc.ponds.dto.PondMeasurementDto;
 
+import com.fairagora.verifik8.v8web.mvc.suppliers.dto.SupplierListingDto;
+
 import javax.annotation.Generated;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -74,7 +78,7 @@ import org.springframework.stereotype.Component;
 
     value = "org.mapstruct.ap.MappingProcessor",
 
-    date = "2017-11-02T00:26:00+0100",
+    date = "2017-11-02T01:00:36+0100",
 
     comments = "version: 1.1.0.Final, compiler: javac, environment: Java 1.8.0_112 (Oracle Corporation)"
 
@@ -865,6 +869,30 @@ public class RegFarmDTOMapperImpl implements RegFarmDTOMapper {
         measure.setComment( dto.getComment() );
     }
 
+    @Override
+
+    public SupplierListingDto toListing(RegEntityFarmSupplierAssignment m) {
+
+        if ( m == null ) {
+
+            return null;
+        }
+
+        SupplierListingDto supplierListingDto = new SupplierListingDto();
+
+        supplierListingDto.setCity( mSupplierAddressCity( m ) );
+
+        supplierListingDto.setFarm( entityDtoMapper.toName( m.getFarm() ) );
+
+        supplierListingDto.setSupplier( entityDtoMapper.toName( m.getSupplier() ) );
+
+        supplierListingDto.setProductType( entityDtoMapper.toName( m.getProductType() ) );
+
+        supplierListingDto.setId( m.getId() );
+
+        return supplierListingDto;
+    }
+
     private String mActivityTypeName(DTFarmPlotActivity dTFarmPlotActivity) {
 
         if ( dTFarmPlotActivity == null ) {
@@ -911,6 +939,37 @@ public class RegFarmDTOMapperImpl implements RegFarmDTOMapper {
         }
 
         return name;
+    }
+
+    private String mSupplierAddressCity(RegEntityFarmSupplierAssignment regEntityFarmSupplierAssignment) {
+
+        if ( regEntityFarmSupplierAssignment == null ) {
+
+            return null;
+        }
+
+        RegEntity supplier = regEntityFarmSupplierAssignment.getSupplier();
+
+        if ( supplier == null ) {
+
+            return null;
+        }
+
+        Address address = supplier.getAddress();
+
+        if ( address == null ) {
+
+            return null;
+        }
+
+        String city = address.getCity();
+
+        if ( city == null ) {
+
+            return null;
+        }
+
+        return city;
     }
 }
 

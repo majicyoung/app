@@ -2,6 +2,8 @@ package com.fairagora.verifik8.v8web.mvc;
 
 import java.util.List;
 
+import javax.persistence.EntityManager;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.security.core.Authentication;
@@ -43,6 +45,9 @@ public class AbstractV8Controller {
 	@Autowired
 	protected CodeListsService codeListservice;
 
+	@Autowired
+	protected EntityManager em;
+	
 	@ModelAttribute("v8App")
 	public Verifik8AppConfig appConfig() {
 		return v8App;
