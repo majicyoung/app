@@ -160,7 +160,6 @@ public class FarmsController extends AbstractV8Controller {
 		mv.addAttribute("farmId", dto.getId());
 		mv.addAttribute("allQuantityUnits", quantityUnitRepository.findAll(new Sort("name")));
 		mv.addAttribute("allCountries", countryRepository.findAll(new Sort("name")));
-		mv.addAttribute("allCountries", countryRepository.findAll(new Sort("name")));
 		mv.addAttribute("allIndividuals", regEntityRepository.findByEntityTypeCode(CLEntityType.CODE_COOP));
 		mv.addAttribute("allCooperatives", regEntityRepository.findByEntityTypeCode(CLEntityType.CODE_COOP));
 	}

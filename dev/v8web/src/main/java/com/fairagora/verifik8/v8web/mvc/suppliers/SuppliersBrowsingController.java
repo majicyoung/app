@@ -14,8 +14,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.fairagora.verifik8.v8web.data.application.V8Page;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLEntityType;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLProductType;
-import com.fairagora.verifik8.v8web.data.domain.reg.RegEntity;
-import com.fairagora.verifik8.v8web.data.domain.reg.farm.RegEntityFarmPond;
 import com.fairagora.verifik8.v8web.data.domain.reg.farm.RegEntityFarmSupplierAssignment;
 import com.fairagora.verifik8.v8web.data.repo.reg.RegEntityFarmSupplierAssignmentRepository;
 import com.fairagora.verifik8.v8web.mvc.AbstractV8Controller;
@@ -73,14 +71,14 @@ public class SuppliersBrowsingController extends AbstractV8Controller {
 			@RequestParam("productType") Long productType, @RequestParam("supplier") Long supplier,
 			@RequestParam("farm") Long farmId, Model mv) {
 
-		RegEntityFarmSupplierAssignment pond = supplierAssId == 0 ? new RegEntityFarmSupplierAssignment()
+		RegEntityFarmSupplierAssignment supAsst = supplierAssId == 0 ? new RegEntityFarmSupplierAssignment()
 				: regEntityFarmSupplierRepository.findOne(supplierAssId);
 
-		pond.setFarm(regEntityRepository.findOne(farmId));
-		pond.setProductType(em.find(CLProductType.class, productType));
-		pond.setSupplier(regEntityRepository.findOne(supplier));
+		supAsst.setFarm(regEntityRepository.findOne(farmId));
+		supAsst.setProductType(em.find(CLProductType.class, productType));
+		supAsst.setSupplier(regEntityRepository.findOne(supplier));
 
-		regEntityFarmSupplierRepository.save(pond);
+		regEntityFarmSupplierRepository.save(supAsst);
 
 		return "redirect:/suppliers/browser.html";
 	}
@@ -98,6 +96,9 @@ public class SuppliersBrowsingController extends AbstractV8Controller {
 		preparePage(mv);
 		mv.addAttribute("supplierId", 0);
 		mv.addAttribute("allFarmsForUser", farmService.listFarms());
+		mv.addAttribute("farm", 0);
+		mv.addAttribute("productType", 0);
+		mv.addAttribute("supplier", 0);
 
 		return "suppliers/editor";
 	}
@@ -109,8 +110,13 @@ public class SuppliersBrowsingController extends AbstractV8Controller {
 	 * @param mv
 	 * @return
 	 */
-	@RequestMapping(value = "/suppliers/{supplierId}/edit.html", method = RequestMethod.GET)
-	public String editSupplier(@PathVariable("supplierId") Long supplierId, Model mv) {
+	@RequestMapping(value = "/suppliers/{supplierAssId}/edit.html", method = RequestMethod.GET)
+	public String editSupplier(@PathVariable("supplierAssId") Long supplierAssId, Model mv) {
+
+		RegEntityFarmSupplierAssignment supAsst = regEntityFarmSupplierRepository.findOne(supplierAssId);
+		mv.addAttribute("farm", supAsst.getFarm().getId());
+		mv.addAttribute("productType", supAsst.getProductType().getId());
+		mv.addAttribute("supplier", supAsst.getSupplier().getId());
 
 		preparePage(mv);
 		mv.addAttribute("allFarmsForUser", farmService.listFarms());

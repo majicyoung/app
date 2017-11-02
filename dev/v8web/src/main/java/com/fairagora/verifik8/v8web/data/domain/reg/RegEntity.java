@@ -1,6 +1,7 @@
 package com.fairagora.verifik8.v8web.data.domain.reg;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Embedded;
@@ -13,6 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.fairagora.verifik8.v8web.data.domain.V8Entity;
+import com.fairagora.verifik8.v8web.data.domain.cl.CLCountry;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLEntityType;
 import com.fairagora.verifik8.v8web.data.domain.commons.Address;
 
@@ -43,6 +45,12 @@ public class RegEntity implements V8Entity, Serializable {
 	@Column(name = "SUFFIX_NAME")
 	protected String suffixName;
 
+	@Column(name = "SALUTATION")
+	protected String salutation;
+
+	@Column(name = "GENDER")
+	protected String gender;
+
 	@Column(name = "ACRONYM")
 	protected String accronym;
 
@@ -61,8 +69,21 @@ public class RegEntity implements V8Entity, Serializable {
 	@Column(name = "E_MAIL")
 	protected String email;
 
+	@Column(name = "REGISTRATION_NUMBER")
+	protected String registrationNumber;
+
 	@Column(name = "WEBSITE")
 	protected String website;
+
+	@ManyToOne(optional = true)
+	@JoinColumn(name = "CL_NATIONALITY_COUNTRY_ID")
+	protected CLCountry nationality;
+
+	@Column(name = "DATE_OF_BIRTH")
+	protected Date dateOfBirth;
+
+	@Column(name = "COMMENT")
+	protected String comment = "";
 
 	public Long getId() {
 		return id;
@@ -166,6 +187,54 @@ public class RegEntity implements V8Entity, Serializable {
 
 	public void setAccronym(String accronym) {
 		this.accronym = accronym;
+	}
+
+	public CLCountry getNationality() {
+		return nationality;
+	}
+
+	public void setNationality(CLCountry nationality) {
+		this.nationality = nationality;
+	}
+
+	public String getSalutation() {
+		return salutation;
+	}
+
+	public void setSalutation(String salutation) {
+		this.salutation = salutation;
+	}
+
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+
+	public Date getDateOfBirth() {
+		return dateOfBirth;
+	}
+
+	public void setDateOfBirth(Date dateOfBirth) {
+		this.dateOfBirth = dateOfBirth;
+	}
+
+	public String getComment() {
+		return comment;
+	}
+
+	public void setComment(String comment) {
+		this.comment = comment;
+	}
+
+	public String getRegistrationNumber() {
+		return registrationNumber;
+	}
+
+	public void setRegistrationNumber(String registrationNumber) {
+		this.registrationNumber = registrationNumber;
 	}
 
 }

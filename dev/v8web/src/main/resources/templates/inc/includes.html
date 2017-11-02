@@ -67,8 +67,8 @@
 	            </span>
 	          </a>
 	          <ul class="treeview-menu">
-	        	<li class="{{ Request::is('individuals*')?'active':'' }}"><a href="{{ url('/individuals') }}"><i class="fa fa-caret-right"></i> <span th:text="#{default.individuals}">default.individuals</span></a></li>
-	            <li class="{{ Request::is('companies*')?'active':'' }}"><a href="{{ url('/companies') }}"><i class="fa fa-caret-right"></i> <span th:text="#{default.companies}">default.companies</span></a></li>
+	        	<li class="{{ Request::is('individuals*')?'active':'' }}"><a th:href="@{/individuals/browser.html}"><i class="fa fa-caret-right"></i> <span th:text="#{default.individuals}">default.individuals</span></a></li>
+	            <li class="{{ Request::is('companies*')?'active':'' }}"><a th:href="@{/companies/browser.html}"><i class="fa fa-caret-right"></i> <span th:text="#{default.companies}">default.companies</span></a></li>
 	            <!--<li class="{{ Request::is('species*')?'active':'' }}"><a href="{{ url('/species') }}"><i class="fa fa-caret-right"></i> {{ trans('default.species') }}</a></li>
 	            <li class="{{ Request::is('products*')?'active':'' }}"><a href="{{ url('/products') }}"><i class="fa fa-caret-right"></i> {{ trans('default.products') }}</a></li>-->
 	          </ul>

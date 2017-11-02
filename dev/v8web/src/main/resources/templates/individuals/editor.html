@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html layout:decorator="inc/main-layout" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<div layout:fragment="content">
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="box" id="individual-box">
+				<div class="box-header with-border">
+					<h3 class="box-title" th:text="farm.create_individual"></h3>
+					<div class="box-tools">
+						<a th:href="@{/individuals/browser.html}" class="btn btn-sm btn-flat btn-warning"><i class="fa fa-backward"></i> <span th:text="#{default.back}"></span></a>
+					</div>
+				</div>
+				<form th:action="@{'/individuals/'+${individualId}+'/update.html'}" id="individualEditorForm" method="post" th:object="${individualDto}">
+					<div class="box-body">
+						<div class="row">
+							<div class="col-md-6 col-sm-6 col-xs-12">
+								<div class="form-group">
+									<label th:text="|#{default.first_name}*|">individual.first_name*</label> 
+									<input name="firstname" type="text" class="form-control" th:placeholder="#{default.first_name}" th:field="*{name}" required="required" />
+								</div>
+								<div class="form-group">
+									<label th:text="#{default.middle_name}">individual.middle_name</label> 
+									<input name="middlename" type="text" class="form-control" th:placeholder="#{default.middle_name}" th:field="*{middleName}" />
+								</div>
+								<div class="form-group">
+									<label th:text="#{default.last_name}">individual.last_name</label> 
+									<input name="lastname" type="text" class="form-control" th:placeholder="#{default.last_name}" th:field="*{surname}" />
+								</div>
+								<div class="form-group">
+									<label th:text="#{individual.registration_number}">individual.registration_number</label> 
+									<input name="lastname" type="text" class="form-control" th:placeholder="#{individual.registration_number}" th:field="*{registrationNumber}" />
+								</div>
+							</div>
+							<div class="col-md-6 col-sm-6 col-xs-12">
+								<div class="form-group">
+									<label th:text="#{default.salutation}">default.salutation</label> 
+									<select name="salutation" class="form-control" th:field="*{salutation}">
+										<option value="Mr."  th:text="#{default.mr}"> default.mr</option>
+										<option value="Mrs." th:text="#{default.mrs}"> default.mrs</option>
+										<option value="Ms." th:text="#{default.ms}">default.ms</option>
+									</select>
+								</div>
+								<div class="form-group">
+									<label th:text="#{default.gender}">default.gender</label> 
+									<select name="gender" class="form-control" th:field="*{gender}">
+										<option value="M" th:text="#{default.male}">default.male</option>
+										<option value="F" th:text="#{default.female}">default.female</option>
+									</select>
+								</div>
+								<div class="form-group">
+									<label th:text="#{default.date_birth}">default.date_birth</label>
+									<div class="input-group">
+										<input type="text" class="form-control datepicker datefield" name="dob" placeholder="YYYY-MM-DD" th:field="*{dateOfBirth}"/> <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6 col-sm-6 col-xs-12">
+								<div class="form-group">
+									<label th:text="#{default.address}">default.address</label>
+									<textarea name="address" class="form-control" th:placeholder="#{default.address}" th:field="*{address.main}">{{ $individual->ADDRESS }}</textarea>
+								</div>
+								<div class="form-group">
+									<label th:text="#{default.city}">default.city</label> 
+									<input name="city" type="text" class="form-control" placeholder="#{default.city}" th:field="*{address.city}" />
+								</div>
+								<div class="form-group">
+									<label th:text="#{default.zip_code}">default.zip_code</label> 
+									<input name="zip" type="text" class="form-control" th:placeholder="#{default.zip_code}" th:field="*{address.zip}" />
+								</div>
+								<div class="form-group">
+									<label th:text="#{default.country}"></label> 
+									<select name="country" class="form-control" th:field="*{address.country}">
+										<option value="" th:text="|-- #{default.select_country} --|">-- default.select_nationality --</option>
+										<option th:each="c:${allCountries}"  th:value="${c.id}"  th:text="${c.name}"></option>
+									</select>
+								</div>
+								<div class="form-group">
+									<label th:text="|#{default.nationality}*|">default.nationality*</label> 
+									<select name="nationality" class="form-control" required="required" th:field="*{nationality}">
+										<option value="" th:text="|-- #{default.select_nationality} --|">-- default.select_nationality --</option>
+										<option th:each="c:${allCountries}"  th:value="${c.id}"  th:text="${c.name}"></option>
+									</select>
+								</div>
+							</div>
+							<div class="col-md-6 col-sm-6 col-xs-12">
+								<div class="form-group">
+									<label th:text="#{default.phone}">default.phone</label> 
+									<input name="phone" type="text" class="form-control" th:placeholder="#{default.phone}" th:field="*{phoneNumber}"  />
+								</div>
+								<div class="form-group">
+									<label th:text="|#{default.mobile}*|">default.mobile*</label> 
+									<input name="mobile" type="text" class="form-control" th:placeholder="#{default.mobile}" th:field="*{mobileNumber}"  required="required" />
+								</div>
+								<div class="form-group">
+									<label th:text="#{default.fax}"></label> 
+									<input name="fax" type="text" class="form-control" th:placeholder="#{default.fax}" th:field="*{faxNumber}"/>
+								</div>
+								<div class="form-group">
+									<label th:text="#{default.email}"></label> 
+									<input name="email" type="email" class="form-control" th:placeholder="#{default.email}" th:field="*{email}"/>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="box-footer text-center">
+			            <small th:text="|*#{default.mandatory_field}|">*default.mandatory_field</small>
+			            <a th:href="@{/individuals/browser.html}" class="btn btn-warning"><i class="fa fa-times"></i> <span th:text="#{default.cancel}">default.cancel</span></a> 
+			            <button type="submit" class="btn btn-success"><span th:text="#{default.submit}"></span> <i class="fa fa-check"></i></button>
+			        </div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+<th:block layout:fragment="page-scripts">
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$('.datefield').datetimepicker({
+				format: 'Y-m-d'
+			});
+		});
+
+		function hasEmptyFields(selector) {
+			var hasError = false;
+			$(selector).each(function(index, element) {
+				if ($(element).val() == '') {
+					hasError = true;
+					$(element).closest('.form-group').addClass('has-error');
+				} else
+					$(element).closest('.form-group').removeClass('has-error');
+			});
+			return hasError;
+		}
+	</script>
+</th:block>
+</html>

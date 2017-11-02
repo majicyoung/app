@@ -56,6 +56,10 @@ import com.fairagora.verifik8.v8web.mvc.infra.dtomapping.commons.AddressDto;
 
 import com.fairagora.verifik8.v8web.mvc.infra.dtomapping.commons.V8MeasureDto;
 
+import com.fairagora.verifik8.v8web.mvc.invididuals.dto.IndividualDto;
+
+import com.fairagora.verifik8.v8web.mvc.invididuals.dto.IndividualListingDto;
+
 import com.fairagora.verifik8.v8web.mvc.plots.dto.PlotActivityDto;
 
 import com.fairagora.verifik8.v8web.mvc.plots.dto.PlotListingDto;
@@ -78,7 +82,7 @@ import org.springframework.stereotype.Component;
 
     value = "org.mapstruct.ap.MappingProcessor",
 
-    date = "2017-11-02T01:00:36+0100",
+    date = "2017-11-02T20:38:33+0100",
 
     comments = "version: 1.1.0.Final, compiler: javac, environment: Java 1.8.0_112 (Oracle Corporation)"
 
@@ -893,6 +897,146 @@ public class RegFarmDTOMapperImpl implements RegFarmDTOMapper {
         return supplierListingDto;
     }
 
+    @Override
+
+    public IndividualListingDto toListing(RegEntity m) {
+
+        if ( m == null ) {
+
+            return null;
+        }
+
+        IndividualListingDto individualListingDto = new IndividualListingDto();
+
+        individualListingDto.setCity( mAddressCity( m ) );
+
+        individualListingDto.setRegistrationNumber( m.getRegistrationNumber() );
+
+        individualListingDto.setName( m.getName() );
+
+        individualListingDto.setPhoneNumber( m.getPhoneNumber() );
+
+        individualListingDto.setEmail( m.getEmail() );
+
+        individualListingDto.setNationality( entityDtoMapper.toName( m.getNationality() ) );
+
+        individualListingDto.setId( m.getId() );
+
+        return individualListingDto;
+    }
+
+    @Override
+
+    public void toDto(RegEntity supAsst, IndividualDto dto) {
+
+        if ( supAsst == null ) {
+
+            return;
+        }
+
+        dto.setId( supAsst.getId() );
+
+        dto.setName( supAsst.getName() );
+
+        dto.setSurname( supAsst.getSurname() );
+
+        dto.setMiddleName( supAsst.getMiddleName() );
+
+        dto.setSuffixName( supAsst.getSuffixName() );
+
+        dto.setAccronym( supAsst.getAccronym() );
+
+        if ( supAsst.getAddress() != null ) {
+
+            if ( dto.getAddress() == null ) {
+
+                dto.setAddress( new AddressDto() );
+            }
+
+            toDto( supAsst.getAddress(), dto.getAddress() );
+        }
+
+        else {
+
+            dto.setAddress( null );
+        }
+
+        dto.setPhoneNumber( supAsst.getPhoneNumber() );
+
+        dto.setMobileNumber( supAsst.getMobileNumber() );
+
+        dto.setFaxNumber( supAsst.getFaxNumber() );
+
+        dto.setEmail( supAsst.getEmail() );
+
+        dto.setWebsite( supAsst.getWebsite() );
+
+        dto.setSalutation( supAsst.getSalutation() );
+
+        dto.setGender( supAsst.getGender() );
+
+        dto.setDateOfBirth( supAsst.getDateOfBirth() );
+
+        dto.setNationality( entityDtoMapper.toReference( supAsst.getNationality() ) );
+
+        dto.setRegistrationNumber( supAsst.getRegistrationNumber() );
+    }
+
+    @Override
+
+    public void fillEntity(IndividualDto dto, RegEntity ind) {
+
+        if ( dto == null ) {
+
+            return;
+        }
+
+        ind.setName( dto.getName() );
+
+        if ( dto.getAddress() != null ) {
+
+            if ( ind.getAddress() == null ) {
+
+                ind.setAddress( new Address() );
+            }
+
+            fillEntity( dto.getAddress(), ind.getAddress() );
+        }
+
+        else {
+
+            ind.setAddress( null );
+        }
+
+        ind.setPhoneNumber( dto.getPhoneNumber() );
+
+        ind.setMobileNumber( dto.getMobileNumber() );
+
+        ind.setFaxNumber( dto.getFaxNumber() );
+
+        ind.setEmail( dto.getEmail() );
+
+        ind.setWebsite( dto.getWebsite() );
+
+        ind.setSurname( dto.getSurname() );
+
+        ind.setMiddleName( dto.getMiddleName() );
+
+        ind.setSuffixName( dto.getSuffixName() );
+
+        ind.setAccronym( dto.getAccronym() );
+
+        ind.setNationality( entityDtoMapper.resolve( dto.getNationality(), CLCountry.class ) );
+
+        ind.setSalutation( dto.getSalutation() );
+
+        ind.setGender( dto.getGender() );
+
+        ind.setDateOfBirth( dto.getDateOfBirth() );
+
+        ind.setRegistrationNumber( dto.getRegistrationNumber() );
+    }
+
     private String mActivityTypeName(DTFarmPlotActivity dTFarmPlotActivity) {
 
         if ( dTFarmPlotActivity == null ) {
@@ -956,6 +1100,30 @@ public class RegFarmDTOMapperImpl implements RegFarmDTOMapper {
         }
 
         Address address = supplier.getAddress();
+
+        if ( address == null ) {
+
+            return null;
+        }
+
+        String city = address.getCity();
+
+        if ( city == null ) {
+
+            return null;
+        }
+
+        return city;
+    }
+
+    private String mAddressCity(RegEntity regEntity) {
+
+        if ( regEntity == null ) {
+
+            return null;
+        }
+
+        Address address = regEntity.getAddress();
 
         if ( address == null ) {
 

@@ -1,16 +1,5 @@
 package com.fairagora.verifik8.v8web.mvc.suppliers.dto;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-
-import com.fairagora.verifik8.v8web.data.domain.cl.CLProductType;
-import com.fairagora.verifik8.v8web.data.domain.reg.RegEntity;
-import com.fairagora.verifik8.v8web.mvc.infra.dtomapping.commons.V8MeasureDto;
-
 public class SupplierListingDto {
 
 	protected Long id;

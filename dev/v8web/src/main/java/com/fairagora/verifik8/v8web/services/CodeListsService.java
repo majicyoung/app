@@ -4,10 +4,12 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.fairagora.verifik8.v8web.data.domain.cl.CLCommodities;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLCompanyPositionType;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLCountry;
+import com.fairagora.verifik8.v8web.data.domain.cl.CLEntityType;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLHazardousWorkType;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLHvHeExpensionType;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLMeasureType;
@@ -21,6 +23,7 @@ import com.fairagora.verifik8.v8web.data.domain.cl.CLTilingActivityType;
 import com.fairagora.verifik8.v8web.data.repo.cl.CLCommoditiesRepository;
 import com.fairagora.verifik8.v8web.data.repo.cl.CLCompanyPositionTypeRepository;
 import com.fairagora.verifik8.v8web.data.repo.cl.CLCountryRepository;
+import com.fairagora.verifik8.v8web.data.repo.cl.CLEntityTypeRepository;
 import com.fairagora.verifik8.v8web.data.repo.cl.CLHazardousWorkTypeRepository;
 import com.fairagora.verifik8.v8web.data.repo.cl.CLHvHeExpensionTypeRepository;
 import com.fairagora.verifik8.v8web.data.repo.cl.CLMeasureTypeRepository;
@@ -73,7 +76,7 @@ public class CodeListsService {
 
 	@Autowired
 	private CLTilingActivityTypeRepository tilingActivityTypeRepository;
-	
+
 	/**
 	 * 
 	 * @return
@@ -166,17 +169,27 @@ public class CodeListsService {
 	public List<CLProduct> listActiveProducts() {
 		return productRepository.findByEnabledTrueOrderByName();
 	}
-	
-	public List<CLTilingActivityType> listActiveTilingActivityTypes(){
+
+	public List<CLTilingActivityType> listActiveTilingActivityTypes() {
 		return tilingActivityTypeRepository.findByEnabledTrueOrderByName();
 	}
 
 	@Autowired
 	private CLMeasureTypeRepository measureTypeRepository;
-	
+
 	public List<CLMeasureType> listActiveMeasureTypes() {
 		return measureTypeRepository.findByEnabledTrueOrderByName();
 	}
-	
+
+	@Autowired
+	CLEntityTypeRepository entityTypeRepository;
+
+	@Transactional
+	public CLEntityType findEntityType(String codeInd) {
+		for (CLEntityType e : entityTypeRepository.findAll())
+			if (e.getCode().equals(codeInd))
+				return e;
+		return null;
+	}
 
 }

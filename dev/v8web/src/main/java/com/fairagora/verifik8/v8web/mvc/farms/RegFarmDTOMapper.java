@@ -25,6 +25,8 @@ import com.fairagora.verifik8.v8web.mvc.farms.dto.StaffGeneralInfoSto;
 import com.fairagora.verifik8.v8web.mvc.infra.dtomapping.EntityDtoMapper;
 import com.fairagora.verifik8.v8web.mvc.infra.dtomapping.commons.AddressDto;
 import com.fairagora.verifik8.v8web.mvc.infra.dtomapping.commons.V8MeasureDto;
+import com.fairagora.verifik8.v8web.mvc.invididuals.dto.IndividualDto;
+import com.fairagora.verifik8.v8web.mvc.invididuals.dto.IndividualListingDto;
 import com.fairagora.verifik8.v8web.mvc.plots.dto.PlotActivityDto;
 import com.fairagora.verifik8.v8web.mvc.plots.dto.PlotListingDto;
 import com.fairagora.verifik8.v8web.mvc.plots.dto.PlotMeasurementDto;
@@ -93,5 +95,13 @@ public interface RegFarmDTOMapper {
 
 	@Mapping(source = "m.supplier.address.city", target = "city")
 	SupplierListingDto toListing(RegEntityFarmSupplierAssignment m);
+
+	@Mapping(source = "m.address.city", target = "city")
+	IndividualListingDto toListing(RegEntity m);
+
+	void toDto(RegEntity supAsst, @MappingTarget IndividualDto dto);
+	
+	@Mapping(target = "id", ignore = true)
+	void fillEntity(IndividualDto dto, @MappingTarget RegEntity ind);
 
 }
