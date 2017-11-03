@@ -17,6 +17,8 @@ import com.fairagora.verifik8.v8web.data.domain.reg.farm.RegEntityFarmPlot;
 import com.fairagora.verifik8.v8web.data.domain.reg.farm.RegEntityFarmPond;
 import com.fairagora.verifik8.v8web.data.domain.reg.farm.RegEntityFarmSupplierAssignment;
 import com.fairagora.verifik8.v8web.data.domain.reg.farm.RegEntityStaffManagement;
+import com.fairagora.verifik8.v8web.mvc.companies.dto.CompanyDto;
+import com.fairagora.verifik8.v8web.mvc.companies.dto.CompanyListingDto;
 import com.fairagora.verifik8.v8web.mvc.farms.dto.FarmEnvironmentalDto;
 import com.fairagora.verifik8.v8web.mvc.farms.dto.FarmFormDto;
 import com.fairagora.verifik8.v8web.mvc.farms.dto.FarmPlotDto;
@@ -99,9 +101,17 @@ public interface RegFarmDTOMapper {
 	@Mapping(source = "m.address.city", target = "city")
 	IndividualListingDto toListing(RegEntity m);
 
-	void toDto(RegEntity supAsst, @MappingTarget IndividualDto dto);
-	
+	void toDto(RegEntity e, @MappingTarget IndividualDto dto);
+
 	@Mapping(target = "id", ignore = true)
 	void fillEntity(IndividualDto dto, @MappingTarget RegEntity ind);
+
+	@Mapping(source = "m.address.city", target = "city")
+	CompanyListingDto toCompListing(RegEntity m);
+
+	void toDto(RegEntity ind, @MappingTarget CompanyDto dto);
+
+	@Mapping(target = "id", ignore = true)
+	void fillEntity(CompanyDto dto, @MappingTarget RegEntity ind);
 
 }

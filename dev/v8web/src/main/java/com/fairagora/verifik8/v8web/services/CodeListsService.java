@@ -192,4 +192,8 @@ public class CodeListsService {
 		return null;
 	}
 
+	public List<CLEntityType> listActiveCompanyEntityTypes() {
+		return entityTypeRepository.findByEnabledTrueAndCompanyTrueOrderByName();
+	}
+
 }
