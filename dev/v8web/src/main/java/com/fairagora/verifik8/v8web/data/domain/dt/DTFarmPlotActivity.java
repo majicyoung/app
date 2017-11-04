@@ -16,6 +16,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fairagora.verifik8.v8web.data.domain.V8EntitySupport;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLPlotActivityType;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLProduct;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLTilingActivityType;
@@ -24,7 +25,7 @@ import com.fairagora.verifik8.v8web.data.domain.reg.farm.RegEntityFarmPlot;
 
 @Entity
 @Table(name = "dt_farmag_plot_management")
-public class DTFarmPlotActivity {
+public class DTFarmPlotActivity extends V8EntitySupport {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -65,9 +66,6 @@ public class DTFarmPlotActivity {
 	@ManyToOne(optional = true)
 	@JoinColumn(name = "CL_TILING_ACTIVITY_TYPE_ID")
 	protected CLTilingActivityType tilingActivityType;
-
-	@Column(name = "COMMENT")
-	protected String comment;
 
 	public Long getId() {
 		return id;
@@ -141,12 +139,9 @@ public class DTFarmPlotActivity {
 		this.tilingActivityType = tilingActivityType;
 	}
 
-	public String getComment() {
-		return comment;
-	}
-
-	public void setComment(String comment) {
-		this.comment = comment;
+	@Override
+	public String getName() {
+		return toString();
 	}
 
 }

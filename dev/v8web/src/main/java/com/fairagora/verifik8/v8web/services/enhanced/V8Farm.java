@@ -26,7 +26,7 @@ public class V8Farm {
 
 	private int staffCount;
 	private int pondsCount;
-	private int fieldsCount;
+	private int plotsCount;
 
 	private V8Measure size;
 
@@ -71,11 +71,11 @@ public class V8Farm {
 	}
 
 	public int getFieldsCount() {
-		return fieldsCount;
+		return plotsCount;
 	}
 
 	public void setFieldsCount(int fieldsCount) {
-		this.fieldsCount = fieldsCount;
+		this.plotsCount = fieldsCount;
 	}
 
 	public String getLocation() {
@@ -134,4 +134,11 @@ public class V8Farm {
 		this.address = address;
 	}
 
+	public int getPlotsCount() {
+		return plotsCount;
+	}
+
+	public void setPlotsCount(int plotsCount) {
+		this.plotsCount = plotsCount;
+	}
 }

@@ -14,13 +14,13 @@
 			<li id="farmtab_plots"><a th:href="@{${'/farm/'+farmId+'/plots.html'}}" th:text="#{default.plots}">default.plots</a></li>
 		</th:block>
 		<th:block th:if="${newEntity!=null AND newEntity}">
-			<li><a href="#tab_1" data-toggle="tab" th:text="#{farm.profile}">farm.profile</a></li>
+			<li class="active"><a href="#tab_1" data-toggle="tab" th:text="#{farm.profile}">farm.profile</a></li>
 			<li class="disabled"><a th:text="#{farm.staff_general_info}">farm.staff_general_info</a></li>
 			<li class="disabled"><a th:text="#{farm.contact_staff}">farm.contact_staff</a></li>
 			<li class="disabled"><a th:text="#{farm.env_details}">farm.env_details</a></li>
 			<li class="disabled"><a th:text="#{default.suppliers}">default.suppliers</a></li>
 			<li class="disabled"><a th:text="#{default.ponds}">default.ponds</a></li>
-			<li class="disabled"><a th:text="#{default.fields}">default.fields</a></li>
+			<li class="disabled"><a th:text="#{default.plots}">default.fields</a></li>
 		</th:block>
 	</ul>
 

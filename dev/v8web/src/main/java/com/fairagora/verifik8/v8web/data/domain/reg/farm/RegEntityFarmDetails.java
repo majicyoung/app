@@ -18,6 +18,8 @@ import javax.persistence.Table;
 import org.hibernate.annotations.NotFound;
 import org.hibernate.annotations.NotFoundAction;
 
+import com.fairagora.verifik8.v8web.data.domain.V8Entity;
+import com.fairagora.verifik8.v8web.data.domain.V8EntitySupport;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLHvHeExpensionType;
 import com.fairagora.verifik8.v8web.data.domain.commons.Attachment;
 import com.fairagora.verifik8.v8web.data.domain.commons.V8Measure;
@@ -25,7 +27,7 @@ import com.fairagora.verifik8.v8web.data.domain.reg.RegEntity;
 
 @Entity
 @Table(name = "reg_entity_farm_details")
-public class RegEntityFarmDetails {
+public class RegEntityFarmDetails extends V8EntitySupport{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -71,6 +73,10 @@ public class RegEntityFarmDetails {
 	@AttributeOverrides({ @AttributeOverride(name = "resourcePath", column = @Column(name = "HVH_LAND_TITLE")) })
 	protected Attachment landTitle;
 
+	@Embedded
+	@AttributeOverrides({ @AttributeOverride(name = "resourcePath", column = @Column(name = "AERIAL_VIEW")) })
+	protected Attachment aerialView;
+
 	@Column(name = "SITING_PROTECTED_AREA")
 	protected boolean sittingProtectedArea;
 
@@ -95,6 +101,9 @@ public class RegEntityFarmDetails {
 	@Embedded
 	@AttributeOverrides({ @AttributeOverride(name = "resourcePath", column = @Column(name = "CUMUL_IMPACTS")) })
 	protected Attachment cumulativeImpactStudy;
+
+	@Column(name = "HAS_A_LAB")
+	protected boolean hasALab;
 
 	public Long getId() {
 		return id;
@@ -232,4 +241,28 @@ public class RegEntityFarmDetails {
 		this.sittingProtectedAreaUrl = sittingProtectedAreaUrl;
 	}
 
+	public Attachment getAerialView() {
+		return aerialView;
+	}
+
+	public void setAerialView(Attachment aerialView) {
+		this.aerialView = aerialView;
+	}
+
+	public boolean isHasALab() {
+		return hasALab;
+	}
+
+	public void setHasALab(boolean hasALab) {
+		this.hasALab = hasALab;
+	}
+
+	public void setupFromExNihilo() {
+		this.hasALab = false;
+	}
+
+	@Override
+	public String getName() {
+		return getEntity().getName();
+	}
 }

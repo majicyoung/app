@@ -2,9 +2,11 @@ package com.fairagora.verifik8.v8web.mvc.farms;
 
 import java.util.List;
 
+import org.hibernate.type.descriptor.sql.JdbcTypeFamilyInformation.Family;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
@@ -65,10 +67,18 @@ public class FarmsController extends AbstractV8Controller {
 	@RequestMapping(value = "/farm/create.html", method = RequestMethod.GET)
 	public String showCreateUserForm(Model mv) {
 
-		prepareForFarmEdition(new FarmFormDto(), mv);
+		FarmFormDto dto = new FarmFormDto();
+		dto.setId(0l);
+		prepareForFarmEdition(dto, mv);
 
 		return "farms/create";
 
+	}
+
+	@RequestMapping(value = "/farm/{id}/delete.html", method = RequestMethod.POST)
+	public String deleteFarms(@PathVariable("id") Long id, Model mv) {
+		farmService.deleteFarm(id);
+		return "redirect:/farms.html";
 	}
 
 	@RequestMapping(value = "/farm/{id}/edit.html", method = RequestMethod.GET)
@@ -76,23 +86,36 @@ public class FarmsController extends AbstractV8Controller {
 		FarmFormDto dto = new FarmFormDto();
 
 		regFarmDtoMapper.toDto(regEntityRepository.findOne(id), dto);
-		regFarmDtoMapper.toDto(regEntityFarmDetailsRepository.findByEntityId(id), dto);
+		regFarmDtoMapper.toDto(regEntityFarmDetailsRepository.findByEntityId(id).get(), dto);
 
 		prepareForFarmEdition(dto, mv);
 		return "farms/create";
 	}
 
 	@RequestMapping(value = "/farm/{id}/update.html", method = RequestMethod.POST)
-	public String createUser(@Validated @ModelAttribute("farmDto") FarmFormDto farmDto,
+	@Transactional
+	public String updateFarm(@Validated @ModelAttribute("farmDto") FarmFormDto farmDto,
 			@PathVariable("id") Long entityId, BindingResult bindResults, Model mv) {
 
 		RegEntity farm = regEntityRepository.findOne(entityId);
-		RegEntityFarmDetails farmDetails = regEntityFarmDetailsRepository.findByEntityId(entityId);
+		RegEntityFarmDetails farmDetails = entityId == null || entityId.intValue() == 0 ? null
+				: regEntityFarmDetailsRepository.findByEntityId(entityId).get();
+
+		if (farm == null) {
+			farm = new RegEntity();
+			farm.setEntityType(codeListservice.findEntityType(CLEntityType.CODE_FARM));
+		}
 
 		regFarmDtoMapper.fillEntity(farmDto, farm);
-		regFarmDtoMapper.fillEntity(farmDto, farmDetails);
+		regEntityRepository.saveAndFlush(farm);
 
-		regEntityRepository.save(farm);
+		if (farmDetails == null) {
+			farmDetails = new RegEntityFarmDetails();
+			farmDetails.setupFromExNihilo();
+		}
+		regFarmDtoMapper.fillEntity(farmDto, farmDetails);
+		farmDetails.setEntity(farm);
+
 		regEntityFarmDetailsRepository.save(farmDetails);
 
 		return "redirect:/farms.html";
@@ -108,7 +131,7 @@ public class FarmsController extends AbstractV8Controller {
 	public String showEnvironmental(@PathVariable("id") Long id, Model mv) {
 		FarmEnvironmentalDto dto = new FarmEnvironmentalDto();
 
-		regFarmDtoMapper.toDto(regEntityFarmDetailsRepository.findByEntityId(id), dto);
+		regFarmDtoMapper.toDto(regEntityFarmDetailsRepository.findByEntityId(id).get(), dto);
 
 		prepareForFarmEdition(id, dto, mv);
 		return "farms/environmental";
@@ -124,20 +147,19 @@ public class FarmsController extends AbstractV8Controller {
 	 */
 	@RequestMapping(value = "/farm/{id}/environmental-update.html", method = RequestMethod.POST)
 	public String saveEnvironmental(@Validated @ModelAttribute("farmDto") FarmEnvironmentalDto farmDto,
-			@PathVariable("id") Long entityId, BindingResult bindResults, 
-			@RequestParam("impact_study") MultipartFile impact_study, 
-			@RequestParam("contruct_permit") MultipartFile contruct_permit, 
-			@RequestParam("land_title") MultipartFile land_title, 
-			@RequestParam("land_auth") MultipartFile land_auth, 
-			@RequestParam("canal_restore") MultipartFile canal_restore, 
-			@RequestParam("cumul_study") MultipartFile cumul_study, 
-			Model mv) {
+			@PathVariable("id") Long entityId, BindingResult bindResults,
+			@RequestParam("impact_study") MultipartFile impact_study,
+			@RequestParam("contruct_permit") MultipartFile contruct_permit,
+			@RequestParam("land_title") MultipartFile land_title, @RequestParam("land_auth") MultipartFile land_auth,
+			@RequestParam("canal_restore") MultipartFile canal_restore,
+			@RequestParam("cumul_study") MultipartFile cumul_study, Model mv) {
 
+		RegEntityFarmDetails farmDetails = regEntityFarmDetailsRepository.findByEntityId(entityId).get();
+		regFarmDtoMapper.fillEntity(farmDto, farmDetails);
+		regEntityFarmDetailsRepository.save(farmDetails);
+		// TODO: save files !
 
-
-		prepareForFarmEdition(entityId, farmDto, mv);
-		
-		return "redirect:/farm/"+entityId+"/environmental.html";
+		return "redirect:/farm/" + entityId + "/environmental.html";
 	}
 
 	/**
@@ -155,12 +177,12 @@ public class FarmsController extends AbstractV8Controller {
 
 		mv.addAttribute("newEntity", dto.getId() == null);
 		mv.addAttribute("activeTab", "profile");
-		
+
 		mv.addAttribute("farmDto", dto);
 		mv.addAttribute("farmId", dto.getId());
 		mv.addAttribute("allQuantityUnits", quantityUnitRepository.findAll(new Sort("name")));
 		mv.addAttribute("allCountries", countryRepository.findAll(new Sort("name")));
-		mv.addAttribute("allIndividuals", regEntityRepository.findByEntityTypeCode(CLEntityType.CODE_COOP));
+		mv.addAttribute("allIndividuals", regEntityRepository.findByEntityTypeCode(CLEntityType.CODE_IND));
 		mv.addAttribute("allCooperatives", regEntityRepository.findByEntityTypeCode(CLEntityType.CODE_COOP));
 	}
 

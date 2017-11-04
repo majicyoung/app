@@ -9,7 +9,7 @@
         <div class="box-header with-border">
           <h3 class="box-title" th:text="#{farm.create}">farm.create</h3>
         </div>
-        <form role="form"  th:action="@{${newEntity ? '/farm/create.html' : '/farm/'+farmDto.id+'/update.html'}}" th:object="${farmDto}" method="post" class="form-horizontal" enctype="multipart/form-data" onsubmit="return !hasEmptyFields('#farm-box form .form-control[required]');">
+        <form role="form"  th:action="@{'/farm/'+${farmDto.id}+'/update.html'}" th:object="${farmDto}" method="post" class="form-horizontal" enctype="multipart/form-data" onsubmit="return !hasEmptyFields('#farm-box form .form-control[required]');">
         <div class="box-body" style="padding:0;">
           <div class="nav-tabs-custom">
            <ul th:include="farms/farms-includes :: farms-tabs" class="nav nav-tabs"></ul>
@@ -19,9 +19,6 @@
                     <div class="col-xs-12">
                         <div class="col-xs-12">
                         	<h4 th:text="#{farm.profile_info}">farm.profile_info</h4>
-                            <div class="form-bloc-navigation">
-                            <button type="submit" class="btn btn-flat btn-success" th:text="#{default.next}">default.next <i class="fa fa-step-forward"></i></button>
-                            </div>
                         </div>
                         <div class="col-xs-6">
                             <div class="form-group row">
@@ -52,7 +49,7 @@
                                 <label for="inputFarmCountry" class="col-xs-3 control-label" th:text="#{default.country}+'*'">default.country*</label>
                                 <div class="col-xs-9">
                                     <select class="form-control" id="inputFarmCountry" th:field="*{address.country}"  required="required" onchange="locateAddress();">
-                                       	<option value=""> -- <span th:text="#{default.select_country}"></span> -- </option>
+                                       	<option value="" th:text="|-- #{default.select_country} --|"> #{default.select_country} </option>
                                         <option th:each="country : ${allCountries}" th:value="${country.id}" th:text="${country.name}"></option>
                                     </select>
                                 </div>
@@ -64,7 +61,7 @@
                                 <div class="col-xs-9 no-padding">
                                     <div class="col-xs-10">
                                         <select class="form-control" id="inputFarmOwner" th:field="*{owner}" required="required" >
-                                            <option value="" > -- <span th:text="#{farm.select_owner}" th:remove="tag"></span> -- </option>
+                                            <option value="" th:text="|-- #{farm.select_owner} --|">#{farm.select_owner}</option>
                                             <option th:each="ind : ${allIndividuals}" th:value="${ind.id}" th:text="${ind.name+' '+ind.surname}"> </option>
                                         </select>		
                                     </div>
@@ -102,7 +99,7 @@
                                 <div class="col-xs-9 no-padding">
                                 	<div class="col-xs-10">
                                         <select class="form-control" id="inputFarmCoop" th:field="*{cooperative}">
-                                            <option value=""> -- <span th:text="#{cooperative.select}" th:remove="tag"></span> -- </option>
+                                            <option th:text="|-- #{default.select_cooperative} --|" value="">  </option>
                                             <option th:each="coop : ${allCooperatives}" th:value="${coop.id}" th:text="${coop.name}"> </option>
                                         </select>
                                     </div>

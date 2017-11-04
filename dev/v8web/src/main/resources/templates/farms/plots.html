@@ -39,7 +39,6 @@
 													<td th:text="${plot.size.unit.name}"></td>
 													<td th:text="${plot.commodities.name}"></td>
 													<td align="center">
-														<a href="javascript:void(0);" th:attr="data-id=${plot.id}" class="btn btn-xs btn-flat btn-info addPlotDataBtn"><i class="fa fa-plus"></i></a> 
 														<a href="javascript:void(0);" th:attr="data-id=${plot.id}" class="btn btn-xs btn-flat btn-primary editPlotBtn"><i class="fa fa-edit"></i></a> 
 														 <form th:action="@{'/farm/'+${farmId}+'/plot/delete.html'}" method="post" style="display: inline;">
 				                                        	<input type="hidden" th:value="${plot.id}" th:name="plotId" />

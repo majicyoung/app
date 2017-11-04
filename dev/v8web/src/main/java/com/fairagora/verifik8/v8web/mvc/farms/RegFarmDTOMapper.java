@@ -44,6 +44,7 @@ public interface RegFarmDTOMapper {
 	@Mapping(target = "id", ignore = true)
 	void toDto(RegEntityFarmDetails farm, @MappingTarget FarmFormDto dto);
 
+	@Mapping(target = "id", ignore = true)
 	void fillEntity(FarmFormDto dto, @MappingTarget RegEntity farm);
 
 	@Mapping(target = "id", ignore = true)
@@ -84,7 +85,17 @@ public interface RegFarmDTOMapper {
 	void fillEntity(V8MeasureDto dto, @MappingTarget V8Measure m);
 
 	default String map(Attachment at) {
-		return at.getResourcePath();
+		return at == null ? null : at.getResourcePath();
+	}
+
+	default Attachment map(String url) {
+		if (url == null)
+			return null;
+		else {
+			Attachment a = new Attachment();
+			a.setResourcePath(url);
+			return a;
+		}
 	}
 
 	PlotListingDto toListing(RegEntityFarmPlot p);
@@ -113,5 +124,10 @@ public interface RegFarmDTOMapper {
 
 	@Mapping(target = "id", ignore = true)
 	void fillEntity(CompanyDto dto, @MappingTarget RegEntity ind);
+
+	@Mapping(target = "farmId", ignore = true)
+	void fillEntity(StaffGeneralInfoSto farmDto, @MappingTarget RegEntityStaffManagement ent);
+
+	void fillEntity(FarmEnvironmentalDto farmDto, @MappingTarget RegEntityFarmDetails farmDetails);
 
 }

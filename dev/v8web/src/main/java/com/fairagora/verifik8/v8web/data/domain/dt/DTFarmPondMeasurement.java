@@ -16,13 +16,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fairagora.verifik8.v8web.data.domain.V8EntitySupport;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLMeasureType;
 import com.fairagora.verifik8.v8web.data.domain.commons.V8Measure;
 import com.fairagora.verifik8.v8web.data.domain.reg.farm.RegEntityFarmPond;
 
 @Entity
 @Table(name = "dt_farmaq_pond_measurements")
-public class DTFarmPondMeasurement {
+public class DTFarmPondMeasurement extends V8EntitySupport {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -45,9 +46,6 @@ public class DTFarmPondMeasurement {
 	@AssociationOverrides({
 			@AssociationOverride(name = "unit", joinColumns = @JoinColumn(name = "CL_MEASURE_VALUE_UNIT_ID")) })
 	protected V8Measure measure;
-
-	@Column(name = "COMMENT")
-	protected String comment;
 
 	public Long getId() {
 		return id;
@@ -89,12 +87,9 @@ public class DTFarmPondMeasurement {
 		this.measure = measure;
 	}
 
-	public String getComment() {
-		return comment;
-	}
-
-	public void setComment(String comment) {
-		this.comment = comment;
+	@Override
+	public String getName() {
+		return toString();
 	}
 
 }

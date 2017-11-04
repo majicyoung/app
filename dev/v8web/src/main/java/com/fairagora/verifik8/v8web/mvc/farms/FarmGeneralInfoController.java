@@ -1,6 +1,7 @@
 package com.fairagora.verifik8.v8web.mvc.farms;
 
 import java.sql.Time;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 
@@ -40,14 +41,15 @@ public class FarmGeneralInfoController extends AbstractV8Controller {
 	public String showEnvironmental(@PathVariable("id") Long id, Model mv) {
 		StaffGeneralInfoSto dto = new StaffGeneralInfoSto();
 
-		RegEntityStaffManagement staffMgmt = regEntityStaffManagementRepository.findByFarmId(id);
-		if (staffMgmt == null) {
-			staffMgmt = new RegEntityStaffManagement();
-			staffMgmt.setFarmId(id);
-			staffMgmt.setRegularWorkStartHour(new Time(8, 00, 00));
-			staffMgmt.setRegularWorkEndHour(new Time(18, 00, 00));
-			regEntityStaffManagementRepository.save(staffMgmt);
-		}
+		RegEntityStaffManagement staffMgmt = regEntityStaffManagementRepository.findByFarmId(id).orElseGet(() -> {
+			RegEntityStaffManagement r = new RegEntityStaffManagement();
+			r.setFarmId(id);
+			r.setRegularWorkStartHour(new Time(8, 00, 00));
+			r.setRegularWorkEndHour(new Time(18, 00, 00));
+			regEntityStaffManagementRepository.save(r);
+			return r;
+		});
+
 		regFarmDtoMapper.toDto(staffMgmt, dto);
 
 		prepareForFarmEdition(id, dto, mv);
@@ -57,19 +59,27 @@ public class FarmGeneralInfoController extends AbstractV8Controller {
 	/**
 	 * 
 	 * @param farmDto
-	 * @param entityId
+	 * @param farmId
 	 * @param bindResults
 	 * @param mv
 	 * @return
 	 */
 	@RequestMapping(value = "/farm/{id}/staff-general-info.html", method = RequestMethod.POST)
 	public String saveEnvironmental(@Validated @ModelAttribute("farmDto") StaffGeneralInfoSto farmDto,
-			@PathVariable("id") Long entityId, BindingResult bindResults,
-			Model mv) {
+			@PathVariable("id") Long farmId, BindingResult bindResults, Model mv) {
 
-		prepareForFarmEdition(entityId, farmDto, mv);
+		RegEntityStaffManagement ent = regEntityStaffManagementRepository.findByFarmId(farmId).orElseGet(() -> {
+			RegEntityStaffManagement e = new RegEntityStaffManagement();
+			e.setFarmId(farmId);
+			regEntityStaffManagementRepository.save(e);
+			return e;
+		});
 
-		return "redirect:/farm/" + entityId + "/staff-general-info.html";
+		regFarmDtoMapper.fillEntity(farmDto, ent);
+
+		regEntityStaffManagementRepository.save(ent);
+
+		return "redirect:/farm/" + farmId + "/staff-general-info.html";
 	}
 
 	/**
@@ -86,11 +96,11 @@ public class FarmGeneralInfoController extends AbstractV8Controller {
 		mv.addAttribute("v8p", p);
 
 		mv.addAttribute("activeTab", "staff-general-info");
-		
+
 		mv.addAttribute("farmDto", dto);
 		mv.addAttribute("farmId", dto.getFarmId());
-		
-		mv.addAttribute("allHazardousWorkType",codeListservice.listActiveHazardousWorkType());
-		
+
+		mv.addAttribute("allHazardousWorkType", codeListservice.listActiveHazardousWorkType());
+
 	}
 }

@@ -14,13 +14,14 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.fairagora.verifik8.v8web.data.domain.V8Entity;
+import com.fairagora.verifik8.v8web.data.domain.V8EntitySupport;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLCountry;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLEntityType;
 import com.fairagora.verifik8.v8web.data.domain.commons.Address;
 
 @Entity()
 @Table(name = "reg_entities")
-public class RegEntity implements V8Entity, Serializable {
+public class RegEntity extends V8EntitySupport implements  Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -82,8 +83,7 @@ public class RegEntity implements V8Entity, Serializable {
 	@Column(name = "DATE_OF_BIRTH")
 	protected Date dateOfBirth;
 
-	@Column(name = "COMMENT")
-	protected String comment = "";
+
 
 	public Long getId() {
 		return id;

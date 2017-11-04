@@ -6,6 +6,10 @@ import com.fairagora.verifik8.v8web.data.domain.cl.CLCountry;
 
 import com.fairagora.verifik8.v8web.data.domain.cl.CLEntityType;
 
+import com.fairagora.verifik8.v8web.data.domain.cl.CLHazardousWorkType;
+
+import com.fairagora.verifik8.v8web.data.domain.cl.CLHvHeExpensionType;
+
 import com.fairagora.verifik8.v8web.data.domain.cl.CLMeasureType;
 
 import com.fairagora.verifik8.v8web.data.domain.cl.CLPlotActivityType;
@@ -88,7 +92,7 @@ import org.springframework.stereotype.Component;
 
     value = "org.mapstruct.ap.MappingProcessor",
 
-    date = "2017-11-03T08:55:53+0200",
+    date = "2017-11-04T11:30:38+0200",
 
     comments = "version: 1.1.0.Final, compiler: javac, environment: Java 1.8.0_112 (Oracle Corporation)"
 
@@ -150,6 +154,8 @@ public class RegFarmDTOMapperImpl implements RegFarmDTOMapper {
             return;
         }
 
+        dto.setName( farm.getName() );
+
         dto.setOwner( entityDtoMapper.toReference( farm.getOwner() ) );
 
         if ( farm.getLongitude() != null ) {
@@ -175,8 +181,6 @@ public class RegFarmDTOMapperImpl implements RegFarmDTOMapper {
 
             return;
         }
-
-        farm.setId( dto.getId() );
 
         farm.setName( dto.getName() );
 
@@ -567,6 +571,8 @@ public class RegFarmDTOMapperImpl implements RegFarmDTOMapper {
             return;
         }
 
+        m.setComment( dto.getComment() );
+
         m.setId( dto.getId() );
 
         m.setPlot( entityDtoMapper.resolve( dto.getPlot(), RegEntityFarmPlot.class ) );
@@ -589,8 +595,6 @@ public class RegFarmDTOMapperImpl implements RegFarmDTOMapper {
 
             m.setMeasure( null );
         }
-
-        m.setComment( dto.getComment() );
     }
 
     @Override
@@ -660,6 +664,8 @@ public class RegFarmDTOMapperImpl implements RegFarmDTOMapper {
             return;
         }
 
+        m.setComment( dto.getComment() );
+
         m.setId( dto.getId() );
 
         m.setPlot( entityDtoMapper.resolve( dto.getPlot(), RegEntityFarmPlot.class ) );
@@ -703,8 +709,6 @@ public class RegFarmDTOMapperImpl implements RegFarmDTOMapper {
         }
 
         m.setTilingActivityType( entityDtoMapper.resolve( dto.getTilingActivityType(), CLTilingActivityType.class ) );
-
-        m.setComment( dto.getComment() );
     }
 
     @Override
@@ -853,6 +857,8 @@ public class RegFarmDTOMapperImpl implements RegFarmDTOMapper {
             return;
         }
 
+        measure.setComment( dto.getComment() );
+
         measure.setId( dto.getId() );
 
         measure.setPond( entityDtoMapper.resolve( dto.getPond(), RegEntityFarmPond.class ) );
@@ -875,8 +881,6 @@ public class RegFarmDTOMapperImpl implements RegFarmDTOMapper {
 
             measure.setMeasure( null );
         }
-
-        measure.setComment( dto.getComment() );
     }
 
     @Override
@@ -1161,6 +1165,72 @@ public class RegFarmDTOMapperImpl implements RegFarmDTOMapper {
         ind.setNationality( entityDtoMapper.resolve( dto.getNationality(), CLCountry.class ) );
 
         ind.setRegistrationNumber( dto.getRegistrationNumber() );
+    }
+
+    @Override
+
+    public void fillEntity(StaffGeneralInfoSto farmDto, RegEntityStaffManagement ent) {
+
+        if ( farmDto == null ) {
+
+            return;
+        }
+
+        ent.setNumberOfStaffAsToday( farmDto.getNumberOfStaffAsToday() );
+
+        ent.setNbWorkersChildLivingInFarm( farmDto.getNbWorkersChildLivingInFarm() );
+
+        ent.setNbWorkersChildHelpingInFarm( farmDto.getNbWorkersChildHelpingInFarm() );
+
+        ent.setNbWorkersChildEnrolledSchool( farmDto.getNbWorkersChildEnrolledSchool() );
+
+        ent.setNbRestDays( farmDto.getNbRestDays() );
+
+        ent.setExistenceHazardousWork( farmDto.isExistenceHazardousWork() );
+
+        ent.setHazardousWorkType( entityDtoMapper.resolve( farmDto.getHazardousWorkType(), CLHazardousWorkType.class ) );
+
+        ent.setExistenceFarmPolicies( farmDto.isExistenceFarmPolicies() );
+
+        ent.setFarmPolicies( farmDto.getFarmPolicies() );
+
+        ent.setExistenceWorkAccidentRecord( farmDto.isExistenceWorkAccidentRecord() );
+
+        ent.setWorkAccidentRecord( farmDto.getWorkAccidentRecord() );
+
+        ent.setAccessToProtectiveEquipment( farmDto.isAccessToProtectiveEquipment() );
+
+        ent.setWorkersRepresentativeGroup( farmDto.isWorkersRepresentativeGroup() );
+    }
+
+    @Override
+
+    public void fillEntity(FarmEnvironmentalDto farmDto, RegEntityFarmDetails farmDetails) {
+
+        if ( farmDto == null ) {
+
+            return;
+        }
+
+        farmDetails.setEnvironmentImpactAssessment( farmDto.isEnvironmentImpactAssessment() );
+
+        farmDetails.setEnvironmentImpactAssessmentUrl( map( farmDto.getEnvironmentImpactAssessmentUrl() ) );
+
+        farmDetails.setContructionPermit( map( farmDto.getContructionPermit() ) );
+
+        farmDetails.setLandTitle( map( farmDto.getLandTitle() ) );
+
+        farmDetails.setFarmExpension( farmDto.isFarmExpension() );
+
+        farmDetails.setFarmExpensionType( entityDtoMapper.resolve( farmDto.getFarmExpensionType(), CLHvHeExpensionType.class ) );
+
+        farmDetails.setCanalRestorationPlan( map( farmDto.getCanalRestorationPlan() ) );
+
+        farmDetails.setCumulativeImpactStudy( map( farmDto.getCumulativeImpactStudy() ) );
+
+        farmDetails.setSittingProtectedArea( farmDto.isSittingProtectedArea() );
+
+        farmDetails.setSittingProtectedAreaUrl( map( farmDto.getSittingProtectedAreaUrl() ) );
     }
 
     private String mActivityTypeName(DTFarmPlotActivity dTFarmPlotActivity) {

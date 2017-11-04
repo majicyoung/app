@@ -30,7 +30,7 @@
                                 <tr th:each="staff:${staffListing}" th:id="${'staff-'+staff.entity.id}" data-staff="{{$decla->staff}}">
                                     <td th:text="${staff.entity.name}"></td>
                                     <td th:text="${staff.entity.surname}"></td>
-                                    <td text="${staff.position}">?</td>
+                                    <td th:text="${staff.position}">?</td>
                                     <td align="center">
                                         <a href="javascript:void(0);" onclick="editFarmStaff({{$decla->ID}});" class="btn btn-xs btn-flat btn-primary"><i class="fa fa-edit"></i></a>
                                         <a href="javascript:void(0);" onclick="deleteFarmStaff({{$decla->ID}});" class="btn btn-xs btn-flat btn-danger"><i class="fa fa-remove"></i></a>
@@ -48,7 +48,7 @@
                                 <div class="col-xs-9 no-padding">
                                     <div class="col-xs-10">
                                         <select class="form-control form-staff form-staff-required" name="staff_entity" id="inputFarmStaffName">
-                                            <option value=""> -- <span th:text="#{staff.select}" th:remove="tag"/> -- </option>
+                                            <option value="|-- #{#{staff.select}} --|"> #{staff.select} </option>
                                             <option th:each="ind : ${allIndividuals}" th:value="${ind.id}" th:text="${ind.name+' '+ind.surname}"> </option>
                                         </select>		
                                     </div>

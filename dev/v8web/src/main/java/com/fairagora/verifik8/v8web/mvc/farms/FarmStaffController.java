@@ -56,7 +56,7 @@ public class FarmStaffController extends AbstractV8Controller {
 		
 		List<RegEntityStaff> staffListing = regEntityStaffRepository.findByFarmId(farm.getId());
 		mv.addAttribute("staffListing", staffListing);
-		mv.addAttribute("allIndividuals", regEntityRepository.findByEntityTypeCode(CLEntityType.CODE_COOP));
+		mv.addAttribute("allIndividuals", regEntityRepository.findByEntityTypeCode(CLEntityType.CODE_IND));
 		mv.addAttribute("allPositions", codeListservice.listActivePositionTypes());
 
 	}

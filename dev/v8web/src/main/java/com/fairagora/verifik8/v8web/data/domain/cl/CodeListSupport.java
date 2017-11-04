@@ -5,9 +5,10 @@ import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
 import com.fairagora.verifik8.v8web.data.domain.V8Entity;
+import com.fairagora.verifik8.v8web.data.domain.V8EntitySupport;
 
 @MappedSuperclass
-public abstract class CodeListSupport implements V8Entity {
+public abstract class CodeListSupport extends V8EntitySupport {
 
 	@Id
 	@Column(name = "ID")
@@ -24,9 +25,6 @@ public abstract class CodeListSupport implements V8Entity {
 
 	@Column(name = "DESCRIPTION", length = 128, nullable = false)
 	protected String description;
-
-	@Column(name = "COMMENT", length = 1024, nullable = false)
-	protected String comment;
 
 	public Long getId() {
 		return id;
@@ -66,14 +64,6 @@ public abstract class CodeListSupport implements V8Entity {
 
 	public void setDescription(String description) {
 		this.description = description;
-	}
-
-	public String getComment() {
-		return comment;
-	}
-
-	public void setComment(String comment) {
-		this.comment = comment;
 	}
 
 }

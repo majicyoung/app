@@ -4,13 +4,17 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.fairagora.verifik8.v8web.data.domain.cl.CLEntityType;
 import com.fairagora.verifik8.v8web.data.domain.commons.V8Measure;
 import com.fairagora.verifik8.v8web.data.domain.reg.RegEntity;
+import com.fairagora.verifik8.v8web.data.domain.reg.farm.RegEntityFarmDetails;
+import com.fairagora.verifik8.v8web.data.repo.reg.RegEntityFarmDetailsRepository;
 import com.fairagora.verifik8.v8web.data.repo.reg.RegEntityRepository;
 import com.fairagora.verifik8.v8web.services.enhanced.V8Farm;
 import com.fairagora.verifik8.v8web.services.enhanced.dtomapping.V8EnhancedDtoMapper;
@@ -25,8 +29,8 @@ public class FarmService extends AbstractV8Service {
 	private V8EnhancedDtoMapper enhancedMapper;
 
 	/**
-	 * Return a list of Model Enhanced Farms, useful for display form meta
-	 * data, in an optimized way 
+	 * Return a list of Model Enhanced Farms, useful for display form meta data,
+	 * in an optimized way
 	 * 
 	 * @return
 	 */
@@ -64,5 +68,16 @@ public class FarmService extends AbstractV8Service {
 		}
 
 		return farms;
+	}
+
+	@Autowired
+	private RegEntityFarmDetailsRepository farmDetailsRepository;
+
+	@Transactional
+	public void deleteFarm(Long id) {
+		regEntityRepository.delete(id);
+
+		Optional<RegEntityFarmDetails> details = farmDetailsRepository.findByEntityId(id);
+		details.ifPresent(d -> farmDetailsRepository.delete(d));
 	}
 }
