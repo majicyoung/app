@@ -118,7 +118,7 @@
               <img th:src="@{'/static/langs/'+${v8App.currentLanguage.i18n}+'.png'}" />
             </a>
             <ul class="dropdown-menu" style="width:auto;padding:5px;min-width:120px;">
-              	<li th:each="lng : ${v8App.languages}"><a href="?_lang={{ $cd }}"><img th:src="@{'/static/langs/'+${lng.i18n}+'.png'}" /><span  th:text="${lng.name}"></span></a></li>
+              	<li th:each="lng : ${v8App.languages}"><a th:href="@{'?_lang='+${lng.i18n}}"><img th:src="@{'/static/langs/'+${lng.i18n}+'.png'}" /><span  th:text="${lng.name}"></span></a></li>
             </ul>
           </li>
           <!-- /.messages-menu -->
