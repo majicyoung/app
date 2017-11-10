@@ -1,21 +1,27 @@
 package com.fairagora.verifik8.v8web.mvc.farms.dto;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class FarmEnvironmentalDto {
 
 	protected boolean environmentImpactAssessment;
 
 	// att
-	protected String environmentImpactAssessmentUrl;
+	protected MultipartFile environmentImpactAssessmentDoc;
+	protected String environmentImpactAssessmentDocUrl;
 
 	// att
-	protected String contructionPermit;
+	protected MultipartFile contructionPermit;
+	protected String contructionPermitUrl;
 
 	// att
-	protected String landTitle;
+	protected MultipartFile landTitle;
+	protected String landTitleUrl;
 
 	protected boolean sittingProtectedArea;
 
 	// att
+	protected MultipartFile sittingProtectedAreaDoc;
 	protected String sittingProtectedAreaUrl;
 
 	protected boolean farmExpension;
@@ -23,9 +29,12 @@ public class FarmEnvironmentalDto {
 	protected Long farmExpensionType;
 
 	// att
-	protected String canalRestorationPlan;
+	protected MultipartFile canalRestorationPlan;
+	protected String canalRestorationPlanUrl;
+
 	// att
-	protected String cumulativeImpactStudy;
+	protected MultipartFile cumulativeImpactStudy;
+	protected String cumulativeImpactStudyUrl;
 
 	public boolean isEnvironmentImpactAssessment() {
 		return environmentImpactAssessment;
@@ -34,32 +43,6 @@ public class FarmEnvironmentalDto {
 	public void setEnvironmentImpactAssessment(boolean environmentImpactAssessment) {
 		this.environmentImpactAssessment = environmentImpactAssessment;
 	}
-
-	public String getEnvironmentImpactAssessmentUrl() {
-		return environmentImpactAssessmentUrl;
-	}
-
-	public void setEnvironmentImpactAssessmentUrl(String environmentImpactAssessmentUrl) {
-		this.environmentImpactAssessmentUrl = environmentImpactAssessmentUrl;
-	}
-
-	public String getContructionPermit() {
-		return contructionPermit;
-	}
-
-	public void setContructionPermit(String contructionPermit) {
-		this.contructionPermit = contructionPermit;
-	}
-
-	public String getLandTitle() {
-		return landTitle;
-	}
-
-	public void setLandTitle(String landTitle) {
-		this.landTitle = landTitle;
-	}
-
-	
 
 	public boolean isFarmExpension() {
 		return farmExpension;
@@ -77,22 +60,6 @@ public class FarmEnvironmentalDto {
 		this.farmExpensionType = farmExpensionType;
 	}
 
-	public String getCanalRestorationPlan() {
-		return canalRestorationPlan;
-	}
-
-	public void setCanalRestorationPlan(String canalRestorationPlan) {
-		this.canalRestorationPlan = canalRestorationPlan;
-	}
-
-	public String getCumulativeImpactStudy() {
-		return cumulativeImpactStudy;
-	}
-
-	public void setCumulativeImpactStudy(String cumulativeImpactStudy) {
-		this.cumulativeImpactStudy = cumulativeImpactStudy;
-	}
-
 	public String getSittingProtectedAreaUrl() {
 		return sittingProtectedAreaUrl;
 	}
@@ -107,6 +74,94 @@ public class FarmEnvironmentalDto {
 
 	public void setSittingProtectedArea(boolean sittingProtectedArea) {
 		this.sittingProtectedArea = sittingProtectedArea;
+	}
+
+	public MultipartFile getContructionPermit() {
+		return contructionPermit;
+	}
+
+	public void setContructionPermit(MultipartFile contructionPermit) {
+		this.contructionPermit = contructionPermit;
+	}
+
+	public String getContructionPermitUrl() {
+		return contructionPermitUrl;
+	}
+
+	public void setContructionPermitUrl(String contructionPermitUrl) {
+		this.contructionPermitUrl = contructionPermitUrl;
+	}
+
+	public MultipartFile getLandTitle() {
+		return landTitle;
+	}
+
+	public void setLandTitle(MultipartFile landTitle) {
+		this.landTitle = landTitle;
+	}
+
+	public String getLandTitleUrl() {
+		return landTitleUrl;
+	}
+
+	public void setLandTitleUrl(String landTitleUrl) {
+		this.landTitleUrl = landTitleUrl;
+	}
+
+	public MultipartFile getCanalRestorationPlan() {
+		return canalRestorationPlan;
+	}
+
+	public void setCanalRestorationPlan(MultipartFile canalRestorationPlan) {
+		this.canalRestorationPlan = canalRestorationPlan;
+	}
+
+	public String getCanalRestorationPlanUrl() {
+		return canalRestorationPlanUrl;
+	}
+
+	public void setCanalRestorationPlanUrl(String canalRestorationPlanUrl) {
+		this.canalRestorationPlanUrl = canalRestorationPlanUrl;
+	}
+
+	public MultipartFile getCumulativeImpactStudy() {
+		return cumulativeImpactStudy;
+	}
+
+	public void setCumulativeImpactStudy(MultipartFile cumulativeImpactStudy) {
+		this.cumulativeImpactStudy = cumulativeImpactStudy;
+	}
+
+	public String getCumulativeImpactStudyUrl() {
+		return cumulativeImpactStudyUrl;
+	}
+
+	public void setCumulativeImpactStudyUrl(String cumulativeImpactStudyUrl) {
+		this.cumulativeImpactStudyUrl = cumulativeImpactStudyUrl;
+	}
+
+	public MultipartFile getEnvironmentImpactAssessmentDoc() {
+		return environmentImpactAssessmentDoc;
+	}
+
+	public void setEnvironmentImpactAssessmentDoc(MultipartFile environmentImpactAssessmentDoc) {
+		this.environmentImpactAssessmentDoc = environmentImpactAssessmentDoc;
+	}
+
+	public String getEnvironmentImpactAssessmentDocUrl() {
+		return environmentImpactAssessmentDocUrl;
+	}
+
+	public void setEnvironmentImpactAssessmentDocUrl(String environmentImpactAssessmentDocUrl) {
+		this.environmentImpactAssessmentDocUrl = environmentImpactAssessmentDocUrl;
+	}
+
+	public MultipartFile getSittingProtectedAreaDoc() {
+		return sittingProtectedAreaDoc;
+	}
+
+	public void setSittingProtectedAreaDoc(MultipartFile sittingProtectedAreaDoc) {
+		this.sittingProtectedAreaDoc = sittingProtectedAreaDoc;
 	}
 
 }

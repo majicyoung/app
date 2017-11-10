@@ -147,11 +147,7 @@ public class FarmsController extends AbstractV8Controller {
 	@RequestMapping(value = "/farm/{id}/environmental-update.html", method = RequestMethod.POST)
 	public String saveEnvironmental(@Validated @ModelAttribute("farmDto") FarmEnvironmentalDto farmDto,
 			@PathVariable("id") Long entityId, BindingResult bindResults,
-			@RequestParam("impact_study") MultipartFile impact_study,
-			@RequestParam("contruct_permit") MultipartFile contruct_permit,
-			@RequestParam("land_title") MultipartFile land_title, @RequestParam("land_auth") MultipartFile land_auth,
-			@RequestParam("canal_restore") MultipartFile canal_restore,
-			@RequestParam("cumul_study") MultipartFile cumul_study, Model mv) {
+			Model mv) {
 
 		RegEntityFarmDetails farmDetails = regEntityFarmDetailsRepository.findByEntityId(entityId).get();
 		regFarmDtoMapper.fillEntity(farmDto, farmDetails);

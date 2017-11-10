@@ -5,8 +5,8 @@
 <body>
 	<ul th:fragment="farms-tabs" class="nav nav-tabs">
 		<th:block th:if="${newEntity==null OR !newEntity}">
-			<li id="farmtab_profile"><a href="#tab_1" data-toggle="tab" th:text="#{farm.profile}">farm.profile</a></li>
-			<li id="farmtab_staff-general-info"><a th:href="@{${'/farm/'+farmId+'//staff-general-info.html'}}" th:text="#{farm.staff_general_info}">farm.staff_general_info</a></li>
+			<li id="farmtab_profile"><a th:href="@{${'/farm/'+farmId+'/edit.html'}}" th:text="#{farm.profile}">farm.profile</a></li>
+			<li id="farmtab_staff-general-info"><a th:href="@{${'/farm/'+farmId+'/staff-general-info.html'}}" th:text="#{farm.staff_general_info}">farm.staff_general_info</a></li>
 			<li id="farmtab_staff"><a th:href="@{${'/farm/'+farmId+'/staff.html'}}" th:text="#{farm.contact_staff}">farm.contact_staff</a></li>
 			<li id="farmtab_environmental"><a th:href="@{${'/farm/'+farmId+'/environmental.html'}}" th:text="#{farm.env_details}">farm.env_details</a></li>
 			<li id="farmtab_suppliers"><a th:href="@{${'/farm/'+farmId+'/suppliers.html'}}" th:text="#{default.suppliers}">default.suppliers</a></li>

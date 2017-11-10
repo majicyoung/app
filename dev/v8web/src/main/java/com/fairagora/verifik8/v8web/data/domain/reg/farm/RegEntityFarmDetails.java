@@ -26,7 +26,7 @@ import com.fairagora.verifik8.v8web.data.domain.reg.RegEntity;
 
 @Entity
 @Table(name = "reg_entity_farm_details")
-public class RegEntityFarmDetails extends V8EntitySupport{
+public class RegEntityFarmDetails extends V8EntitySupport {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -62,7 +62,7 @@ public class RegEntityFarmDetails extends V8EntitySupport{
 	@Embedded
 	@AttributeOverrides({
 			@AttributeOverride(name = "resourcePath", column = @Column(name = "ENVIRONMENT_IMPACT_ASSESSMENT_URL")) })
-	protected Attachment environmentImpactAssessmentUrl;
+	protected Attachment environmentImpactAssessmentDoc;
 
 	@Embedded
 	@AttributeOverrides({ @AttributeOverride(name = "resourcePath", column = @Column(name = "HVH_CONSTRUCT_PERMIT")) })
@@ -82,7 +82,7 @@ public class RegEntityFarmDetails extends V8EntitySupport{
 	@Embedded
 	@AttributeOverrides({
 			@AttributeOverride(name = "resourcePath", column = @Column(name = "SITING_PROTECTED_AREA_AUTHORIZATION_URL")) })
-	protected Attachment sittingProtectedAreaUrl;
+	protected Attachment sittingProtectedAreaDoc;
 
 	@Column(name = "HVHE_FARM_EXPENSION")
 	protected boolean farmExpension;
@@ -168,12 +168,12 @@ public class RegEntityFarmDetails extends V8EntitySupport{
 		this.environmentImpactAssessment = environmentImpactAssessment;
 	}
 
-	public Attachment getEnvironmentImpactAssessmentUrl() {
-		return environmentImpactAssessmentUrl;
+	public Attachment getEnvironmentImpactAssessmentDoc() {
+		return environmentImpactAssessmentDoc;
 	}
 
-	public void setEnvironmentImpactAssessmentUrl(Attachment environmentImpactAssessmentUrl) {
-		this.environmentImpactAssessmentUrl = environmentImpactAssessmentUrl;
+	public void setEnvironmentImpactAssessmentDoc(Attachment environmentImpactAssessmentDoc) {
+		this.environmentImpactAssessmentDoc = environmentImpactAssessmentDoc;
 	}
 
 	public Attachment getContructionPermit() {
@@ -232,12 +232,12 @@ public class RegEntityFarmDetails extends V8EntitySupport{
 		this.sittingProtectedArea = sittingProtectedArea;
 	}
 
-	public Attachment getSittingProtectedAreaUrl() {
-		return sittingProtectedAreaUrl;
+	public Attachment getSittingProtectedAreaDoc() {
+		return sittingProtectedAreaDoc;
 	}
 
-	public void setSittingProtectedAreaUrl(Attachment sittingProtectedAreaUrl) {
-		this.sittingProtectedAreaUrl = sittingProtectedAreaUrl;
+	public void setSittingProtectedAreaDoc(Attachment sittingProtectedAreaDoc) {
+		this.sittingProtectedAreaDoc = sittingProtectedAreaDoc;
 	}
 
 	public Attachment getAerialView() {

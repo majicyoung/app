@@ -13,7 +13,7 @@
 						<ul th:include="farms/farms-includes :: farms-tabs" class="nav nav-tabs"></ul>
 						<div class="tab-content">
 							<div class="tab-pane active" id="tab_1">
-								<form th:action="@{'/farm/'+${farmId}+'/staff-general-info.html'}" th:object="${farmDto}" method="post">
+								<form th:action="@{'/farm/'+${farmId}+'/staff-general-info.html'}" th:object="${farmDto}" method="post" enctype="multipart/form-data">
 									<div class="row">
 										<!-- general info -->
 										<div class="col-xs-6">
@@ -99,6 +99,9 @@
 													<label for="workAccidentRecord" class="col-xs-9 control-label" th:text="#{staffgeneralinfo.existenceWorkAccidentRecordUpload}">existenceWorkAccidentRecordUpload</label>
 													<div class="col-xs-3">
 														<input type="file" th:field="*{workAccidentRecord}" />
+														<a th:if="${!#strings.isEmpty(farmDto.workAccidentRecordUrl)}" th:href="@{'/download/'+${farmDto.workAccidentRecordUrl}}" target="_blank">
+					                                    	<i class="fa fa-download"></i>
+														</a>
 													</div>
 												</div>
 											</div>
@@ -119,6 +122,9 @@
 													<label for="farmPolicies" class="col-xs-9 control-label" th:text="#{staffgeneralinfo.existenceFarmPoliciesUpload}">#{staffgeneralinfo.existenceFarmPoliciesUpload}</label>
 													<div class="col-xs-3">
 														<input type="file" th:field="*{farmPolicies}" />
+														<a th:if="${!#strings.isEmpty(farmDto.farmPoliciesUrl)}" th:href="@{'/download/'+${farmDto.farmPoliciesUrl}}" target="_blank">
+					                                    	<i class="fa fa-download"></i>
+														</a>
 													</div>
 												</div>
 											</div>

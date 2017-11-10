@@ -30,6 +30,8 @@ import com.fairagora.verifik8.v8web.data.domain.cl.CLTilingActivityType;
 
 import com.fairagora.verifik8.v8web.data.domain.commons.Address;
 
+import com.fairagora.verifik8.v8web.data.domain.commons.Attachment;
+
 import com.fairagora.verifik8.v8web.data.domain.commons.V8Measure;
 
 import com.fairagora.verifik8.v8web.data.domain.dt.DTFarmAgProduction;
@@ -108,7 +110,7 @@ import org.springframework.stereotype.Component;
 
     value = "org.mapstruct.ap.MappingProcessor",
 
-    date = "2017-11-10T07:45:56+0100",
+    date = "2017-11-10T20:14:54+0100",
 
     comments = "version: 1.1.0.Final, compiler: javac, environment: Java 1.8.0_112 (Oracle Corporation)"
 
@@ -170,6 +172,8 @@ public class RegFarmDTOMapperImpl implements RegFarmDTOMapper {
             return;
         }
 
+        dto.setAerialViewUrl( farmAerialViewResourcePath( farm ) );
+
         dto.setName( farm.getName() );
 
         dto.setOwner( entityDtoMapper.toReference( farm.getOwner() ) );
@@ -184,7 +188,20 @@ public class RegFarmDTOMapperImpl implements RegFarmDTOMapper {
             dto.setLatitude( Float.parseFloat( farm.getLatitude() ) );
         }
 
-        dto.setSize( farm.getSize() );
+        if ( farm.getSize() != null ) {
+
+            if ( dto.getSize() == null ) {
+
+                dto.setSize( new V8MeasureDto() );
+            }
+
+            toDto( farm.getSize(), dto.getSize() );
+        }
+
+        else {
+
+            dto.setSize( null );
+        }
 
         dto.setCooperative( entityDtoMapper.toReference( farm.getCooperative() ) );
     }
@@ -235,7 +252,20 @@ public class RegFarmDTOMapperImpl implements RegFarmDTOMapper {
             return;
         }
 
-        farm.setSize( dto.getSize() );
+        if ( dto.getSize() != null ) {
+
+            if ( farm.getSize() == null ) {
+
+                farm.setSize( new V8Measure() );
+            }
+
+            fillEntity( dto.getSize(), farm.getSize() );
+        }
+
+        else {
+
+            farm.setSize( null );
+        }
 
         farm.setOwner( entityDtoMapper.resolve( dto.getOwner(), RegEntity.class ) );
 
@@ -250,6 +280,21 @@ public class RegFarmDTOMapperImpl implements RegFarmDTOMapper {
         }
 
         farm.setCooperative( entityDtoMapper.resolve( dto.getCooperative(), RegEntity.class ) );
+
+        if ( dto.getAerialView() != null ) {
+
+            if ( farm.getAerialView() == null ) {
+
+                farm.setAerialView( new Attachment() );
+            }
+
+            entityDtoMapper.map( dto.getAerialView(), farm.getAerialView() );
+        }
+
+        else {
+
+            farm.setAerialView( null );
+        }
     }
 
     @Override
@@ -279,23 +324,23 @@ public class RegFarmDTOMapperImpl implements RegFarmDTOMapper {
             return;
         }
 
+        dto.setSittingProtectedAreaUrl( farmSittingProtectedAreaDocResourcePath( farm ) );
+
+        dto.setContructionPermitUrl( farmContructionPermitResourcePath( farm ) );
+
+        dto.setCanalRestorationPlanUrl( farmCanalRestorationPlanResourcePath( farm ) );
+
+        dto.setLandTitleUrl( farmLandTitleResourcePath( farm ) );
+
+        dto.setCumulativeImpactStudyUrl( farmCumulativeImpactStudyResourcePath( farm ) );
+
+        dto.setEnvironmentImpactAssessmentDocUrl( farmEnvironmentImpactAssessmentDocResourcePath( farm ) );
+
         dto.setEnvironmentImpactAssessment( farm.isEnvironmentImpactAssessment() );
-
-        dto.setEnvironmentImpactAssessmentUrl( map( farm.getEnvironmentImpactAssessmentUrl() ) );
-
-        dto.setContructionPermit( map( farm.getContructionPermit() ) );
-
-        dto.setLandTitle( map( farm.getLandTitle() ) );
 
         dto.setFarmExpension( farm.isFarmExpension() );
 
         dto.setFarmExpensionType( entityDtoMapper.toReference( farm.getFarmExpensionType() ) );
-
-        dto.setCanalRestorationPlan( map( farm.getCanalRestorationPlan() ) );
-
-        dto.setCumulativeImpactStudy( map( farm.getCumulativeImpactStudy() ) );
-
-        dto.setSittingProtectedAreaUrl( map( farm.getSittingProtectedAreaUrl() ) );
 
         dto.setSittingProtectedArea( farm.isSittingProtectedArea() );
     }
@@ -327,6 +372,10 @@ public class RegFarmDTOMapperImpl implements RegFarmDTOMapper {
             return;
         }
 
+        dto.setWorkAccidentRecordUrl( findByFarmIdWorkAccidentRecordResourcePath( findByFarmId ) );
+
+        dto.setFarmPoliciesUrl( findByFarmIdFarmPoliciesResourcePath( findByFarmId ) );
+
         dto.setFarmId( findByFarmId.getFarmId() );
 
         dto.setNumberOfStaffAsToday( findByFarmId.getNumberOfStaffAsToday() );
@@ -349,11 +398,7 @@ public class RegFarmDTOMapperImpl implements RegFarmDTOMapper {
 
         dto.setExistenceWorkAccidentRecord( findByFarmId.isExistenceWorkAccidentRecord() );
 
-        dto.setWorkAccidentRecord( findByFarmId.getWorkAccidentRecord() );
-
         dto.setExistenceFarmPolicies( findByFarmId.isExistenceFarmPolicies() );
-
-        dto.setFarmPolicies( findByFarmId.getFarmPolicies() );
     }
 
     @Override
@@ -977,17 +1022,17 @@ public class RegFarmDTOMapperImpl implements RegFarmDTOMapper {
 
         DTSoilAnalysisDto dTSoilAnalysisDto = new DTSoilAnalysisDto();
 
+        dTSoilAnalysisDto.setPlotNumber( ePlotNumber( e ) );
+
         dTSoilAnalysisDto.setSoilAnalysisTypeName( eSoilAnalysisTypeName( e ) );
 
-        dTSoilAnalysisDto.setPlotNumber( ePlotNumber( e ) );
+        dTSoilAnalysisDto.setAnalysisUrl( eAnalysisResourcePath( e ) );
 
         dTSoilAnalysisDto.setPlot( entityDtoMapper.toReference( e.getPlot() ) );
 
         dTSoilAnalysisDto.setAnalysisDate( e.getAnalysisDate() );
 
         dTSoilAnalysisDto.setSoilAnalysisType( entityDtoMapper.toReference( e.getSoilAnalysisType() ) );
-
-        dTSoilAnalysisDto.setAnalysis( map( e.getAnalysis() ) );
 
         dTSoilAnalysisDto.setId( e.getId() );
 
@@ -1005,13 +1050,13 @@ public class RegFarmDTOMapperImpl implements RegFarmDTOMapper {
 
         DTWaterAnalysisDto dTWaterAnalysisDto = new DTWaterAnalysisDto();
 
+        dTWaterAnalysisDto.setAnalysisUrl( eAnalysisResourcePath_( e ) );
+
         dTWaterAnalysisDto.setPondNumber( ePondNumber( e ) );
 
         dTWaterAnalysisDto.setPond( entityDtoMapper.toReference( e.getPond() ) );
 
         dTWaterAnalysisDto.setAnalysisDate( e.getAnalysisDate() );
-
-        dTWaterAnalysisDto.setAnalysis( map( e.getAnalysis() ) );
 
         dTWaterAnalysisDto.setId( e.getId() );
 
@@ -1364,11 +1409,37 @@ public class RegFarmDTOMapperImpl implements RegFarmDTOMapper {
 
         ent.setExistenceFarmPolicies( farmDto.isExistenceFarmPolicies() );
 
-        ent.setFarmPolicies( farmDto.getFarmPolicies() );
+        if ( farmDto.getFarmPolicies() != null ) {
+
+            if ( ent.getFarmPolicies() == null ) {
+
+                ent.setFarmPolicies( new Attachment() );
+            }
+
+            entityDtoMapper.map( farmDto.getFarmPolicies(), ent.getFarmPolicies() );
+        }
+
+        else {
+
+            ent.setFarmPolicies( null );
+        }
 
         ent.setExistenceWorkAccidentRecord( farmDto.isExistenceWorkAccidentRecord() );
 
-        ent.setWorkAccidentRecord( farmDto.getWorkAccidentRecord() );
+        if ( farmDto.getWorkAccidentRecord() != null ) {
+
+            if ( ent.getWorkAccidentRecord() == null ) {
+
+                ent.setWorkAccidentRecord( new Attachment() );
+            }
+
+            entityDtoMapper.map( farmDto.getWorkAccidentRecord(), ent.getWorkAccidentRecord() );
+        }
+
+        else {
+
+            ent.setWorkAccidentRecord( null );
+        }
 
         ent.setAccessToProtectiveEquipment( farmDto.isAccessToProtectiveEquipment() );
 
@@ -1386,23 +1457,101 @@ public class RegFarmDTOMapperImpl implements RegFarmDTOMapper {
 
         farmDetails.setEnvironmentImpactAssessment( farmDto.isEnvironmentImpactAssessment() );
 
-        farmDetails.setEnvironmentImpactAssessmentUrl( map( farmDto.getEnvironmentImpactAssessmentUrl() ) );
+        if ( farmDto.getEnvironmentImpactAssessmentDoc() != null ) {
 
-        farmDetails.setContructionPermit( map( farmDto.getContructionPermit() ) );
+            if ( farmDetails.getEnvironmentImpactAssessmentDoc() == null ) {
 
-        farmDetails.setLandTitle( map( farmDto.getLandTitle() ) );
+                farmDetails.setEnvironmentImpactAssessmentDoc( new Attachment() );
+            }
+
+            entityDtoMapper.map( farmDto.getEnvironmentImpactAssessmentDoc(), farmDetails.getEnvironmentImpactAssessmentDoc() );
+        }
+
+        else {
+
+            farmDetails.setEnvironmentImpactAssessmentDoc( null );
+        }
+
+        if ( farmDto.getContructionPermit() != null ) {
+
+            if ( farmDetails.getContructionPermit() == null ) {
+
+                farmDetails.setContructionPermit( new Attachment() );
+            }
+
+            entityDtoMapper.map( farmDto.getContructionPermit(), farmDetails.getContructionPermit() );
+        }
+
+        else {
+
+            farmDetails.setContructionPermit( null );
+        }
+
+        if ( farmDto.getLandTitle() != null ) {
+
+            if ( farmDetails.getLandTitle() == null ) {
+
+                farmDetails.setLandTitle( new Attachment() );
+            }
+
+            entityDtoMapper.map( farmDto.getLandTitle(), farmDetails.getLandTitle() );
+        }
+
+        else {
+
+            farmDetails.setLandTitle( null );
+        }
 
         farmDetails.setFarmExpension( farmDto.isFarmExpension() );
 
         farmDetails.setFarmExpensionType( entityDtoMapper.resolve( farmDto.getFarmExpensionType(), CLHvHeExpensionType.class ) );
 
-        farmDetails.setCanalRestorationPlan( map( farmDto.getCanalRestorationPlan() ) );
+        if ( farmDto.getCanalRestorationPlan() != null ) {
 
-        farmDetails.setCumulativeImpactStudy( map( farmDto.getCumulativeImpactStudy() ) );
+            if ( farmDetails.getCanalRestorationPlan() == null ) {
+
+                farmDetails.setCanalRestorationPlan( new Attachment() );
+            }
+
+            entityDtoMapper.map( farmDto.getCanalRestorationPlan(), farmDetails.getCanalRestorationPlan() );
+        }
+
+        else {
+
+            farmDetails.setCanalRestorationPlan( null );
+        }
+
+        if ( farmDto.getCumulativeImpactStudy() != null ) {
+
+            if ( farmDetails.getCumulativeImpactStudy() == null ) {
+
+                farmDetails.setCumulativeImpactStudy( new Attachment() );
+            }
+
+            entityDtoMapper.map( farmDto.getCumulativeImpactStudy(), farmDetails.getCumulativeImpactStudy() );
+        }
+
+        else {
+
+            farmDetails.setCumulativeImpactStudy( null );
+        }
 
         farmDetails.setSittingProtectedArea( farmDto.isSittingProtectedArea() );
 
-        farmDetails.setSittingProtectedAreaUrl( map( farmDto.getSittingProtectedAreaUrl() ) );
+        if ( farmDto.getSittingProtectedAreaDoc() != null ) {
+
+            if ( farmDetails.getSittingProtectedAreaDoc() == null ) {
+
+                farmDetails.setSittingProtectedAreaDoc( new Attachment() );
+            }
+
+            entityDtoMapper.map( farmDto.getSittingProtectedAreaDoc(), farmDetails.getSittingProtectedAreaDoc() );
+        }
+
+        else {
+
+            farmDetails.setSittingProtectedAreaDoc( null );
+        }
     }
 
     @Override
@@ -1418,7 +1567,20 @@ public class RegFarmDTOMapperImpl implements RegFarmDTOMapper {
 
         analysis.setAnalysisDate( dto.getAnalysisDate() );
 
-        analysis.setAnalysis( map( dto.getAnalysis() ) );
+        if ( dto.getAnalysis() != null ) {
+
+            if ( analysis.getAnalysis() == null ) {
+
+                analysis.setAnalysis( new Attachment() );
+            }
+
+            entityDtoMapper.map( dto.getAnalysis(), analysis.getAnalysis() );
+        }
+
+        else {
+
+            analysis.setAnalysis( null );
+        }
 
         analysis.setPond( entityDtoMapper.resolve( dto.getPond(), RegEntityFarmPond.class ) );
     }
@@ -1440,7 +1602,236 @@ public class RegFarmDTOMapperImpl implements RegFarmDTOMapper {
 
         analysis.setSoilAnalysisType( entityDtoMapper.resolve( dto.getSoilAnalysisType(), CLSoilAnalysisType.class ) );
 
-        analysis.setAnalysis( map( dto.getAnalysis() ) );
+        if ( dto.getAnalysis() != null ) {
+
+            if ( analysis.getAnalysis() == null ) {
+
+                analysis.setAnalysis( new Attachment() );
+            }
+
+            entityDtoMapper.map( dto.getAnalysis(), analysis.getAnalysis() );
+        }
+
+        else {
+
+            analysis.setAnalysis( null );
+        }
+    }
+
+    private String farmAerialViewResourcePath(RegEntityFarmDetails regEntityFarmDetails) {
+
+        if ( regEntityFarmDetails == null ) {
+
+            return null;
+        }
+
+        Attachment aerialView = regEntityFarmDetails.getAerialView();
+
+        if ( aerialView == null ) {
+
+            return null;
+        }
+
+        String resourcePath = aerialView.getResourcePath();
+
+        if ( resourcePath == null ) {
+
+            return null;
+        }
+
+        return resourcePath;
+    }
+
+    private String farmSittingProtectedAreaDocResourcePath(RegEntityFarmDetails regEntityFarmDetails) {
+
+        if ( regEntityFarmDetails == null ) {
+
+            return null;
+        }
+
+        Attachment sittingProtectedAreaDoc = regEntityFarmDetails.getSittingProtectedAreaDoc();
+
+        if ( sittingProtectedAreaDoc == null ) {
+
+            return null;
+        }
+
+        String resourcePath = sittingProtectedAreaDoc.getResourcePath();
+
+        if ( resourcePath == null ) {
+
+            return null;
+        }
+
+        return resourcePath;
+    }
+
+    private String farmContructionPermitResourcePath(RegEntityFarmDetails regEntityFarmDetails) {
+
+        if ( regEntityFarmDetails == null ) {
+
+            return null;
+        }
+
+        Attachment contructionPermit = regEntityFarmDetails.getContructionPermit();
+
+        if ( contructionPermit == null ) {
+
+            return null;
+        }
+
+        String resourcePath = contructionPermit.getResourcePath();
+
+        if ( resourcePath == null ) {
+
+            return null;
+        }
+
+        return resourcePath;
+    }
+
+    private String farmCanalRestorationPlanResourcePath(RegEntityFarmDetails regEntityFarmDetails) {
+
+        if ( regEntityFarmDetails == null ) {
+
+            return null;
+        }
+
+        Attachment canalRestorationPlan = regEntityFarmDetails.getCanalRestorationPlan();
+
+        if ( canalRestorationPlan == null ) {
+
+            return null;
+        }
+
+        String resourcePath = canalRestorationPlan.getResourcePath();
+
+        if ( resourcePath == null ) {
+
+            return null;
+        }
+
+        return resourcePath;
+    }
+
+    private String farmLandTitleResourcePath(RegEntityFarmDetails regEntityFarmDetails) {
+
+        if ( regEntityFarmDetails == null ) {
+
+            return null;
+        }
+
+        Attachment landTitle = regEntityFarmDetails.getLandTitle();
+
+        if ( landTitle == null ) {
+
+            return null;
+        }
+
+        String resourcePath = landTitle.getResourcePath();
+
+        if ( resourcePath == null ) {
+
+            return null;
+        }
+
+        return resourcePath;
+    }
+
+    private String farmCumulativeImpactStudyResourcePath(RegEntityFarmDetails regEntityFarmDetails) {
+
+        if ( regEntityFarmDetails == null ) {
+
+            return null;
+        }
+
+        Attachment cumulativeImpactStudy = regEntityFarmDetails.getCumulativeImpactStudy();
+
+        if ( cumulativeImpactStudy == null ) {
+
+            return null;
+        }
+
+        String resourcePath = cumulativeImpactStudy.getResourcePath();
+
+        if ( resourcePath == null ) {
+
+            return null;
+        }
+
+        return resourcePath;
+    }
+
+    private String farmEnvironmentImpactAssessmentDocResourcePath(RegEntityFarmDetails regEntityFarmDetails) {
+
+        if ( regEntityFarmDetails == null ) {
+
+            return null;
+        }
+
+        Attachment environmentImpactAssessmentDoc = regEntityFarmDetails.getEnvironmentImpactAssessmentDoc();
+
+        if ( environmentImpactAssessmentDoc == null ) {
+
+            return null;
+        }
+
+        String resourcePath = environmentImpactAssessmentDoc.getResourcePath();
+
+        if ( resourcePath == null ) {
+
+            return null;
+        }
+
+        return resourcePath;
+    }
+
+    private String findByFarmIdWorkAccidentRecordResourcePath(RegEntityStaffManagement regEntityStaffManagement) {
+
+        if ( regEntityStaffManagement == null ) {
+
+            return null;
+        }
+
+        Attachment workAccidentRecord = regEntityStaffManagement.getWorkAccidentRecord();
+
+        if ( workAccidentRecord == null ) {
+
+            return null;
+        }
+
+        String resourcePath = workAccidentRecord.getResourcePath();
+
+        if ( resourcePath == null ) {
+
+            return null;
+        }
+
+        return resourcePath;
+    }
+
+    private String findByFarmIdFarmPoliciesResourcePath(RegEntityStaffManagement regEntityStaffManagement) {
+
+        if ( regEntityStaffManagement == null ) {
+
+            return null;
+        }
+
+        Attachment farmPolicies = regEntityStaffManagement.getFarmPolicies();
+
+        if ( farmPolicies == null ) {
+
+            return null;
+        }
+
+        String resourcePath = farmPolicies.getResourcePath();
+
+        if ( resourcePath == null ) {
+
+            return null;
+        }
+
+        return resourcePath;
     }
 
     private String mActivityTypeName(DTFarmPlotActivity dTFarmPlotActivity) {
@@ -1515,6 +1906,30 @@ public class RegFarmDTOMapperImpl implements RegFarmDTOMapper {
         return name;
     }
 
+    private String ePlotNumber(DTSoilAnalysis dTSoilAnalysis) {
+
+        if ( dTSoilAnalysis == null ) {
+
+            return null;
+        }
+
+        RegEntityFarmPlot plot = dTSoilAnalysis.getPlot();
+
+        if ( plot == null ) {
+
+            return null;
+        }
+
+        String number = plot.getNumber();
+
+        if ( number == null ) {
+
+            return null;
+        }
+
+        return number;
+    }
+
     private String eSoilAnalysisTypeName(DTSoilAnalysis dTSoilAnalysis) {
 
         if ( dTSoilAnalysis == null ) {
@@ -1539,28 +1954,52 @@ public class RegFarmDTOMapperImpl implements RegFarmDTOMapper {
         return name;
     }
 
-    private String ePlotNumber(DTSoilAnalysis dTSoilAnalysis) {
+    private String eAnalysisResourcePath(DTSoilAnalysis dTSoilAnalysis) {
 
         if ( dTSoilAnalysis == null ) {
 
             return null;
         }
 
-        RegEntityFarmPlot plot = dTSoilAnalysis.getPlot();
+        Attachment analysis = dTSoilAnalysis.getAnalysis();
 
-        if ( plot == null ) {
-
-            return null;
-        }
-
-        String number = plot.getNumber();
-
-        if ( number == null ) {
+        if ( analysis == null ) {
 
             return null;
         }
 
-        return number;
+        String resourcePath = analysis.getResourcePath();
+
+        if ( resourcePath == null ) {
+
+            return null;
+        }
+
+        return resourcePath;
+    }
+
+    private String eAnalysisResourcePath_(DTWaterAnalysis dTWaterAnalysis) {
+
+        if ( dTWaterAnalysis == null ) {
+
+            return null;
+        }
+
+        Attachment analysis = dTWaterAnalysis.getAnalysis();
+
+        if ( analysis == null ) {
+
+            return null;
+        }
+
+        String resourcePath = analysis.getResourcePath();
+
+        if ( resourcePath == null ) {
+
+            return null;
+        }
+
+        return resourcePath;
     }
 
     private String ePondNumber(DTWaterAnalysis dTWaterAnalysis) {

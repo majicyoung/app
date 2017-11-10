@@ -3,6 +3,7 @@ package com.fairagora.verifik8.v8web.mvc.farms.dto;
 import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.multipart.MultipartFile;
 
 public class DTWaterAnalysisDto {
 
@@ -14,7 +15,9 @@ public class DTWaterAnalysisDto {
 	protected Date analysisDate;
 
 	protected String pondNumber;
-	protected String analysis;
+
+	protected MultipartFile analysis;
+	protected String analysisUrl;
 
 	public Long getId() {
 		return id;
@@ -36,14 +39,6 @@ public class DTWaterAnalysisDto {
 		this.analysisDate = analysisDate;
 	}
 
-	public String getAnalysis() {
-		return analysis;
-	}
-
-	public void setAnalysis(String analysis) {
-		this.analysis = analysis;
-	}
-
 	public void setId(Long id) {
 		this.id = id;
 	}
@@ -54,5 +49,21 @@ public class DTWaterAnalysisDto {
 
 	public void setPondNumber(String pondNumber) {
 		this.pondNumber = pondNumber;
+	}
+
+	public MultipartFile getAnalysis() {
+		return analysis;
+	}
+
+	public void setAnalysis(MultipartFile analysis) {
+		this.analysis = analysis;
+	}
+
+	public String getAnalysisUrl() {
+		return analysisUrl;
+	}
+
+	public void setAnalysisUrl(String analysisUrl) {
+		this.analysisUrl = analysisUrl;
 	}
 }

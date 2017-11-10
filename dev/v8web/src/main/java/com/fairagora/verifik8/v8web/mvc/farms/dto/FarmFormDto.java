@@ -1,7 +1,10 @@
 package com.fairagora.verifik8.v8web.mvc.farms.dto;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import com.fairagora.verifik8.v8web.data.domain.commons.V8Measure;
 import com.fairagora.verifik8.v8web.mvc.infra.dtomapping.commons.AddressDto;
+import com.fairagora.verifik8.v8web.mvc.infra.dtomapping.commons.V8MeasureDto;
 
 public class FarmFormDto {
 
@@ -29,7 +32,10 @@ public class FarmFormDto {
 
 	protected Float latitude;
 
-	protected V8Measure size;
+	protected V8MeasureDto size;
+
+	protected MultipartFile aerialView;
+	protected String aerialViewUrl;
 
 	public Long getId() {
 		return id;
@@ -119,11 +125,11 @@ public class FarmFormDto {
 		this.latitude = latitude;
 	}
 
-	public V8Measure getSize() {
+	public V8MeasureDto getSize() {
 		return size;
 	}
 
-	public void setSize(V8Measure size) {
+	public void setSize(V8MeasureDto size) {
 		this.size = size;
 	}
 
@@ -133,5 +139,21 @@ public class FarmFormDto {
 
 	public void setCooperative(Long cooperative) {
 		this.cooperative = cooperative;
+	}
+
+	public MultipartFile getAerialView() {
+		return aerialView;
+	}
+
+	public void setAerialView(MultipartFile aerialView) {
+		this.aerialView = aerialView;
+	}
+
+	public String getAerialViewUrl() {
+		return aerialViewUrl;
+	}
+
+	public void setAerialViewUrl(String aerialViewUrl) {
+		this.aerialViewUrl = aerialViewUrl;
 	}
 }

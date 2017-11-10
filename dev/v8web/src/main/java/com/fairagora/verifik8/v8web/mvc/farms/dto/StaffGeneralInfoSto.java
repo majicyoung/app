@@ -1,5 +1,7 @@
 package com.fairagora.verifik8.v8web.mvc.farms.dto;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class StaffGeneralInfoSto {
 
 	protected Long farmId;
@@ -17,11 +19,14 @@ public class StaffGeneralInfoSto {
 	protected boolean accessToProtectiveEquipment;
 
 	protected boolean existenceWorkAccidentRecord;
-	protected String workAccidentRecord;
+
+	protected MultipartFile workAccidentRecord;
+	protected String workAccidentRecordUrl;
 
 	protected boolean existenceFarmPolicies;
-	protected String farmPolicies;
-	
+	protected MultipartFile farmPolicies;
+	protected String farmPoliciesUrl;
+
 	public Long getFarmId() {
 		return farmId;
 	}
@@ -110,14 +115,6 @@ public class StaffGeneralInfoSto {
 		this.existenceWorkAccidentRecord = existenceWorkAccidentRecord;
 	}
 
-	public String getWorkAccidentRecord() {
-		return workAccidentRecord;
-	}
-
-	public void setWorkAccidentRecord(String workAccidentRecord) {
-		this.workAccidentRecord = workAccidentRecord;
-	}
-
 	public boolean isExistenceFarmPolicies() {
 		return existenceFarmPolicies;
 	}
@@ -126,11 +123,35 @@ public class StaffGeneralInfoSto {
 		this.existenceFarmPolicies = existenceFarmPolicies;
 	}
 
-	public String getFarmPolicies() {
+	public MultipartFile getWorkAccidentRecord() {
+		return workAccidentRecord;
+	}
+
+	public void setWorkAccidentRecord(MultipartFile workAccidentRecord) {
+		this.workAccidentRecord = workAccidentRecord;
+	}
+
+	public String getWorkAccidentRecordUrl() {
+		return workAccidentRecordUrl;
+	}
+
+	public void setWorkAccidentRecordUrl(String workAccidentRecordUrl) {
+		this.workAccidentRecordUrl = workAccidentRecordUrl;
+	}
+
+	public MultipartFile getFarmPolicies() {
 		return farmPolicies;
 	}
 
-	public void setFarmPolicies(String farmPolicies) {
+	public void setFarmPolicies(MultipartFile farmPolicies) {
 		this.farmPolicies = farmPolicies;
+	}
+
+	public String getFarmPoliciesUrl() {
+		return farmPoliciesUrl;
+	}
+
+	public void setFarmPoliciesUrl(String farmPoliciesUrl) {
+		this.farmPoliciesUrl = farmPoliciesUrl;
 	}
 }

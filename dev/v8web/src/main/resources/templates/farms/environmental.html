@@ -22,33 +22,33 @@
                             <div class="form-group row">
                                 <label for="inputFarmImpactAssesment" class="col-xs-4 control-label" th:text="#{farm.envi_impact_assessment}">farm.envi_impact_assessment</label>
                                 <div class="col-xs-5">
-                                    <input type="file" class="form-control" id="inputFarmImpactAssesment" th:placeholder="#{farm.upload_study}" accept=".xlsx, .xls, .doc, .docx, .pdf, image/*" name="impact_study" />
+                                    <input type="file" class="form-control" th:field="*{environmentImpactAssessmentDoc}" th:placeholder="#{farm.upload_study}" accept=".xlsx, .xls, .doc, .docx, .pdf, image/*" />
                                 </div>
-                                <div class="col-xs-2 bloc-file-uploaded" th:if="${!#strings.isEmpty(farmDto.environmentImpactAssessmentUrl)}">
-                                   	<a href="{{ asset($farm_impact_study_url) }}" target="_blank">
-                                   		<i class="fa fa-file-image-o"></i> - <i class="fa fa-download"></i>
+                                <div class="col-xs-2 bloc-file-uploaded" >
+                                   	<a th:if="${!#strings.isEmpty(farmDto.environmentImpactAssessmentDocUrl)}" th:href="@{'/downloard/'+${farmDto.environmentImpactAssessmentDocUrl}}" target="_blank">
+                                   		<i class="fa fa-download"></i>
                                     </a>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="inputFarmConstructionPermit" class="col-xs-4 control-label" th:text="#{default.construction_permit}"></label>
                                 <div class="col-xs-5">
-                                    <input type="file" class="form-control" id="inputFarmConstructionPermit"  th:placeholder="#{farm.upload_permit}" accept=".xlsx, .xls, .doc, .docx, .pdf, image/*" name="contruct_permit" />
+                                    <input type="file" class="form-control" th:field="*{contructionPermit}"  th:placeholder="#{farm.upload_permit}" accept=".xlsx, .xls, .doc, .docx, .pdf, image/*"  />
                                 </div>
-                                <div class="col-xs-2 bloc-file-uploaded" th:if="${!#strings.isEmpty(farmDto.contructionPermit)}">
-                                    <a href="{{ asset($farm_contruct_permit_url) }}" target="_blank">
-                                    	<i class="fa fa-file-image-o"></i> - <i class="fa fa-download"></i>
-									</a>
+                                <div class="col-xs-2 bloc-file-uploaded" >
+                                  	<a th:if="${!#strings.isEmpty(farmDto.contructionPermitUrl)}" th:href="@{'/downloard/'+${farmDto.contructionPermitUrl}}" target="_blank">
+                                   		<i class="fa fa-download"></i>
+                                    </a>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="inputFarmLandTitle" class="col-xs-4 control-label" th:text="#{default.land_title}">default.land_title</label>
                                 <div class="col-xs-5">
-                                    <input type="file" class="form-control" id="inputFarmLandTitle" th:placeholder="#{farm.upload_land_title}" accept=".xlsx, .xls, .doc, .docx, .pdf, image/*" name="land_title" />
+                                    <input type="file" class="form-control" th:field="*{landTitle}" th:placeholder="#{farm.upload_land_title}" accept=".xlsx, .xls, .doc, .docx, .pdf, image/*"  />
                                 </div>
-                                <div class="col-xs-2 bloc-file-uploaded" th:if="${!#strings.isEmpty(farmDto.landTitle)}">
-                                  	<a href="{{ asset($farm_land_title_url) }}" target="_blank">
-	                                 	<i class="fa fa-file-image-o"></i> - <i class="fa fa-download"></i>
+                                <div class="col-xs-2 bloc-file-uploaded">
+                                  	<a th:if="${!#strings.isEmpty(farmDto.landTitleUrl)}" th:href="@{'/downloard/'+${farmDto.landTitleUrl}}" target="_blank">
+                                   		<i class="fa fa-download"></i>
                                     </a>
                                 </div>
                             </div>
@@ -66,11 +66,11 @@
                             <div class="form-group row">
                                 <label for="inputFarmAuthorization" class="col-xs-4 control-label"><span th:text="#{farm.authorization_siting_hvh}">farm.authorization_siting_hvh</span></label>
                                 <div class="col-xs-5">
-                                    <input type="file" class="form-control" id="inputFarmAuthorization" th:placeholder="#{farm.upload_authorization}" accept=".xlsx, .xls, .doc, .docx, .pdf, image/*" name="land_auth" />
+                                    <input type="file" class="form-control" th:field="*{sittingProtectedAreaDoc}" th:placeholder="#{farm.upload_authorization}" accept=".xlsx, .xls, .doc, .docx, .pdf, image/*"  />
                                 </div>
-                                <div class="col-xs-2 bloc-file-uploaded" th:if="${!#strings.isEmpty(farmDto.sittingProtectedAreaUrl)}">
-                                    <a href="{{ asset($farm_land_auth_url) }}" target="_blank">
-                                    	<i class="fa fa-file-image-o"></i> - <i class="fa fa-download"></i>
+                                <div class="col-xs-2 bloc-file-uploaded">
+                                    <a th:if="${!#strings.isEmpty(farmDto.sittingProtectedAreaUrl)}" th:href="@{'/downloard/'+${farmDto.sittingProtectedAreaUrl}}" target="_blank">
+                                   		<i class="fa fa-download"></i>
                                     </a>
                                 </div>
                             </div>
@@ -102,27 +102,23 @@
                             <div class="form-group row">
                                 <label for="inputFarmRestauration" class="col-xs-4 control-label" th:text="#{farm.canal_restauration_up}">farm.canal_restauration_up</label>
                                 <div class="col-xs-5">
-                                    <input type="file" class="form-control" id="inputFarmRestauration" placeholder="{{ trans('farm.canal_restauration_up') }}" accept=".xlsx, .xls, .doc, .docx, .pdf, image/*" name="canal_restore" />
+                                    <input type="file" class="form-control" th:field="*{canalRestorationPlan}" placeholder="{{ trans('farm.canal_restauration_up') }}" accept=".xlsx, .xls, .doc, .docx, .pdf, image/*" />
                                 </div>
                                 <div class="col-xs-2 bloc-file-uploaded">
-                                	<?php if(!empty($farm_canal_restore_url)){?>
-                                    	<a href="{{ asset($farm_canal_restore_url) }}" target="_blank">
-                                    	<i class="fa fa-file-image-o"></i> - <i class="fa fa-download"></i>
-                                        </a>
-									<?php }?>
+                                    <a th:if="${!#strings.isEmpty(farmDto.canalRestorationPlanUrl)}" th:href="@{'/downloard/'+${farmDto.canalRestorationPlanUrl}}" target="_blank">
+                                   		<i class="fa fa-download"></i>
+                                    </a>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="inputFarmCumulStudy" class="col-xs-4 control-label" th:text="#{farm.cummulative_study_up}">farm.cummulative_study_up</label>
                                 <div class="col-xs-5">
-                                    <input type="file" class="form-control" id="inputFarmCumulStudy" placeholder="Upload Cumulative study" accept=".xlsx, .xls, .doc, .docx, .pdf, image/*" name="cumul_study" />
+                                    <input type="file" class="form-control" th:field="*{cumulativeImpactStudy}" placeholder="Upload Cumulative study" accept=".xlsx, .xls, .doc, .docx, .pdf, image/*" />
                                 </div>
                                 <div class="col-xs-2 bloc-file-uploaded">
-                                	<?php if(!empty($farm_cumul_study_url)){?>
-                                    	<a href="{{ asset($farm_cumul_study_url) }}" target="_blank">
-                                    	<i class="fa fa-file-image-o"></i> - <i class="fa fa-download"></i>
-                                        </a>
-									<?php }?>
+                                    <a th:if="${!#strings.isEmpty(farmDto.cumulativeImpactStudyUrl)}" th:href="@{'/downloard/'+${farmDto.cumulativeImpactStudyUrl}}" target="_blank">
+                                   		<i class="fa fa-download"></i>
+                                    </a>
                                 </div>
                             </div>
                         </div>

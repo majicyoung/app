@@ -72,8 +72,9 @@ public class RegEntityStaffManagement {
 	@Column(name = "EXISTENCE_FARM_POLICIES")
 	protected boolean existenceFarmPolicies;
 
-	@Column(name = "FARM_POLICIES")
-	protected String farmPolicies;
+	@Embedded
+	@AttributeOverrides({ @AttributeOverride(name = "resourcePath", column = @Column(name = "FARM_POLICIES")) })
+	protected Attachment farmPolicies;
 
 	@Column(name = "EXISTENCE_HEALTH_SAFETY_POLICIES")
 	protected boolean existenceHealthSafetyPolicies;
@@ -84,8 +85,9 @@ public class RegEntityStaffManagement {
 	@Column(name = "EXISTENCE_WORK_ACCIDENT_RECORD")
 	protected boolean existenceWorkAccidentRecord;
 
-	@Column(name = "WORK_ACCIDENT_RECORD")
-	protected String workAccidentRecord;
+	@Embedded
+	@AttributeOverrides({ @AttributeOverride(name = "resourcePath", column = @Column(name = "WORK_ACCIDENT_RECORD")) })
+	protected Attachment workAccidentRecord;
 
 	@Column(name = "ACCESS_TO_PROTECTIVE_EQUIPMENT")
 	protected boolean accessToProtectiveEquipment;
@@ -273,11 +275,11 @@ public class RegEntityStaffManagement {
 		this.existenceFarmPolicies = existenceFarmPolicies;
 	}
 
-	public String getFarmPolicies() {
+	public Attachment getFarmPolicies() {
 		return farmPolicies;
 	}
 
-	public void setFarmPolicies(String farmPolicies) {
+	public void setFarmPolicies(Attachment farmPolicies) {
 		this.farmPolicies = farmPolicies;
 	}
 
@@ -305,11 +307,11 @@ public class RegEntityStaffManagement {
 		this.existenceWorkAccidentRecord = existenceWorkAccidentRecord;
 	}
 
-	public String getWorkAccidentRecord() {
+	public Attachment getWorkAccidentRecord() {
 		return workAccidentRecord;
 	}
 
-	public void setWorkAccidentRecord(String workAccidentRecord) {
+	public void setWorkAccidentRecord(Attachment workAccidentRecord) {
 		this.workAccidentRecord = workAccidentRecord;
 	}
 

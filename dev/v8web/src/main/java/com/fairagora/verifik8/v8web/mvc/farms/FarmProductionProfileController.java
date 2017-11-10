@@ -89,8 +89,7 @@ public class FarmProductionProfileController extends AbstractV8Controller {
 	
 	@Transactional
 	@RequestMapping(value = "/farm/{farmId}/production-profile/water-analysis/update.html", method = RequestMethod.POST)
-	public String updateWaterAnalysis(@PathVariable(name = "farmId") Long farmid, DTWaterAnalysisDto dto,
-			@RequestParam("analysisFile") MultipartFile analysisFile) {
+	public String updateWaterAnalysis(@PathVariable(name = "farmId") Long farmid, DTWaterAnalysisDto dto) {
 		DTWaterAnalysis analysis = new DTWaterAnalysis();
 
 		regFarmDtoMapper.fillEntity(dto, analysis);
@@ -101,8 +100,7 @@ public class FarmProductionProfileController extends AbstractV8Controller {
 
 	@Transactional
 	@RequestMapping(value = "/farm/{farmId}/production-profile/soil-analysis/update.html", method = RequestMethod.POST)
-	public String updateSoilAnalysis(@PathVariable(name = "farmId") Long farmid, DTSoilAnalysisDto dto,
-			@RequestParam("analysisFile") MultipartFile analysisFile) {
+	public String updateSoilAnalysis(@PathVariable(name = "farmId") Long farmid, DTSoilAnalysisDto dto) {
 		DTSoilAnalysis analysis = new DTSoilAnalysis();
 
 		regFarmDtoMapper.fillEntity(dto, analysis);

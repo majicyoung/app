@@ -159,9 +159,12 @@
                                 <label for="inputFarmMap" class="col-xs-3 control-label" th:text="#{farm.map_drawing}">farm.map_drawing</label>
                                 <div class="col-xs-9 no-padding">
                                     <div class="col-xs-6">
-                                        <input type="file" class="form-control" id="inputFarmMap" name="map" th:placeholder="#{farm.map_drawing}" accept=".xlsx, .xls, .doc, .docx, .pdf, image/*" />
+                                        <input type="file" class="form-control" th:field="*{aerialView}" th:placeholder="#{farm.map_drawing}" accept=".xlsx, .xls, .doc, .docx, .pdf, image/*" />
                                     </div>
                                     <div class="col-xs-6">
+                                    	<a th:if="${farmDto.aerialViewUrl !=null}" th:href="@{'/download/'+${farmDto.aerialViewUrl}}" target="_blank">
+	                                    	<i class="fa fa-file-image-o"></i> - <i class="fa fa-download"></i>
+										</a>
                                     </div>
                                 </div>
                             </div>

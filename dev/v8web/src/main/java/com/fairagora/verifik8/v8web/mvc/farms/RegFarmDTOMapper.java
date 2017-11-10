@@ -48,6 +48,8 @@ public interface RegFarmDTOMapper {
 	void toDto(RegEntity farm, @MappingTarget FarmFormDto dto);
 
 	@Mapping(target = "id", ignore = true)
+	@Mapping(target = "aerialView", ignore = true)
+	@Mapping(target = "aerialViewUrl", source = "aerialView.resourcePath")
 	void toDto(RegEntityFarmDetails farm, @MappingTarget FarmFormDto dto);
 
 	@Mapping(target = "id", ignore = true)
@@ -58,10 +60,26 @@ public interface RegFarmDTOMapper {
 
 	void fillEntity(AddressDto dto, @MappingTarget Address adr);
 
+	@Mapping(target = "environmentImpactAssessmentDoc", ignore = true)
+	@Mapping(target = "environmentImpactAssessmentDocUrl", source = "environmentImpactAssessmentDoc.resourcePath")
+	@Mapping(target = "contructionPermit", ignore = true)
+	@Mapping(target = "contructionPermitUrl", source = "contructionPermit.resourcePath")
+	@Mapping(target = "landTitle", ignore = true)
+	@Mapping(target = "landTitleUrl", source = "landTitle.resourcePath")
+	@Mapping(target = "sittingProtectedAreaDoc", ignore = true)
+	@Mapping(target = "sittingProtectedAreaUrl", source = "sittingProtectedAreaDoc.resourcePath")
+	@Mapping(target = "canalRestorationPlan", ignore = true)
+	@Mapping(target = "canalRestorationPlanUrl", source = "canalRestorationPlan.resourcePath")
+	@Mapping(target = "cumulativeImpactStudy", ignore = true)
+	@Mapping(target = "cumulativeImpactStudyUrl", source = "cumulativeImpactStudy.resourcePath")
 	void toDto(RegEntityFarmDetails farm, @MappingTarget FarmEnvironmentalDto dto);
 
 	void toDto(Address adr, @MappingTarget AddressDto dto);
 
+	@Mapping(target = "workAccidentRecord", ignore = true)
+	@Mapping(target = "workAccidentRecordUrl", source = "workAccidentRecord.resourcePath")
+	@Mapping(target = "farmPolicies", ignore = true)
+	@Mapping(target = "farmPoliciesUrl", source = "farmPolicies.resourcePath")
 	void toDto(RegEntityStaffManagement findByFarmId, @MappingTarget StaffGeneralInfoSto dto);
 
 	void toDto(RegEntityFarmPond m, @MappingTarget FarmPondDto dto);
@@ -119,9 +137,14 @@ public interface RegFarmDTOMapper {
 
 	@Mapping(source = "e.plot.number", target = "plotNumber")
 	@Mapping(source = "e.soilAnalysisType.name", target = "soilAnalysisTypeName")
+	@Mapping(target = "analysis", ignore = true)
+	@Mapping(target = "analysisUrl", source = "analysis.resourcePath")
 	DTSoilAnalysisDto toSoilAnalysisDto(DTSoilAnalysis e);
 
 	@Mapping(source = "e.pond.number", target = "pondNumber")
+
+	@Mapping(target = "analysis", ignore = true)
+	@Mapping(target = "analysisUrl", source = "analysis.resourcePath")
 	DTWaterAnalysisDto toWaterAnalysisDto(DTWaterAnalysis e);
 
 	void fillEntity(DTFarmAgProductionDto dto, @MappingTarget DTFarmAgProduction measure);

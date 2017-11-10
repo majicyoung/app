@@ -8,7 +8,7 @@ public class Attachment {
 
 	@Column(name = "RESPATH")
 	protected String resourcePath;
-
+	
 	public String getResourcePath() {
 		return resourcePath;
 	}
