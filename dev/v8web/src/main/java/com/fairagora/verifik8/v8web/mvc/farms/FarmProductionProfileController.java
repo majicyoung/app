@@ -81,6 +81,13 @@ public class FarmProductionProfileController extends AbstractV8Controller {
 	}
 
 	@Transactional
+	@RequestMapping(value = "/farm/{farmId}/production-profile/water-analysis/delete.html", method = RequestMethod.POST)
+	public String deleteWaterAnalysis(@PathVariable(name = "farmId") Long farmid, @RequestParam("id") Long id) {
+		waterAnalysisRepository.delete(id);
+		return "redirect:/farm/" + farmid + "/production-profile.html";
+	}
+	
+	@Transactional
 	@RequestMapping(value = "/farm/{farmId}/production-profile/water-analysis/update.html", method = RequestMethod.POST)
 	public String updateWaterAnalysis(@PathVariable(name = "farmId") Long farmid, DTWaterAnalysisDto dto,
 			@RequestParam("analysisFile") MultipartFile analysisFile) {
@@ -105,6 +112,13 @@ public class FarmProductionProfileController extends AbstractV8Controller {
 	}
 
 	@Transactional
+	@RequestMapping(value = "/farm/{farmId}/production-profile/soil-analysis/delete.html", method = RequestMethod.POST)
+	public String deleteSoilAnalysis(@PathVariable(name = "farmId") Long farmid, @RequestParam("id") Long id) {
+		soilAnalysisRepository.delete(id);
+		return "redirect:/farm/" + farmid + "/production-profile.html";
+	}
+	
+	@Transactional
 	@RequestMapping(value = "/farm/{farmId}/production-profile/total-production/update.html", method = RequestMethod.POST)
 	public String updateProduction(@PathVariable(name = "farmId") Long farmid, DTFarmAgProductionDto dto) {
 		DTFarmAgProduction prod = new DTFarmAgProduction();
@@ -121,6 +135,14 @@ public class FarmProductionProfileController extends AbstractV8Controller {
 		return "redirect:/farm/" + farmid + "/production-profile.html";
 	}
 
+
+	@Transactional
+	@RequestMapping(value = "/farm/{farmId}/production-profile/total-production/delete.html", method = RequestMethod.POST)
+	public String deleteTotalProduction(@PathVariable(name = "farmId") Long farmid, @RequestParam("id") Long id) {
+		totalProductionRepository.delete(id);
+		return "redirect:/farm/" + farmid + "/production-profile.html";
+	}
+	
 	/**
 	 * 
 	 * @param farm

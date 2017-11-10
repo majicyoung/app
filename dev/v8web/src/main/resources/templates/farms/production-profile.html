@@ -45,7 +45,7 @@
 													<td th:text="${e.quantity.unitName}"></td>
 													<td align="center">
 														<a href="javascript:void(0);" th:attr="data-id=${e.id}" class="btn btn-xs btn-flat btn-primary editProdBtn"><i class="fa fa-edit"></i></a> 
-														 <form th:action="@{'/farm/'+${farmId}+'/production-profile/production/delete.html'}" method="post" style="display: inline;">
+														 <form th:action="@{'/farm/'+${farmId}+'/production-profile/total-production/delete.html'}" method="post" style="display: inline;">
 				                                        	<input type="hidden" th:value="${e.id}" th:name="id" />
 				                                        	<button type="submit" class="btn btn-xs btn-flat btn-danger">
 																<i class="fa fa-remove"></i> 
@@ -133,13 +133,18 @@
 												</tr>
 											</table>
 										</div>
-										
-										<div class="col-xs-6">
-											<a href="javascript:void(0);" class="btn btn-flat btn-primary btn-form-pond" onclick="addSoilAnalysis();"><i class="fa fa-plus"></i> <span th:text="#{production_profile.soil_analysis.add}"></span></a>
-										</div>
-										<div class="col-xs-6">
-											<a href="javascript:void(0);" class="btn btn-flat btn-primary btn-form-pond" onclick="addWaterAnalysis();"><i class="fa fa-plus"></i> <span th:text="#{production_profile.water_analysis.add}"></span></a>
-										</div>
+									</div>
+								</div>
+								
+								<div class="row">
+									<div class="col-xs-12">
+									<div class="col-xs-6">
+										<a href="javascript:void(0);" class="btn btn-flat btn-primary"  onclick="addSoilAnalysis();"><i class="fa fa-plus"></i> <span th:text="#{production_profile.soil_analysis.add}"></span></a>
+									</div>
+									
+									<div class="col-xs-6">
+										<a href="javascript:void(0);" class="btn btn-flat btn-primary" onclick="addWaterAnalysis();"><i class="fa fa-plus"></i> <span th:text="#{production_profile.water_analysis.add}"></span></a>
+									</div>
 									</div>
 								</div>
 							</div>
@@ -297,7 +302,7 @@
 	                <div class="col-xs-12">
 	                	<div class="form-group">
 	                      <label th:text="|#{production_profile.soil_analysis.type}*|">production_profile.soil_analysis.type*</label>
-	                      <select class="form-control" name="pond">
+	                      <select class="form-control" name="soilAnalysisType">
 	                      	<option th:each="p:${soilAnalysisTypeListing}" th:value="${p.id}" th:text="${p.name}"></option>
 	                      </select>
 	                    </div>
