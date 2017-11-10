@@ -86,11 +86,17 @@ public class FarmProductionProfileController extends AbstractV8Controller {
 		waterAnalysisRepository.delete(id);
 		return "redirect:/farm/" + farmid + "/production-profile.html";
 	}
-	
+
 	@Transactional
 	@RequestMapping(value = "/farm/{farmId}/production-profile/water-analysis/update.html", method = RequestMethod.POST)
 	public String updateWaterAnalysis(@PathVariable(name = "farmId") Long farmid, DTWaterAnalysisDto dto) {
-		DTWaterAnalysis analysis = new DTWaterAnalysis();
+		DTWaterAnalysis analysis = null;
+
+		if (dto.getId() != null) {
+			analysis = waterAnalysisRepository.findOne(dto.getId());
+		} else {
+			analysis = new DTWaterAnalysis();
+		}
 
 		regFarmDtoMapper.fillEntity(dto, analysis);
 		waterAnalysisRepository.save(analysis);
@@ -101,7 +107,13 @@ public class FarmProductionProfileController extends AbstractV8Controller {
 	@Transactional
 	@RequestMapping(value = "/farm/{farmId}/production-profile/soil-analysis/update.html", method = RequestMethod.POST)
 	public String updateSoilAnalysis(@PathVariable(name = "farmId") Long farmid, DTSoilAnalysisDto dto) {
-		DTSoilAnalysis analysis = new DTSoilAnalysis();
+		DTSoilAnalysis analysis = null;
+
+		if (dto.getId() != null) {
+			analysis = soilAnalysisRepository.findOne(dto.getId());
+		} else {
+			analysis = new DTSoilAnalysis();
+		}
 
 		regFarmDtoMapper.fillEntity(dto, analysis);
 		soilAnalysisRepository.save(analysis);
@@ -115,11 +127,17 @@ public class FarmProductionProfileController extends AbstractV8Controller {
 		soilAnalysisRepository.delete(id);
 		return "redirect:/farm/" + farmid + "/production-profile.html";
 	}
-	
+
 	@Transactional
 	@RequestMapping(value = "/farm/{farmId}/production-profile/total-production/update.html", method = RequestMethod.POST)
 	public String updateProduction(@PathVariable(name = "farmId") Long farmid, DTFarmAgProductionDto dto) {
-		DTFarmAgProduction prod = new DTFarmAgProduction();
+		DTFarmAgProduction prod = null;
+
+		if (dto.getId() != null) {
+			prod = totalProductionRepository.findOne(dto.getId());
+		} else {
+			prod = new DTFarmAgProduction();
+		}
 
 		if (dto.getDataEntryType() == null)
 			dto.setDataEntryType(1l);
@@ -133,14 +151,13 @@ public class FarmProductionProfileController extends AbstractV8Controller {
 		return "redirect:/farm/" + farmid + "/production-profile.html";
 	}
 
-
 	@Transactional
 	@RequestMapping(value = "/farm/{farmId}/production-profile/total-production/delete.html", method = RequestMethod.POST)
 	public String deleteTotalProduction(@PathVariable(name = "farmId") Long farmid, @RequestParam("id") Long id) {
 		totalProductionRepository.delete(id);
 		return "redirect:/farm/" + farmid + "/production-profile.html";
 	}
-	
+
 	/**
 	 * 
 	 * @param farm
