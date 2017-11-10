@@ -1,7 +1,6 @@
 package com.fairagora.verifik8.v8web.mvc.farms;
 
 import java.sql.Time;
-import java.util.Optional;
 
 import javax.transaction.Transactional;
 

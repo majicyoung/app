@@ -58,7 +58,7 @@ public class DTFarmPlotActivity extends V8EntitySupport {
 
 	@Embedded
 	@AttributeOverrides({
-			@AttributeOverride(name = "quantity", column = @Column(name = "ADDITIONNAL_MEASURE_VALUE")), })
+			@AttributeOverride(name = "quantity", column = @Column(name = "ADDITIONNAL_MEASURE_VALUE")) })
 	@AssociationOverrides({
 			@AssociationOverride(name = "unit", joinColumns = @JoinColumn(name = "CL_ADDITIONNAL_MEASURE_VALUE_UNIT_ID")) })
 	protected V8Measure additionalMeasure;

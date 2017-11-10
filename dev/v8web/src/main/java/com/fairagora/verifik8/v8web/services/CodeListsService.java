@@ -18,6 +18,7 @@ import com.fairagora.verifik8.v8web.data.domain.cl.CLPondType;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLProduct;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLProductType;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLQuantityUnit;
+import com.fairagora.verifik8.v8web.data.domain.cl.CLSoilAnalysisType;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLSpecies;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLTilingActivityType;
 import com.fairagora.verifik8.v8web.data.repo.cl.CLCommoditiesRepository;
@@ -32,6 +33,7 @@ import com.fairagora.verifik8.v8web.data.repo.cl.CLPoundTypeRepository;
 import com.fairagora.verifik8.v8web.data.repo.cl.CLProductRepository;
 import com.fairagora.verifik8.v8web.data.repo.cl.CLProductTypesRepository;
 import com.fairagora.verifik8.v8web.data.repo.cl.CLQuantityUnitRepository;
+import com.fairagora.verifik8.v8web.data.repo.cl.CLSoilAnalysisTypeRepository;
 import com.fairagora.verifik8.v8web.data.repo.cl.CLSpeciesRepository;
 import com.fairagora.verifik8.v8web.data.repo.cl.CLTilingActivityTypeRepository;
 
@@ -76,6 +78,9 @@ public class CodeListsService {
 
 	@Autowired
 	private CLTilingActivityTypeRepository tilingActivityTypeRepository;
+
+	@Autowired
+	private CLSoilAnalysisTypeRepository soilAnalysisTypeRepository;
 
 	/**
 	 * 
@@ -194,6 +199,10 @@ public class CodeListsService {
 
 	public List<CLEntityType> listActiveCompanyEntityTypes() {
 		return entityTypeRepository.findByEnabledTrueAndCompanyTrueOrderByName();
+	}
+
+	public List<CLSoilAnalysisType> listActiveSoilAnalysisType() {
+		return soilAnalysisTypeRepository.findByEnabledTrueOrderByName();
 	}
 
 }

@@ -4,7 +4,6 @@ import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import com.fairagora.verifik8.v8web.data.domain.commons.Address;
 import com.fairagora.verifik8.v8web.mvc.infra.dtomapping.commons.AddressDto;
 
 public class IndividualDto {

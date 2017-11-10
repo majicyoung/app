@@ -8,9 +8,12 @@ import org.mapstruct.ReportingPolicy;
 import com.fairagora.verifik8.v8web.data.domain.commons.Address;
 import com.fairagora.verifik8.v8web.data.domain.commons.Attachment;
 import com.fairagora.verifik8.v8web.data.domain.commons.V8Measure;
+import com.fairagora.verifik8.v8web.data.domain.dt.DTFarmAgProduction;
 import com.fairagora.verifik8.v8web.data.domain.dt.DTFarmPlotActivity;
 import com.fairagora.verifik8.v8web.data.domain.dt.DTFarmPlotMeasurement;
 import com.fairagora.verifik8.v8web.data.domain.dt.DTFarmPondMeasurement;
+import com.fairagora.verifik8.v8web.data.domain.dt.DTSoilAnalysis;
+import com.fairagora.verifik8.v8web.data.domain.dt.DTWaterAnalysis;
 import com.fairagora.verifik8.v8web.data.domain.reg.RegEntity;
 import com.fairagora.verifik8.v8web.data.domain.reg.farm.RegEntityFarmDetails;
 import com.fairagora.verifik8.v8web.data.domain.reg.farm.RegEntityFarmPlot;
@@ -19,6 +22,9 @@ import com.fairagora.verifik8.v8web.data.domain.reg.farm.RegEntityFarmSupplierAs
 import com.fairagora.verifik8.v8web.data.domain.reg.farm.RegEntityStaffManagement;
 import com.fairagora.verifik8.v8web.mvc.companies.dto.CompanyDto;
 import com.fairagora.verifik8.v8web.mvc.companies.dto.CompanyListingDto;
+import com.fairagora.verifik8.v8web.mvc.farms.dto.DTFarmAgProductionDto;
+import com.fairagora.verifik8.v8web.mvc.farms.dto.DTSoilAnalysisDto;
+import com.fairagora.verifik8.v8web.mvc.farms.dto.DTWaterAnalysisDto;
 import com.fairagora.verifik8.v8web.mvc.farms.dto.FarmEnvironmentalDto;
 import com.fairagora.verifik8.v8web.mvc.farms.dto.FarmFormDto;
 import com.fairagora.verifik8.v8web.mvc.farms.dto.FarmPlotDto;
@@ -106,6 +112,20 @@ public interface RegFarmDTOMapper {
 
 	void fillEntity(PondMeasurementDto dto, @MappingTarget DTFarmPondMeasurement measure);
 
+	void toDto(DTFarmAgProduction act, @MappingTarget DTFarmAgProductionDto dto);
+
+	@Mapping(source = "e.commodities.name", target = "commoditiesName")
+	DTFarmAgProductionDto toProductionDto(DTFarmAgProduction e);
+
+	@Mapping(source = "e.plot.number", target = "plotNumber")
+	@Mapping(source = "e.soilAnalysisType.name", target = "soilAnalysisTypeName")
+	DTSoilAnalysisDto toSoilAnalysisDto(DTSoilAnalysis e);
+
+	@Mapping(source = "e.pond.number", target = "pondNumber")
+	DTWaterAnalysisDto toWaterAnalysisDto(DTWaterAnalysis e);
+
+	void fillEntity(DTFarmAgProductionDto dto, @MappingTarget DTFarmAgProduction measure);
+
 	@Mapping(source = "m.supplier.address.city", target = "city")
 	SupplierListingDto toListing(RegEntityFarmSupplierAssignment m);
 
@@ -129,5 +149,9 @@ public interface RegFarmDTOMapper {
 	void fillEntity(StaffGeneralInfoSto farmDto, @MappingTarget RegEntityStaffManagement ent);
 
 	void fillEntity(FarmEnvironmentalDto farmDto, @MappingTarget RegEntityFarmDetails farmDetails);
+
+	void fillEntity(DTWaterAnalysisDto dto, @MappingTarget DTWaterAnalysis analysis);
+
+	void fillEntity(DTSoilAnalysisDto dto, @MappingTarget DTSoilAnalysis analysis);
 
 }

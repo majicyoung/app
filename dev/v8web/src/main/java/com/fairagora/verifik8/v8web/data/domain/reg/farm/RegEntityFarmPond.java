@@ -48,9 +48,9 @@ public class RegEntityFarmPond implements V8Entity{
 	protected CLSpecies species;
 
 	@Embedded
-	@AttributeOverrides({ @AttributeOverride(name = "quantity", column = @Column(name = "POND_VOLUME")), })
-	@AssociationOverrides({
-			@AssociationOverride(name = "unit", joinColumns = @JoinColumn(name = "CL_POND_VOLUME_UNIT_ID")) })
+	@AttributeOverrides({ 
+		@AttributeOverride(name = "quantity", column = @Column(name = "POND_VOLUME")), })
+		@AssociationOverrides({			@AssociationOverride(name = "unit", joinColumns = @JoinColumn(name = "CL_POND_VOLUME_UNIT_ID")) })
 	protected V8Measure volume;
 
 	@Column(name = "COMMENT", length = 512)

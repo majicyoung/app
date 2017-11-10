@@ -4,7 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "cl_soil_analysis_type")
+@Table(name = "cl_soil_analysis_types")
 public class CLSoilAnalysisType extends CodeListSupport {
 
 

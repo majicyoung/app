@@ -3,14 +3,11 @@ package com.fairagora.verifik8.v8web.data.domain;
 import java.util.Date;
 
 import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EntityManager;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.PrePersist;
 
-import org.apache.catalina.core.ApplicationContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 import com.fairagora.verifik8.v8web.data.domain.sys.SYSUser;

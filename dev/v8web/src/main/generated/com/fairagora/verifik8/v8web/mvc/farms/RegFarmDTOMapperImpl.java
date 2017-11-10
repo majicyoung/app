@@ -16,9 +16,13 @@ import com.fairagora.verifik8.v8web.data.domain.cl.CLPlotActivityType;
 
 import com.fairagora.verifik8.v8web.data.domain.cl.CLPondType;
 
+import com.fairagora.verifik8.v8web.data.domain.cl.CLProdDataEntryType;
+
 import com.fairagora.verifik8.v8web.data.domain.cl.CLProduct;
 
 import com.fairagora.verifik8.v8web.data.domain.cl.CLQuantityUnit;
+
+import com.fairagora.verifik8.v8web.data.domain.cl.CLSoilAnalysisType;
 
 import com.fairagora.verifik8.v8web.data.domain.cl.CLSpecies;
 
@@ -28,11 +32,17 @@ import com.fairagora.verifik8.v8web.data.domain.commons.Address;
 
 import com.fairagora.verifik8.v8web.data.domain.commons.V8Measure;
 
+import com.fairagora.verifik8.v8web.data.domain.dt.DTFarmAgProduction;
+
 import com.fairagora.verifik8.v8web.data.domain.dt.DTFarmPlotActivity;
 
 import com.fairagora.verifik8.v8web.data.domain.dt.DTFarmPlotMeasurement;
 
 import com.fairagora.verifik8.v8web.data.domain.dt.DTFarmPondMeasurement;
+
+import com.fairagora.verifik8.v8web.data.domain.dt.DTSoilAnalysis;
+
+import com.fairagora.verifik8.v8web.data.domain.dt.DTWaterAnalysis;
 
 import com.fairagora.verifik8.v8web.data.domain.reg.RegEntity;
 
@@ -49,6 +59,12 @@ import com.fairagora.verifik8.v8web.data.domain.reg.farm.RegEntityStaffManagemen
 import com.fairagora.verifik8.v8web.mvc.companies.dto.CompanyDto;
 
 import com.fairagora.verifik8.v8web.mvc.companies.dto.CompanyListingDto;
+
+import com.fairagora.verifik8.v8web.mvc.farms.dto.DTFarmAgProductionDto;
+
+import com.fairagora.verifik8.v8web.mvc.farms.dto.DTSoilAnalysisDto;
+
+import com.fairagora.verifik8.v8web.mvc.farms.dto.DTWaterAnalysisDto;
 
 import com.fairagora.verifik8.v8web.mvc.farms.dto.FarmEnvironmentalDto;
 
@@ -92,7 +108,7 @@ import org.springframework.stereotype.Component;
 
     value = "org.mapstruct.ap.MappingProcessor",
 
-    date = "2017-11-04T18:14:56+0100",
+    date = "2017-11-10T07:45:56+0100",
 
     comments = "version: 1.1.0.Final, compiler: javac, environment: Java 1.8.0_112 (Oracle Corporation)"
 
@@ -885,6 +901,162 @@ public class RegFarmDTOMapperImpl implements RegFarmDTOMapper {
 
     @Override
 
+    public void toDto(DTFarmAgProduction act, DTFarmAgProductionDto dto) {
+
+        if ( act == null ) {
+
+            return;
+        }
+
+        dto.setId( act.getId() );
+
+        dto.setFarm( entityDtoMapper.toReference( act.getFarm() ) );
+
+        dto.setDateFrom( act.getDateFrom() );
+
+        dto.setDateTo( act.getDateTo() );
+
+        dto.setCommodities( entityDtoMapper.toReference( act.getCommodities() ) );
+
+        if ( act.getQuantity() != null ) {
+
+            if ( dto.getQuantity() == null ) {
+
+                dto.setQuantity( new V8MeasureDto() );
+            }
+
+            toDto( act.getQuantity(), dto.getQuantity() );
+        }
+
+        else {
+
+            dto.setQuantity( null );
+        }
+
+        dto.setDataEntryType( entityDtoMapper.toReference( act.getDataEntryType() ) );
+    }
+
+    @Override
+
+    public DTFarmAgProductionDto toProductionDto(DTFarmAgProduction e) {
+
+        if ( e == null ) {
+
+            return null;
+        }
+
+        DTFarmAgProductionDto dTFarmAgProductionDto = new DTFarmAgProductionDto();
+
+        dTFarmAgProductionDto.setCommoditiesName( eCommoditiesName( e ) );
+
+        dTFarmAgProductionDto.setId( e.getId() );
+
+        dTFarmAgProductionDto.setFarm( entityDtoMapper.toReference( e.getFarm() ) );
+
+        dTFarmAgProductionDto.setDateFrom( e.getDateFrom() );
+
+        dTFarmAgProductionDto.setDateTo( e.getDateTo() );
+
+        dTFarmAgProductionDto.setCommodities( entityDtoMapper.toReference( e.getCommodities() ) );
+
+        dTFarmAgProductionDto.setQuantity( toDto( e.getQuantity() ) );
+
+        dTFarmAgProductionDto.setDataEntryType( entityDtoMapper.toReference( e.getDataEntryType() ) );
+
+        return dTFarmAgProductionDto;
+    }
+
+    @Override
+
+    public DTSoilAnalysisDto toSoilAnalysisDto(DTSoilAnalysis e) {
+
+        if ( e == null ) {
+
+            return null;
+        }
+
+        DTSoilAnalysisDto dTSoilAnalysisDto = new DTSoilAnalysisDto();
+
+        dTSoilAnalysisDto.setSoilAnalysisTypeName( eSoilAnalysisTypeName( e ) );
+
+        dTSoilAnalysisDto.setPlotNumber( ePlotNumber( e ) );
+
+        dTSoilAnalysisDto.setPlot( entityDtoMapper.toReference( e.getPlot() ) );
+
+        dTSoilAnalysisDto.setAnalysisDate( e.getAnalysisDate() );
+
+        dTSoilAnalysisDto.setSoilAnalysisType( entityDtoMapper.toReference( e.getSoilAnalysisType() ) );
+
+        dTSoilAnalysisDto.setAnalysis( map( e.getAnalysis() ) );
+
+        dTSoilAnalysisDto.setId( e.getId() );
+
+        return dTSoilAnalysisDto;
+    }
+
+    @Override
+
+    public DTWaterAnalysisDto toWaterAnalysisDto(DTWaterAnalysis e) {
+
+        if ( e == null ) {
+
+            return null;
+        }
+
+        DTWaterAnalysisDto dTWaterAnalysisDto = new DTWaterAnalysisDto();
+
+        dTWaterAnalysisDto.setPondNumber( ePondNumber( e ) );
+
+        dTWaterAnalysisDto.setPond( entityDtoMapper.toReference( e.getPond() ) );
+
+        dTWaterAnalysisDto.setAnalysisDate( e.getAnalysisDate() );
+
+        dTWaterAnalysisDto.setAnalysis( map( e.getAnalysis() ) );
+
+        dTWaterAnalysisDto.setId( e.getId() );
+
+        return dTWaterAnalysisDto;
+    }
+
+    @Override
+
+    public void fillEntity(DTFarmAgProductionDto dto, DTFarmAgProduction measure) {
+
+        if ( dto == null ) {
+
+            return;
+        }
+
+        measure.setId( dto.getId() );
+
+        measure.setFarm( entityDtoMapper.resolve( dto.getFarm(), RegEntity.class ) );
+
+        measure.setDateFrom( dto.getDateFrom() );
+
+        measure.setDateTo( dto.getDateTo() );
+
+        measure.setCommodities( entityDtoMapper.resolve( dto.getCommodities(), CLCommodities.class ) );
+
+        if ( dto.getQuantity() != null ) {
+
+            if ( measure.getQuantity() == null ) {
+
+                measure.setQuantity( new V8Measure() );
+            }
+
+            fillEntity( dto.getQuantity(), measure.getQuantity() );
+        }
+
+        else {
+
+            measure.setQuantity( null );
+        }
+
+        measure.setDataEntryType( entityDtoMapper.resolve( dto.getDataEntryType(), CLProdDataEntryType.class ) );
+    }
+
+    @Override
+
     public SupplierListingDto toListing(RegEntityFarmSupplierAssignment m) {
 
         if ( m == null ) {
@@ -1233,6 +1405,44 @@ public class RegFarmDTOMapperImpl implements RegFarmDTOMapper {
         farmDetails.setSittingProtectedAreaUrl( map( farmDto.getSittingProtectedAreaUrl() ) );
     }
 
+    @Override
+
+    public void fillEntity(DTWaterAnalysisDto dto, DTWaterAnalysis analysis) {
+
+        if ( dto == null ) {
+
+            return;
+        }
+
+        analysis.setId( dto.getId() );
+
+        analysis.setAnalysisDate( dto.getAnalysisDate() );
+
+        analysis.setAnalysis( map( dto.getAnalysis() ) );
+
+        analysis.setPond( entityDtoMapper.resolve( dto.getPond(), RegEntityFarmPond.class ) );
+    }
+
+    @Override
+
+    public void fillEntity(DTSoilAnalysisDto dto, DTSoilAnalysis analysis) {
+
+        if ( dto == null ) {
+
+            return;
+        }
+
+        analysis.setId( dto.getId() );
+
+        analysis.setPlot( entityDtoMapper.resolve( dto.getPlot(), RegEntityFarmPlot.class ) );
+
+        analysis.setAnalysisDate( dto.getAnalysisDate() );
+
+        analysis.setSoilAnalysisType( entityDtoMapper.resolve( dto.getSoilAnalysisType(), CLSoilAnalysisType.class ) );
+
+        analysis.setAnalysis( map( dto.getAnalysis() ) );
+    }
+
     private String mActivityTypeName(DTFarmPlotActivity dTFarmPlotActivity) {
 
         if ( dTFarmPlotActivity == null ) {
@@ -1279,6 +1489,102 @@ public class RegFarmDTOMapperImpl implements RegFarmDTOMapper {
         }
 
         return name;
+    }
+
+    private String eCommoditiesName(DTFarmAgProduction dTFarmAgProduction) {
+
+        if ( dTFarmAgProduction == null ) {
+
+            return null;
+        }
+
+        CLCommodities commodities = dTFarmAgProduction.getCommodities();
+
+        if ( commodities == null ) {
+
+            return null;
+        }
+
+        String name = commodities.getName();
+
+        if ( name == null ) {
+
+            return null;
+        }
+
+        return name;
+    }
+
+    private String eSoilAnalysisTypeName(DTSoilAnalysis dTSoilAnalysis) {
+
+        if ( dTSoilAnalysis == null ) {
+
+            return null;
+        }
+
+        CLSoilAnalysisType soilAnalysisType = dTSoilAnalysis.getSoilAnalysisType();
+
+        if ( soilAnalysisType == null ) {
+
+            return null;
+        }
+
+        String name = soilAnalysisType.getName();
+
+        if ( name == null ) {
+
+            return null;
+        }
+
+        return name;
+    }
+
+    private String ePlotNumber(DTSoilAnalysis dTSoilAnalysis) {
+
+        if ( dTSoilAnalysis == null ) {
+
+            return null;
+        }
+
+        RegEntityFarmPlot plot = dTSoilAnalysis.getPlot();
+
+        if ( plot == null ) {
+
+            return null;
+        }
+
+        String number = plot.getNumber();
+
+        if ( number == null ) {
+
+            return null;
+        }
+
+        return number;
+    }
+
+    private String ePondNumber(DTWaterAnalysis dTWaterAnalysis) {
+
+        if ( dTWaterAnalysis == null ) {
+
+            return null;
+        }
+
+        RegEntityFarmPond pond = dTWaterAnalysis.getPond();
+
+        if ( pond == null ) {
+
+            return null;
+        }
+
+        String number = pond.getNumber();
+
+        if ( number == null ) {
+
+            return null;
+        }
+
+        return number;
     }
 
     private String mSupplierAddressCity(RegEntityFarmSupplierAssignment regEntityFarmSupplierAssignment) {

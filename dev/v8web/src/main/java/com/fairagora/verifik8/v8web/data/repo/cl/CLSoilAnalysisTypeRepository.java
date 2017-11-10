@@ -8,4 +8,5 @@ public interface CLSoilAnalysisTypeRepository extends CodeListRepository<CLSoilA
 
 	List<CLSoilAnalysisType> findByEnabledTrueOrderByName();
 
+
 }

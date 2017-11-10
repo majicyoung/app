@@ -18,7 +18,6 @@ import javax.persistence.Table;
 import org.hibernate.annotations.NotFound;
 import org.hibernate.annotations.NotFoundAction;
 
-import com.fairagora.verifik8.v8web.data.domain.V8Entity;
 import com.fairagora.verifik8.v8web.data.domain.V8EntitySupport;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLHvHeExpensionType;
 import com.fairagora.verifik8.v8web.data.domain.commons.Attachment;
