@@ -10,7 +10,7 @@
 					<h3 class="box-title" th:text="#{user.add}" th:if="${newEntity}">user.add</h3>
 					<h3 class="box-title" th:text="#{user.edit}" th:if="${!newEntity}">user.edit</h3>
 					<div class="box-tools">
-						<a href="{{ url('/users') }}" class="btn btn-sm btn-flat btn-warning"><i class="fa fa-backward"></i> <span th:text="#{default.back}"></span></a>
+						<a th:href="@{/users.html}" class="btn btn-sm btn-flat btn-warning"><i class="fa fa-backward"></i> <span th:text="#{default.back}"></span></a>
 					</div>
 				</div>
 				<form role="form" th:action="@{${newEntity ? '/users/create.html' : '/user/'+userDto.id+'/update.html'}}" th:object="${userDto}" method="post" autocomplete="off"

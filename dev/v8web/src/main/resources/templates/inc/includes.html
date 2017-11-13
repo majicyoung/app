@@ -31,7 +31,7 @@
 	        </div>
 	        <div class="pull-left info">
 	          <p th:text="${loggedUser.name}">USER NAME</p>
-	          <a th:href="@{'/users/'+${loggedUser.id}+'/edit'}" th:text="#{default.online}"><i class="fa fa-circle text-success"></i>default.online</a>
+	          <a th:href="@{'/user/'+${loggedUser.id}+'/edit.html'}" th:text="#{default.online}"><i class="fa fa-circle text-success"></i>default.online</a>
 	        </div>
 	      </div>
 	      <form action="#" method="get" class="sidebar-form">

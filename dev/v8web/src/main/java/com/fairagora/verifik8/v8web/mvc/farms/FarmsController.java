@@ -1,6 +1,7 @@
 package com.fairagora.verifik8.v8web.mvc.farms;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -85,7 +86,9 @@ public class FarmsController extends AbstractV8Controller {
 		FarmFormDto dto = new FarmFormDto();
 
 		regFarmDtoMapper.toDto(regEntityRepository.findOne(id), dto);
-		regFarmDtoMapper.toDto(regEntityFarmDetailsRepository.findByEntityId(id).get(), dto);
+		Optional<RegEntityFarmDetails> details = regEntityFarmDetailsRepository.findByEntityId(id);
+		if (details.isPresent())
+			regFarmDtoMapper.toDto(details.get(), dto);
 
 		prepareForFarmEdition(dto, mv);
 		return "farms/create";
@@ -146,8 +149,7 @@ public class FarmsController extends AbstractV8Controller {
 	 */
 	@RequestMapping(value = "/farm/{id}/environmental-update.html", method = RequestMethod.POST)
 	public String saveEnvironmental(@Validated @ModelAttribute("farmDto") FarmEnvironmentalDto farmDto,
-			@PathVariable("id") Long entityId, BindingResult bindResults,
-			Model mv) {
+			@PathVariable("id") Long entityId, BindingResult bindResults, Model mv) {
 
 		RegEntityFarmDetails farmDetails = regEntityFarmDetailsRepository.findByEntityId(entityId).get();
 		regFarmDtoMapper.fillEntity(farmDto, farmDetails);
