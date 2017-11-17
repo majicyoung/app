@@ -1,2 +1,4 @@
 eclipse.preferences.version=1
 encoding//src/main/java/com/fairagora/verifik8/v8web/config/functional/Verifik8AppConfig.java=UTF-8
+encoding//src/main/resources/messages_th.properties=UTF-8
+encoding//src/main/resources/messages_vt.properties=UTF-8

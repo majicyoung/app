@@ -44,11 +44,11 @@
                             <h4 class="form-staff-title" th:text="#{farm.staff_information}">farm.staff_information</h4>
                             <input type="hidden" id="form-staff-id" value="0" />
                             <div class="form-group row">
-                                <label for="inputFarmStaffName" class="col-xs-3 control-label" th:tabindex="|#{staff.first_name}*|">staff.first_name*</label>
+                                <label for="inputFarmStaffName" class="col-xs-3 control-label" th:text="|#{staff.first_name}*|">staff.first_name*</label>
                                 <div class="col-xs-9 no-padding">
                                     <div class="col-xs-10">
                                         <select class="form-control form-staff form-staff-required" name="staff_entity" id="inputFarmStaffName">
-                                            <option value="|-- #{#{staff.select}} --|"> #{staff.select} </option>
+                                            <option value=""> -- <span th:text="#{staff.select}" th:remove="tag"/> -- </option>
                                             <option th:each="ind : ${allIndividuals}" th:value="${ind.id}" th:text="${ind.name+' '+ind.surname}"> </option>
                                         </select>		
                                     </div>
