@@ -15,7 +15,9 @@ public class Verifik8AppConfig {
 		languages = new ArrayList<>();
 		languages.add(new V8AppLanguage().setup("English", "en"));
 		languages.add(new V8AppLanguage().setup("Français", "fr"));
-		languages.add(new V8AppLanguage().setup("Th", "th"));
+		languages.add(new V8AppLanguage().setup("Espanol", "es"));
+		languages.add(new V8AppLanguage().setup("ไทย", "th"));
+		languages.add(new V8AppLanguage().setup("tiếng Việt", "vt"));
 	}
 
 	public List<V8AppLanguage> getLanguages() {
