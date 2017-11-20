@@ -46,7 +46,7 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="inputFarmCountry" class="col-xs-3 control-label" th:text="#{default.country}+'*'">default.country*</label>
+                                <label for="inputFarmCountry" class="col-xs-3 control-label" th:text="#{default.country}+'*'" onchange="locateAddress();">default.country*</label>
                                 <div class="col-xs-9">
                                     <select class="form-control" id="inputFarmCountry" th:field="*{address.country}"  required="required" onchange="locateAddress();">
                                        	<option value="" th:text="|-- #{default.select_country} --|"> #{default.select_country} </option>
@@ -193,9 +193,92 @@
 
 
 <th:block layout:fragment="page-scripts">
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCOH2xiCWWRQraDjvC_BqEbr-gBlFkrEZ4"></script>
+	<script th:src="@{/static/dist/js/jquery.ui.map.js}"></script>
 	<script type="text/javascript">
+	/*<![CDATA[*/
 		$( document ).ready(function() {
 		});
+		
+		function centerMap(address,zoom,marker){
+			var geocoder = new google.maps.Geocoder();
+		    geocoder.geocode({
+		        'address': address
+		    }, function(results, status) {
+		        if (status == google.maps.GeocoderStatus.OK) {
+					$("#map_farm").gmap("option","center",results[0].geometry.location);
+					if(zoom>0) $('#map_farm').gmap('option','zoom',zoom);
+					if(marker>0){
+						$('#map_farm').gmap('clear','markers');
+						$('#lat').val(results[0].geometry.location.lat());
+						$('#lng').val(results[0].geometry.location.lng());
+						$('#map_farm').gmap('addMarker',{position:results[0].geometry.location,bounds:false,draggable:true},function(map,marker){getCoord(marker.getPosition());}).dragend(function(event){getCoord(event.latLng);});
+					}
+		        }
+		    });
+		}
+		function locateAddress(){
+			var cty = $('#inputFarmCountry option:selected').text();
+			var sAddr = $('#inputFarmAddr').val()+" "+$('#inputFarmCity').val()+" "+$('#inputFarmZip').val()+" "+cty;
+			if(cty.length>0) centerMap(sAddr,6,1);
+		}
+		function getCoord(location){
+			$('#lat').val(location.lat());
+			$('#lng').val(location.lng());
+		}
+		function setCoord(){
+			var aLat = $('#lat').val();
+			var aLng = $('#lng').val();
+			if((aLat.length>0)&&(aLng.length>0)){
+				$('#map_farm').gmap('clear','markers');
+				$('#map_farm').gmap('addMarker',{position:''+aLat+','+aLng+'',bounds:false,draggable:true},function(map,marker){getCoord(marker.getPosition());}).dragend(function(event){getCoord(event.latLng);});
+			}
+		}
+		
+		
+		
+		$(function(){
+			var zo = 4;
+			var cnt = '13.66733825965496,100.37109375';
+			var aLat = $('#lat').val();
+			var aLng = $('#lng').val();
+			if((aLat.length>0)&&(aLng.length>0)) cnt = ''+aLat+','+aLng+'';
+			$('#map_farm').gmap({
+				'center':cnt, 
+				'zoom':zo,
+				'mapTypeId':'terrain', 
+				'disableDefaultUI':false
+			}).bind('init', function(event, map) { 
+				$(map).click( function(event) {
+					$('#map_farm').gmap('clear','markers');
+					$('#map_farm').gmap('addMarker', {
+						'id': 'marker_1', 
+						'position': event.latLng, 
+						'draggable': true, 
+						'bounds': false
+					}, function(map, marker) {
+						getCoord(marker.getPosition());
+					}).dragend( function(event) {
+						getCoord(event.latLng);
+					})
+				});
+				if((aLat.length>0)&&(aLng.length>0)){
+					$('#map_farm').gmap('clear','markers');
+					$('#map_farm').gmap('addMarker', {
+						'id': 'marker_1', 
+						'position': cnt, 
+						'draggable': true, 
+						'bounds': false
+					}, function(map, marker) {
+						getCoord(marker.getPosition());
+					}).dragend( function(event) {
+						getCoord(event.latLng);
+					});
+				}
+			});
+		});
+		
+		/*]]>*/
 	</script>
 </th:block>
 
