@@ -13,15 +13,15 @@
 						<!-- messages here -->
 					</div>
 					<div class="box-tools">
-						<a th:href="@{/suppliers/create.html}" class="btn btn-sm btn-flat btn-success"><i class="fa fa-plus"></i> <span th:text="#{suppliers.add_supplier}">farm.add_supplier</span></a>
+						<a th:href="@{/suppliers/create.html}" class="btn btn-sm btn-flat btn-success"><i class="fa fa-plus"></i> <span th:text="#{suppliers.add_supplier}">suppliers.add_supplier</span></a>
 					</div>
 				</div>
 				<div class="box-body">
 					<table class="table table-hover table-striped table-bordered datatable" id="datatables-browser">
 						<thead>
 							<tr>
-								<th th:text="#{default.farm}">default.product_type</th>
-                                <th th:text="#{default.name}">supplier.name</th>
+								<th th:text="#{default.farm}">default.farm</th>
+                                <th th:text="#{supplier.name}">supplier.name</th>
 								<th th:text="#{default.product_type}">default.product_type</th>
                                 <th th:text="#{default.city}"></th>
                                 <th width="90"></th>

@@ -6,7 +6,7 @@
 		<div class="col-xs-12">
 			<div class="box" id="company-box">
 				<div class="box-header with-border">
-					<h3 class="box-title" th:text="farm.create_company"></h3>
+					<h3 class="box-title" th:text="#{company.create}"></h3>
 					<div class="box-tools">
 						<a th:href="@{/companies/browser.html}" class="btn btn-sm btn-flat btn-warning"><i class="fa fa-backward"></i> <span th:text="#{default.back}"></span></a>
 					</div>
@@ -31,7 +31,7 @@
 							</div>
 							<div class="col-md-6 col-sm-6 col-xs-12">
 								<div class="form-group">
-									<label th:text="|#{default.type}*|">company.type*</label> 
+									<label th:text="|#{company.type}*|">company.type*</label> 
 									<select name="type" class="form-control" th:field="*{entityType}" required="required">
 										<option value="" th:text="|-- #{company.select_type} --|">-- company.select_type --</option> 
 										<option th:each="t:${allCompanyTypes}" th:value="${t.id}" th:text="${t.name}"></option>

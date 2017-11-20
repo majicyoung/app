@@ -6,7 +6,7 @@
 		<div class="col-xs-12">
 			<div class="box" id="individual-box">
 				<div class="box-header with-border">
-					<h3 class="box-title" th:text="farm.create_individual"></h3>
+					<h3 class="box-title" th:text="#{individual.create}"></h3>
 					<div class="box-tools">
 						<a th:href="@{/individuals/browser.html}" class="btn btn-sm btn-flat btn-warning"><i class="fa fa-backward"></i> <span th:text="#{default.back}"></span></a>
 					</div>
@@ -64,7 +64,7 @@
 								</div>
 								<div class="form-group">
 									<label th:text="#{default.city}">default.city</label> 
-									<input name="city" type="text" class="form-control" placeholder="#{default.city}" th:field="*{address.city}" />
+									<input name="city" type="text" class="form-control" th:placeholder="#{default.city}" th:field="*{address.city}" />
 								</div>
 								<div class="form-group">
 									<label th:text="#{default.zip_code}">default.zip_code</label> 
