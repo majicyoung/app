@@ -13,6 +13,11 @@ import com.fairagora.verifik8.v8web.mvc.AbstractV8Controller;
 @PreAuthorize("isAuthenticated()")
 public class HomeController extends AbstractV8Controller {
 
+	@RequestMapping(value = "/", method = RequestMethod.GET)
+	public String index(Model mv) {
+		return "redirect:/home.html";
+	}
+
 	/**
 	 * Show home dashboard
 	 * 
