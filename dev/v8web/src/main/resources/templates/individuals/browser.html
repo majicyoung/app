@@ -38,11 +38,11 @@
 								<td th:text="${individual.nationality}"></td>
 								<td th:text="${individual.city}"></td>
 								<td align="center">
-									<a href="javascript:void(0);" th:attr="data-id=${individual.id}" class="btn btn-xs btn-flat btn-primary editIndividualBtn"><i class="fa fa-edit"></i></a>
+									<a href="javascript:void(0);" th:attr="data-id=${individual.id}" class="btn btn-xs btn-flat btn-primary editIndividualBtn" th:title="#{tooltip.edit_individual}"><i class="fa fa-edit"></i></a>
 									<form th:action="@{/individuals/delete.html}" method="post" style="display: inline;">
 										<input type="hidden" th:value="${individual.id}" th:name="individualId" />
-										<button type="submit" class="btn btn-xs btn-flat btn-danger">
-											<i class="fa fa-remove"></i>
+										<button type="submit" class="btn btn-xs btn-flat btn-danger" th:title="#{tooltip.delete_individual}">
+											<i class="fa fa-trash"></i>
 										</button>
 									</form>
 								</td>
