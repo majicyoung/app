@@ -8,7 +8,7 @@
 				<div class="box-header with-border">
 					<h3 class="box-title" th:text="farm.create_plot"></h3>
 					<div class="box-tools">
-						<a th:href="@{'/ponds/browser.html}" class="btn btn-sm btn-flat btn-warning"><i class="fa fa-backward"></i> <span th:text="#{default.back}"></span></a>
+						<a th:href="@{'/plots/'+${plotId}+'/activities/browser.html'}" class="btn btn-sm btn-flat btn-warning"><i class="fa fa-backward"></i> <span th:text="#{default.back}"></span></a>
 					</div>
 				</div>
 				<form th:action="@{'/plots/'+${plotId}+'/activities/update.html'}" th:object="${activityDto}" id="plotEditorForm" method="post">
@@ -64,7 +64,7 @@
 					<div class="box-footer text-center">
 						<small>* <span th:text="#{default.mandatory_field}"></span></small> 
 						
-						<a th:href="@{'/plots/'+${plotId}+'/activities/browser.html}" class="btn btn-warning"><i class="fa fa-times"></i><span th:text="#{default.cancel}"></span></a>
+						<a th:href="@{'/plots/'+${plotId}+'/activities/browser.html'}" class="btn btn-warning"><i class="fa fa-times"></i><span th:text="#{default.cancel}"></span></a>
 						<button type="submit" class="btn btn-success">
 							<span th:text="#{default.submit}"></span> <i class="fa fa-check"></i>
 						</button>
