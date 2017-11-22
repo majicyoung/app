@@ -11,6 +11,9 @@ public class Verifik8AppConfig {
 	private String appName = "Verifik8";
 	private final List<V8AppLanguage> languages;
 
+	private boolean pondProfile;
+	private boolean plotProfile;
+
 	public Verifik8AppConfig() {
 		languages = new ArrayList<>();
 		languages.add(new V8AppLanguage().setup("English", "en"));
@@ -37,6 +40,22 @@ public class Verifik8AppConfig {
 		}
 
 		return languages.iterator().next();
+	}
+
+	public boolean isPondProfile() {
+		return pondProfile;
+	}
+
+	public boolean isPlotProfile() {
+		return plotProfile;
+	}
+
+	public void setPlotProfile(boolean plotProfile) {
+		this.plotProfile = plotProfile;
+	}
+
+	public void setPondProfile(boolean pondProfile) {
+		this.pondProfile = pondProfile;
 	}
 
 }
