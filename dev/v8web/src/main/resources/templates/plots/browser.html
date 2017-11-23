@@ -38,14 +38,13 @@
 								<td th:text="${plot.size.unitName}"></td>
 								<td th:text="${plot.commodities}"></td>
 								<td align="center">
-									<a href="javascript:void(0);" th:attr="data-id=${plot.id}" class="btn btn-xs btn-flat btn-info addPlotDataBtn"><i class="fa fa-plus"></i></a> 
-									<a href="javascript:void(0);" th:attr="data-id=${plot.id}" class="btn btn-xs btn-flat btn-info viewActivitiesPlotDataBtn"><i class="fa fa-eye"></i></a> 
-									<a href="javascript:void(0);" th:attr="data-id=${plot.id}" class="btn btn-xs btn-flat btn-info viewDataPlotDataBtn"><i class="fa fa-bar-chart"></i></a> 
-									<a href="javascript:void(0);" th:attr="data-id=${plot.id}" class="btn btn-xs btn-flat btn-primary editPlotBtn"><i class="fa fa-edit"></i></a>
+									<a href="javascript:void(0);" th:attr="data-id=${plot.id}" class="btn btn-xs btn-flat btn-info addActivitiesPlotDataBtn" th:title="#{tooltip.add_plot_activity}"><i class="fa fa-plus"></i></a> 
+									<a href="javascript:void(0);" th:attr="data-id=${plot.id}" class="btn btn-xs btn-flat btn-info viewActivitiesPlotDataBtn" th:title="#{tooltip.view_plot_activity}"><i class="fa fa-eye"></i></a>									<!--  <a href="javascript:void(0);" th:attr="data-id=${plot.id}" class="btn btn-xs btn-flat btn-info viewDataPlotDataBtn" th:title="#{tooltip.view_plot_data}"><i class="fa fa-bar-chart"></i></a>--> 
+									<a href="javascript:void(0);" th:attr="data-id=${plot.id}" class="btn btn-xs btn-flat btn-primary editPlotBtn" th:title="#{tooltip.edit_plot}"><i class="fa fa-edit"></i></a>
 									<form th:action="@{/plots/delete.html}" method="post" style="display: inline;">
 										<input type="hidden" th:value="${plot.id}" th:name="plotId" />
-										<button type="submit" class="btn btn-xs btn-flat btn-danger">
-											<i class="fa fa-remove"></i>
+										<button type="submit" class="btn btn-xs btn-flat btn-danger" th:title="#{tooltip.delete_plot}">
+											<i class="fa fa-trash"></i>
 										</button>
 									</form>
 								</td>
@@ -72,12 +71,11 @@
 				document.location=[[@{/plots/}]]+id+'/activities/browser.html';
 			});
 			
-
-			$('.viewDataPlotDataBtn').click(function(){
+			$('.addActivitiesPlotDataBtn').click(function(){
 				var id = $(this).attr("data-id");
-				document.location=[[@{/plots/}]]+id+'/measures/browser.html';
-			});
-		 
+				document.location=[[@{/plots/}]]+id+'/activities/create.html';
+			});	
+			
 		});
 		
 	</script>

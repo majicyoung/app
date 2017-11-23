@@ -28,9 +28,9 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="inputFarmAddr" class="col-xs-3 control-label" th:text="#{default.address}">default.address*</label>
+                                <label for="inputFarmAddr" class="col-xs-3 control-label" th:text="#{default.address}">default.address</label>
                                 <div class="col-xs-9">
-                                    <textarea class="form-control" id="inputFarmAddr" th:field="*{address.main}" th:placeholder="#{default.address}" style="height:83px;" required="required" ></textarea>
+                                    <textarea class="form-control" id="inputFarmAddr" th:field="*{address.main}" th:placeholder="#{default.address}" style="height:83px;"></textarea>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -40,9 +40,9 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="inputFarmZip" class="col-xs-3 control-label" th:text="#{default.zip_code}">default.zip_code*</label>
+                                <label for="inputFarmZip" class="col-xs-3 control-label" th:text="#{default.zip_code}">default.zip_code</label>
                                 <div class="col-xs-9">
-                                    <input type="text" class="form-control" id="inputFarmZip" th:field="*{address.zip}" th:placeholder="#{default.zip_code}" required="required" />
+                                    <input type="text" class="form-control" id="inputFarmZip" th:field="*{address.zip}" th:placeholder="#{default.zip_code}"  />
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -71,15 +71,15 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="inputFarmPhone" class="col-xs-3 control-label" th:text="#{default.phone}">default.phone*</label>
+                                <label for="inputFarmPhone" class="col-xs-3 control-label" th:text="#{default.phone}">default.phone</label>
                                 <div class="col-xs-9">
-                                    <input type="text" class="form-control" id="inputFarmPhone" th:field="*{phoneNumber}" th:placeholder="#{default.phone}" required="required" />
+                                    <input type="text" class="form-control" id="inputFarmPhone" th:field="*{phoneNumber}" th:placeholder="#{default.phone}"  />
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="inputFarmMobile" class="col-xs-3 control-label" th:text="#{default.mobile}">default.mobile</label>
+                                <label for="inputFarmMobile" class="col-xs-3 control-label" th:text="#{default.mobile}+'*'">default.mobile*</label>
                                 <div class="col-xs-9">
-                                    <input type="text" class="form-control" id="inputFarmMobile" th:field="*{mobileNumber}" th:placeholder="#{default.mobile}" />
+                                    <input type="text" class="form-control" id="inputFarmMobile" th:field="*{mobileNumber}" th:placeholder="#{default.mobile}" required="required"/>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -140,13 +140,13 @@
                         <div class="col-xs-12"><h4 th:text="#{farm.env_info}">farm.env_info</h4></div>
                         <div class="col-xs-6">
                             <div class="form-group row">
-                                <label for="inputFarmArea" class="col-xs-3 control-label" th:text="#{default.area}">default.area</label>
+                                <label for="inputFarmArea" class="col-xs-3 control-label" th:text="#{default.area}+'*'" >default.area*</label>
                                 <div class="col-xs-9 no-padding">
                                     <div class="col-xs-6">
-                                        <input type="text" class="form-control" id="inputFarmArea" th:field="*{size.quantity}" th:placeholder="#{default.area}" />
+                                        <input type="text" class="form-control" id="inputFarmArea" th:field="*{size.quantity}" th:placeholder="#{default.area}" required="required"/>
                                     </div>
                                     <div class="col-xs-6">
-                                        <select class="form-control" th:field="*{size.unit}">
+                                        <select class="form-control" th:field="*{size.unit}" required="required">
                                             <option value=""> -- <span text="#{default.select_unit}"  th:remove="tag"></span> -- </option>
                                             <option th:each="unit : ${allQuantityUnits}" th:value="${unit.id}" th:text="${unit.name}"></option>
                                         </select>
