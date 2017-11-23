@@ -6,6 +6,9 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
@@ -17,6 +20,7 @@ import javax.persistence.TemporalType;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLCompanyPositionType;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLContractType;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLCountry;
+import com.fairagora.verifik8.v8web.data.domain.cl.CLCurrency;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLPaymentFrequency;
 import com.fairagora.verifik8.v8web.data.domain.reg.RegEntity;
 import com.fairagora.verifik8.v8web.data.domain.reg.V8Base;
@@ -27,16 +31,16 @@ public class RegEntityStaffContract extends V8Base implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	@EmbeddedId
-	protected StaffCompKey key;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "ID")
+	protected Long id;
 
-	@OneToOne(optional = false)
-	@MapsId("farmId")
+	@ManyToOne(optional = false)
 	@JoinColumn(name = "REG_ENTITY_FARM_ID")
 	protected RegEntity farm;
 
-	@OneToOne(optional = false)
-	@MapsId("entityId")
+	@ManyToOne(optional = false)
 	@JoinColumn(name = "REG_ENTITY_ID")
 	protected RegEntity entity;
 
@@ -79,6 +83,10 @@ public class RegEntityStaffContract extends V8Base implements Serializable {
 	@Column(name = "CONTRACT_REMUNERATION")
 	protected Float remuneration;
 
+	@ManyToOne(optional=true)
+	@JoinColumn(name = "CONTRACT_REMUNERATION_CURRENCY_ID")
+	protected CLCurrency remunerationCurrency;
+	
 	@ManyToOne(optional = true)
 	@JoinColumn(name = "CL_PAYMENT_FREQUENCY_ID")
 	protected CLPaymentFrequency paymentFrequency;
@@ -102,13 +110,6 @@ public class RegEntityStaffContract extends V8Base implements Serializable {
 	@JoinColumn(name = "CL_COUNTRY_ID")
 	protected CLCountry country;
 
-	public StaffCompKey getKey() {
-		return key;
-	}
-
-	public void setKey(StaffCompKey key) {
-		this.key = key;
-	}
 
 	public RegEntity getFarm() {
 		return farm;
@@ -268,6 +269,22 @@ public class RegEntityStaffContract extends V8Base implements Serializable {
 
 	public void setCountry(CLCountry country) {
 		this.country = country;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public CLCurrency getRemunerationCurrency() {
+		return remunerationCurrency;
+	}
+
+	public void setRemunerationCurrency(CLCurrency remunerationCurrency) {
+		this.remunerationCurrency = remunerationCurrency;
 	}
 
 }

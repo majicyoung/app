@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html layout:decorator="inc/main-layout" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<div layout:fragment="content">
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="box" id="farm-box">
+				<div class="box-header with-border">
+					<h3 class="box-title" th:text="#{farm.create}">farm.create</h3>
+				</div>
+				<div class="box-body" style="padding: 0;">
+					<div class="nav-tabs-custom">
+						<ul th:include="farms/farms-includes :: farms-tabs" class="nav nav-tabs"></ul>
+						<div class="tab-content">
+                        	<script type="text/javascript" th:inline="javascript">
+				            	var wags = [];    	        	
+				            </script>
+							<div class="tab-pane active" id="tab_1">
+								<div class="row">
+									<div class="col-xs-12">
+										<div class="col-xs-9">
+											<h4>
+												<b><span th:text="#{staff.worker_agreements}"></span></b> &gt; <span th:text="${staff.entity.name}"></span>
+											</h4>
+										</div>
+										<div class="col-xs-3" style="text-align: right;">
+											<div class="box-tools">
+												<a th:href="@{'/farm/'+${farmId}+'/staff.html'}" class="btn btn-sm btn-flat btn-warning"><i class="fa fa-backward"></i> <span th:text="#{default.back}"></span></a>
+											</div>
+										</div>
+
+										<div class="col-xs-12">
+											<table class="table table-bordered table-striped table-hover table-farm-staff" style="margin: 10px 0;">
+												<tr>
+													<th th:text="#{staff-working-agreement.contractNo}"></th>
+													<th th:text="#{staff-working-agreement.type}"></th>
+													<th th:text="#{staff-working-agreement.start}"></th>
+													<th th:text="#{staff-working-agreement.end}"></th>
+													<th width="90"></th>
+												</tr>
+												<tr th:each="wag:${workingAgreements}" th:id="${'staff-'+staff.entity.id}" data-staff="{{$decla->staff}}">
+													<td th:text="${wag.contractNo}"></td>
+													<td th:text="${wag.contactType.name}"></td>
+													<td th:text="${wag.startingDate}"></td>
+													<td th:text="${wag.agreedEndDate}"></td>
+													<td align="center">
+														<a th:attr="data-id=${wag.id}" class="btn btn-xs btn-flat btn-primary editWagBtn"><i class="fa fa-edit"></i></a> 
+														
+														 <form th:action="@{'/farm/'+${farmId}+'/entity/'+${entityId}+'/staff-working-agreemenent/delete.html'}" method="post" style="display: inline;">
+				                                        	<input type="hidden" th:value="${wag.id}" th:name="contractId" />
+				                                        	<button type="submit" class="btn btn-xs btn-flat btn-danger">
+																<i class="fa fa-remove"></i> 
+															</button>
+				                                        </form>
+														
+														<script type="text/javascript" th:inline="javascript">
+				                                       		var i=[[${wag.id}]];
+				                                       		wags[i]=([[${wag}]]);
+				                                       </script>
+													</td>
+												</tr>
+											</table>
+										</div>
+									</div>
+								</div>
+								<hr/>
+								<div class="row">
+								<div class="col-xs-12">
+									<form th:action="@{'/farm/'+${farmId}+'/entity/'+${entityId}+'/staff-working-agreement.html'}" th:object="${wagDto}" method="post" enctype="multipart/form-data" onsubmit="return !hasEmptyFields('.form-control[required]');">
+									<div class="col-xs-12">
+										<h4 class="form-staff-title" th:text="#{staff-working-agreement.title}">staff-working-agreement.title</h4>
+										<input type="hidden" th:field="*{id}"  />
+				                            
+				                        <div class="form-group row">
+			                                <label for="contractNo" class="col-xs-3 control-label" th:text="|#{staff-working-agreement.contractNo}*|"></label>
+			                                <div class="col-xs-9">
+			                                   <input type="text" class="form-control form-staff form-staff-required" th:field="*{contractNo}" required="required"></input>
+			                                </div>
+			                            </div>
+				                            
+			                            <div class="form-group row">
+			                                <label for="contactType" class="col-xs-3 control-label" th:text="|#{staff-working-agreement.contactType}*|"></label>
+			                                <div class="col-xs-9">
+			                                    <select class="form-control form-staff form-staff-required" th:field="*{contactType}" id="wag_contactType">
+			                                 	   <option value="" th:text="|-- #{staff-working-agreement.select_contactType} --|"></option>
+			                                       <option th:each="pos : ${allContractTypes}" th:value="${pos.id}" th:text="${pos.name}"> </option>
+			                                    </select>
+			                                </div>
+			                            </div>
+			                            
+			                            <div class="form-group row">
+			                                <label for="companyPositionType" class="col-xs-3 control-label" th:text="|#{staff-working-agreement.companyPositionType}*|"></label>
+			                                <div class="col-xs-9">
+			                                    <select class="form-control form-staff form-staff-required" th:field="*{companyPositionType}" id="wag_companyPositionType">
+			                                 	   <option value="" th:text="|-- #{staff-working-agreement.select_companyPositionType} --|"></option>
+			                                       <option th:each="pos : ${allCompanyPositionTypes}" th:value="${pos.id}" th:text="${pos.name}"> </option>
+			                                    </select>
+			                                </div>
+			                            </div>
+			                            
+			                            <div class="form-group">
+											<label th:text="#{staff-working-agreement.startingDate}">staff-working-agreement.start</label>
+											<div class="input-group">
+												<input type="text" class="form-control datepicker datefield" placeholder="YYYY-MM-DD" th:field="*{startingDate}"/> <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+											</div>
+										</div>
+			                            
+			                            <div class="form-group">
+											<label th:text="#{staff-working-agreement.agreedEndDate}">staff-working-agreement.agreedEndDate</label>
+											<div class="input-group">
+												<input type="text" class="form-control datepicker datefield" placeholder="YYYY-MM-DD" th:field="*{agreedEndDate}"/> <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+											</div>
+										</div>
+			                            
+			                            <div class="form-group row">
+			                                <label for="companyPositionType" class="col-xs-3 control-label" th:text="|#{staff-working-agreement.remuneration}|"></label>
+			                                <div class="col-xs-2">
+			                                	<input type="text" class="form-control" th:field="*{remuneration}"/>
+			                                </div>
+			                                <div class="col-xs-2">
+			                                    <select class="form-control form-staff form-staff-required" th:field="*{remunerationCurrency}" >
+			                                 	   <option value="" th:text="|-- #{staff-working-agreement.select_remunerationCurrency} --|"></option>
+			                                       <option th:each="pos : ${allCurrencies}" th:value="${pos.id}" th:text="${pos.name}"> </option>
+			                                    </select>
+			                                </div>
+			                            </div>
+			                            
+			                            
+			                             <div class="form-group row">
+			                                <label for="companyPositionType" class="col-xs-3 control-label" th:text="|#{staff-working-agreement.paymentFrequency}*|"></label>
+			                                <div class="col-xs-9">
+			                                    <select class="form-control form-staff form-staff-required" th:field="*{paymentFrequency}" >
+			                                 	   <option value="" th:text="|-- #{staff-working-agreement.select_paymentFrequency} --|"></option>
+			                                       <option th:each="pos : ${allPaymentFrequencies}" th:value="${pos.id}" th:text="${pos.name}"> </option>
+			                                    </select>
+			                                </div>
+			                            </div>
+			                            
+			                            
+			                            <div class="form-group row">
+			                                <div class="col-xs-12 text-right" style="margin-top:40px;">
+			                                	<button type="submit" class="btn btn-success"><span th:text="#{default.submit}"></span> <i class="fa fa-check"></i></button>
+			                                </div>
+			                            </div>
+									</div>
+									</form>
+								</div>
+							</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+</div>
+
+
+<th:block layout:fragment="page-scripts">
+	<script type="text/javascript">
+	
+		$(document).ready(function() {
+			$('.datefield').datetimepicker({
+				format: 'Y-m-d'
+			});
+			
+			$('.editWagBtn').click(function(){
+				var id = $(this).attr("data-id");
+				console.log(id);
+				var p = wags[id];
+				console.log(p);
+				if(p!=null){
+					$('#id').val(p.id);
+					$('#contractNo').val(p.contractNo);
+					$('#remuneration').val(p.remuneration);
+					$('#startingDate').val(p.startingDate);
+					$('#agreedEndDate').val(p.agreedEndDate);
+					if(p.contactType!=null)
+						$('#wag_contactType').val(p.contactType.id);
+					if(p.companyPositionType!=null)
+						$('#wag_companyPositionType').val(p.companyPositionType.id);
+					if(p.remunerationCurrency!=null)
+						$('#remunerationCurrency').val(p.remunerationCurrency.id);
+					if(p.paymentFrequency!=null)
+						$('#paymentFrequency').val(p.paymentFrequency.id);
+				}
+			});
+			
+		});
+	
+		function hasEmptyFields(selector) {
+			var hasError = false;
+			$(selector).each(function(index, element) {
+				if ($(element).val() == '') {
+					hasError = true;
+					$(element).closest('.form-group').addClass('has-error');
+				} else
+					$(element).closest('.form-group').removeClass('has-error');
+			});
+			return hasError;
+		} 
+	
+	</script>
+</th:block>
+
+</html>

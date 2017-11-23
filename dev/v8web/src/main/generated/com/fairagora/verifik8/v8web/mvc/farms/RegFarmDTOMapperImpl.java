@@ -8,6 +8,8 @@ import com.fairagora.verifik8.v8web.data.domain.cl.CLContractType;
 
 import com.fairagora.verifik8.v8web.data.domain.cl.CLCountry;
 
+import com.fairagora.verifik8.v8web.data.domain.cl.CLCurrency;
+
 import com.fairagora.verifik8.v8web.data.domain.cl.CLEntityType;
 
 import com.fairagora.verifik8.v8web.data.domain.cl.CLHazardousWorkType;
@@ -128,7 +130,7 @@ import org.springframework.stereotype.Component;
 
     value = "org.mapstruct.ap.MappingProcessor",
 
-    date = "2017-11-23T11:37:03+0100",
+    date = "2017-11-23T20:51:02+0100",
 
     comments = "version: 1.1.0.Final, compiler: javac, environment: Java 1.8.0_112 (Oracle Corporation)"
 
@@ -1768,6 +1770,10 @@ public class RegFarmDTOMapperImpl implements RegFarmDTOMapper {
 
         staffContractDto.setCountry( entityDtoMapper.toReference( e.getCountry() ) );
 
+        staffContractDto.setId( e.getId() );
+
+        staffContractDto.setRemunerationCurrency( entityDtoMapper.toReference( e.getRemunerationCurrency() ) );
+
         return staffContractDto;
     }
 
@@ -1779,10 +1785,6 @@ public class RegFarmDTOMapperImpl implements RegFarmDTOMapper {
 
             return;
         }
-
-        e.setFarm( entityDtoMapper.resolve( dto.getFarm(), RegEntity.class ) );
-
-        e.setEntity( entityDtoMapper.resolve( dto.getEntity(), RegEntity.class ) );
 
         e.setContractNo( dto.getContractNo() );
 
@@ -1819,6 +1821,10 @@ public class RegFarmDTOMapperImpl implements RegFarmDTOMapper {
         e.setContractInAnotherLanguage( dto.isContractInAnotherLanguage() );
 
         e.setCountry( entityDtoMapper.resolve( dto.getCountry(), CLCountry.class ) );
+
+        e.setId( dto.getId() );
+
+        e.setRemunerationCurrency( entityDtoMapper.resolve( dto.getRemunerationCurrency(), CLCurrency.class ) );
     }
 
     private String farmAerialViewResourcePath(RegEntityFarmDetails regEntityFarmDetails) {

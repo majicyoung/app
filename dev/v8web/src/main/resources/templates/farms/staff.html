@@ -33,7 +33,8 @@
                                     <td th:text="${staff.entity.name}"></td>
                                     <td th:text="${staff.entity.surname}"></td>
                                     <td align="center">
-                                        <a href="javascript:void(0);" th:attr="data-id=${staff.entity.id}" class="btn btn-xs btn-flat btn-primary editStaffBtn"><i class="fa fa-edit"></i></a>
+                                        <a th:attr="data-id=${staff.entity.id}" class="btn btn-xs btn-flat btn-primary editStaffBtn"><i class="fa fa-edit"></i></a>
+                                        <a th:href="@{'/farm/'+${farmId}+'/entity/'+${staff.entity.id}+'/staff-working-agreements.html'}" class="btn btn-xs btn-flat btn-primary" ><i class="fa fa-paperclip"></i></a>
                                         <form th:action="@{'/farm/'+${farmId}+'/staff/delete.html'}" method="post" style="display: inline;">
                                         	<input type="hidden" th:value="${staff.entity.id}" th:name="entityId" />
                                         	<button type="submit" class="btn btn-xs btn-flat btn-danger">
@@ -53,7 +54,7 @@
                         <form th:action="@{'/farm/'+${farmId}+'/staff.html'}" th:object="${staffDto}" id="staffEditorForm" method="post" enctype="multipart/form-data">
 	                        <div class="col-xs-6">
 	                            <h4 class="form-staff-title" th:text="#{farm.staff_information}">farm.staff_information</h4>
-	                            <input type="hidden" id="form-staff-id" value="0" />
+	                            <input type="hidden" id="form-staff-id"  />
 	                            <div class="form-group row">
 	                                <label for="inputFarmStaffName" class="col-xs-3 control-label" th:text="|#{staff.first_name}*|">staff.first_name*</label>
 	                                <div class="col-xs-9 no-padding">
@@ -182,7 +183,6 @@
 		$(".editStaffBtn").click(function(){
 			var id = $(this).attr("data-id");
 			var p = staffs[id];
-			console.log(p);
 			if(p!=null){
 				$('#staff_phone').val(p.officePhoneNumber);
 				$('#staff_email').val(p.officeEmail);
@@ -198,6 +198,11 @@
 				$('#staff_focal_point').attr('checked',p.companyFocalPoint);
 				$('#staff_no_employed_anymore').attr('checked',p.noEmployedAnymore);
 			}
+		});
+		
+		$(".editWorkingAgreements").click(function(){
+			var entityId = $(this).attr("data-entityid");
+			var farmId = $(this).attr("data-farmid");
 		});
 		
 		$("#saveStaffbtn").click(function(){

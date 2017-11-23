@@ -190,5 +190,7 @@ public interface RegFarmDTOMapper {
 
 	StaffContractDto toDto(RegEntityStaffContract e);
 
+	@Mapping(target = "farm", ignore = true)
+	@Mapping(target = "entity", ignore = true)
 	void fillEntity(StaffContractDto dto, @MappingTarget RegEntityStaffContract e);
 }

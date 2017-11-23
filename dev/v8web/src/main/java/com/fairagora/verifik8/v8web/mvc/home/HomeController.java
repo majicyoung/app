@@ -18,6 +18,11 @@ public class HomeController extends AbstractV8Controller {
 		return "redirect:/home.html";
 	}
 
+	@RequestMapping(value = "/index.html", method = RequestMethod.GET)
+	public String indexHTML(Model mv) {
+		return "redirect:/home.html";
+	}
+
 	/**
 	 * Show home dashboard
 	 * 

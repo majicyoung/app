@@ -8,13 +8,16 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.fairagora.verifik8.v8web.data.domain.cl.CLCommodities;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLCompanyPositionType;
+import com.fairagora.verifik8.v8web.data.domain.cl.CLContractType;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLCountry;
+import com.fairagora.verifik8.v8web.data.domain.cl.CLCurrency;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLEntityType;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLHazardousWorkType;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLHvHeExpensionType;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLLanguage;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLLegalStatus;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLMeasureType;
+import com.fairagora.verifik8.v8web.data.domain.cl.CLPaymentFrequency;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLPlotActivityType;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLPondType;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLProduct;
@@ -25,13 +28,16 @@ import com.fairagora.verifik8.v8web.data.domain.cl.CLSpecies;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLTilingActivityType;
 import com.fairagora.verifik8.v8web.data.repo.cl.CLCommoditiesRepository;
 import com.fairagora.verifik8.v8web.data.repo.cl.CLCompanyPositionTypeRepository;
+import com.fairagora.verifik8.v8web.data.repo.cl.CLContractTypeRepository;
 import com.fairagora.verifik8.v8web.data.repo.cl.CLCountryRepository;
+import com.fairagora.verifik8.v8web.data.repo.cl.CLCurrencyRepository;
 import com.fairagora.verifik8.v8web.data.repo.cl.CLEntityTypeRepository;
 import com.fairagora.verifik8.v8web.data.repo.cl.CLHazardousWorkTypeRepository;
 import com.fairagora.verifik8.v8web.data.repo.cl.CLHvHeExpensionTypeRepository;
 import com.fairagora.verifik8.v8web.data.repo.cl.CLLanguageRepository;
 import com.fairagora.verifik8.v8web.data.repo.cl.CLLegalStatusRepository;
 import com.fairagora.verifik8.v8web.data.repo.cl.CLMeasureTypeRepository;
+import com.fairagora.verifik8.v8web.data.repo.cl.CLPaymentFrequenciesRepository;
 import com.fairagora.verifik8.v8web.data.repo.cl.CLPlotActivityTypeRepository;
 import com.fairagora.verifik8.v8web.data.repo.cl.CLPoundTypeRepository;
 import com.fairagora.verifik8.v8web.data.repo.cl.CLProductRepository;
@@ -81,6 +87,9 @@ public class CodeListsService {
 	private CLProductRepository productRepository;
 
 	@Autowired
+	private CLCurrencyRepository currencyRepository;
+
+	@Autowired
 	private CLTilingActivityTypeRepository tilingActivityTypeRepository;
 
 	@Autowired
@@ -90,7 +99,13 @@ public class CodeListsService {
 
 	@Autowired
 	private CLLanguageRepository languageRepository;
-	
+
+	@Autowired
+	private CLContractTypeRepository contractTypesRepository;
+
+	@Autowired
+	private CLPaymentFrequenciesRepository paymentFrequenciesRepository;
+
 	/**
 	 * 
 	 * @return
@@ -220,6 +235,18 @@ public class CodeListsService {
 
 	public List<CLLanguage> listActiveLanguages() {
 		return languageRepository.findByEnabledTrueOrderByName();
+	}
+
+	public List<CLContractType> listActiveContractTypes() {
+		return contractTypesRepository.findByEnabledTrueOrderByName();
+	}
+
+	public List<CLPaymentFrequency> listActivePaymentFrequencies() {
+		return paymentFrequenciesRepository.findByEnabledTrueOrderByName();
+	}
+
+	public List<CLCurrency> listActiveCurrencies() {
+		return currencyRepository.findByEnabledTrueOrderByName();
 	}
 
 }

@@ -3,10 +3,12 @@ package com.fairagora.verifik8.v8web.mvc.farms.dto;
 import java.io.Serializable;
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 public class StaffContractDto implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-
+	protected Long id;
 	protected Long farm;
 
 	protected Long entity;
@@ -19,12 +21,16 @@ public class StaffContractDto implements Serializable {
 
 	protected String departement;
 
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	protected Date startingDate;
 
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	protected Date agreedEndDate;
 
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	protected Date issuanceDate;
 
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	protected Date actualTerminationDate;
 
 	protected boolean continuingContract;
@@ -32,6 +38,8 @@ public class StaffContractDto implements Serializable {
 	protected Float duration;
 
 	protected Float remuneration;
+
+	protected Long remunerationCurrency;
 
 	protected Long paymentFrequency;
 
@@ -205,5 +213,21 @@ public class StaffContractDto implements Serializable {
 
 	public void setCountry(Long country) {
 		this.country = country;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Long getRemunerationCurrency() {
+		return remunerationCurrency;
+	}
+
+	public void setRemunerationCurrency(Long remunerationCurrency) {
+		this.remunerationCurrency = remunerationCurrency;
 	}
 }
