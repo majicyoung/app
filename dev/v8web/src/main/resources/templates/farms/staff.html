@@ -34,7 +34,12 @@
                                     <td th:text="${staff.entity.surname}"></td>
                                     <td align="center">
                                         <a href="javascript:void(0);" th:attr="data-id=${staff.entity.id}" class="btn btn-xs btn-flat btn-primary editStaffBtn"><i class="fa fa-edit"></i></a>
-                                        <a href="javascript:void(0);" onclick="deleteFarmStaff({{$decla->ID}});" class="btn btn-xs btn-flat btn-danger"><i class="fa fa-remove"></i></a>
+                                        <form th:action="@{'/farm/'+${farmId}+'/staff/delete.html'}" method="post" style="display: inline;">
+                                        	<input type="hidden" th:value="${staff.entity.id}" th:name="entityId" />
+                                        	<button type="submit" class="btn btn-xs btn-flat btn-danger">
+												<i class="fa fa-remove"></i> 
+											</button>
+                                        </form>
                                          <script type="text/javascript" th:inline="javascript">
                                         	var i=[[${staff.entity.id}]];
                                         	staffs[i]=([[${staff}]]);
@@ -84,7 +89,7 @@
 	                                </div>
 	                            </div>
 	                            <div class="form-group row">
-	                                <label for="inputFarmStaffPos" class="col-xs-3 control-label" th:text="|#{staff.legalStatus}*|"></label>
+	                                <label for="inputFarmStaffPos" class="col-xs-3 control-label" th:text="|#{staff.legal_status}*|"></label>
 	                                <div class="col-xs-9">
 	                                    <select class="form-control form-staff form-staff-required" th:field="*{legalStatus}" id="staff_legalStatus">
 	                                 	   <option value="" th:text="|-- #{staff.select_legalstatus} --|"></option>
@@ -143,7 +148,7 @@
 	                                </div>
 	                            </div>
 	                            <div class="form-group row">
-	                               <label for="workingPermit" class="col-xs-4 control-label" th:text="#{staff.working_permit}">farm.envi_impact_assessment</label>
+	                               <label for="workingPermit" class="col-xs-4 control-label" th:text="#{staff.foreign_permit}">farm.envi_impact_assessment</label>
 	                               <div class="col-xs-5">
 	                                   <input type="file" class="form-control" th:field="*{workingPermit}" th:placeholder="#{farm.upload_study}" accept=".xlsx, .xls, .doc, .docx, .pdf, image/*" />
 	                               </div>
