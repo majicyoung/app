@@ -20,6 +20,8 @@ import com.fairagora.verifik8.v8web.data.domain.reg.farm.RegEntityFarmPlot;
 import com.fairagora.verifik8.v8web.data.domain.reg.farm.RegEntityFarmPond;
 import com.fairagora.verifik8.v8web.data.domain.reg.farm.RegEntityFarmSupplierAssignment;
 import com.fairagora.verifik8.v8web.data.domain.reg.farm.RegEntityStaffManagement;
+import com.fairagora.verifik8.v8web.data.domain.reg.staff.RegEntityStaff;
+import com.fairagora.verifik8.v8web.data.domain.reg.staff.RegEntityStaffContract;
 import com.fairagora.verifik8.v8web.mvc.companies.dto.CompanyDto;
 import com.fairagora.verifik8.v8web.mvc.companies.dto.CompanyListingDto;
 import com.fairagora.verifik8.v8web.mvc.farms.dto.DTFarmAgProductionDto;
@@ -29,6 +31,8 @@ import com.fairagora.verifik8.v8web.mvc.farms.dto.FarmEnvironmentalDto;
 import com.fairagora.verifik8.v8web.mvc.farms.dto.FarmFormDto;
 import com.fairagora.verifik8.v8web.mvc.farms.dto.FarmPlotDto;
 import com.fairagora.verifik8.v8web.mvc.farms.dto.FarmPondDto;
+import com.fairagora.verifik8.v8web.mvc.farms.dto.StaffContractDto;
+import com.fairagora.verifik8.v8web.mvc.farms.dto.StaffFarmFormDto;
 import com.fairagora.verifik8.v8web.mvc.farms.dto.StaffGeneralInfoSto;
 import com.fairagora.verifik8.v8web.mvc.infra.dtomapping.EntityDtoMapper;
 import com.fairagora.verifik8.v8web.mvc.infra.dtomapping.commons.AddressDto;
@@ -177,4 +181,14 @@ public interface RegFarmDTOMapper {
 
 	void fillEntity(DTSoilAnalysisDto dto, @MappingTarget DTSoilAnalysis analysis);
 
+	// -- STAFF
+	@Mapping(target = "workingPermit", ignore = true)
+	@Mapping(target = "workingPermitUrl", source = "workingPermit.resourcePath")
+	StaffFarmFormDto toDto(RegEntityStaff e);
+
+	void fillEntity(StaffFarmFormDto dto, @MappingTarget RegEntityStaff e);
+
+	StaffContractDto toDto(RegEntityStaffContract e);
+
+	void fillEntity(StaffContractDto dto, @MappingTarget RegEntityStaffContract e);
 }

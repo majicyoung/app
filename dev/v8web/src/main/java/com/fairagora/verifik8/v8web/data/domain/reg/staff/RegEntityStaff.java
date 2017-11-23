@@ -10,16 +10,19 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
 
+import com.fairagora.verifik8.v8web.data.domain.cl.CLCompanyPositionType;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLLanguage;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLLegalStatus;
 import com.fairagora.verifik8.v8web.data.domain.commons.Attachment;
 import com.fairagora.verifik8.v8web.data.domain.reg.RegEntity;
+import com.fairagora.verifik8.v8web.data.domain.reg.V8Base;
 
 @Entity
 @Table(name = "reg_entity_staff")
-public class RegEntityStaff {
+public class RegEntityStaff extends V8Base {
 
 	@EmbeddedId
 	protected StaffCompKey key;
@@ -42,11 +45,18 @@ public class RegEntityStaff {
 	@JoinColumn(name = "CL_LEGAL_STATUS_ID")
 	protected CLLegalStatus legalStatus;
 
+	@ManyToOne()
+	@JoinColumn(name = "CL_POSITION_TYPE_ID")
+	protected CLCompanyPositionType position;
+	
 	@Column(name = "NOT_EMPLOYED_ANYMORE")
 	protected boolean noEmployedAnymore;
 
 	@Column(name = "FROM_LOCAL_COMMUNITY")
 	protected boolean fromLocalComunity;
+
+	@Column(name = "COMPANY_FOCAL_POINT")
+	protected boolean companyFocalPoint;
 
 	@Column(name = "TELEPHONE_OFFICE")
 	protected String officePhoneNumber;
@@ -57,8 +67,15 @@ public class RegEntityStaff {
 	@Column(name = "EMAIL_OFFICE")
 	protected String officeEmail;
 
+	@PrePersist
+	void prePersistId(){
+		if(key==null)key=new StaffCompKey();
+		key.entityId=getEntity().getId();
+		key.farmId=getFarm().getId();
+	}
+	
 	@Embedded
-	@AttributeOverrides({ @AttributeOverride(name = "resourcePath", column = @Column(name = "WORKING_PERMIT")) })
+	@AttributeOverrides({ @AttributeOverride(name = "resourcePath", column = @Column(name = "WORKING_PERMIT_URL")) })
 	protected Attachment workingPermit;
 
 	public RegEntity getFarm() {
@@ -123,6 +140,46 @@ public class RegEntityStaff {
 
 	public void setFromLocalComunity(boolean fromLocalComunity) {
 		this.fromLocalComunity = fromLocalComunity;
+	}
+
+	public boolean isCompanyFocalPoint() {
+		return companyFocalPoint;
+	}
+
+	public void setCompanyFocalPoint(boolean companyFocalPoint) {
+		this.companyFocalPoint = companyFocalPoint;
+	}
+
+	public String getOfficePhoneNumber() {
+		return officePhoneNumber;
+	}
+
+	public void setOfficePhoneNumber(String officePhoneNumber) {
+		this.officePhoneNumber = officePhoneNumber;
+	}
+
+	public String getOfficeMobile() {
+		return officeMobile;
+	}
+
+	public void setOfficeMobile(String officeMobile) {
+		this.officeMobile = officeMobile;
+	}
+
+	public String getOfficeEmail() {
+		return officeEmail;
+	}
+
+	public void setOfficeEmail(String officeEmail) {
+		this.officeEmail = officeEmail;
+	}
+
+	public CLCompanyPositionType getPosition() {
+		return position;
+	}
+
+	public void setPosition(CLCompanyPositionType position) {
+		this.position = position;
 	}
 
 }

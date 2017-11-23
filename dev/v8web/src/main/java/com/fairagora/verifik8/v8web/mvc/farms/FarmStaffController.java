@@ -15,6 +15,7 @@ import com.fairagora.verifik8.v8web.data.domain.reg.RegEntity;
 import com.fairagora.verifik8.v8web.data.domain.reg.staff.RegEntityStaff;
 import com.fairagora.verifik8.v8web.data.repo.reg.RegEntityStaffRepository;
 import com.fairagora.verifik8.v8web.mvc.AbstractV8Controller;
+import com.fairagora.verifik8.v8web.mvc.farms.dto.StaffFarmFormDto;
 import com.fairagora.verifik8.v8web.services.FarmService;
 
 @Controller
@@ -25,6 +26,8 @@ public class FarmStaffController extends AbstractV8Controller {
 
 	@Autowired
 	private RegEntityStaffRepository regEntityStaffRepository;
+	@Autowired
+	private RegFarmDTOMapper regFarmDtoMapper;
 
 	@RequestMapping(value = "/farm/{id}/staff.html", method = RequestMethod.GET)
 	public String showEditStaff(@PathVariable("id") Long id, Model mv) {
@@ -32,8 +35,28 @@ public class FarmStaffController extends AbstractV8Controller {
 		RegEntity farm = regEntityRepository.findOne(id);
 
 		preparePage(farm, mv);
-
+		
+		StaffFarmFormDto dto = new StaffFarmFormDto();
+		mv.addAttribute("staffDto", dto);
+		
 		return "farms/staff";
+	}
+
+	@RequestMapping(value = "/farm/{id}/staff.html", method = RequestMethod.POST)
+	public String saveEntityStaff(@PathVariable("id") Long id, StaffFarmFormDto dto, Model mv) {
+
+		RegEntityStaff staff = regEntityStaffRepository.findByFarmId(id).stream()
+				.filter(s -> s.getEntity().getId().equals(dto.getEntity())).findFirst().orElseGet(() -> {
+					RegEntityStaff st = new RegEntityStaff();
+					st.setFarm(regEntityRepository.findOne(id));
+					st.setEntity(regEntityRepository.findOne(dto.getEntity()));
+					return st;
+				});
+
+		regFarmDtoMapper.fillEntity(dto, staff);
+		regEntityStaffRepository.save(staff);
+
+		return "redirect:/farm/" + id + "/staff.html";
 	}
 
 	/**
@@ -53,11 +76,13 @@ public class FarmStaffController extends AbstractV8Controller {
 		// operation, and page reload
 		mv.addAttribute("farmId", farm.getId());
 		mv.addAttribute("activeTab", "staff");
-		
+
 		List<RegEntityStaff> staffListing = regEntityStaffRepository.findByFarmId(farm.getId());
 		mv.addAttribute("staffListing", staffListing);
 		mv.addAttribute("allIndividuals", regEntityRepository.findByEntityTypeCode(CLEntityType.CODE_IND));
 		mv.addAttribute("allPositions", codeListservice.listActivePositionTypes());
+		mv.addAttribute("allLegalStatuses", codeListservice.listActiveLegalStatuses());
+		mv.addAttribute("allLanguages", codeListservice.listActiveLanguages());
 
 	}
 

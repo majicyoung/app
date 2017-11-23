@@ -2,6 +2,10 @@ package com.fairagora.verifik8.v8web.mvc.farms;
 
 import com.fairagora.verifik8.v8web.data.domain.cl.CLCommodities;
 
+import com.fairagora.verifik8.v8web.data.domain.cl.CLCompanyPositionType;
+
+import com.fairagora.verifik8.v8web.data.domain.cl.CLContractType;
+
 import com.fairagora.verifik8.v8web.data.domain.cl.CLCountry;
 
 import com.fairagora.verifik8.v8web.data.domain.cl.CLEntityType;
@@ -10,7 +14,13 @@ import com.fairagora.verifik8.v8web.data.domain.cl.CLHazardousWorkType;
 
 import com.fairagora.verifik8.v8web.data.domain.cl.CLHvHeExpensionType;
 
+import com.fairagora.verifik8.v8web.data.domain.cl.CLLanguage;
+
+import com.fairagora.verifik8.v8web.data.domain.cl.CLLegalStatus;
+
 import com.fairagora.verifik8.v8web.data.domain.cl.CLMeasureType;
+
+import com.fairagora.verifik8.v8web.data.domain.cl.CLPaymentFrequency;
 
 import com.fairagora.verifik8.v8web.data.domain.cl.CLPlotActivityType;
 
@@ -58,6 +68,10 @@ import com.fairagora.verifik8.v8web.data.domain.reg.farm.RegEntityFarmSupplierAs
 
 import com.fairagora.verifik8.v8web.data.domain.reg.farm.RegEntityStaffManagement;
 
+import com.fairagora.verifik8.v8web.data.domain.reg.staff.RegEntityStaff;
+
+import com.fairagora.verifik8.v8web.data.domain.reg.staff.RegEntityStaffContract;
+
 import com.fairagora.verifik8.v8web.mvc.companies.dto.CompanyDto;
 
 import com.fairagora.verifik8.v8web.mvc.companies.dto.CompanyListingDto;
@@ -75,6 +89,10 @@ import com.fairagora.verifik8.v8web.mvc.farms.dto.FarmFormDto;
 import com.fairagora.verifik8.v8web.mvc.farms.dto.FarmPlotDto;
 
 import com.fairagora.verifik8.v8web.mvc.farms.dto.FarmPondDto;
+
+import com.fairagora.verifik8.v8web.mvc.farms.dto.StaffContractDto;
+
+import com.fairagora.verifik8.v8web.mvc.farms.dto.StaffFarmFormDto;
 
 import com.fairagora.verifik8.v8web.mvc.farms.dto.StaffGeneralInfoSto;
 
@@ -110,7 +128,7 @@ import org.springframework.stereotype.Component;
 
     value = "org.mapstruct.ap.MappingProcessor",
 
-    date = "2017-11-20T16:38:32+0100",
+    date = "2017-11-23T11:37:03+0100",
 
     comments = "version: 1.1.0.Final, compiler: javac, environment: Java 1.8.0_112 (Oracle Corporation)"
 
@@ -1618,6 +1636,191 @@ public class RegFarmDTOMapperImpl implements RegFarmDTOMapper {
         }
     }
 
+    @Override
+
+    public StaffFarmFormDto toDto(RegEntityStaff e) {
+
+        if ( e == null ) {
+
+            return null;
+        }
+
+        StaffFarmFormDto staffFarmFormDto = new StaffFarmFormDto();
+
+        staffFarmFormDto.setWorkingPermitUrl( eWorkingPermitResourcePath( e ) );
+
+        staffFarmFormDto.setEntity( entityDtoMapper.toReference( e.getEntity() ) );
+
+        staffFarmFormDto.setPosition( entityDtoMapper.toReference( e.getPosition() ) );
+
+        staffFarmFormDto.setOfficePhoneNumber( e.getOfficePhoneNumber() );
+
+        staffFarmFormDto.setOfficeMobile( e.getOfficeMobile() );
+
+        staffFarmFormDto.setOfficeEmail( e.getOfficeEmail() );
+
+        staffFarmFormDto.setFromLocalComunity( e.isFromLocalComunity() );
+
+        staffFarmFormDto.setCompanyFocalPoint( e.isCompanyFocalPoint() );
+
+        staffFarmFormDto.setLegalStatus( entityDtoMapper.toReference( e.getLegalStatus() ) );
+
+        staffFarmFormDto.setNoEmployedAnymore( e.isNoEmployedAnymore() );
+
+        staffFarmFormDto.setLanguage( entityDtoMapper.toReference( e.getLanguage() ) );
+
+        return staffFarmFormDto;
+    }
+
+    @Override
+
+    public void fillEntity(StaffFarmFormDto dto, RegEntityStaff e) {
+
+        if ( dto == null ) {
+
+            return;
+        }
+
+        e.setLanguage( entityDtoMapper.resolve( dto.getLanguage(), CLLanguage.class ) );
+
+        e.setLegalStatus( entityDtoMapper.resolve( dto.getLegalStatus(), CLLegalStatus.class ) );
+
+        e.setNoEmployedAnymore( dto.isNoEmployedAnymore() );
+
+        if ( dto.getWorkingPermit() != null ) {
+
+            if ( e.getWorkingPermit() == null ) {
+
+                e.setWorkingPermit( new Attachment() );
+            }
+
+            entityDtoMapper.map( dto.getWorkingPermit(), e.getWorkingPermit() );
+        }
+
+        else {
+
+            e.setWorkingPermit( null );
+        }
+
+        e.setEntity( entityDtoMapper.resolve( dto.getEntity(), RegEntity.class ) );
+
+        e.setFromLocalComunity( dto.isFromLocalComunity() );
+
+        e.setCompanyFocalPoint( dto.isCompanyFocalPoint() );
+
+        e.setOfficePhoneNumber( dto.getOfficePhoneNumber() );
+
+        e.setOfficeMobile( dto.getOfficeMobile() );
+
+        e.setOfficeEmail( dto.getOfficeEmail() );
+
+        e.setPosition( entityDtoMapper.resolve( dto.getPosition(), CLCompanyPositionType.class ) );
+    }
+
+    @Override
+
+    public StaffContractDto toDto(RegEntityStaffContract e) {
+
+        if ( e == null ) {
+
+            return null;
+        }
+
+        StaffContractDto staffContractDto = new StaffContractDto();
+
+        staffContractDto.setFarm( entityDtoMapper.toReference( e.getFarm() ) );
+
+        staffContractDto.setEntity( entityDtoMapper.toReference( e.getEntity() ) );
+
+        staffContractDto.setContractNo( e.getContractNo() );
+
+        staffContractDto.setContactType( entityDtoMapper.toReference( e.getContactType() ) );
+
+        staffContractDto.setCompanyPositionType( entityDtoMapper.toReference( e.getCompanyPositionType() ) );
+
+        staffContractDto.setDepartement( e.getDepartement() );
+
+        staffContractDto.setStartingDate( e.getStartingDate() );
+
+        staffContractDto.setAgreedEndDate( e.getAgreedEndDate() );
+
+        staffContractDto.setIssuanceDate( e.getIssuanceDate() );
+
+        staffContractDto.setActualTerminationDate( e.getActualTerminationDate() );
+
+        staffContractDto.setContinuingContract( e.isContinuingContract() );
+
+        staffContractDto.setDuration( e.getDuration() );
+
+        staffContractDto.setRemuneration( e.getRemuneration() );
+
+        staffContractDto.setPaymentFrequency( entityDtoMapper.toReference( e.getPaymentFrequency() ) );
+
+        staffContractDto.setMinimumWagesApplied( e.isMinimumWagesApplied() );
+
+        staffContractDto.setNbHoursPerDay( e.getNbHoursPerDay() );
+
+        staffContractDto.setNbDaysAnnualLeave( e.getNbDaysAnnualLeave() );
+
+        staffContractDto.setNoAnnualLeaveSpecified( e.isNoAnnualLeaveSpecified() );
+
+        staffContractDto.setContractInAnotherLanguage( e.isContractInAnotherLanguage() );
+
+        staffContractDto.setCountry( entityDtoMapper.toReference( e.getCountry() ) );
+
+        return staffContractDto;
+    }
+
+    @Override
+
+    public void fillEntity(StaffContractDto dto, RegEntityStaffContract e) {
+
+        if ( dto == null ) {
+
+            return;
+        }
+
+        e.setFarm( entityDtoMapper.resolve( dto.getFarm(), RegEntity.class ) );
+
+        e.setEntity( entityDtoMapper.resolve( dto.getEntity(), RegEntity.class ) );
+
+        e.setContractNo( dto.getContractNo() );
+
+        e.setContactType( entityDtoMapper.resolve( dto.getContactType(), CLContractType.class ) );
+
+        e.setCompanyPositionType( entityDtoMapper.resolve( dto.getCompanyPositionType(), CLCompanyPositionType.class ) );
+
+        e.setDepartement( dto.getDepartement() );
+
+        e.setStartingDate( dto.getStartingDate() );
+
+        e.setAgreedEndDate( dto.getAgreedEndDate() );
+
+        e.setIssuanceDate( dto.getIssuanceDate() );
+
+        e.setActualTerminationDate( dto.getActualTerminationDate() );
+
+        e.setContinuingContract( dto.isContinuingContract() );
+
+        e.setDuration( dto.getDuration() );
+
+        e.setRemuneration( dto.getRemuneration() );
+
+        e.setPaymentFrequency( entityDtoMapper.resolve( dto.getPaymentFrequency(), CLPaymentFrequency.class ) );
+
+        e.setMinimumWagesApplied( dto.isMinimumWagesApplied() );
+
+        e.setNbHoursPerDay( dto.getNbHoursPerDay() );
+
+        e.setNbDaysAnnualLeave( dto.getNbDaysAnnualLeave() );
+
+        e.setNoAnnualLeaveSpecified( dto.isNoAnnualLeaveSpecified() );
+
+        e.setContractInAnotherLanguage( dto.isContractInAnotherLanguage() );
+
+        e.setCountry( entityDtoMapper.resolve( dto.getCountry(), CLCountry.class ) );
+    }
+
     private String farmAerialViewResourcePath(RegEntityFarmDetails regEntityFarmDetails) {
 
         if ( regEntityFarmDetails == null ) {
@@ -2103,6 +2306,30 @@ public class RegFarmDTOMapperImpl implements RegFarmDTOMapper {
         }
 
         return city;
+    }
+
+    private String eWorkingPermitResourcePath(RegEntityStaff regEntityStaff) {
+
+        if ( regEntityStaff == null ) {
+
+            return null;
+        }
+
+        Attachment workingPermit = regEntityStaff.getWorkingPermit();
+
+        if ( workingPermit == null ) {
+
+            return null;
+        }
+
+        String resourcePath = workingPermit.getResourcePath();
+
+        if ( resourcePath == null ) {
+
+            return null;
+        }
+
+        return resourcePath;
     }
 }
 

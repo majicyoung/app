@@ -12,6 +12,8 @@ import com.fairagora.verifik8.v8web.data.domain.cl.CLCountry;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLEntityType;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLHazardousWorkType;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLHvHeExpensionType;
+import com.fairagora.verifik8.v8web.data.domain.cl.CLLanguage;
+import com.fairagora.verifik8.v8web.data.domain.cl.CLLegalStatus;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLMeasureType;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLPlotActivityType;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLPondType;
@@ -27,6 +29,8 @@ import com.fairagora.verifik8.v8web.data.repo.cl.CLCountryRepository;
 import com.fairagora.verifik8.v8web.data.repo.cl.CLEntityTypeRepository;
 import com.fairagora.verifik8.v8web.data.repo.cl.CLHazardousWorkTypeRepository;
 import com.fairagora.verifik8.v8web.data.repo.cl.CLHvHeExpensionTypeRepository;
+import com.fairagora.verifik8.v8web.data.repo.cl.CLLanguageRepository;
+import com.fairagora.verifik8.v8web.data.repo.cl.CLLegalStatusRepository;
 import com.fairagora.verifik8.v8web.data.repo.cl.CLMeasureTypeRepository;
 import com.fairagora.verifik8.v8web.data.repo.cl.CLPlotActivityTypeRepository;
 import com.fairagora.verifik8.v8web.data.repo.cl.CLPoundTypeRepository;
@@ -81,7 +85,12 @@ public class CodeListsService {
 
 	@Autowired
 	private CLSoilAnalysisTypeRepository soilAnalysisTypeRepository;
+	@Autowired
+	private CLLegalStatusRepository legalStatusRepository;
 
+	@Autowired
+	private CLLanguageRepository languageRepository;
+	
 	/**
 	 * 
 	 * @return
@@ -203,6 +212,14 @@ public class CodeListsService {
 
 	public List<CLSoilAnalysisType> listActiveSoilAnalysisType() {
 		return soilAnalysisTypeRepository.findByEnabledTrueOrderByName();
+	}
+
+	public List<CLLegalStatus> listActiveLegalStatuses() {
+		return legalStatusRepository.findByEnabledTrueOrderByName();
+	}
+
+	public List<CLLanguage> listActiveLanguages() {
+		return languageRepository.findByEnabledTrueOrderByName();
 	}
 
 }
