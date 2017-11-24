@@ -57,7 +57,7 @@
 	            <li th:if="${v8App.pondProfile}"><a th:href="@{/ponds/browser.html}"><i class="fa fa-caret-right"></i><span th:text="#{default.ponds}">default.ponds</span></a></li>
 	            <li th:if="${v8App.plotProfile}"><a th:href="@{/plots/browser.html}"><i class="fa fa-caret-right"></i><span th:text="#{default.plots}">default.ponds</span></a></li>
 	            <li ><a th:href="@{/suppliers/browser.html}"><i class="fa fa-caret-right"></i><span th:text="#{default.suppliers}">default.suppliers</span></a></li>
-	            <li ><a th:href="@{/staff/browser.html}"><i class="fa fa-caret-right"></i> <span th:text="#{default.staffs}"></span></a></li>
+	            <!--  <li ><a th:href="@{/staff/browser.html}"><i class="fa fa-caret-right"></i> <span th:text="#{default.staffs}"></span></a></li>-->
 	          </ul>
 	        </li>
 	        <li class="treeview {{ (Request::is('companies*')||Request::is('individuals*'))?'active':'' }}">
