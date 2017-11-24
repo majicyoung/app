@@ -62,7 +62,7 @@ public class DashboardDataBuilder {
 
 	private void buildTopKpis(HomeDashboardDto dash) {
 		dash.getTopKpis().add(new DashboardTopKpi<Integer>().setup("Number of Farms", "nbfarms", jdbc
-				.queryForObject("SELECT count(ID) FROM reg_entities WHERE CL_ENTITY_UID_TYPE_ID=5", Integer.class)));
+				.queryForObject("SELECT count(ID) FROM reg_entities WHERE CL_ENTITY_UID_TYPE_ID=2", Integer.class)));
 
 		dash.getTopKpis().add(new DashboardTopKpi<Integer>().setup("Number of Plots", "nbPlots",
 				jdbc.queryForObject("SELECT count(ID) FROM reg_entity_farmag_plots", Integer.class)));
