@@ -26,22 +26,22 @@
 								</div>
 								<div class="form-group ">
 									<label for="number" class="control-label" th:text="|#{farm.plot_activity_start}*|">farm.plot_number*</label>
-									<input type="text" class="form-control form-plot form-plot-required datefield" th:field="*{activityStartDate}" th:placeholder="#{farm.plot_number}" maxlength="10" />
+									<input type="text" class="form-control form-plot form-plot-required datefield" th:field="*{activityStartDate}" th:placeholder="#{farm.plot_activity_start}" maxlength="10" />
 								</div>
 								<div class="form-group ">
 									<label for="number" class="control-label" th:text="|#{farm.plot_activity_end}*|">farm.plot_number*</label>
-									<input type="text" class="form-control form-plot form-plot-required datefield" th:field="*{activityEndDate}" th:placeholder="#{farm.plot_number}" maxlength="10" />
+									<input type="text" class="form-control form-plot form-plot-required datefield" th:field="*{activityEndDate}" th:placeholder="#{farm.plot_activity_end}" maxlength="10" />
 								</div>
 								<div class="form-group ">
 									<label th:text="|#{farm.plot_activity_product}|"></label>
-									<select class="form-control" th:field="*{product}" required="required">
+									<select class="form-control" th:field="*{product}" >
 										<option value="" th:text="|-- #{farm.plot_activity_select_product} --|">-- default.select_farm --</option> 
 										<option th:each="actType:${allProducts}" th:value="${actType.id}" th:text="${actType.name}"></option> 
 									</select>
 								</div>
 								<div class="form-group ">
 									<label th:text="|#{farm.plot_activity_tilingActivityType}|"></label>
-									<select class="form-control" th:field="*{tilingActivityType}" required="required">
+									<select class="form-control" th:field="*{tilingActivityType}">
 										<option value="" th:text="|-- #{farm.plot_activity_select_tilingActivityType} --|">-- default.select_farm --</option> 
 										<option th:each="actType:${allTilingActivityTypes}" th:value="${actType.id}" th:text="${actType.name}"></option> 
 									</select>
