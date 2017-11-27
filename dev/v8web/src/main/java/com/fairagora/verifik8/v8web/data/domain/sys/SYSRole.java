@@ -2,6 +2,8 @@ package com.fairagora.verifik8.v8web.data.domain.sys;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -12,6 +14,7 @@ import com.fairagora.verifik8.v8web.data.domain.V8Entity;
 public class SYSRole implements V8Entity {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID")
 	protected Long id;
 
@@ -49,7 +52,5 @@ public class SYSRole implements V8Entity {
 	public String getName() {
 		return getLabel();
 	}
-	
-	
 
 }

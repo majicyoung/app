@@ -80,7 +80,7 @@
 	            </span>
 	          </a>
 	          <ul class="treeview-menu">
-	        	<li class=""><a href="#"><i class="fa fa-caret-right"></i><span th:text="#{default.roles}">default.roles</span></a></li>
+	        	<li th:class="${v8p.getNavActive('/roles')}"><a th:href="@{/roles.html}"><i class="fa fa-caret-right"></i><span th:text="#{default.roles}">default.roles</span></a></li>
 	            <li th:class="${v8p.getNavActive('/users')}"><a th:href="@{'/users.html'}"><i class="fa fa-caret-right"></i><span th:text="#{default.users}">default.users</span></a></li>
 	          </ul>
 	        </li>

@@ -6,6 +6,8 @@ import com.fairagora.verifik8.v8web.data.domain.sys.SYSRole;
 
 import com.fairagora.verifik8.v8web.data.domain.sys.SYSUser;
 
+import com.fairagora.verifik8.v8web.mvc.users.dto.RoleFormDto;
+
 import com.fairagora.verifik8.v8web.mvc.users.dto.UserFormDto;
 
 import javax.annotation.Generated;
@@ -18,7 +20,7 @@ import org.springframework.stereotype.Component;
 
     value = "org.mapstruct.ap.MappingProcessor",
 
-    date = "2017-11-23T20:51:02+0100",
+    date = "2017-11-27T15:56:38+0100",
 
     comments = "version: 1.1.0.Final, compiler: javac, environment: Java 1.8.0_112 (Oracle Corporation)"
 
@@ -74,6 +76,36 @@ public class SysUserDTOMapperImpl implements SysUserDTOMapper {
         user.setRole( entityDtoMapper.resolve( dto.getRole(), SYSRole.class ) );
 
         user.setCountry( entityDtoMapper.resolve( dto.getCountry(), CLCountry.class ) );
+    }
+
+    @Override
+
+    public void toDto(SYSRole findOne, RoleFormDto dto) {
+
+        if ( findOne == null ) {
+
+            return;
+        }
+
+        dto.setId( findOne.getId() );
+
+        dto.setCode( findOne.getCode() );
+
+        dto.setLabel( findOne.getLabel() );
+    }
+
+    @Override
+
+    public void fillEntity(RoleFormDto dto, SYSRole u) {
+
+        if ( dto == null ) {
+
+            return;
+        }
+
+        u.setCode( dto.getCode() );
+
+        u.setLabel( dto.getLabel() );
     }
 }
 
