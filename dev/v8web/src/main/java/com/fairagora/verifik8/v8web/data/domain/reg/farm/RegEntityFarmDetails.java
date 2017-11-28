@@ -55,6 +55,9 @@ public class RegEntityFarmDetails extends V8EntitySupport {
 
 	@Column(name = "LATITUDE")
 	protected String latitude;
+	
+	@Column(name = "QUOTA_ID")
+	protected String quotaId;
 
 	@Column(name = "ENVIRONMENT_IMPACT_ASSESSMENT")
 	protected boolean environmentImpactAssessment;
@@ -263,5 +266,13 @@ public class RegEntityFarmDetails extends V8EntitySupport {
 	@Override
 	public String getName() {
 		return getEntity().getName();
+	}
+
+	public String getQuotaId() {
+		return quotaId;
+	}
+
+	public void setQuotaId(String quotaId) {
+		this.quotaId = quotaId;
 	}
 }

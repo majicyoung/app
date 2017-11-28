@@ -2,7 +2,6 @@ package com.fairagora.verifik8.v8web.mvc.farms.dto;
 
 import org.springframework.web.multipart.MultipartFile;
 
-import com.fairagora.verifik8.v8web.data.domain.commons.V8Measure;
 import com.fairagora.verifik8.v8web.mvc.infra.dtomapping.commons.AddressDto;
 import com.fairagora.verifik8.v8web.mvc.infra.dtomapping.commons.V8MeasureDto;
 
@@ -27,6 +26,7 @@ public class FarmFormDto {
 	protected String email;
 
 	protected String website;
+	protected String quotaId;
 
 	protected Float longitude;
 
@@ -155,5 +155,13 @@ public class FarmFormDto {
 
 	public void setAerialViewUrl(String aerialViewUrl) {
 		this.aerialViewUrl = aerialViewUrl;
+	}
+
+	public String getQuotaId() {
+		return quotaId;
+	}
+
+	public void setQuotaId(String quotaId) {
+		this.quotaId = quotaId;
 	}
 }
