@@ -33,12 +33,12 @@
                                     <td th:text="${staff.entity.name}"></td>
                                     <td th:text="${staff.entity.surname}"></td>
                                     <td align="center">
-                                        <a th:attr="data-id=${staff.entity.id}" class="btn btn-xs btn-flat btn-primary editStaffBtn"><i class="fa fa-edit"></i></a>
+                                        <a th:attr="data-id=${staff.entity.id}" class="btn btn-xs btn-flat btn-primary editStaffBtn" th:title="#{tooltip.edit}"><i class="fa fa-edit"></i></a>
                                         <a th:href="@{'/farm/'+${farmId}+'/entity/'+${staff.entity.id}+'/staff-working-agreements.html'}" class="btn btn-xs btn-flat btn-primary" ><i class="fa fa-paperclip"></i></a>
                                         <form th:action="@{'/farm/'+${farmId}+'/staff/delete.html'}" method="post" style="display: inline;">
                                         	<input type="hidden" th:value="${staff.entity.id}" th:name="entityId" />
-                                        	<button type="submit" class="btn btn-xs btn-flat btn-danger">
-												<i class="fa fa-remove"></i> 
+                                        	<button type="submit" class="btn btn-xs btn-flat btn-danger" th:title="#{tooltip.delete}">
+												<i class="fa fa-trash"></i> 
 											</button>
                                         </form>
                                          <script type="text/javascript" th:inline="javascript">

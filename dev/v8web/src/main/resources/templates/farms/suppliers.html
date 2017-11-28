@@ -37,8 +37,8 @@
                                         <form th:action="@{'/farm/'+${farmId}+'/delete-supplier-for-producttype.html'}" method="post">
                                         	<input type="hidden" th:value="${supplier.supplier.id}" th:name="supplier" />
                                         	<input type="hidden" th:value="${supplier.productType.id}" th:name="productType" />
-                                        	<button type="submit" class="btn btn-xs btn-flat btn-danger">
-												<i class="fa fa-remove"></i> 
+                                        	<button type="submit" class="btn btn-xs btn-flat btn-danger" th:title="#{tooltip.delete}">
+												<i class="fa fa-trash"></i> 
 											</button>
                                         </form>
                                     </td>
@@ -69,7 +69,7 @@
 		                                        </select>		
 		                                    </div>
 		                                    <div class="col-xs-2">
-		                                        <a href="javascript:void(0);" class="btn btn-flat btn-primary" th:title="#{supplier.add}" onclick="openNewSupplier();"><i class="fa fa-plus"></i></a>
+		                                   <!--       <a href="javascript:void(0);" class="btn btn-flat btn-primary" th:title="#{supplier.add}" onclick="openNewSupplier();"><i class="fa fa-plus"></i></a> -->
 		                                    </div>
 		                                </div>
 		                            </div>

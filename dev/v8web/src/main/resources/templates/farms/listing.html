@@ -26,8 +26,8 @@
               <th th:text="#{farm.name}">farm.name</th>
               <th th:text="#{default.location}">default.location</th>
               <th th:text="#{farm.staff_count}">staff.number</th>
-              <th th:text="#{farm.pond_count}">default.ponds_number</th>
-              <th th:text="#{farm.plot_count}">default.plots_count</th>
+              <th th:text="#{farm.pond_count}" th:if="${v8App.pondProfile}">default.ponds_number</th>
+              <th th:text="#{farm.plot_count}" th:if="${v8App.plotProfile}">default.plots_count</th>
               <th th:text="#{default.area}">default.area</th>
               <th></th>
             </tr>
@@ -38,8 +38,8 @@
               <td th:inline="text" th:text="${farm.name}">[[${farm.name}]]</td>
               <td th:inline="text">[[${farm.address.city}]]</td>              
               <td th:inline="text">[[${farm.staffCount}]]</td>
-              <td th:inline="text">[[${farm.pondsCount}]]</td>
-              <td th:inline="text">[[${farm.fieldsCount}]]</td>
+              <td th:inline="text" th:if="${v8App.pondProfile}">[[${farm.pondsCount}]]</td>
+              <td th:inline="text" th:if="${v8App.plotProfile}">[[${farm.fieldsCount}]]</td>
               <td th:inline="text">[[${farm.size}]]</td>              
               <td align="center">
                 <a th:href="@{'/farm/'+${farm.id}+'/edit.html'}" class="btn btn-sm btn-flat btn-primary" th:title="#{tooltip.edit_farm}"><i class="fa fa-edit"></i></a>

@@ -44,11 +44,11 @@
 													<td th:text="${e.quantity.quantity}"></td>
 													<td th:text="${e.quantity.unitName}"></td>
 													<td align="center">
-														<a href="javascript:void(0);" th:attr="data-id=${e.id}" class="btn btn-xs btn-flat btn-primary editProdBtn"><i class="fa fa-edit"></i></a> 
+														<a href="javascript:void(0);" th:attr="data-id=${e.id}" class="btn btn-xs btn-flat btn-primary editProdBtn" th:title="#{tooltip.edit}"><i class="fa fa-edit"></i></a> 
 														 <form th:action="@{'/farm/'+${farmId}+'/production-profile/total-production/delete.html'}" method="post" style="display: inline;">
 				                                        	<input type="hidden" th:value="${e.id}" th:name="id" />
-				                                        	<button type="submit" class="btn btn-xs btn-flat btn-danger">
-																<i class="fa fa-remove"></i> 
+				                                        	<button type="submit" class="btn btn-xs btn-flat btn-danger" th:title="#{tooltip.delete}">
+																<i class="fa fa-trash"></i> 
 															</button>
 				                                        </form>
 				                                        <script type="text/javascript" th:inline="javascript">
@@ -91,11 +91,11 @@
 													<td th:text="${e.soilAnalysisTypeName}"></td>
 													<td align="center">
 														<a th:if="${!#strings.isEmpty(e.analysisUrl)}" th:href="@{'/download/'+${e.analysisUrl}}" class="btn btn-xs btn-flat btn-primary" target="_blank"><i class="fa fa-download"></i></a>
-														<a href="javascript:void(0);" th:attr="data-id=${e.id}" class="btn btn-xs btn-flat btn-primary editSoilAnalysisBtn"><i class="fa fa-edit"></i></a> 
+														<a href="javascript:void(0);" th:attr="data-id=${e.id}" class="btn btn-xs btn-flat btn-primary editSoilAnalysisBtn" th:title="#{tooltip.edit}"><i class="fa fa-edit"></i></a> 
 														 <form th:action="@{'/farm/'+${farmId}+'/production-profile/soil-analysis/delete.html'}" method="post" style="display: inline;">
 				                                        	<input type="hidden" th:value="${e.id}" th:name="id" />
-				                                        	<button type="submit" class="btn btn-xs btn-flat btn-danger">
-																<i class="fa fa-remove"></i> 
+				                                        	<button type="submit" class="btn btn-xs btn-flat btn-danger" th:title="#{tooltip.delete}">
+																<i class="fa fa-trash"></i> 
 															</button>
 				                                        </form>
 				                                        <script type="text/javascript" th:inline="javascript">
@@ -120,11 +120,11 @@
 													<td th:text="${e.pondNumber}"></td>
 													<td align="center">
 														<a th:if="${!#strings.isEmpty(e.analysisUrl)}" th:href="@{'/download/'+${e.analysisUrl}}" class="btn btn-xs btn-flat btn-primary" target="_blank"><i class="fa fa-download"></i></a>
-														<a href="javascript:void(0);" th:attr="data-id=${e.id}" class="btn btn-xs btn-flat btn-primary editWaterAnalysisBtn"><i class="fa fa-edit"></i></a> 
+														<a href="javascript:void(0);" th:attr="data-id=${e.id}" class="btn btn-xs btn-flat btn-primary editWaterAnalysisBtn" th:title="#{tooltip.edit}"><i class="fa fa-edit"></i></a> 
 														 <form th:action="@{'/farm/'+${farmId}+'/production-profile/water-analysis/delete.html'}" method="post" style="display: inline;">
 				                                        	<input type="hidden" th:value="${e.id}" th:name="id" />
-				                                        	<button type="submit" class="btn btn-xs btn-flat btn-danger">
-																<i class="fa fa-remove"></i> 
+				                                        	<button type="submit" class="btn btn-xs btn-flat btn-danger" th:title="#{tooltip.delete}">
+																<i class="fa fa-trash"></i> 
 															</button>
 				                                        </form>
 				                                        <script type="text/javascript" th:inline="javascript">
