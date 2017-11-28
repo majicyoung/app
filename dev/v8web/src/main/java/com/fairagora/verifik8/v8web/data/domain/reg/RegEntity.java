@@ -69,6 +69,9 @@ public class RegEntity extends V8EntitySupport implements  Serializable {
 	@Column(name = "E_MAIL")
 	protected String email;
 
+	@Column(name = "INSTANT_MESSANGER")
+	protected String instantMessanger;
+	
 	@Column(name = "REGISTRATION_NUMBER")
 	protected String registrationNumber;
 
@@ -148,6 +151,14 @@ public class RegEntity extends V8EntitySupport implements  Serializable {
 		this.email = email;
 	}
 
+	public String getInstantMessanger() {
+		return instantMessanger;
+	}
+
+	public void setInstantMessanger(String instantMessanger) {
+		this.instantMessanger = instantMessanger;
+	}
+	
 	public String getWebsite() {
 		return website;
 	}

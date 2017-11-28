@@ -24,7 +24,8 @@ public class FarmFormDto {
 	protected String faxNumber;
 
 	protected String email;
-
+	protected String instantMessanger;
+	
 	protected String website;
 	protected String quotaId;
 
@@ -91,6 +92,14 @@ public class FarmFormDto {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public String getInstantMessanger() {
+		return instantMessanger;
+	}
+
+	public void setInstantMessanger(String instantMessanger) {
+		this.instantMessanger = instantMessanger;
 	}
 
 	public String getWebsite() {

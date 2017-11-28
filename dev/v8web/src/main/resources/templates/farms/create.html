@@ -22,6 +22,12 @@
                         </div>
                         <div class="col-xs-6">
                             <div class="form-group row">
+								<label for="quotaId" class="col-xs-3 control-label" th:text="#{farm.quota_id}">farm.quota_id</label>
+                                <div class="col-xs-9">
+                                    <input type="text" class="form-control" id="inputFarmPhone" th:field="*{quotaId}" th:placeholder="#{farm.quota_id}"  />
+                                </div>
+                            </div>             
+                            <div class="form-group row">
                                 <label for="inputFarmName" class="col-xs-3 control-label" th:text="#{default.name}+'*'">default.name*</label>
                                 <div class="col-xs-9">
                                     <input type="text" class="form-control" id="inputFarmName" th:field="*{name}" th:placeholder="#{default.name}" required="required" />
@@ -94,6 +100,12 @@
                                     <input type="email" class="form-control" id="inputFarmEmail" th:field="*{email}" th:placeholder="#{default.email}" />
                                 </div>
                             </div>
+                          	 <div class="form-group row">
+								<label for="inputFarmIM" class="col-xs-3 control-label" th:text="#{farm.instantMessanger}">farm.instantMessanger</label>
+                                <div class="col-xs-9">
+                                    <input type="text" class="form-control" id="inputFarmIM" th:field="*{instantMessanger}" th:placeholder="#{farm.instantMessanger}"  />
+                                </div>
+                            </div>  
                             <div class="form-group row">
                                 <label for="inputFarmCoop" class="col-xs-3 control-label" th:text="#{default.cooperative}"></label>
                                 <div class="col-xs-9 no-padding">
@@ -166,16 +178,6 @@
 	                                    	<i class="fa fa-file-image-o"></i> - <i class="fa fa-download"></i>
 										</a>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xs-12">
-                    	 <div class="col-xs-6">
-                            <div class="form-group row">
-								<label for="quotaId" class="col-xs-3 control-label" th:text="#{farm.quota_id}">farm.quota_id</label>
-                                <div class="col-xs-9">
-                                    <input type="text" class="form-control" id="inputFarmPhone" th:field="*{quotaId}" th:placeholder="#{farm.quota_id}"  />
                                 </div>
                             </div>
                         </div>
