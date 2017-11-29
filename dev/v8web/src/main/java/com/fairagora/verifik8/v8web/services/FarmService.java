@@ -51,6 +51,13 @@ public class FarmService extends AbstractV8Service {
 					pondsCountPerFarms.put(rs.getLong(1), rs.getInt(2));
 				});
 
+		// fetch how many plots we have per farm
+		Map<Long, Integer> plotsCountPerFarms = new HashMap<>();
+		jdbc.query("select REG_ENTITY_FARM_ID, COUNT(ID) from reg_entity_farmag_plots GROUP BY REG_ENTITY_FARM_ID ",
+				rs -> {
+					plotsCountPerFarms.put(rs.getLong(1), rs.getInt(2));
+				});
+
 		Map<Long, V8Measure> sizesPerFarms = new HashMap<>();
 		jdbc.query("select ID, SIZE,CL_SIZE_UNIT_ID FROM reg_entity_farm_details", rs -> {
 			sizesPerFarms.put(rs.getLong(1),
@@ -63,6 +70,7 @@ public class FarmService extends AbstractV8Service {
 			enhancedMapper.enhance(e, f);
 			f.setStaffCount(staffCountPerFarms.getOrDefault(e.getId(), 0));
 			f.setPondsCount(pondsCountPerFarms.getOrDefault(e.getId(), 0));
+			f.setPlotsCount(plotsCountPerFarms.getOrDefault(e.getId(), 0));
 			f.setSize(sizesPerFarms.get(e.getId()));
 			farms.add(f);
 		}
