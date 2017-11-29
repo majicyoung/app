@@ -84,6 +84,8 @@ public interface RegFarmDTOMapper {
 	@Mapping(target = "workAccidentRecordUrl", source = "workAccidentRecord.resourcePath")
 	@Mapping(target = "farmPolicies", ignore = true)
 	@Mapping(target = "farmPoliciesUrl", source = "farmPolicies.resourcePath")
+	@Mapping(target = "protectiveEquipment", ignore = true)
+	@Mapping(target = "protectiveEquipmentUrl", source = "protectiveEquipment.resourcePath")
 	void toDto(RegEntityStaffManagement findByFarmId, @MappingTarget StaffGeneralInfoSto dto);
 
 	void toDto(RegEntityFarmPond m, @MappingTarget FarmPondDto dto);

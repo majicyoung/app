@@ -77,10 +77,17 @@
 														</select>
 													</div>
 												</div>
+												
 												<div class="form-group row col-xs-12">
 													<label for="accessToProtectiveEquipment" class="col-xs-6 control-label" th:text="#{staffgeneralinfo.accessToProtectiveEquipment}">default.name</label>
 													<div class="col-xs-6">
 														<input type="checkbox" th:field="*{accessToProtectiveEquipment}" />
+													</div>
+													<div class="col-xs-6">
+														<input type="file" th:field="*{protectiveEquipment}" />
+														<a th:if="${!#strings.isEmpty(farmDto.protectiveEquipmentUrl)}" th:href="@{'/download/'+${farmDto.protectiveEquipmentUrl}}" target="_blank">
+					                                    	<i class="fa fa-download"></i>
+														</a>
 													</div>
 												</div>
 											</div>

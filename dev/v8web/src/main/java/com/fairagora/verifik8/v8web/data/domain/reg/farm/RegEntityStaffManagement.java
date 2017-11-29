@@ -92,6 +92,11 @@ public class RegEntityStaffManagement {
 	@Column(name = "ACCESS_TO_PROTECTIVE_EQUIPMENT")
 	protected boolean accessToProtectiveEquipment;
 
+	@Embedded
+	@AttributeOverrides({
+			@AttributeOverride(name = "resourcePath", column = @Column(name = "PROTECTIVE_EQUIPMENT_URL")) })
+	protected Attachment protectiveEquipment;
+	
 	@Column(name = "EMPLOYER_ISSUE_RECORD")
 	protected boolean empolyerIssueRecord;
 
@@ -136,13 +141,7 @@ public class RegEntityStaffManagement {
 	@AttributeOverrides({ @AttributeOverride(name = "resourcePath", column = @Column(name = "GRIEVING_SYSTEM_URL")) })
 	protected Attachment grievingSystemUrl;
 
-	@Column(name = "PROTECTIVE_EQUIPMENT_AVAILABLE")
-	protected boolean protectiveEquipmentAvailable;
-
-	@Embedded
-	@AttributeOverrides({
-			@AttributeOverride(name = "resourcePath", column = @Column(name = "PROTECTIVE_EQUIPMENT_URL")) })
-	protected Attachment protectiveEquipmentUrl;
+	
 
 	@Column(name = "SAFETY_CONDITION")
 	protected String safetyCondition;
@@ -419,20 +418,14 @@ public class RegEntityStaffManagement {
 		this.grievingSystemUrl = grievingSystemUrl;
 	}
 
-	public boolean isProtectiveEquipmentAvailable() {
-		return protectiveEquipmentAvailable;
+	 
+
+	public Attachment getProtectiveEquipment() {
+		return protectiveEquipment;
 	}
 
-	public void setProtectiveEquipmentAvailable(boolean protectiveEquipmentAvailable) {
-		this.protectiveEquipmentAvailable = protectiveEquipmentAvailable;
-	}
-
-	public Attachment getProtectiveEquipmentUrl() {
-		return protectiveEquipmentUrl;
-	}
-
-	public void setProtectiveEquipmentUrl(Attachment protectiveEquipmentUrl) {
-		this.protectiveEquipmentUrl = protectiveEquipmentUrl;
+	public void setProtectiveEquipment(Attachment protectiveEquipmentUrl) {
+		this.protectiveEquipment = protectiveEquipmentUrl;
 	}
 
 	public String getSafetyCondition() {

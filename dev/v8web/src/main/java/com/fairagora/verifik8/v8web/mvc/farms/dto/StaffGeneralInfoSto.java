@@ -17,7 +17,9 @@ public class StaffGeneralInfoSto {
 	protected Long hazardousWorkType;
 
 	protected boolean accessToProtectiveEquipment;
-
+	protected MultipartFile protectiveEquipment;
+	protected String protectiveEquipmentUrl;
+	
 	protected boolean existenceWorkAccidentRecord;
 
 	protected MultipartFile workAccidentRecord;
@@ -153,5 +155,21 @@ public class StaffGeneralInfoSto {
 
 	public void setFarmPoliciesUrl(String farmPoliciesUrl) {
 		this.farmPoliciesUrl = farmPoliciesUrl;
+	}
+
+	public MultipartFile getProtectiveEquipment() {
+		return protectiveEquipment;
+	}
+
+	public void setProtectiveEquipment(MultipartFile protectiveEquipment) {
+		this.protectiveEquipment = protectiveEquipment;
+	}
+
+	public String getProtectiveEquipmentUrl() {
+		return protectiveEquipmentUrl;
+	}
+
+	public void setProtectiveEquipmentUrl(String protectiveEquipmentUrl) {
+		this.protectiveEquipmentUrl = protectiveEquipmentUrl;
 	}
 }

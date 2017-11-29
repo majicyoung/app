@@ -130,7 +130,7 @@ import org.springframework.stereotype.Component;
 
     value = "org.mapstruct.ap.MappingProcessor",
 
-    date = "2017-11-28T10:54:12+0100",
+    date = "2017-11-29T01:59:31+0100",
 
     comments = "version: 1.1.0.Final, compiler: javac, environment: Java 1.8.0_112 (Oracle Corporation)"
 
@@ -179,6 +179,8 @@ public class RegFarmDTOMapperImpl implements RegFarmDTOMapper {
         dto.setFaxNumber( farm.getFaxNumber() );
 
         dto.setEmail( farm.getEmail() );
+
+        dto.setInstantMessanger( farm.getInstantMessanger() );
 
         dto.setWebsite( farm.getWebsite() );
     }
@@ -261,6 +263,8 @@ public class RegFarmDTOMapperImpl implements RegFarmDTOMapper {
         farm.setFaxNumber( dto.getFaxNumber() );
 
         farm.setEmail( dto.getEmail() );
+
+        farm.setInstantMessanger( dto.getInstantMessanger() );
 
         farm.setWebsite( dto.getWebsite() );
     }
@@ -397,6 +401,8 @@ public class RegFarmDTOMapperImpl implements RegFarmDTOMapper {
         }
 
         dto.setWorkAccidentRecordUrl( findByFarmIdWorkAccidentRecordResourcePath( findByFarmId ) );
+
+        dto.setProtectiveEquipmentUrl( findByFarmIdProtectiveEquipmentResourcePath( findByFarmId ) );
 
         dto.setFarmPoliciesUrl( findByFarmIdFarmPoliciesResourcePath( findByFarmId ) );
 
@@ -1467,6 +1473,21 @@ public class RegFarmDTOMapperImpl implements RegFarmDTOMapper {
 
         ent.setAccessToProtectiveEquipment( farmDto.isAccessToProtectiveEquipment() );
 
+        if ( farmDto.getProtectiveEquipment() != null ) {
+
+            if ( ent.getProtectiveEquipment() == null ) {
+
+                ent.setProtectiveEquipment( new Attachment() );
+            }
+
+            entityDtoMapper.map( farmDto.getProtectiveEquipment(), ent.getProtectiveEquipment() );
+        }
+
+        else {
+
+            ent.setProtectiveEquipment( null );
+        }
+
         ent.setWorkersRepresentativeGroup( farmDto.isWorkersRepresentativeGroup() );
     }
 
@@ -2014,6 +2035,30 @@ public class RegFarmDTOMapperImpl implements RegFarmDTOMapper {
         }
 
         String resourcePath = workAccidentRecord.getResourcePath();
+
+        if ( resourcePath == null ) {
+
+            return null;
+        }
+
+        return resourcePath;
+    }
+
+    private String findByFarmIdProtectiveEquipmentResourcePath(RegEntityStaffManagement regEntityStaffManagement) {
+
+        if ( regEntityStaffManagement == null ) {
+
+            return null;
+        }
+
+        Attachment protectiveEquipment = regEntityStaffManagement.getProtectiveEquipment();
+
+        if ( protectiveEquipment == null ) {
+
+            return null;
+        }
+
+        String resourcePath = protectiveEquipment.getResourcePath();
 
         if ( resourcePath == null ) {
 
