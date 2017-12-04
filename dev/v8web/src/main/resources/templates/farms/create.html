@@ -72,7 +72,7 @@
                                         </select>		
                                     </div>
                                     <div class="col-xs-2">
-                                       <!-- <a href="javascript:void(0);" class="btn btn-flat btn-primary" title="{{ trans('default.add_owner') }}" onclick="openNewStaff();"><i class="fa fa-plus"></i></a> --> 
+                                       <a href="javascript:void(0);" class="btn btn-flat btn-primary openNewStaffBtn" title="{{ trans('default.add_owner') }}" ><i class="fa fa-plus"></i></a>
                                     </div>
                                 </div>
                             </div>
@@ -116,7 +116,7 @@
                                         </select>
                                     </div>
                                     <div class="col-xs-2">
-                                      <!--  <a href="javascript:void(0);" class="btn btn-flat btn-primary" title="{{ trans('cooperative.add') }}" onclick="openNewCooperative();"><i class="fa fa-plus"></i></a>  --> 
+                                      <a href="javascript:void(0);" class="btn btn-flat btn-primary openNewCooperativeBtn" title="{{ trans('cooperative.add') }}" ><i class="fa fa-plus"></i></a>  
                                     </div>
                                 </div>
                             </div>
@@ -210,8 +210,23 @@
 	<script type="text/javascript">
 	/*<![CDATA[*/
 		$( document ).ready(function() {
+			$('.openNewStaffBtn').click(function(){
+				
+				document.location='individual-editor.html';
+			});
+
+			$('.openNewCooperativeBtn').click(function(){
+				
+				document.location='cooperative-editor.html';
+			});
+			
+			
+			
 		});
-		
+
+			
+
+	
 		function centerMap(address,zoom,marker){
 			var geocoder = new google.maps.Geocoder();
 		    geocoder.geocode({

@@ -25,8 +25,10 @@ import com.fairagora.verifik8.v8web.data.repo.cl.CLQuantityUnitRepository;
 import com.fairagora.verifik8.v8web.data.repo.reg.RegEntityFarmDetailsRepository;
 import com.fairagora.verifik8.v8web.data.repo.reg.RegEntityRepository;
 import com.fairagora.verifik8.v8web.mvc.AbstractV8Controller;
+import com.fairagora.verifik8.v8web.mvc.companies.dto.CompanyDto;
 import com.fairagora.verifik8.v8web.mvc.farms.dto.FarmEnvironmentalDto;
 import com.fairagora.verifik8.v8web.mvc.farms.dto.FarmFormDto;
+import com.fairagora.verifik8.v8web.mvc.invididuals.dto.IndividualDto;
 import com.fairagora.verifik8.v8web.services.FarmService;
 import com.fairagora.verifik8.v8web.services.enhanced.V8Farm;
 
@@ -159,6 +161,70 @@ public class FarmsController extends AbstractV8Controller {
 		return "redirect:/farm/" + entityId + "/environmental.html";
 	}
 
+	
+	/**
+	 * 
+	 * @param id
+	 * @param individualId
+	 * @param mv
+	 * @return
+	 */
+	@RequestMapping(value = "/farm/{id}/individual-editor.html", method = RequestMethod.GET)
+	public String createIndividual(Model mv) {
+
+		IndividualDto dto = new IndividualDto();
+		prepareForIndividualCreation(mv);
+		mv.addAttribute("individualId", 0);
+		mv.addAttribute("individualDto", dto);
+		mv.addAttribute("farm", 0);
+		mv.addAttribute("productType", 0);
+		mv.addAttribute("individual", 0);
+
+		return "farms/includes/individual-editor";
+	}
+	
+	
+	
+	
+	/**
+	 * 
+	 * @param farmDto
+	 * @param entityId
+	 * @param mv
+	 * @return
+	 */
+	@RequestMapping(value = "/farm/{id}/individual-editor.html", method = RequestMethod.POST)
+
+	public String addIndividual(@PathVariable("individualId") Long individualAssId,
+			IndividualDto dto, Model mv) {
+
+		RegEntity ind = individualAssId.intValue()==0 ? new RegEntity(): regEntityRepository.findOne(individualAssId);
+		ind.setEntityType(codeListservice.findEntityType(CLEntityType.CODE_IND));
+		
+		regFarmDtoMapper.fillEntity(dto, ind);
+
+		regEntityRepository.save(ind);
+		
+		return "redirect:/farm/create";
+	}	
+	
+	@RequestMapping(value = "/farm/{id}/cooperative-editor.html", method = RequestMethod.GET)
+	public String createCompany(Model mv) {
+
+		CompanyDto dto = new CompanyDto();
+		prepareForCooperativeCreation(mv);
+		mv.addAttribute("companyId", 0);
+		mv.addAttribute("companyDto", dto);
+		mv.addAttribute("farm", 0);
+		mv.addAttribute("productType", 0);
+		mv.addAttribute("company", 0);
+		mv.addAttribute("entityType", 5);
+
+		return "farms/includes/cooperative-editor";
+	}	
+	
+	
+	
 	/**
 	 * prepare for model for pages
 	 * 
@@ -205,4 +271,41 @@ public class FarmsController extends AbstractV8Controller {
 		mv.addAttribute("allHighValueExpensionTypes", codeListservice.listActiveHighValueExpensionTypes());
 
 	}
+	
+	/**
+	 * 
+	 * @param farm
+	 * @param mv
+	 */
+	protected void prepareForIndividualCreation(Model mv) {
+
+		V8Page p = new V8Page();
+		p.setTitle("default.individuals");
+		p.setDescription("default.individuals_page_description");
+		p.setNavBarPrefix("/individuals");
+		mv.addAttribute("v8p", p);
+
+		mv.addAttribute("allCountries", countryRepository.findAll(new Sort("name")));
+
+	}
+	
+	/**
+	 * 
+	 * @param farm
+	 * @param mv
+	 */
+	protected void prepareForCooperativeCreation(Model mv) {
+
+		V8Page p = new V8Page();
+		p.setTitle("default.companies");
+		p.setDescription("default.companies_page_description");
+		p.setNavBarPrefix("/companies");
+		mv.addAttribute("v8p", p);
+
+		mv.addAttribute("allCountries", countryRepository.findAll(new Sort("name")));
+		mv.addAttribute("allCompanyTypes", codeListservice.listActiveCompanyEntityTypes());
+
+	}	
+	
+	
 }

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html layout:decorator="inc/main-layout" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<div layout:fragment="content">
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="box" id="company-box">
+				<div class="box-header with-border">
+					<h3 class="box-title" th:text="#{default.cooperatives}"></h3>
+					<div class="box-tools">
+						<a th:href="@{/companies/browser.html}" class="btn btn-sm btn-flat btn-warning"><i class="fa fa-backward"></i> <span th:text="#{default.back}"></span></a>
+					</div>
+				</div>
+				<form th:action="@{'/companies/'+${companyId}+'/update.html'}" id="cooperativeEditorForm" method="post" th:object="${companyDto}">
+
+					<div class="box-body">
+						<div class="row">
+							<div class="col-md-6 col-sm-6 col-xs-12">
+								<div class="form-group">
+									<label th:text="|#{company.name}*|">company.name*</label> 
+									<input name="name" type="text" class="form-control" th:placeholder="#{company.name}" th:field="*{name}" required="required"  />
+								</div>
+								<div class="form-group">
+									<label th:text="#{company.registration_number}">company.registration_number</label> 
+									<input name="name" type="text" class="form-control" th:placeholder="#{company.registration_number}" th:field="*{registrationNumber}" />
+								</div>
+								<div class="form-group">
+									<label th:text="#{company.accronym}">company.accronym</label> 
+									<input name="name" type="text" class="form-control" th:placeholder="#{company.accronym}" th:field="*{accronym}"  />
+								</div>
+							</div>
+							<div class="col-md-6 col-sm-6 col-xs-12">
+								<div class="form-group">
+									<label th:text="|#{company.type}*|">company.type*</label> 
+									<select name="type" id="entityType" class="form-control" th:field="*{entityType}" required="required">
+										<option value="5" th:text="|-- #{default.cooperatives} --|">-- company.select_type --</option> 
+										<!--  <option th:each="t:${allCompanyTypes}" th:value="${t.id}" th:text="${t.name}" ></option>-->
+									</select>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6 col-sm-6 col-xs-12">
+								<div class="form-group">
+									<label th:text="#{default.address}">default.address</label>
+									<textarea name="address" class="form-control" th:placeholder="#{default.address}" th:field="*{address.main}">{{ $individual->ADDRESS }}</textarea>
+								</div>
+								<div class="form-group">
+									<label th:text="#{default.city}">default.city</label> 
+									<input name="city" type="text" class="form-control" th:placeholder="#{default.city}" th:field="*{address.city}" />
+								</div>
+								<div class="form-group">
+									<label th:text="#{default.zip_code}">default.zip_code}</label> 
+									<input name="zip" type="text" class="form-control" th:placeholder="#{default.zip_code}" th:field="*{address.zip}" />
+								</div>
+								<div class="form-group">
+									<label th:text="|#{default.country}*|">default.country*</label> 
+									<select name="country" id="country" class="form-control" th:field="*{address.country}">
+										<option th:text="|-- #{default.select_country} --|" value="">-- default.select_country --</option>
+										<option th:each="t:${allCountries}" th:value="${t.id}" th:text="${t.name}"></option>
+									</select>
+								</div>
+								<div class="form-group">
+									<label th:text="|#{default.nationality}*|">default.nationality*</label> 
+									<select name="nationality" id="nationality" class="form-control" required="required" th:field="*{nationality}">
+										<option value="" th:text="|-- #{default.select_nationality} --|">-- default.select_nationality --</option>
+										<option th:each="c:${allCountries}"  th:value="${c.id}"  th:text="${c.name}"></option>
+									</select>
+								</div>
+							</div>
+							<div class="col-md-6 col-sm-6 col-xs-12">
+								<div class="form-group">
+									<label th:text="#{default.phone}">default.phone</label> 
+									<input name="phone" type="text" class="form-control" th:placeholder="#{default.phone}" th:field="*{phoneNumber}"  />
+								</div>
+								<div class="form-group">
+									<label th:text="|#{default.mobile}*|">default.mobile*</label> 
+									<input name="mobile" type="text" class="form-control" th:placeholder="#{default.mobile}" th:field="*{mobileNumber}"  required="required" />
+								</div>
+								<div class="form-group">
+									<label th:text="#{default.fax}"></label> 
+									<input name="fax" type="text" class="form-control" th:placeholder="#{default.fax}" th:field="*{faxNumber}"/>
+								</div>
+								<div class="form-group">
+									<label th:text="#{default.email}"></label> 
+									<input name="email" type="email" class="form-control" th:placeholder="#{default.email}" th:field="*{email}"/>
+								</div>
+							</div>
+						</div>
+					</div>
+
+
+					<div class="box-footer text-center">
+						<small th:text="|*#{default.mandatory_field}|">*default.mandatory_field</small> <a th:href="@{/companies/browser.html}" class="btn btn-warning"><i class="fa fa-times"></i> <span th:text="#{default.cancel}">default.cancel</span></a>
+						<button type="submit" class="btn btn-success">
+							<span th:text="#{default.submit}"></span> <i class="fa fa-check"></i>
+						</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+<th:block layout:fragment="page-scripts">
+	<script type="text/javascript">
+		$(document).ready(function() {
+			
+			
+			document.getElementById("nationality").value = 205;
+			document.getElementById("country").value = 205;
+			
+			$('.datefield').datetimepicker({
+				format : 'Y-m-d'
+			});
+			
+			$("#cooperativeEditorForm").submit(function()
+			        {
+			         document.getElementById("entityType").value = 5;
+			         return true;
+		    });
+			
+			
+		});
+
+		function hasEmptyFields(selector) {
+			var hasError = false;
+			$(selector).each(function(index, element) {
+				if ($(element).val() == '') {
+					hasError = true;
+					$(element).closest('.form-group').addClass('has-error');
+				} else
+					$(element).closest('.form-group').removeClass('has-error');
+			});
+			return hasError;
+		}
+	</script>
+</th:block>
+</html>
