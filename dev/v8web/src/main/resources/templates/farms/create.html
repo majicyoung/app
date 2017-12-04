@@ -158,7 +158,7 @@
                                         <input type="text" class="form-control" id="inputFarmArea" th:field="*{size.quantity}" th:placeholder="#{default.area}" required="required"/>
                                     </div>
                                     <div class="col-xs-6">
-                                        <select class="form-control" th:field="*{size.unit}" required="required">
+                                        <select class="form-control" id="areaUnit" th:field="*{size.unit}" required="required">
                                             <option value=""> -- <span text="#{default.select_unit}"  th:remove="tag"></span> -- </option>
                                             <option th:each="unit : ${allQuantityUnits}" th:value="${unit.id}" th:text="${unit.name}"></option>
                                         </select>
@@ -210,6 +210,9 @@
 	<script type="text/javascript">
 	/*<![CDATA[*/
 		$( document ).ready(function() {
+			
+			
+			
 			$('.openNewStaffBtn').click(function(){
 				
 				document.location='individual-editor.html';
