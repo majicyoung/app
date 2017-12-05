@@ -1,8 +1,12 @@
 package com.fairagora.verifik8.v8web.data.domain.cl;
 
+import java.util.Locale;
+
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
+
+import org.springframework.context.i18n.LocaleContextHolder;
 
 import com.fairagora.verifik8.v8web.data.domain.V8EntitySupport;
 
@@ -27,23 +31,22 @@ public abstract class CodeListSupport extends V8EntitySupport {
 
 	@Column(name = "I18N_DEFAULT", length = 256, nullable = false)
 	protected String i18nDefault;
-	
+
 	@Column(name = "I18N_EN", length = 256, nullable = false)
 	protected String i18nEn;
-	
+
 	@Column(name = "I18N_FR", length = 256, nullable = false)
 	protected String i18nFr;
 
 	@Column(name = "I18N_ES", length = 256, nullable = false)
 	protected String i18nEs;
-	
+
 	@Column(name = "I18N_TH", length = 256, nullable = false)
 	protected String i18nTh;
 
 	@Column(name = "I18N_VT", length = 256, nullable = false)
 	protected String i18nVt;
-	
-	
+
 	public Long getId() {
 		return id;
 	}
@@ -91,23 +94,23 @@ public abstract class CodeListSupport extends V8EntitySupport {
 	public void setI18nDefault(String i18nDefault) {
 		this.i18nDefault = i18nDefault;
 	}
-	
+
 	public String getI18nEn() {
 		return i18nEn;
 	}
 
 	public void setI18nEn(String i18nEn) {
 		this.i18nEn = i18nEn;
-	}	
-	
+	}
+
 	public String getI18nFr() {
 		return i18nFr;
 	}
 
 	public void setI18nFr(String i18nFr) {
 		this.i18nFr = i18nFr;
-	}	
-	
+	}
+
 	public String getI18nEs() {
 		return i18nEs;
 	}
@@ -123,14 +126,36 @@ public abstract class CodeListSupport extends V8EntitySupport {
 	public void setI18nTh(String i18nTh) {
 		this.i18nTh = i18nTh;
 	}
-	
+
 	public String getI18nVt() {
 		return i18nVt;
 	}
 
 	public void setI18nVt(String i18nVt) {
 		this.i18nVt = i18nVt;
-	}	
+	}
 
+	public String getLocalisedName() {
+		Locale locale = LocaleContextHolder.getLocale();
+
+		if (Locale.FRANCE.getLanguage().equals(locale.getLanguage()))
+			return getI18nFr();
+		else if (Locale.ENGLISH.getLanguage().equals(locale.getLanguage()))
+			return getI18nEn();
+		else if (Locale.US.getLanguage().equals(locale.getLanguage()))
+			return getI18nEn();
+		else if (Locale.UK.getLanguage().equals(locale.getLanguage()))
+			return getI18nEn();
+		else if ("th".equalsIgnoreCase(locale.getLanguage()))
+			return getI18nTh();
+		else if ("vt".equalsIgnoreCase(locale.getLanguage()))
+			return getI18nVt();
+		else if ("es".equalsIgnoreCase(locale.getLanguage()))
+			return getI18nEs();
+
+		System.out.println("UNKNOWN LOCALE ::: " + locale);
+
+		return getI18nDefault();
+	}
 
 }
