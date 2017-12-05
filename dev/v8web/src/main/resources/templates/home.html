@@ -47,8 +47,9 @@
           <div class="info-box">
             <span class="info-box-icon bg-green"><i class="fa fa-money"></i></span>
             <div class="info-box-content">
-              <span class="info-box-text">Production</span>
-              <span class="info-box-number">840 <small>t</small></span>
+              <span class="info-box-text" th:text="${dashboard.topKpisMap['totalProduction'].name}"></span>
+              <span class="info-box-number" th:text="${dashboard.topKpisMap['totalProduction'].value}"> </span><span>MT</span>
+              
             </div>
           </div>
         </div>
@@ -62,11 +63,41 @@
           </div>
         </div>
     </div>
+    
+    <div class="row">
+        <div class="col-md-3 col-sm-6 col-xs-12">
+	        <div class="text-center">
+					<button type="button" class="btn btn-primary  btnFarmList" th:title="#{tooltip.view}" th:text="#{farm.list}">View farm list</button>
+					<button type="button" class="btn btn-primary  btnAddFarm" th:title="#{tooltip.add}" th:text="#{farm.add}">Add a farm</button>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="text-center">
+					<button type="button" class="btn btn-danger  btnPlotList" th:title="#{tooltip.view}" th:text="#{farm.plots_list}">View plot list</button>
+					<button type="button" class="btn btn-danger  btnAddPlot" th:title="#{tooltip.add}" th:text="#{farm.add_plot}">Add a plot</button>       
+	        </div>
+        </div>
+
+        <div class="clearfix visible-sm-block"></div>
+        <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="text-center">
+					<button type="button" class="btn btn-success btnPlotList" th:title="#{tooltip.view}" th:text="#{farm.plots_list}">View plot list</button>
+					<button type="button" class="btn btn-success btnAddActivity" th:title="#{tooltip.add}" th:text="#{farm.plot_activity_add}">Add production to a plot</button>        
+	        </div>
+        </div>
+        <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="text-center">
+					<button type="button" class="btn btn-warning  btnStaffList" th:title="#{tooltip.view}" th:text="#{staff.list}">View employee list</button>
+					<button type="button" class="btn btn-warning  btnAddStaff" th:title="#{tooltip.add}" th:text="#{staff.add}">Add an employee</button>        
+	        </div>
+        </div>
+    </div>
+
     <div class="row">
         <div class="col-md-12">
           <div class="box">
             <div class="box-header with-border">
-              <h3 class="box-title">Registered farms in Verifik8 in 2016</h3>
+              <h3 class="box-title" th:text="#{dashboard.registered_farms}">Registered farms in Verifik8 in 2017</h3>
               <div class="box-tools pull-right">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
                 </button>
@@ -87,43 +118,43 @@
             <div class="box-body">
               <div class="row">
                 <div class="col-md-8">
-                  <p class="text-center">
-                    <strong>Registration: 1 Aug, 2016 - 31 Dec, 2016</strong>
+                  <p class="text-center" th:text="#{dashboard.registration}">
+
                   </p>
                   <div class="chart">
                     <canvas id="salesChart" style="height: 180px; width: 699px;" height="180" width="699"></canvas>
                   </div>
                 </div>
                 <div class="col-md-4">
-                  <p class="text-center">
+                  <p class="text-center" th:text="#{dashboard.goal_completion}">
                     <strong>Goal Completion</strong>
                   </p>
                   <div class="progress-group">
-                    <span class="progress-text">Registered users</span>
-                    <span class="progress-number"><b>40</b>/50</span>
+                    <span class="progress-text" th:text="#{dashboard.registered_users}">Registered users</span>
+                    <span class="progress-number">40/50</span>
                     <div class="progress sm">
                       <div class="progress-bar progress-bar-aqua" style="width: 80%"></div>
                     </div>
                   </div>
                   <div class="progress-group">
-                    <span class="progress-text">Registered farms</span>
-                    <span class="progress-number"><b>80</b>/100</span>
+                    <span class="progress-text" th:text="#{dashboard.registered_farms}">Registered farms</span>
+                    <span class="progress-number" th:text="${dashboard.topKpisMap['nbfarms'].value} + '/100'"></span>
                     <div class="progress sm">
-                      <div class="progress-bar progress-bar-red" style="width: 80%"></div>
+                      <div class="progress-bar progress-bar-red" style="width: 46%"></div>
                     </div>
                   </div>
                   <div class="progress-group">
-                    <span class="progress-text">Farm Profil completed</span>
-                    <span class="progress-number"><b>75</b>/80</span>
+                    <span class="progress-text" th:text="#{dashboard.farm_profile_completed}">Farm Profiles completed</span>
+                    <span class="progress-number" th:text="${dashboard.topKpisMap['nbfarms'].value} + '/'+${dashboard.topKpisMap['nbfarms'].value}"></span>
                     <div class="progress sm">
-                      <div class="progress-bar progress-bar-green" style="width: 80%"></div>
+                      <div class="progress-bar progress-bar-green" style="width: 100%"></div>
                     </div>
                   </div>
                   <div class="progress-group">
-                    <span class="progress-text">Pond profile completed</span>
-                    <span class="progress-number"><b>70</b>/80</span>
+                    <span class="progress-text" th:text="#{dashboard.plot_profile_completed}">Plot profile completed</span>
+                    <span class="progress-number" th:text="${dashboard.topKpisMap['nbPlots'].value}+ '/100'"></span>
                     <div class="progress sm">
-                      <div class="progress-bar progress-bar-yellow" style="width: 80%"></div>
+                      <div class="progress-bar progress-bar-yellow" style="width: 6%"></div>
                     </div>
                   </div>
                 </div>
@@ -136,7 +167,7 @@
     	<div class="col-sm-6">
           <div class="box box-danger">
             <div class="box-header with-border">
-              <h3 class="box-title">Species repartition</h3>
+              <h3 class="box-title" th:text="#{dashboard.farm_distribution}">Farm distribution</h3>
               <div class="box-tools pull-right">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
                 </button>
@@ -151,7 +182,7 @@
         <div class="col-sm-6">
           <div class="box box-success">
             <div class="box-header with-border">
-              <h3 class="box-title">Production evolution</h3>
+              <h3 class="box-title" th:text="#{dashboard.production_evolution}">Production evolution</h3>
               <div class="box-tools pull-right">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
                 </button>
@@ -178,6 +209,37 @@
 
 <script type="text/javascript" th:inline="javascript">
 /*<![CDATA[*/
+	
+	$(document).ready(function() {
+		$('.btnFarmList').click(function(){
+			document.location='/farms.html';
+		});		
+
+		$('.btnAddFarm').click(function(){
+			document.location='/farm/create.html';
+		});
+		
+		$('.btnPlotList').click(function(){
+			document.location='/plots/browser.html';
+		});
+		
+		$('.btnAddPlot').click(function(){
+			document.location='/plots/create.html';
+		});
+		
+		$('.btnAddActivity').click(function(){
+			document.location='/plots/browser.html';
+		});		
+
+		$('.btnStaffList').click(function(){
+			document.location='/individuals/browser.html';
+		});	
+	
+		$('.btnAddStaff').click(function(){
+			document.location='/individuals/create.html';
+		});	
+	});	
+	
 	var dashboardData=/*[[${dashboard}]]*/;
 	console.log( dashboardData.timeSeriesMap['kpi1'].labels);
 /*]]>*/
@@ -281,42 +343,30 @@
     var pieChart = new Chart(pieChartCanvas);
     var PieData = [
       {
-        value: 700,
+        value: 20,
         color: "#f56954",
         highlight: "#f56954",
-        label: "Tilapia"
+        label: "South East"
 
       },
       {
-        value: 500,
+        value: 15,
         color: "#00a65a",
         highlight: "#00a65a",
-        label: "Vannamei"
+        label: "South West"
       },
       {
-        value: 400,
+        value: 5,
         color: "#f39c12",
         highlight: "#f39c12",
-        label: "Monodon"
+        label: "Center"
       },
       {
-        value: 600,
+        value: 6,
         color: "#00c0ef",
         highlight: "#00c0ef",
-        label: "Catfish"
+        label: "North"
       },
-      {
-        value: 300,
-        color: "#3c8dbc",
-        highlight: "#3c8dbc",
-        label: "Milk fish"
-      },
-      {
-        value: 100,
-        color: "#d2d6de",
-        highlight: "#d2d6de",
-        label: "Others"
-      }
     ];
     var pieOptions = {
       //Boolean - Whether we should show a stroke on each segment
