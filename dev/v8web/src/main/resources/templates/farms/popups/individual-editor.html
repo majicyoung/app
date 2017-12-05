@@ -1,17 +1,14 @@
 <!DOCTYPE html>
-<html layout:decorator="inc/main-layout" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-
-<div layout:fragment="content">
-	<div class="row">
-		<div class="col-xs-12">
-			<div class="box" id="individual-box">
-				<div class="box-header with-border">
-					<h3 class="box-title" th:text="#{individual.create}"></h3>
-					<div class="box-tools">
-						<a th:href="@{/individuals/browser.html}" class="btn btn-sm btn-flat btn-warning"><i class="fa fa-backward"></i> <span th:text="#{default.back}"></span></a>
-					</div>
-				</div>
-				<form th:action="@{'/individuals/'+${individualId}+'/update.html'}" id="individualEditorForm" method="post" th:object="${individualDto}">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<object th:include="inc/includes :: head" th:remove="tag"></object>
+<title th:text="|${v8App.appName} ${'|'} #{page.home.title}|"></title>
+</head>
+<body class="hold-transition skin-green sidebar-mini">
+<div class="content">
+<div class="row">
+<form th:action="@{'/individuals/'+${individualId}+'/update.html'}" id="individualEditorForm" method="post" th:object="${individualDto}">
+	<input name="fromPopup" value="true" type="hidden"/>
 					<div class="box-body">
 						<div class="row">
 							<div class="col-md-6 col-sm-6 col-xs-12">
@@ -107,14 +104,15 @@
 					</div>
 					<div class="box-footer text-center">
 			            <small th:text="|*#{default.mandatory_field}|">*default.mandatory_field</small>
-			            <a th:href="@{/individuals/browser.html}" class="btn btn-warning"><i class="fa fa-times"></i> <span th:text="#{default.cancel}">default.cancel</span></a> 
 			            <button type="submit" class="btn btn-success"><span th:text="#{default.submit}"></span> <i class="fa fa-check"></i></button>
 			        </div>
 				</form>
-			</div>
-		</div>
-	</div>
 </div>
+</div>
+</body>
+
+
+ 
 
 <th:block layout:fragment="page-scripts">
 	<script type="text/javascript">

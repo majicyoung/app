@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<object th:include="inc/includes :: head" th:remove="tag"></object>
+<title th:text="|${v8App.appName} ${'|'} #{page.home.title}|"></title>
+</head>
+<body class="hold-transition skin-green sidebar-mini">
+ OK.
+</body>
+
+
+<script type="text/javascript" th:inline="javascript">
+	/*<![CDATA[*/
+		var iType = [[${itemType}]];		
+		var iId = [[${itemId}]];		
+		var iName = [[${itemName}]];		
+		window.parent.actionDone({itemType:iType, itemId:iId, itemName:iName});
+	/*]]>*/
+</script>
+</html>

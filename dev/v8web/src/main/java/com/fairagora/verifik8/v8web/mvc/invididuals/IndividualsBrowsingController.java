@@ -66,18 +66,24 @@ public class IndividualsBrowsingController extends AbstractV8Controller {
 	 */
 	@RequestMapping(value = "/individuals/{individualId}/update.html", method = RequestMethod.POST)
 	@Transactional
-	public String updateIndividual(@PathVariable("individualId") Long individualAssId,
-			IndividualDto dto, Model mv) {
+	public String updateIndividual(@PathVariable("individualId") Long individualAssId, IndividualDto dto,
+			@RequestParam(required = false, name = "fromPopup") Boolean fromPopup, Model mv) {
 
-		
-		RegEntity ind = individualAssId.intValue()==0 ? new RegEntity(): regEntityRepository.findOne(individualAssId);
+		RegEntity ind = individualAssId.intValue() == 0 ? new RegEntity()
+				: regEntityRepository.findOne(individualAssId);
 		ind.setEntityType(codeListservice.findEntityType(CLEntityType.CODE_IND));
-		
+
 		regFarmDtoMapper.fillEntity(dto, ind);
 
 		regEntityRepository.save(ind);
-		
-		return "redirect:/individuals/browser.html";
+
+		if (fromPopup != null && fromPopup) {
+			mv.addAttribute("itemType", "individual");
+			mv.addAttribute("itemId", ind.getId());
+			mv.addAttribute("itemName", ind.getName());
+			return "farms/popups/action-done";
+		} else
+			return "redirect:/individuals/browser.html";
 	}
 
 	/**

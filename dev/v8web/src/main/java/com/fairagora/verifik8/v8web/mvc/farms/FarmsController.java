@@ -180,7 +180,7 @@ public class FarmsController extends AbstractV8Controller {
 		mv.addAttribute("productType", 0);
 		mv.addAttribute("individual", 0);
 
-		return "farms/includes/individual-editor";
+		return "farms/popups/individual-editor";
 	}
 	
 	

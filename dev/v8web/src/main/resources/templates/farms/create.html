@@ -201,30 +201,57 @@
 
 	</div>
 
+	<!-- MODALS -->
+	<div class="modal fade popModal" id="modalIndividual" tabindex="-1" role="dialog">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        <h4 class="modal-title">{{ trans('default.create_owner') }}</h4>
+	      </div>
+	      <div class="modal-body" style="height: 600px;width:600px">
+			<iframe id="indFrame" th:src="@{'/farm/'+${farmId}+'/individual-editor.html'}" class="iframe" name="info" seamless="" height="100%" width="100%"></iframe>
+	      </div>
+	      <div class="modal-footer">
+	      </div>
+	    </div>
+	  </div>
+	</div>
 </div>
 
+	
 
 <th:block layout:fragment="page-scripts">
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCOH2xiCWWRQraDjvC_BqEbr-gBlFkrEZ4"></script>
 	<script th:src="@{/static/dist/js/jquery.ui.map.js}"></script>
 	<script type="text/javascript">
 	/*<![CDATA[*/
+		
 		$( document ).ready(function() {
+
+			var individualEditorSrc=$('#indFrame').attr('src');
+			
 			$('.openNewStaffBtn').click(function(){
-				
-				document.location='individual-editor.html';
+				//document.location='individual-editor.html';
+				$('#indFrame').attr('src',individualEditorSrc);
+				$('#modalIndividual').modal('show');
 			});
 
 			$('.openNewCooperativeBtn').click(function(){
-				
 				document.location='cooperative-editor.html';
 			});
 			
-			
-			
 		});
 
-			
+		function actionDone(item){
+			console.log(item);
+			if(item.itemType=='individual'){
+				$('#modalIndividual').modal('hide');
+				var sCoo = '<option value="'+item.itemId+'"> '+item.itemName+' </option>';
+				$('#inputFarmOwner').append(sCoo);
+				$('#inputFarmOwner').val(item.itemId);
+			}
+		}	
 
 	
 		function centerMap(address,zoom,marker){
