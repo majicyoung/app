@@ -21,7 +21,7 @@
 									<label th:text="|#{default.measure_type}*|">default.measure_type</label>
 									<select class="form-control" th:field="*{measureType}" required="required">
 										<option value="" th:text="|-- #{default.select_measure_type} --|">-- default.select_measure_type --</option> 
-										<option th:each="actType:${allMeasureTypes}" th:value="${actType.id}" th:text="${actType.name}"></option> 
+										<option th:each="actType:${allMeasureTypes}" th:value="${actType.id}" th:text="${actType.localisedName}"></option> 
 									</select>
 								</div>
 								<div class="form-group ">
@@ -42,7 +42,7 @@
 			                              <div class="col-xs-6">
 			                                <select class="form-control" id="inputPondAreaUnit" th:field="*{measure.unit}" required="required">
 			                                    <option value="" th:text="|-- #{default.select_unit} --|"></option>
-												<option th:each="unit : ${allQuantityUnits}" th:value="${unit.id}" th:text="${unit.name}"></option>
+												<option th:each="unit : ${allQuantityUnits}" th:value="${unit.id}" th:text="${unit.localisedName}"></option>
 			                                </select>
 			                              </div>
 			                          </div>

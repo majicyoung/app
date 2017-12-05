@@ -83,7 +83,7 @@
 			                                <div class="col-xs-9">
 			                                    <select class="form-control form-staff form-staff-required" th:field="*{contactType}" id="wag_contactType">
 			                                 	   <option value="" th:text="|-- #{staff-working-agreement.select_contactType} --|"></option>
-			                                       <option th:each="pos : ${allContractTypes}" th:value="${pos.id}" th:text="${pos.name}"> </option>
+			                                       <option th:each="pos : ${allContractTypes}" th:value="${pos.id}" th:text="${pos.localisedName}"> </option>
 			                                    </select>
 			                                </div>
 			                            </div>
@@ -93,7 +93,7 @@
 			                                <div class="col-xs-9">
 			                                    <select class="form-control form-staff form-staff-required" th:field="*{companyPositionType}" id="wag_companyPositionType">
 			                                 	   <option value="" th:text="|-- #{staff-working-agreement.select_companyPositionType} --|"></option>
-			                                       <option th:each="pos : ${allCompanyPositionTypes}" th:value="${pos.id}" th:text="${pos.name}"> </option>
+			                                       <option th:each="pos : ${allCompanyPositionTypes}" th:value="${pos.id}" th:text="${pos.localisedName}"> </option>
 			                                    </select>
 			                                </div>
 			                            </div>
@@ -120,7 +120,7 @@
 			                                <div class="col-xs-2">
 			                                    <select class="form-control form-staff form-staff-required" th:field="*{remunerationCurrency}" >
 			                                 	   <option value="" th:text="|-- #{staff-working-agreement.select_remunerationCurrency} --|"></option>
-			                                       <option th:each="pos : ${allCurrencies}" th:value="${pos.id}" th:text="${pos.name}"> </option>
+			                                       <option th:each="pos : ${allCurrencies}" th:value="${pos.id}" th:text="${pos.localisedName}"> </option>
 			                                    </select>
 			                                </div>
 			                            </div>
@@ -131,7 +131,7 @@
 			                                <div class="col-xs-9">
 			                                    <select class="form-control form-staff form-staff-required" th:field="*{paymentFrequency}" >
 			                                 	   <option value="" th:text="|-- #{staff-working-agreement.select_paymentFrequency} --|"></option>
-			                                       <option th:each="pos : ${allPaymentFrequencies}" th:value="${pos.id}" th:text="${pos.name}"> </option>
+			                                       <option th:each="pos : ${allPaymentFrequencies}" th:value="${pos.id}" th:text="${pos.localisedName}"> </option>
 			                                    </select>
 			                                </div>
 			                            </div>

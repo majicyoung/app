@@ -191,7 +191,7 @@
 	                      <label th:text="|#{default.unit}*|">unit*</label>
 	                      <select class="form-control" name="commodities" id="totalProductionForm_commodities">
 	                      	<option value="" th:text="|-- #{farm.select_plot_commodities} --|">farm.select_plot_type</option>
-							<option th:each="ptype : ${allCommodities}" th:value="${ptype.id}" th:text="${ptype.name}"></option>
+							<option th:each="ptype : ${allCommodities}" th:value="${ptype.id}" th:text="${ptype.localisedName}"></option>
 	                      </select>
 	                    </div>
 	                </div>
@@ -209,7 +209,7 @@
 	                	<div class="form-group">
 	                      <label th:text="|#{default.unit}*|">unit*</label>
 	                      <select class="form-control" name="quantity.unit" id="totalProductionForm_unit">
-	                      	<option th:each="p:${allQuantityUnits}" th:value="${p.id}" th:text="${p.name}"></option>
+	                      	<option th:each="p:${allQuantityUnits}" th:value="${p.id}" th:text="${p.localisedName}"></option>
 	                      </select>
 	                    </div>
 	                </div>
@@ -305,7 +305,7 @@
 	                	<div class="form-group">
 	                      <label th:text="|#{production_profile.soil_analysis.type}*|">production_profile.soil_analysis.type*</label>
 	                      <select class="form-control" name="soilAnalysisType" id="soilAnalysisForm_soilAnalysisType">
-	                      	<option th:each="p:${soilAnalysisTypeListing}" th:value="${p.id}" th:text="${p.name}"></option>
+	                      	<option th:each="p:${soilAnalysisTypeListing}" th:value="${p.id}" th:text="${p.localisedName}"></option>
 	                      </select>
 	                    </div>
 	                </div>

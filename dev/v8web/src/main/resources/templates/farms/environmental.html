@@ -95,7 +95,7 @@
                                 <div class="col-xs-4">
                                     <select class="form-control" th:field="*{farmExpensionType}">
                                         <option value="" th:text="|--- #{farm.expansion_type} ---|"> -- farm.expansion_type -- </option>
-                                        <option th:each="expType : ${allHighValueExpensionTypes}" th:value="${expType.id}" th:text="${expType.name}"></option>
+                                        <option th:each="expType : ${allHighValueExpensionTypes}" th:value="${expType.id}" th:text="${expType.localisedName}"></option>
                                     </select>
                                 </div>
                             </div>

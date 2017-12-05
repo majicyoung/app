@@ -55,7 +55,7 @@
                 <div class="col-md-3 col-sm-4 col-xs-6">
                     <select class="form-control" onchange="changeMeasure(this);">
                         <option value="" th:text="|-- #{default.select_measure_type} --|"> </option>
-                        <option th:each="mType:${measureTypes}" th:value="${mType.name}" th:text="${mType.name}"></option>
+                        <option th:each="mType:${measureTypes}" th:value="${mType.name}" th:text="${mType.localisedName}"></option>
                     </select>
               	</div>
               </div>

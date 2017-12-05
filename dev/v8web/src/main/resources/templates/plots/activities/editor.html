@@ -21,7 +21,7 @@
 									<label th:text="|#{farm.plot_activity_type}#|">default.farm*</label>
 									<select class="form-control" th:field="*{activityType}" required="required" onchange="activityTypeChanged()">
 										<option value="" th:text="|-- #{farm.plot_activity_select_type} --|">-- default.select_farm --</option> 
-										<option th:each="actType:${allActivityTypes}" th:value="${actType.id}" th:text="${actType.name}"></option> 
+										<option th:each="actType:${allActivityTypes}" th:value="${actType.id}" th:text="${actType.localisedName}"></option> 
 									</select>
 								</div>
 								<div class="form-group ">
@@ -36,14 +36,14 @@
 									<label th:text="|#{farm.plot_activity_product}|"></label>
 									<select class="form-control" th:field="*{product}" >
 										<option value="" th:text="|-- #{farm.plot_activity_select_product} --|">-- default.select_farm --</option> 
-										<option th:each="actType:${allProducts}" th:value="${actType.id}" th:text="${actType.name}"></option> 
+										<option th:each="actType:${allProducts}" th:value="${actType.id}" th:text="${actType.localisedName}"></option> 
 									</select>
 								</div>
 								<div class="form-group " id="tilingActiGroup">
 									<label th:text="|#{farm.plot_activity_tilingActivityType}|"></label>
 									<select class="form-control" th:field="*{tilingActivityType}">
 										<option value="" th:text="|-- #{farm.plot_activity_select_tilingActivityType} --|">-- default.select_farm --</option> 
-										<option th:each="actType:${allTilingActivityTypes}" th:value="${actType.id}" th:text="${actType.name}"></option> 
+										<option th:each="actType:${allTilingActivityTypes}" th:value="${actType.id}" th:text="${actType.localisedName}"></option> 
 									</select>
 								</div>
 								<div class="form-group">
@@ -51,7 +51,7 @@
 									<input type="text" class="form-control form-pond form-pond-required" th:field="*{measure.quantity}" />
 									<select class="form-control" th:field="*{measure.unit}">
 										<option value="" th:text="|-- #{default.select_unit} --|"></option>
-										<option th:each="unit : ${allQuantityUnits}" th:value="${unit.id}" th:text="${unit.name}"></option>
+										<option th:each="unit : ${allQuantityUnits}" th:value="${unit.id}" th:text="${unit.localisedName}"></option>
 									</select>
 								</div>
 								<div class="form-group ">

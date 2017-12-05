@@ -73,7 +73,7 @@
 													<label for="numberOfStaffAsToday" class="col-xs-6 control-label" th:text="|#{staffgeneralinfo.existenceHazardousWork}|">default.name*</label>
 													<div class="col-xs-6">
 														<input type="checkbox" th:field="*{existenceHazardousWork}" /> <select th:field="*{hazardousWorkType}">
-															<option th:each="wtype:${allHazardousWorkType}" th:value="${wtype.id}" th:text="${wtype.name}"></option>
+															<option th:each="wtype:${allHazardousWorkType}" th:value="${wtype.id}" th:text="${wtype.localisedName}"></option>
 														</select>
 													</div>
 												</div>

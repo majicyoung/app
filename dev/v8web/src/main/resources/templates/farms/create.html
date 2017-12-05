@@ -160,7 +160,7 @@
                                     <div class="col-xs-6">
                                         <select class="form-control" id="areaUnit" th:field="*{size.unit}" required="required">
                                             <option value=""> -- <span text="#{default.select_unit}"  th:remove="tag"></span> -- </option>
-                                            <option th:each="unit : ${allQuantityUnits}" th:value="${unit.id}" th:text="${unit.name}"></option>
+                                            <option th:each="unit : ${allQuantityUnits}" th:value="${unit.id}" th:text="${unit.localisedName}"></option>
                                         </select>
                                     </div>
                                 </div>

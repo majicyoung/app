@@ -54,7 +54,7 @@
 									<label th:text="#{default.country}">default.country</label> 
 									<select class="form-control" th:field="*{country}">
 										<option value="" th:text="#{default.select_country}">default.select_country</option>
-										<option th:each="country : ${allCountries}" th:value="${country.id}" th:text="${country.name}"></option>
+										<option th:each="country : ${allCountries}" th:value="${country.id}" th:text="${country.localisedName}"></option>
 									</select>
 								</div>
 							</div>

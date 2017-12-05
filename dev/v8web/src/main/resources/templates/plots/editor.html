@@ -39,7 +39,7 @@
 										<div class="col-xs-6">
 											<select class="form-control form-plot form-plot-required" id="inputFarmPlotAreaUnit" th:field="*{size.unit}">
 												<option value="" th:text="|-- #{default.select_unit} --|"></option>
-												<option th:each="unit : ${allQuantityUnits}" th:value="${unit.id}" th:text="${unit.name}"></option>
+												<option th:each="unit : ${allQuantityUnits}" th:value="${unit.id}" th:text="${unit.localisedName}"></option>
 											</select>
 										</div>
 									</div>
@@ -50,7 +50,7 @@
 									<div class="col-xs-9">
 										<select class="form-control form-plot" id="inputFarmPlotCommodity" th:field="*{commodities}">
 											<option value="" th:text="|-- #{farm.select_plot_commodities} --|">farm.select_plot_type</option>
-											<option th:each="ptype : ${allCommodities}" th:value="${ptype.id}" th:text="${ptype.name}"></option>
+											<option th:each="ptype : ${allCommodities}" th:value="${ptype.id}" th:text="${ptype.localisedName}"></option>
 										</select>
 									</div>
 								</div>
