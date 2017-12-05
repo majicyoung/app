@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Client :  127.0.0.1
--- Généré le :  Lun 04 Décembre 2017 à 22:50
+-- Généré le :  Mar 05 Décembre 2017 à 14:46
 -- Version du serveur :  5.7.14
 -- Version de PHP :  5.6.25
 
@@ -1441,10 +1441,12 @@ CREATE TABLE `dt_farmag_plot_management` (
 --
 
 INSERT INTO `dt_farmag_plot_management` (`ID`, `REG_ENTITY_FARM_PLOT_ID`, `ACTIVITY_START_DATE`, `ACTIVITY_END_DATE`, `CL_PLOT_ACTIVITY_TYPE_ID`, `CL_PRODUCT_ID`, `MEASURE_VALUE`, `CL_MEASURE_VALUE_UNIT_ID`, `ADDITIONNAL_MEASURE_VALUE`, `CL_ADDITIONNAL_MEASURE_VALUE_UNIT_ID`, `CL_TILING_ACTIVITY_TYPE_ID`, `UPDATER_ID`, `COMMENT`, `CREATED_AT`, `UPDATED_AT`) VALUES
-(8, 8, '2017-11-27 18:15:23', '2017-11-27 18:15:27', 11, NULL, 0, 5, NULL, NULL, NULL, 3, '', '2017-11-27 17:16:36', '2017-11-27 17:16:36'),
-(9, 8, '2017-11-29 18:16:46', '2017-11-29 18:16:49', 1, NULL, 46, 2, NULL, NULL, NULL, 3, '', '2017-11-27 17:17:15', '2017-11-27 17:17:15'),
-(10, 8, '2017-11-30 18:17:31', '2017-11-30 18:17:34', 10, 9, 568, 2, NULL, NULL, NULL, 3, '', '2017-11-27 17:17:55', '2017-11-27 17:17:55'),
-(11, 9, '2017-12-13 17:56:38', '2018-01-12 17:56:49', 5, NULL, 5000, 2, NULL, NULL, 3, 4, '', '2017-11-28 11:02:16', '2017-11-28 11:02:16');
+(12, 11, '2016-11-01 10:25:03', '2016-11-12 10:25:15', 1, NULL, 6025, 3, NULL, NULL, NULL, 3, '', '2017-12-05 10:25:55', '2017-12-05 10:25:55'),
+(13, 11, '2017-02-08 10:26:06', '2017-02-08 14:26:00', 2, NULL, 0, NULL, NULL, NULL, NULL, 3, '', '2017-12-05 10:26:57', '2017-12-05 10:26:57'),
+(14, 11, '2017-03-08 10:27:19', '2017-03-09 10:27:26', 10, 19, 85, 2, NULL, NULL, NULL, 3, '', '2017-12-05 10:27:35', '2017-12-05 10:27:35'),
+(15, 11, '2017-10-05 09:27:51', '2017-10-06 09:28:00', 4, NULL, 230, 11, NULL, NULL, NULL, 3, '', '2017-12-05 10:28:14', '2017-12-05 10:28:14'),
+(16, 12, '2017-10-12 09:28:45', '2017-10-14 09:28:51', 4, NULL, 215, 11, NULL, NULL, NULL, 3, '', '2017-12-05 10:29:09', '2017-12-05 10:29:09'),
+(17, 13, '2017-10-16 09:29:26', '2017-10-17 09:29:31', 3, NULL, 50, 11, NULL, NULL, NULL, 3, '', '2017-12-05 10:29:45', '2017-12-05 10:29:45');
 
 -- --------------------------------------------------------
 
@@ -1467,6 +1469,16 @@ CREATE TABLE `dt_farmag_production` (
   `CREATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `UPDATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='soil analysis record';
+
+--
+-- Contenu de la table `dt_farmag_production`
+--
+
+INSERT INTO `dt_farmag_production` (`ID`, `REG_ENTITY_FARM_ID`, `CL_PROD_DATA_ENTRY_TYPE_ID`, `DATE_FROM`, `DATE_TO`, `CL_COMMODITIES_ID`, `PRODUCTION_QUANTITY`, `CL_PRODUCTION_QUANTITY_UNIT_ID`, `UPDATER_ID`, `COMMENT`, `CREATED_AT`, `UPDATED_AT`) VALUES
+(6, 3, 1, '2017-01-01', '2017-12-31', 1, '450.0', 11, 3, '', '2017-12-05 10:21:34', '2017-12-05 10:21:34'),
+(7, 3, 1, '2016-01-01', '2016-12-31', 1, '489.0', 11, 3, '', '2017-12-05 10:22:03', '2017-12-05 10:22:03'),
+(8, 13, 1, '2017-01-01', '2016-12-31', 1, '654.0', 11, 3, '', '2017-12-05 13:52:37', '2017-12-05 13:52:37'),
+(9, 13, 1, '2016-01-01', '2016-12-31', 1, '421.0', 11, 3, '', '2017-12-05 13:53:20', '2017-12-05 13:53:20');
 
 -- --------------------------------------------------------
 
@@ -1616,13 +1628,102 @@ CREATE TABLE `reg_entities` (
 --
 
 INSERT INTO `reg_entities` (`ID`, `CL_ENTITY_UID_TYPE_ID`, `IDENTIFIER`, `STANDARD_IDENTIFIER`, `CL_NATIONALITY_COUNTRY_ID`, `NAME`, `SURNAME`, `MIDDLE_NAME`, `SUFFIX_NAME`, `ACRONYM`, `SALUTATION`, `GENDER`, `DATE_OF_BIRTH`, `CL_ADDRESS_COUNTRY_ID`, `ADDRESS_CITY`, `ADDRESS`, `ADDRESS_ZIP_CODE`, `CL_ADML1_ID`, `PHONE_NUMBER`, `MOBILE_NUMBER`, `FAX_NUMBER`, `E_MAIL`, `INSTANT_MESSANGER`, `WEBSITE`, `REGISTRATION_NUMBER`, `IMG_URL`, `LTO_NUMBER`, `LTO_VALIDITY_DATE`, `UPDATER_ID`, `COMMENT`, `CREATED_AT`, `UPDATED_AT`) VALUES
-(125, 1, NULL, NULL, 205, 'Yann', '', '', NULL, NULL, 'Mr.', 'M', NULL, 205, '', '', '', 0, '', '5555', '', '', NULL, NULL, '', NULL, 0, NULL, 4, '', '2017-11-27 09:12:12', '2017-11-27 09:12:12'),
-(126, 2, NULL, NULL, NULL, 'TestFarm', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 205, 'Bangkok', '', '', 0, '', '5555', '', '', NULL, NULL, NULL, NULL, 0, NULL, 4, '', '2017-11-27 09:12:54', '2017-11-27 09:12:54'),
-(127, 8, NULL, NULL, 205, 'TestCompany', NULL, NULL, NULL, '', NULL, NULL, NULL, 205, '', '', '', 0, '', '5555', '', '', NULL, NULL, '', NULL, 0, NULL, 3, '', '2017-11-27 17:14:17', '2017-11-27 17:14:17'),
-(128, 1, NULL, NULL, 205, 'joe', '', '', NULL, NULL, 'Mr.', 'M', NULL, 205, '', '', '', 0, '', '555', '', '', NULL, NULL, '', NULL, 0, NULL, 3, '', '2017-11-27 17:38:24', '2017-11-27 17:38:24'),
-(129, 1, NULL, NULL, 64, 'Claire', 'Le Bras', '', NULL, NULL, 'Mrs.', 'F', '1995-08-02', 64, 'Toulouse', 'Place Laganne', '', 0, '', '0689485364', '', 'claire@fairagora.com', NULL, NULL, '14', NULL, 0, NULL, 2, '', '2017-11-28 04:27:07', '2017-11-28 04:27:07'),
-(130, 2, NULL, NULL, NULL, 'Sugarland1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 205, 'Khon Kaen', '', '', 0, '', '0689485364', '', 'claire@fairagora.com', NULL, NULL, NULL, NULL, 0, NULL, 2, '', '2017-11-28 04:30:06', '2017-11-28 04:30:06'),
-(131, 2, NULL, NULL, NULL, 'farm2', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 205, 'BKK', '', '', 0, '', '555', '', '', '', NULL, NULL, NULL, 0, NULL, 3, '', '2017-12-04 22:41:39', '2017-12-04 22:41:39');
+(1, 1, '', NULL, 205, 'Jaruk', 'Prapom', '', '', '', 'Mr.', 'M', NULL, 205, 'Chantaburi', '', '', 0, '', 'TBC', '', '', '', '', '', '', 0, NULL, 2, 'test-data', '2017-01-11 08:40:35', '2017-01-11 08:40:35'),
+(2, 1, '', NULL, 205, 'Tew', '', '', '', '', 'Mr.', 'M', NULL, 205, 'Chantaburi', '', '', 0, '', 'TBC', '', '', '', '', '', '', 0, NULL, 2, 'test-data', '2017-01-11 08:43:08', '2017-01-11 10:17:03'),
+(3, 2, '', NULL, 205, 'Tew Farm', '', '', '', '', '', '', NULL, 166, 'Chantaburi', 'Khung district, Chantaburi province', '', 0, '0134129620', '0683496499', '0134121811', 'email@mail.com', '', '', '', '', 0, NULL, 3, 'test-data', '2017-01-12 08:47:53', '2017-05-04 02:11:14'),
+(4, 1, '', NULL, 205, 'Trane', 'Yaw (TewW1)', '', '', '', 'Mr.', 'M', NULL, 205, 'Chantaburi', '', '', 0, '', 'TBC', '', '', '', '', '', '', 0, NULL, 2, 'test-data', '2017-01-12 09:19:24', '2017-01-12 09:29:43'),
+(5, 1, '', NULL, 205, 'Tew Worker 2', '', '', '', '', 'Mrs.', 'F', NULL, 205, 'Chantaburi', '', '', 0, '', 'TBC', '', '', '', '', '', '', 0, NULL, 2, 'test-data', '2017-01-11 09:20:55', '2017-01-11 09:20:55'),
+(6, 1, '', NULL, 205, 'Tew Worker 3', '', '', '', '', 'Mr.', 'M', NULL, 205, 'Chantaburi', '', '', 0, '', 'TBC', '', '', '', '', '', '', 0, NULL, 2, 'test-data', '2017-01-11 09:21:42', '2017-01-11 09:21:42'),
+(7, 8, '', NULL, 205, 'Thai Union Feed Mill Co. Ltd.', '', '', '', '', '', '', NULL, 205, 'Samutsakorn', ' 89/1 Moo 2,  Rama II Road,  Kalong Subdistrict, Muang District', '74000', 0, '66 (0) 3481-6500', '66 (0) 63 230 9410', '66 (0) 3481-6629', 'Yurachat.Sangsingkaew@thaiunion.com', '', '', '', '', 0, NULL, 2, 'test-data', '2017-01-11 10:00:08', '2017-01-20 11:52:18'),
+(8, 8, '', NULL, 205, 'Andaman Seafood CO. LTD.', '', '', '', '', '', '', NULL, 205, 'Bangkok', 'SUIT 216/44, 49 L.P.N. TOWER 21TH FLOOR,  NONGLINCHEE RD., CHONGNONSEE,  YANNAWA', '10120', 0, '66 2285 2450-1', '66 7783 5579-80', '66 2285 2911', 'group@andaman-food.com', '', '', '', '', 0, NULL, 2, 'test-data', '2017-01-11 11:37:56', '2017-01-11 16:14:01'),
+(10, 2, '', NULL, 205, 'THAI UNION HATCHERY CO.  LTD.', '', '', '', '', '', '', NULL, 205, 'Takuatung', '42 Moo 14, Kokkloy Sub-district,  Takuatung District, Phangnga Province', '82140', 0, 'TBC', '', '', '', '', '', '', '', 0, NULL, 2, 'test-data', '2017-01-11 11:43:22', '2017-01-11 11:43:22'),
+(11, 1, '', NULL, 205, 'Decha', 'Barnleudech', '', '', '', 'Mr.', 'M', NULL, 205, 'Prachuap Khiri Khan', 'Moo 2, Rai Kao Subdistrict, Sam Roi Yot District', '77180', 0, '', '0898364133', '', '', '', '', '', '', 0, NULL, 2, 'test-data', '2017-01-11 15:10:47', '2017-01-20 11:16:44'),
+(12, 5, '', NULL, 205, 'Sam Roi Yot Shrimp Farm Cooperative', '', '', '', '', '', '', NULL, 205, 'Prachuap Khiri Khan', '', '', 0, '', '', '', 'TBC@TBC', '', '', '', '', 0, NULL, 2, 'test-data', '2017-01-11 15:15:05', '2017-01-11 16:19:52'),
+(13, 2, '', NULL, 205, 'Decha Farm', '', '', '', '', '', '', NULL, 205, 'Prachuap Khiri Khan', 'Moo 2, Rai Kao Subdistrict, Sam Roi Yot District', '77180', 0, '0898364133', '', '', '', '', '', '', '', 0, NULL, 4, 'test-data', '2017-01-11 15:20:33', '2017-05-02 22:37:52'),
+(14, 1, '', NULL, 205, 'Ning Nong (Nickname)', '', '', '', '', 'Mr.', 'M', NULL, 205, 'Prachuap Khiri Khan', 'Moo 2, Rai Kao Subdistrict, Sam Roi Yot District', '77180', 0, '', 'TBC', '', '', '', '', '', '', 0, NULL, 2, 'test-data', '2017-01-11 15:22:26', '2017-01-20 11:17:21'),
+(15, 8, '', NULL, 205, 'Thai Union Hatchery Co. Ltd.', '', '', '', '', '', '', NULL, 205, 'Phang Nga', '42 Moo 14, Kokkloy Sub-district,  Takuatung District, Phangnga Province', '82140', 0, '66 (0) 7658-4000-27', '', '66 (0) 7658-4028-9', 'Yurachat.Sangsingkaew@thaiunion.com', '', '', '', '', 0, NULL, 2, 'test-data', '2017-01-11 16:12:38', '2017-01-20 11:52:33'),
+(16, 5, '', NULL, 205, 'Atina Farms Cooperative', '', '', '', '', '', '', NULL, 94, 'Phang Nga', '', '', 0, '', '', '', 'PCB@PCB', '', '', '', '', 0, NULL, 2, 'test-data', '2017-01-11 16:19:33', '2017-01-11 16:19:33'),
+(17, 1, '', NULL, 205, 'Chen', 'Huaheng', '', '', '', 'Mr.', 'M', NULL, 205, 'Prachuap Khiri Khan', 'Prachuap Khiri Khan, Moo 1, Sam Krathai Subdistrict, Kui Buri District ', '77150', 0, '', '0861757989', '', '', '', '', '', '', 0, NULL, 2, 'test-data', '2017-01-17 08:37:54', '2017-01-20 10:14:09'),
+(18, 2, '', NULL, 205, 'Chen Farm', '', '', '', '', '', '', NULL, 205, 'Prachuap Khiri Khan', 'Prachuap Khiri Khan, Moo 1 Samkrat tai District, Kui Buri', '77150', 0, '0861757989', '', '', '', '', '', '', '', 0, NULL, 2, 'test-data', '2017-02-17 08:38:01', '2017-02-17 11:16:09'),
+(19, 2, '', NULL, 205, 'Chean Farm', '', '', '', '', '', '', NULL, 205, 'Prachuap Khiri Khan', 'Prachuap Khiri Khan, Moo 1 Samkrat tai District, Kui Buri', '77150', 0, '', '', '', '', '', '', '', '', 0, NULL, 2, 'test-data', '2017-02-17 08:38:01', '2017-02-17 08:38:01'),
+(21, 1, '', NULL, 205, 'Naiyana', 'Phuengphakdi', '', '', '', 'Mrs.', 'F', NULL, 205, 'Prachuap Khiri Khan', 'Prachuap Khiri Khan, Moo 2, Rai Kao Subdistrict, Sam Roi Yot District', '', 0, '', '0892595298', '', '', '', '', '', '', 0, NULL, 2, 'test-data', '2017-02-17 08:59:40', '2017-02-20 11:03:46'),
+(22, 2, '', NULL, 205, 'Naiyana Farm', '', '', '', '', '', '', NULL, 205, 'Prachuap Khiri Khan', 'Prachuap Khiri Khan, Moo 2, Rai Kao Subdistrict, Sam Roi Yot District', '77180', 0, '0892595298', '', '', '', '', '', '', '', 0, NULL, 2, 'test-data', '2017-02-17 08:59:54', '2017-02-20 11:03:08'),
+(23, 1, '', NULL, 205, 'Thongthern', 'Phuangphet', '', '', '', 'Mr.', 'M', NULL, 205, 'Prachuap Khiri Khan', 'Prachuap Khiri Khan, Moo 1, Sam Krathai Subdistrict, Kui Buri District ', '77150', 0, '', '0984295819', '', '', '', '', '', '', 0, NULL, 2, 'test-data', '2017-02-17 09:07:42', '2017-02-20 09:18:37'),
+(24, 2, '', NULL, 205, 'Thongthern Farm', '', '', '', '', '', '', NULL, 205, 'Prachuap Khiri Khan', 'Prachuap Khiri Khan, Moo 1, Sam Krathai Subdistrict, Kui Buri District ', '77150', 0, '0984295819', '', '', '', '', '', '', '', 0, NULL, 2, 'test-data', '2017-02-17 09:07:51', '2017-02-20 09:17:52'),
+(25, 1, '', NULL, 205, 'Seri', 'Kochio', '', '', '', 'Mr.', 'M', NULL, 205, 'Prachuap Khiri Khan', 'Prachuap Khiri Khan, Moo 1, Sam Krathai Subdistrict, Kui Buri District ', '77150', 0, '', '0852162592', '', '', '', '', '', '', 0, NULL, 2, 'test-data', '2017-02-17 09:13:02', '2017-02-20 11:06:32'),
+(26, 2, '', NULL, 205, 'Seri Farm', '', '', '', '', '', '', NULL, 205, 'Prachuap Khiri Khan', 'Prachuap Khiri Khan, Moo 1, Sam Krathai Subdistrict, Kui Buri District ', '77150', 0, '0852162592', '', '', '', '', '', '', '', 0, NULL, 2, 'test-data', '2017-02-17 09:13:09', '2017-02-20 11:08:13'),
+(27, 1, '', NULL, 205, 'Sunan', 'Rakyim', '', '', '', 'Mr.', 'M', NULL, 205, 'Prachuap Khiri Khan', 'Prachuap Khiri Khan, Moo 2, Rai Kao Subdistrict, Sam Roi Yot District', '77180', 0, '', '0852661378', '', '', '', '', '', '', 0, NULL, 2, 'test-data', '2017-02-17 09:16:37', '2017-02-20 11:12:46'),
+(28, 2, '', NULL, 205, 'Sunan Farm', '', '', '', '', '', '', NULL, 205, 'Prachuap Khiri Khan', 'Prachuap Khiri Khan, Moo 2, Rai Kao Subdistrict, Sam Roi Yot District', '77180', 0, '0852661378', '', '', '', '', '', '', '', 0, NULL, 2, 'test-data', '2017-02-17 09:16:43', '2017-02-20 11:12:17'),
+(29, 1, '', NULL, 205, 'Somsak', 'Thongtun', '', '', '', 'Mr.', 'M', NULL, 205, 'Prachuap Khiri Khan', 'Prachuap Khiri Khan, Moo 1, Sam Krathai Subdistrict, Kui Buri District ', '77150', 0, '', '0839746629', '', '', '', '', '', '', 0, NULL, 2, 'test-data', '2017-02-17 09:21:22', '2017-02-20 11:10:30'),
+(30, 2, '', NULL, 205, 'Somsak Farm', '', '', '', '', '', '', NULL, 205, 'Prachuap Khiri Khan', 'Prachuap Khiri Khan, Moo 1, Samkrat Tai, Kui Buri', '77150', 0, '0839746629', '', '', '', '', '', '', '', 0, NULL, 2, 'test-data', '2017-03-17 09:21:25', '2017-03-17 11:18:57'),
+(32, 2, '', NULL, 205, 'Somphan Farm', '', '', '', '', '', '', NULL, 205, 'Prachuap Khiri Khan', 'Prachuap Khiri Khan, Moo 1, Sam Krathai Subdistrict, Kui Buri District ', '77150', 0, '0870067416', '', '', '', '', '', '', '', 0, NULL, 2, 'test-data', '2017-03-17 09:25:41', '2017-03-20 08:21:48'),
+(33, 1, '', NULL, 205, 'Bunloed', 'Phuengphakdi', '', '', '', 'Mr.', 'M', NULL, 205, 'Prachuap Khiri Khan', 'Prachuap Khiri Khan, Moo 2, Rai Kao Subdistrict, Sam Roi Yot District', '77180', 0, '', '0870722281', '', '', '', '', '', '', 0, NULL, 2, 'test-data', '2017-03-17 09:38:33', '2017-03-20 10:03:21'),
+(34, 2, '', NULL, 205, 'Sangat Farm', '', '', '', '', '', '', NULL, 205, 'Prachuap Khiri Khan', 'Prachuap Khiri Khan, Moo 2, Rai Kao Subdistrict, Sam Roi Yot District', '77180', 0, '0822494743', '', '', '', '', '', '', '', 0, NULL, 2, 'test-data', '2017-03-17 09:38:39', '2017-03-20 10:10:12'),
+(35, 1, '', NULL, 205, 'Vichai', 'Huaheng', '', '', '', 'Mr.', 'M', NULL, 205, 'Prachuap Khiri Khan', 'Prachuap Khiri Khan, Moo 1, Sam Krathai Subdistrict, Kui Buri District ', '77150', 0, '', '0860366905', '', '', '', '', '', '', 0, NULL, 2, 'test-data', '2017-03-17 09:55:03', '2017-03-20 08:37:47'),
+(36, 2, '', NULL, 205, 'Vichai Farm', '', '', '', '', '', '', NULL, 205, 'Prachuap Khiri Khan', 'Prachuap Khiri Khan, Moo 1, Sam Krathai Subdistrict, Kui Buri District ', '77150', 0, '0860366905', '', '', '', '', '', '', '', 0, NULL, 2, 'test-data', '2017-03-17 09:55:28', '2017-03-20 08:33:55'),
+(37, 1, '', NULL, 205, 'Man ', 'Temta', '', '', '', 'Mr.', 'M', NULL, 205, 'Prachuap Khiri Khan', 'Prachuap Khiri Khan, Moo 1, Sam Krathai Subdistrict, Kui Buri District ', '77150', 0, '', '0951085528', '', '', '', '', '', '', 0, NULL, 2, 'test-data', '2017-03-17 10:01:24', '2017-03-20 08:41:44'),
+(38, 2, '', NULL, 205, 'Man Farm', '', '', '', '', '', '', NULL, 205, 'Prachuap Khiri Khan', 'Prachuap Khiri Khan, Moo 1, Sam Krathai Subdistrict, Kui Buri District ', '77150', 0, '0951085528', '', '', '', '', '', '', '', 0, NULL, 2, 'test-data', '2017-03-17 10:01:39', '2017-03-20 08:45:19'),
+(39, 1, '', NULL, 205, 'Arnon', 'Manesuwan', '', '', '', 'Mr.', 'M', NULL, 205, 'Prachuap Khiri Khan', 'Prachuap Khiri Khan, Moo 5, Rai Mai Subdistrict, Sam Roi Yot District', '77180', 0, '', '0927010684', '', '', '', '', '', '', 0, NULL, 2, 'test-data', '2017-03-17 10:08:35', '2017-03-20 08:50:04'),
+(40, 2, '', NULL, 205, 'Arnon Farm', '', '', '', '', '', '', NULL, 205, 'Prachuap Khiri Khan', 'Prachuap Khiri Khan, Moo 5, Rai Mai Subdistrict, Sam Roi Yot District', '77180', 0, '0927010684', '', '', '', '', '', '', '', 0, NULL, 2, 'test-data', '2017-03-17 10:08:41', '2017-03-20 08:48:52'),
+(41, 1, '', NULL, 205, 'Oangchan', 'Mansuwan', '', '', '', 'Mrs.', 'F', NULL, 205, 'Prachuap Khiri Khan', 'Prachuap Khiri Khan, Moo 5, Rai Mai Subdistrict, Sam Roi Yot District', '77180', 0, '', '0927010684', '', '', '', '', '', '', 0, NULL, 2, 'test-data', '2017-03-17 10:14:18', '2017-03-20 08:52:23'),
+(42, 2, '', NULL, 205, 'Oangchan Farm', '', '', '', '', '', '', NULL, 205, 'Prachuap Khiri Khan', 'Prachuap Khiri Khan, Moo 5, Rai Mai Subdistrict, Sam Roi Yot District', '77180', 0, '0927010684', '', '', '', '', '', '', '', 0, NULL, 2, 'test-data', '2017-03-17 10:14:27', '2017-03-20 08:51:39'),
+(43, 1, '', NULL, 205, 'Sangat', 'Chaibun', '', '', '', 'Mr.', 'M', NULL, 205, 'Prachuap Khiri Khan', 'Prachuap Khiri Khan, Moo 2, Rai Kao Subdistrict, Sam Roi Yot District', '77180', 0, '', '0822494743', '', '', '', '', '', '', 0, NULL, 2, 'test-data', '2017-03-17 11:26:27', '2017-03-20 10:12:49'),
+(44, 2, '', NULL, 205, 'Bunloed Farm', '', '', '', '', '', '', NULL, 205, 'Prachuap Khiri Khan', 'Prachuap Khiri Khan, Moo 2, Rai Kao Subdistrict, Sam Roi Yot District', '77180', 0, '0870722281', '', '', '', '', '', '', '', 0, NULL, 2, 'test-data', '2017-03-17 11:32:04', '2017-03-20 10:04:54'),
+(45, 1, '', NULL, 205, 'Somchai', 'Loekam', '', '', '', 'Mr.', 'M', NULL, 205, 'Prachuap Khiri Khan', 'Prachuap Khiri Khan, Moo 5, Rai Mai Subdistrict, Sam Roi Yot District', '77180', 0, '', '0898296805', '', '', '', '', '', '', 0, NULL, 2, 'test-data', '2017-03-17 11:41:10', '2017-03-20 09:57:52'),
+(46, 2, '', NULL, 205, 'Somchai Farm', '', '', '', '', '', '', NULL, 205, 'Prachuap Khiri Khan', 'Prachuap Khiri Khan, Moo 5, Rai Mai Subdistrict, Sam Roi Yot District', '77180', 0, '0898296805', '', '', '', '', '', '', '', 0, NULL, 2, 'test-data', '2017-03-17 11:41:18', '2017-03-20 10:01:19'),
+(47, 1, '', NULL, 205, 'Phuvadon', 'Phetpradub', '', '', '', 'Mr.', 'M', NULL, 205, 'Prachuap Khiri Khan', 'Prachuap Khiri Khan, Moo 9, Kui Nua Subdistrict, Kui Buri District', '77150', 0, '', '0843196654', '', '', '', '', '', '', 0, NULL, 2, 'test-data', '2017-03-17 11:46:34', '2017-03-20 09:54:26'),
+(48, 2, '', NULL, 205, 'Phuvadon Farm', '', '', '', '', '', '', NULL, 205, 'Prachuap Khiri Khan', 'Prachuap Khiri Khan, Moo 9, Kui Nua Subdistrict, Kui Buri District', '77150', 0, '0843196654', '', '', '', '', '', '', '', 0, NULL, 2, 'test-data', '2017-03-17 11:46:43', '2017-03-20 09:51:24'),
+(49, 1, '', NULL, 205, 'Thongdee', 'Phetpradub', '', '', '', 'Mr.', 'M', NULL, 205, 'Prachuap Khiri Khan', 'Prachuap Khiri Khan, Moo 9, Kui Nua Subdistrict, Kui Buri District', '77150', 0, '', '0857026937', '', '', '', '', '', '', 0, NULL, 2, 'test-data', '2017-03-17 11:52:04', '2017-03-20 09:46:08'),
+(50, 2, '', NULL, 205, 'Thongdee Farm', '', '', '', '', '', '', NULL, 205, 'Prachuap Khiri Khan', 'Prachuap Khiri Khan, Moo 9, Kui Nua Subdistrict, Kui Buri District', '77150', 0, '0857026937', '', '', '', '', '', '', '', 0, NULL, 2, 'test-data', '2017-03-17 11:52:24', '2017-03-20 09:47:22'),
+(51, 1, '', NULL, 205, 'Thongpoon ', 'Torrasap', '', '', '', 'Mr.', 'M', NULL, 205, 'Prachuap Khiri Khan', 'Prachuap Khiri Khan, Moo 9, Kui Nua Subdistrict, Kui Buri District', '77150', 0, '', '0849715564', '', '', '', '', '', '', 0, NULL, 2, 'test-data', '2017-03-17 11:56:42', '2017-03-20 09:43:20'),
+(52, 2, '', NULL, 205, 'Thongpoon Farm', '', '', '', '', '', '', NULL, 205, 'Prachuap Khiri Khan', 'Prachuap Khiri Khan, Moo 9, Kui Nua Subdistrict, Kui Buri District', '77150', 0, '0849715564', '', '', '', '', '', '', '', 0, NULL, 2, 'test-data', '2017-03-17 11:56:47', '2017-03-20 09:42:06'),
+(53, 1, '', NULL, 205, 'Samran', 'Hatsadam', '', '', '', 'Mrs.', 'F', NULL, 205, 'Prachuap Khiri Khan', 'Prachuap Khiri Khan, Moo 5, Rai Mai Subdistrict, Sam Roi Yot District', '77180', 0, '', '0822414116', '', '', '', '', '', '', 0, NULL, 2, 'test-data', '2017-03-17 12:00:54', '2017-03-20 09:38:55'),
+(54, 2, '', NULL, 205, 'Samran Farm', '', '', '', '', '', '', NULL, 205, 'Prachuap Khiri Khan', 'Prachuap Khiri Khan, Moo 5, Rai Mai Subdistrict, Sam Roi Yot District', '77180', 0, '0822414116', '', '', '', '', '', '', '', 0, NULL, 2, 'test-data', '2017-03-17 12:00:59', '2017-03-20 09:40:54'),
+(55, 1, '', NULL, 205, 'Tongchai', 'Thorasab', '', '', '', 'Mr.', 'M', NULL, 205, 'Prachuap Khiri Khan', 'Prachuap Khiri Khan, Moo 9, Kui Nua Subdistrict, Kui Buri District', '77150', 0, '', '0810110371', '', '', '', '', '', '', 0, NULL, 2, 'test-data', '2017-03-17 12:06:26', '2017-03-20 09:37:38'),
+(56, 2, '', NULL, 205, 'Tongchai Farm', '', '', '', '', '', '', NULL, 205, 'Prachuap Khiri Khan', 'Prachuap Khiri Khan, Moo 9, Kui Nua Subdistrict, Kui Buri District', '77150', 0, '0810110371', '', '', '', '', '', '', '', 0, NULL, 2, 'test-data', '2017-03-17 12:06:31', '2017-03-20 09:36:31'),
+(57, 1, '', NULL, 205, 'Prakit', 'Uthaitipwuttikorn', '', '', '', 'Mr.', 'M', NULL, 205, 'Prachuap Khiri Khan', 'Prachuap Khiri Khan, Moo 1, Sam Krathai Subdistrict, Kui Buri District ', '77150', 0, '', '0910123417', '', '', '', '', '', '', 0, NULL, 2, 'test-data', '2017-03-17 12:11:06', '2017-03-20 09:30:29'),
+(58, 2, '', NULL, 205, 'Prakit Farm', '', '', '', '', '', '', NULL, 205, 'Prachuap Khiri Khan', 'Prachuap Khiri Khan, Moo 1, Sam Krathai Subdistrict, Kui Buri District ', '77150', 0, '0910123417', '', '', '', '', '', '', '', 0, NULL, 2, 'test-data', '2017-03-17 12:11:16', '2017-03-20 09:28:20'),
+(59, 1, '', NULL, 205, 'Prani', 'Yamyai', '', '', '', 'Mrs.', 'F', NULL, 205, 'Prachuap Khiri Khan', 'Prachuap Khiri Khan, Moo 5, Rai Mai Subdistrict, Sam Roi Yot District', '77180', 0, '', '0844139444', '', '', '', '', '', '', 0, NULL, 2, 'test-data', '2017-03-17 12:17:46', '2017-03-20 09:26:02'),
+(60, 2, '', NULL, 205, 'Prani Farm', '', '', '', '', '', '', NULL, 205, 'Prachuap Khiri Khan', 'Prachuap Khiri Khan, Moo 5, Rai Mai Subdistrict, Sam Roi Yot District', '77180', 0, '0844139444', '', '', '', '', '', '', '', 0, NULL, 2, 'test-data', '2017-03-17 12:17:53', '2017-03-20 09:25:19'),
+(61, 1, '', NULL, 205, 'Chomkhan', 'Meuansuwan', '', '', '', 'Mrs.', 'F', NULL, 205, 'Prachuap Khiri Khan', 'Prachuap Khiri Khan, Moo 5, Rai Mai Subdistrict, Sam Roi Yot District', '77180', 0, '', '0822408337', '', '', '', '', '', '', 0, NULL, 2, 'test-data', '2017-03-17 12:23:11', '2017-03-20 09:04:58'),
+(62, 2, '', NULL, 205, 'Chomkhan Farm', '', '', '', '', '', '', NULL, 205, 'Prachuap Khiri Khan', 'Prachuap Khiri Khan, Moo 5, Rai Mai Subdistrict, Sam Roi Yot District', '77180', 0, '0822408337', '', '', '', '', '', '', '', 0, NULL, 2, 'test-data', '2017-03-17 12:23:14', '2017-03-20 09:12:24'),
+(63, 1, '', NULL, 205, 'Pathomkan', 'Yimyai', '', '', '', 'Mrs.', 'F', NULL, 205, 'Prachuap Khiri Khan', 'Prachuap Khiri Khan, Moo 1, Sam Krathai Subdistrict, Kui Buri District ', '77150', 0, '', '0819952083', '', '', '', '', '', '', 0, NULL, 2, 'test-data', '2017-03-17 12:30:15', '2017-03-20 09:04:07'),
+(64, 2, '', NULL, 205, 'Patomkan Farm', '', '', '', '', '', '', NULL, 205, 'Prachuap Khiri Khan', 'Prachuap Khiri Khan, Moo 1, Samkrat Tai, Kui Buri', '77180', 0, '0819952083', '', '', '', '', '', '', '', 0, NULL, 2, 'test-data', '2017-03-17 12:30:21', '2017-03-17 12:30:21'),
+(65, 1, '', NULL, 205, 'Prachern', 'Yimyai', '', '', '', 'Mr.', 'M', NULL, 205, 'Prachuap Khiri Khan', 'Prachuap Khiri Khan, Moo 1, Sam Krathai Subdistrict, Kui Buri District ', '77150', 0, '', '0804322933', '', '', '', '', '', '', 0, NULL, 2, 'test-data', '2017-03-17 12:36:17', '2017-03-20 08:54:26'),
+(66, 2, '', NULL, 205, 'Prachern Farm', '', '', '', '', '', '', NULL, 205, 'Prachuap Khiri Khan', 'Prachuap Khiri Khan, Moo 1, Sam Krathai Subdistrict, Kui Buri District ', '77150', 0, '0804322933', '', '', '', '', '', '', '', 0, NULL, 2, 'test-data', '2017-04-17 11:36:22', '2017-04-20 07:57:55'),
+(67, 1, '', NULL, 205, 'Somphan', 'Laosuan', '', '', '', 'Mr.', 'M', NULL, 205, 'Prachuap Khiri Khan', 'Prachuap Khiri Khan, Moo 1, Sam Krathai Subdistrict, Kui Buri District ', '77150', 0, '', '0870067416', '', '', '', '', '', '', 0, NULL, 2, 'test-data', '2017-04-17 12:14:03', '2017-04-20 07:25:22'),
+(68, 2, '', NULL, 205, 'Somphan Farm', '', '', '', '', '', '', NULL, 205, 'Prachuap Khiri Khan', 'Prachuap Khiri Khan, Moo 1, Samkrat Tai, Kui Buri', '77150', 0, '0870067416', '', '', '', '', '', '', '', 0, NULL, 2, 'test-data', '2017-04-17 12:14:08', '2017-04-17 12:14:08'),
+(69, 1, '', NULL, 205, 'Somkhit ', 'Phuangphae', '', '', '', 'Mr.', 'M', NULL, 205, 'Prachuap Khiri Khan', 'Prachuap Khiri Khan, Moo 5, Rai Mai Subdistrict, Sam Roi Yot District', '77180', 0, '', '0877178509', '', '', '', '', '', '', 0, NULL, 2, 'test-data', '2017-04-17 12:20:55', '2017-04-18 09:08:22'),
+(70, 2, '', NULL, 205, 'Somkhit Farm', '', '', '', '', '', '', NULL, 205, 'Prachuap Khiri Khan', 'Prachuap Khiri Khan, Moo 5, Rai Mai Subdistrict, Sam Roi Yot District', '77180', 0, '0877178509', '', '', '', '', '', '', '', 0, NULL, 2, 'test-data', '2017-04-17 12:21:23', '2017-04-18 09:07:50'),
+(71, 1, '', NULL, 205, 'Sayan', 'Bunma', '', '', '', 'Mr.', 'M', NULL, 205, 'Prachuap Khiri Khan', 'Prachuap Khiri Khan, Moo 2, Rai Kao Subdistrict, Sam Roi Yot District', '77180', 0, '', '0891582857', '', '', '', '', '', '', 0, NULL, 2, 'test-data', '2017-04-17 12:23:30', '2017-04-18 09:10:03'),
+(72, 2, '', NULL, 205, 'Sayan Farm', '', '', '', '', '', '', NULL, 205, 'Prachuap Khiri Khan', 'Prachuap Khiri Khan, Moo 2, Rai Kao Subdistrict, Sam Roi Yot District', '77180', 0, '0891582857', '', '', '', '', '', '', '', 0, NULL, 2, 'test-data', '2017-04-17 12:23:39', '2017-04-18 09:09:35'),
+(73, 1, '', NULL, 205, 'Somnuek', 'Loekam', '', '', '', 'Mr.', 'M', NULL, 205, 'Prachuap Khiri Khan', 'Prachuap Khiri Khan, Moo 2, Rai Kao Subdistrict, Sam Roi Yot District', '77180', 0, '', '0897412416', '', '', '', '', '', '', 0, NULL, 2, 'test-data', '2017-04-17 12:24:48', '2017-04-18 07:58:27'),
+(74, 2, '', NULL, 205, 'Somnuek Farm', '', '', '', '', '', '', NULL, 205, 'Prachuap Khiri Khan', 'Prachuap Khiri Khan, Moo 2, Rai Kao Subdistrict, Sam Roi Yot District', '77180', 0, '0897412416', '', '', '', '', '', '', '', 0, NULL, 2, 'test-data', '2017-04-17 12:24:54', '2017-04-18 07:57:56'),
+(75, 1, '', NULL, 205, 'Siri', 'Ainpasit', '', '', '', 'Mr.', 'M', NULL, 205, 'Prachuap Khiri Khan', 'Prachuap Khiri Khan, Moo 5, Rai Mai Subdistrict, Sam Roi Yot District', '77180', 0, '', '0840154443', '', '', '', '', '', '', 0, NULL, 2, 'test-data', '2017-04-17 12:26:18', '2017-04-18 07:56:46'),
+(76, 2, '', NULL, 205, 'Siri Farm', '', '', '', '', '', '', NULL, 205, 'Prachuap Khiri Khan', 'Prachuap Khiri Khan, Moo 5, Rai Mai Subdistrict, Sam Roi Yot District', '77180', 0, '0947374352', '', '', '', '', '', '', '', 0, NULL, 9, 'test-data', '2017-04-17 12:26:23', '2017-05-04 19:01:42'),
+(77, 1, '', NULL, 205, 'Saman', ' Sukkrom', '', '', '', 'Mr.', 'M', NULL, 205, 'Prachuap Khiri Khan', 'Prachuap Khiri Khan, Moo 2, Rai Kao Subdistrict, Sam Roi Yot District', '77180', 0, '', '0811912347', '', '', '', '', '', '', 0, NULL, 2, 'test-data', '2017-04-17 12:27:26', '2017-04-18 07:54:29'),
+(78, 2, '', NULL, 205, 'Saman Farm', '', '', '', '', '', '', NULL, 205, 'Prachuap Khiri Khan', 'Prachuap Khiri Khan, Moo 2, Rai Kao District, Sam Roi Yot', '77180', 0, '0811912347', '', '', '', '', '', '', '', 0, NULL, 2, 'test-data', '2017-04-17 12:27:31', '2017-04-17 13:17:45'),
+(79, 1, '', NULL, 205, 'Woravit', 'Rodbowonwittahaya', '', '', '', 'Mr.', 'M', NULL, 205, 'Prachuap Khiri Khan', 'Prachuap Khiri Khan, Moo 5, Rai Mai Subdistrict, Sam Roi Yot District', '77180', 0, '', '0833175803', '', '', '', '', '', '', 0, NULL, 2, 'test-data', '2017-04-17 12:28:36', '2017-04-18 07:43:13'),
+(80, 2, '', NULL, 205, 'Woravit Farm', '', '', '', '', '', '', NULL, 205, 'Prachuap Khiri Khan', 'Prachuap Khiri Khan, Moo 5, Rai Mai Subdistrict, Sam Roi Yot District', '77180', 0, '0833175803', '', '', '', '', '', '', '', 0, NULL, 2, 'test-data', '2017-04-17 12:28:41', '2017-04-18 07:41:31'),
+(81, 1, '', NULL, 205, 'Somsong ', 'Nessuwan', '', '', '', 'Mr.', 'M', NULL, 205, 'Prachuap Khiri Khan', 'Prachuap Khiri Khan, Moo 2, Rai Kao Subdistrict, Sam Roi Yot District', '77180', 0, '', '0890764380', '', '', '', '', '', '', 0, NULL, 2, 'test-data', '2017-04-17 12:29:45', '2017-04-18 07:33:36'),
+(82, 2, '', NULL, 205, 'Somsong Farm', '', '', '', '', '', '', NULL, 205, 'Prachuap Khiri Khan', 'Prachuap Khiri Khan, Moo 2, Rai Kao Subdistrict, Sam Roi Yot District', '77180', 0, '0890764380', '', '', '', '', '', '', '', 0, NULL, 2, 'test-data', '2017-04-17 12:29:50', '2017-04-18 07:11:37'),
+(83, 1, '', NULL, 205, 'Setthakit ', 'Laochuan', '', '', '', 'Mr.', 'M', NULL, 205, 'Prachuap Khiri Khan', 'Prachuap Khiri Khan, Moo 1, Sam Krathai Subdistrict, Kui Buri District', '77150', 0, '', '0983705194', '', '', '', '', '', '', 0, NULL, 2, 'test-data', '2017-04-17 12:30:51', '2017-04-18 06:55:28'),
+(84, 2, '', NULL, 205, 'Setthakit Farm', '', '', '', '', '', '', NULL, 205, 'Prachuap Khiri Khan', 'Prachuap Khiri Khan, Moo 1, Sam Krathai Subdistrict, Kui Buri District ', '77150', 0, '0983705194', '', '', '', '', '', '', '', 0, NULL, 2, 'test-data', '2017-04-17 12:31:31', '2017-04-18 07:13:47'),
+(85, 1, '', NULL, 205, 'Nuengruethai', 'Gojiw', '', '', '', 'Mrs.', 'F', NULL, 205, 'Prachuap Khiri Khan', 'Prachuap Khiri Khan', '', 833175449, '', '', '', '', '', '', '', '', 0, NULL, 2, 'test-data', '2017-04-17 12:34:11', '2017-04-17 12:34:11'),
+(86, 2, '', NULL, 205, 'Nuengruethai Farm', '', '', '', '', '', '', NULL, 205, 'Prachuap Khiri Khan', 'Prachuap Khiri Khan, Moo 1, Samkrat Tai, Kui Buri', '77150', 0, '0833175449', '', '', '', '', '', '', '', 0, NULL, 2, 'test-data', '2017-04-17 12:34:19', '2017-04-17 12:34:19'),
+(87, 1, '', NULL, 205, 'Lamphu', 'Vasayangkui', '', '', '', 'Mrs.', 'F', NULL, 205, 'Prachuap Khiri Khan', 'Prachuap Khiri Khan, Moo 5, Rai Mai Subdistrict, Sam Roi Yot District', '77180', 0, '', '0957956624', '', '', '', '', '', '', 0, NULL, 2, 'test-data', '2017-04-17 12:36:13', '2017-04-18 09:11:37'),
+(88, 2, '', NULL, 205, 'Lamphu Farm', '', '', '', '', '', '', NULL, 205, 'Prachuap Khiri Khan', 'Prachuap Khiri Khan, Moo 5, Rai Mai Subdistrict, Sam Roi Yot District', '77180', 0, '0957956624', '', '', '', '', '', '', '', 0, NULL, 2, 'test-data', '2017-04-17 12:36:18', '2017-04-18 09:11:03'),
+(89, 1, '', NULL, 205, 'Rawisara', 'Authaithipwutthikon', '', '', '', 'Mrs.', 'F', NULL, 205, 'Prachuap Khiri Khan', 'Prachuap Khiri Khan', '', 874141765, '', '', '', '', '', '', '', '', 0, NULL, 2, 'test-data', '2017-05-17 12:38:56', '2017-05-17 12:41:52'),
+(90, 2, '', NULL, 205, 'Rawisara Farm', '', '', '', '', '', '', NULL, 205, 'Prachuap Khiri Khan', 'Prachuap Khiri Khan, Moo 1, Sam Krathai Subdistrict, Kui Buri District ', '77150', 0, '0874141765', '', '', '', '', '', '', '', 0, NULL, 2, 'test-data', '2017-05-17 12:39:00', '2017-05-20 07:20:01'),
+(91, 1, '', NULL, 205, 'Ratchaset', 'Wongsawat', '', '', '', 'Mr.', 'M', NULL, 205, 'Prachuap Khiri Khan', 'Prachuap Khiri Khan, 111 Moo 2, Rai Kao Subdistrict, Sam Roi Yot District', '77180', 0, '', '0863264268', '', '', '', '', '', '', 0, NULL, 2, 'test-data', '2017-05-17 12:45:21', '2017-05-18 09:25:08'),
+(92, 2, '', NULL, 205, 'Farm Thung Ngan', '', '', '', '', '', '', NULL, 205, 'Prachuap Khiri Khan', 'Prachuap Khiri Khan, 111 Moo 2, Rai Kao Subdistrict, Sam Roi Yot District', '77180', 0, '0863264268', '', '', '', '', '', '', '', 0, NULL, 2, 'test-data', '2017-05-17 12:45:28', '2017-05-18 09:23:50'),
+(93, 1, '', NULL, 205, 'Supot', 'Yudee', '', '', '', 'Mr.', 'M', NULL, 205, 'Prachuap Khiri Khan', 'Prachuap Khiri Khan, Moo 2, Rai Kao Subdistrict, Sam Roi Yot District', '77180', 0, '', '0877178509', '', '', '', '', '', '', 0, NULL, 2, 'test-data', '2017-05-17 13:03:36', '2017-05-18 08:00:27'),
+(94, 2, '', NULL, 205, 'Supot Farm', '', '', '', '', '', '', NULL, 205, 'Prachuap Khiri Khan', 'Prachuap Khiri Khan, Moo 2, Rai Kao Subdistrict, Sam Roi Yot District', '77180', 0, '0877178509', '', '', '', '', '', '', '', 0, NULL, 2, 'test-data', '2017-05-17 13:03:43', '2017-05-18 07:59:56'),
+(95, 1, '', NULL, 205, 'Phanjaporn', 'Bunma', '', '', '', 'Mr.', 'M', NULL, 205, 'Prachuap Khiri Khan', 'Prachuap Khiri Khan, Moo 2, Rai Kao Subdistrict, Sam Roi Yot District', '77180', 0, '', '0888498838', '', '', '', '', '', '', 0, NULL, 2, 'test-data', '2017-05-17 13:20:12', '2017-05-18 07:52:12'),
+(96, 2, '', NULL, 205, 'Phanjaporn Farm', '', '', '', '', '', '', NULL, 205, 'Prachuap Khiri Khan', 'Prachuap Khiri Khan, Moo 2, Rai Kao Subdistrict, Sam Roi Yot District', '77180', 0, '0888498838', '', '', '', '', '', '', '', 0, NULL, 2, 'test-data', '2017-05-17 13:20:33', '2017-05-18 07:46:05'),
+(97, 2, '', NULL, 205, 'Chen Farm', '', '', '', '', '', '', NULL, 205, 'Prachuap Khiri Khan', 'Prachuap Khiri Khan, Moo 1, Sam Krathai Subdistrict, Kui Buri District ', '77150', 0, '0861757989', '', '', '', '', '', '', '', 0, NULL, 2, 'test-data', '2017-05-20 09:19:09', '2017-05-20 09:19:09'),
+(132, 1, NULL, NULL, 205, 'Jaruk', 'Prapom', '', NULL, NULL, 'Mr.', 'M', '1971-05-11', 205, '', '', '', 0, '', '555 1', '', '', NULL, NULL, 'Staff1', NULL, 0, NULL, 3, '', '2017-12-05 08:53:30', '2017-12-05 08:53:30'),
+(133, 2, NULL, NULL, NULL, 'Decha Farm', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 205, 'Sam Roi Yot', 'Moo 2, Rai Kao Subdistrict, Sam Roi Yot District', '77180', 0, '', '555 2', '', '', '', NULL, NULL, NULL, 0, NULL, 3, '', '2017-12-05 08:55:16', '2017-12-05 08:55:16');
 
 -- --------------------------------------------------------
 
@@ -1669,9 +1770,12 @@ CREATE TABLE `reg_entity_farmag_plots` (
 --
 
 INSERT INTO `reg_entity_farmag_plots` (`ID`, `REG_ENTITY_FARM_ID`, `PLOT_NUMBER`, `PLOT_DESCRIPTION`, `CL_COMMODITIES_ID`, `PLOT_SIZE`, `CL_PLOT_SIZE_UNIT_ID`, `IS_IRRIGATED`, `UPDATER_ID`, `CREATED_AT`, `UPDATED_AT`, `COMMENT`) VALUES
-(8, 126, '1', 'Myplot', 1, 20.00, 29, 1, 0, NULL, NULL, NULL),
-(9, 130, '1', '', 1, 90.00, 29, 1, 0, NULL, NULL, NULL),
-(10, 130, '2', '', 1, 30.00, 29, 0, 0, NULL, NULL, NULL);
+(11, 3, 'Plot1', 'Plot1', 1, 3.00, 29, 1, 0, NULL, NULL, NULL),
+(12, 3, 'plot2', 'Plot2', 1, 5.00, 29, 0, 0, NULL, NULL, NULL),
+(13, 3, 'Plot3', 'Plot3', 1, 5.00, 29, 1, 0, NULL, NULL, NULL),
+(14, 13, 'DCP1', 'Decha Farm plot 1', 1, 14.00, 29, 1, 0, NULL, NULL, NULL),
+(15, 13, 'DCP2', 'Decha Farm plot 2', 1, 10.00, 29, 1, 0, NULL, NULL, NULL),
+(16, 13, 'DCP3', 'Decha Farm plot 3', 1, 10.00, 29, 1, 0, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1791,9 +1895,49 @@ CREATE TABLE `reg_entity_farm_details` (
 --
 
 INSERT INTO `reg_entity_farm_details` (`ID`, `REG_ENTITY_FARM_ID`, `REG_ENTITY_OWNER_ID`, `SYS_USER_FARMADMIN_ID`, `SIZE`, `CL_SIZE_UNIT_ID`, `LONGITUDE`, `LATITUDE`, `AERIAL_VIEW`, `QUOTA_ID`, `WATER_USE_AUTHORIZATION`, `LAND_USE_AUTHORIZATION`, `ENVIRONMENT_IMPACT_ASSESSMENT`, `ENVIRONMENT_IMPACT_ASSESSMENT_URL`, `HVH_CONSTRUCT_PERMIT`, `HVH_LAND_TITLE`, `SITING_PROTECTED_AREA`, `SITING_PROTECTED_AREA_AUTHORIZATION_URL`, `HVHE_FARM_EXPENSION`, `HVHE_YES_IN_HVH`, `CL_HVHE_EXPENSION_TYPE_ID`, `HVHE_CANAL_RESTAURATION_PLAN`, `CUMUL_IMPACTS`, `MEMBER_COOP_ID`, `HAS_A_LAB`, `HEALTH_MANAGEMENT_TRAINING`, `HEALTH_MANAGEMENT_PLAN`, `ESCAPE_PREVENTION_DEVICE_URL`, `RECORD_INSPECTION`, `UPDATER_ID`, `COMMENT`, `CREATED_AT`, `UPDATED_AT`) VALUES
-(52, 126, 125, NULL, 45.00, 29, '100.50176', '13.7563305', NULL, '', NULL, NULL, 0, NULL, NULL, NULL, 0, NULL, 0, 0, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, 4, '', '2017-11-27 09:12:55', '2017-11-27 09:12:55'),
-(53, 130, 129, NULL, 30.00, 28, '102.82362', '16.432194', NULL, '', NULL, NULL, 0, NULL, NULL, NULL, 0, NULL, 0, 0, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, 2, '', '2017-11-28 04:30:06', '2017-11-28 04:30:06'),
-(54, 131, 125, NULL, 45.00, 27, '100.50176', '13.7563305', NULL, 'xxxx', NULL, NULL, 0, NULL, NULL, NULL, 0, NULL, 0, 0, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, 3, '', '2017-12-04 22:41:39', '2017-12-04 22:41:39');
+(1, 3, 5, 1, 13.00, 29, '102.29619', '22.435404', 'Screenshot_1508081899.png', NULL, NULL, NULL, 0, '', 'farm/permit/81652226f86146494bdb1d7841d59a7b.png', 'farm/land/9028b2d11440588ab0458faeb83e9c8f.png', 1, '', 0, 0, NULL, '', '', 12, 0, '', '', '', '', 3, '', '2017-01-11 08:47:53', '2017-05-04 02:11:14'),
+(3, 13, 11, 1, 34.03, 29, '99.91035461425781', '12.227957407305896', 'farm/map/ba4dacafe04f893a279773d8a3a3037d.png', NULL, NULL, NULL, 0, '0_Screenshot_1508081899.png', '0_Skype.jpg', '2017-09-02 FairAgoraa - Verifik8 Spring Port - BonSucro Impl (Autosaved).docx', 0, 'flyingb.xlsx', 0, 0, NULL, 'resiliation_-_red_-_SFR.jpg', 'Impact_tab_dash.pdf', 12, 0, '', '', '', '', 4, '', '2017-01-11 15:20:33', '2017-05-02 22:37:55'),
+(6, 22, 21, 1, 0.00, 0, '98.36361310000007', '8.6892088', '', NULL, NULL, NULL, 0, '', '', '', 0, '', 0, 0, 0, '', '', 12, 0, '', '', '', '', 2, '', '2017-01-17 08:59:54', '2017-01-20 11:03:08'),
+(7, 24, 23, 1, 0.00, 0, '', '', '', NULL, NULL, NULL, 0, '', '', '', 0, '', 0, 0, 0, '', '', 12, 0, '', '', '', '', 2, '', '2017-01-17 09:07:51', '2017-01-20 09:17:52'),
+(8, 26, 25, 1, 0.00, 0, '', '', '', NULL, NULL, NULL, 0, '', '', '', 0, '', 0, 0, 0, '', '', 12, 0, '', '', '', '', 2, '', '2017-01-17 09:13:09', '2017-01-20 11:08:13'),
+(9, 28, 27, 1, 0.00, 0, '99.94570429999999', '12.2015729', '', NULL, NULL, NULL, 0, '', '', '', 0, '', 0, 0, 0, '', '', 12, 0, '', '', '', '', 2, '', '2017-01-17 09:16:43', '2017-01-20 11:12:17'),
+(10, 30, 29, 1, 0.00, 0, '', '', '', NULL, NULL, NULL, 0, '', '', '', 0, '', 0, 0, 0, '', '', 12, 0, '', '', '', '', 2, '', '2017-01-17 09:21:25', '2017-01-17 11:18:57'),
+(11, 32, 67, 1, 0.00, 0, '', '', '', NULL, NULL, NULL, 0, '', '', '', 0, '', 0, 0, 0, '', '', 12, 0, '', '', '', '', 2, '', '2017-01-17 09:25:41', '2017-02-27 22:23:04'),
+(12, 34, 43, 1, 0.00, 0, '99.94570429999999', '12.2015729', '', NULL, NULL, NULL, 0, '', '', '', 0, '', 0, 0, 0, '', '', 12, 0, '', '', '', '', 2, '', '2017-01-17 09:38:39', '2017-02-27 22:23:27'),
+(13, 36, 35, 1, 0.00, 0, '', '', '', NULL, NULL, NULL, 0, '', '', '', 0, '', 0, 0, 0, '', '', 12, 0, '', '', '', '', 2, '', '2017-01-17 09:55:28', '2017-01-20 08:33:55'),
+(14, 38, 37, 1, 0.00, 0, '', '', '', NULL, NULL, NULL, 0, '', '', '', 0, '', 0, 0, 0, '', '', 12, 0, '', '', '', '', 2, '', '2017-01-17 10:01:39', '2017-01-20 08:45:19'),
+(15, 40, 39, 1, 0.00, 0, '', '', '', NULL, NULL, NULL, 0, '', '', '', 0, '', 0, 0, 0, '', '', 12, 0, '', '', '', '', 2, '', '2017-01-17 10:08:41', '2017-01-20 08:48:52'),
+(16, 42, 41, 1, 0.00, 0, '', '', '', NULL, NULL, NULL, 0, '', '', '', 0, '', 0, 0, 0, '', '', 12, 0, '', '', '', '', 2, '', '2017-01-17 10:14:27', '2017-01-20 08:51:39'),
+(17, 44, 33, 1, 0.00, 0, '99.94570429999999', '12.2015729', '', NULL, NULL, NULL, 0, '', '', '', 0, '', 0, 0, 0, '', '', 12, 0, '', '', '', '', 2, '', '2017-01-17 11:32:04', '2017-01-20 10:04:54'),
+(18, 46, 45, 1, 0.00, 0, '', '', '', NULL, NULL, NULL, 0, '', '', '', 0, '', 0, 0, 0, '', '', 12, 0, '', '', '', '', 2, '', '2017-01-17 11:41:18', '2017-01-20 10:01:19'),
+(19, 48, 47, 1, 0.00, 0, '99.4639598', '11.1131166', '', NULL, NULL, NULL, 0, '', '', '', 0, '', 0, 0, 0, '', '', 12, 0, '', '', '', '', 2, '', '2017-01-17 11:46:43', '2017-01-20 09:51:24'),
+(20, 50, 49, 1, 0.00, 0, '', '', '', NULL, NULL, NULL, 0, '', '', '', 0, '', 0, 0, 0, '', '', 12, 0, '', '', '', '', 2, '', '2017-01-17 11:52:24', '2017-01-20 09:47:22'),
+(21, 52, 51, 1, 0.00, 0, '', '', '', NULL, NULL, NULL, 0, '', '', '', 0, '', 0, 0, 0, '', '', 12, 0, '', '', '', '', 2, '', '2017-01-17 11:56:47', '2017-01-20 09:42:06'),
+(22, 54, 53, 1, 0.00, 0, '', '', '', NULL, NULL, NULL, 0, '', '', '', 0, '', 0, 0, 0, '', '', 12, 0, '', '', '', '', 2, '', '2017-01-17 12:00:59', '2017-01-20 09:40:54'),
+(23, 56, 55, 1, 0.00, 0, '', '', '', NULL, NULL, NULL, 0, '', '', '', 0, '', 0, 0, 0, '', '', 12, 0, '', '', '', '', 2, '', '2017-01-17 12:06:31', '2017-01-20 09:36:31'),
+(24, 58, 57, 1, 0.00, 0, '', '', '', NULL, NULL, NULL, 0, '', '', '', 0, '', 0, 0, 0, '', '', 12, 0, '', '', '', '', 2, '', '2017-01-17 12:11:16', '2017-01-20 09:28:20'),
+(25, 60, 59, 1, 0.00, 0, '', '', '', NULL, NULL, NULL, 0, '', '', '', 0, '', 0, 0, 0, '', '', 12, 0, '', '', '', '', 2, '', '2017-01-17 12:17:53', '2017-01-20 09:25:19'),
+(26, 62, 61, 1, 0.00, 0, '', '', '', NULL, NULL, NULL, 0, '', '', '', 0, '', 0, 0, 0, '', '', 12, 0, '', '', '', '', 2, '', '2017-01-17 12:23:14', '2017-01-20 09:12:24'),
+(27, 64, 63, 1, 0.00, 0, '', '', '', NULL, NULL, NULL, 0, '', '', '', 0, '', 0, 0, 0, '', '', 12, 0, '', '', '', '', 2, '', '2017-01-17 12:30:21', '2017-01-17 12:31:41'),
+(28, 66, 65, 1, 0.00, 0, '', '', '', NULL, NULL, NULL, 0, '', '', '', 0, '', 0, 0, 0, '', '', 12, 0, '', '', '', '', 2, '', '2017-01-17 12:36:22', '2017-01-20 08:57:55'),
+(30, 70, 69, 1, 0.00, 0, '', '', '', NULL, NULL, NULL, 0, '', '', '', 0, '', 0, 0, 0, '', '', 12, 0, '', '', '', '', 2, '', '2017-01-17 13:21:23', '2017-01-18 10:07:50'),
+(31, 72, 71, 1, 0.00, 0, '99.94570429999999', '12.2015729', '', NULL, NULL, NULL, 0, '', '', '', 0, '', 0, 0, 0, '', '', 12, 0, '', '', '', '', 2, '', '2017-01-17 13:23:39', '2017-01-18 10:09:35'),
+(32, 74, 73, 1, 0.00, 0, '99.94570429999999', '12.2015729', '', NULL, NULL, NULL, 0, '', '', '', 0, '', 0, 0, 0, '', '', 12, 0, '', '', '', '', 2, '', '2017-01-17 13:24:54', '2017-01-18 08:57:56'),
+(33, 76, 75, 1, 0.00, 0, '100.99254100000007', '15.870032', '', NULL, NULL, NULL, 0, '', '', '', 0, '', 0, 0, 0, '', '', 12, 0, '', '', '', '', 9, '', '2017-01-17 13:26:23', '2017-05-04 19:01:42'),
+(34, 78, 77, 1, 0.00, 0, '99.94570429999999', '12.2015729', '', NULL, NULL, NULL, 0, '', '', '', 0, '', 0, 0, 0, '', '', 12, 0, '', '', '', '', 2, '', '2017-01-17 13:27:31', '2017-01-17 14:18:09'),
+(35, 80, 79, 1, 0.00, 0, '', '', '', NULL, NULL, NULL, 0, '', '', '', 0, '', 0, 0, 0, '', '', 12, 0, '', '', '', '', 2, '', '2017-01-17 13:28:41', '2017-01-18 08:42:27'),
+(36, 82, 81, 1, 0.00, 0, '99.94570429999999', '12.2015729', '', NULL, NULL, NULL, 0, '', '', '', 0, '', 0, 0, 0, '', '', 12, 0, '', '', '', '', 2, '', '2017-01-17 13:29:50', '2017-01-18 08:38:00'),
+(37, 84, 83, 1, 0.00, 0, '', '', '', NULL, NULL, NULL, 0, '', '', '', 0, '', 0, 0, 0, '', '', 12, 0, '', '', '', '', 2, '', '2017-01-17 13:31:31', '2017-01-18 08:13:47'),
+(38, 86, 85, 1, 0.00, 0, '', '', '', NULL, NULL, NULL, 0, '', '', '', 0, '', 0, 0, 0, '', '', 12, 0, '', '', '', '', 2, '', '2017-01-17 13:34:19', '2017-01-17 13:34:55'),
+(39, 88, 87, 1, 0.00, 0, '', '', '', NULL, NULL, NULL, 0, '', '', '', 0, '', 0, 0, 0, '', '', 12, 0, '', '', '', '', 2, '', '2017-01-17 13:36:18', '2017-01-18 10:11:03'),
+(40, 90, 89, 1, 0.00, 0, '', '', '', NULL, NULL, NULL, 0, '', '', '', 0, '', 0, 0, 0, '', '', 12, 0, '', '', '', '', 2, '', '2017-01-17 13:39:00', '2017-01-20 08:20:01'),
+(41, 92, 91, 1, 0.00, 0, '', '', '', NULL, NULL, NULL, 0, '', '', '', 0, '', 0, 0, 0, '', '', 12, 0, '', '', '', '', 2, '', '2017-01-17 13:45:28', '2017-01-18 10:23:50'),
+(42, 94, 93, 1, 0.00, 0, '99.94570429999999', '12.2015729', '', NULL, NULL, NULL, 0, '', '', '', 0, '', 0, 0, 0, '', '', 12, 0, '', '', '', '', 2, '', '2017-01-17 14:03:43', '2017-01-18 08:59:56'),
+(43, 96, 95, 1, 0.00, 0, '99.94570429999999', '12.2015729', '', NULL, NULL, NULL, 0, '', '', '', 0, '', 0, 0, 0, '', '', 12, 0, '', '', '', '', 2, '', '2017-01-17 14:20:33', '2017-01-18 08:51:37'),
+(44, 97, 17, 1, 0.00, 0, '', '', '', NULL, NULL, NULL, 0, '', '', '', 0, '', 0, 0, 0, '', '', 12, 0, '', '', '', '', 2, '', '2017-01-20 10:19:09', '2017-01-20 11:01:44'),
+(46, 115, 5, NULL, 123.00, 21, '102.29619', '12.435403', NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, 0, NULL, 0, 0, NULL, NULL, NULL, 16, 0, NULL, NULL, NULL, NULL, 3, '', '2017-11-04 07:43:51', '2017-11-04 07:43:51'),
+(51, 124, 4, NULL, 132.00, 4, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, 1, NULL, 1, 0, 1, NULL, NULL, 12, 0, NULL, NULL, NULL, NULL, 3, '', '2017-11-04 08:03:02', '2017-11-04 08:03:02'),
+(55, 133, 132, NULL, 55.00, 29, '99.9457', '12.201573', NULL, 'Q1', NULL, NULL, 0, NULL, NULL, NULL, 0, NULL, 0, 0, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, 3, '', '2017-12-05 08:55:16', '2017-12-05 08:55:16');
 
 -- --------------------------------------------------------
 
@@ -1851,7 +1995,8 @@ CREATE TABLE `reg_entity_farm_providers` (
 --
 
 INSERT INTO `reg_entity_farm_providers` (`ID`, `REG_ENTITY_FARM_ID`, `REG_ENTITY_SUPPLIER_ID`, `CL_PRODUCT_TYPES_ID`, `UPDATER_ID`, `COMMENT`, `CREATED_AT`, `UPDATED_AT`) VALUES
-(14, 126, 127, 5, '1', NULL, '2017-11-27 17:14:37', '2017-11-27 17:14:37');
+(15, 3, 7, 50, '1', NULL, '2017-12-05 10:23:43', '2017-12-05 10:23:43'),
+(16, 3, 7, 80, '1', NULL, '2017-12-05 10:23:55', '2017-12-05 10:23:55');
 
 -- --------------------------------------------------------
 
@@ -1920,9 +2065,52 @@ CREATE TABLE `reg_entity_staff` (
 --
 
 INSERT INTO `reg_entity_staff` (`REG_ENTITY_ID`, `REG_ENTITY_FARM_ID`, `CL_LANGUAGE_ID`, `CL_POSITION_TYPE_ID`, `CL_LEGAL_STATUS_ID`, `CHARACTERISTICS_1`, `CHARACTERISTICS_2`, `NOT_EMPLOYED_ANYMORE`, `TELEPHONE_OFFICE`, `MOBILE_OFFICE`, `EMAIL_OFFICE`, `FROM_LOCAL_COMMUNITY`, `COMPANY_FOCAL_POINT`, `WORKING_PERMIT_URL`, `UPDATER_ID`, `COMMENT`, `CREATED_AT`, `UPDATED_AT`) VALUES
-(125, 130, 159, 5, 1, NULL, NULL, 0, '', '6666888999', '', 0, 0, NULL, 4, '', '2017-11-28 10:49:02', '2017-11-28 10:49:02'),
-(128, 126, 159, 5, 2, NULL, NULL, 0, '555', '', '', 0, 0, NULL, 3, '', '2017-11-27 17:38:49', '2017-11-27 17:38:49'),
-(128, 130, 4, 3, 5, NULL, NULL, 0, '', '99900007776', '', 1, 0, NULL, 4, '', '2017-11-28 10:49:34', '2017-11-28 10:49:34');
+(1, 3, NULL, 1, 1, NULL, NULL, 0, '', 'TBC', '', 0, 0, 'staff/work_permit/8ea6eb660a94a67a7deeb835aa5ab6c4.jpeg', 2, '', '2017-01-11 09:48:01', '2017-01-11 09:48:01'),
+(2, 14, NULL, 1, 0, NULL, NULL, 0, '', 'TBC', '', 1, 0, '', 2, '', '2017-01-11 15:23:15', '2017-01-11 15:23:15'),
+(4, 17, NULL, 1, 0, NULL, NULL, 0, '', '0861757989', '', 1, 0, '', 2, '', '2017-01-17 08:52:04', '2017-01-17 08:52:04'),
+(5, 3, NULL, 1, 4, NULL, NULL, 0, NULL, NULL, NULL, 1, 1, NULL, 3, '', '2017-11-23 05:20:48', '2017-11-23 05:20:48'),
+(5, 20, NULL, 1, 0, NULL, NULL, 0, '', 'TBC', '', 1, 0, '', 2, '', '2017-01-17 08:54:32', '2017-01-17 08:54:32'),
+(6, 21, NULL, 1, 0, NULL, NULL, 0, '', '0892595298', '', 0, 0, '', 2, '', '2017-01-17 09:00:39', '2017-01-17 09:46:00'),
+(7, 23, NULL, 1, 0, NULL, NULL, 0, '', '0984295819', '', 0, 0, '', 2, '', '2017-01-17 09:08:12', '2017-01-17 09:49:50'),
+(8, 25, NULL, 1, 0, NULL, NULL, 0, '', '0852162592', '', 0, 0, '', 2, '', '2017-01-17 09:13:34', '2017-01-17 11:21:30'),
+(9, 27, NULL, 1, 0, NULL, NULL, 0, '', '0852661378', '', 0, 0, '', 2, '', '2017-01-17 09:17:04', '2017-01-17 09:48:19'),
+(10, 29, NULL, 1, 0, NULL, NULL, 0, '', '0839746629', '', 0, 0, '', 2, '', '2017-01-17 09:21:45', '2017-01-17 09:50:46'),
+(11, 43, NULL, 1, 0, NULL, NULL, 0, '', '0822494743', '', 0, 0, '', 2, '', '2017-01-17 09:39:03', '2017-01-17 11:27:10'),
+(13, 35, NULL, 1, 0, NULL, NULL, 0, '', '0860366905', '', 0, 0, '', 2, '', '2017-01-17 09:56:04', '2017-01-17 12:59:24'),
+(14, 37, NULL, 1, 0, NULL, NULL, 0, '', '0951085528', '', 1, 0, '', 2, '', '2017-01-17 10:03:29', '2017-01-17 10:03:29'),
+(15, 39, NULL, 1, 0, NULL, NULL, 0, '', '0927010684', '', 0, 0, '', 2, '', '2017-01-17 10:09:10', '2017-01-17 10:10:57'),
+(16, 41, NULL, 1, 0, NULL, NULL, 0, '', '0927010684', '', 1, 0, '', 2, '', '2017-01-17 10:14:48', '2017-01-17 10:14:48'),
+(17, 33, NULL, 1, 0, NULL, NULL, 0, '', '0870722281', '', 1, 0, '', 2, '', '2017-01-17 11:33:21', '2017-01-17 11:33:21'),
+(18, 45, NULL, 1, 0, NULL, NULL, 0, '', '0898296805', '', 1, 0, '', 2, '', '2017-01-17 11:41:37', '2017-01-17 11:41:37'),
+(19, 47, NULL, 1, 0, NULL, NULL, 0, '', '0843196654', '', 1, 0, '', 2, '', '2017-01-17 11:47:04', '2017-01-17 11:47:04'),
+(20, 49, NULL, 1, 0, NULL, NULL, 0, '', '0857026937', '', 1, 0, '', 2, '', '2017-01-17 11:52:44', '2017-01-17 11:52:44'),
+(21, 51, NULL, 1, 0, NULL, NULL, 0, '', '0849715564', '', 1, 0, '', 2, '', '2017-01-17 11:57:08', '2017-01-17 11:57:08'),
+(22, 53, NULL, 1, 0, NULL, NULL, 0, '', '0822414116', '', 1, 0, '', 2, '', '2017-01-17 12:01:25', '2017-01-17 12:01:25'),
+(23, 55, NULL, 1, 0, NULL, NULL, 0, '', '0810110371', '', 1, 0, '', 2, '', '2017-01-17 12:06:58', '2017-01-17 12:06:58'),
+(24, 57, NULL, 1, 0, NULL, NULL, 0, '', '0910123417', '', 1, 0, '', 2, '', '2017-01-17 12:11:34', '2017-01-17 12:11:34'),
+(25, 59, NULL, 1, 0, NULL, NULL, 0, '', '0844139444', '', 1, 0, '', 2, '', '2017-01-17 12:18:11', '2017-01-17 12:18:11'),
+(26, 61, NULL, 1, 0, NULL, NULL, 0, '', '0822408337', '', 1, 0, '', 2, '', '2017-01-17 12:24:07', '2017-01-17 12:24:07'),
+(27, 63, NULL, 1, 0, NULL, NULL, 0, '', '0819952083', '', 1, 0, '', 2, '', '2017-01-17 12:30:43', '2017-01-17 12:30:43'),
+(28, 65, NULL, 1, 0, NULL, NULL, 0, '', '0804322933', '', 1, 0, '', 2, '', '2017-01-17 12:36:49', '2017-01-17 12:36:49'),
+(29, 11, NULL, 1, 0, NULL, NULL, 0, '', '0898364133', '', 1, 0, '', 2, '', '2017-01-17 13:05:46', '2017-01-17 13:05:46'),
+(30, 67, NULL, 1, 0, NULL, NULL, 0, '', '0870067416', '', 1, 0, '', 2, '', '2017-01-17 13:14:33', '2017-01-17 13:14:33'),
+(31, 67, NULL, 1, 0, NULL, NULL, 0, '', '0870067416', '', 1, 0, '', 2, '', '2017-01-17 13:17:11', '2017-01-17 13:17:11'),
+(32, 69, NULL, 1, 0, NULL, NULL, 0, '', '0877178509', '', 1, 0, '', 2, '', '2017-01-17 13:21:53', '2017-01-17 13:21:53'),
+(33, 83, NULL, 1, 0, NULL, NULL, 0, '', '0983705194', '', 1, 0, '', 2, '', '2017-01-17 13:32:53', '2017-01-17 13:32:53'),
+(34, 85, NULL, 1, 0, NULL, NULL, 0, '', '0833175449', '', 1, 0, '', 2, '', '2017-01-17 13:34:50', '2017-01-17 13:34:50'),
+(35, 87, NULL, 1, 0, NULL, NULL, 0, '', '0957956624', '', 1, 0, '', 2, '', '2017-01-17 13:36:41', '2017-01-17 13:36:41'),
+(36, 89, NULL, 1, 0, NULL, NULL, 0, '', '0874141765', '', 1, 0, '', 2, '', '2017-01-17 13:41:34', '2017-01-17 13:41:34'),
+(37, 91, NULL, 1, 0, NULL, NULL, 0, '', '0863264268', '', 1, 0, '', 2, '', '2017-01-17 13:46:30', '2017-01-17 13:46:30'),
+(38, 71, NULL, 1, 0, NULL, NULL, 0, '', '0891582857', '', 1, 0, '', 2, '', '2017-01-17 13:57:45', '2017-01-17 13:57:45'),
+(39, 93, NULL, 1, 0, NULL, NULL, 0, '', '0877178509', '', 1, 0, '', 2, '', '2017-01-17 14:04:40', '2017-01-17 14:04:40'),
+(40, 73, NULL, 1, 0, NULL, NULL, 0, '', '0897412416', '', 1, 0, '', 2, '', '2017-01-17 14:08:26', '2017-01-17 14:08:26'),
+(41, 75, NULL, 1, 0, NULL, NULL, 0, '', '0840154443', '', 1, 0, '', 2, '', '2017-01-17 14:11:30', '2017-01-17 14:11:30'),
+(42, 77, NULL, 1, 0, NULL, NULL, 0, '', '0811912347', '', 1, 0, '', 2, '', '2017-01-17 14:17:25', '2017-01-17 14:17:25'),
+(43, 95, NULL, 1, 0, NULL, NULL, 0, '', '0888498838', '', 1, 0, '', 2, '', '2017-01-17 14:21:08', '2017-01-17 14:21:08'),
+(44, 81, NULL, 1, 0, NULL, NULL, 0, '', '0890764380', '', 1, 0, '', 2, '', '2017-01-18 08:03:48', '2017-01-18 08:03:48'),
+(45, 79, NULL, 1, 0, NULL, NULL, 0, '', '0833175803', '', 1, 0, '', 2, '', '2017-01-18 08:40:48', '2017-01-18 08:40:48'),
+(46, 17, NULL, 1, 0, NULL, NULL, 0, '', '0861757989', '', 1, 0, '', 2, '', '2017-01-20 10:22:25', '2017-01-20 10:22:25'),
+(67, 3, NULL, 1, 4, NULL, NULL, 1, '0683496499', '683496499', 'pichenot@free.fr', 1, 1, NULL, 3, '', '2017-11-23 05:25:44', '2017-11-23 05:25:44');
 
 -- --------------------------------------------------------
 
@@ -1960,14 +2148,6 @@ CREATE TABLE `reg_entity_staff_contract` (
   `CREATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `UPDATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-
---
--- Contenu de la table `reg_entity_staff_contract`
---
-
-INSERT INTO `reg_entity_staff_contract` (`ID`, `REG_ENTITY_ID`, `REG_ENTITY_FARM_ID`, `CONTRACT_NO`, `CL_CONTRACT_TYPE_ID`, `CL_COMPANY_POSITION_TYPE_ID`, `DEPARTMENT`, `STARTING_DATE`, `AGREED_END_DATE`, `ISSUANCE_DATE`, `CONTINUING_CONTRACT`, `ACTUAL_TERMINATION_DATE`, `CONTRACT_DURATION`, `CONTRACT_REMUNERATION`, `CONTRACT_REMUNERATION_CURRENCY_ID`, `CL_PAYMENT_FREQUENCY_ID`, `MINIMUM_WAGES_APPLIED`, `NB_HOURS_PER_DAY`, `NB_DAYS_ANNUAL_LEAVE`, `PAPER_CONTRACT_COPY_URL`, `NO_ANNUAL_LEAVE_SPECIFIED`, `CONTRACT_IN_OTHER_LANGUAGE`, `CL_COUNTRY_ID`, `UPDATER_ID`, `COMMENT`, `CREATED_AT`, `UPDATED_AT`) VALUES
-(6, 128, 126, '2017-01', 1, 5, NULL, '2017-01-01', '2017-11-30', NULL, 0, NULL, NULL, 5600, 2, 2, 0, 0, 0, NULL, 0, 0, NULL, 3, '', '2017-11-27 17:40:04', '2017-11-27 17:40:04'),
-(8, 125, 130, '444', 1, 5, NULL, '2017-12-29', '2017-12-07', NULL, 0, NULL, NULL, 1500, 1, NULL, 0, 0, 0, NULL, 0, 0, NULL, 4, '', '2017-11-28 10:52:24', '2017-11-28 10:52:24');
 
 -- --------------------------------------------------------
 
@@ -2031,7 +2211,7 @@ CREATE TABLE `reg_entity_staff_management` (
   `DISCIPLINARY_POLICIES` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'URL of uploaded Disciplinary policies ',
   `EXISTENCE_GRIEVING_SYSTEM` tinyint(1) NOT NULL,
   `GRIEVING_SYSTEM_URL` varchar(45) COLLATE utf8_bin DEFAULT NULL COMMENT 'URL of uploaded grieving system description or picture',
-  `PROTECTIVE_EQUIPMENT_AVAILABLE` tinyint(1) NOT NULL,
+  `PROTECTIVE_EQUIPMENT_AVAILABLE` tinyint(1) DEFAULT NULL,
   `PROTECTIVE_EQUIPMENT_URL` varchar(256) COLLATE utf8_bin DEFAULT NULL,
   `SAFETY_CONDITION` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'URL of uploaded safety condition - can be a picture',
   `WORKERS_REPRESENTATIVE_GROUP` tinyint(1) NOT NULL,
@@ -2046,8 +2226,8 @@ CREATE TABLE `reg_entity_staff_management` (
 --
 
 INSERT INTO `reg_entity_staff_management` (`REG_ENTITY_FARM_ID`, `NUMBER_STAFF_FARM_AS_TODAY`, `REGULAR_WORK_START_HOUR`, `REGULAR_WORK_END_HOUR`, `NB_WORKERS_LIVING_IN_FARM`, `NB_WORKERS_CHILD_LIVING_IN_FARM`, `NB_WORKERS_CHILD_HELPING_IN_FARM`, `NB_WORKERS_CHILD_ENROLLED_SCHOOL`, `NB_WORKERS_MIGRANTS`, `MIMINUM_WAGES_APPLIED_TO_CONTRACT`, `WORKER_OVERTIME`, `IS_OVERTIME_VOLUNTARY`, `NB_REST_DAYS`, `EXISTENCE_HAZARDOUS_WORK`, `CL_HARZARDOUS_WORK_TYPE_ID`, `EXISTENCE_FARM_POLICIES`, `FARM_POLICIES`, `EXISTENCE_HEALTH_SAFETY_POLICIES`, `HEALTH_SAFETY_POLICIES`, `EXISTENCE_WORK_ACCIDENT_RECORD`, `WORK_ACCIDENT_RECORD`, `ACCESS_TO_PROTECTIVE_EQUIPMENT`, `EMPLOYER_ISSUE_RECORD`, `ISSUE_RECORD_URL`, `EXISTENCE_EXTRA_WORK_RECORD`, `EXTRA_WORK_RECORD_URL`, `EXISTENCE_FREEDOM_ASSOCIATION_DISCLAIMER`, `FREEDOM_ASSOCIATION_DISCLAIMER_URL`, `EXISTENCE_DISCRIMINATION_REGULATION`, `DISCRIMINATION_REGULATION_URL`, `EXISTENCE_DISCIPLINARY_POLICIES`, `DISCIPLINARY_POLICIES`, `EXISTENCE_GRIEVING_SYSTEM`, `GRIEVING_SYSTEM_URL`, `PROTECTIVE_EQUIPMENT_AVAILABLE`, `PROTECTIVE_EQUIPMENT_URL`, `SAFETY_CONDITION`, `WORKERS_REPRESENTATIVE_GROUP`, `UPDATER_ID`, `COMMENT`, `CREATED_AT`, `UPDATED_AT`) VALUES
-(126, 0, '08:00:00', '18:00:00', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0, NULL, 0, NULL, 0, 0, NULL, 0, NULL, 0, NULL, 0, NULL, 0, NULL, 0, NULL, 0, NULL, NULL, 0, NULL, NULL, '2017-11-27 09:16:20', '2017-11-27 09:16:20'),
-(130, 0, '08:00:00', '18:00:00', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0, NULL, 0, NULL, 0, 0, NULL, 0, NULL, 0, NULL, 0, NULL, 0, NULL, 0, NULL, 0, NULL, NULL, 0, NULL, NULL, '2017-11-28 05:31:32', '2017-11-28 05:31:32');
+(3, 0, '08:00:00', '18:00:00', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0, NULL, 0, NULL, 0, 0, NULL, 0, NULL, 0, NULL, 0, NULL, 0, NULL, 0, NULL, NULL, NULL, NULL, 0, NULL, NULL, '2017-12-05 10:19:32', '2017-12-05 10:19:32'),
+(133, 3, '08:00:00', '18:00:00', 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 5, 0, NULL, 0, NULL, 0, NULL, 0, 0, NULL, 0, NULL, 0, NULL, 0, NULL, 0, NULL, 0, NULL, NULL, NULL, NULL, 0, NULL, NULL, '2017-12-05 09:01:51', '2017-12-05 09:01:51');
 
 -- --------------------------------------------------------
 
@@ -2589,12 +2769,12 @@ ALTER TABLE `cl_species`
 -- AUTO_INCREMENT pour la table `dt_farmag_plot_management`
 --
 ALTER TABLE `dt_farmag_plot_management`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 --
 -- AUTO_INCREMENT pour la table `dt_farmag_production`
 --
 ALTER TABLE `dt_farmag_production`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT pour la table `dt_farmaq_plot_measurements`
 --
@@ -2624,7 +2804,7 @@ ALTER TABLE `dt_water_analysis`
 -- AUTO_INCREMENT pour la table `reg_entities`
 --
 ALTER TABLE `reg_entities`
-  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=132;
+  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=134;
 --
 -- AUTO_INCREMENT pour la table `reg_entity_farmag_details`
 --
@@ -2634,7 +2814,7 @@ ALTER TABLE `reg_entity_farmag_details`
 -- AUTO_INCREMENT pour la table `reg_entity_farmag_plots`
 --
 ALTER TABLE `reg_entity_farmag_plots`
-  MODIFY `ID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `ID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 --
 -- AUTO_INCREMENT pour la table `reg_entity_farmaq_details`
 --
@@ -2649,12 +2829,12 @@ ALTER TABLE `reg_entity_farmaq_ponds`
 -- AUTO_INCREMENT pour la table `reg_entity_farm_details`
 --
 ALTER TABLE `reg_entity_farm_details`
-  MODIFY `ID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+  MODIFY `ID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 --
 -- AUTO_INCREMENT pour la table `reg_entity_farm_providers`
 --
 ALTER TABLE `reg_entity_farm_providers`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 --
 -- AUTO_INCREMENT pour la table `reg_entity_product_suppliers`
 --
