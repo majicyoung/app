@@ -25,13 +25,15 @@
 				            </script>
                             <table class="table table-bordered table-striped table-hover table-farm-staff" style="margin:10px 0;">
                                 <tr>
-                                    <th th:text="#{staff.first_name}">staff.first_name</th>
-                                    <th th:text="#{staff.last_name}">staff.last_name</th>
+                                    <th > <span th:text="#{staff.first_name}"> staff.first_name </span> / <span th:text="#{staff.last_name}"> staff.last_name </span></th>
+                                   <!--   <th th:text="#{staff.position}">staff.position</th>-->
+                                    <th th:text="#{default.phone}">default.phone</th>
                                     <th width="90"></th>
                                 </tr>
                                 <tr th:each="staff:${staffListing}" th:id="${'staff-'+staff.entity.id}" data-staff="{{$decla->staff}}">
-                                    <td th:text="${staff.entity.name}"></td>
-                                    <td th:text="${staff.entity.surname}"></td>
+                                    <td> <span th:text="${staff.entity.name}"> </span> <span th:text="${staff.entity.surname}"> </span></td>
+                                     <!-- <td th:text="${staff.position}"></td>-->
+                                    <td th:text="${staff.officeMobile}"></td>
                                     <td align="center">
                                         <a th:attr="data-id=${staff.entity.id}" class="btn btn-xs btn-flat btn-primary editStaffBtn" th:title="#{tooltip.edit}"><i class="fa fa-edit"></i></a>
                                         <a th:href="@{'/farm/'+${farmId}+'/entity/'+${staff.entity.id}+'/staff-working-agreements.html'}" class="btn btn-xs btn-flat btn-primary" ><i class="fa fa-paperclip"></i></a>
@@ -87,15 +89,15 @@
 	                                    </select>
 	                                </div>
 	                            </div>
-	                            <div class="form-group row">
-	                                <label for="inputFarmStaffPos" class="col-xs-3 control-label" th:text="|#{staff.legal_status}*|"></label>
-	                                <div class="col-xs-9">
-	                                    <select class="form-control form-staff form-staff-required" th:field="*{legalStatus}" id="staff_legalStatus">
-	                                 	   <option value="" th:text="|-- #{staff.select_legalstatus} --|"></option>
-	                                       <option th:each="pos : ${allLegalStatuses}" th:value="${pos.id}" th:text="${pos.localisedName}"> </option>
-	                                    </select>
-	                                </div>
-	                            </div>
+	                            <!-- <div class="form-group row">-->
+	                             <!--   <label for="inputFarmStaffPos" class="col-xs-3 control-label" th:text="|#{staff.legal_status}*|"></label>-->
+	                             <!--   <div class="col-xs-9">-->
+	                              <!--      <select class="form-control form-staff form-staff-required" th:field="*{legalStatus}" id="staff_legalStatus">-->
+	                              <!--   	   <option value="" th:text="|- #{staff.select_legalstatus} -|"></option>-->
+	                              <!--         <option th:each="pos : ${allLegalStatuses}" th:value="${pos.id}" th:text="${pos.localisedName}"> </option>-->
+	                              <!--      </select>-->
+	                              <!--  </div>-->
+	                            <!--</div>-->
 	                            <div class="form-group row">
 	                                <label class="col-xs-1 control-label"></label>
 	                                <div class="col-xs-11">
@@ -104,23 +106,23 @@
 	                                    </div>
 	                                </div>
 	                            </div>
-	                            <div class="form-group row">
+	                            <!--  <div class="form-group row">
 	                                <label class="col-xs-1 control-label"></label>
 	                                <div class="col-xs-11">
 	                                    <div class="checkbox">
 	                                        <label><input type="checkbox" class="form-staff" th:field="*{companyFocalPoint}" id="staff_focal_point" th:text="#{staff.company_focal_point}"/></label>
 	                                    </div>
 	                                </div>
-	                            </div>
-	                            <div class="form-group row">
-	                                <label class="col-xs-1 control-label"></label>
-	                                <div class="col-xs-11">
-	                                    <div class="checkbox">
-	                                        <label><input type="checkbox" class="form-staff" th:field="*{noEmployedAnymore}" id="staff_no_employed_anymore" th:text="#{staff.no_employed_anymore}"/></label>
-	                                    </div>
-	                                </div>
-	                            </div>
-	                            <div class="form-group row">
+	                            </div>-->
+	                           <div class="form-group row">
+	                           	<label class="col-xs-1 control-label"></label>
+	                           		<div class="col-xs-11">
+	                           			<div class="checkbox">
+	                           			<label><input type="checkbox" class="form-staff" th:field="*{noEmployedAnymore}" id="staff_no_employed_anymore" th:text="#{staff.no_employed_anymore}"/></label>
+	                           			</div>
+	                           		</div> 
+	                           </div> 
+	                           <div class="form-group row">
 	                                <div class="col-xs-12 text-right" style="margin-top:40px;">
 	                                    <a href="javascript:void(0);" class="btn btn-flat btn-primary btn-form-staff" id="saveStaffbtn"><i class="fa fa-plus"></i> <span th:text="#{staff.add}">staff.add</span></a>
 	                                </div>

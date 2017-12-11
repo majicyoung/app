@@ -69,9 +69,9 @@
 							</div>
 							<div class="col-md-6 col-sm-6 col-xs-12 bloc-role" id="bloc-role-farm" style="display: none;">
 								<div class="form-group">
-									<label th:text="#{farm.select}">farm.select</label> 
+									<label th:text="#{default.select_farm}">default.select_farm</label> 
 									<select class="form-control" th:field="*{farm}">
-										<option value="" th:text="#{farm.select}"></option>
+										<option value="" th:text="#{default.select_farm}"></option>
 										<option th:each="farm : ${allFarms}" th:value="${farm.id}" th:text="${farm.name}"></option>
 									</select>
 								</div>
