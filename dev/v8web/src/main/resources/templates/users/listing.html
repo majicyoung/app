@@ -19,7 +19,7 @@
           </div>
         </div>
         <div class="box-body">
-          <table class="table table-hover table-striped table-bordered datatable">
+          <table class="table table-hover table-striped table-bordered datatable" id="userTable">
             <thead>
             <tr>
               <th th:text="#{user.number}">{{ trans('user.number') }}</th>
@@ -58,5 +58,23 @@
 </div>
  
  </div>
+
+<th:block layout:fragment="page-scripts">
+	<script th:inline="javascript">
+	/*<![CDATA[*/
+
+		$(document).ready(function() {
+			$('#userTable').DataTable( {
+		        "order": [[ 0, "desc" ]],
+				"language": {
+		            "url": langURL
+		        }
+		    } );
+			
+		});	
+		/*]]>*/
+	</script>
+</th:block>
+
 
 </html>

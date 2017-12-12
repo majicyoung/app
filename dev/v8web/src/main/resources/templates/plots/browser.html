@@ -62,7 +62,10 @@
 		$(document).ready(function() {
 	
 			$('#plotList').DataTable( {
-		        "order": [[ 1, "asc" ]]
+		        "order": [[ 1, "asc" ]],
+				"language": {
+		            "url": langURL
+		        }
 		    } );
 			
 			

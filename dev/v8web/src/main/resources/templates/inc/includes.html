@@ -141,7 +141,31 @@
 		<script type="text/javascript" th:src="@{/webjars/datatables/1.10.15/js/dataTables.bootstrap.min.js}"></script>
 		<script type="text/javascript" th:src="@{/webjars/datetimepicker/2.5.11/build/jquery.datetimepicker.full.js}"></script>
 		<script th:src="@{/static/dist/js/app.min.js}"></script>
+	<script th:inline="javascript">
+	/*<![CDATA[*/
+		var lang = [[${v8App.currentLanguage.i18n}]];
+		var langURL = "";
+		switch (lang) {
+		case 'en': 
+			langURL = "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/English.json";
+			break;
+		case 'fr': 
+			langURL = "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/French.json";
+			break;
+		case 'es': 
+			langURL = "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json";
+			break;
+		case 'th': 
+			langURL = "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Thai.json";
+			break;
+		case 'vt': 
+			langURL = "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Vietnamese.json";
+			break;
+		}
+		/*]]>*/
+		</script>	
 	</th:block>
+
 
 </body>
 </html>

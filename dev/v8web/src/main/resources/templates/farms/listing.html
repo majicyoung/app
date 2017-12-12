@@ -61,14 +61,19 @@
 
 
 <th:block layout:fragment="page-scripts">
-	<script type="text/javascript">
+	<script th:inline="javascript">
+	/*<![CDATA[*/
+
 		$(document).ready(function() {
-			
 			$('#farmlist').DataTable( {
-		        "order": [[ 5, "desc" ]]
+		        "order": [[ 5, "desc" ]],
+				"language": {
+		            "url": langURL
+		        }
 		    } );
 			
-		});		
+		});	
+		/*]]>*/
 	</script>
 </th:block>
 		
