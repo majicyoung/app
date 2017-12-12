@@ -127,8 +127,12 @@
 
 
 <th:block layout:fragment="page-scripts">
-	<script type="text/javascript">
+	<script th:inline="javascript">
+	/*<![CDATA[*/
 		$(document).ready(function() {
+			
+			document.getElementById("inputFarmPlotAreaUnit").value = "29"; // only for Thailand and sugar cane - to be removed when expanding
+			document.getElementById("inputFarmPlotCommodity").value = "1"; // only for Thailand and sugar cane - to be removed when expanding
 			
 			$(".editPlotBtn").click(function(){
 				var id = $(this).attr("data-id");
@@ -162,7 +166,7 @@
 		function addFarmPlot(){
 			$("#plotEditorForm").submit();
 		}
-		
+		/*]]>*/		
 	</script>
 </th:block>
 

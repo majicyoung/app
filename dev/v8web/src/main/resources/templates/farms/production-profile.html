@@ -338,6 +338,10 @@
 <th:block layout:fragment="page-scripts">
 	<script type="text/javascript">
 		$(document).ready(function() {
+
+			document.getElementById("totalProductionForm_unit").value = "11"; // Metric tons only for Thailand and sugar cane - to be removed when expanding
+			document.getElementById("totalProductionForm_commodities").value = "1"; // only for Thailand and sugar cane - to be removed when expanding
+			
 			
 			$('.datefield').datetimepicker({
 				format: 'Y-m-d'
