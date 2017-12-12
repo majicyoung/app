@@ -122,7 +122,7 @@ public class FarmsController extends AbstractV8Controller {
 
 		regEntityFarmDetailsRepository.save(farmDetails);
 
-		return "redirect:/farms.html";
+		return "redirect:/farm/"+farm.getId()+"/edit.html";
 	}
 
 	/**
