@@ -36,8 +36,8 @@
 													<td th:text="${plot.number}"></td>
 													<td th:text="${plot.description}"></td>
 													<td th:text="${plot.size.quantity}"></td>
-													<td th:text="${plot.size.unit.name}"></td>
-													<td th:text="${plot.commodities.name}"></td>
+													<td th:text="${plot.size.unit.localisedName}"></td>
+													<td th:text="${plot.commodities.localisedName}"></td>
 													<td align="center">
 														<a href="javascript:void(0);" th:attr="data-id=${plot.id}" class="btn btn-xs btn-flat btn-info addActivitiesPlotDataBtn" th:title="#{tooltip.add_plot_activity}"><i class="fa fa-plus"></i></a> 
 														<a href="javascript:void(0);" th:attr="data-id=${plot.id}" class="btn btn-xs btn-flat btn-info viewActivitiesPlotDataBtn" th:title="#{tooltip.view_plot_activity}"><i class="fa fa-eye"></i></a>

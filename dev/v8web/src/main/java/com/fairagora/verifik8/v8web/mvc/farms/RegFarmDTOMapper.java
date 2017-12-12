@@ -102,14 +102,14 @@ public interface RegFarmDTOMapper {
 
 	void fillEntity(PlotMeasurementDto dto, @MappingTarget DTFarmPlotMeasurement m);
 
-	@Mapping(source = "m.activityType.name", target = "activityName")
+	@Mapping(source = "m.activityType.localisedName", target = "activityName")
 	void toDto(DTFarmPlotActivity m, @MappingTarget PlotActivityDto dto);
 
 	void fillEntity(PlotActivityDto dto, @MappingTarget DTFarmPlotActivity m);
 
 	void toDto(V8Measure m, @MappingTarget V8MeasureDto dto);
 
-	@Mapping(source = "m.unit.name", target = "unitName")
+	@Mapping(source = "m.unit.localisedName", target = "unitName")
 	V8MeasureDto toDto(V8Measure m);
 
 	void fillEntity(V8MeasureDto dto, @MappingTarget V8Measure m);
@@ -138,11 +138,11 @@ public interface RegFarmDTOMapper {
 
 	void toDto(DTFarmAgProduction act, @MappingTarget DTFarmAgProductionDto dto);
 
-	@Mapping(source = "e.commodities.name", target = "commoditiesName")
+	@Mapping(source = "e.commodities.localisedName", target = "commoditiesName")
 	DTFarmAgProductionDto toProductionDto(DTFarmAgProduction e);
 
 	@Mapping(source = "e.plot.number", target = "plotNumber")
-	@Mapping(source = "e.soilAnalysisType.name", target = "soilAnalysisTypeName")
+	@Mapping(source = "e.soilAnalysisType.localisedName", target = "soilAnalysisTypeName")
 	@Mapping(target = "analysis", ignore = true)
 	@Mapping(target = "analysisUrl", source = "analysis.resourcePath")
 	DTSoilAnalysisDto toSoilAnalysisDto(DTSoilAnalysis e);
@@ -156,6 +156,7 @@ public interface RegFarmDTOMapper {
 	void fillEntity(DTFarmAgProductionDto dto, @MappingTarget DTFarmAgProduction measure);
 
 	@Mapping(source = "m.supplier.address.city", target = "city")
+	@Mapping(source = "m.productType.localisedName", target = "productType")
 	SupplierListingDto toListing(RegEntityFarmSupplierAssignment m);
 
 	@Mapping(source = "m.address.city", target = "city")

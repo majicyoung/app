@@ -26,13 +26,13 @@
                             <table class="table table-bordered table-striped table-hover table-farm-staff" style="margin:10px 0;">
                                 <tr>
                                     <th > <span th:text="#{staff.first_name}"> staff.first_name </span> / <span th:text="#{staff.last_name}"> staff.last_name </span></th>
-                                   <!--   <th th:text="#{staff.position}">staff.position</th>-->
+                                   <th th:text="#{staff.position}">staff.position</th>
                                     <th th:text="#{default.phone}">default.phone</th>
                                     <th width="90"></th>
                                 </tr>
                                 <tr th:each="staff:${staffListing}" th:id="${'staff-'+staff.entity.id}" data-staff="{{$decla->staff}}">
                                     <td> <span th:text="${staff.entity.name}"> </span> <span th:text="${staff.entity.surname}"> </span></td>
-                                     <!-- <td th:text="${staff.position}"></td>-->
+                                    <td th:text="${staff.position.localisedName}"></td>
                                     <td th:text="${staff.officeMobile}"></td>
                                     <td align="center">
                                         <a th:attr="data-id=${staff.entity.id}" class="btn btn-xs btn-flat btn-primary editStaffBtn" th:title="#{tooltip.edit}"><i class="fa fa-edit"></i></a>

@@ -19,7 +19,7 @@
           </div>
         </div>
         <div class="box-body">
-          <table class="table table-hover table-striped table-bordered datatable">
+          <table id="farmlist" class="table table-hover table-striped table-bordered datatable order-column">
             <thead>
             <tr>
               <th>#</th>
@@ -28,6 +28,7 @@
               <th th:text="#{farm.staff_count}">staff.number</th>
               <th th:text="#{farm.pond_count}" th:if="${v8App.pondProfile}">default.ponds_number</th>
               <th th:text="#{farm.plot_count}" th:if="${v8App.plotProfile}">default.plots_count</th>
+              <th th:text="#{default.creation_date}">default.area</th>
               <th th:text="#{default.area}">default.area</th>
               <th></th>
             </tr>
@@ -40,6 +41,7 @@
               <td th:inline="text">[[${farm.staffCount}]]</td>
               <td th:inline="text" th:if="${v8App.pondProfile}">[[${farm.pondsCount}]]</td>
               <td th:inline="text" th:if="${v8App.plotProfile}">[[${farm.fieldsCount}]]</td>
+              <td th:inline="text" th:text="${farm.createdAt}">xxx</td>
               <td th:inline="text">[[${farm.size}]]</td>              
               <td align="center">
                 <a th:href="@{'/farm/'+${farm.id}+'/edit.html'}" class="btn btn-sm btn-flat btn-primary" th:title="#{tooltip.edit_farm}"><i class="fa fa-edit"></i></a>
@@ -56,5 +58,21 @@
 </div>
  
  </div>
+
+
+<th:block layout:fragment="page-scripts">
+	<script type="text/javascript">
+		$(document).ready(function() {
+			
+			$('#farmlist').DataTable( {
+		        "order": [[ 5, "desc" ]]
+		    } );
+			
+		});		
+	</script>
+</th:block>
+		
+
+
 
 </html>

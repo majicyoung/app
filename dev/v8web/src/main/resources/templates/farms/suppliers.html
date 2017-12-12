@@ -30,7 +30,7 @@
                                     <th width="90"></th>
                                 </tr>
                                 <tr th:each="supplier:${suppliersListing}">
-                                    <td th:text="${supplier.productType.name}"></td>
+                                    <td th:text="${supplier.productType.localisedName}"></td>
                                     <td th:text="${supplier.supplier.name}"></td>
                                     <td th:text="${supplier.supplier.address.city}">?</td>
                                     <td align="center">

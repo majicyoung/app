@@ -1,5 +1,7 @@
 package com.fairagora.verifik8.v8web.services.enhanced;
 
+import java.util.Date;
+
 import com.fairagora.verifik8.v8web.data.domain.commons.Address;
 import com.fairagora.verifik8.v8web.data.domain.commons.V8Measure;
 
@@ -28,6 +30,9 @@ public class V8Farm {
 	private int pondsCount;
 	private int plotsCount;
 
+	protected Date createdAt;
+	protected Date updatedAt;
+	
 	private V8Measure size;
 
 	public String getName() {
@@ -141,4 +146,27 @@ public class V8Farm {
 	public void setPlotsCount(int plotsCount) {
 		this.plotsCount = plotsCount;
 	}
+
+
+	public Date getUpdatedAt() {
+		return updatedAt;
+	}
+
+	public void setUpdatedAt(Date UpdatedAt) {
+		this.updatedAt = UpdatedAt;
+	}
+
+	public Date getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(Date createdAt) {
+		this.createdAt = createdAt;
+	}
+
+
 }
+
+
+
+
