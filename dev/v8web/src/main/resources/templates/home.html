@@ -28,7 +28,7 @@
           <div class="info-box">
             <span class="info-box-icon bg-aqua"><i class="fa fa-eye"></i></span>
             <div class="info-box-content">
-              <span class="info-box-text" th:text="${dashboard.topKpisMap['nbfarms'].name}"></span>
+              <span class="info-box-text" th:text="#{farm.count}"></span>
               <span class="info-box-number" th:text="${dashboard.topKpisMap['nbfarms'].value}"></span>
             </div>
           </div>
@@ -37,7 +37,7 @@
           <div class="info-box">
             <span class="info-box-icon bg-red"><i class="fa fa-line-chart"></i></span>
             <div class="info-box-content">
-              <span class="info-box-text" th:text="${dashboard.topKpisMap['nbPlots'].name}"></span>
+              <span class="info-box-text" th:text="#{farm.plot_count}"></span>
               <span class="info-box-number" th:text="${dashboard.topKpisMap['nbPlots'].value}"></span>
             </div>
           </div>
@@ -47,7 +47,7 @@
           <div class="info-box">
             <span class="info-box-icon bg-green"><i class="fa fa-money"></i></span>
             <div class="info-box-content">
-              <span class="info-box-text" th:text="${dashboard.topKpisMap['totalProduction'].name}"></span>
+              <span class="info-box-text" th:text="#{production_profile.total_production}"></span>
               <span class="info-box-number" th:text="${dashboard.topKpisMap['totalProduction'].value}"> </span><span>MT</span>
               
             </div>
@@ -57,7 +57,7 @@
           <div class="info-box">
             <span class="info-box-icon bg-yellow"><i class="fa fa-users"></i></span>
             <div class="info-box-content">
-              <span class="info-box-text" th:text="${dashboard.topKpisMap['nbEmployees'].name}"></span>
+              <span class="info-box-text" th:text="#{farm.staff_count}"></span>
               <span class="info-box-number" th:text="${dashboard.topKpisMap['nbEmployees'].value}"></span>
             </div>
           </div>
