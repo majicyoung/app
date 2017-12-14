@@ -141,9 +141,11 @@
 		<script type="text/javascript" th:src="@{/webjars/datatables/1.10.15/js/dataTables.bootstrap.min.js}"></script>
 		<script type="text/javascript" th:src="@{/webjars/datetimepicker/2.5.11/build/jquery.datetimepicker.full.js}"></script>
 		<script th:src="@{/static/dist/js/app.min.js}"></script>
-	<script th:inline="javascript">
+	<script th:inline="javascript"> <!-- Loading langauge for dataTable-->
 	/*<![CDATA[*/
+		
 		var lang = [[${v8App.currentLanguage.i18n}]];
+		jQuery.datetimepicker.setLocale(lang);
 		var langURL = "";
 		switch (lang) {
 		case 'en': 

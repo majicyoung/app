@@ -168,7 +168,7 @@
 	    <div class="modal-content">
 	      <div class="modal-header">
 	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	        <h4 class="modal-title" th:text="#{production_profile.water_analysis.add}">#{production_profile.soil_analysis.add}</h4>
+	        <h4 class="modal-title" th:text="#{production_profile.total_production.add}">production_profile.total_production.add</h4>
 	      </div>
  		<div class="modal-body">
         	<form role="form" th:action="@{'/farm/'+${farmId}+'/production-profile/total-production/update.html'}" method="post" enctype="multipart/form-data" id="totalProductionForm" >
@@ -342,9 +342,11 @@
 			document.getElementById("totalProductionForm_unit").value = "11"; // Metric tons only for Thailand and sugar cane - to be removed when expanding
 			document.getElementById("totalProductionForm_commodities").value = "1"; // only for Thailand and sugar cane - to be removed when expanding
 			
-			
+		
 			$('.datefield').datetimepicker({
-				format: 'Y-m-d'
+				format: 'd-m-Y',
+				closeOnDateSelect:true
+
 			});
 			
 			
