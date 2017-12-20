@@ -109,16 +109,16 @@
 				</form>
 </div>
 </div>
-</body>
 
-
- 
-
+<th:block th:include="inc/includes :: footer-scripts" th:remove="tag"></th:block>
 <th:block layout:fragment="page-scripts">
 	<script type="text/javascript">
+	/*<![CDATA[*/
+		
 		$(document).ready(function() {
 			$('.datefield').datetimepicker({
-				format: 'Y-m-d'
+				format: 'Y-m-d',
+				closeOnDateSelect:true
 			});
 		});
 
@@ -133,6 +133,16 @@
 			});
 			return hasError;
 		}
+		/*]]>*/
 	</script>
 </th:block>
+
+
+
+</body>
+
+
+ 
+
+
 </html>

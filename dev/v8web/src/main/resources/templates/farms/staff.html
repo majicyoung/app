@@ -176,6 +176,27 @@
 
 	</div>
 
+
+	<!-- MODALS -->
+	<div class="modal fade popModal" id="modalIndividual" tabindex="-1" role="dialog">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        <h4 class="modal-title" th:text="#{staff.create}">staff </h4>
+	      </div>
+	      <div class="modal-body" style="height: 600px;width:600px">
+			<iframe id="indFrame" th:src="@{'/farm/'+${farmId}+'/individual-editor.html'}" class="iframe" name="info" seamless="" height="100%" width="100%"></iframe>
+	      </div>
+	      <div class="modal-footer">
+	      </div>
+	    </div>
+	  </div>
+	</div>
+
+
+
+
 </div>
 
 
@@ -184,13 +205,13 @@
 	
 	$(document).ready(function() {
 	
-		
+		var individualEditorSrc=$('#indFrame').attr('src');		
 		
 		$('.AddNewStaffBtn').click(function(){
 			
-			document.location='individual-editor.html';
+			$('#indFrame').attr('src',individualEditorSrc);
+			$('#modalIndividual').modal('show');
 		});
-		
 		
 		
 		$(".editStaffBtn").click(function(){
@@ -224,6 +245,15 @@
 		
 	});
 	
+	function actionDone(item){
+		console.log(item);
+		if(item.itemType=='individual'){
+			$('#modalIndividual').modal('hide');
+			var sCoo = '<option value="'+item.itemId+'"> '+item.itemName+' </option>';
+			$('#inputFarmStaffName').append(sCoo);
+			$('#inputFarmStaffName').val(item.itemId);
+		}
+	}
 	 
 	</script>
 </th:block>
