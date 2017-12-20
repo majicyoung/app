@@ -13,6 +13,11 @@ import com.fairagora.verifik8.v8web.data.domain.V8Entity;
 @Table(name = "sys_roles")
 public class SYSRole implements V8Entity {
 
+	public static final String SADMIN = "sadmin";
+	public static final String country = "country";
+	public static final String coop = "coop";
+	public static final String farm = "farm";
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID")

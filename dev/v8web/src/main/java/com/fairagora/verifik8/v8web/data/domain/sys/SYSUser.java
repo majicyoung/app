@@ -10,6 +10,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.fairagora.verifik8.v8web.data.domain.cl.CLCountry;
+import com.fairagora.verifik8.v8web.data.domain.reg.RegEntity;
 
 @Entity
 @Table(name = "sys_users")
@@ -36,6 +37,14 @@ public class SYSUser {
 	@ManyToOne
 	@JoinColumn(name = "CL_COUNTRY_ID")
 	protected CLCountry country;
+
+	@ManyToOne
+	@JoinColumn(name = "REG_ENTITY_FARM_ID")
+	protected RegEntity farm;
+
+	@ManyToOne
+	@JoinColumn(name = "REG_ENTITY_COOP_ID")
+	protected RegEntity cooperative;
 
 	public Long getId() {
 		return id;
@@ -91,6 +100,22 @@ public class SYSUser {
 
 	public void setCountry(CLCountry country) {
 		this.country = country;
+	}
+
+	public RegEntity getFarm() {
+		return farm;
+	}
+
+	public void setFarm(RegEntity farm) {
+		this.farm = farm;
+	}
+
+	public RegEntity getCooperative() {
+		return cooperative;
+	}
+
+	public void setCooperative(RegEntity cooperative) {
+		this.cooperative = cooperative;
 	}
 
 }

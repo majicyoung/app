@@ -17,7 +17,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	private static final String USERS_BY_NAME = "SELECT email,password,active FROM sys_users WHERE email=?";
-	private static final String AUTORITIES_BY_USERNAME = "SELECT email,sys_roles.CODE FROM sys_users LEFT JOIN sys_roles ON sys_roles.ID=SYS_ROLE_ID WHERE email=?";
+	private static final String AUTORITIES_BY_USERNAME = "SELECT email,CONCAT('ROLE_',sys_roles.CODE) FROM sys_users LEFT JOIN sys_roles ON sys_roles.ID=SYS_ROLE_ID WHERE email=?";
 
 	@Autowired
 	private DataSource dataSource;

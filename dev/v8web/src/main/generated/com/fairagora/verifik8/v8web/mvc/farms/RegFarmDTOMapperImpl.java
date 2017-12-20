@@ -32,6 +32,8 @@ import com.fairagora.verifik8.v8web.data.domain.cl.CLProdDataEntryType;
 
 import com.fairagora.verifik8.v8web.data.domain.cl.CLProduct;
 
+import com.fairagora.verifik8.v8web.data.domain.cl.CLProductType;
+
 import com.fairagora.verifik8.v8web.data.domain.cl.CLQuantityUnit;
 
 import com.fairagora.verifik8.v8web.data.domain.cl.CLSoilAnalysisType;
@@ -130,7 +132,7 @@ import org.springframework.stereotype.Component;
 
     value = "org.mapstruct.ap.MappingProcessor",
 
-    date = "2017-11-29T01:59:31+0100",
+    date = "2017-12-20T07:03:48+0100",
 
     comments = "version: 1.1.0.Final, compiler: javac, environment: Java 1.8.0_112 (Oracle Corporation)"
 
@@ -697,7 +699,7 @@ public class RegFarmDTOMapperImpl implements RegFarmDTOMapper {
             return;
         }
 
-        dto.setActivityName( mActivityTypeName( m ) );
+        dto.setActivityName( mActivityTypeLocalisedName( m ) );
 
         dto.setId( m.getId() );
 
@@ -827,7 +829,7 @@ public class RegFarmDTOMapperImpl implements RegFarmDTOMapper {
 
         V8MeasureDto v8MeasureDto = new V8MeasureDto();
 
-        v8MeasureDto.setUnitName( mUnitName( m ) );
+        v8MeasureDto.setUnitName( mUnitLocalisedName( m ) );
 
         v8MeasureDto.setQuantity( m.getQuantity() );
 
@@ -1022,7 +1024,7 @@ public class RegFarmDTOMapperImpl implements RegFarmDTOMapper {
 
         DTFarmAgProductionDto dTFarmAgProductionDto = new DTFarmAgProductionDto();
 
-        dTFarmAgProductionDto.setCommoditiesName( eCommoditiesName( e ) );
+        dTFarmAgProductionDto.setCommoditiesName( eCommoditiesLocalisedName( e ) );
 
         dTFarmAgProductionDto.setId( e.getId() );
 
@@ -1054,7 +1056,7 @@ public class RegFarmDTOMapperImpl implements RegFarmDTOMapper {
 
         dTSoilAnalysisDto.setPlotNumber( ePlotNumber( e ) );
 
-        dTSoilAnalysisDto.setSoilAnalysisTypeName( eSoilAnalysisTypeName( e ) );
+        dTSoilAnalysisDto.setSoilAnalysisTypeName( eSoilAnalysisTypeLocalisedName( e ) );
 
         dTSoilAnalysisDto.setAnalysisUrl( eAnalysisResourcePath( e ) );
 
@@ -1143,11 +1145,11 @@ public class RegFarmDTOMapperImpl implements RegFarmDTOMapper {
 
         supplierListingDto.setCity( mSupplierAddressCity( m ) );
 
+        supplierListingDto.setProductType( mProductTypeLocalisedName( m ) );
+
         supplierListingDto.setFarm( entityDtoMapper.toName( m.getFarm() ) );
 
         supplierListingDto.setSupplier( entityDtoMapper.toName( m.getSupplier() ) );
-
-        supplierListingDto.setProductType( entityDtoMapper.toName( m.getProductType() ) );
 
         supplierListingDto.setId( m.getId() );
 
@@ -2092,7 +2094,7 @@ public class RegFarmDTOMapperImpl implements RegFarmDTOMapper {
         return resourcePath;
     }
 
-    private String mActivityTypeName(DTFarmPlotActivity dTFarmPlotActivity) {
+    private String mActivityTypeLocalisedName(DTFarmPlotActivity dTFarmPlotActivity) {
 
         if ( dTFarmPlotActivity == null ) {
 
@@ -2106,17 +2108,17 @@ public class RegFarmDTOMapperImpl implements RegFarmDTOMapper {
             return null;
         }
 
-        String name = activityType.getName();
+        String localisedName = activityType.getLocalisedName();
 
-        if ( name == null ) {
+        if ( localisedName == null ) {
 
             return null;
         }
 
-        return name;
+        return localisedName;
     }
 
-    private String mUnitName(V8Measure v8Measure) {
+    private String mUnitLocalisedName(V8Measure v8Measure) {
 
         if ( v8Measure == null ) {
 
@@ -2130,17 +2132,17 @@ public class RegFarmDTOMapperImpl implements RegFarmDTOMapper {
             return null;
         }
 
-        String name = unit.getName();
+        String localisedName = unit.getLocalisedName();
 
-        if ( name == null ) {
+        if ( localisedName == null ) {
 
             return null;
         }
 
-        return name;
+        return localisedName;
     }
 
-    private String eCommoditiesName(DTFarmAgProduction dTFarmAgProduction) {
+    private String eCommoditiesLocalisedName(DTFarmAgProduction dTFarmAgProduction) {
 
         if ( dTFarmAgProduction == null ) {
 
@@ -2154,14 +2156,14 @@ public class RegFarmDTOMapperImpl implements RegFarmDTOMapper {
             return null;
         }
 
-        String name = commodities.getName();
+        String localisedName = commodities.getLocalisedName();
 
-        if ( name == null ) {
+        if ( localisedName == null ) {
 
             return null;
         }
 
-        return name;
+        return localisedName;
     }
 
     private String ePlotNumber(DTSoilAnalysis dTSoilAnalysis) {
@@ -2188,7 +2190,7 @@ public class RegFarmDTOMapperImpl implements RegFarmDTOMapper {
         return number;
     }
 
-    private String eSoilAnalysisTypeName(DTSoilAnalysis dTSoilAnalysis) {
+    private String eSoilAnalysisTypeLocalisedName(DTSoilAnalysis dTSoilAnalysis) {
 
         if ( dTSoilAnalysis == null ) {
 
@@ -2202,14 +2204,14 @@ public class RegFarmDTOMapperImpl implements RegFarmDTOMapper {
             return null;
         }
 
-        String name = soilAnalysisType.getName();
+        String localisedName = soilAnalysisType.getLocalisedName();
 
-        if ( name == null ) {
+        if ( localisedName == null ) {
 
             return null;
         }
 
-        return name;
+        return localisedName;
     }
 
     private String eAnalysisResourcePath(DTSoilAnalysis dTSoilAnalysis) {
@@ -2313,6 +2315,30 @@ public class RegFarmDTOMapperImpl implements RegFarmDTOMapper {
         }
 
         return city;
+    }
+
+    private String mProductTypeLocalisedName(RegEntityFarmSupplierAssignment regEntityFarmSupplierAssignment) {
+
+        if ( regEntityFarmSupplierAssignment == null ) {
+
+            return null;
+        }
+
+        CLProductType productType = regEntityFarmSupplierAssignment.getProductType();
+
+        if ( productType == null ) {
+
+            return null;
+        }
+
+        String localisedName = productType.getLocalisedName();
+
+        if ( localisedName == null ) {
+
+            return null;
+        }
+
+        return localisedName;
     }
 
     private String mAddressCity(RegEntity regEntity) {

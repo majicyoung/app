@@ -61,7 +61,7 @@
 							<div class="col-md-6 col-sm-6 col-xs-12 bloc-role" id="bloc-role-coop" style="display: none;">
 								<div class="form-group">
 									<label th:text="#{default.cooperative}">default.cooperative</label> 
-									<select class="form-control" th:field="*{coop}">
+									<select class="form-control" th:field="*{cooperative}">
 										<option value="" th:text="#{cooperative.select}"></option>
 										<option th:each="coop : ${allCooperatives}" th:value="${coop.id}" th:text="${coop.name}"></option>
 									</select>

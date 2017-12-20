@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 
     value = "org.mapstruct.ap.MappingProcessor",
 
-    date = "2017-11-29T01:59:31+0100",
+    date = "2017-12-20T07:03:48+0100",
 
     comments = "version: 1.1.0.Final, compiler: javac, environment: Java 1.8.0_112 (Oracle Corporation)"
 
@@ -46,6 +46,10 @@ public class V8EnhancedDtoMapperImpl implements V8EnhancedDtoMapper {
         f.setWebsite( e.getWebsite() );
 
         f.setAddress( e.getAddress() );
+
+        f.setUpdatedAt( e.getUpdatedAt() );
+
+        f.setCreatedAt( e.getCreatedAt() );
     }
 }
 

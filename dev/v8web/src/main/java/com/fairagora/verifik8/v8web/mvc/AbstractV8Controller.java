@@ -3,10 +3,12 @@ package com.fairagora.verifik8.v8web.mvc;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
@@ -55,7 +57,7 @@ public class AbstractV8Controller {
 
 
 	@ModelAttribute("loggedUser")
-	public SYSUser loggedUser() {
+	public SYSUser loggedUser(HttpServletRequest rq) {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		return userRepository.findByEmail(authentication.getName());
 	}

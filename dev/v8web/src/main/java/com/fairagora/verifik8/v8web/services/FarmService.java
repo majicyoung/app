@@ -7,6 +7,9 @@ import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,8 +17,11 @@ import com.fairagora.verifik8.v8web.data.domain.cl.CLEntityType;
 import com.fairagora.verifik8.v8web.data.domain.commons.V8Measure;
 import com.fairagora.verifik8.v8web.data.domain.reg.RegEntity;
 import com.fairagora.verifik8.v8web.data.domain.reg.farm.RegEntityFarmDetails;
+import com.fairagora.verifik8.v8web.data.domain.sys.SYSRole;
+import com.fairagora.verifik8.v8web.data.domain.sys.SYSUser;
 import com.fairagora.verifik8.v8web.data.repo.reg.RegEntityFarmDetailsRepository;
 import com.fairagora.verifik8.v8web.data.repo.reg.RegEntityRepository;
+import com.fairagora.verifik8.v8web.data.repo.sys.SYSUserRepository;
 import com.fairagora.verifik8.v8web.services.enhanced.V8Farm;
 import com.fairagora.verifik8.v8web.services.enhanced.dtomapping.V8EnhancedDtoMapper;
 
@@ -65,6 +71,8 @@ public class FarmService extends AbstractV8Service {
 		});
 
 		List<RegEntity> farmsEntities = regEntityRepository.findByEntityTypeCode(CLEntityType.CODE_FARM);
+		farmsEntities = filterForCurrentUser(farmsEntities);
+
 		for (RegEntity e : farmsEntities) {
 			V8Farm f = new V8Farm();
 			enhancedMapper.enhance(e, f);
@@ -76,6 +84,53 @@ public class FarmService extends AbstractV8Service {
 		}
 
 		return farms;
+	}
+
+	@Autowired
+	private SYSUserRepository userRepo;
+
+	/**
+	 * 
+	 * @param farmsEntities
+	 * @return
+	 */
+	private List<RegEntity> filterForCurrentUser(List<RegEntity> farmsEntities) {
+
+		List<RegEntity> filtered = new ArrayList<>();
+
+		// get the technical user
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		if (!(authentication instanceof AnonymousAuthenticationToken)) {
+
+			// load the user entity from the databse, matching the name
+			SYSUser user = userRepo.findByEmail(authentication.getName());
+
+			if (user.getRole() != null) {
+				if (user.getRole().getCode().equals(SYSRole.SADMIN)) {
+					// as an admin, I have no restriction
+					return farmsEntities;
+				} else if (user.getRole().getCode().equals(SYSRole.farm)) {
+					// as an FARM user, I shall see only my own farm, from my
+					// user profile, if I have no farm defined, I will see no
+					// farm
+					farmsEntities.stream()
+							.filter(f -> user.getFarm() != null && f.getId().equals(user.getFarm().getId()))
+							.forEach(filtered::add);
+				} else if (user.getRole().getCode().equals(SYSRole.country)) {
+					// as a COUNTRY user I shall see the farms from the country
+					// defined in my user profile
+					farmsEntities.stream()
+							.filter(f -> user.getCountry() != null && f.getAddress().getCountry() != null
+									&& f.getAddress().getCountry().getId().equals(user.getCountry().getId()))
+							.forEach(filtered::add);
+				}
+
+			}
+
+		}
+
+		return filtered;
+
 	}
 
 	@Autowired

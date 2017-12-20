@@ -2,6 +2,8 @@ package com.fairagora.verifik8.v8web.mvc.infra.dtomapping;
 
 import com.fairagora.verifik8.v8web.data.domain.cl.CLCountry;
 
+import com.fairagora.verifik8.v8web.data.domain.reg.RegEntity;
+
 import com.fairagora.verifik8.v8web.data.domain.sys.SYSRole;
 
 import com.fairagora.verifik8.v8web.data.domain.sys.SYSUser;
@@ -20,7 +22,7 @@ import org.springframework.stereotype.Component;
 
     value = "org.mapstruct.ap.MappingProcessor",
 
-    date = "2017-11-29T01:59:32+0100",
+    date = "2017-12-20T07:03:47+0100",
 
     comments = "version: 1.1.0.Final, compiler: javac, environment: Java 1.8.0_112 (Oracle Corporation)"
 
@@ -53,6 +55,10 @@ public class SysUserDTOMapperImpl implements SysUserDTOMapper {
 
         dto.setCountry( entityDtoMapper.toReference( user.getCountry() ) );
 
+        dto.setCooperative( entityDtoMapper.toReference( user.getCooperative() ) );
+
+        dto.setFarm( entityDtoMapper.toReference( user.getFarm() ) );
+
         dto.setId( user.getId() );
     }
 
@@ -76,6 +82,10 @@ public class SysUserDTOMapperImpl implements SysUserDTOMapper {
         user.setRole( entityDtoMapper.resolve( dto.getRole(), SYSRole.class ) );
 
         user.setCountry( entityDtoMapper.resolve( dto.getCountry(), CLCountry.class ) );
+
+        user.setFarm( entityDtoMapper.resolve( dto.getFarm(), RegEntity.class ) );
+
+        user.setCooperative( entityDtoMapper.resolve( dto.getCooperative(), RegEntity.class ) );
     }
 
     @Override

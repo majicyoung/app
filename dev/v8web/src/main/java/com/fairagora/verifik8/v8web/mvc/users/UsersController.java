@@ -2,8 +2,12 @@ package com.fairagora.verifik8.v8web.mvc.users;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -27,7 +31,7 @@ public class UsersController extends AbstractV8Controller {
 	private SysUserDTOMapper sysUserDTOMapper;
 
 	@RequestMapping(value = "/users.html", method = RequestMethod.GET)
-	public String showUsersList(Model mv) {
+	public String showUsersList(Model mv, HttpServletRequest req) {
 
 		V8Page p = new V8Page();
 		p.setTitle("default.users");
@@ -83,8 +87,8 @@ public class UsersController extends AbstractV8Controller {
 	}
 
 	@RequestMapping(value = "/users/create.html", method = RequestMethod.POST)
-	public String createUser(@Validated @ModelAttribute("userDto") UserFormDto createUserDto,
-			BindingResult bindResults, Model mv) {
+	public String createUser(@Validated @ModelAttribute("userDto") UserFormDto createUserDto, BindingResult bindResults,
+			Model mv) {
 
 		SYSUser newUser = new SYSUser();
 

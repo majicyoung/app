@@ -26,7 +26,7 @@ public class UserFormDto {
 	 * id of the cooperative we want this user to be linked to, this is not
 	 * mandatory, and rather exclusive with farm
 	 */
-	protected Long coop;
+	protected Long cooperative;
 
 	/**
 	 * id of the farm we want this user to be linked to, this is not mandatory,
@@ -74,12 +74,12 @@ public class UserFormDto {
 		this.country = country;
 	}
 
-	public Long getCoop() {
-		return coop;
+	public Long getCooperative() {
+		return cooperative;
 	}
 
-	public void setCoop(Long coop) {
-		this.coop = coop;
+	public void setCooperative(Long coop) {
+		this.cooperative = coop;
 	}
 
 	public Long getFarm() {
