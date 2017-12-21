@@ -168,6 +168,7 @@ public interface RegFarmDTOMapper {
 	void fillEntity(IndividualDto dto, @MappingTarget RegEntity ind);
 
 	@Mapping(source = "m.address.city", target = "city")
+	@Mapping(source = "m.entityType.localisedName", target = "entityType")
 	CompanyListingDto toCompListing(RegEntity m);
 
 	void toDto(RegEntity ind, @MappingTarget CompanyDto dto);

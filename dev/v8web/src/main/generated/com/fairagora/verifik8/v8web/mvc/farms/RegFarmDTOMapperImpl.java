@@ -132,7 +132,7 @@ import org.springframework.stereotype.Component;
 
     value = "org.mapstruct.ap.MappingProcessor",
 
-    date = "2017-12-20T07:03:48+0100",
+    date = "2017-12-21T16:04:21+0200",
 
     comments = "version: 1.1.0.Final, compiler: javac, environment: Java 1.8.0_112 (Oracle Corporation)"
 
@@ -1309,6 +1309,8 @@ public class RegFarmDTOMapperImpl implements RegFarmDTOMapper {
 
         companyListingDto.setCity( mAddressCity_( m ) );
 
+        companyListingDto.setEntityType( mEntityTypeLocalisedName( m ) );
+
         companyListingDto.setRegistrationNumber( m.getRegistrationNumber() );
 
         companyListingDto.setName( m.getName() );
@@ -1316,8 +1318,6 @@ public class RegFarmDTOMapperImpl implements RegFarmDTOMapper {
         companyListingDto.setPhoneNumber( m.getPhoneNumber() );
 
         companyListingDto.setEmail( m.getEmail() );
-
-        companyListingDto.setEntityType( entityDtoMapper.toName( m.getEntityType() ) );
 
         companyListingDto.setId( m.getId() );
 
@@ -2387,6 +2387,30 @@ public class RegFarmDTOMapperImpl implements RegFarmDTOMapper {
         }
 
         return city;
+    }
+
+    private String mEntityTypeLocalisedName(RegEntity regEntity) {
+
+        if ( regEntity == null ) {
+
+            return null;
+        }
+
+        CLEntityType entityType = regEntity.getEntityType();
+
+        if ( entityType == null ) {
+
+            return null;
+        }
+
+        String localisedName = entityType.getLocalisedName();
+
+        if ( localisedName == null ) {
+
+            return null;
+        }
+
+        return localisedName;
     }
 
     private String eWorkingPermitResourcePath(RegEntityStaff regEntityStaff) {
