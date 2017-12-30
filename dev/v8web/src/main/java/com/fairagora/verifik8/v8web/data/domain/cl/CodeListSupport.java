@@ -47,6 +47,15 @@ public abstract class CodeListSupport extends V8EntitySupport {
 	@Column(name = "I18N_VT", length = 256, nullable = false)
 	protected String i18nVt;
 
+	@Column(name = "I18N_LA", length = 256, nullable = false)
+	protected String i18nLa;
+	
+	@Column(name = "I18N_ID", length = 256, nullable = false)
+	protected String i18nId;
+	
+	@Column(name = "I18N_KH", length = 256, nullable = false)
+	protected String i18nKh;
+	
 	public Long getId() {
 		return id;
 	}
@@ -134,6 +143,31 @@ public abstract class CodeListSupport extends V8EntitySupport {
 	public void setI18nVt(String i18nVt) {
 		this.i18nVt = i18nVt;
 	}
+	
+	public String getI18nLa() {
+		return i18nLa;
+	}
+	
+	public void setI18nLa(String i18nLa) {
+		this.i18nLa = i18nLa;
+	}
+
+	public String getI18nId() {
+		return i18nId;
+	}
+	
+	public void setI18nId(String i18nId) {
+		this.i18nId = i18nId;
+	}
+
+	public String getI18nKh() {
+		return i18nKh;
+	}
+	
+	public void setI18nKh(String i18nKh) {
+		this.i18nKh = i18nKh;
+	}
+	
 
 	public String getLocalisedName() {
 		Locale locale = LocaleContextHolder.getLocale();
@@ -152,7 +186,14 @@ public abstract class CodeListSupport extends V8EntitySupport {
 			return getI18nVt();
 		else if ("es".equalsIgnoreCase(locale.getLanguage()))
 			return getI18nEs();
-
+		else if ("la".equalsIgnoreCase(locale.getLanguage()))
+			return getI18nLa();
+		else if ("id".equalsIgnoreCase(locale.getLanguage()))
+			return getI18nId();
+		else if ("kh".equalsIgnoreCase(locale.getLanguage()))
+			return getI18nKh();
+		
+		
 		System.out.println("UNKNOWN LOCALE ::: " + locale);
 
 		return getI18nDefault();
