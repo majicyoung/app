@@ -19,7 +19,7 @@ import org.hibernate.annotations.NotFound;
 import org.hibernate.annotations.NotFoundAction;
 
 import com.fairagora.verifik8.v8web.data.domain.V8EntitySupport;
-import com.fairagora.verifik8.v8web.data.domain.cl.CLHvHeExpensionType;
+import com.fairagora.verifik8.v8web.data.domain.cl.CLAppHvHeExpensionType;
 import com.fairagora.verifik8.v8web.data.domain.commons.Attachment;
 import com.fairagora.verifik8.v8web.data.domain.commons.V8Measure;
 import com.fairagora.verifik8.v8web.data.domain.reg.RegEntity;
@@ -93,7 +93,7 @@ public class RegEntityFarmDetails extends V8EntitySupport {
 	@ManyToOne(optional = true)
 	@NotFound(action = NotFoundAction.IGNORE)
 	@JoinColumn(name = "CL_HVHE_EXPENSION_TYPE_ID")
-	protected CLHvHeExpensionType farmExpensionType;
+	protected CLAppHvHeExpensionType farmExpensionType;
 
 	@Embedded
 	@AttributeOverrides({
@@ -203,11 +203,11 @@ public class RegEntityFarmDetails extends V8EntitySupport {
 		this.farmExpension = farmExpension;
 	}
 
-	public CLHvHeExpensionType getFarmExpensionType() {
+	public CLAppHvHeExpensionType getFarmExpensionType() {
 		return farmExpensionType;
 	}
 
-	public void setFarmExpensionType(CLHvHeExpensionType farmExpensionType) {
+	public void setFarmExpensionType(CLAppHvHeExpensionType farmExpensionType) {
 		this.farmExpensionType = farmExpensionType;
 	}
 

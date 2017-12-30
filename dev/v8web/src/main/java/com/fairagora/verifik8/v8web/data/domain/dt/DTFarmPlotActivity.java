@@ -17,9 +17,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.fairagora.verifik8.v8web.data.domain.V8EntitySupport;
-import com.fairagora.verifik8.v8web.data.domain.cl.CLPlotActivityType;
-import com.fairagora.verifik8.v8web.data.domain.cl.CLProduct;
-import com.fairagora.verifik8.v8web.data.domain.cl.CLTilingActivityType;
+import com.fairagora.verifik8.v8web.data.domain.cl.CLFarmPlotActivityType;
+import com.fairagora.verifik8.v8web.data.domain.cl.CLRefProduct;
+import com.fairagora.verifik8.v8web.data.domain.cl.CLAppTilingActivityType;
 import com.fairagora.verifik8.v8web.data.domain.commons.V8Measure;
 import com.fairagora.verifik8.v8web.data.domain.reg.farm.RegEntityFarmPlot;
 
@@ -44,11 +44,11 @@ public class DTFarmPlotActivity extends V8EntitySupport {
 
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "CL_PLOT_ACTIVITY_TYPE_ID")
-	protected CLPlotActivityType activityType;
+	protected CLFarmPlotActivityType activityType;
 
 	@ManyToOne(optional = true)
 	@JoinColumn(name = "CL_PRODUCT_ID")
-	protected CLProduct product;
+	protected CLRefProduct product;
 
 	@Embedded
 	@AttributeOverrides({ @AttributeOverride(name = "quantity", column = @Column(name = "MEASURE_VALUE")), })
@@ -65,7 +65,7 @@ public class DTFarmPlotActivity extends V8EntitySupport {
 
 	@ManyToOne(optional = true)
 	@JoinColumn(name = "CL_TILING_ACTIVITY_TYPE_ID")
-	protected CLTilingActivityType tilingActivityType;
+	protected CLAppTilingActivityType tilingActivityType;
 
 	public Long getId() {
 		return id;
@@ -99,19 +99,19 @@ public class DTFarmPlotActivity extends V8EntitySupport {
 		this.activityEndDate = activityEndDate;
 	}
 
-	public CLPlotActivityType getActivityType() {
+	public CLFarmPlotActivityType getActivityType() {
 		return activityType;
 	}
 
-	public void setActivityType(CLPlotActivityType activityType) {
+	public void setActivityType(CLFarmPlotActivityType activityType) {
 		this.activityType = activityType;
 	}
 
-	public CLProduct getProduct() {
+	public CLRefProduct getProduct() {
 		return product;
 	}
 
-	public void setProduct(CLProduct product) {
+	public void setProduct(CLRefProduct product) {
 		this.product = product;
 	}
 
@@ -131,11 +131,11 @@ public class DTFarmPlotActivity extends V8EntitySupport {
 		this.additionalMeasure = additionalMeasure;
 	}
 
-	public CLTilingActivityType getTilingActivityType() {
+	public CLAppTilingActivityType getTilingActivityType() {
 		return tilingActivityType;
 	}
 
-	public void setTilingActivityType(CLTilingActivityType tilingActivityType) {
+	public void setTilingActivityType(CLAppTilingActivityType tilingActivityType) {
 		this.tilingActivityType = tilingActivityType;
 	}
 

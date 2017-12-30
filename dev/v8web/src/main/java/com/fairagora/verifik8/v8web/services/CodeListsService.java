@@ -6,111 +6,111 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.fairagora.verifik8.v8web.data.domain.cl.CLCommodities;
-import com.fairagora.verifik8.v8web.data.domain.cl.CLCompanyPositionType;
-import com.fairagora.verifik8.v8web.data.domain.cl.CLContractType;
-import com.fairagora.verifik8.v8web.data.domain.cl.CLCountry;
-import com.fairagora.verifik8.v8web.data.domain.cl.CLCurrency;
-import com.fairagora.verifik8.v8web.data.domain.cl.CLEntityType;
-import com.fairagora.verifik8.v8web.data.domain.cl.CLHazardousWorkType;
-import com.fairagora.verifik8.v8web.data.domain.cl.CLHvHeExpensionType;
-import com.fairagora.verifik8.v8web.data.domain.cl.CLLanguage;
-import com.fairagora.verifik8.v8web.data.domain.cl.CLLegalStatus;
-import com.fairagora.verifik8.v8web.data.domain.cl.CLMeasureType;
-import com.fairagora.verifik8.v8web.data.domain.cl.CLPaymentFrequency;
-import com.fairagora.verifik8.v8web.data.domain.cl.CLPlotActivityType;
-import com.fairagora.verifik8.v8web.data.domain.cl.CLPondType;
-import com.fairagora.verifik8.v8web.data.domain.cl.CLProduct;
-import com.fairagora.verifik8.v8web.data.domain.cl.CLProductType;
-import com.fairagora.verifik8.v8web.data.domain.cl.CLQuantityUnit;
-import com.fairagora.verifik8.v8web.data.domain.cl.CLSoilAnalysisType;
-import com.fairagora.verifik8.v8web.data.domain.cl.CLSpecies;
-import com.fairagora.verifik8.v8web.data.domain.cl.CLTilingActivityType;
-import com.fairagora.verifik8.v8web.data.repo.cl.CLCommoditiesRepository;
-import com.fairagora.verifik8.v8web.data.repo.cl.CLCompanyPositionTypeRepository;
-import com.fairagora.verifik8.v8web.data.repo.cl.CLContractTypeRepository;
-import com.fairagora.verifik8.v8web.data.repo.cl.CLCountryRepository;
-import com.fairagora.verifik8.v8web.data.repo.cl.CLCurrencyRepository;
-import com.fairagora.verifik8.v8web.data.repo.cl.CLEntityTypeRepository;
-import com.fairagora.verifik8.v8web.data.repo.cl.CLHazardousWorkTypeRepository;
-import com.fairagora.verifik8.v8web.data.repo.cl.CLHvHeExpensionTypeRepository;
-import com.fairagora.verifik8.v8web.data.repo.cl.CLLanguageRepository;
-import com.fairagora.verifik8.v8web.data.repo.cl.CLLegalStatusRepository;
-import com.fairagora.verifik8.v8web.data.repo.cl.CLMeasureTypeRepository;
-import com.fairagora.verifik8.v8web.data.repo.cl.CLPaymentFrequenciesRepository;
-import com.fairagora.verifik8.v8web.data.repo.cl.CLPlotActivityTypeRepository;
-import com.fairagora.verifik8.v8web.data.repo.cl.CLPoundTypeRepository;
-import com.fairagora.verifik8.v8web.data.repo.cl.CLProductRepository;
-import com.fairagora.verifik8.v8web.data.repo.cl.CLProductTypesRepository;
-import com.fairagora.verifik8.v8web.data.repo.cl.CLQuantityUnitRepository;
-import com.fairagora.verifik8.v8web.data.repo.cl.CLSoilAnalysisTypeRepository;
-import com.fairagora.verifik8.v8web.data.repo.cl.CLSpeciesRepository;
-import com.fairagora.verifik8.v8web.data.repo.cl.CLTilingActivityTypeRepository;
+import com.fairagora.verifik8.v8web.data.domain.cl.CLRefCommodities;
+import com.fairagora.verifik8.v8web.data.domain.cl.CLAppCompanyPositionType;
+import com.fairagora.verifik8.v8web.data.domain.cl.CLAppContractType;
+import com.fairagora.verifik8.v8web.data.domain.cl.CLRefCountry;
+import com.fairagora.verifik8.v8web.data.domain.cl.CLRefCurrency;
+import com.fairagora.verifik8.v8web.data.domain.cl.CLAppEntityType;
+import com.fairagora.verifik8.v8web.data.domain.cl.CLAppHazardousWorkType;
+import com.fairagora.verifik8.v8web.data.domain.cl.CLAppHvHeExpensionType;
+import com.fairagora.verifik8.v8web.data.domain.cl.CLRefLanguage;
+import com.fairagora.verifik8.v8web.data.domain.cl.CLAppLegalStatus;
+import com.fairagora.verifik8.v8web.data.domain.cl.CLAppMeasureType;
+import com.fairagora.verifik8.v8web.data.domain.cl.CLAppPaymentFrequency;
+import com.fairagora.verifik8.v8web.data.domain.cl.CLFarmPlotActivityType;
+import com.fairagora.verifik8.v8web.data.domain.cl.CLFarmPondType;
+import com.fairagora.verifik8.v8web.data.domain.cl.CLRefProduct;
+import com.fairagora.verifik8.v8web.data.domain.cl.CLRefProductType;
+import com.fairagora.verifik8.v8web.data.domain.cl.CLAppQuantityUnit;
+import com.fairagora.verifik8.v8web.data.domain.cl.CLAppSoilAnalysisType;
+import com.fairagora.verifik8.v8web.data.domain.cl.CLRefSpecies;
+import com.fairagora.verifik8.v8web.data.domain.cl.CLAppTilingActivityType;
+import com.fairagora.verifik8.v8web.data.repo.cl.CLRefCommoditiesRepository;
+import com.fairagora.verifik8.v8web.data.repo.cl.CLAppCompanyPositionTypeRepository;
+import com.fairagora.verifik8.v8web.data.repo.cl.CLAppContractTypeRepository;
+import com.fairagora.verifik8.v8web.data.repo.cl.CLRefCountryRepository;
+import com.fairagora.verifik8.v8web.data.repo.cl.CLRefCurrencyRepository;
+import com.fairagora.verifik8.v8web.data.repo.cl.CLAppEntityTypeRepository;
+import com.fairagora.verifik8.v8web.data.repo.cl.CLAppHazardousWorkTypeRepository;
+import com.fairagora.verifik8.v8web.data.repo.cl.CLAppHvHeExpensionTypeRepository;
+import com.fairagora.verifik8.v8web.data.repo.cl.CLRefLanguageRepository;
+import com.fairagora.verifik8.v8web.data.repo.cl.CLAppLegalStatusRepository;
+import com.fairagora.verifik8.v8web.data.repo.cl.CLAppMeasureTypeRepository;
+import com.fairagora.verifik8.v8web.data.repo.cl.CLAppPaymentFrequenciesRepository;
+import com.fairagora.verifik8.v8web.data.repo.cl.CLFarmPlotActivityTypeRepository;
+import com.fairagora.verifik8.v8web.data.repo.cl.CLFarmPondTypeRepository;
+import com.fairagora.verifik8.v8web.data.repo.cl.CLRefProductRepository;
+import com.fairagora.verifik8.v8web.data.repo.cl.CLRefProductTypesRepository;
+import com.fairagora.verifik8.v8web.data.repo.cl.CLAppQuantityUnitRepository;
+import com.fairagora.verifik8.v8web.data.repo.cl.CLAppSoilAnalysisTypeRepository;
+import com.fairagora.verifik8.v8web.data.repo.cl.CLRefSpeciesRepository;
+import com.fairagora.verifik8.v8web.data.repo.cl.CLAppTilingActivityTypeRepository;
 
 @Service
 public class CodeListsService {
 
 	@Autowired
-	private CLCountryRepository countriesRepository;
+	private CLRefCountryRepository countriesRepository;
 
 	@Autowired
-	private CLSpeciesRepository speciesRepository;
+	private CLRefSpeciesRepository speciesRepository;
 
 	@Autowired
-	private CLPoundTypeRepository pondTypesRepository;
+	private CLFarmPondTypeRepository pondTypesRepository;
 
 	@Autowired
-	private CLCommoditiesRepository commoditiesRepository;
+	private CLRefCommoditiesRepository commoditiesRepository;
 
 	@Autowired
-	private CLHazardousWorkTypeRepository hazardousWorkTypeRepository;
+	private CLAppHazardousWorkTypeRepository hazardousWorkTypeRepository;
 
 	@Autowired
-	private CLProductTypesRepository productTypesRepository;
+	private CLRefProductTypesRepository productTypesRepository;
 
 	@Autowired
-	private CLQuantityUnitRepository quantityUnitsRepository;
+	private CLAppQuantityUnitRepository quantityUnitsRepository;
 
 	@Autowired
-	private CLHvHeExpensionTypeRepository hvHeExpensionTypeRepository;
+	private CLAppHvHeExpensionTypeRepository hvHeExpensionTypeRepository;
 
 	@Autowired
-	private CLCompanyPositionTypeRepository companyPositionTypeRepository;
+	private CLAppCompanyPositionTypeRepository companyPositionTypeRepository;
 
 	@Autowired
-	private CLHvHeExpensionTypeRepository highValueExpensionTypeRepository;
+	private CLAppHvHeExpensionTypeRepository highValueExpensionTypeRepository;
 
 	@Autowired
-	private CLPlotActivityTypeRepository plotActivityTypesRepository;
+	private CLFarmPlotActivityTypeRepository plotActivityTypesRepository;
 
 	@Autowired
-	private CLProductRepository productRepository;
+	private CLRefProductRepository productRepository;
 
 	@Autowired
-	private CLCurrencyRepository currencyRepository;
+	private CLRefCurrencyRepository currencyRepository;
 
 	@Autowired
-	private CLTilingActivityTypeRepository tilingActivityTypeRepository;
+	private CLAppTilingActivityTypeRepository tilingActivityTypeRepository;
 
 	@Autowired
-	private CLSoilAnalysisTypeRepository soilAnalysisTypeRepository;
+	private CLAppSoilAnalysisTypeRepository soilAnalysisTypeRepository;
 	@Autowired
-	private CLLegalStatusRepository legalStatusRepository;
+	private CLAppLegalStatusRepository legalStatusRepository;
 
 	@Autowired
-	private CLLanguageRepository languageRepository;
+	private CLRefLanguageRepository languageRepository;
 
 	@Autowired
-	private CLContractTypeRepository contractTypesRepository;
+	private CLAppContractTypeRepository contractTypesRepository;
 
 	@Autowired
-	private CLPaymentFrequenciesRepository paymentFrequenciesRepository;
+	private CLAppPaymentFrequenciesRepository paymentFrequenciesRepository;
 
 	/**
 	 * 
 	 * @return
 	 */
-	public List<CLHvHeExpensionType> listActiveHighValueExpensionTypes() {
+	public List<CLAppHvHeExpensionType> listActiveHighValueExpensionTypes() {
 		return highValueExpensionTypeRepository.findByEnabledTrueOrderByName();
 	}
 
@@ -118,7 +118,7 @@ public class CodeListsService {
 	 * 
 	 * @return
 	 */
-	public List<CLCompanyPositionType> listActivePositionTypes() {
+	public List<CLAppCompanyPositionType> listActivePositionTypes() {
 		return companyPositionTypeRepository.findByEnabledTrueOrderByName();
 	}
 
@@ -127,7 +127,7 @@ public class CodeListsService {
 	 * 
 	 * @return
 	 */
-	public List<CLCountry> listActiveCountries() {
+	public List<CLRefCountry> listActiveCountries() {
 		return countriesRepository.findByEnabledTrueOrderByName();
 	}
 
@@ -136,7 +136,7 @@ public class CodeListsService {
 	 * 
 	 * @return
 	 */
-	public List<CLProductType> listActiveProductTypes() {
+	public List<CLRefProductType> listActiveProductTypes() {
 		return productTypesRepository.findByEnabledTrueOrderByName();
 	}
 
@@ -145,7 +145,7 @@ public class CodeListsService {
 	 * 
 	 * @return
 	 */
-	public List<CLQuantityUnit> listActiveQuantityUnit() {
+	public List<CLAppQuantityUnit> listActiveQuantityUnit() {
 		return quantityUnitsRepository.findByEnabledTrueOrderByName();
 	}
 
@@ -154,7 +154,7 @@ public class CodeListsService {
 	 * 
 	 * @return
 	 */
-	public List<CLHvHeExpensionType> listHvHeExpensionTypes() {
+	public List<CLAppHvHeExpensionType> listHvHeExpensionTypes() {
 		return hvHeExpensionTypeRepository.findByEnabledTrueOrderByName();
 	}
 
@@ -163,7 +163,7 @@ public class CodeListsService {
 	 * @param productType
 	 * @return
 	 */
-	public CLProductType getProductType(Long productType) {
+	public CLRefProductType getProductType(Long productType) {
 		return productTypesRepository.findOne(productType);
 	}
 
@@ -171,7 +171,7 @@ public class CodeListsService {
 	 * 
 	 * @return
 	 */
-	public List<CLHazardousWorkType> listActiveHazardousWorkType() {
+	public List<CLAppHazardousWorkType> listActiveHazardousWorkType() {
 		return hazardousWorkTypeRepository.findByEnabledTrueOrderByName();
 	}
 
@@ -179,73 +179,73 @@ public class CodeListsService {
 	 * 
 	 * @return
 	 */
-	public List<CLSpecies> listActiveSpecies() {
+	public List<CLRefSpecies> listActiveSpecies() {
 		return speciesRepository.findByEnabledTrueOrderByName();
 	}
 
-	public List<CLPondType> listActivePondTypes() {
+	public List<CLFarmPondType> listActivePondTypes() {
 		return pondTypesRepository.findByEnabledTrueOrderByName();
 	}
 
-	public List<CLCommodities> listActiveCommodities() {
+	public List<CLRefCommodities> listActiveCommodities() {
 		return commoditiesRepository.findByEnabledTrueOrderByName();
 	}
 
-	public List<CLPlotActivityType> listActiveActivityTypes() {
+	public List<CLFarmPlotActivityType> listActiveActivityTypes() {
 		return plotActivityTypesRepository.findByEnabledTrueOrderByName();
 	}
 
-	public List<CLProduct> listActiveProducts() {
+	public List<CLRefProduct> listActiveProducts() {
 		return productRepository.findByEnabledTrueOrderByName();
 	}
 
-	public List<CLTilingActivityType> listActiveTilingActivityTypes() {
+	public List<CLAppTilingActivityType> listActiveTilingActivityTypes() {
 		return tilingActivityTypeRepository.findByEnabledTrueOrderByName();
 	}
 
 	@Autowired
-	private CLMeasureTypeRepository measureTypeRepository;
+	private CLAppMeasureTypeRepository measureTypeRepository;
 
-	public List<CLMeasureType> listActiveMeasureTypes() {
+	public List<CLAppMeasureType> listActiveMeasureTypes() {
 		return measureTypeRepository.findByEnabledTrueOrderByName();
 	}
 
 	@Autowired
-	CLEntityTypeRepository entityTypeRepository;
+	CLAppEntityTypeRepository entityTypeRepository;
 
 	@Transactional
-	public CLEntityType findEntityType(String codeInd) {
-		for (CLEntityType e : entityTypeRepository.findAll())
+	public CLAppEntityType findEntityType(String codeInd) {
+		for (CLAppEntityType e : entityTypeRepository.findAll())
 			if (e.getCode().equals(codeInd))
 				return e;
 		return null;
 	}
 
-	public List<CLEntityType> listActiveCompanyEntityTypes() {
+	public List<CLAppEntityType> listActiveCompanyEntityTypes() {
 		return entityTypeRepository.findByEnabledTrueAndCompanyTrueOrderByName();
 	}
 
-	public List<CLSoilAnalysisType> listActiveSoilAnalysisType() {
+	public List<CLAppSoilAnalysisType> listActiveSoilAnalysisType() {
 		return soilAnalysisTypeRepository.findByEnabledTrueOrderByName();
 	}
 
-	public List<CLLegalStatus> listActiveLegalStatuses() {
+	public List<CLAppLegalStatus> listActiveLegalStatuses() {
 		return legalStatusRepository.findByEnabledTrueOrderByName();
 	}
 
-	public List<CLLanguage> listActiveLanguages() {
+	public List<CLRefLanguage> listActiveLanguages() {
 		return languageRepository.findByEnabledTrueOrderByName();
 	}
 
-	public List<CLContractType> listActiveContractTypes() {
+	public List<CLAppContractType> listActiveContractTypes() {
 		return contractTypesRepository.findByEnabledTrueOrderByName();
 	}
 
-	public List<CLPaymentFrequency> listActivePaymentFrequencies() {
+	public List<CLAppPaymentFrequency> listActivePaymentFrequencies() {
 		return paymentFrequenciesRepository.findByEnabledTrueOrderByName();
 	}
 
-	public List<CLCurrency> listActiveCurrencies() {
+	public List<CLRefCurrency> listActiveCurrencies() {
 		return currencyRepository.findByEnabledTrueOrderByName();
 	}
 

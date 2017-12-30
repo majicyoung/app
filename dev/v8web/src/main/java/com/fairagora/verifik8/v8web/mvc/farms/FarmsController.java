@@ -18,10 +18,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.fairagora.verifik8.v8web.data.application.V8Page;
-import com.fairagora.verifik8.v8web.data.domain.cl.CLEntityType;
+import com.fairagora.verifik8.v8web.data.domain.cl.CLAppEntityType;
 import com.fairagora.verifik8.v8web.data.domain.reg.RegEntity;
 import com.fairagora.verifik8.v8web.data.domain.reg.farm.RegEntityFarmDetails;
-import com.fairagora.verifik8.v8web.data.repo.cl.CLQuantityUnitRepository;
+import com.fairagora.verifik8.v8web.data.repo.cl.CLAppQuantityUnitRepository;
 import com.fairagora.verifik8.v8web.data.repo.reg.RegEntityFarmDetailsRepository;
 import com.fairagora.verifik8.v8web.data.repo.reg.RegEntityRepository;
 import com.fairagora.verifik8.v8web.mvc.AbstractV8Controller;
@@ -36,7 +36,7 @@ import com.fairagora.verifik8.v8web.services.enhanced.V8Farm;
 public class FarmsController extends AbstractV8Controller {
 
 	@Autowired
-	private CLQuantityUnitRepository quantityUnitRepository;
+	private CLAppQuantityUnitRepository quantityUnitRepository;
 
 	@Autowired
 	private RegEntityRepository regEntityRepository;
@@ -107,7 +107,7 @@ public class FarmsController extends AbstractV8Controller {
 
 		if (farm == null) {
 			farm = new RegEntity();
-			farm.setEntityType(codeListservice.findEntityType(CLEntityType.CODE_FARM));
+			farm.setEntityType(codeListservice.findEntityType(CLAppEntityType.CODE_FARM));
 		}
 
 		regFarmDtoMapper.fillEntity(farmDto, farm);
@@ -199,7 +199,7 @@ public class FarmsController extends AbstractV8Controller {
 			IndividualDto dto, Model mv) {
 
 		RegEntity ind = individualAssId.intValue()==0 ? new RegEntity(): regEntityRepository.findOne(individualAssId);
-		ind.setEntityType(codeListservice.findEntityType(CLEntityType.CODE_IND));
+		ind.setEntityType(codeListservice.findEntityType(CLAppEntityType.CODE_IND));
 		
 		regFarmDtoMapper.fillEntity(dto, ind);
 
@@ -243,10 +243,11 @@ public class FarmsController extends AbstractV8Controller {
 
 		mv.addAttribute("farmDto", dto);
 		mv.addAttribute("farmId", dto.getId());
+		mv.addAttribute("farmName", dto.getName());
 		mv.addAttribute("allQuantityUnits", quantityUnitRepository.findAll(new Sort("name")));
 		mv.addAttribute("allCountries", countryRepository.findAll(new Sort("name")));
-		mv.addAttribute("allIndividuals", regEntityRepository.findByEntityTypeCode(CLEntityType.CODE_IND));
-		mv.addAttribute("allCooperatives", regEntityRepository.findByEntityTypeCode(CLEntityType.CODE_COOP));
+		mv.addAttribute("allIndividuals", regEntityRepository.findByEntityTypeCode(CLAppEntityType.CODE_IND));
+		mv.addAttribute("allCooperatives", regEntityRepository.findByEntityTypeCode(CLAppEntityType.CODE_COOP));
 	}
 
 	/**

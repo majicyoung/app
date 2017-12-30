@@ -17,8 +17,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.fairagora.verifik8.v8web.data.domain.V8EntitySupport;
-import com.fairagora.verifik8.v8web.data.domain.cl.CLCommodities;
-import com.fairagora.verifik8.v8web.data.domain.cl.CLProdDataEntryType;
+import com.fairagora.verifik8.v8web.data.domain.cl.CLRefCommodities;
+import com.fairagora.verifik8.v8web.data.domain.cl.CLAppProdDataEntryType;
 import com.fairagora.verifik8.v8web.data.domain.commons.V8Measure;
 import com.fairagora.verifik8.v8web.data.domain.reg.RegEntity;
 
@@ -43,11 +43,11 @@ public class DTFarmAgProduction extends V8EntitySupport {
 
 	@ManyToOne
 	@JoinColumn(name = "CL_COMMODITIES_ID")
-	protected CLCommodities commodities;
+	protected CLRefCommodities commodities;
 
 	@ManyToOne
 	@JoinColumn(name = "CL_PROD_DATA_ENTRY_TYPE_ID")
-	protected CLProdDataEntryType dataEntryType;
+	protected CLAppProdDataEntryType dataEntryType;
 	
 	@Embedded
 	@AttributeOverrides({ @AttributeOverride(name = "quantity", column = @Column(name = "PRODUCTION_QUANTITY")) })
@@ -87,11 +87,11 @@ public class DTFarmAgProduction extends V8EntitySupport {
 		this.dateTo = dateTo;
 	}
 
-	public CLCommodities getCommodities() {
+	public CLRefCommodities getCommodities() {
 		return commodities;
 	}
 
-	public void setCommodities(CLCommodities commodities) {
+	public void setCommodities(CLRefCommodities commodities) {
 		this.commodities = commodities;
 	}
 
@@ -108,11 +108,11 @@ public class DTFarmAgProduction extends V8EntitySupport {
 		return getCommodities().getName() + " " + getQuantity();
 	}
 
-	public CLProdDataEntryType getDataEntryType() {
+	public CLAppProdDataEntryType getDataEntryType() {
 		return dataEntryType;
 	}
 
-	public void setDataEntryType(CLProdDataEntryType dataEntryType) {
+	public void setDataEntryType(CLAppProdDataEntryType dataEntryType) {
 		this.dataEntryType = dataEntryType;
 	}
 

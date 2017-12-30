@@ -12,7 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.fairagora.verifik8.v8web.data.domain.cl.CLHazardousWorkType;
+import com.fairagora.verifik8.v8web.data.domain.cl.CLAppHazardousWorkType;
 import com.fairagora.verifik8.v8web.data.domain.commons.Attachment;
 
 @Entity
@@ -67,7 +67,7 @@ public class RegEntityStaffManagement {
 
 	@ManyToOne(optional = true)
 	@JoinColumn(name = "CL_HARZARDOUS_WORK_TYPE_ID")
-	protected CLHazardousWorkType hazardousWorkType;
+	protected CLAppHazardousWorkType hazardousWorkType;
 
 	@Column(name = "EXISTENCE_FARM_POLICIES")
 	protected boolean existenceFarmPolicies;
@@ -258,11 +258,11 @@ public class RegEntityStaffManagement {
 		this.existenceHazardousWork = existenceHazardousWork;
 	}
 
-	public CLHazardousWorkType getHazardousWorkType() {
+	public CLAppHazardousWorkType getHazardousWorkType() {
 		return hazardousWorkType;
 	}
 
-	public void setHazardousWorkType(CLHazardousWorkType hazardousWorkType) {
+	public void setHazardousWorkType(CLAppHazardousWorkType hazardousWorkType) {
 		this.hazardousWorkType = hazardousWorkType;
 	}
 

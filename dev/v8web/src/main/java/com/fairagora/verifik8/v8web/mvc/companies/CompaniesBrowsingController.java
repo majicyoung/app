@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.fairagora.verifik8.v8web.data.application.V8Page;
-import com.fairagora.verifik8.v8web.data.domain.cl.CLEntityType;
+import com.fairagora.verifik8.v8web.data.domain.cl.CLAppEntityType;
 import com.fairagora.verifik8.v8web.data.domain.reg.RegEntity;
 import com.fairagora.verifik8.v8web.mvc.AbstractV8Controller;
 import com.fairagora.verifik8.v8web.mvc.companies.dto.CompanyDto;
@@ -70,7 +70,7 @@ public class CompaniesBrowsingController extends AbstractV8Controller {
 	public String updateCompany(@PathVariable("companyId") Long companyAssId, CompanyDto dto, Model mv) {
 
 		RegEntity ind = companyAssId.intValue() == 0 ? new RegEntity() : regEntityRepository.findOne(companyAssId);
-		ind.setEntityType(codeListservice.findEntityType(CLEntityType.CODE_IND));
+		ind.setEntityType(codeListservice.findEntityType(CLAppEntityType.CODE_IND));
 
 		regFarmDtoMapper.fillEntity(dto, ind);
 

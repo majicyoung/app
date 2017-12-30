@@ -8,8 +8,8 @@
       <div class="box" id="farm-box">
         <div class="box-header with-border">
 	        <div th:switch="${farmDto.id}">
-	          <h3 th:case="0" class="box-title" th:text="#{farm.create}">farm.create</h3>
-	          <h3 th:case="*" class="box-title" th:text="#{farm.edit}">farm.edit</h3>
+	          <h3 th:case="0" class="box-title" th:text="#{farm.create}">farm.create</h3> 
+	          <h3 th:case="*" class="box-title" th:text="#{farm.edit}">farm.edit</h3> <!-- <span th:text="${farmDto.name}">farm.name</span>-->
 	        </div>
         </div>
         <form role="form"  th:action="@{'/farm/'+${farmDto.id}+'/update.html'}" th:object="${farmDto}" method="post" class="form-horizontal" enctype="multipart/form-data" onsubmit="return !hasEmptyFields('#farm-box form .form-control[required]');">

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.fairagora.verifik8.v8web.data.application.V8Page;
-import com.fairagora.verifik8.v8web.data.domain.cl.CLEntityType;
+import com.fairagora.verifik8.v8web.data.domain.cl.CLAppEntityType;
 import com.fairagora.verifik8.v8web.data.domain.reg.RegEntity;
 import com.fairagora.verifik8.v8web.data.domain.reg.staff.RegEntityStaff;
 import com.fairagora.verifik8.v8web.data.repo.reg.RegEntityStaffRepository;
@@ -103,7 +103,7 @@ public class FarmStaffController extends AbstractV8Controller {
 
 		List<RegEntityStaff> staffListing = regEntityStaffRepository.findByFarmId(farm.getId());
 		mv.addAttribute("staffListing", staffListing);
-		mv.addAttribute("allIndividuals", regEntityRepository.findByEntityTypeCode(CLEntityType.CODE_IND));
+		mv.addAttribute("allIndividuals", regEntityRepository.findByEntityTypeCode(CLAppEntityType.CODE_IND));
 		mv.addAttribute("allPositions", codeListservice.listActivePositionTypes());
 		mv.addAttribute("allLegalStatuses", codeListservice.listActiveLegalStatuses());
 		mv.addAttribute("allLanguages", codeListservice.listActiveLanguages());

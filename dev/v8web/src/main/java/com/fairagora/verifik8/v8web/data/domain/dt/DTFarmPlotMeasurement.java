@@ -17,7 +17,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.fairagora.verifik8.v8web.data.domain.V8EntitySupport;
-import com.fairagora.verifik8.v8web.data.domain.cl.CLMeasureType;
+import com.fairagora.verifik8.v8web.data.domain.cl.CLAppMeasureType;
 import com.fairagora.verifik8.v8web.data.domain.commons.V8Measure;
 import com.fairagora.verifik8.v8web.data.domain.reg.farm.RegEntityFarmPlot;
 
@@ -39,7 +39,7 @@ public class DTFarmPlotMeasurement extends V8EntitySupport {
 
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "CL_MEASURE_TYPE_ID")
-	protected CLMeasureType measureType;
+	protected CLAppMeasureType measureType;
 
 	@Embedded
 	@AttributeOverrides({ @AttributeOverride(name = "quantity", column = @Column(name = "MEASURE_VALUE")), })
@@ -71,11 +71,11 @@ public class DTFarmPlotMeasurement extends V8EntitySupport {
 		this.measureDate = measureDate;
 	}
 
-	public CLMeasureType getMeasureType() {
+	public CLAppMeasureType getMeasureType() {
 		return measureType;
 	}
 
-	public void setMeasureType(CLMeasureType measureType) {
+	public void setMeasureType(CLAppMeasureType measureType) {
 		this.measureType = measureType;
 	}
 

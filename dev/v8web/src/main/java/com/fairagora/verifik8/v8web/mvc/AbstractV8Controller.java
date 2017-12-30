@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import com.fairagora.verifik8.v8web.config.functional.Verifik8AppConfig;
 import com.fairagora.verifik8.v8web.data.domain.sys.SYSRole;
 import com.fairagora.verifik8.v8web.data.domain.sys.SYSUser;
-import com.fairagora.verifik8.v8web.data.repo.cl.CLCountryRepository;
+import com.fairagora.verifik8.v8web.data.repo.cl.CLRefCountryRepository;
 import com.fairagora.verifik8.v8web.data.repo.reg.RegEntityRepository;
 import com.fairagora.verifik8.v8web.data.repo.sys.SYSRoleRepository;
 import com.fairagora.verifik8.v8web.data.repo.sys.SYSUserRepository;
@@ -36,7 +36,7 @@ public class AbstractV8Controller {
 	protected SYSRoleRepository roleRepository;
 
 	@Autowired
-	protected CLCountryRepository countryRepository;
+	protected CLRefCountryRepository countryRepository;
 
 	@Autowired
 	protected Verifik8AppConfig v8App;

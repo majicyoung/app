@@ -14,8 +14,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.fairagora.verifik8.v8web.data.domain.V8EntitySupport;
-import com.fairagora.verifik8.v8web.data.domain.cl.CLCountry;
-import com.fairagora.verifik8.v8web.data.domain.cl.CLEntityType;
+import com.fairagora.verifik8.v8web.data.domain.cl.CLRefCountry;
+import com.fairagora.verifik8.v8web.data.domain.cl.CLAppEntityType;
 import com.fairagora.verifik8.v8web.data.domain.commons.Address;
 
 @Entity()
@@ -31,7 +31,7 @@ public class RegEntity extends V8EntitySupport implements  Serializable {
 
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "CL_ENTITY_UID_TYPE_ID")
-	protected CLEntityType entityType;
+	protected CLAppEntityType entityType;
 
 	@Column(name = "NAME")
 	protected String name;
@@ -80,7 +80,7 @@ public class RegEntity extends V8EntitySupport implements  Serializable {
 
 	@ManyToOne(optional = true)
 	@JoinColumn(name = "CL_NATIONALITY_COUNTRY_ID")
-	protected CLCountry nationality;
+	protected CLRefCountry nationality;
 
 	@Column(name = "DATE_OF_BIRTH")
 	protected Date dateOfBirth;
@@ -95,11 +95,11 @@ public class RegEntity extends V8EntitySupport implements  Serializable {
 		this.id = id;
 	}
 
-	public CLEntityType getEntityType() {
+	public CLAppEntityType getEntityType() {
 		return entityType;
 	}
 
-	public void setEntityType(CLEntityType entityType) {
+	public void setEntityType(CLAppEntityType entityType) {
 		this.entityType = entityType;
 	}
 
@@ -199,11 +199,11 @@ public class RegEntity extends V8EntitySupport implements  Serializable {
 		this.accronym = accronym;
 	}
 
-	public CLCountry getNationality() {
+	public CLRefCountry getNationality() {
 		return nationality;
 	}
 
-	public void setNationality(CLCountry nationality) {
+	public void setNationality(CLRefCountry nationality) {
 		this.nationality = nationality;
 	}
 

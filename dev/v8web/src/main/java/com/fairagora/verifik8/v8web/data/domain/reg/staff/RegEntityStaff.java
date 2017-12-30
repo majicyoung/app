@@ -13,9 +13,9 @@ import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
 
-import com.fairagora.verifik8.v8web.data.domain.cl.CLCompanyPositionType;
-import com.fairagora.verifik8.v8web.data.domain.cl.CLLanguage;
-import com.fairagora.verifik8.v8web.data.domain.cl.CLLegalStatus;
+import com.fairagora.verifik8.v8web.data.domain.cl.CLAppCompanyPositionType;
+import com.fairagora.verifik8.v8web.data.domain.cl.CLRefLanguage;
+import com.fairagora.verifik8.v8web.data.domain.cl.CLAppLegalStatus;
 import com.fairagora.verifik8.v8web.data.domain.commons.Attachment;
 import com.fairagora.verifik8.v8web.data.domain.reg.RegEntity;
 import com.fairagora.verifik8.v8web.data.domain.reg.V8Base;
@@ -39,15 +39,15 @@ public class RegEntityStaff extends V8Base {
 
 	@ManyToOne()
 	@JoinColumn(name = "CL_LANGUAGE_ID")
-	protected CLLanguage language;
+	protected CLRefLanguage language;
 
 	@ManyToOne()
 	@JoinColumn(name = "CL_LEGAL_STATUS_ID")
-	protected CLLegalStatus legalStatus;
+	protected CLAppLegalStatus legalStatus;
 
 	@ManyToOne()
 	@JoinColumn(name = "CL_POSITION_TYPE_ID")
-	protected CLCompanyPositionType position;
+	protected CLAppCompanyPositionType position;
 	
 	@Column(name = "NOT_EMPLOYED_ANYMORE")
 	protected boolean noEmployedAnymore;
@@ -86,19 +86,19 @@ public class RegEntityStaff extends V8Base {
 		this.farm = farm;
 	}
 
-	public CLLanguage getLanguage() {
+	public CLRefLanguage getLanguage() {
 		return language;
 	}
 
-	public void setLanguage(CLLanguage language) {
+	public void setLanguage(CLRefLanguage language) {
 		this.language = language;
 	}
 
-	public CLLegalStatus getLegalStatus() {
+	public CLAppLegalStatus getLegalStatus() {
 		return legalStatus;
 	}
 
-	public void setLegalStatus(CLLegalStatus legalStatus) {
+	public void setLegalStatus(CLAppLegalStatus legalStatus) {
 		this.legalStatus = legalStatus;
 	}
 
@@ -174,11 +174,11 @@ public class RegEntityStaff extends V8Base {
 		this.officeEmail = officeEmail;
 	}
 
-	public CLCompanyPositionType getPosition() {
+	public CLAppCompanyPositionType getPosition() {
 		return position;
 	}
 
-	public void setPosition(CLCompanyPositionType position) {
+	public void setPosition(CLAppCompanyPositionType position) {
 		this.position = position;
 	}
 

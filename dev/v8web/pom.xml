@@ -9,7 +9,7 @@
 	<packaging>jar</packaging>
 
 	<name>v8web</name>
-	<description>Verifik8 Web Portal</description>
+	<description>Verifik8 / OpenFisMIS Web Portal</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>

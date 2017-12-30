@@ -15,8 +15,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.fairagora.verifik8.v8web.data.domain.V8Entity;
-import com.fairagora.verifik8.v8web.data.domain.cl.CLPondType;
-import com.fairagora.verifik8.v8web.data.domain.cl.CLSpecies;
+import com.fairagora.verifik8.v8web.data.domain.cl.CLFarmPondType;
+import com.fairagora.verifik8.v8web.data.domain.cl.CLRefSpecies;
 import com.fairagora.verifik8.v8web.data.domain.commons.V8Measure;
 import com.fairagora.verifik8.v8web.data.domain.reg.RegEntity;
 
@@ -41,11 +41,11 @@ public class RegEntityFarmPond implements V8Entity{
 
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "CL_POND_TYPE_ID")
-	protected CLPondType type;
+	protected CLFarmPondType type;
 
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "CL_SPECIES_ID")
-	protected CLSpecies species;
+	protected CLRefSpecies species;
 
 	@Embedded
 	@AttributeOverrides({ 
@@ -72,19 +72,19 @@ public class RegEntityFarmPond implements V8Entity{
 		this.farm = farmId;
 	}
 
-	public CLPondType getType() {
+	public CLFarmPondType getType() {
 		return type;
 	}
 
-	public void setType(CLPondType type) {
+	public void setType(CLFarmPondType type) {
 		this.type = type;
 	}
 
-	public CLSpecies getSpecies() {
+	public CLRefSpecies getSpecies() {
 		return species;
 	}
 
-	public void setSpecies(CLSpecies species) {
+	public void setSpecies(CLRefSpecies species) {
 		this.species = species;
 	}
 

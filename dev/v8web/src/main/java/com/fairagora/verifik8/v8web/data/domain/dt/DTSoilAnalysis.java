@@ -15,7 +15,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.fairagora.verifik8.v8web.data.domain.V8EntitySupport;
-import com.fairagora.verifik8.v8web.data.domain.cl.CLSoilAnalysisType;
+import com.fairagora.verifik8.v8web.data.domain.cl.CLAppSoilAnalysisType;
 import com.fairagora.verifik8.v8web.data.domain.commons.Attachment;
 import com.fairagora.verifik8.v8web.data.domain.reg.farm.RegEntityFarmPlot;
 
@@ -37,7 +37,7 @@ public class DTSoilAnalysis extends V8EntitySupport {
 
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "CL_SOIL_ANALYSIS_TYPE_ID")
-	protected CLSoilAnalysisType soilAnalysisType;
+	protected CLAppSoilAnalysisType soilAnalysisType;
 
 	@Embedded
 	@AttributeOverrides({ @AttributeOverride(name = "resourcePath", column = @Column(name = "SOIL_ANALYSIS_URL")) })
@@ -67,11 +67,11 @@ public class DTSoilAnalysis extends V8EntitySupport {
 		this.analysisDate = analysisDate;
 	}
 
-	public CLSoilAnalysisType getSoilAnalysisType() {
+	public CLAppSoilAnalysisType getSoilAnalysisType() {
 		return soilAnalysisType;
 	}
 
-	public void setSoilAnalysisType(CLSoilAnalysisType soilAnalysisType) {
+	public void setSoilAnalysisType(CLAppSoilAnalysisType soilAnalysisType) {
 		this.soilAnalysisType = soilAnalysisType;
 	}
 

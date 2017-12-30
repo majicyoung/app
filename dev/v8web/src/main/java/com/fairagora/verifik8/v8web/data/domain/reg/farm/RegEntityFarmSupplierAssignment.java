@@ -9,7 +9,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.fairagora.verifik8.v8web.data.domain.cl.CLProductType;
+import com.fairagora.verifik8.v8web.data.domain.cl.CLRefProductType;
 import com.fairagora.verifik8.v8web.data.domain.reg.RegEntity;
 
 @Entity
@@ -31,7 +31,7 @@ public class RegEntityFarmSupplierAssignment {
 
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "CL_PRODUCT_TYPES_ID")
-	protected CLProductType productType;
+	protected CLRefProductType productType;
 
 	public Long getId() {
 		return id;
@@ -57,11 +57,11 @@ public class RegEntityFarmSupplierAssignment {
 		this.supplier = supplier;
 	}
 
-	public CLProductType getProductType() {
+	public CLRefProductType getProductType() {
 		return productType;
 	}
 
-	public void setProductType(CLProductType productType) {
+	public void setProductType(CLRefProductType productType) {
 		this.productType = productType;
 	}
 

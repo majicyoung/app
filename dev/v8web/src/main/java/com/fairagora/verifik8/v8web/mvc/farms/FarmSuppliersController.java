@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.fairagora.verifik8.v8web.data.application.V8Page;
-import com.fairagora.verifik8.v8web.data.domain.cl.CLEntityType;
+import com.fairagora.verifik8.v8web.data.domain.cl.CLAppEntityType;
 import com.fairagora.verifik8.v8web.data.domain.reg.RegEntity;
 import com.fairagora.verifik8.v8web.data.domain.reg.farm.RegEntityFarmSupplierAssignment;
 import com.fairagora.verifik8.v8web.data.repo.reg.RegEntityFarmSupplierAssignmentRepository;
@@ -87,7 +87,7 @@ public class FarmSuppliersController extends AbstractV8Controller {
 				.findByFarmIdOrderBySupplierName(farm.getId());
 		mv.addAttribute("suppliersListing", suppliersListing);
 		mv.addAttribute("allProductTypes", codeListservice.listActiveProductTypes());
-		mv.addAttribute("allCompanies", regEntityRepository.findByEntityTypeCode(CLEntityType.CODE_COM));
+		mv.addAttribute("allCompanies", regEntityRepository.findByEntityTypeCode(CLAppEntityType.CODE_COM));
 
 	}
 }

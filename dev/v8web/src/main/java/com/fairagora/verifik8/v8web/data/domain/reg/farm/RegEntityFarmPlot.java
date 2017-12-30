@@ -15,7 +15,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.fairagora.verifik8.v8web.data.domain.V8Entity;
-import com.fairagora.verifik8.v8web.data.domain.cl.CLCommodities;
+import com.fairagora.verifik8.v8web.data.domain.cl.CLRefCommodities;
 import com.fairagora.verifik8.v8web.data.domain.commons.V8Measure;
 import com.fairagora.verifik8.v8web.data.domain.reg.RegEntity;
 
@@ -39,7 +39,7 @@ public class RegEntityFarmPlot implements V8Entity {
 
 	@ManyToOne(optional = true)
 	@JoinColumn(name = "CL_COMMODITIES_ID")
-	protected CLCommodities commodities;
+	protected CLRefCommodities commodities;
 
 	@Column(name = "IS_IRRIGATED", length = 255)
 	protected boolean irrigated;
@@ -82,11 +82,11 @@ public class RegEntityFarmPlot implements V8Entity {
 		this.description = description;
 	}
 
-	public CLCommodities getCommodities() {
+	public CLRefCommodities getCommodities() {
 		return commodities;
 	}
 
-	public void setCommodities(CLCommodities commodities) {
+	public void setCommodities(CLRefCommodities commodities) {
 		this.commodities = commodities;
 	}
 

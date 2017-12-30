@@ -5,7 +5,7 @@ import javax.persistence.Embeddable;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import com.fairagora.verifik8.v8web.data.domain.cl.CLQuantityUnit;
+import com.fairagora.verifik8.v8web.data.domain.cl.CLAppQuantityUnit;
 
 @Embeddable
 public class V8Measure {
@@ -15,7 +15,7 @@ public class V8Measure {
 
 	@ManyToOne
 	@JoinColumn(name = "CL_UNIT_ID")
-	protected CLQuantityUnit unit;
+	protected CLAppQuantityUnit unit;
 
 	public float getQuantity() {
 		return quantity;
@@ -25,11 +25,11 @@ public class V8Measure {
 		this.quantity = quantity;
 	}
 
-	public CLQuantityUnit getUnit() {
+	public CLAppQuantityUnit getUnit() {
 		return unit;
 	}
 
-	public void setUnit(CLQuantityUnit unit) {
+	public void setUnit(CLAppQuantityUnit unit) {
 		this.unit = unit;
 	}
 
@@ -38,7 +38,7 @@ public class V8Measure {
 		return unit == null ? "" : quantity + " " + (unit == null ? "?" : unit.getCode());
 	}
 
-	public V8Measure setup(float qt, CLQuantityUnit unit) {
+	public V8Measure setup(float qt, CLAppQuantityUnit unit) {
 		this.quantity = qt;
 		this.unit = unit;
 		return this;

@@ -17,11 +17,11 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import com.fairagora.verifik8.v8web.data.domain.cl.CLCompanyPositionType;
-import com.fairagora.verifik8.v8web.data.domain.cl.CLContractType;
-import com.fairagora.verifik8.v8web.data.domain.cl.CLCountry;
-import com.fairagora.verifik8.v8web.data.domain.cl.CLCurrency;
-import com.fairagora.verifik8.v8web.data.domain.cl.CLPaymentFrequency;
+import com.fairagora.verifik8.v8web.data.domain.cl.CLAppCompanyPositionType;
+import com.fairagora.verifik8.v8web.data.domain.cl.CLAppContractType;
+import com.fairagora.verifik8.v8web.data.domain.cl.CLRefCountry;
+import com.fairagora.verifik8.v8web.data.domain.cl.CLRefCurrency;
+import com.fairagora.verifik8.v8web.data.domain.cl.CLAppPaymentFrequency;
 import com.fairagora.verifik8.v8web.data.domain.reg.RegEntity;
 import com.fairagora.verifik8.v8web.data.domain.reg.V8Base;
 
@@ -49,11 +49,11 @@ public class RegEntityStaffContract extends V8Base implements Serializable {
 
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "CL_CONTRACT_TYPE_ID")
-	protected CLContractType contactType;
+	protected CLAppContractType contactType;
 
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "CL_COMPANY_POSITION_TYPE_ID")
-	protected CLCompanyPositionType companyPositionType;
+	protected CLAppCompanyPositionType companyPositionType;
 
 	@Column(name = "DEPARTMENT")
 	protected String departement;
@@ -85,11 +85,11 @@ public class RegEntityStaffContract extends V8Base implements Serializable {
 
 	@ManyToOne(optional=true)
 	@JoinColumn(name = "CONTRACT_REMUNERATION_CURRENCY_ID")
-	protected CLCurrency remunerationCurrency;
+	protected CLRefCurrency remunerationCurrency;
 	
 	@ManyToOne(optional = true)
 	@JoinColumn(name = "CL_PAYMENT_FREQUENCY_ID")
-	protected CLPaymentFrequency paymentFrequency;
+	protected CLAppPaymentFrequency paymentFrequency;
 
 	@Column(name = "MINIMUM_WAGES_APPLIED")
 	protected boolean minimumWagesApplied;
@@ -108,7 +108,7 @@ public class RegEntityStaffContract extends V8Base implements Serializable {
 
 	@ManyToOne(optional = true)
 	@JoinColumn(name = "CL_COUNTRY_ID")
-	protected CLCountry country;
+	protected CLRefCountry country;
 
 
 	public RegEntity getFarm() {
@@ -135,19 +135,19 @@ public class RegEntityStaffContract extends V8Base implements Serializable {
 		this.contractNo = contractNo;
 	}
 
-	public CLContractType getContactType() {
+	public CLAppContractType getContactType() {
 		return contactType;
 	}
 
-	public void setContactType(CLContractType contactType) {
+	public void setContactType(CLAppContractType contactType) {
 		this.contactType = contactType;
 	}
 
-	public CLCompanyPositionType getCompanyPositionType() {
+	public CLAppCompanyPositionType getCompanyPositionType() {
 		return companyPositionType;
 	}
 
-	public void setCompanyPositionType(CLCompanyPositionType companyPositionType) {
+	public void setCompanyPositionType(CLAppCompanyPositionType companyPositionType) {
 		this.companyPositionType = companyPositionType;
 	}
 
@@ -215,11 +215,11 @@ public class RegEntityStaffContract extends V8Base implements Serializable {
 		this.remuneration = remuneration;
 	}
 
-	public CLPaymentFrequency getPaymentFrequency() {
+	public CLAppPaymentFrequency getPaymentFrequency() {
 		return paymentFrequency;
 	}
 
-	public void setPaymentFrequency(CLPaymentFrequency paymentFrequency) {
+	public void setPaymentFrequency(CLAppPaymentFrequency paymentFrequency) {
 		this.paymentFrequency = paymentFrequency;
 	}
 
@@ -263,11 +263,11 @@ public class RegEntityStaffContract extends V8Base implements Serializable {
 		this.contractInAnotherLanguage = contractInAnotherLanguage;
 	}
 
-	public CLCountry getCountry() {
+	public CLRefCountry getCountry() {
 		return country;
 	}
 
-	public void setCountry(CLCountry country) {
+	public void setCountry(CLRefCountry country) {
 		this.country = country;
 	}
 
@@ -279,11 +279,11 @@ public class RegEntityStaffContract extends V8Base implements Serializable {
 		this.id = id;
 	}
 
-	public CLCurrency getRemunerationCurrency() {
+	public CLRefCurrency getRemunerationCurrency() {
 		return remunerationCurrency;
 	}
 
-	public void setRemunerationCurrency(CLCurrency remunerationCurrency) {
+	public void setRemunerationCurrency(CLRefCurrency remunerationCurrency) {
 		this.remunerationCurrency = remunerationCurrency;
 	}
 

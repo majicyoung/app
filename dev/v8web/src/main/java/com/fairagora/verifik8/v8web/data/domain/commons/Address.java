@@ -5,7 +5,7 @@ import javax.persistence.Embeddable;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import com.fairagora.verifik8.v8web.data.domain.cl.CLCountry;
+import com.fairagora.verifik8.v8web.data.domain.cl.CLRefCountry;
 
 @Embeddable
 public class Address {
@@ -21,7 +21,7 @@ public class Address {
 
 	@ManyToOne(optional = true)
 	@JoinColumn(name = "CL_ADDRESS_COUNTRY_ID")
-	protected CLCountry country;
+	protected CLRefCountry country;
 
 	public String getMain() {
 		return main;
@@ -47,11 +47,11 @@ public class Address {
 		this.zip = zip;
 	}
 
-	public CLCountry getCountry() {
+	public CLRefCountry getCountry() {
 		return country;
 	}
 
-	public void setCountry(CLCountry country) {
+	public void setCountry(CLRefCountry country) {
 		this.country = country;
 	}
 

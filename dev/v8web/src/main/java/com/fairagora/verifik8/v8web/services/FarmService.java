@@ -13,7 +13,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.fairagora.verifik8.v8web.data.domain.cl.CLEntityType;
+import com.fairagora.verifik8.v8web.data.domain.cl.CLAppEntityType;
 import com.fairagora.verifik8.v8web.data.domain.commons.V8Measure;
 import com.fairagora.verifik8.v8web.data.domain.reg.RegEntity;
 import com.fairagora.verifik8.v8web.data.domain.reg.farm.RegEntityFarmDetails;
@@ -70,7 +70,7 @@ public class FarmService extends AbstractV8Service {
 					new V8Measure().setup(rs.getFloat(2), clQtUnityRepository.findOne(rs.getLong(3))));
 		});
 
-		List<RegEntity> farmsEntities = regEntityRepository.findByEntityTypeCode(CLEntityType.CODE_FARM);
+		List<RegEntity> farmsEntities = regEntityRepository.findByEntityTypeCode(CLAppEntityType.CODE_FARM);
 		farmsEntities = filterForCurrentUser(farmsEntities);
 
 		for (RegEntity e : farmsEntities) {

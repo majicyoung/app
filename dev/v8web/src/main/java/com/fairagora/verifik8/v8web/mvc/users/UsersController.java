@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.fairagora.verifik8.v8web.data.application.V8Page;
-import com.fairagora.verifik8.v8web.data.domain.cl.CLEntityType;
+import com.fairagora.verifik8.v8web.data.domain.cl.CLAppEntityType;
 import com.fairagora.verifik8.v8web.data.domain.sys.SYSUser;
 import com.fairagora.verifik8.v8web.mvc.AbstractV8Controller;
 import com.fairagora.verifik8.v8web.mvc.infra.dtomapping.SysUserDTOMapper;
@@ -82,8 +82,8 @@ public class UsersController extends AbstractV8Controller {
 
 		mv.addAttribute("userDto", dto);
 		mv.addAttribute("allCountries", countryRepository.findAll(new Sort("name")));
-		mv.addAttribute("allCooperatives", regEntityRepository.findByEntityTypeCode(CLEntityType.CODE_COOP));
-		mv.addAttribute("allFarms", regEntityRepository.findByEntityTypeCode(CLEntityType.CODE_FARM));
+		mv.addAttribute("allCooperatives", regEntityRepository.findByEntityTypeCode(CLAppEntityType.CODE_COOP));
+		mv.addAttribute("allFarms", regEntityRepository.findByEntityTypeCode(CLAppEntityType.CODE_FARM));
 	}
 
 	@RequestMapping(value = "/users/create.html", method = RequestMethod.POST)

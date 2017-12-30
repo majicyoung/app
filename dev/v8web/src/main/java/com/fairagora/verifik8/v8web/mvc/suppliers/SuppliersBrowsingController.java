@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.fairagora.verifik8.v8web.data.application.V8Page;
-import com.fairagora.verifik8.v8web.data.domain.cl.CLEntityType;
-import com.fairagora.verifik8.v8web.data.domain.cl.CLProductType;
+import com.fairagora.verifik8.v8web.data.domain.cl.CLAppEntityType;
+import com.fairagora.verifik8.v8web.data.domain.cl.CLRefProductType;
 import com.fairagora.verifik8.v8web.data.domain.reg.farm.RegEntityFarmSupplierAssignment;
 import com.fairagora.verifik8.v8web.data.repo.reg.RegEntityFarmSupplierAssignmentRepository;
 import com.fairagora.verifik8.v8web.mvc.AbstractV8Controller;
@@ -75,7 +75,7 @@ public class SuppliersBrowsingController extends AbstractV8Controller {
 				: regEntityFarmSupplierRepository.findOne(supplierAssId);
 
 		supAsst.setFarm(regEntityRepository.findOne(farmId));
-		supAsst.setProductType(em.find(CLProductType.class, productType));
+		supAsst.setProductType(em.find(CLRefProductType.class, productType));
 		supAsst.setSupplier(regEntityRepository.findOne(supplier));
 
 		regEntityFarmSupplierRepository.save(supAsst);
@@ -138,7 +138,7 @@ public class SuppliersBrowsingController extends AbstractV8Controller {
 		mv.addAttribute("v8p", p);
 
 		mv.addAttribute("allProductTypes", codeListservice.listActiveProductTypes());
-		mv.addAttribute("allCompanies", regEntityRepository.findByEntityTypeCode(CLEntityType.CODE_COM));
+		mv.addAttribute("allCompanies", regEntityRepository.findByEntityTypeCode(CLAppEntityType.CODE_COM));
 
 	}
 }
