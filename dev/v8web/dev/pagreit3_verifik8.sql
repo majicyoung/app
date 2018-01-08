@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Client :  127.0.0.1
--- Généré le :  Sam 30 Décembre 2017 à 15:15
+-- Généré le :  Lun 08 Janvier 2018 à 15:19
 -- Version du serveur :  5.7.14
 -- Version de PHP :  5.6.25
 
@@ -25,6 +25,33 @@ USE `pagreit3_verifik8`;
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `cl_app_administrative_characteristic_types`
+--
+
+CREATE TABLE `cl_app_administrative_characteristic_types` (
+  `ID` int(11) NOT NULL COMMENT 'Administrative characteristic type',
+  `ENABLED` tinyint(1) NOT NULL DEFAULT '1',
+  `CODE` char(2) CHARACTER SET utf8 NOT NULL,
+  `NAME` varchar(64) CHARACTER SET utf8 NOT NULL,
+  `DESCRIPTION` varchar(128) CHARACTER SET utf8 NOT NULL,
+  `I18n_DEFAULT` varchar(256) COLLATE utf8_bin NOT NULL COMMENT 'default label',
+  `I18N_EN` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in English',
+  `I18N_FR` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in French',
+  `I18N_ES` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Spanish',
+  `I18N_TH` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Thai',
+  `I18N_VT` varchar(256) CHARACTER SET utf8 COLLATE utf8_vietnamese_ci DEFAULT NULL COMMENT 'label in Vietnamese',
+  `I18N_LA` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Lao',
+  `I18N_ID` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in indonesian',
+  `I18N_KH` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Cambodian',
+  `UPDATER_ID` int(11) NOT NULL DEFAULT '1',
+  `COMMENT` varchar(1024) CHARACTER SET utf8 DEFAULT NULL,
+  `CREATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `UPDATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Administrative characteristic type';
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `cl_app_company_position_types`
 --
 
@@ -40,6 +67,9 @@ CREATE TABLE `cl_app_company_position_types` (
   `I18N_ES` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Spanish',
   `I18N_TH` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Thai',
   `I18N_VT` varchar(256) CHARACTER SET utf8 COLLATE utf8_vietnamese_ci DEFAULT NULL COMMENT 'label in Vietnamese',
+  `I18N_LA` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Lao',
+  `I18N_ID` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in indonesian',
+  `I18N_KH` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Cambodian',
   `UPDATER_ID` int(11) NOT NULL DEFAULT '1',
   `COMMENT` varchar(1024) CHARACTER SET utf8 DEFAULT NULL,
   `CREATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -50,12 +80,12 @@ CREATE TABLE `cl_app_company_position_types` (
 -- Contenu de la table `cl_app_company_position_types`
 --
 
-INSERT INTO `cl_app_company_position_types` (`ID`, `ENABLED`, `CODE`, `NAME`, `DESCRIPTION`, `I18n_DEFAULT`, `I18N_EN`, `I18N_FR`, `I18N_ES`, `I18N_TH`, `I18N_VT`, `UPDATER_ID`, `COMMENT`, `CREATED_AT`, `UPDATED_AT`) VALUES
-(1, 1, 'CEO', 'Company CEO', 'Company CEO', 'Company CEO', 'Company CEO', 'PDG', NULL, 'CEO บริษัท', NULL, 1, NULL, '2016-11-13 15:17:13', '2017-09-12 13:26:58'),
-(2, 1, 'OWN', 'Company Owner', 'Small Company Owner', 'Company Owner', 'Company Owner', 'Propriétaire de l\'entreprise', NULL, 'เจ้าของ บริษัท', NULL, 1, NULL, '2016-11-13 15:18:30', '2017-09-12 13:26:58'),
-(3, 1, 'PROD', 'Production Manager', 'Production Manager', 'Production Manager', 'Production Manager', 'Gestionnaire de production', NULL, 'ผู้จัดการฝ่ายผลิต', NULL, 1, NULL, '2016-11-13 15:18:30', '2017-09-12 13:26:58'),
-(4, 1, 'SALES', 'Sales Manager', 'Sales Manager', 'Sales Manager', 'Sales Manager', 'Responsable des ventes', NULL, 'ผู้จัดการฝ่ายขาย', NULL, 1, NULL, '2016-11-13 21:08:54', '2017-09-12 13:26:58'),
-(5, 1, 'WORK', 'Worker', 'Worker', 'Worker', 'Worker', NULL, NULL, 'ผู้ปฏิบัติงาน', NULL, 1, NULL, '2016-11-13 21:08:54', '2017-09-12 13:26:58');
+INSERT INTO `cl_app_company_position_types` (`ID`, `ENABLED`, `CODE`, `NAME`, `DESCRIPTION`, `I18n_DEFAULT`, `I18N_EN`, `I18N_FR`, `I18N_ES`, `I18N_TH`, `I18N_VT`, `I18N_LA`, `I18N_ID`, `I18N_KH`, `UPDATER_ID`, `COMMENT`, `CREATED_AT`, `UPDATED_AT`) VALUES
+(1, 1, 'CEO', 'Company CEO', 'Company CEO', 'Company CEO', 'Company CEO', 'PDG', NULL, 'CEO บริษัท', NULL, NULL, NULL, NULL, 1, NULL, '2016-11-13 15:17:13', '2017-09-12 13:26:58'),
+(2, 1, 'OWN', 'Company Owner', 'Small Company Owner', 'Company Owner', 'Company Owner', 'Propriétaire de l\'entreprise', NULL, 'เจ้าของ บริษัท', NULL, NULL, NULL, NULL, 1, NULL, '2016-11-13 15:18:30', '2017-09-12 13:26:58'),
+(3, 1, 'PROD', 'Production Manager', 'Production Manager', 'Production Manager', 'Production Manager', 'Gestionnaire de production', NULL, 'ผู้จัดการฝ่ายผลิต', NULL, NULL, NULL, NULL, 1, NULL, '2016-11-13 15:18:30', '2017-09-12 13:26:58'),
+(4, 1, 'SALES', 'Sales Manager', 'Sales Manager', 'Sales Manager', 'Sales Manager', 'Responsable des ventes', NULL, 'ผู้จัดการฝ่ายขาย', NULL, NULL, NULL, NULL, 1, NULL, '2016-11-13 21:08:54', '2017-09-12 13:26:58'),
+(5, 1, 'WORK', 'Worker', 'Worker', 'Worker', 'Worker', NULL, NULL, 'ผู้ปฏิบัติงาน', NULL, NULL, NULL, NULL, 1, NULL, '2016-11-13 21:08:54', '2017-09-12 13:26:58');
 
 -- --------------------------------------------------------
 
@@ -75,6 +105,9 @@ CREATE TABLE `cl_app_contract_types` (
   `I18N_ES` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Spanish',
   `I18N_TH` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Thai',
   `I18N_VT` varchar(256) CHARACTER SET utf8 COLLATE utf8_vietnamese_ci DEFAULT NULL COMMENT 'label in Vietnamese',
+  `I18N_LA` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Lao',
+  `I18N_ID` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in indonesian',
+  `I18N_KH` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Cambodian',
   `UPDATER_ID` int(11) NOT NULL DEFAULT '1',
   `COMMENT` varchar(512) COLLATE utf8_bin DEFAULT NULL,
   `CREATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -85,9 +118,9 @@ CREATE TABLE `cl_app_contract_types` (
 -- Contenu de la table `cl_app_contract_types`
 --
 
-INSERT INTO `cl_app_contract_types` (`ID`, `ENABLED`, `CODE`, `NAME`, `DESCRIPTION`, `I18n_DEFAULT`, `I18N_EN`, `I18N_FR`, `I18N_ES`, `I18N_TH`, `I18N_VT`, `UPDATER_ID`, `COMMENT`, `CREATED_AT`, `UPDATED_AT`) VALUES
-(1, 1, 'ORAL', 'ORAL', 'ORAL', 'ORAL', 'ORAL', 'ORAL', NULL, 'ทางปาก', NULL, 1, NULL, '2017-11-04 17:53:42', '2017-11-04 17:53:42'),
-(2, 1, 'WRITTEN', 'WRITTEN', 'WRITTEN', 'WRITTEN', 'WRITTEN', 'ECRIT', NULL, 'เป็นลายลักษณ์อักษร', NULL, 1, NULL, '2017-11-04 17:53:42', '2017-11-04 17:53:42');
+INSERT INTO `cl_app_contract_types` (`ID`, `ENABLED`, `CODE`, `NAME`, `DESCRIPTION`, `I18n_DEFAULT`, `I18N_EN`, `I18N_FR`, `I18N_ES`, `I18N_TH`, `I18N_VT`, `I18N_LA`, `I18N_ID`, `I18N_KH`, `UPDATER_ID`, `COMMENT`, `CREATED_AT`, `UPDATED_AT`) VALUES
+(1, 1, 'ORAL', 'ORAL', 'ORAL', 'ORAL', 'ORAL', 'ORAL', NULL, 'ทางปาก', NULL, NULL, NULL, NULL, 1, NULL, '2017-11-04 17:53:42', '2017-11-04 17:53:42'),
+(2, 1, 'WRITTEN', 'WRITTEN', 'WRITTEN', 'WRITTEN', 'WRITTEN', 'ECRIT', NULL, 'เป็นลายลักษณ์อักษร', NULL, NULL, NULL, NULL, 1, NULL, '2017-11-04 17:53:42', '2017-11-04 17:53:42');
 
 -- --------------------------------------------------------
 
@@ -107,6 +140,63 @@ CREATE TABLE `cl_app_energy_types` (
   `I18N_ES` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Spanish',
   `I18N_TH` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Thai',
   `I18N_VT` varchar(256) CHARACTER SET utf8 COLLATE utf8_vietnamese_ci DEFAULT NULL COMMENT 'label in Vietnamese',
+  `I18N_LA` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Lao',
+  `I18N_ID` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in indonesian',
+  `I18N_KH` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Cambodian',
+  `UPDATER_ID` int(11) NOT NULL DEFAULT '1',
+  `COMMENT` varchar(512) COLLATE utf8_bin DEFAULT NULL,
+  `CREATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `UPDATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `cl_app_engine_roles`
+--
+
+CREATE TABLE `cl_app_engine_roles` (
+  `ID` int(11) NOT NULL,
+  `ENABLED` tinyint(1) NOT NULL DEFAULT '1',
+  `CODE` varchar(16) COLLATE utf8_bin NOT NULL,
+  `NAME` varchar(64) COLLATE utf8_bin NOT NULL,
+  `DESCRIPTION` varchar(512) COLLATE utf8_bin DEFAULT NULL,
+  `I18n_DEFAULT` varchar(256) COLLATE utf8_bin NOT NULL COMMENT 'default label',
+  `I18N_EN` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in English',
+  `I18N_FR` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in French',
+  `I18N_ES` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Spanish',
+  `I18N_TH` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Thai',
+  `I18N_VT` varchar(256) CHARACTER SET utf8 COLLATE utf8_vietnamese_ci DEFAULT NULL COMMENT 'label in Vietnamese',
+  `I18N_LA` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Lao',
+  `I18N_ID` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in indonesian',
+  `I18N_KH` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Cambodian',
+  `UPDATER_ID` int(11) NOT NULL DEFAULT '1',
+  `COMMENT` varchar(512) COLLATE utf8_bin DEFAULT NULL,
+  `CREATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `UPDATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `cl_app_engine_types`
+--
+
+CREATE TABLE `cl_app_engine_types` (
+  `ID` int(11) NOT NULL,
+  `ENABLED` tinyint(1) NOT NULL DEFAULT '1',
+  `CODE` varchar(16) COLLATE utf8_bin NOT NULL,
+  `NAME` varchar(64) COLLATE utf8_bin NOT NULL,
+  `DESCRIPTION` varchar(512) COLLATE utf8_bin DEFAULT NULL,
+  `I18n_DEFAULT` varchar(256) COLLATE utf8_bin NOT NULL COMMENT 'default label',
+  `I18N_EN` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in English',
+  `I18N_FR` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in French',
+  `I18N_ES` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Spanish',
+  `I18N_TH` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Thai',
+  `I18N_VT` varchar(256) CHARACTER SET utf8 COLLATE utf8_vietnamese_ci DEFAULT NULL COMMENT 'label in Vietnamese',
+  `I18N_LA` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Lao',
+  `I18N_ID` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in indonesian',
+  `I18N_KH` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Cambodian',
   `UPDATER_ID` int(11) NOT NULL DEFAULT '1',
   `COMMENT` varchar(512) COLLATE utf8_bin DEFAULT NULL,
   `CREATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -131,6 +221,9 @@ CREATE TABLE `cl_app_entity_types` (
   `I18N_ES` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Spanish',
   `I18N_TH` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Thai',
   `I18N_VT` varchar(256) CHARACTER SET utf8 COLLATE utf8_vietnamese_ci DEFAULT NULL COMMENT 'label in Vietnamese',
+  `I18N_LA` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Lao',
+  `I18N_ID` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in indonesian',
+  `I18N_KH` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Cambodian',
   `IS_COMPANY` tinyint(1) NOT NULL,
   `UPDATER_ID` int(11) NOT NULL DEFAULT '1',
   `COMMENT` varchar(1024) CHARACTER SET utf8 DEFAULT NULL,
@@ -142,16 +235,16 @@ CREATE TABLE `cl_app_entity_types` (
 -- Contenu de la table `cl_app_entity_types`
 --
 
-INSERT INTO `cl_app_entity_types` (`ID`, `ENABLED`, `CODE`, `NAME`, `DESCRIPTION`, `I18n_DEFAULT`, `I18N_EN`, `I18N_FR`, `I18N_ES`, `I18N_TH`, `I18N_VT`, `IS_COMPANY`, `UPDATER_ID`, `COMMENT`, `CREATED_AT`, `UPDATED_AT`) VALUES
-(1, 1, 'IND', 'Individual', 'Individual', 'Individual', 'Individual', 'Personne', NULL, 'บุคคล', NULL, 0, 1, NULL, '2014-12-31 21:00:00', '2017-09-12 13:28:43'),
-(2, 1, 'FARM', 'Any type of farm', NULL, 'Any type of farm', 'Any type of farm', 'Tout type de ferme', NULL, 'ฟาร์ม', NULL, 0, 1, NULL, '2016-10-03 11:03:11', '2017-09-12 13:28:43'),
-(5, 1, 'COOP', 'Cooperative', 'Cooperative', 'Cooperative', 'Cooperative', 'Coopérative', NULL, 'สหกรณ์', NULL, 1, 1, NULL, '2016-10-03 11:04:43', '2017-09-12 13:28:43'),
-(6, 1, 'FM', 'Feed Mill', 'Feed Mill', 'Feed Mill', 'Feed Mill', NULL, NULL, 'โรงงานอาหาร', NULL, 1, 1, NULL, '2017-09-12 13:28:43', '2017-09-12 13:28:43'),
-(7, 1, 'LAB', 'Laboratory', 'Laboratory', 'Laboratory', 'Laboratory', 'Laboratoire', NULL, 'ห้องปฏิบัติการ', NULL, 1, 1, NULL, '2017-09-12 13:28:43', '2017-09-12 13:28:43'),
-(8, 1, 'COM', 'Commercial company', 'Commercial company', 'Commercial company', 'Commercial company', 'Société privée', NULL, 'บริษัท พาณิชย์', NULL, 1, 1, NULL, '2016-10-03 11:04:43', '2017-09-12 13:28:43'),
-(9, 1, 'GOV', 'Government Institution', 'Government Institution', 'Government Institution', 'Government Institution', 'Institution gouvernementale', NULL, 'Government Institution', NULL, 1, 1, NULL, '2016-10-03 11:04:43', '2017-09-12 13:28:43'),
-(10, 1, 'NGO', 'Non-Governmental Organization', 'NGO', 'NGO', 'NGO', 'ONG', NULL, 'Xngkh̒kr phạtʹhnā xekchn', NULL, 1, 1, NULL, '2016-10-03 11:04:43', '2017-09-12 13:28:43'),
-(99, 1, 'SYS', 'System-related entity', 'System-related entity', 'System-related entity', 'System-related entity', 'System-related entity', NULL, 'เอนทิตีที่เกี่ยวกับระบบ', NULL, 0, 1, NULL, '2016-10-03 11:04:43', '2017-09-12 13:28:43');
+INSERT INTO `cl_app_entity_types` (`ID`, `ENABLED`, `CODE`, `NAME`, `DESCRIPTION`, `I18n_DEFAULT`, `I18N_EN`, `I18N_FR`, `I18N_ES`, `I18N_TH`, `I18N_VT`, `I18N_LA`, `I18N_ID`, `I18N_KH`, `IS_COMPANY`, `UPDATER_ID`, `COMMENT`, `CREATED_AT`, `UPDATED_AT`) VALUES
+(1, 1, 'IND', 'Individual', 'Individual', 'Individual', 'Individual', 'Personne', NULL, 'บุคคล', NULL, NULL, NULL, NULL, 0, 1, NULL, '2014-12-31 21:00:00', '2017-09-12 13:28:43'),
+(2, 1, 'FARM', 'Any type of farm', NULL, 'Any type of farm', 'Any type of farm', 'Tout type de ferme', NULL, 'ฟาร์ม', NULL, NULL, NULL, NULL, 0, 1, NULL, '2016-10-03 11:03:11', '2017-09-12 13:28:43'),
+(5, 1, 'COOP', 'Cooperative', 'Cooperative', 'Cooperative', 'Cooperative', 'Coopérative', NULL, 'สหกรณ์', NULL, NULL, NULL, NULL, 1, 1, NULL, '2016-10-03 11:04:43', '2017-09-12 13:28:43'),
+(6, 1, 'FM', 'Feed Mill', 'Feed Mill', 'Feed Mill', 'Feed Mill', NULL, NULL, 'โรงงานอาหาร', NULL, NULL, NULL, NULL, 1, 1, NULL, '2017-09-12 13:28:43', '2017-09-12 13:28:43'),
+(7, 1, 'LAB', 'Laboratory', 'Laboratory', 'Laboratory', 'Laboratory', 'Laboratoire', NULL, 'ห้องปฏิบัติการ', NULL, NULL, NULL, NULL, 1, 1, NULL, '2017-09-12 13:28:43', '2017-09-12 13:28:43'),
+(8, 1, 'COM', 'Commercial company', 'Commercial company', 'Commercial company', 'Commercial company', 'Société privée', NULL, 'บริษัท พาณิชย์', NULL, NULL, NULL, NULL, 1, 1, NULL, '2016-10-03 11:04:43', '2017-09-12 13:28:43'),
+(9, 1, 'GOV', 'Government Institution', 'Government Institution', 'Government Institution', 'Government Institution', 'Institution gouvernementale', NULL, 'Government Institution', NULL, NULL, NULL, NULL, 1, 1, NULL, '2016-10-03 11:04:43', '2017-09-12 13:28:43'),
+(10, 1, 'NGO', 'Non-Governmental Organization', 'NGO', 'NGO', 'NGO', 'ONG', NULL, 'Xngkh̒kr phạtʹhnā xekchn', NULL, NULL, NULL, NULL, 1, 1, NULL, '2016-10-03 11:04:43', '2017-09-12 13:28:43'),
+(99, 1, 'SYS', 'System-related entity', 'System-related entity', 'System-related entity', 'System-related entity', 'System-related entity', NULL, 'เอนทิตีที่เกี่ยวกับระบบ', NULL, NULL, NULL, NULL, 0, 1, NULL, '2016-10-03 11:04:43', '2017-09-12 13:28:43');
 
 -- --------------------------------------------------------
 
@@ -171,6 +264,9 @@ CREATE TABLE `cl_app_hazardous_work_type` (
   `I18N_ES` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Spanish',
   `I18N_TH` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Thai',
   `I18N_VT` varchar(256) CHARACTER SET utf8 COLLATE utf8_vietnamese_ci DEFAULT NULL COMMENT 'label in Vietnamese',
+  `I18N_LA` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Lao',
+  `I18N_ID` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in indonesian',
+  `I18N_KH` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Cambodian',
   `UPDATER_ID` int(11) NOT NULL DEFAULT '1',
   `COMMENT` varchar(512) COLLATE utf8_bin DEFAULT NULL,
   `CREATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -181,12 +277,12 @@ CREATE TABLE `cl_app_hazardous_work_type` (
 -- Contenu de la table `cl_app_hazardous_work_type`
 --
 
-INSERT INTO `cl_app_hazardous_work_type` (`ID`, `ENABLED`, `CODE`, `NAME`, `DESCRIPTION`, `I18n_DEFAULT`, `I18N_EN`, `I18N_FR`, `I18N_ES`, `I18N_TH`, `I18N_VT`, `UPDATER_ID`, `COMMENT`, `CREATED_AT`, `UPDATED_AT`) VALUES
-(1, 1, 'SUGHARV', 'Sugar Cane harvester', 'Sugar Cane harvester', 'Sugar Cane harvester', 'Sugar Cane harvester', 'Coupeur de canne à sucre', NULL, 'เครื่องเก็บเกี่ยวอ้อย', NULL, 1, NULL, '2017-09-23 10:18:02', '2017-09-23 10:18:02'),
-(2, 1, 'MANCUT', 'Manual Cutting', 'Manual Cutting', 'Manual Cutting', 'Manual Cutting', 'Coupe manuelle', NULL, 'ตัดด้วยมือ', NULL, 1, NULL, '2017-11-28 13:35:34', '2017-11-28 13:35:34'),
-(3, 1, 'PESTSP', 'Pesticides Spraying', 'Pesticides Spraying', 'Pesticides Spraying', 'Pesticides Spraying', NULL, NULL, 'พ่นยาฆ่าแมลง', NULL, 1, NULL, '2017-11-28 13:43:12', '2017-11-28 13:43:12'),
-(4, 1, 'MECHTIL', 'Mechanical tillage', 'Mechanical tillage', 'Mechanical tillage', 'Mechanical tillage', 'Travail du sol manuel', NULL, 'การไถพรวนแบบเครื่องกล', NULL, 1, NULL, '2017-11-28 13:43:12', '2017-11-28 13:43:12'),
-(5, 1, 'FERT', 'Fertilizer Use', 'Fertilizer Use', 'Fertilizer Use', 'Fertilizer Use', 'Utilisation d\'engrais', NULL, 'การใช้ปุ๋ย', NULL, 1, NULL, '2017-11-28 13:43:12', '2017-11-28 13:43:12');
+INSERT INTO `cl_app_hazardous_work_type` (`ID`, `ENABLED`, `CODE`, `NAME`, `DESCRIPTION`, `I18n_DEFAULT`, `I18N_EN`, `I18N_FR`, `I18N_ES`, `I18N_TH`, `I18N_VT`, `I18N_LA`, `I18N_ID`, `I18N_KH`, `UPDATER_ID`, `COMMENT`, `CREATED_AT`, `UPDATED_AT`) VALUES
+(1, 1, 'SUGHARV', 'Sugar Cane harvester', 'Sugar Cane harvester', 'Sugar Cane harvester', 'Sugar Cane harvester', 'Coupeur de canne à sucre', NULL, 'เครื่องเก็บเกี่ยวอ้อย', NULL, NULL, NULL, NULL, 1, NULL, '2017-09-23 10:18:02', '2017-09-23 10:18:02'),
+(2, 1, 'MANCUT', 'Manual Cutting', 'Manual Cutting', 'Manual Cutting', 'Manual Cutting', 'Coupe manuelle', NULL, 'ตัดด้วยมือ', NULL, NULL, NULL, NULL, 1, NULL, '2017-11-28 13:35:34', '2017-11-28 13:35:34'),
+(3, 1, 'PESTSP', 'Pesticides Spraying', 'Pesticides Spraying', 'Pesticides Spraying', 'Pesticides Spraying', NULL, NULL, 'พ่นยาฆ่าแมลง', NULL, NULL, NULL, NULL, 1, NULL, '2017-11-28 13:43:12', '2017-11-28 13:43:12'),
+(4, 1, 'MECHTIL', 'Mechanical tillage', 'Mechanical tillage', 'Mechanical tillage', 'Mechanical tillage', 'Travail du sol manuel', NULL, 'การไถพรวนแบบเครื่องกล', NULL, NULL, NULL, NULL, 1, NULL, '2017-11-28 13:43:12', '2017-11-28 13:43:12'),
+(5, 1, 'FERT', 'Fertilizer Use', 'Fertilizer Use', 'Fertilizer Use', 'Fertilizer Use', 'Utilisation d\'engrais', NULL, 'การใช้ปุ๋ย', NULL, NULL, NULL, NULL, 1, NULL, '2017-11-28 13:43:12', '2017-11-28 13:43:12');
 
 -- --------------------------------------------------------
 
@@ -206,6 +302,9 @@ CREATE TABLE `cl_app_hull_types` (
   `I18N_ES` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Spanish',
   `I18N_TH` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Thai',
   `I18N_VT` varchar(256) CHARACTER SET utf8 COLLATE utf8_vietnamese_ci DEFAULT NULL COMMENT 'label in Vietnamese',
+  `I18N_LA` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Lao',
+  `I18N_ID` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in indonesian',
+  `I18N_KH` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Cambodian',
   `UPDATER_ID` int(11) NOT NULL DEFAULT '1',
   `COMMENT` varchar(512) COLLATE utf8_bin DEFAULT NULL,
   `CREATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -230,6 +329,9 @@ CREATE TABLE `cl_app_hvhe_expension_types` (
   `I18N_ES` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Spanish',
   `I18N_TH` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Thai',
   `I18N_VT` varchar(256) CHARACTER SET utf8 COLLATE utf8_vietnamese_ci DEFAULT NULL COMMENT 'label in Vietnamese',
+  `I18N_LA` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Lao',
+  `I18N_ID` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in indonesian',
+  `I18N_KH` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Cambodian',
   `CL_COUNTRY_ID` int(11) NOT NULL,
   `UPDATER_ID` int(11) NOT NULL DEFAULT '1',
   `COMMENT` varchar(1024) CHARACTER SET utf8 DEFAULT NULL,
@@ -241,9 +343,9 @@ CREATE TABLE `cl_app_hvhe_expension_types` (
 -- Contenu de la table `cl_app_hvhe_expension_types`
 --
 
-INSERT INTO `cl_app_hvhe_expension_types` (`ID`, `ENABLED`, `CODE`, `NAME`, `DESCRIPTION`, `I18n_DEFAULT`, `I18N_EN`, `I18N_FR`, `I18N_ES`, `I18N_TH`, `I18N_VT`, `CL_COUNTRY_ID`, `UPDATER_ID`, `COMMENT`, `CREATED_AT`, `UPDATED_AT`) VALUES
-(1, 1, 'POND', 'New Pond', 'Creation of new pond', 'Creation of new pond', 'Creation of new pond', 'Création d\'un nouveau bassin', NULL, 'การสร้างบ่อใหม่', NULL, 235, 1, NULL, '2016-11-13 20:10:38', '2017-09-12 13:29:31'),
-(2, 1, 'CANAL', 'Canal creation', 'Canal creation', 'Canal creation', 'Canal creation', 'Création d\'un canal', NULL, 'การสร้างคลอง', NULL, 235, 1, NULL, '2016-11-13 20:25:06', '2017-09-12 13:29:31');
+INSERT INTO `cl_app_hvhe_expension_types` (`ID`, `ENABLED`, `CODE`, `NAME`, `DESCRIPTION`, `I18n_DEFAULT`, `I18N_EN`, `I18N_FR`, `I18N_ES`, `I18N_TH`, `I18N_VT`, `I18N_LA`, `I18N_ID`, `I18N_KH`, `CL_COUNTRY_ID`, `UPDATER_ID`, `COMMENT`, `CREATED_AT`, `UPDATED_AT`) VALUES
+(1, 1, 'POND', 'New Pond', 'Creation of new pond', 'Creation of new pond', 'Creation of new pond', 'Création d\'un nouveau bassin', NULL, 'การสร้างบ่อใหม่', NULL, NULL, NULL, NULL, 235, 1, NULL, '2016-11-13 20:10:38', '2017-09-12 13:29:31'),
+(2, 1, 'CANAL', 'Canal creation', 'Canal creation', 'Canal creation', 'Canal creation', 'Création d\'un canal', NULL, 'การสร้างคลอง', NULL, NULL, NULL, NULL, 235, 1, NULL, '2016-11-13 20:25:06', '2017-09-12 13:29:31');
 
 -- --------------------------------------------------------
 
@@ -264,6 +366,9 @@ CREATE TABLE `cl_app_legal_status` (
   `I18N_ES` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Spanish',
   `I18N_TH` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Thai',
   `I18N_VT` varchar(256) CHARACTER SET utf8 COLLATE utf8_vietnamese_ci DEFAULT NULL COMMENT 'label in Vietnamese',
+  `I18N_LA` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Lao',
+  `I18N_ID` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in indonesian',
+  `I18N_KH` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Cambodian',
   `UPDATER_ID` int(11) NOT NULL DEFAULT '1',
   `COMMENT` varchar(512) COLLATE utf8_bin DEFAULT NULL,
   `CREATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -274,14 +379,14 @@ CREATE TABLE `cl_app_legal_status` (
 -- Contenu de la table `cl_app_legal_status`
 --
 
-INSERT INTO `cl_app_legal_status` (`ID`, `CL_COUNTRY_ID`, `ENABLED`, `CODE`, `NAME`, `DESCRIPTION`, `I18n_DEFAULT`, `I18N_EN`, `I18N_FR`, `I18N_ES`, `I18N_TH`, `I18N_VT`, `UPDATER_ID`, `COMMENT`, `CREATED_AT`, `UPDATED_AT`) VALUES
-(1, 205, 1, 'SING', 'Single', 'Single', 'Single', 'Single', 'Célibataire', NULL, 'เดียว', NULL, 1, 'ISO 20022 applied to Thailand', '2017-09-23 10:50:17', '2017-09-23 10:50:17'),
-(2, 205, 1, 'MARR', 'Married', 'Married', 'Married', 'Married', 'Marié', NULL, 'แต่งงาน', NULL, 1, 'ISO 20022 applied to Thailand', '2017-09-23 10:50:17', '2017-09-23 10:50:17'),
-(3, 205, 1, 'LDIV', 'Legally divorced', 'Legally divored', 'Legally divorced', 'Legally divorced', 'Divorcé légalement', NULL, 'หย่าร้างตามกฎหมาย', NULL, 1, 'ISO 20022 applied to Thailand', '2017-09-23 10:51:38', '2017-09-23 10:51:38'),
-(4, 205, 1, 'DIVO', 'Divorced', 'Divorced', 'Divorced', 'Divorced', 'Divorcé', NULL, 'การหย่าร้าง', NULL, 1, 'ISO 20022 applied to Thailand', '2017-09-23 10:51:38', '2017-09-23 10:51:38'),
-(5, 205, 1, 'WIDO', 'Widow', 'Widow', 'Widow', 'Widow', 'Veuve', NULL, 'แม่หม้าย', NULL, 1, 'ISO 20022 applied to Thailand', '2017-09-23 10:52:56', '2017-09-23 10:52:56'),
-(6, 205, 1, 'UNIO', 'Stable Union', 'Stable Union', 'Stable Union', 'Stable Union', 'Union stable', NULL, 'สหภาพคงที่', NULL, 1, 'ISO 20022 applied to Thailand', '2017-09-23 10:52:56', '2017-09-23 10:52:56'),
-(7, 205, 1, 'SEPA', 'Separated', 'Separated', 'Separated', 'Separated', 'Séparé', NULL, 'แยกออกจากกัน', NULL, 1, 'ISO 20022 applied to Thailand', '2017-09-23 10:55:43', '2017-09-23 10:55:43');
+INSERT INTO `cl_app_legal_status` (`ID`, `CL_COUNTRY_ID`, `ENABLED`, `CODE`, `NAME`, `DESCRIPTION`, `I18n_DEFAULT`, `I18N_EN`, `I18N_FR`, `I18N_ES`, `I18N_TH`, `I18N_VT`, `I18N_LA`, `I18N_ID`, `I18N_KH`, `UPDATER_ID`, `COMMENT`, `CREATED_AT`, `UPDATED_AT`) VALUES
+(1, 205, 1, 'SING', 'Single', 'Single', 'Single', 'Single', 'Célibataire', NULL, 'เดียว', NULL, NULL, NULL, NULL, 1, 'ISO 20022 applied to Thailand', '2017-09-23 10:50:17', '2017-09-23 10:50:17'),
+(2, 205, 1, 'MARR', 'Married', 'Married', 'Married', 'Married', 'Marié', NULL, 'แต่งงาน', NULL, NULL, NULL, NULL, 1, 'ISO 20022 applied to Thailand', '2017-09-23 10:50:17', '2017-09-23 10:50:17'),
+(3, 205, 1, 'LDIV', 'Legally divorced', 'Legally divored', 'Legally divorced', 'Legally divorced', 'Divorcé légalement', NULL, 'หย่าร้างตามกฎหมาย', NULL, NULL, NULL, NULL, 1, 'ISO 20022 applied to Thailand', '2017-09-23 10:51:38', '2017-09-23 10:51:38'),
+(4, 205, 1, 'DIVO', 'Divorced', 'Divorced', 'Divorced', 'Divorced', 'Divorcé', NULL, 'การหย่าร้าง', NULL, NULL, NULL, NULL, 1, 'ISO 20022 applied to Thailand', '2017-09-23 10:51:38', '2017-09-23 10:51:38'),
+(5, 205, 1, 'WIDO', 'Widow', 'Widow', 'Widow', 'Widow', 'Veuve', NULL, 'แม่หม้าย', NULL, NULL, NULL, NULL, 1, 'ISO 20022 applied to Thailand', '2017-09-23 10:52:56', '2017-09-23 10:52:56'),
+(6, 205, 1, 'UNIO', 'Stable Union', 'Stable Union', 'Stable Union', 'Stable Union', 'Union stable', NULL, 'สหภาพคงที่', NULL, NULL, NULL, NULL, 1, 'ISO 20022 applied to Thailand', '2017-09-23 10:52:56', '2017-09-23 10:52:56'),
+(7, 205, 1, 'SEPA', 'Separated', 'Separated', 'Separated', 'Separated', 'Séparé', NULL, 'แยกออกจากกัน', NULL, NULL, NULL, NULL, 1, 'ISO 20022 applied to Thailand', '2017-09-23 10:55:43', '2017-09-23 10:55:43');
 
 -- --------------------------------------------------------
 
@@ -301,8 +406,68 @@ CREATE TABLE `cl_app_license_types` (
   `I18N_ES` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Spanish',
   `I18N_TH` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Thai',
   `I18N_VT` varchar(256) CHARACTER SET utf8 COLLATE utf8_vietnamese_ci DEFAULT NULL COMMENT 'label in Vietnamese',
+  `I18N_LA` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Lao',
+  `I18N_ID` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in indonesian',
+  `I18N_KH` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Cambodian',
   `UPDATER_ID` int(11) NOT NULL DEFAULT '1',
   `COMMENT` varchar(512) COLLATE utf8_bin DEFAULT NULL,
+  `CREATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `UPDATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `cl_app_locations`
+--
+
+CREATE TABLE `cl_app_locations` (
+  `ID` int(11) NOT NULL,
+  `ENABLED` tinyint(1) NOT NULL DEFAULT '1',
+  `CODE` varchar(16) CHARACTER SET utf8 NOT NULL,
+  `NAME` varchar(64) CHARACTER SET utf8 NOT NULL,
+  `DESCRIPTION` varchar(512) CHARACTER SET utf8 DEFAULT NULL,
+  `CL_REF_COUNTRY_ID` int(11) DEFAULT NULL,
+  `CL_REF_REGION_ID` int(11) DEFAULT NULL,
+  `CL_APP_CONSTRUCTION_LOCATION_TYPE` int(11) DEFAULT NULL,
+  `I18n_DEFAULT` varchar(256) COLLATE utf8_bin NOT NULL COMMENT 'default label',
+  `I18N_EN` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in English',
+  `I18N_FR` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in French',
+  `I18N_ES` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Spanish',
+  `I18N_TH` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Thai',
+  `I18N_VT` varchar(256) CHARACTER SET utf8 COLLATE utf8_vietnamese_ci DEFAULT NULL COMMENT 'label in Vietnamese',
+  `I18N_LA` varchar(256) COLLATE utf8_bin DEFAULT NULL,
+  `I18N_ID` varchar(256) COLLATE utf8_bin DEFAULT NULL,
+  `I18N_KH` varchar(256) COLLATE utf8_bin DEFAULT NULL,
+  `UPDATER_ID` int(11) NOT NULL DEFAULT '1',
+  `COMMENT` varchar(1024) CHARACTER SET utf8 DEFAULT NULL,
+  `CREATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `UPDATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='UN/CEFACT FLUX Vessel Domain: Entity used to provide information on a physical location or place of construction.';
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `cl_app_location_types`
+--
+
+CREATE TABLE `cl_app_location_types` (
+  `ID` int(11) NOT NULL,
+  `ENABLED` tinyint(1) NOT NULL DEFAULT '1',
+  `CODE` varchar(16) CHARACTER SET utf8 NOT NULL,
+  `NAME` varchar(64) CHARACTER SET utf8 NOT NULL,
+  `DESCRIPTION` varchar(512) CHARACTER SET utf8 DEFAULT NULL,
+  `I18n_DEFAULT` varchar(256) COLLATE utf8_bin NOT NULL COMMENT 'default label',
+  `I18N_EN` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in English',
+  `I18N_FR` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in French',
+  `I18N_ES` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Spanish',
+  `I18N_TH` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Thai',
+  `I18N_VT` varchar(256) CHARACTER SET utf8 COLLATE utf8_vietnamese_ci DEFAULT NULL COMMENT 'label in Vietnamese',
+  `I18N_LA` varchar(256) COLLATE utf8_bin DEFAULT NULL,
+  `I18N_ID` varchar(256) COLLATE utf8_bin DEFAULT NULL,
+  `I18N_KH` varchar(256) COLLATE utf8_bin DEFAULT NULL,
+  `UPDATER_ID` int(11) NOT NULL DEFAULT '1',
+  `COMMENT` varchar(1024) CHARACTER SET utf8 DEFAULT NULL,
   `CREATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `UPDATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
@@ -325,6 +490,9 @@ CREATE TABLE `cl_app_measure_types` (
   `I18N_ES` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Spanish',
   `I18N_TH` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Thai',
   `I18N_VT` varchar(256) CHARACTER SET utf8 COLLATE utf8_vietnamese_ci DEFAULT NULL COMMENT 'label in Vietnamese',
+  `I18N_LA` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Lao',
+  `I18N_ID` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in indonesian',
+  `I18N_KH` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Cambodian',
   `UPDATER_ID` int(11) NOT NULL DEFAULT '1',
   `COMMENT` varchar(1024) CHARACTER SET utf8 DEFAULT NULL,
   `CREATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -335,12 +503,12 @@ CREATE TABLE `cl_app_measure_types` (
 -- Contenu de la table `cl_app_measure_types`
 --
 
-INSERT INTO `cl_app_measure_types` (`ID`, `ENABLED`, `CODE`, `NAME`, `DESCRIPTION`, `I18n_DEFAULT`, `I18N_EN`, `I18N_FR`, `I18N_ES`, `I18N_TH`, `I18N_VT`, `UPDATER_ID`, `COMMENT`, `CREATED_AT`, `UPDATED_AT`) VALUES
-(1, 1, 'pH', 'pH', 'pH', 'pH', 'pH', 'pH', NULL, 'พีเอช', NULL, 1, NULL, '2016-10-23 17:00:47', '2017-09-12 13:30:11'),
-(2, 1, 'TEMP', 'Temperature', 'Temperature', 'Temperature', 'Temperature', 'Température', NULL, 'อุณหภูมิ', NULL, 1, NULL, '2016-10-23 17:00:47', '2017-09-12 13:30:11'),
-(3, 1, 'DO', 'Dissolved Oxygen', 'Dissolved Oxygen', 'Dissolved Oxygen', 'Dissolved Oxygen', 'Oxygène dissous', NULL, 'ออกซิเจนละลาย', NULL, 1, NULL, '2016-10-23 17:02:34', '2017-09-12 13:30:11'),
-(4, 1, 'SAL', 'Salinity', 'Salinity', 'Salinity', 'Salinity', 'Salinité', NULL, 'ความเค็ม', NULL, 1, NULL, '2016-10-23 17:02:34', '2017-09-12 13:30:11'),
-(5, 1, 'AMMO', 'Ammonia', 'Ammonia', 'Ammonia', 'Ammonia', 'Ammoniac', NULL, 'สารแอมโมเนีย', NULL, 1, NULL, '2016-10-23 17:03:03', '2017-09-12 13:30:11');
+INSERT INTO `cl_app_measure_types` (`ID`, `ENABLED`, `CODE`, `NAME`, `DESCRIPTION`, `I18n_DEFAULT`, `I18N_EN`, `I18N_FR`, `I18N_ES`, `I18N_TH`, `I18N_VT`, `I18N_LA`, `I18N_ID`, `I18N_KH`, `UPDATER_ID`, `COMMENT`, `CREATED_AT`, `UPDATED_AT`) VALUES
+(1, 1, 'pH', 'pH', 'pH', 'pH', 'pH', 'pH', NULL, 'พีเอช', NULL, NULL, NULL, NULL, 1, NULL, '2016-10-23 17:00:47', '2017-09-12 13:30:11'),
+(2, 1, 'TEMP', 'Temperature', 'Temperature', 'Temperature', 'Temperature', 'Température', NULL, 'อุณหภูมิ', NULL, NULL, NULL, NULL, 1, NULL, '2016-10-23 17:00:47', '2017-09-12 13:30:11'),
+(3, 1, 'DO', 'Dissolved Oxygen', 'Dissolved Oxygen', 'Dissolved Oxygen', 'Dissolved Oxygen', 'Oxygène dissous', NULL, 'ออกซิเจนละลาย', NULL, NULL, NULL, NULL, 1, NULL, '2016-10-23 17:02:34', '2017-09-12 13:30:11'),
+(4, 1, 'SAL', 'Salinity', 'Salinity', 'Salinity', 'Salinity', 'Salinité', NULL, 'ความเค็ม', NULL, NULL, NULL, NULL, 1, NULL, '2016-10-23 17:02:34', '2017-09-12 13:30:11'),
+(5, 1, 'AMMO', 'Ammonia', 'Ammonia', 'Ammonia', 'Ammonia', 'Ammoniac', NULL, 'สารแอมโมเนีย', NULL, NULL, NULL, NULL, 1, NULL, '2016-10-23 17:03:03', '2017-09-12 13:30:11');
 
 -- --------------------------------------------------------
 
@@ -360,6 +528,9 @@ CREATE TABLE `cl_app_payment_frequencies` (
   `I18N_ES` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Spanish',
   `I18N_TH` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Thai',
   `I18N_VT` varchar(256) CHARACTER SET utf8 COLLATE utf8_vietnamese_ci DEFAULT NULL COMMENT 'label in Vietnamese',
+  `I18N_LA` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Lao',
+  `I18N_ID` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in indonesian',
+  `I18N_KH` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Cambodian',
   `UPDATER_ID` int(11) NOT NULL DEFAULT '1',
   `COMMENT` varchar(1024) CHARACTER SET utf8 DEFAULT NULL,
   `CREATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -370,10 +541,10 @@ CREATE TABLE `cl_app_payment_frequencies` (
 -- Contenu de la table `cl_app_payment_frequencies`
 --
 
-INSERT INTO `cl_app_payment_frequencies` (`ID`, `ENABLED`, `CODE`, `NAME`, `DESCRIPTION`, `I18n_DEFAULT`, `I18N_EN`, `I18N_FR`, `I18N_ES`, `I18N_TH`, `I18N_VT`, `UPDATER_ID`, `COMMENT`, `CREATED_AT`, `UPDATED_AT`) VALUES
-(1, 1, 'DAY', 'Daily', 'Daily', 'Daily', 'Daily', 'Journalier', NULL, 'ประจำวัน', NULL, 1, NULL, '2017-11-23 19:36:53', '2017-11-23 19:36:53'),
-(2, 1, 'WEEK', 'Weekly', 'Weekly', 'Weekly', 'Weekly', 'Hebdomadaire', NULL, 'รายสัปดาห์', NULL, 1, NULL, '2017-11-23 19:36:53', '2017-11-23 19:36:53'),
-(3, 1, 'MON', 'Monthly', 'Monthly', 'Monthly', 'Monthly', 'Mensuel', NULL, 'Monthly', NULL, 1, NULL, '2017-11-23 19:36:53', '2017-11-23 19:36:53');
+INSERT INTO `cl_app_payment_frequencies` (`ID`, `ENABLED`, `CODE`, `NAME`, `DESCRIPTION`, `I18n_DEFAULT`, `I18N_EN`, `I18N_FR`, `I18N_ES`, `I18N_TH`, `I18N_VT`, `I18N_LA`, `I18N_ID`, `I18N_KH`, `UPDATER_ID`, `COMMENT`, `CREATED_AT`, `UPDATED_AT`) VALUES
+(1, 1, 'DAY', 'Daily', 'Daily', 'Daily', 'Daily', 'Journalier', NULL, 'ประจำวัน', NULL, NULL, NULL, NULL, 1, NULL, '2017-11-23 19:36:53', '2017-11-23 19:36:53'),
+(2, 1, 'WEEK', 'Weekly', 'Weekly', 'Weekly', 'Weekly', 'Hebdomadaire', NULL, 'รายสัปดาห์', NULL, NULL, NULL, NULL, 1, NULL, '2017-11-23 19:36:53', '2017-11-23 19:36:53'),
+(3, 1, 'MON', 'Monthly', 'Monthly', 'Monthly', 'Monthly', 'Mensuel', NULL, 'Monthly', NULL, NULL, NULL, NULL, 1, NULL, '2017-11-23 19:36:53', '2017-11-23 19:36:53');
 
 -- --------------------------------------------------------
 
@@ -393,6 +564,9 @@ CREATE TABLE `cl_app_power_units` (
   `I18N_ES` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Spanish',
   `I18N_TH` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Thai',
   `I18N_VT` varchar(256) CHARACTER SET utf8 COLLATE utf8_vietnamese_ci DEFAULT NULL COMMENT 'label in Vietnamese',
+  `I18N_LA` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Lao',
+  `I18N_ID` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in indonesian',
+  `I18N_KH` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Cambodian',
   `UPDATER_ID` int(11) NOT NULL DEFAULT '1',
   `COMMENT` varchar(512) COLLATE utf8_bin DEFAULT NULL,
   `CREATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -417,6 +591,9 @@ CREATE TABLE `cl_app_prod_data_entry_types` (
   `I18N_ES` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Spanish',
   `I18N_TH` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Thai',
   `I18N_VT` varchar(256) CHARACTER SET utf8 COLLATE utf8_vietnamese_ci DEFAULT NULL COMMENT 'label in Vietnamese',
+  `I18N_LA` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Lao',
+  `I18N_ID` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in indonesian',
+  `I18N_KH` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Cambodian',
   `UPDATER_ID` int(11) NOT NULL DEFAULT '1',
   `COMMENT` varchar(1024) CHARACTER SET utf8 DEFAULT NULL,
   `CREATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -427,9 +604,36 @@ CREATE TABLE `cl_app_prod_data_entry_types` (
 -- Contenu de la table `cl_app_prod_data_entry_types`
 --
 
-INSERT INTO `cl_app_prod_data_entry_types` (`ID`, `ENABLED`, `CODE`, `NAME`, `DESCRIPTION`, `I18n_DEFAULT`, `I18N_EN`, `I18N_FR`, `I18N_ES`, `I18N_TH`, `I18N_VT`, `UPDATER_ID`, `COMMENT`, `CREATED_AT`, `UPDATED_AT`) VALUES
-(1, 1, 'MAN', 'Manual entry', 'Data entry is done by the user', '', NULL, NULL, NULL, NULL, NULL, 1, NULL, '2017-09-23 11:10:25', '2017-09-23 11:10:25'),
-(2, 1, 'COMP', 'Computarized', 'Date are computed by the system', '', NULL, NULL, NULL, NULL, NULL, 1, NULL, '2017-09-23 11:10:25', '2017-09-23 11:10:25');
+INSERT INTO `cl_app_prod_data_entry_types` (`ID`, `ENABLED`, `CODE`, `NAME`, `DESCRIPTION`, `I18n_DEFAULT`, `I18N_EN`, `I18N_FR`, `I18N_ES`, `I18N_TH`, `I18N_VT`, `I18N_LA`, `I18N_ID`, `I18N_KH`, `UPDATER_ID`, `COMMENT`, `CREATED_AT`, `UPDATED_AT`) VALUES
+(1, 1, 'MAN', 'Manual entry', 'Data entry is done by the user', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, '2017-09-23 11:10:25', '2017-09-23 11:10:25'),
+(2, 1, 'COMP', 'Computarized', 'Date are computed by the system', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, '2017-09-23 11:10:25', '2017-09-23 11:10:25');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `cl_app_propulsion_types`
+--
+
+CREATE TABLE `cl_app_propulsion_types` (
+  `ID` int(11) NOT NULL,
+  `ENABLED` tinyint(1) NOT NULL DEFAULT '1',
+  `CODE` varchar(16) COLLATE utf8_bin NOT NULL,
+  `NAME` varchar(64) COLLATE utf8_bin NOT NULL,
+  `DESCRIPTION` varchar(512) COLLATE utf8_bin DEFAULT NULL,
+  `I18n_DEFAULT` varchar(256) COLLATE utf8_bin NOT NULL COMMENT 'default label',
+  `I18N_EN` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in English',
+  `I18N_FR` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in French',
+  `I18N_ES` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Spanish',
+  `I18N_TH` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Thai',
+  `I18N_VT` varchar(256) CHARACTER SET utf8 COLLATE utf8_vietnamese_ci DEFAULT NULL COMMENT 'label in Vietnamese',
+  `I18N_LA` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Lao',
+  `I18N_ID` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in indonesian',
+  `I18N_KH` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Cambodian',
+  `UPDATER_ID` int(11) NOT NULL DEFAULT '1',
+  `COMMENT` varchar(512) COLLATE utf8_bin DEFAULT NULL,
+  `CREATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `UPDATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- --------------------------------------------------------
 
@@ -449,6 +653,9 @@ CREATE TABLE `cl_app_quantity_units` (
   `I18N_ES` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Spanish',
   `I18N_TH` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Thai',
   `I18N_VT` varchar(256) CHARACTER SET utf8 COLLATE utf8_vietnamese_ci DEFAULT NULL COMMENT 'label in Vietnamese',
+  `I18N_LA` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Lao',
+  `I18N_ID` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in indonesian',
+  `I18N_KH` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Cambodian',
   `CL_QUANTITY_UNIT_TYPE_ID` int(11) NOT NULL,
   `UPDATER_ID` int(11) NOT NULL DEFAULT '1',
   `COMMENT` varchar(512) CHARACTER SET utf8 DEFAULT NULL,
@@ -460,36 +667,36 @@ CREATE TABLE `cl_app_quantity_units` (
 -- Contenu de la table `cl_app_quantity_units`
 --
 
-INSERT INTO `cl_app_quantity_units` (`ID`, `ENABLED`, `CODE`, `NAME`, `DESCRIPTION`, `I18n_DEFAULT`, `I18N_EN`, `I18N_FR`, `I18N_ES`, `I18N_TH`, `I18N_VT`, `CL_QUANTITY_UNIT_TYPE_ID`, `UPDATER_ID`, `COMMENT`, `CREATED_AT`, `UPDATED_AT`) VALUES
-(1, 1, 'LBS', 'Pounds', 'Pounds (Lbs.) as a weight quantity type', 'Pounds (Lbs.)', 'Pounds (Lbs.)', 'Livre anglaise (unité de poids)', NULL, 'ปอนด์อังกฤษ (หน่วยน้ำหนัก)', NULL, 3, 1, 'Initial import', '2014-12-31 18:00:00', '2017-09-12 13:32:19'),
-(2, 1, 'KG', 'Kg', 'Kilograms as a weight quantity type', 'Kilograms', 'Kilograms', 'Kilogrammes', NULL, 'กิโลกรัม', NULL, 3, 1, 'Initial import', '2014-12-31 18:00:00', '2017-09-12 13:32:19'),
-(3, 1, 'UNITS', 'Units', 'Units as quantity type', 'Units as quantity type', 'Units as quantity type', 'Unité (nombre)', NULL, 'หน่วย (จำนวน)', NULL, 4, 1, 'Initial import', '2014-12-31 18:00:00', '2017-09-12 13:32:19'),
-(4, 1, 'CASES', 'Cases', 'Cases as quantity type', 'Cases as quantity type', 'Cases as quantity type', 'Caisses (unité de quantité)', NULL, 'คดี (หน่วยปริมาณ)', NULL, 4, 1, 'Initial import', '2014-12-31 18:00:00', '2017-09-12 13:32:19'),
-(5, 1, 'M', 'Meters', 'Meters as length units', 'Meters', 'Meters', 'Mètres', NULL, 'เมตร', NULL, 1, 1, 'Initial import', '2014-12-31 18:00:00', '2017-09-12 13:32:19'),
-(6, 1, 'M3', 'Cubic meters', 'Cubic meters as volume units', 'Cubic meters', 'Cubic meters', 'Mètres Cubes', NULL, 'ลูกบาศก์เมตร', NULL, 2, 1, 'Initial import', '2014-12-31 18:00:00', '2017-09-12 13:32:19'),
-(7, 1, 'FEET', 'Feet', 'Feet as length units', 'Feet', 'Feet', 'Pied anglais', NULL, 'เท้าอังกฤษ', NULL, 1, 1, 'Initial import', '2014-12-31 18:00:00', '2017-09-12 13:32:19'),
-(8, 1, 'FEET3', 'Cubic feet', 'Cubic feet as volume units', 'Cubic feet', 'Cubic feet', 'Pied cube', NULL, 'ลูกบาศก์ฟุต', NULL, 2, 1, 'Initial import', '2014-12-31 18:00:00', '2017-09-12 13:32:19'),
-(9, 1, 'LIT', 'Liters', 'Liters as volume units', 'Liters', 'Liters', 'Litres', NULL, 'ลิตร', NULL, 2, 1, 'Initial import', '2014-12-31 18:00:00', '2017-09-12 13:32:19'),
-(10, 1, 'GALL', 'Gallons', 'Gallons as volume units', 'Gallons', 'Gallons', 'Galons', NULL, 'แกลลอน', NULL, 2, 1, 'Initial import', '2014-12-31 18:00:00', '2017-09-12 13:32:19'),
-(11, 1, 'MT', 'Metric tons', 'Metric tons as tonnage units', 'Metric tons', 'Metric tons', 'Tonnes métriques', NULL, 'เมตริกตัน', NULL, 5, 1, 'Initial import', '2014-12-31 18:00:00', '2017-09-12 13:32:19'),
-(12, 1, 'HRS', 'Hours', 'Hours fished', 'Hours fished', 'Hours fished', 'Heures passées à pêcher', NULL, 'เวลาที่ใช้ตกปลา', NULL, 6, 1, 'Initial import', '2014-12-31 18:00:00', '2017-09-12 13:32:19'),
-(13, 1, 'DAYS', 'Days', 'Days fished', 'Days fished', 'Days fished', 'Jours passés à pêcher', NULL, 'วันที่ใช้ตกปลา', NULL, 6, 1, 'Initial import', '2014-12-31 18:00:00', '2017-09-12 13:32:19'),
-(14, 1, 'HA', 'Hectares', 'Hectares as length units', 'Hectares ', 'Hectares ', 'Hectares ', NULL, 'เฮคเตอร์', NULL, 7, 1, '', '2017-01-04 14:11:35', '2017-09-12 13:32:19'),
-(15, 1, 'M2', 'Square meters', 'Square meters', 'Square meters', 'Square meters', 'Mètres carrés', NULL, 'ตารางเมตร', NULL, 7, 1, NULL, '2017-01-06 10:31:05', '2017-09-12 13:32:19'),
-(16, 1, 'pH', 'pH', 'pH unit', 'pH unit', 'pH unit', 'Unité de ph', NULL, 'หน่วย pH', NULL, 8, 1, NULL, '2017-01-06 10:33:18', '2017-09-12 13:32:19'),
-(17, 1, 'T°C', 'Degree Celsius', 'Temperature in Celsius', 'Degree Celsius', 'Degree Celsius', 'Degrés Celsius', NULL, 'องศาเซลเซียส', NULL, 9, 1, NULL, '2017-01-06 10:39:41', '2017-09-12 13:32:19'),
-(18, 1, 'T°F', 'Degree Fahrenheit', 'Temperature in Fahrenheit', 'Degree Fahrenheit', 'Degree Fahrenheit', 'Degrés Fahrenheit', NULL, 'องศาฟาเรนไฮต์', NULL, 9, 1, NULL, '2017-01-06 10:40:24', '2017-09-12 13:32:19'),
-(19, 1, 'PPM', 'ppm', 'Part per million', 'Part per million', 'Part per million', 'Partie par million', NULL, 'ส่วนต่อล้าน', NULL, 8, 1, NULL, '2017-01-06 10:46:06', '2017-09-12 13:32:19'),
-(20, 1, 'MG/L', 'mg/l', 'Milligram per liter ', 'mg/l', 'mg/l', 'mg/l', NULL, 'มิลลิกรัม / ลิตร', NULL, 8, 1, NULL, '2017-01-06 10:46:06', '2017-09-12 13:32:19'),
-(21, 1, 'PERCENT', '%', 'Percentage', '%', '%', '%', '%', '%', NULL, 8, 1, NULL, '2017-01-06 10:46:06', '2017-09-12 13:32:19'),
-(22, 1, 'PERTHOUS', 'ppt (‰)', 'Perthousand', 'ppt (‰)', 'ppt (‰)', 'ppt (‰)', 'ppt (‰)', 'ต่อพัน (‰)', 'ppt (‰)', 8, 1, NULL, '2017-01-06 10:46:06', '2017-09-12 13:32:19'),
-(23, 1, 'KG/L', 'Kg/l', '\r\nKilogram per liter', 'Kg/l', 'Kg/l', 'Kg/l', 'Kg/l', 'กก. / ลิตร', 'Kg/l', 8, 1, NULL, '2017-01-06 10:47:54', '2017-09-12 13:32:19'),
-(24, 1, 'G/L', 'g/l', 'g/l', 'g/l', 'g/l', 'g/l', NULL, 'g/l', NULL, 8, 1, NULL, '2017-01-06 10:50:41', '2017-09-12 13:32:19'),
-(25, 1, 'PSU', 'psu', 'Practical Salinity Unit', 'psu', 'psu', 'psu', NULL, 'psu', NULL, 8, 1, NULL, '2017-01-06 10:50:41', '2017-09-12 13:32:19'),
-(26, 1, 'G/KG', 'g/Kg', 'Gram per Kilogram (Salinity unit)', 'g/Kg', 'g/Kg', 'g/Kg', NULL, 'g/Kg', NULL, 8, 1, NULL, '2017-01-06 10:50:41', '2017-09-12 13:32:19'),
-(27, 1, 'FEET2', 'Square feet', 'Square feet as area unit', 'Square feet', 'Square feet', 'Pieds carrés', NULL, 'ตารางฟุต', NULL, 7, 1, NULL, '2017-01-06 10:53:14', '2017-09-12 13:32:19'),
-(28, 1, 'ACRE', 'Acre', 'Acre as area unit', 'Acre', 'Acre', 'Acre', NULL, 'เอเคอร์', NULL, 7, 1, NULL, '2017-01-06 10:53:40', '2017-09-12 13:32:19'),
-(29, 1, 'RAI', 'Rai (area)', 'Rai area thai unit', 'Rai area thai unit', 'Rai area thai unit', 'Rai unité de surface thai', NULL, 'ไร่', NULL, 7, 1, NULL, '2017-01-09 08:16:06', '2017-09-12 13:32:19');
+INSERT INTO `cl_app_quantity_units` (`ID`, `ENABLED`, `CODE`, `NAME`, `DESCRIPTION`, `I18n_DEFAULT`, `I18N_EN`, `I18N_FR`, `I18N_ES`, `I18N_TH`, `I18N_VT`, `I18N_LA`, `I18N_ID`, `I18N_KH`, `CL_QUANTITY_UNIT_TYPE_ID`, `UPDATER_ID`, `COMMENT`, `CREATED_AT`, `UPDATED_AT`) VALUES
+(1, 1, 'LBS', 'Pounds', 'Pounds (Lbs.) as a weight quantity type', 'Pounds (Lbs.)', 'Pounds (Lbs.)', 'Livre anglaise (unité de poids)', NULL, 'ปอนด์อังกฤษ (หน่วยน้ำหนัก)', NULL, NULL, NULL, NULL, 3, 1, 'Initial import', '2014-12-31 18:00:00', '2017-09-12 13:32:19'),
+(2, 1, 'KG', 'Kg', 'Kilograms as a weight quantity type', 'Kilograms', 'Kilograms', 'Kilogrammes', NULL, 'กิโลกรัม', NULL, NULL, NULL, NULL, 3, 1, 'Initial import', '2014-12-31 18:00:00', '2017-09-12 13:32:19'),
+(3, 1, 'UNITS', 'Units', 'Units as quantity type', 'Units as quantity type', 'Units as quantity type', 'Unité (nombre)', NULL, 'หน่วย (จำนวน)', NULL, NULL, NULL, NULL, 4, 1, 'Initial import', '2014-12-31 18:00:00', '2017-09-12 13:32:19'),
+(4, 1, 'CASES', 'Cases', 'Cases as quantity type', 'Cases as quantity type', 'Cases as quantity type', 'Caisses (unité de quantité)', NULL, 'คดี (หน่วยปริมาณ)', NULL, NULL, NULL, NULL, 4, 1, 'Initial import', '2014-12-31 18:00:00', '2017-09-12 13:32:19'),
+(5, 1, 'M', 'Meters', 'Meters as length units', 'Meters', 'Meters', 'Mètres', NULL, 'เมตร', NULL, NULL, NULL, NULL, 1, 1, 'Initial import', '2014-12-31 18:00:00', '2017-09-12 13:32:19'),
+(6, 1, 'M3', 'Cubic meters', 'Cubic meters as volume units', 'Cubic meters', 'Cubic meters', 'Mètres Cubes', NULL, 'ลูกบาศก์เมตร', NULL, NULL, NULL, NULL, 2, 1, 'Initial import', '2014-12-31 18:00:00', '2017-09-12 13:32:19'),
+(7, 1, 'FEET', 'Feet', 'Feet as length units', 'Feet', 'Feet', 'Pied anglais', NULL, 'เท้าอังกฤษ', NULL, NULL, NULL, NULL, 1, 1, 'Initial import', '2014-12-31 18:00:00', '2017-09-12 13:32:19'),
+(8, 1, 'FEET3', 'Cubic feet', 'Cubic feet as volume units', 'Cubic feet', 'Cubic feet', 'Pied cube', NULL, 'ลูกบาศก์ฟุต', NULL, NULL, NULL, NULL, 2, 1, 'Initial import', '2014-12-31 18:00:00', '2017-09-12 13:32:19'),
+(9, 1, 'LIT', 'Liters', 'Liters as volume units', 'Liters', 'Liters', 'Litres', NULL, 'ลิตร', NULL, NULL, NULL, NULL, 2, 1, 'Initial import', '2014-12-31 18:00:00', '2017-09-12 13:32:19'),
+(10, 1, 'GALL', 'Gallons', 'Gallons as volume units', 'Gallons', 'Gallons', 'Galons', NULL, 'แกลลอน', NULL, NULL, NULL, NULL, 2, 1, 'Initial import', '2014-12-31 18:00:00', '2017-09-12 13:32:19'),
+(11, 1, 'MT', 'Metric tons', 'Metric tons as tonnage units', 'Metric tons', 'Metric tons', 'Tonnes métriques', NULL, 'เมตริกตัน', NULL, NULL, NULL, NULL, 5, 1, 'Initial import', '2014-12-31 18:00:00', '2017-09-12 13:32:19'),
+(12, 1, 'HRS', 'Hours', 'Hours fished', 'Hours fished', 'Hours fished', 'Heures passées à pêcher', NULL, 'เวลาที่ใช้ตกปลา', NULL, NULL, NULL, NULL, 6, 1, 'Initial import', '2014-12-31 18:00:00', '2017-09-12 13:32:19'),
+(13, 1, 'DAYS', 'Days', 'Days fished', 'Days fished', 'Days fished', 'Jours passés à pêcher', NULL, 'วันที่ใช้ตกปลา', NULL, NULL, NULL, NULL, 6, 1, 'Initial import', '2014-12-31 18:00:00', '2017-09-12 13:32:19'),
+(14, 1, 'HA', 'Hectares', 'Hectares as length units', 'Hectares ', 'Hectares ', 'Hectares ', NULL, 'เฮคเตอร์', NULL, NULL, NULL, NULL, 7, 1, '', '2017-01-04 14:11:35', '2017-09-12 13:32:19'),
+(15, 1, 'M2', 'Square meters', 'Square meters', 'Square meters', 'Square meters', 'Mètres carrés', NULL, 'ตารางเมตร', NULL, NULL, NULL, NULL, 7, 1, NULL, '2017-01-06 10:31:05', '2017-09-12 13:32:19'),
+(16, 1, 'pH', 'pH', 'pH unit', 'pH unit', 'pH unit', 'Unité de ph', NULL, 'หน่วย pH', NULL, NULL, NULL, NULL, 8, 1, NULL, '2017-01-06 10:33:18', '2017-09-12 13:32:19'),
+(17, 1, 'T°C', 'Degree Celsius', 'Temperature in Celsius', 'Degree Celsius', 'Degree Celsius', 'Degrés Celsius', NULL, 'องศาเซลเซียส', NULL, NULL, NULL, NULL, 9, 1, NULL, '2017-01-06 10:39:41', '2017-09-12 13:32:19'),
+(18, 1, 'T°F', 'Degree Fahrenheit', 'Temperature in Fahrenheit', 'Degree Fahrenheit', 'Degree Fahrenheit', 'Degrés Fahrenheit', NULL, 'องศาฟาเรนไฮต์', NULL, NULL, NULL, NULL, 9, 1, NULL, '2017-01-06 10:40:24', '2017-09-12 13:32:19'),
+(19, 1, 'PPM', 'ppm', 'Part per million', 'Part per million', 'Part per million', 'Partie par million', NULL, 'ส่วนต่อล้าน', NULL, NULL, NULL, NULL, 8, 1, NULL, '2017-01-06 10:46:06', '2017-09-12 13:32:19'),
+(20, 1, 'MG/L', 'mg/l', 'Milligram per liter ', 'mg/l', 'mg/l', 'mg/l', NULL, 'มิลลิกรัม / ลิตร', NULL, NULL, NULL, NULL, 8, 1, NULL, '2017-01-06 10:46:06', '2017-09-12 13:32:19'),
+(21, 1, 'PERCENT', '%', 'Percentage', '%', '%', '%', '%', '%', NULL, NULL, NULL, NULL, 8, 1, NULL, '2017-01-06 10:46:06', '2017-09-12 13:32:19'),
+(22, 1, 'PERTHOUS', 'ppt (‰)', 'Perthousand', 'ppt (‰)', 'ppt (‰)', 'ppt (‰)', 'ppt (‰)', 'ต่อพัน (‰)', 'ppt (‰)', NULL, NULL, NULL, 8, 1, NULL, '2017-01-06 10:46:06', '2017-09-12 13:32:19'),
+(23, 1, 'KG/L', 'Kg/l', '\r\nKilogram per liter', 'Kg/l', 'Kg/l', 'Kg/l', 'Kg/l', 'กก. / ลิตร', 'Kg/l', NULL, NULL, NULL, 8, 1, NULL, '2017-01-06 10:47:54', '2017-09-12 13:32:19'),
+(24, 1, 'G/L', 'g/l', 'g/l', 'g/l', 'g/l', 'g/l', NULL, 'g/l', NULL, NULL, NULL, NULL, 8, 1, NULL, '2017-01-06 10:50:41', '2017-09-12 13:32:19'),
+(25, 1, 'PSU', 'psu', 'Practical Salinity Unit', 'psu', 'psu', 'psu', NULL, 'psu', NULL, NULL, NULL, NULL, 8, 1, NULL, '2017-01-06 10:50:41', '2017-09-12 13:32:19'),
+(26, 1, 'G/KG', 'g/Kg', 'Gram per Kilogram (Salinity unit)', 'g/Kg', 'g/Kg', 'g/Kg', NULL, 'g/Kg', NULL, NULL, NULL, NULL, 8, 1, NULL, '2017-01-06 10:50:41', '2017-09-12 13:32:19'),
+(27, 1, 'FEET2', 'Square feet', 'Square feet as area unit', 'Square feet', 'Square feet', 'Pieds carrés', NULL, 'ตารางฟุต', NULL, NULL, NULL, NULL, 7, 1, NULL, '2017-01-06 10:53:14', '2017-09-12 13:32:19'),
+(28, 1, 'ACRE', 'Acre', 'Acre as area unit', 'Acre', 'Acre', 'Acre', NULL, 'เอเคอร์', NULL, NULL, NULL, NULL, 7, 1, NULL, '2017-01-06 10:53:40', '2017-09-12 13:32:19'),
+(29, 1, 'RAI', 'Rai (area)', 'Rai area thai unit', 'Rai area thai unit', 'Rai area thai unit', 'Rai unité de surface thai', NULL, 'ไร่', NULL, NULL, NULL, NULL, 7, 1, NULL, '2017-01-09 08:16:06', '2017-09-12 13:32:19');
 
 -- --------------------------------------------------------
 
@@ -509,6 +716,9 @@ CREATE TABLE `cl_app_quantity_unit_types` (
   `I18N_ES` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Spanish',
   `I18N_TH` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Thai',
   `I18N_VT` varchar(256) CHARACTER SET utf8 COLLATE utf8_vietnamese_ci DEFAULT NULL COMMENT 'label in Vietnamese',
+  `I18N_LA` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Lao',
+  `I18N_ID` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in indonesian',
+  `I18N_KH` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Cambodian',
   `UPDATER_ID` int(11) NOT NULL DEFAULT '1',
   `COMMENT` varchar(512) CHARACTER SET utf8 DEFAULT NULL,
   `CREATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -519,16 +729,16 @@ CREATE TABLE `cl_app_quantity_unit_types` (
 -- Contenu de la table `cl_app_quantity_unit_types`
 --
 
-INSERT INTO `cl_app_quantity_unit_types` (`ID`, `ENABLED`, `CODE`, `NAME`, `DESCRIPTION`, `I18n_DEFAULT`, `I18N_EN`, `I18N_FR`, `I18N_ES`, `I18N_TH`, `I18N_VT`, `UPDATER_ID`, `COMMENT`, `CREATED_AT`, `UPDATED_AT`) VALUES
-(1, 1, 'LEN', 'Length units', 'For quantity units modeling lengths', 'Length units', 'Length units', 'Unités de longueur', NULL, 'หน่วยความยาว', NULL, 1, 'Initial import', '2014-12-31 23:00:00', '2017-09-12 13:31:44'),
-(2, 1, 'VOL', 'Volume', 'For quantity units modeling volumes', 'Volume Units', 'Volume Units', 'Unités de Volume', NULL, 'ปริมาณ', NULL, 1, 'Initial import', '2014-12-31 23:00:00', '2017-09-12 13:31:44'),
-(3, 1, 'WGT', 'Weight', 'For quantity units modeling weights', 'Weight', 'Weight', 'Unités de poids', NULL, 'หน่วยน้ำหนัก', NULL, 1, 'Initial import', '2014-12-31 23:00:00', '2017-09-12 13:31:44'),
-(4, 1, 'ITM', 'Item Units', 'For quantity units modeling items', 'Item Units', 'Item Units', 'Unités pour les unités (éléments)', NULL, 'หน่วยสำหรับหน่วย (องค์ประกอบ)', NULL, 1, 'Initial import', '2014-12-31 23:00:00', '2017-09-12 13:31:44'),
-(5, 1, 'TON', 'Tonnage Units (Vessel)', 'For quantity units modeling tonnages (vessel)', 'Tonnage Units (Vessel)', 'Tonnage Units (Vessel)', 'Unités de tonnage (Navire)', NULL, 'หน่วยระวางน้ำหนัก (เรือ)', NULL, 1, 'Initial import', '2014-12-31 23:00:00', '2017-09-12 13:31:44'),
-(6, 1, 'EFF', 'Effort (Fisheries)', 'For quantity units modeling fishing effort', 'Effort (Fisheries)', 'Effort (Fisheries)', 'Effort (Pêche)', NULL, 'ความพยายาม (ตกปลา)', NULL, 1, 'Initial import', '2014-12-31 23:00:00', '2017-09-12 13:31:44'),
-(7, 1, 'AREA', 'Area unit', 'For quantity units modeling area or surface', 'Area unit', 'Area unit', 'Unité de surface', NULL, 'หน่วยพื้นผิว', NULL, 1, NULL, '2017-01-05 23:00:00', '2017-09-12 13:31:44'),
-(8, 1, 'PHYCHEM', 'Physics and Chemistry units', 'Any unit used in physics and Chemistry (except temperature)', 'Physics and Chemistry units', 'Physics and Chemistry units', 'Unités physico-chimiques', NULL, 'หน่วยกายภาพและเคมี', NULL, 1, NULL, '2017-01-05 23:00:00', '2017-09-12 13:31:44'),
-(9, 1, 'TEMP', 'Temperature units', 'Temperature as  measure unit', 'Temperature units', 'Temperature units', 'Unités de température', NULL, 'หน่วยของอุณหภูมิ', NULL, 1, NULL, '2017-01-05 23:00:00', '2017-09-12 13:31:44');
+INSERT INTO `cl_app_quantity_unit_types` (`ID`, `ENABLED`, `CODE`, `NAME`, `DESCRIPTION`, `I18n_DEFAULT`, `I18N_EN`, `I18N_FR`, `I18N_ES`, `I18N_TH`, `I18N_VT`, `I18N_LA`, `I18N_ID`, `I18N_KH`, `UPDATER_ID`, `COMMENT`, `CREATED_AT`, `UPDATED_AT`) VALUES
+(1, 1, 'LEN', 'Length units', 'For quantity units modeling lengths', 'Length units', 'Length units', 'Unités de longueur', NULL, 'หน่วยความยาว', NULL, NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 23:00:00', '2017-09-12 13:31:44'),
+(2, 1, 'VOL', 'Volume', 'For quantity units modeling volumes', 'Volume Units', 'Volume Units', 'Unités de Volume', NULL, 'ปริมาณ', NULL, NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 23:00:00', '2017-09-12 13:31:44'),
+(3, 1, 'WGT', 'Weight', 'For quantity units modeling weights', 'Weight', 'Weight', 'Unités de poids', NULL, 'หน่วยน้ำหนัก', NULL, NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 23:00:00', '2017-09-12 13:31:44'),
+(4, 1, 'ITM', 'Item Units', 'For quantity units modeling items', 'Item Units', 'Item Units', 'Unités pour les unités (éléments)', NULL, 'หน่วยสำหรับหน่วย (องค์ประกอบ)', NULL, NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 23:00:00', '2017-09-12 13:31:44'),
+(5, 1, 'TON', 'Tonnage Units (Vessel)', 'For quantity units modeling tonnages (vessel)', 'Tonnage Units (Vessel)', 'Tonnage Units (Vessel)', 'Unités de tonnage (Navire)', NULL, 'หน่วยระวางน้ำหนัก (เรือ)', NULL, NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 23:00:00', '2017-09-12 13:31:44'),
+(6, 1, 'EFF', 'Effort (Fisheries)', 'For quantity units modeling fishing effort', 'Effort (Fisheries)', 'Effort (Fisheries)', 'Effort (Pêche)', NULL, 'ความพยายาม (ตกปลา)', NULL, NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 23:00:00', '2017-09-12 13:31:44'),
+(7, 1, 'AREA', 'Area unit', 'For quantity units modeling area or surface', 'Area unit', 'Area unit', 'Unité de surface', NULL, 'หน่วยพื้นผิว', NULL, NULL, NULL, NULL, 1, NULL, '2017-01-05 23:00:00', '2017-09-12 13:31:44'),
+(8, 1, 'PHYCHEM', 'Physics and Chemistry units', 'Any unit used in physics and Chemistry (except temperature)', 'Physics and Chemistry units', 'Physics and Chemistry units', 'Unités physico-chimiques', NULL, 'หน่วยกายภาพและเคมี', NULL, NULL, NULL, NULL, 1, NULL, '2017-01-05 23:00:00', '2017-09-12 13:31:44'),
+(9, 1, 'TEMP', 'Temperature units', 'Temperature as  measure unit', 'Temperature units', 'Temperature units', 'Unités de température', NULL, 'หน่วยของอุณหภูมิ', NULL, NULL, NULL, NULL, 1, NULL, '2017-01-05 23:00:00', '2017-09-12 13:31:44');
 
 -- --------------------------------------------------------
 
@@ -548,6 +758,9 @@ CREATE TABLE `cl_app_soil_analysis_types` (
   `I18N_ES` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Spanish',
   `I18N_TH` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Thai',
   `I18N_VT` varchar(256) CHARACTER SET utf8 COLLATE utf8_vietnamese_ci DEFAULT NULL COMMENT 'label in Vietnamese',
+  `I18N_LA` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Lao',
+  `I18N_ID` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in indonesian',
+  `I18N_KH` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Cambodian',
   `UPDATER_ID` int(11) NOT NULL DEFAULT '1',
   `COMMENT` varchar(512) COLLATE utf8_bin DEFAULT NULL,
   `CREATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -558,8 +771,8 @@ CREATE TABLE `cl_app_soil_analysis_types` (
 -- Contenu de la table `cl_app_soil_analysis_types`
 --
 
-INSERT INTO `cl_app_soil_analysis_types` (`ID`, `ENABLED`, `CODE`, `NAME`, `DESCRIPTION`, `I18n_DEFAULT`, `I18N_EN`, `I18N_FR`, `I18N_ES`, `I18N_TH`, `I18N_VT`, `UPDATER_ID`, `COMMENT`, `CREATED_AT`, `UPDATED_AT`) VALUES
-(1, 1, 'GEN', 'Soil Analysis', 'Soil Analysis (no specific information known)', 'Soil Analysis', 'Soil Analysis', 'Analyse de sol', NULL, 'การวิเคราะห์ดิน', NULL, 1, NULL, '2017-09-20 09:58:43', '2017-09-20 09:58:43');
+INSERT INTO `cl_app_soil_analysis_types` (`ID`, `ENABLED`, `CODE`, `NAME`, `DESCRIPTION`, `I18n_DEFAULT`, `I18N_EN`, `I18N_FR`, `I18N_ES`, `I18N_TH`, `I18N_VT`, `I18N_LA`, `I18N_ID`, `I18N_KH`, `UPDATER_ID`, `COMMENT`, `CREATED_AT`, `UPDATED_AT`) VALUES
+(1, 1, 'GEN', 'Soil Analysis', 'Soil Analysis (no specific information known)', 'Soil Analysis', 'Soil Analysis', 'Analyse de sol', NULL, 'การวิเคราะห์ดิน', NULL, NULL, NULL, NULL, 1, NULL, '2017-09-20 09:58:43', '2017-09-20 09:58:43');
 
 -- --------------------------------------------------------
 
@@ -579,6 +792,9 @@ CREATE TABLE `cl_app_tiling_activity_types` (
   `I18N_ES` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Spanish',
   `I18N_TH` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Thai',
   `I18N_VT` varchar(256) CHARACTER SET utf8 COLLATE utf8_vietnamese_ci DEFAULT NULL COMMENT 'label in Vietnamese',
+  `I18N_LA` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Lao',
+  `I18N_ID` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in indonesian',
+  `I18N_KH` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Cambodian',
   `UPDATER_ID` int(11) NOT NULL DEFAULT '1',
   `COMMENT` varchar(512) CHARACTER SET utf8 DEFAULT NULL,
   `CREATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -589,10 +805,10 @@ CREATE TABLE `cl_app_tiling_activity_types` (
 -- Contenu de la table `cl_app_tiling_activity_types`
 --
 
-INSERT INTO `cl_app_tiling_activity_types` (`ID`, `ENABLED`, `CODE`, `NAME`, `DESCRIPTION`, `I18n_DEFAULT`, `I18N_EN`, `I18N_FR`, `I18N_ES`, `I18N_TH`, `I18N_VT`, `UPDATER_ID`, `COMMENT`, `CREATED_AT`, `UPDATED_AT`) VALUES
-(1, 1, 'SHOV', 'Manual Shoveling', 'Manual Shoveling', 'Manual Shoveling', 'Manual Shoveling', 'Bechage manuel', NULL, 'คู่มือการพลิกคว่ำ', NULL, 1, NULL, '2017-09-23 11:14:53', '2017-09-23 11:14:53'),
-(2, 1, 'HOE', 'Manual hoeing', 'Manual hoeing', 'Manual hoeing', 'Manual hoeing', 'Sarclage manuel', NULL, 'คู่มือจอบ', NULL, 1, NULL, '2017-09-23 11:17:07', '2017-09-23 11:17:07'),
-(3, 1, 'PLOUGH', 'Animal/mechanical ploughing', 'Animal/mechanical ploughing', 'Animal/mechanical ploughing', 'Animal/mechanical ploughing', 'Labourage animal ou mécanique', NULL, 'การไถพรวนสัตว์ / กล', NULL, 1, NULL, '2017-09-23 11:17:07', '2017-09-23 11:17:07');
+INSERT INTO `cl_app_tiling_activity_types` (`ID`, `ENABLED`, `CODE`, `NAME`, `DESCRIPTION`, `I18n_DEFAULT`, `I18N_EN`, `I18N_FR`, `I18N_ES`, `I18N_TH`, `I18N_VT`, `I18N_LA`, `I18N_ID`, `I18N_KH`, `UPDATER_ID`, `COMMENT`, `CREATED_AT`, `UPDATED_AT`) VALUES
+(1, 1, 'SHOV', 'Manual Shoveling', 'Manual Shoveling', 'Manual Shoveling', 'Manual Shoveling', 'Bechage manuel', NULL, 'คู่มือการพลิกคว่ำ', NULL, NULL, NULL, NULL, 1, NULL, '2017-09-23 11:14:53', '2017-09-23 11:14:53'),
+(2, 1, 'HOE', 'Manual hoeing', 'Manual hoeing', 'Manual hoeing', 'Manual hoeing', 'Sarclage manuel', NULL, 'คู่มือจอบ', NULL, NULL, NULL, NULL, 1, NULL, '2017-09-23 11:17:07', '2017-09-23 11:17:07'),
+(3, 1, 'PLOUGH', 'Animal/mechanical ploughing', 'Animal/mechanical ploughing', 'Animal/mechanical ploughing', 'Animal/mechanical ploughing', 'Labourage animal ou mécanique', NULL, 'การไถพรวนสัตว์ / กล', NULL, NULL, NULL, NULL, 1, NULL, '2017-09-23 11:17:07', '2017-09-23 11:17:07');
 
 -- --------------------------------------------------------
 
@@ -612,6 +828,9 @@ CREATE TABLE `cl_app_vessel_characteristics` (
   `I18N_ES` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Spanish',
   `I18N_TH` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Thai',
   `I18N_VT` varchar(256) CHARACTER SET utf8 COLLATE utf8_vietnamese_ci DEFAULT NULL COMMENT 'label in Vietnamese',
+  `I18N_LA` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Lao',
+  `I18N_ID` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in indonesian',
+  `I18N_KH` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Cambodian',
   `UPDATER_ID` int(11) NOT NULL DEFAULT '1',
   `COMMENT` varchar(512) COLLATE utf8_bin DEFAULT NULL,
   `CREATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -636,6 +855,9 @@ CREATE TABLE `cl_app_vessel_equipment_types` (
   `I18N_ES` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Spanish',
   `I18N_TH` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Thai',
   `I18N_VT` varchar(256) CHARACTER SET utf8 COLLATE utf8_vietnamese_ci DEFAULT NULL COMMENT 'label in Vietnamese',
+  `I18N_LA` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Lao',
+  `I18N_ID` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in indonesian',
+  `I18N_KH` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Cambodian',
   `UPDATER_ID` int(11) NOT NULL DEFAULT '1',
   `COMMENT` varchar(512) COLLATE utf8_bin DEFAULT NULL,
   `CREATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -645,26 +867,56 @@ CREATE TABLE `cl_app_vessel_equipment_types` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `cl_app_vessel_status`
+-- Structure de la table `cl_app_vessel_historical_characteristic_types`
 --
 
-CREATE TABLE `cl_app_vessel_status` (
+CREATE TABLE `cl_app_vessel_historical_characteristic_types` (
   `ID` int(11) NOT NULL,
   `ENABLED` tinyint(1) NOT NULL DEFAULT '1',
-  `CODE` varchar(16) COLLATE utf8_bin NOT NULL,
-  `NAME` varchar(64) COLLATE utf8_bin NOT NULL,
-  `DESCRIPTION` varchar(512) COLLATE utf8_bin DEFAULT NULL,
+  `CODE` char(2) CHARACTER SET utf8 NOT NULL,
+  `NAME` varchar(64) CHARACTER SET utf8 NOT NULL,
+  `DESCRIPTION` varchar(128) CHARACTER SET utf8 NOT NULL,
   `I18n_DEFAULT` varchar(256) COLLATE utf8_bin NOT NULL COMMENT 'default label',
   `I18N_EN` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in English',
   `I18N_FR` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in French',
   `I18N_ES` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Spanish',
   `I18N_TH` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Thai',
   `I18N_VT` varchar(256) CHARACTER SET utf8 COLLATE utf8_vietnamese_ci DEFAULT NULL COMMENT 'label in Vietnamese',
+  `I18N_LA` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Lao',
+  `I18N_ID` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in indonesian',
+  `I18N_KH` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Cambodian',
   `UPDATER_ID` int(11) NOT NULL DEFAULT '1',
-  `COMMENT` varchar(512) COLLATE utf8_bin DEFAULT NULL,
+  `COMMENT` varchar(1024) CHARACTER SET utf8 DEFAULT NULL,
   `CREATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `UPDATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='historical vessel characteristic type';
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `cl_app_vessel_operational_status`
+--
+
+CREATE TABLE `cl_app_vessel_operational_status` (
+  `ID` int(11) NOT NULL COMMENT 'The REGION codelist ID',
+  `ENABLED` tinyint(1) NOT NULL DEFAULT '1',
+  `CODE` char(2) CHARACTER SET utf8 NOT NULL,
+  `NAME` varchar(64) CHARACTER SET utf8 NOT NULL,
+  `DESCRIPTION` varchar(128) CHARACTER SET utf8 NOT NULL,
+  `I18n_DEFAULT` varchar(256) COLLATE utf8_bin NOT NULL COMMENT 'default label',
+  `I18N_EN` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in English',
+  `I18N_FR` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in French',
+  `I18N_ES` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Spanish',
+  `I18N_TH` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Thai',
+  `I18N_VT` varchar(256) CHARACTER SET utf8 COLLATE utf8_vietnamese_ci DEFAULT NULL COMMENT 'label in Vietnamese',
+  `I18N_LA` varchar(256) COLLATE utf8_bin DEFAULT NULL,
+  `I18N_ID` varchar(256) COLLATE utf8_bin DEFAULT NULL,
+  `I18N_KH` varchar(256) COLLATE utf8_bin DEFAULT NULL,
+  `UPDATER_ID` int(11) NOT NULL DEFAULT '1',
+  `COMMENT` varchar(1024) CHARACTER SET utf8 DEFAULT NULL,
+  `CREATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `UPDATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='The REGION codelist';
 
 -- --------------------------------------------------------
 
@@ -684,6 +936,9 @@ CREATE TABLE `cl_farm_building_types` (
   `I18N_ES` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Spanish',
   `I18N_TH` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Thai',
   `I18N_VT` varchar(256) CHARACTER SET utf8 COLLATE utf8_vietnamese_ci DEFAULT NULL COMMENT 'label in Vietnamese',
+  `I18N_LA` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Lao',
+  `I18N_ID` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in indonesian',
+  `I18N_KH` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Cambodian',
   `UPDATER_ID` int(11) NOT NULL DEFAULT '1',
   `COMMENT` varchar(512) CHARACTER SET utf8 DEFAULT NULL,
   `CREATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -708,6 +963,9 @@ CREATE TABLE `cl_farm_plot_activity_types` (
   `I18N_ES` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Spanish',
   `I18N_TH` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Thai',
   `I18N_VT` varchar(256) CHARACTER SET utf8 COLLATE utf8_vietnamese_ci DEFAULT NULL COMMENT 'label in Vietnamese',
+  `I18N_LA` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Lao',
+  `I18N_ID` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in indonesian',
+  `I18N_KH` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Cambodian',
   `UPDATER_ID` int(11) NOT NULL DEFAULT '1',
   `COMMENT` varchar(512) CHARACTER SET utf8 DEFAULT NULL,
   `CREATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -718,20 +976,20 @@ CREATE TABLE `cl_farm_plot_activity_types` (
 -- Contenu de la table `cl_farm_plot_activity_types`
 --
 
-INSERT INTO `cl_farm_plot_activity_types` (`ID`, `ENABLED`, `CODE`, `NAME`, `DESCRIPTION`, `I18n_DEFAULT`, `I18N_EN`, `I18N_FR`, `I18N_ES`, `I18N_TH`, `I18N_VT`, `UPDATER_ID`, `COMMENT`, `CREATED_AT`, `UPDATED_AT`) VALUES
-(1, 1, 'SOWI', 'Sowing', 'Sowing', 'Sowing', 'Sowing', 'Plantation', NULL, 'ปลูกอ้อย', NULL, 1, NULL, '2017-09-23 12:56:40', '2017-09-23 12:56:40'),
-(2, 1, 'WEED', 'weeding', 'weeding', 'weeding', 'weeding', 'Désherbage', NULL, 'ฉีดยากำจัดวัชพืช', '', 1, NULL, '2017-09-23 12:56:40', '2017-09-23 12:56:40'),
-(3, 1, 'HARV1', 'Harvesting', 'Harvesting', 'Harvesting', 'Harvesting', 'Récolte', NULL, 'เก็บเกี่ยว', NULL, 1, NULL, '2017-09-23 12:59:56', '2017-09-23 12:59:56'),
-(4, 1, 'HARV2', 'Harvesting by hands', 'Harvesting by hands', 'Harvesting by hands', 'Harvesting by hands', 'Récolte manuelle', NULL, 'ตัดอ้อยด้วยมือ', NULL, 1, NULL, '2017-09-23 12:59:56', '2017-09-23 12:59:56'),
-(5, 1, 'HARV3', 'Harvesting with machine', 'Harvesting with machine', 'Harvesting with machine', 'Harvesting with machine', 'Récolte mécanique', NULL, 'ตัดอ้อยด้วยรถตัด', NULL, 1, NULL, '2017-09-23 12:59:56', '2017-09-23 12:59:56'),
-(6, 1, 'IRRI', 'Irrigation', 'Irrigation', 'Irrigation', 'Irrigation', 'Irrigation', NULL, 'ให้น้ำ', NULL, 1, NULL, '2017-09-23 12:59:56', '2017-09-23 12:59:56'),
-(7, 1, 'PEST', 'Pesticide use', 'Pesticide use', 'Pesticide use', 'Pesticide use', 'Utilisation de pesticides', NULL, 'การใช้สารกำจัดศัตรูพืช', NULL, 1, NULL, '2017-09-23 12:59:56', '2017-09-23 12:59:56'),
-(8, 1, 'HERB', 'Herbicide use', 'Herbicide use', 'Herbicide use', 'Herbicide use', 'Utilisation d\'herbicides', NULL, 'การใช้สารเคมีกำจัดวัชพืช', NULL, 1, NULL, '2017-09-23 12:59:56', '2017-09-23 12:59:56'),
-(9, 1, 'FUNG', 'Fungicide use', 'Fungicide use', 'Fungicide use', 'Fungicide use', 'Utilisation de fongicides', NULL, 'การใช้สารฆ่าเชื้อรา', NULL, 1, NULL, '2017-09-23 12:59:56', '2017-09-23 12:59:56'),
-(10, 1, 'FERT', 'Fertilizer use', 'Fertilizer use', 'Fertilizer use', 'Fertilizer use', 'Utilisation d\'engrais', NULL, 'ใส่ปุ๋ย', NULL, 1, NULL, '2017-09-23 12:59:56', '2017-09-23 12:59:56'),
-(11, 1, 'TILL', 'Soil Tillage', 'Soil tillage', 'Soil tillage', 'Soil tillage', 'Travail du sol', NULL, 'ไถ เตรียมดิน', NULL, 1, NULL, '2017-09-23 13:01:37', '2017-09-23 13:01:37'),
-(12, 1, 'TRANS', 'Transport harvested crop out of field', 'Transport harvested crop out of field', 'Transport harvested crop out of field', 'Transport harvested crop out of field', 'Transport de la récolte hors du champs', NULL, 'ขับรถบรรทุก', NULL, 1, NULL, '2017-11-28 17:28:33', '2017-11-28 17:28:33'),
-(99, 1, 'OTHER', 'Other', 'Other', 'Other', 'Other', 'Autres', NULL, 'อื่นๆ', NULL, 1, NULL, '2017-09-23 13:01:37', '2017-09-23 13:01:37');
+INSERT INTO `cl_farm_plot_activity_types` (`ID`, `ENABLED`, `CODE`, `NAME`, `DESCRIPTION`, `I18n_DEFAULT`, `I18N_EN`, `I18N_FR`, `I18N_ES`, `I18N_TH`, `I18N_VT`, `I18N_LA`, `I18N_ID`, `I18N_KH`, `UPDATER_ID`, `COMMENT`, `CREATED_AT`, `UPDATED_AT`) VALUES
+(1, 1, 'SOWI', 'Sowing', 'Sowing', 'Sowing', 'Sowing', 'Plantation', NULL, 'ปลูกอ้อย', NULL, NULL, NULL, NULL, 1, NULL, '2017-09-23 12:56:40', '2017-09-23 12:56:40'),
+(2, 1, 'WEED', 'weeding', 'weeding', 'weeding', 'weeding', 'Désherbage', NULL, 'ฉีดยากำจัดวัชพืช', '', NULL, NULL, NULL, 1, NULL, '2017-09-23 12:56:40', '2017-09-23 12:56:40'),
+(3, 1, 'HARV1', 'Harvesting', 'Harvesting', 'Harvesting', 'Harvesting', 'Récolte', NULL, 'เก็บเกี่ยว', NULL, NULL, NULL, NULL, 1, NULL, '2017-09-23 12:59:56', '2017-09-23 12:59:56'),
+(4, 1, 'HARV2', 'Harvesting by hands', 'Harvesting by hands', 'Harvesting by hands', 'Harvesting by hands', 'Récolte manuelle', NULL, 'ตัดอ้อยด้วยมือ', NULL, NULL, NULL, NULL, 1, NULL, '2017-09-23 12:59:56', '2017-09-23 12:59:56'),
+(5, 1, 'HARV3', 'Harvesting with machine', 'Harvesting with machine', 'Harvesting with machine', 'Harvesting with machine', 'Récolte mécanique', NULL, 'ตัดอ้อยด้วยรถตัด', NULL, NULL, NULL, NULL, 1, NULL, '2017-09-23 12:59:56', '2017-09-23 12:59:56'),
+(6, 1, 'IRRI', 'Irrigation', 'Irrigation', 'Irrigation', 'Irrigation', 'Irrigation', NULL, 'ให้น้ำ', NULL, NULL, NULL, NULL, 1, NULL, '2017-09-23 12:59:56', '2017-09-23 12:59:56'),
+(7, 1, 'PEST', 'Pesticide use', 'Pesticide use', 'Pesticide use', 'Pesticide use', 'Utilisation de pesticides', NULL, 'การใช้สารกำจัดศัตรูพืช', NULL, NULL, NULL, NULL, 1, NULL, '2017-09-23 12:59:56', '2017-09-23 12:59:56'),
+(8, 1, 'HERB', 'Herbicide use', 'Herbicide use', 'Herbicide use', 'Herbicide use', 'Utilisation d\'herbicides', NULL, 'การใช้สารเคมีกำจัดวัชพืช', NULL, NULL, NULL, NULL, 1, NULL, '2017-09-23 12:59:56', '2017-09-23 12:59:56'),
+(9, 1, 'FUNG', 'Fungicide use', 'Fungicide use', 'Fungicide use', 'Fungicide use', 'Utilisation de fongicides', NULL, 'การใช้สารฆ่าเชื้อรา', NULL, NULL, NULL, NULL, 1, NULL, '2017-09-23 12:59:56', '2017-09-23 12:59:56'),
+(10, 1, 'FERT', 'Fertilizer use', 'Fertilizer use', 'Fertilizer use', 'Fertilizer use', 'Utilisation d\'engrais', NULL, 'ใส่ปุ๋ย', NULL, NULL, NULL, NULL, 1, NULL, '2017-09-23 12:59:56', '2017-09-23 12:59:56'),
+(11, 1, 'TILL', 'Soil Tillage', 'Soil tillage', 'Soil tillage', 'Soil tillage', 'Travail du sol', NULL, 'ไถ เตรียมดิน', NULL, NULL, NULL, NULL, 1, NULL, '2017-09-23 13:01:37', '2017-09-23 13:01:37'),
+(12, 1, 'TRANS', 'Transport harvested crop out of field', 'Transport harvested crop out of field', 'Transport harvested crop out of field', 'Transport harvested crop out of field', 'Transport de la récolte hors du champs', NULL, 'ขับรถบรรทุก', NULL, NULL, NULL, NULL, 1, NULL, '2017-11-28 17:28:33', '2017-11-28 17:28:33'),
+(99, 1, 'OTHER', 'Other', 'Other', 'Other', 'Other', 'Autres', NULL, 'อื่นๆ', NULL, NULL, NULL, NULL, 1, NULL, '2017-09-23 13:01:37', '2017-09-23 13:01:37');
 
 -- --------------------------------------------------------
 
@@ -751,6 +1009,9 @@ CREATE TABLE `cl_farm_pond_activity_types` (
   `I18N_ES` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Spanish',
   `I18N_TH` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Thai',
   `I18N_VT` varchar(256) CHARACTER SET utf8 COLLATE utf8_vietnamese_ci DEFAULT NULL COMMENT 'label in Vietnamese',
+  `I18N_LA` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Lao',
+  `I18N_ID` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in indonesian',
+  `I18N_KH` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Cambodian',
   `UPDATER_ID` int(11) NOT NULL DEFAULT '1',
   `COMMENT` varchar(512) CHARACTER SET utf8 DEFAULT NULL,
   `CREATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -775,6 +1036,9 @@ CREATE TABLE `cl_farm_pond_types` (
   `I18N_ES` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Spanish',
   `I18N_TH` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Thai',
   `I18N_VT` varchar(256) CHARACTER SET utf8 COLLATE utf8_vietnamese_ci DEFAULT NULL COMMENT 'label in Vietnamese',
+  `I18N_LA` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Lao',
+  `I18N_ID` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in indonesian',
+  `I18N_KH` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Cambodian',
   `UPDATER_ID` int(11) NOT NULL DEFAULT '1',
   `COMMENT` varchar(1024) CHARACTER SET utf8 DEFAULT NULL,
   `CREATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -785,11 +1049,11 @@ CREATE TABLE `cl_farm_pond_types` (
 -- Contenu de la table `cl_farm_pond_types`
 --
 
-INSERT INTO `cl_farm_pond_types` (`ID`, `ENABLED`, `CODE`, `NAME`, `DESCRIPTION`, `I18n_DEFAULT`, `I18N_EN`, `I18N_FR`, `I18N_ES`, `I18N_TH`, `I18N_VT`, `UPDATER_ID`, `COMMENT`, `CREATED_AT`, `UPDATED_AT`) VALUES
-(1, 1, 'RES', 'Reservoir', 'Pond as water reservoir', '', NULL, NULL, NULL, NULL, NULL, 1, NULL, '2017-01-06 11:19:45', '2017-09-12 13:35:05'),
-(2, 1, 'GROW', 'Pond for growing', 'Pond for fish growing', '', NULL, NULL, NULL, NULL, NULL, 1, NULL, '2017-01-06 11:25:19', '2017-09-12 13:35:05'),
-(3, 1, 'REP', 'Pond for reproduction', 'Pond for fish reproduction', '', NULL, NULL, NULL, NULL, NULL, 1, NULL, '2017-01-06 11:25:19', '2017-09-12 13:35:05'),
-(4, 1, 'SEW', 'Sewage Pond', 'Pond for sewage cleaning', '', NULL, NULL, NULL, NULL, NULL, 1, NULL, '2017-01-06 11:25:19', '2017-09-12 13:35:05');
+INSERT INTO `cl_farm_pond_types` (`ID`, `ENABLED`, `CODE`, `NAME`, `DESCRIPTION`, `I18n_DEFAULT`, `I18N_EN`, `I18N_FR`, `I18N_ES`, `I18N_TH`, `I18N_VT`, `I18N_LA`, `I18N_ID`, `I18N_KH`, `UPDATER_ID`, `COMMENT`, `CREATED_AT`, `UPDATED_AT`) VALUES
+(1, 1, 'RES', 'Reservoir', 'Pond as water reservoir', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, '2017-01-06 11:19:45', '2017-09-12 13:35:05'),
+(2, 1, 'GROW', 'Pond for growing', 'Pond for fish growing', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, '2017-01-06 11:25:19', '2017-09-12 13:35:05'),
+(3, 1, 'REP', 'Pond for reproduction', 'Pond for fish reproduction', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, '2017-01-06 11:25:19', '2017-09-12 13:35:05'),
+(4, 1, 'SEW', 'Sewage Pond', 'Pond for sewage cleaning', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, '2017-01-06 11:25:19', '2017-09-12 13:35:05');
 
 -- --------------------------------------------------------
 
@@ -809,6 +1073,9 @@ CREATE TABLE `cl_farm_types` (
   `I18N_ES` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Spanish',
   `I18N_TH` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Thai',
   `I18N_VT` varchar(256) CHARACTER SET utf8 COLLATE utf8_vietnamese_ci DEFAULT NULL COMMENT 'label in Vietnamese',
+  `I18N_LA` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Lao',
+  `I18N_ID` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in indonesian',
+  `I18N_KH` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Cambodian',
   `UPDATER_ID` int(11) NOT NULL DEFAULT '1',
   `COMMENT` varchar(1024) CHARACTER SET utf8 DEFAULT NULL,
   `CREATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -819,19 +1086,19 @@ CREATE TABLE `cl_farm_types` (
 -- Contenu de la table `cl_farm_types`
 --
 
-INSERT INTO `cl_farm_types` (`ID`, `ENABLED`, `CODE`, `NAME`, `DESCRIPTION`, `I18n_DEFAULT`, `I18N_EN`, `I18N_FR`, `I18N_ES`, `I18N_TH`, `I18N_VT`, `UPDATER_ID`, `COMMENT`, `CREATED_AT`, `UPDATED_AT`) VALUES
-(1, 1, 'FARMAQ', 'Aquaculture Farm (growing)', 'Aquaculture Farm (growing)', 'Aquaculture Farm (growing)', 'Aquaculture Farm (growing)', 'Ferme aquacole (engraissement)', NULL, 'เพาะเลี้ยงสัตว์น้ำ (เติบโต)', NULL, 1, NULL, '2016-10-03 11:03:11', '2017-09-12 13:28:43'),
-(2, 1, 'FARMAQ-H', 'Aquaculture Hatchery', 'Aquaculture Hatchery', 'Aquaculture Hatchery', 'Aquaculture Hatchery', 'Ferme aquacole de reproduction', NULL, 'เพาะเลี้ยงสัตว์น้ำเพาะเลี้ยงสัตว์น้ำ', NULL, 1, NULL, '2016-10-03 11:04:43', '2017-09-12 13:28:43'),
-(3, 1, 'FARMAQ-M', 'Aquaculture Farm growing and hatchery', 'Aquaculture Farm growing and hatchery', 'Aquaculture Farm growing and hatchery', 'Aquaculture Farm growing and hatchery', 'Ferme aquacole mixte reproduction et engraissement', NULL, 'การเพาะเลี้ยงสัตว์น้ำการเพาะเลี้ยงและการเพาะพันธุ์', NULL, 1, NULL, '2016-10-03 11:05:46', '2017-09-12 13:28:43'),
-(4, 1, 'FARMSUG', 'Sugar cane Farm', 'Sugar cane Farm production', 'Sugar cane Farm', 'Sugar cane Farm', 'Ferme canne à sucre', NULL, 'ฟาร์มอ้อย', NULL, 1, NULL, '2016-10-18 17:42:16', '2017-09-12 13:28:43');
+INSERT INTO `cl_farm_types` (`ID`, `ENABLED`, `CODE`, `NAME`, `DESCRIPTION`, `I18n_DEFAULT`, `I18N_EN`, `I18N_FR`, `I18N_ES`, `I18N_TH`, `I18N_VT`, `I18N_LA`, `I18N_ID`, `I18N_KH`, `UPDATER_ID`, `COMMENT`, `CREATED_AT`, `UPDATED_AT`) VALUES
+(1, 1, 'FARMAQ', 'Aquaculture Farm (growing)', 'Aquaculture Farm (growing)', 'Aquaculture Farm (growing)', 'Aquaculture Farm (growing)', 'Ferme aquacole (engraissement)', NULL, 'เพาะเลี้ยงสัตว์น้ำ (เติบโต)', NULL, NULL, NULL, NULL, 1, NULL, '2016-10-03 11:03:11', '2017-09-12 13:28:43'),
+(2, 1, 'FARMAQ-H', 'Aquaculture Hatchery', 'Aquaculture Hatchery', 'Aquaculture Hatchery', 'Aquaculture Hatchery', 'Ferme aquacole de reproduction', NULL, 'เพาะเลี้ยงสัตว์น้ำเพาะเลี้ยงสัตว์น้ำ', NULL, NULL, NULL, NULL, 1, NULL, '2016-10-03 11:04:43', '2017-09-12 13:28:43'),
+(3, 1, 'FARMAQ-M', 'Aquaculture Farm growing and hatchery', 'Aquaculture Farm growing and hatchery', 'Aquaculture Farm growing and hatchery', 'Aquaculture Farm growing and hatchery', 'Ferme aquacole mixte reproduction et engraissement', NULL, 'การเพาะเลี้ยงสัตว์น้ำการเพาะเลี้ยงและการเพาะพันธุ์', NULL, NULL, NULL, NULL, 1, NULL, '2016-10-03 11:05:46', '2017-09-12 13:28:43'),
+(4, 1, 'FARMSUG', 'Sugar cane Farm', 'Sugar cane Farm production', 'Sugar cane Farm', 'Sugar cane Farm', 'Ferme canne à sucre', NULL, 'ฟาร์มอ้อย', NULL, NULL, NULL, NULL, 1, NULL, '2016-10-18 17:42:16', '2017-09-12 13:28:43');
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `cl_fish_fishing_type`
+-- Structure de la table `cl_fish_fishing_types`
 --
 
-CREATE TABLE `cl_fish_fishing_type` (
+CREATE TABLE `cl_fish_fishing_types` (
   `ID` int(11) NOT NULL,
   `ENABLED` tinyint(1) NOT NULL DEFAULT '1',
   `CODE` varchar(16) COLLATE utf8_bin NOT NULL,
@@ -843,6 +1110,9 @@ CREATE TABLE `cl_fish_fishing_type` (
   `I18N_ES` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Spanish',
   `I18N_TH` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Thai',
   `I18N_VT` varchar(256) CHARACTER SET utf8 COLLATE utf8_vietnamese_ci DEFAULT NULL COMMENT 'label in Vietnamese',
+  `I18N_LA` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Lao',
+  `I18N_ID` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in indonesian',
+  `I18N_KH` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Cambodian',
   `UPDATER_ID` int(11) NOT NULL DEFAULT '1',
   `COMMENT` varchar(512) COLLATE utf8_bin DEFAULT NULL,
   `CREATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -867,6 +1137,9 @@ CREATE TABLE `cl_fish_fishing_zones` (
   `I18N_ES` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Spanish',
   `I18N_TH` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Thai',
   `I18N_VT` varchar(256) CHARACTER SET utf8 COLLATE utf8_vietnamese_ci DEFAULT NULL COMMENT 'label in Vietnamese',
+  `I18N_LA` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Lao',
+  `I18N_ID` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in indonesian',
+  `I18N_KH` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Cambodian',
   `UPDATER_ID` int(11) NOT NULL DEFAULT '1',
   `COMMENT` varchar(512) COLLATE utf8_bin DEFAULT NULL,
   `CREATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -891,6 +1164,9 @@ CREATE TABLE `cl_ref_admin_level_1` (
   `I18N_ES` varchar(256) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Spanish',
   `I18N_TH` varchar(256) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Thai',
   `I18N_VT` varchar(256) CHARACTER SET utf8 COLLATE utf8_vietnamese_ci DEFAULT NULL COMMENT 'label in Vietnamese',
+  `I18N_LA` varchar(256) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Lao',
+  `I18N_ID` varchar(256) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL COMMENT 'label in indonesian',
+  `I18N_KH` varchar(256) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Cambodian',
   `UPDATER_ID` int(11) NOT NULL DEFAULT '1',
   `COMMENT` varchar(512) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
   `CREATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -916,6 +1192,9 @@ CREATE TABLE `cl_ref_admin_level_2` (
   `I18N_ES` varchar(256) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Spanish',
   `I18N_TH` varchar(256) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Thai',
   `I18N_VT` varchar(256) CHARACTER SET utf8 COLLATE utf8_vietnamese_ci DEFAULT NULL COMMENT 'label in Vietnamese',
+  `I18N_LA` varchar(256) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Lao',
+  `I18N_ID` varchar(256) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL COMMENT 'label in indonesian',
+  `I18N_KH` varchar(256) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Cambodian',
   `UPDATER_ID` int(11) NOT NULL DEFAULT '1',
   `COMMENT` varchar(512) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
   `CREATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -942,6 +1221,9 @@ CREATE TABLE `cl_ref_commodities` (
   `I18N_ES` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Spanish',
   `I18N_TH` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Thai',
   `I18N_VT` varchar(256) CHARACTER SET utf8 COLLATE utf8_vietnamese_ci DEFAULT NULL COMMENT 'label in Vietnamese',
+  `I18N_LA` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Lao',
+  `I18N_ID` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in indonesian',
+  `I18N_KH` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Cambodian',
   `UPDATER_ID` int(11) NOT NULL DEFAULT '1',
   `COMMENT` varchar(512) COLLATE utf8_bin DEFAULT NULL,
   `CREATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -952,8 +1234,8 @@ CREATE TABLE `cl_ref_commodities` (
 -- Contenu de la table `cl_ref_commodities`
 --
 
-INSERT INTO `cl_ref_commodities` (`ID`, `ENABLED`, `CODE`, `NAME`, `DESCRIPTION`, `CPC_CODE`, `HS_CODE`, `I18n_DEFAULT`, `I18N_EN`, `I18N_FR`, `I18N_ES`, `I18N_TH`, `I18N_VT`, `UPDATER_ID`, `COMMENT`, `CREATED_AT`, `UPDATED_AT`) VALUES
-(1, 1, '0156', 'Sugar Cane', 'Sugar cane - Saccharum officinarum', '0182', '1212.99', 'Sugar Cane', 'Sugar Cane', 'Sucre de Canne', NULL, 'อ้อย', NULL, 1, NULL, '2017-09-23 08:16:35', '2017-09-23 08:16:35');
+INSERT INTO `cl_ref_commodities` (`ID`, `ENABLED`, `CODE`, `NAME`, `DESCRIPTION`, `CPC_CODE`, `HS_CODE`, `I18n_DEFAULT`, `I18N_EN`, `I18N_FR`, `I18N_ES`, `I18N_TH`, `I18N_VT`, `I18N_LA`, `I18N_ID`, `I18N_KH`, `UPDATER_ID`, `COMMENT`, `CREATED_AT`, `UPDATED_AT`) VALUES
+(1, 1, '0156', 'Sugar Cane', 'Sugar cane - Saccharum officinarum', '0182', '1212.99', 'Sugar Cane', 'Sugar Cane', 'Sucre de Canne', NULL, 'อ้อย', NULL, NULL, NULL, NULL, 1, NULL, '2017-09-23 08:16:35', '2017-09-23 08:16:35');
 
 -- --------------------------------------------------------
 
@@ -974,6 +1256,9 @@ CREATE TABLE `cl_ref_countries` (
   `I18N_ES` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Spanish',
   `I18N_TH` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Thai',
   `I18N_VT` varchar(256) CHARACTER SET utf8 COLLATE utf8_vietnamese_ci DEFAULT NULL COMMENT 'label in Vietnamese',
+  `I18N_LA` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Lao',
+  `I18N_ID` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in indonesian',
+  `I18N_KH` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Cambodian',
   `UPDATER_ID` int(11) NOT NULL DEFAULT '1',
   `COMMENT` varchar(1024) CHARACTER SET utf8 DEFAULT NULL,
   `CREATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -984,267 +1269,267 @@ CREATE TABLE `cl_ref_countries` (
 -- Contenu de la table `cl_ref_countries`
 --
 
-INSERT INTO `cl_ref_countries` (`ID`, `ENABLED`, `CODE`, `ISO_3_CODE`, `NAME`, `DESCRIPTION`, `I18n_DEFAULT`, `I18N_EN`, `I18N_FR`, `I18N_ES`, `I18N_TH`, `I18N_VT`, `UPDATER_ID`, `COMMENT`, `CREATED_AT`, `UPDATED_AT`) VALUES
-(1, 1, 'AM', 'ARM', 'Armenia', 'the Republic of Armenia', 'Armenia', 'Armenia', 'Armenia', 'Armenia', 'Armenia', 'Armenia', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(2, 1, 'AF', 'AFG', 'Afghanistan', 'the Islamic Republic of Afghanistan', 'Afghanistan', 'Afghanistan', 'Afghanistan', 'Afghanistan', 'Afghanistan', 'Afghanistan', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(3, 1, 'AL', 'ALB', 'Albania', 'the Republic of Albania', 'Albania', 'Albania', 'Albania', 'Albania', 'Albania', 'Albania', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(4, 1, 'DZ', 'DZA', 'Algeria', 'the People\'s Democratic Republic of Algeria', 'Algeria', 'Algeria', 'Algeria', 'Algeria', 'Algeria', 'Algeria', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(5, 1, 'AS', 'ASM', 'American Samoa', 'American Samoa', 'American Samoa', 'American Samoa', 'American Samoa', 'American Samoa', 'American Samoa', 'American Samoa', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(6, 1, 'AD', 'AND', 'Andorra', 'the Principality of Andorra', 'Andorra', 'Andorra', 'Andorra', 'Andorra', 'Andorra', 'Andorra', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(7, 1, 'AO', 'AGO', 'Angola', 'the Republic of Angola', 'Angola', 'Angola', 'Angola', 'Angola', 'Angola', 'Angola', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(8, 1, 'AG', 'ATG', 'Antigua and Barbuda', 'Antigua and Barbuda', 'Antigua and Barbuda', 'Antigua and Barbuda', 'Antigua and Barbuda', 'Antigua and Barbuda', 'Antigua and Barbuda', 'Antigua and Barbuda', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(9, 1, 'AR', 'ARG', 'Argentina', 'the Argentine Republic', 'Argentina', 'Argentina', 'Argentina', 'Argentina', 'Argentina', 'Argentina', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(10, 1, 'AU', 'AUS', 'Australia', 'Australia', 'Australia', 'Australia', 'Australia', 'Australia', 'Australia', 'Australia', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(11, 1, 'AT', 'AUT', 'Austria', 'the Republic of Austria', 'Austria', 'Austria', 'Austria', 'Austria', 'Austria', 'Austria', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(12, 1, 'BS', 'BHS', 'Bahamas', 'the Commonwealth of the Bahamas', 'Bahamas', 'Bahamas', 'Bahamas', 'Bahamas', 'Bahamas', 'Bahamas', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(13, 1, 'BH', 'BHR', 'Bahrain', 'the Kingdom of Bahrain', 'Bahrain', 'Bahrain', 'Bahrain', 'Bahrain', 'Bahrain', 'Bahrain', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(14, 1, 'BB', 'BRB', 'Barbados', 'Barbados', 'Barbados', 'Barbados', 'Barbados', 'Barbados', 'Barbados', 'Barbados', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(15, 1, 'BD', 'BGD', 'Bangladesh', 'the People\'s Republic of Bangladesh', 'Bangladesh', 'Bangladesh', 'Bangladesh', 'Bangladesh', 'Bangladesh', 'Bangladesh', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(16, 1, 'BM', 'BMU', 'Bermuda', 'Bermuda', 'Bermuda', 'Bermuda', 'Bermuda', 'Bermuda', 'Bermuda', 'Bermuda', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(17, 1, 'BT', 'BTN', 'Bhutan', 'the Kingdom of Bhutan', 'Bhutan', 'Bhutan', 'Bhutan', 'Bhutan', 'Bhutan', 'Bhutan', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(18, 1, 'BO', 'BOL', 'Bolivia (Plurinational State of)', 'the Plurinational State of Bolivia', 'Bolivia (Plurinational State of)', 'Bolivia (Plurinational State of)', 'Bolivia (Plurinational State of)', 'Bolivia (Plurinational State of)', 'Bolivia (Plurinational State of)', 'Bolivia (Plurinational State of)', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(19, 1, 'BW', 'BWA', 'Botswana', 'the Republic of Botswana', 'Botswana', 'Botswana', 'Botswana', 'Botswana', 'Botswana', 'Botswana', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(20, 1, 'BR', 'BRA', 'Brazil', 'the Federative Republic of Brazil', 'Brazil', 'Brazil', 'Brazil', 'Brazil', 'Brazil', 'Brazil', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(21, 1, 'AW', 'ABW', 'Aruba', 'Aruba', 'Aruba', 'Aruba', 'Aruba', 'Aruba', 'Aruba', 'Aruba', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(22, 1, 'BZ', 'BLZ', 'Belize', 'Belize', 'Belize', 'Belize', 'Belize', 'Belize', 'Belize', 'Belize', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(23, 1, 'IO', 'IOT', 'British Indian Ocean Territory', 'British Indian Ocean Territory', 'British Indian Ocean Territory', 'British Indian Ocean Territory', 'British Indian Ocean Territory', 'British Indian Ocean Territory', 'British Indian Ocean Territory', 'British Indian Ocean Territory', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(24, 1, 'SB', 'SLB', 'Solomon Islands', 'Solomon Islands', 'Solomon Islands', 'Solomon Islands', 'Solomon Islands', 'Solomon Islands', 'Solomon Islands', 'Solomon Islands', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(25, 1, 'BN', 'BRN', 'Brunei Darussalam', 'Brunei Darussalam', 'Brunei Darussalam', 'Brunei Darussalam', 'Brunei Darussalam', 'Brunei Darussalam', 'Brunei Darussalam', 'Brunei Darussalam', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(26, 1, 'BG', 'BGR', 'Bulgaria', 'the Republic of Bulgaria', 'Bulgaria', 'Bulgaria', 'Bulgaria', 'Bulgaria', 'Bulgaria', 'Bulgaria', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(27, 1, 'MM', 'MMR', 'Myanmar', 'the Republic of the Union of Myanmar', 'Myanmar', 'Myanmar', 'Myanmar', 'Myanmar', 'Myanmar', 'Myanmar', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(28, 1, 'BI', 'BDI', 'Burundi', 'the Republic of Burundi', 'Burundi', 'Burundi', 'Burundi', 'Burundi', 'Burundi', 'Burundi', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(29, 1, 'AQ', 'ATA', 'Antarctica', 'Antarctica', 'Antarctica', 'Antarctica', 'Antarctica', 'Antarctica', 'Antarctica', 'Antarctica', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(30, 1, 'BV', 'BVT', 'Bouvet Island', 'Bouvet Island', 'Bouvet Island', 'Bouvet Island', 'Bouvet Island', 'Bouvet Island', 'Bouvet Island', 'Bouvet Island', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(31, 1, 'CM', 'CMR', 'Cameroon', 'the Republic of Cameroon', 'Cameroon', 'Cameroon', 'Cameroon', 'Cameroon', 'Cameroon', 'Cameroon', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(32, 1, 'CA', 'CAN', 'Canada', 'Canada', 'Canada', 'Canada', 'Canada', 'Canada', 'Canada', 'Canada', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(33, 1, 'CV', 'CPV', 'Cape Verde', 'the Republic of Cape Verde', 'Cape Verde', 'Cape Verde', 'Cape Verde', 'Cape Verde', 'Cape Verde', 'Cape Verde', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(34, 1, 'KY', 'CYM', 'Cayman Islands', 'Cayman Islands', 'Cayman Islands', 'Cayman Islands', 'Cayman Islands', 'Cayman Islands', 'Cayman Islands', 'Cayman Islands', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(35, 1, 'CF', 'CAF', 'Central African Republic', 'the Central African Republic', 'Central African Republic', 'Central African Republic', 'Central African Republic', 'Central African Republic', 'Central African Republic', 'Central African Republic', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(36, 1, 'LK', 'LKA', 'Sri Lanka', 'the Democratic Socialist Republic of Sri Lanka', 'Sri Lanka', 'Sri Lanka', 'Sri Lanka', 'Sri Lanka', 'Sri Lanka', 'Sri Lanka', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(37, 1, 'TD', 'TCD', 'Chad', 'the Republic of Chad', 'Chad', 'Chad', 'Chad', 'Chad', 'Chad', 'Chad', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(38, 1, 'CL', 'CHL', 'Chile', 'the Republic of Chile', 'Chile', 'Chile', 'Chile', 'Chile', 'Chile', 'Chile', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(39, 1, 'CN', 'CHN', 'China', 'the People\'s Republic of China', 'China', 'China', 'China', 'China', 'China', 'China', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(40, 1, 'CX', 'CXR', 'Christmas Island', 'Christmas Island', 'Christmas Island', 'Christmas Island', 'Christmas Island', 'Christmas Island', 'Christmas Island', 'Christmas Island', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(41, 1, 'CC', 'CCK', 'Cocos (Keeling) Islands', 'Cocos (Keeling) Islands', 'Cocos (Keeling) Islands', 'Cocos (Keeling) Islands', 'Cocos (Keeling) Islands', 'Cocos (Keeling) Islands', 'Cocos (Keeling) Islands', 'Cocos (Keeling) Islands', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(42, 1, 'CO', 'COL', 'Colombia', 'the Republic of Colombia', 'Colombia', 'Colombia', 'Colombia', 'Colombia', 'Colombia', 'Colombia', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(43, 1, 'KM', 'COM', 'Comoros', 'the Union of the Comoros', 'Comoros', 'Comoros', 'Comoros', 'Comoros', 'Comoros', 'Comoros', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(44, 1, 'CG', 'COG', 'Congo', 'the Republic of the Congo', 'Congo', 'Congo', 'Congo', 'Congo', 'Congo', 'Congo', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(45, 1, 'CK', 'COK', 'Cook Islands', 'the Cook Islands', 'Cook Islands', 'Cook Islands', 'Cook Islands', 'Cook Islands', 'Cook Islands', 'Cook Islands', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(46, 1, 'CR', 'CRI', 'Costa Rica', 'the Republic of Costa Rica', 'Costa Rica', 'Costa Rica', 'Costa Rica', 'Costa Rica', 'Costa Rica', 'Costa Rica', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(47, 1, 'CU', 'CUB', 'Cuba', 'the Republic of Cuba', 'Cuba', 'Cuba', 'Cuba', 'Cuba', 'Cuba', 'Cuba', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(48, 1, 'CY', 'CYP', 'Cyprus', 'the Republic of Cyprus', 'Cyprus', 'Cyprus', 'Cyprus', 'Cyprus', 'Cyprus', 'Cyprus', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(49, 1, 'AZ', 'AZE', 'Azerbaijan', 'the Republic of Azerbaijan', 'Azerbaijan', 'Azerbaijan', 'Azerbaijan', 'Azerbaijan', 'Azerbaijan', 'Azerbaijan', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(50, 1, 'BJ', 'BEN', 'Benin', 'the Republic of Benin', 'Benin', 'Benin', 'Benin', 'Benin', 'Benin', 'Benin', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(51, 1, 'DK', 'DNK', 'Denmark', 'the Kingdom of Denmark', 'Denmark', 'Denmark', 'Denmark', 'Denmark', 'Denmark', 'Denmark', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(52, 1, 'DM', 'DMA', 'Dominica', 'the Commonwealth of Dominica', 'Dominica', 'Dominica', 'Dominica', 'Dominica', 'Dominica', 'Dominica', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(53, 1, 'DO', 'DOM', 'Dominican Republic', 'the Dominican Republic', 'Dominican Republic', 'Dominican Republic', 'Dominican Republic', 'Dominican Republic', 'Dominican Republic', 'Dominican Republic', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(54, 1, 'BY', 'BLR', 'Belarus', 'the Republic of Belarus', 'Belarus', 'Belarus', 'Belarus', 'Belarus', 'Belarus', 'Belarus', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(55, 1, 'EC', 'ECU', 'Ecuador', 'the Republic of Ecuador', 'Ecuador', 'Ecuador', 'Ecuador', 'Ecuador', 'Ecuador', 'Ecuador', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(56, 1, 'EG', 'EGY', 'Egypt', 'the Arab Republic of Egypt', 'Egypt', 'Egypt', 'Egypt', 'Egypt', 'Egypt', 'Egypt', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(57, 1, 'SV', 'SLV', 'El Salvador', 'the Republic of El Salvador', 'El Salvador', 'El Salvador', 'El Salvador', 'El Salvador', 'El Salvador', 'El Salvador', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(58, 1, 'GQ', 'GNQ', 'Equatorial Guinea', 'the Republic of Equatorial Guinea', 'Equatorial Guinea', 'Equatorial Guinea', 'Equatorial Guinea', 'Equatorial Guinea', 'Equatorial Guinea', 'Equatorial Guinea', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(59, 1, 'EE', 'EST', 'Estonia', 'the Republic of Estonia', 'Estonia', 'Estonia', 'Estonia', 'Estonia', 'Estonia', 'Estonia', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(60, 1, 'FO', 'FRO', 'Faroe Islands (Associate Member)', 'Faroe Islands', 'Faroe Islands (Associate Member)', 'Faroe Islands (Associate Member)', 'Faroe Islands (Associate Member)', 'Faroe Islands (Associate Member)', 'Faroe Islands (Associate Member)', 'Faroe Islands (Associate Member)', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(61, 1, 'FK', 'FLK', 'Falkland Islands (Malvinas)', 'the Falkland Islands (Malvinas)', 'Falkland Islands (Malvinas)', 'Falkland Islands (Malvinas)', 'Falkland Islands (Malvinas)', 'Falkland Islands (Malvinas)', 'Falkland Islands (Malvinas)', 'Falkland Islands (Malvinas)', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(62, 1, 'FJ', 'FJI', 'Fiji', 'the Republic of Fiji', 'Fiji', 'Fiji', 'Fiji', 'Fiji', 'Fiji', 'Fiji', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(63, 1, 'FI', 'FIN', 'Finland', 'the Republic of Finland', 'Finland', 'Finland', 'Finland', 'Finland', 'Finland', 'Finland', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(64, 1, 'FR', 'FRA', 'France', 'the French Republic', 'France', 'France', 'France', 'France', 'France', 'France', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(65, 1, 'GF', 'GUF', 'French Guiana', 'French Guiana', 'French Guiana', 'French Guiana', 'French Guiana', 'French Guiana', 'French Guiana', 'French Guiana', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(66, 1, 'PF', 'PYF', 'French Polynesia', 'French Polynesia', 'French Polynesia', 'French Polynesia', 'French Polynesia', 'French Polynesia', 'French Polynesia', 'French Polynesia', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(67, 1, 'TF', 'ATF', 'French Southern and Antarctic Territories', 'French Southern and Antarctic Territories', 'French Southern and Antarctic Territories', 'French Southern and Antarctic Territories', 'French Southern and Antarctic Territories', 'French Southern and Antarctic Territories', 'French Southern and Antarctic Territories', 'French Southern and Antarctic Territories', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(68, 1, 'DJ', 'DJI', 'Djibouti', 'the Republic of Djibouti', 'Djibouti', 'Djibouti', 'Djibouti', 'Djibouti', 'Djibouti', 'Djibouti', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(69, 1, 'GE', 'GEO', 'Georgia', 'Georgia', 'Georgia', 'Georgia', 'Georgia', 'Georgia', 'Georgia', 'Georgia', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(70, 1, 'GA', 'GAB', 'Gabon', 'the Gabonese Republic', 'Gabon', 'Gabon', 'Gabon', 'Gabon', 'Gabon', 'Gabon', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(71, 1, 'GM', 'GMB', 'Gambia', 'the Republic of the Gambia', 'Gambia', 'Gambia', 'Gambia', 'Gambia', 'Gambia', 'Gambia', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(72, 1, 'DE', 'DEU', 'Germany', 'the Federal Republic of Germany', 'Germany', 'Germany', 'Germany', 'Germany', 'Germany', 'Germany', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(73, 1, 'BA', 'BIH', 'Bosnia and Herzegovina', 'Bosnia and Herzegovina', 'Bosnia and Herzegovina', 'Bosnia and Herzegovina', 'Bosnia and Herzegovina', 'Bosnia and Herzegovina', 'Bosnia and Herzegovina', 'Bosnia and Herzegovina', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(74, 1, 'GH', 'GHA', 'Ghana', 'the Republic of Ghana', 'Ghana', 'Ghana', 'Ghana', 'Ghana', 'Ghana', 'Ghana', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(75, 1, 'GI', 'GIB', 'Gibraltar', 'Gibraltar', 'Gibraltar', 'Gibraltar', 'Gibraltar', 'Gibraltar', 'Gibraltar', 'Gibraltar', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(76, 1, 'KI', 'KIR', 'Kiribati', 'the Republic of Kiribati', 'Kiribati', 'Kiribati', 'Kiribati', 'Kiribati', 'Kiribati', 'Kiribati', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(77, 1, 'GR', 'GRC', 'Greece', 'the Hellenic Republic', 'Greece', 'Greece', 'Greece', 'Greece', 'Greece', 'Greece', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(78, 1, 'GL', 'GRL', 'Greenland', 'Greenland', 'Greenland', 'Greenland', 'Greenland', 'Greenland', 'Greenland', 'Greenland', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(79, 1, 'GD', 'GRD', 'Grenada', 'Grenada', 'Grenada', 'Grenada', 'Grenada', 'Grenada', 'Grenada', 'Grenada', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(80, 1, 'GP', 'GLP', 'Guadeloupe', 'Guadeloupe', 'Guadeloupe', 'Guadeloupe', 'Guadeloupe', 'Guadeloupe', 'Guadeloupe', 'Guadeloupe', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(81, 1, 'GU', 'GUM', 'Guam', 'Guam', 'Guam', 'Guam', 'Guam', 'Guam', 'Guam', 'Guam', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(82, 1, 'GT', 'GTM', 'Guatemala', 'the Republic of Guatemala', 'Guatemala', 'Guatemala', 'Guatemala', 'Guatemala', 'Guatemala', 'Guatemala', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(83, 1, 'GN', 'GIN', 'Guinea', 'the Republic of Guinea', 'Guinea', 'Guinea', 'Guinea', 'Guinea', 'Guinea', 'Guinea', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(84, 1, 'GY', 'GUY', 'Guyana', 'the Republic of Guyana', 'Guyana', 'Guyana', 'Guyana', 'Guyana', 'Guyana', 'Guyana', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(85, 1, 'HM', 'HMD', 'Heard and McDonald Islands', 'Heard Island and McDonald Island', 'Heard and McDonald Islands', 'Heard and McDonald Islands', 'Heard and McDonald Islands', 'Heard and McDonald Islands', 'Heard and McDonald Islands', 'Heard and McDonald Islands', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(86, 1, 'HT', 'HTI', 'Haiti', 'the Republic of Haiti', 'Haiti', 'Haiti', 'Haiti', 'Haiti', 'Haiti', 'Haiti', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(87, 1, 'VA', 'VAT', 'Holy See', 'Holy see', 'Holy See', 'Holy See', 'Holy See', 'Holy See', 'Holy See', 'Holy See', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(88, 1, 'HN', 'HND', 'Honduras', 'the Republic of Honduras', 'Honduras', 'Honduras', 'Honduras', 'Honduras', 'Honduras', 'Honduras', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(89, 1, 'HK', 'HKG', 'China, Hong Kong SAR', 'China, Hong Kong Special Administrative Region', 'China, Hong Kong SAR', 'China, Hong Kong SAR', 'China, Hong Kong SAR', 'China, Hong Kong SAR', 'China, Hong Kong SAR', 'China, Hong Kong SAR', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(90, 1, 'HU', 'HUN', 'Hungary', 'Hungary', 'Hungary', 'Hungary', 'Hungary', 'Hungary', 'Hungary', 'Hungary', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(91, 1, 'HR', 'HRV', 'Croatia', 'the Republic of Croatia', 'Croatia', 'Croatia', 'Croatia', 'Croatia', 'Croatia', 'Croatia', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(92, 1, 'IS', 'ISL', 'Iceland', 'the Republic of Iceland', 'Iceland', 'Iceland', 'Iceland', 'Iceland', 'Iceland', 'Iceland', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(93, 1, 'IN', 'IND', 'India', 'the Republic of India', 'India', 'India', 'India', 'India', 'India', 'India', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(94, 1, 'ID', 'IDN', 'Indonesia', 'the Republic of Indonesia', 'Indonesia', 'Indonesia', 'Indonesia', 'Indonesia', 'Indonesia', 'Indonesia', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(95, 1, 'IR', 'IRN', 'Iran (Islamic Republic of)', 'the Islamic Republic of Iran', 'Iran (Islamic Republic of)', 'Iran (Islamic Republic of)', 'Iran (Islamic Republic of)', 'Iran (Islamic Republic of)', 'Iran (Islamic Republic of)', 'Iran (Islamic Republic of)', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(96, 1, 'IQ', 'IRQ', 'Iraq', 'the Republic of Iraq', 'Iraq', 'Iraq', 'Iraq', 'Iraq', 'Iraq', 'Iraq', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(97, 1, 'IE', 'IRL', 'Ireland', 'Ireland', 'Ireland', 'Ireland', 'Ireland', 'Ireland', 'Ireland', 'Ireland', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(98, 1, 'IL', 'ISR', 'Israel', 'the State of Israel', 'Israel', 'Israel', 'Israel', 'Israel', 'Israel', 'Israel', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(99, 1, 'IT', 'ITA', 'Italy', 'the Republic of Italy', 'Italy', 'Italy', 'Italy', 'Italy', 'Italy', 'Italy', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(100, 1, 'CI', 'CIV', 'Côte d\'Ivoire', 'the Republic of Côte d\'Ivoire', 'Cote d\'Ivoire', 'Cote d\'Ivoire', 'Cote d\'Ivoire', 'Cote d\'Ivoire', 'Cote d\'Ivoire', 'Cote d\'Ivoire', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(101, 1, 'KZ', 'KAZ', 'Kazakhstan', 'the Republic of Kazakhstan', 'Kazakhstan', 'Kazakhstan', 'Kazakhstan', 'Kazakhstan', 'Kazakhstan', 'Kazakhstan', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(102, 1, 'JM', 'JAM', 'Jamaica', 'Jamaica', 'Jamaica', 'Jamaica', 'Jamaica', 'Jamaica', 'Jamaica', 'Jamaica', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(103, 1, 'JP', 'JPN', 'Japan', 'Japan', 'Japan', 'Japan', 'Japan', 'Japan', 'Japan', 'Japan', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(104, 1, 'JT', 'JTN', 'Johnston Island', 'Johnston Island', 'Johnston Island', 'Johnston Island', 'Johnston Island', 'Johnston Island', 'Johnston Island', 'Johnston Island', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(105, 1, 'JO', 'JOR', 'Jordan', 'the Hashemite Kingdom of Jordan', 'Jordan', 'Jordan', 'Jordan', 'Jordan', 'Jordan', 'Jordan', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(106, 1, 'KG', 'KGZ', 'Kyrgyzstan', 'the Kyrgyz Republic', 'Kyrgyzstan', 'Kyrgyzstan', 'Kyrgyzstan', 'Kyrgyzstan', 'Kyrgyzstan', 'Kyrgyzstan', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(107, 1, 'KE', 'KEN', 'Kenya', 'the Republic of Kenya', 'Kenya', 'Kenya', 'Kenya', 'Kenya', 'Kenya', 'Kenya', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(108, 1, 'KH', 'KHM', 'Cambodia', 'the Kingdom of Cambodia', 'Cambodia', 'Cambodia', 'Cambodia', 'Cambodia', 'Cambodia', 'Cambodia', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(109, 1, 'KP', 'PRK', 'Democratic People\'s Republic of Korea', 'the Democratic People\'s Republic of Korea', 'Democratic People\'s Republic of Korea', 'Democratic People\'s Republic of Korea', 'Democratic People\'s Republic of Korea', 'Democratic People\'s Republic of Korea', 'Democratic People\'s Republic of Korea', 'Democratic People\'s Republic of Korea', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(110, 1, 'KR', 'KOR', 'Republic of Korea', 'the Republic of Korea', 'Republic of Korea', 'Republic of Korea', 'Republic of Korea', 'Republic of Korea', 'Republic of Korea', 'Republic of Korea', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(111, 1, 'KW', 'KWT', 'Kuwait', 'the State of Kuwait', 'Kuwait', 'Kuwait', 'Kuwait', 'Kuwait', 'Kuwait', 'Kuwait', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(112, 1, 'LV', 'LVA', 'Latvia', 'the Republic of Latvia', 'Latvia', 'Latvia', 'Latvia', 'Latvia', 'Latvia', 'Latvia', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(113, 1, 'LA', 'LAO', 'Lao People\'s Democratic Republic', 'the Lao People\'s Democratic Republic', 'Lao People\'s Democratic Republic', 'Lao People\'s Democratic Republic', 'Lao People\'s Democratic Republic', 'Lao People\'s Democratic Republic', 'Lao People\'s Democratic Republic', 'Lao People\'s Democratic Republic', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(114, 1, 'LB', 'LBN', 'Lebanon', 'the Lebanese Republic', 'Lebanon', 'Lebanon', 'Lebanon', 'Lebanon', 'Lebanon', 'Lebanon', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(115, 1, 'LS', 'LSO', 'Lesotho', 'the Kingdom of Lesotho', 'Lesotho', 'Lesotho', 'Lesotho', 'Lesotho', 'Lesotho', 'Lesotho', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(116, 1, 'LR', 'LBR', 'Liberia', 'the Republic of Liberia', 'Liberia', 'Liberia', 'Liberia', 'Liberia', 'Liberia', 'Liberia', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(117, 1, 'LY', 'LBY', 'Libya', 'Libya', 'Libya', 'Libya', 'Libya', 'Libya', 'Libya', 'Libya', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(118, 1, 'LI', 'LIE', 'Liechtenstein', 'the Principality of Liechtenstein', 'Liechtenstein', 'Liechtenstein', 'Liechtenstein', 'Liechtenstein', 'Liechtenstein', 'Liechtenstein', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(119, 1, 'LT', 'LTU', 'Lithuania', 'the Republic of Lithuania', 'Lithuania', 'Lithuania', 'Lithuania', 'Lithuania', 'Lithuania', 'Lithuania', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(120, 1, 'MH', 'MHL', 'Marshall Islands', 'the Republic of the Marshall Islands', 'Marshall Islands', 'Marshall Islands', 'Marshall Islands', 'Marshall Islands', 'Marshall Islands', 'Marshall Islands', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(121, 1, 'MO', 'MAC', 'China, Macao SAR', 'China, Macao Special Administrative Region', 'China, Macao SAR', 'China, Macao SAR', 'China, Macao SAR', 'China, Macao SAR', 'China, Macao SAR', 'China, Macao SAR', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(122, 1, 'MG', 'MDG', 'Madagascar', 'the Republic of Madagascar', 'Madagascar', 'Madagascar', 'Madagascar', 'Madagascar', 'Madagascar', 'Madagascar', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(123, 1, 'MW', 'MWI', 'Malawi', 'the Republic of Malawi', 'Malawi', 'Malawi', 'Malawi', 'Malawi', 'Malawi', 'Malawi', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(124, 1, 'MY', 'MYS', 'Malaysia', 'Malaysia', 'Malaysia', 'Malaysia', 'Malaysia', 'Malaysia', 'Malaysia', 'Malaysia', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(125, 1, 'MV', 'MDV', 'Maldives', 'the Republic of Maldives', 'Maldives', 'Maldives', 'Maldives', 'Maldives', 'Maldives', 'Maldives', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(126, 1, 'ML', 'MLI', 'Mali', 'the Republic of Mali', 'Mali', 'Mali', 'Mali', 'Mali', 'Mali', 'Mali', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(127, 1, 'MT', 'MLT', 'Malta', 'the Republic of Malta', 'Malta', 'Malta', 'Malta', 'Malta', 'Malta', 'Malta', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(128, 1, 'MQ', 'MTQ', 'Martinique', 'Martinique', 'Martinique', 'Martinique', 'Martinique', 'Martinique', 'Martinique', 'Martinique', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(129, 1, 'MR', 'MRT', 'Mauritania', 'the Islamic Republic of Mauritania', 'Mauritania', 'Mauritania', 'Mauritania', 'Mauritania', 'Mauritania', 'Mauritania', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(130, 1, 'MU', 'MUS', 'Mauritius', 'the Republic of Mauritius', 'Mauritius', 'Mauritius', 'Mauritius', 'Mauritius', 'Mauritius', 'Mauritius', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(131, 1, 'MX', 'MEX', 'Mexico', 'the United Mexican States', 'Mexico', 'Mexico', 'Mexico', 'Mexico', 'Mexico', 'Mexico', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(132, 1, 'MI', 'MID', 'Midway Islands', 'Midway Islands', 'Midway Islands', 'Midway Islands', 'Midway Islands', 'Midway Islands', 'Midway Islands', 'Midway Islands', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(133, 1, 'MC', 'MCO', 'Monaco', 'the Principality of Monaco', 'Monaco', 'Monaco', 'Monaco', 'Monaco', 'Monaco', 'Monaco', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(134, 1, 'MN', 'MNG', 'Mongolia', 'Mongolia', 'Mongolia', 'Mongolia', 'Mongolia', 'Mongolia', 'Mongolia', 'Mongolia', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(135, 1, 'MS', 'MSR', 'Montserrat', 'Montserrat', 'Montserrat', 'Montserrat', 'Montserrat', 'Montserrat', 'Montserrat', 'Montserrat', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(136, 1, 'MA', 'MAR', 'Morocco', 'the Kingdom of Morocco', 'Morocco', 'Morocco', 'Morocco', 'Morocco', 'Morocco', 'Morocco', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(137, 1, 'MZ', 'MOZ', 'Mozambique', 'the Republic of Mozambique', 'Mozambique', 'Mozambique', 'Mozambique', 'Mozambique', 'Mozambique', 'Mozambique', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(138, 1, 'FM', 'FSM', 'Micronesia (Federated States of)', 'the Federated States of Micronesia', 'Micronesia (Federated States of)', 'Micronesia (Federated States of)', 'Micronesia (Federated States of)', 'Micronesia (Federated States of)', 'Micronesia (Federated States of)', 'Micronesia (Federated States of)', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(139, 1, 'MD', 'MDA', 'Republic of Moldova', 'the Republic of Moldova', 'Republic of Moldova', 'Republic of Moldova', 'Republic of Moldova', 'Republic of Moldova', 'Republic of Moldova', 'Republic of Moldova', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(140, 1, 'NA', 'NAM', 'Namibia', 'the Republic of Namibia', 'Namibia', 'Namibia', 'Namibia', 'Namibia', 'Namibia', 'Namibia', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(141, 1, 'NR', 'NRU', 'Nauru', 'the Republic of Nauru', 'Nauru', 'Nauru', 'Nauru', 'Nauru', 'Nauru', 'Nauru', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(142, 1, 'NP', 'NPL', 'Nepal', 'the Federal Democratic Republic of Nepal', 'Nepal', 'Nepal', 'Nepal', 'Nepal', 'Nepal', 'Nepal', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(143, 1, 'NL', 'NLD', 'Netherlands', 'the Kingdom of the Netherlands', 'Netherlands', 'Netherlands', 'Netherlands', 'Netherlands', 'Netherlands', 'Netherlands', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(144, 1, 'AN', 'ANT', 'Netherlands Antilles', 'Netherlands Antilles', 'Netherlands Antilles', 'Netherlands Antilles', 'Netherlands Antilles', 'Netherlands Antilles', 'Netherlands Antilles', 'Netherlands Antilles', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(145, 1, 'NC', 'NCL', 'New Caledonia', 'New Caledonia', 'New Caledonia', 'New Caledonia', 'New Caledonia', 'New Caledonia', 'New Caledonia', 'New Caledonia', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(146, 1, 'MK', 'MKD', 'The former Yugoslav Republic of Macedonia', 'The former Yugoslav Republic of Macedonia', 'The former Yugoslav Republic of Macedonia', 'The former Yugoslav Republic of Macedonia', 'The former Yugoslav Republic of Macedonia', 'The former Yugoslav Republic of Macedonia', 'The former Yugoslav Republic of Macedonia', 'The former Yugoslav Republic of Macedonia', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(147, 1, 'VU', 'VUT', 'Vanuatu', 'the Republic of Vanuatu', 'Vanuatu', 'Vanuatu', 'Vanuatu', 'Vanuatu', 'Vanuatu', 'Vanuatu', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(148, 1, 'NZ', 'NZL', 'New Zealand', 'New Zealand', 'New Zealand', 'New Zealand', 'New Zealand', 'New Zealand', 'New Zealand', 'New Zealand', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(149, 1, 'NI', 'NIC', 'Nicaragua', 'the Republic of Nicaragua', 'Nicaragua', 'Nicaragua', 'Nicaragua', 'Nicaragua', 'Nicaragua', 'Nicaragua', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(150, 1, 'NE', 'NER', 'Niger', 'the Republic of the Niger', 'Niger', 'Niger', 'Niger', 'Niger', 'Niger', 'Niger', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(151, 1, 'NG', 'NGA', 'Nigeria', 'the Federal Republic of Nigeria', 'Nigeria', 'Nigeria', 'Nigeria', 'Nigeria', 'Nigeria', 'Nigeria', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(152, 1, 'NU', 'NIU', 'Niue', 'Niue', 'Niue', 'Niue', 'Niue', 'Niue', 'Niue', 'Niue', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(153, 1, 'NF', 'NFK', 'Norfolk Island', 'Territory of Norfolk Island', 'Norfolk Island', 'Norfolk Island', 'Norfolk Island', 'Norfolk Island', 'Norfolk Island', 'Norfolk Island', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(154, 1, 'NO', 'NOR', 'Norway', 'the Kingdom of Norway', 'Norway', 'Norway', 'Norway', 'Norway', 'Norway', 'Norway', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(155, 1, 'MP', 'MNP', 'Northern Mariana Islands', 'The Commonwealth of the Northern Mariana Islands', 'Northern Mariana Islands', 'Northern Mariana Islands', 'Northern Mariana Islands', 'Northern Mariana Islands', 'Northern Mariana Islands', 'Northern Mariana Islands', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(156, 1, 'PK', 'PAK', 'Pakistan', 'the Islamic Republic of Pakistan', 'Pakistan', 'Pakistan', 'Pakistan', 'Pakistan', 'Pakistan', 'Pakistan', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(157, 1, 'PA', 'PAN', 'Panama', 'the Republic of Panama', 'Panama', 'Panama', 'Panama', 'Panama', 'Panama', 'Panama', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(158, 1, 'CZ', 'CZE', 'Czech Republic', 'the Czech Republic', 'Czech Republic', 'Czech Republic', 'Czech Republic', 'Czech Republic', 'Czech Republic', 'Czech Republic', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(159, 1, 'PG', 'PNG', 'Papua New Guinea', 'Papua New Guinea', 'Papua New Guinea', 'Papua New Guinea', 'Papua New Guinea', 'Papua New Guinea', 'Papua New Guinea', 'Papua New Guinea', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(160, 1, 'PY', 'PRY', 'Paraguay', 'the Republic of Paraguay', 'Paraguay', 'Paraguay', 'Paraguay', 'Paraguay', 'Paraguay', 'Paraguay', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(161, 1, 'PE', 'PER', 'Peru', 'the Republic of Peru', 'Peru', 'Peru', 'Peru', 'Peru', 'Peru', 'Peru', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(162, 1, 'PH', 'PHL', 'Philippines', 'the Republic of the Philippines', 'Philippines', 'Philippines', 'Philippines', 'Philippines', 'Philippines', 'Philippines', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(163, 1, 'PL', 'POL', 'Poland', 'the Republic of Poland', 'Poland', 'Poland', 'Poland', 'Poland', 'Poland', 'Poland', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(164, 1, 'PT', 'PRT', 'Portugal', 'the Portuguese Republic', 'Portugal', 'Portugal', 'Portugal', 'Portugal', 'Portugal', 'Portugal', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(165, 1, 'GW', 'GNB', 'Guinea-Bissau', 'the Republic of Guinea-Bissau', 'Guinea-Bissau', 'Guinea-Bissau', 'Guinea-Bissau', 'Guinea-Bissau', 'Guinea-Bissau', 'Guinea-Bissau', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(166, 1, 'TL', 'TLS', 'Timor-Leste', 'the Democratic Republic of Timor-Leste', 'Timor-Leste', 'Timor-Leste', 'Timor-Leste', 'Timor-Leste', 'Timor-Leste', 'Timor-Leste', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(167, 1, 'PR', 'PRI', 'Puerto Rico', 'the Commonwealth of Puerto Rico', 'Puerto Rico', 'Puerto Rico', 'Puerto Rico', 'Puerto Rico', 'Puerto Rico', 'Puerto Rico', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(168, 1, 'ER', 'ERI', 'Eritrea', 'Eritrea', 'Eritrea', 'Eritrea', 'Eritrea', 'Eritrea', 'Eritrea', 'Eritrea', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(169, 1, 'QA', 'QAT', 'Qatar', 'the State of Qatar', 'Qatar', 'Qatar', 'Qatar', 'Qatar', 'Qatar', 'Qatar', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(170, 1, 'PW', 'PLW', 'Palau', 'the Republic of Palau', 'Palau', 'Palau', 'Palau', 'Palau', 'Palau', 'Palau', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(171, 1, 'ZW', 'ZWE', 'Zimbabwe', 'the Republic of Zimbabwe', 'Zimbabwe', 'Zimbabwe', 'Zimbabwe', 'Zimbabwe', 'Zimbabwe', 'Zimbabwe', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(172, 1, 'RE', 'REU', 'Réunion', 'Réunion', 'Réunion', 'Réunion', 'Réunion', 'Réunion', 'Réunion', 'Réunion', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(173, 1, 'RO', 'ROU', 'Romania', 'Romania', 'Romania', 'Romania', 'Romania', 'Romania', 'Romania', 'Romania', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(174, 1, 'RW', 'RWA', 'Rwanda', 'the Republic of Rwanda', 'Rwanda', 'Rwanda', 'Rwanda', 'Rwanda', 'Rwanda', 'Rwanda', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(175, 1, 'RU', 'RUS', 'Russian Federation', 'the Russian Federation', 'Russian Federation', 'Russian Federation', 'Russian Federation', 'Russian Federation', 'Russian Federation', 'Russian Federation', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(176, 1, 'CS', 'SCG', 'Serbia and Montenegro', 'Serbia and Montenegro', 'Serbia and Montenegro', 'Serbia and Montenegro', 'Serbia and Montenegro', 'Serbia and Montenegro', 'Serbia and Montenegro', 'Serbia and Montenegro', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(177, 1, 'SH', 'SHN', 'Saint Helena, Ascension and Tristan da Cunha', 'Saint Helena, Ascension and Tristan da Cunha', 'Saint Helena, Ascension and Tristan da Cunha', 'Saint Helena, Ascension and Tristan da Cunha', 'Saint Helena, Ascension and Tristan da Cunha', 'Saint Helena, Ascension and Tristan da Cunha', 'Saint Helena, Ascension and Tristan da Cunha', 'Saint Helena, Ascension and Tristan da Cunha', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(178, 1, 'KN', 'KNA', 'Saint Kitts and Nevis', 'Saint Kitts and Nevis', 'Saint Kitts and Nevis', 'Saint Kitts and Nevis', 'Saint Kitts and Nevis', 'Saint Kitts and Nevis', 'Saint Kitts and Nevis', 'Saint Kitts and Nevis', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(179, 1, 'LC', 'LCA', 'Saint Lucia', 'Saint Lucia', 'Saint Lucia', 'Saint Lucia', 'Saint Lucia', 'Saint Lucia', 'Saint Lucia', 'Saint Lucia', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(180, 1, 'PM', 'SPM', 'Saint Pierre and Miquelon', 'Saint Pierre and Miquelon', 'Saint Pierre and Miquelon', 'Saint Pierre and Miquelon', 'Saint Pierre and Miquelon', 'Saint Pierre and Miquelon', 'Saint Pierre and Miquelon', 'Saint Pierre and Miquelon', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(181, 1, 'VC', 'VCT', 'Saint Vincent and the Grenadines', 'Saint Vincent and the Grenadines', 'Saint Vincent and the Grenadines', 'Saint Vincent and the Grenadines', 'Saint Vincent and the Grenadines', 'Saint Vincent and the Grenadines', 'Saint Vincent and the Grenadines', 'Saint Vincent and the Grenadines', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(182, 1, 'SM', 'SMR', 'San Marino', 'the Republic of San Marino', 'San Marino', 'San Marino', 'San Marino', 'San Marino', 'San Marino', 'San Marino', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(183, 1, 'ST', 'STP', 'Sao Tome and Principe', 'the Democratic Republic of Sao Tome and Principe', 'Sao Tome and Principe', 'Sao Tome and Principe', 'Sao Tome and Principe', 'Sao Tome and Principe', 'Sao Tome and Principe', 'Sao Tome and Principe', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(184, 1, 'SA', 'SAU', 'Saudi Arabia', 'the Kingdom of Saudi Arabia', 'Saudi Arabia', 'Saudi Arabia', 'Saudi Arabia', 'Saudi Arabia', 'Saudi Arabia', 'Saudi Arabia', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(185, 1, 'SN', 'SEN', 'Senegal', 'the Republic of Senegal', 'Senegal', 'Senegal', 'Senegal', 'Senegal', 'Senegal', 'Senegal', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(186, 1, 'SC', 'SYC', 'Seychelles', 'the Republic of Seychelles', 'Seychelles', 'Seychelles', 'Seychelles', 'Seychelles', 'Seychelles', 'Seychelles', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(187, 1, 'SL', 'SLE', 'Sierra Leone', 'the Republic of Sierra Leone', 'Sierra Leone', 'Sierra Leone', 'Sierra Leone', 'Sierra Leone', 'Sierra Leone', 'Sierra Leone', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(188, 1, 'SI', 'SVN', 'Slovenia', 'the Republic of Slovenia', 'Slovenia', 'Slovenia', 'Slovenia', 'Slovenia', 'Slovenia', 'Slovenia', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(189, 1, 'SK', 'SVK', 'Slovakia', 'the Slovak Republic', 'Slovakia', 'Slovakia', 'Slovakia', 'Slovakia', 'Slovakia', 'Slovakia', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(190, 1, 'SG', 'SGP', 'Singapore', 'the Republic of Singapore', 'Singapore', 'Singapore', 'Singapore', 'Singapore', 'Singapore', 'Singapore', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(191, 1, 'SO', 'SOM', 'Somalia', 'the Somali Republic', 'Somalia', 'Somalia', 'Somalia', 'Somalia', 'Somalia', 'Somalia', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(192, 1, 'ZA', 'ZAF', 'South Africa', 'the Republic of South Africa', 'South Africa', 'South Africa', 'South Africa', 'South Africa', 'South Africa', 'South Africa', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(193, 1, 'ES', 'ESP', 'Spain', 'the Kingdom of Spain', 'Spain', 'Spain', 'Spain', 'Spain', 'Spain', 'Spain', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(194, 1, 'EH', 'ESH', 'Western Sahara', 'Western Sahara', 'Western Sahara', 'Western Sahara', 'Western Sahara', 'Western Sahara', 'Western Sahara', 'Western Sahara', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(195, 1, 'SD', 'SDN', 'Sudan', 'the Republic of the Sudan', 'Sudan', 'Sudan', 'Sudan', 'Sudan', 'Sudan', 'Sudan', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(196, 1, 'SR', 'SUR', 'Suriname', 'the Republic of Suriname', 'Suriname', 'Suriname', 'Suriname', 'Suriname', 'Suriname', 'Suriname', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(197, 1, 'TJ', 'TJK', 'Tajikistan', 'the Republic of Tajikistan', 'Tajikistan', 'Tajikistan', 'Tajikistan', 'Tajikistan', 'Tajikistan', 'Tajikistan', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(198, 1, 'SZ', 'SWZ', 'Swaziland', 'the Kingdom of Swaziland', 'Swaziland', 'Swaziland', 'Swaziland', 'Swaziland', 'Swaziland', 'Swaziland', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(199, 1, 'SE', 'SWE', 'Sweden', 'the Kingdom of Sweden', 'Sweden', 'Sweden', 'Sweden', 'Sweden', 'Sweden', 'Sweden', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(200, 1, 'CH', 'CHE', 'Switzerland', 'the Swiss Confederation', 'Switzerland', 'Switzerland', 'Switzerland', 'Switzerland', 'Switzerland', 'Switzerland', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(201, 1, 'SY', 'SYR', 'Syrian Arab Republic', 'the Syrian Arab Republic', 'Syrian Arab Republic', 'Syrian Arab Republic', 'Syrian Arab Republic', 'Syrian Arab Republic', 'Syrian Arab Republic', 'Syrian Arab Republic', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(202, 1, 'TM', 'TKM', 'Turkmenistan', 'Turkmenistan', 'Turkmenistan', 'Turkmenistan', 'Turkmenistan', 'Turkmenistan', 'Turkmenistan', 'Turkmenistan', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(203, 1, 'TW', 'TWN', 'Chinese Taipei', 'Chinese Taipei', 'Chinese Taipei', 'Chinese Taipei', 'Chinese Taipei', 'Chinese Taipei', 'Chinese Taipei', 'Chinese Taipei', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(204, 1, 'TZ', 'TZA', 'United Republic of Tanzania', 'the United Republic of Tanzania', 'United Republic of Tanzania', 'United Republic of Tanzania', 'United Republic of Tanzania', 'United Republic of Tanzania', 'United Republic of Tanzania', 'United Republic of Tanzania', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(205, 1, 'TH', 'THA', 'Thailand', 'the Kingdom of Thailand', 'Thailand', 'Thailand', 'Thailand', 'Thailand', 'Thailand', 'Thailand', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(206, 1, 'TG', 'TGO', 'Togo', 'the Togolese Republic', 'Togo', 'Togo', 'Togo', 'Togo', 'Togo', 'Togo', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(207, 1, 'TK', 'TKL', 'Tokelau (Associate Member)', 'Tokelau', 'Tokelau (Associate Member)', 'Tokelau (Associate Member)', 'Tokelau (Associate Member)', 'Tokelau (Associate Member)', 'Tokelau (Associate Member)', 'Tokelau (Associate Member)', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(208, 1, 'TO', 'TON', 'Tonga', 'the Kingdom of Tonga', 'Tonga', 'Tonga', 'Tonga', 'Tonga', 'Tonga', 'Tonga', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(209, 1, 'TT', 'TTO', 'Trinidad and Tobago', 'the Republic of Trinidad and Tobago', 'Trinidad and Tobago', 'Trinidad and Tobago', 'Trinidad and Tobago', 'Trinidad and Tobago', 'Trinidad and Tobago', 'Trinidad and Tobago', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(210, 1, 'OM', 'OMN', 'Oman', 'the Sultanate of Oman', 'Oman', 'Oman', 'Oman', 'Oman', 'Oman', 'Oman', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(211, 1, 'TN', 'TUN', 'Tunisia', 'the Republic of Tunisia', 'Tunisia', 'Tunisia', 'Tunisia', 'Tunisia', 'Tunisia', 'Tunisia', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(212, 1, 'TR', 'TUR', 'Turkey', 'the Republic of Turkey', 'Turkey', 'Turkey', 'Turkey', 'Turkey', 'Turkey', 'Turkey', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(213, 1, 'TC', 'TCA', 'Turks and Caicos Islands', 'Turks and Caicos Islands', 'Turks and Caicos Islands', 'Turks and Caicos Islands', 'Turks and Caicos Islands', 'Turks and Caicos Islands', 'Turks and Caicos Islands', 'Turks and Caicos Islands', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(214, 1, 'AE', 'ARE', 'United Arab Emirates', 'the United Arab Emirates', 'United Arab Emirates', 'United Arab Emirates', 'United Arab Emirates', 'United Arab Emirates', 'United Arab Emirates', 'United Arab Emirates', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(215, 1, 'UG', 'UGA', 'Uganda', 'the Republic of Uganda', 'Uganda', 'Uganda', 'Uganda', 'Uganda', 'Uganda', 'Uganda', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(216, 1, 'TV', 'TUV', 'Tuvalu', 'Tuvalu', 'Tuvalu', 'Tuvalu', 'Tuvalu', 'Tuvalu', 'Tuvalu', 'Tuvalu', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(217, 1, 'SU', 'SUN', 'Russia', 'Un. Sov. Soc. Rep.', 'Russia', 'Russia', 'Russia', 'Russia', 'Russia', 'Russia', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(218, 1, 'GB', 'GBR', 'United Kingdom', 'the United Kingdom of Great Britain and Northern Ireland', 'United Kingdom', 'United Kingdom', 'United Kingdom', 'United Kingdom', 'United Kingdom', 'United Kingdom', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(219, 1, 'UA', 'UKR', 'Ukraine', 'Ukraine', 'Ukraine', 'Ukraine', 'Ukraine', 'Ukraine', 'Ukraine', 'Ukraine', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(220, 1, 'US', 'USA', 'United States of America', 'the United States of America', 'United States of America', 'United States of America', 'United States of America', 'United States of America', 'United States of America', 'United States of America', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(221, 1, 'UM', 'UMI', 'US Minor Is.', 'US Minor Outlying Islands', 'US Minor Is.', 'US Minor Is.', 'US Minor Is.', 'US Minor Is.', 'US Minor Is.', 'US Minor Is.', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(222, 1, 'BF', 'BFA', 'Burkina Faso', 'Burkina Faso', 'Burkina Faso', 'Burkina Faso', 'Burkina Faso', 'Burkina Faso', 'Burkina Faso', 'Burkina Faso', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(223, 1, 'UY', 'URY', 'Uruguay', 'the Eastern Republic of Uruguay', 'Uruguay', 'Uruguay', 'Uruguay', 'Uruguay', 'Uruguay', 'Uruguay', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(224, 1, 'UZ', 'UZB', 'Uzbekistan', 'the Republic of Uzbekistan', 'Uzbekistan', 'Uzbekistan', 'Uzbekistan', 'Uzbekistan', 'Uzbekistan', 'Uzbekistan', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(225, 1, 'VE', 'VEN', 'Venezuela (Bolivarian Republic of)', 'the Bolivarian Republic of Venezuela', 'Venezuela (Bolivarian Republic of)', 'Venezuela (Bolivarian Republic of)', 'Venezuela (Bolivarian Republic of)', 'Venezuela (Bolivarian Republic of)', 'Venezuela (Bolivarian Republic of)', 'Venezuela (Bolivarian Republic of)', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(226, 1, 'VN', 'VNM', 'Viet Nam', 'the Socialist Republic of Viet Nam', 'Viet Nam', 'Viet Nam', 'Viet Nam', 'Viet Nam', 'Viet Nam', 'Viet Nam', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59');
-INSERT INTO `cl_ref_countries` (`ID`, `ENABLED`, `CODE`, `ISO_3_CODE`, `NAME`, `DESCRIPTION`, `I18n_DEFAULT`, `I18N_EN`, `I18N_FR`, `I18N_ES`, `I18N_TH`, `I18N_VT`, `UPDATER_ID`, `COMMENT`, `CREATED_AT`, `UPDATED_AT`) VALUES
-(227, 1, 'ET', 'ETH', 'Ethiopia', 'the Federal Democratic Republic of Ethiopia', 'Ethiopia', 'Ethiopia', 'Ethiopia', 'Ethiopia', 'Ethiopia', 'Ethiopia', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(228, 1, 'VG', 'VGB', 'British Virgin Islands', 'the British Virgin Islands', 'British Virgin Islands', 'British Virgin Islands', 'British Virgin Islands', 'British Virgin Islands', 'British Virgin Islands', 'British Virgin Islands', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(229, 1, 'VI', 'VIR', 'United States Virgin Islands', 'the United States Virgin Islands', 'United States Virgin Islands', 'United States Virgin Islands', 'United States Virgin Islands', 'United States Virgin Islands', 'United States Virgin Islands', 'United States Virgin Islands', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(230, 1, 'WK', 'WAK', 'Wake Island', 'Wake Island', 'Wake Island', 'Wake Island', 'Wake Island', 'Wake Island', 'Wake Island', 'Wake Island', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(231, 1, 'WF', 'WLF', 'Wallis and Futuna Islands', 'Wallis and Futuna Islands', 'Wallis and Futuna Islands', 'Wallis and Futuna Islands', 'Wallis and Futuna Islands', 'Wallis and Futuna Islands', 'Wallis and Futuna Islands', 'Wallis and Futuna Islands', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(232, 1, 'WS', 'WSM', 'Samoa', 'the Independent State of Samoa', 'Samoa', 'Samoa', 'Samoa', 'Samoa', 'Samoa', 'Samoa', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(233, 1, 'YE', 'YEM', 'Yemen', 'the Republic of Yemen', 'Yemen', 'Yemen', 'Yemen', 'Yemen', 'Yemen', 'Yemen', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(234, 1, 'CD', 'COD', 'Democratic Republic of the Congo', 'the Democratic Republic of the Congo', 'Democratic Republic of the Congo', 'Democratic Republic of the Congo', 'Democratic Republic of the Congo', 'Democratic Republic of the Congo', 'Democratic Republic of the Congo', 'Democratic Republic of the Congo', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(235, 1, 'ZM', 'ZMB', 'Zambia', 'the Republic of Zambia', 'Zambia', 'Zambia', 'Zambia', 'Zambia', 'Zambia', 'Zambia', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(236, 1, 'BE', 'BEL', 'Belgium', 'the Kingdom of Belgium', 'Belgium', 'Belgium', 'Belgium', 'Belgium', 'Belgium', 'Belgium', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(237, 1, 'LU', 'LUX', 'Luxembourg', 'the Grand Duchy of Luxembourg', 'Luxembourg', 'Luxembourg', 'Luxembourg', 'Luxembourg', 'Luxembourg', 'Luxembourg', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(238, 1, 'AI', 'AIA', 'Anguilla', 'Anguilla', 'Anguilla', 'Anguilla', 'Anguilla', 'Anguilla', 'Anguilla', 'Anguilla', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(239, 1, 'SJ', 'SJM', 'Svalbard and Jan Mayen Islands', 'Svalbard and Jan Mayen Islands', 'Svalbard and Jan Mayen Islands', 'Svalbard and Jan Mayen Islands', 'Svalbard and Jan Mayen Islands', 'Svalbard and Jan Mayen Islands', 'Svalbard and Jan Mayen Islands', 'Svalbard and Jan Mayen Islands', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(240, 1, 'IM', 'IMN', 'Isle of Man', 'Isle of Man', 'Isle of Man', 'Isle of Man', 'Isle of Man', 'Isle of Man', 'Isle of Man', 'Isle of Man', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(241, 1, 'YT', 'MYT', 'Mayotte', 'Mayotte', 'Mayotte', 'Mayotte', 'Mayotte', 'Mayotte', 'Mayotte', 'Mayotte', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(242, 1, 'GS', 'SGS', 'South Georgia and the South Sandwich Islands', 'South Georgia and the South Sandwich Islands', 'South Georgia and the South Sandwich Islands', 'South Georgia and the South Sandwich Islands', 'South Georgia and the South Sandwich Islands', 'South Georgia and the South Sandwich Islands', 'South Georgia and the South Sandwich Islands', 'South Georgia and the South Sandwich Islands', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(243, 1, 'RS', 'SRB', 'Serbia', 'Serbia', 'Serbia', 'Serbia', 'Serbia', 'Serbia', 'Serbia', 'Serbia', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(244, 1, 'ME', 'MNE', 'Montenegro', 'Montenegro', 'Montenegro', 'Montenegro', 'Montenegro', 'Montenegro', 'Montenegro', 'Montenegro', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(245, 1, 'PS', 'PSE', 'Palestine', 'Palestine', 'Palestine', 'Palestine', 'Palestine', 'Palestine', 'Palestine', 'Palestine', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(246, 1, 'DD', 'DDR', 'German Democratic Republic', 'German Democratic Republic', 'German Democratic Republic', 'German Democratic Republic', 'German Democratic Republic', 'German Democratic Republic', 'German Democratic Republic', 'German Democratic Republic', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(247, 1, 'YU', 'YUG', 'Yugoslavia', 'Socialist Federal Republic of Yugoslavia', 'Yugoslavia', 'Yugoslavia', 'Yugoslavia', 'Yugoslavia', 'Yugoslavia', 'Yugoslavia', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(248, 1, 'AX', 'ALA', 'Åland Islands', 'Åland Islands', 'Ã…land Islands', 'Ã…land Islands', 'Ã…land Islands', 'Ã…land Islands', 'Ã…land Islands', 'Ã…land Islands', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(249, 1, 'BQ', 'BES', 'Bonaire, Sint Eustatius and Saba', 'Bonaire, Sint Eustatius and Saba', 'Bonaire, Sint Eustatius and Saba', 'Bonaire, Sint Eustatius and Saba', 'Bonaire, Sint Eustatius and Saba', 'Bonaire, Sint Eustatius and Saba', 'Bonaire, Sint Eustatius and Saba', 'Bonaire, Sint Eustatius and Saba', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(250, 1, 'CW', 'CUW', 'Curaçao', 'Curaçao', 'Curasao', 'Curasao', 'Curasao', 'Curasao', 'Curasao', 'Curasao', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(251, 1, 'GG', 'GGY', 'Guernsey', 'Bailiwick of Guernsey', 'Guernsey', 'Guernsey', 'Guernsey', 'Guernsey', 'Guernsey', 'Guernsey', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(252, 1, 'JE', 'JEY', 'Jersey', 'Bailiwick of Jersey', 'Jersey', 'Jersey', 'Jersey', 'Jersey', 'Jersey', 'Jersey', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(253, 1, 'PN', 'PNC', 'Pitcairn Islands', 'Pitcairn Islands', 'Pitcairn Islands', 'Pitcairn Islands', 'Pitcairn Islands', 'Pitcairn Islands', 'Pitcairn Islands', 'Pitcairn Islands', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(254, 1, 'BL', 'BLM', 'Saint Barthélemy', 'Saint Barthélemy', 'Saint Barthélemy', 'Saint Barthélemy', 'Saint Barthélemy', 'Saint Barthélemy', 'Saint Barthélemy', 'Saint Barthélemy', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(255, 1, 'MF', 'MAF', 'Saint-Martin (French Part)', 'Saint-Martin (French Part)', 'Saint-Martin (French Part)', 'Saint-Martin (French Part)', 'Saint-Martin (French Part)', 'Saint-Martin (French Part)', 'Saint-Martin (French Part)', 'Saint-Martin (French Part)', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(256, 1, 'SX', 'SXM', 'Sint Maarten (Dutch Part)', 'Sint Maarten (Dutch Part)', 'Sint Maarten (Dutch Part)', 'Sint Maarten (Dutch Part)', 'Sint Maarten (Dutch Part)', 'Sint Maarten (Dutch Part)', 'Sint Maarten (Dutch Part)', 'Sint Maarten (Dutch Part)', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(257, 1, 'SS', 'SSD', 'South Sudan', 'the Republic of South Sudan', 'South Sudan', 'South Sudan', 'South Sudan', 'South Sudan', 'South Sudan', 'South Sudan', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(258, 1, 'UN', 'UNK', 'Unknown / Not set', 'Unknown / Not set', 'Unknown / Not set', 'Unknown / Not set', 'Unknown / Not set', 'Unknown / Not set', 'Unknown / Not set', 'Unknown / Not set', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
-(259, 1, 'EU', 'EUR', 'European Union', 'European Union', 'European Union', 'European Union', 'European Union', 'European Union', 'European Union', 'European Union', 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59');
+INSERT INTO `cl_ref_countries` (`ID`, `ENABLED`, `CODE`, `ISO_3_CODE`, `NAME`, `DESCRIPTION`, `I18n_DEFAULT`, `I18N_EN`, `I18N_FR`, `I18N_ES`, `I18N_TH`, `I18N_VT`, `I18N_LA`, `I18N_ID`, `I18N_KH`, `UPDATER_ID`, `COMMENT`, `CREATED_AT`, `UPDATED_AT`) VALUES
+(1, 1, 'AM', 'ARM', 'Armenia', 'the Republic of Armenia', 'Armenia', 'Armenia', 'Armenia', 'Armenia', 'Armenia', 'Armenia', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(2, 1, 'AF', 'AFG', 'Afghanistan', 'the Islamic Republic of Afghanistan', 'Afghanistan', 'Afghanistan', 'Afghanistan', 'Afghanistan', 'Afghanistan', 'Afghanistan', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(3, 1, 'AL', 'ALB', 'Albania', 'the Republic of Albania', 'Albania', 'Albania', 'Albania', 'Albania', 'Albania', 'Albania', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(4, 1, 'DZ', 'DZA', 'Algeria', 'the People\'s Democratic Republic of Algeria', 'Algeria', 'Algeria', 'Algeria', 'Algeria', 'Algeria', 'Algeria', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(5, 1, 'AS', 'ASM', 'American Samoa', 'American Samoa', 'American Samoa', 'American Samoa', 'American Samoa', 'American Samoa', 'American Samoa', 'American Samoa', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(6, 1, 'AD', 'AND', 'Andorra', 'the Principality of Andorra', 'Andorra', 'Andorra', 'Andorra', 'Andorra', 'Andorra', 'Andorra', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(7, 1, 'AO', 'AGO', 'Angola', 'the Republic of Angola', 'Angola', 'Angola', 'Angola', 'Angola', 'Angola', 'Angola', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(8, 1, 'AG', 'ATG', 'Antigua and Barbuda', 'Antigua and Barbuda', 'Antigua and Barbuda', 'Antigua and Barbuda', 'Antigua and Barbuda', 'Antigua and Barbuda', 'Antigua and Barbuda', 'Antigua and Barbuda', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(9, 1, 'AR', 'ARG', 'Argentina', 'the Argentine Republic', 'Argentina', 'Argentina', 'Argentina', 'Argentina', 'Argentina', 'Argentina', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(10, 1, 'AU', 'AUS', 'Australia', 'Australia', 'Australia', 'Australia', 'Australia', 'Australia', 'Australia', 'Australia', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(11, 1, 'AT', 'AUT', 'Austria', 'the Republic of Austria', 'Austria', 'Austria', 'Austria', 'Austria', 'Austria', 'Austria', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(12, 1, 'BS', 'BHS', 'Bahamas', 'the Commonwealth of the Bahamas', 'Bahamas', 'Bahamas', 'Bahamas', 'Bahamas', 'Bahamas', 'Bahamas', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(13, 1, 'BH', 'BHR', 'Bahrain', 'the Kingdom of Bahrain', 'Bahrain', 'Bahrain', 'Bahrain', 'Bahrain', 'Bahrain', 'Bahrain', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(14, 1, 'BB', 'BRB', 'Barbados', 'Barbados', 'Barbados', 'Barbados', 'Barbados', 'Barbados', 'Barbados', 'Barbados', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(15, 1, 'BD', 'BGD', 'Bangladesh', 'the People\'s Republic of Bangladesh', 'Bangladesh', 'Bangladesh', 'Bangladesh', 'Bangladesh', 'Bangladesh', 'Bangladesh', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(16, 1, 'BM', 'BMU', 'Bermuda', 'Bermuda', 'Bermuda', 'Bermuda', 'Bermuda', 'Bermuda', 'Bermuda', 'Bermuda', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(17, 1, 'BT', 'BTN', 'Bhutan', 'the Kingdom of Bhutan', 'Bhutan', 'Bhutan', 'Bhutan', 'Bhutan', 'Bhutan', 'Bhutan', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(18, 1, 'BO', 'BOL', 'Bolivia (Plurinational State of)', 'the Plurinational State of Bolivia', 'Bolivia (Plurinational State of)', 'Bolivia (Plurinational State of)', 'Bolivia (Plurinational State of)', 'Bolivia (Plurinational State of)', 'Bolivia (Plurinational State of)', 'Bolivia (Plurinational State of)', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(19, 1, 'BW', 'BWA', 'Botswana', 'the Republic of Botswana', 'Botswana', 'Botswana', 'Botswana', 'Botswana', 'Botswana', 'Botswana', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(20, 1, 'BR', 'BRA', 'Brazil', 'the Federative Republic of Brazil', 'Brazil', 'Brazil', 'Brazil', 'Brazil', 'Brazil', 'Brazil', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(21, 1, 'AW', 'ABW', 'Aruba', 'Aruba', 'Aruba', 'Aruba', 'Aruba', 'Aruba', 'Aruba', 'Aruba', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(22, 1, 'BZ', 'BLZ', 'Belize', 'Belize', 'Belize', 'Belize', 'Belize', 'Belize', 'Belize', 'Belize', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(23, 1, 'IO', 'IOT', 'British Indian Ocean Territory', 'British Indian Ocean Territory', 'British Indian Ocean Territory', 'British Indian Ocean Territory', 'British Indian Ocean Territory', 'British Indian Ocean Territory', 'British Indian Ocean Territory', 'British Indian Ocean Territory', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(24, 1, 'SB', 'SLB', 'Solomon Islands', 'Solomon Islands', 'Solomon Islands', 'Solomon Islands', 'Solomon Islands', 'Solomon Islands', 'Solomon Islands', 'Solomon Islands', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(25, 1, 'BN', 'BRN', 'Brunei Darussalam', 'Brunei Darussalam', 'Brunei Darussalam', 'Brunei Darussalam', 'Brunei Darussalam', 'Brunei Darussalam', 'Brunei Darussalam', 'Brunei Darussalam', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(26, 1, 'BG', 'BGR', 'Bulgaria', 'the Republic of Bulgaria', 'Bulgaria', 'Bulgaria', 'Bulgaria', 'Bulgaria', 'Bulgaria', 'Bulgaria', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(27, 1, 'MM', 'MMR', 'Myanmar', 'the Republic of the Union of Myanmar', 'Myanmar', 'Myanmar', 'Myanmar', 'Myanmar', 'Myanmar', 'Myanmar', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(28, 1, 'BI', 'BDI', 'Burundi', 'the Republic of Burundi', 'Burundi', 'Burundi', 'Burundi', 'Burundi', 'Burundi', 'Burundi', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(29, 1, 'AQ', 'ATA', 'Antarctica', 'Antarctica', 'Antarctica', 'Antarctica', 'Antarctica', 'Antarctica', 'Antarctica', 'Antarctica', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(30, 1, 'BV', 'BVT', 'Bouvet Island', 'Bouvet Island', 'Bouvet Island', 'Bouvet Island', 'Bouvet Island', 'Bouvet Island', 'Bouvet Island', 'Bouvet Island', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(31, 1, 'CM', 'CMR', 'Cameroon', 'the Republic of Cameroon', 'Cameroon', 'Cameroon', 'Cameroon', 'Cameroon', 'Cameroon', 'Cameroon', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(32, 1, 'CA', 'CAN', 'Canada', 'Canada', 'Canada', 'Canada', 'Canada', 'Canada', 'Canada', 'Canada', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(33, 1, 'CV', 'CPV', 'Cape Verde', 'the Republic of Cape Verde', 'Cape Verde', 'Cape Verde', 'Cape Verde', 'Cape Verde', 'Cape Verde', 'Cape Verde', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(34, 1, 'KY', 'CYM', 'Cayman Islands', 'Cayman Islands', 'Cayman Islands', 'Cayman Islands', 'Cayman Islands', 'Cayman Islands', 'Cayman Islands', 'Cayman Islands', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(35, 1, 'CF', 'CAF', 'Central African Republic', 'the Central African Republic', 'Central African Republic', 'Central African Republic', 'Central African Republic', 'Central African Republic', 'Central African Republic', 'Central African Republic', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(36, 1, 'LK', 'LKA', 'Sri Lanka', 'the Democratic Socialist Republic of Sri Lanka', 'Sri Lanka', 'Sri Lanka', 'Sri Lanka', 'Sri Lanka', 'Sri Lanka', 'Sri Lanka', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(37, 1, 'TD', 'TCD', 'Chad', 'the Republic of Chad', 'Chad', 'Chad', 'Chad', 'Chad', 'Chad', 'Chad', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(38, 1, 'CL', 'CHL', 'Chile', 'the Republic of Chile', 'Chile', 'Chile', 'Chile', 'Chile', 'Chile', 'Chile', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(39, 1, 'CN', 'CHN', 'China', 'the People\'s Republic of China', 'China', 'China', 'China', 'China', 'China', 'China', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(40, 1, 'CX', 'CXR', 'Christmas Island', 'Christmas Island', 'Christmas Island', 'Christmas Island', 'Christmas Island', 'Christmas Island', 'Christmas Island', 'Christmas Island', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(41, 1, 'CC', 'CCK', 'Cocos (Keeling) Islands', 'Cocos (Keeling) Islands', 'Cocos (Keeling) Islands', 'Cocos (Keeling) Islands', 'Cocos (Keeling) Islands', 'Cocos (Keeling) Islands', 'Cocos (Keeling) Islands', 'Cocos (Keeling) Islands', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(42, 1, 'CO', 'COL', 'Colombia', 'the Republic of Colombia', 'Colombia', 'Colombia', 'Colombia', 'Colombia', 'Colombia', 'Colombia', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(43, 1, 'KM', 'COM', 'Comoros', 'the Union of the Comoros', 'Comoros', 'Comoros', 'Comoros', 'Comoros', 'Comoros', 'Comoros', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(44, 1, 'CG', 'COG', 'Congo', 'the Republic of the Congo', 'Congo', 'Congo', 'Congo', 'Congo', 'Congo', 'Congo', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(45, 1, 'CK', 'COK', 'Cook Islands', 'the Cook Islands', 'Cook Islands', 'Cook Islands', 'Cook Islands', 'Cook Islands', 'Cook Islands', 'Cook Islands', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(46, 1, 'CR', 'CRI', 'Costa Rica', 'the Republic of Costa Rica', 'Costa Rica', 'Costa Rica', 'Costa Rica', 'Costa Rica', 'Costa Rica', 'Costa Rica', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(47, 1, 'CU', 'CUB', 'Cuba', 'the Republic of Cuba', 'Cuba', 'Cuba', 'Cuba', 'Cuba', 'Cuba', 'Cuba', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(48, 1, 'CY', 'CYP', 'Cyprus', 'the Republic of Cyprus', 'Cyprus', 'Cyprus', 'Cyprus', 'Cyprus', 'Cyprus', 'Cyprus', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(49, 1, 'AZ', 'AZE', 'Azerbaijan', 'the Republic of Azerbaijan', 'Azerbaijan', 'Azerbaijan', 'Azerbaijan', 'Azerbaijan', 'Azerbaijan', 'Azerbaijan', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(50, 1, 'BJ', 'BEN', 'Benin', 'the Republic of Benin', 'Benin', 'Benin', 'Benin', 'Benin', 'Benin', 'Benin', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(51, 1, 'DK', 'DNK', 'Denmark', 'the Kingdom of Denmark', 'Denmark', 'Denmark', 'Denmark', 'Denmark', 'Denmark', 'Denmark', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(52, 1, 'DM', 'DMA', 'Dominica', 'the Commonwealth of Dominica', 'Dominica', 'Dominica', 'Dominica', 'Dominica', 'Dominica', 'Dominica', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(53, 1, 'DO', 'DOM', 'Dominican Republic', 'the Dominican Republic', 'Dominican Republic', 'Dominican Republic', 'Dominican Republic', 'Dominican Republic', 'Dominican Republic', 'Dominican Republic', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(54, 1, 'BY', 'BLR', 'Belarus', 'the Republic of Belarus', 'Belarus', 'Belarus', 'Belarus', 'Belarus', 'Belarus', 'Belarus', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(55, 1, 'EC', 'ECU', 'Ecuador', 'the Republic of Ecuador', 'Ecuador', 'Ecuador', 'Ecuador', 'Ecuador', 'Ecuador', 'Ecuador', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(56, 1, 'EG', 'EGY', 'Egypt', 'the Arab Republic of Egypt', 'Egypt', 'Egypt', 'Egypt', 'Egypt', 'Egypt', 'Egypt', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(57, 1, 'SV', 'SLV', 'El Salvador', 'the Republic of El Salvador', 'El Salvador', 'El Salvador', 'El Salvador', 'El Salvador', 'El Salvador', 'El Salvador', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(58, 1, 'GQ', 'GNQ', 'Equatorial Guinea', 'the Republic of Equatorial Guinea', 'Equatorial Guinea', 'Equatorial Guinea', 'Equatorial Guinea', 'Equatorial Guinea', 'Equatorial Guinea', 'Equatorial Guinea', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(59, 1, 'EE', 'EST', 'Estonia', 'the Republic of Estonia', 'Estonia', 'Estonia', 'Estonia', 'Estonia', 'Estonia', 'Estonia', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(60, 1, 'FO', 'FRO', 'Faroe Islands (Associate Member)', 'Faroe Islands', 'Faroe Islands (Associate Member)', 'Faroe Islands (Associate Member)', 'Faroe Islands (Associate Member)', 'Faroe Islands (Associate Member)', 'Faroe Islands (Associate Member)', 'Faroe Islands (Associate Member)', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(61, 1, 'FK', 'FLK', 'Falkland Islands (Malvinas)', 'the Falkland Islands (Malvinas)', 'Falkland Islands (Malvinas)', 'Falkland Islands (Malvinas)', 'Falkland Islands (Malvinas)', 'Falkland Islands (Malvinas)', 'Falkland Islands (Malvinas)', 'Falkland Islands (Malvinas)', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(62, 1, 'FJ', 'FJI', 'Fiji', 'the Republic of Fiji', 'Fiji', 'Fiji', 'Fiji', 'Fiji', 'Fiji', 'Fiji', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(63, 1, 'FI', 'FIN', 'Finland', 'the Republic of Finland', 'Finland', 'Finland', 'Finland', 'Finland', 'Finland', 'Finland', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(64, 1, 'FR', 'FRA', 'France', 'the French Republic', 'France', 'France', 'France', 'France', 'France', 'France', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(65, 1, 'GF', 'GUF', 'French Guiana', 'French Guiana', 'French Guiana', 'French Guiana', 'French Guiana', 'French Guiana', 'French Guiana', 'French Guiana', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(66, 1, 'PF', 'PYF', 'French Polynesia', 'French Polynesia', 'French Polynesia', 'French Polynesia', 'French Polynesia', 'French Polynesia', 'French Polynesia', 'French Polynesia', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(67, 1, 'TF', 'ATF', 'French Southern and Antarctic Territories', 'French Southern and Antarctic Territories', 'French Southern and Antarctic Territories', 'French Southern and Antarctic Territories', 'French Southern and Antarctic Territories', 'French Southern and Antarctic Territories', 'French Southern and Antarctic Territories', 'French Southern and Antarctic Territories', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(68, 1, 'DJ', 'DJI', 'Djibouti', 'the Republic of Djibouti', 'Djibouti', 'Djibouti', 'Djibouti', 'Djibouti', 'Djibouti', 'Djibouti', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(69, 1, 'GE', 'GEO', 'Georgia', 'Georgia', 'Georgia', 'Georgia', 'Georgia', 'Georgia', 'Georgia', 'Georgia', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(70, 1, 'GA', 'GAB', 'Gabon', 'the Gabonese Republic', 'Gabon', 'Gabon', 'Gabon', 'Gabon', 'Gabon', 'Gabon', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(71, 1, 'GM', 'GMB', 'Gambia', 'the Republic of the Gambia', 'Gambia', 'Gambia', 'Gambia', 'Gambia', 'Gambia', 'Gambia', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(72, 1, 'DE', 'DEU', 'Germany', 'the Federal Republic of Germany', 'Germany', 'Germany', 'Germany', 'Germany', 'Germany', 'Germany', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(73, 1, 'BA', 'BIH', 'Bosnia and Herzegovina', 'Bosnia and Herzegovina', 'Bosnia and Herzegovina', 'Bosnia and Herzegovina', 'Bosnia and Herzegovina', 'Bosnia and Herzegovina', 'Bosnia and Herzegovina', 'Bosnia and Herzegovina', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(74, 1, 'GH', 'GHA', 'Ghana', 'the Republic of Ghana', 'Ghana', 'Ghana', 'Ghana', 'Ghana', 'Ghana', 'Ghana', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(75, 1, 'GI', 'GIB', 'Gibraltar', 'Gibraltar', 'Gibraltar', 'Gibraltar', 'Gibraltar', 'Gibraltar', 'Gibraltar', 'Gibraltar', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(76, 1, 'KI', 'KIR', 'Kiribati', 'the Republic of Kiribati', 'Kiribati', 'Kiribati', 'Kiribati', 'Kiribati', 'Kiribati', 'Kiribati', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(77, 1, 'GR', 'GRC', 'Greece', 'the Hellenic Republic', 'Greece', 'Greece', 'Greece', 'Greece', 'Greece', 'Greece', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(78, 1, 'GL', 'GRL', 'Greenland', 'Greenland', 'Greenland', 'Greenland', 'Greenland', 'Greenland', 'Greenland', 'Greenland', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(79, 1, 'GD', 'GRD', 'Grenada', 'Grenada', 'Grenada', 'Grenada', 'Grenada', 'Grenada', 'Grenada', 'Grenada', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(80, 1, 'GP', 'GLP', 'Guadeloupe', 'Guadeloupe', 'Guadeloupe', 'Guadeloupe', 'Guadeloupe', 'Guadeloupe', 'Guadeloupe', 'Guadeloupe', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(81, 1, 'GU', 'GUM', 'Guam', 'Guam', 'Guam', 'Guam', 'Guam', 'Guam', 'Guam', 'Guam', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(82, 1, 'GT', 'GTM', 'Guatemala', 'the Republic of Guatemala', 'Guatemala', 'Guatemala', 'Guatemala', 'Guatemala', 'Guatemala', 'Guatemala', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(83, 1, 'GN', 'GIN', 'Guinea', 'the Republic of Guinea', 'Guinea', 'Guinea', 'Guinea', 'Guinea', 'Guinea', 'Guinea', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(84, 1, 'GY', 'GUY', 'Guyana', 'the Republic of Guyana', 'Guyana', 'Guyana', 'Guyana', 'Guyana', 'Guyana', 'Guyana', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(85, 1, 'HM', 'HMD', 'Heard and McDonald Islands', 'Heard Island and McDonald Island', 'Heard and McDonald Islands', 'Heard and McDonald Islands', 'Heard and McDonald Islands', 'Heard and McDonald Islands', 'Heard and McDonald Islands', 'Heard and McDonald Islands', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(86, 1, 'HT', 'HTI', 'Haiti', 'the Republic of Haiti', 'Haiti', 'Haiti', 'Haiti', 'Haiti', 'Haiti', 'Haiti', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(87, 1, 'VA', 'VAT', 'Holy See', 'Holy see', 'Holy See', 'Holy See', 'Holy See', 'Holy See', 'Holy See', 'Holy See', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(88, 1, 'HN', 'HND', 'Honduras', 'the Republic of Honduras', 'Honduras', 'Honduras', 'Honduras', 'Honduras', 'Honduras', 'Honduras', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(89, 1, 'HK', 'HKG', 'China, Hong Kong SAR', 'China, Hong Kong Special Administrative Region', 'China, Hong Kong SAR', 'China, Hong Kong SAR', 'China, Hong Kong SAR', 'China, Hong Kong SAR', 'China, Hong Kong SAR', 'China, Hong Kong SAR', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(90, 1, 'HU', 'HUN', 'Hungary', 'Hungary', 'Hungary', 'Hungary', 'Hungary', 'Hungary', 'Hungary', 'Hungary', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(91, 1, 'HR', 'HRV', 'Croatia', 'the Republic of Croatia', 'Croatia', 'Croatia', 'Croatia', 'Croatia', 'Croatia', 'Croatia', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(92, 1, 'IS', 'ISL', 'Iceland', 'the Republic of Iceland', 'Iceland', 'Iceland', 'Iceland', 'Iceland', 'Iceland', 'Iceland', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(93, 1, 'IN', 'IND', 'India', 'the Republic of India', 'India', 'India', 'India', 'India', 'India', 'India', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(94, 1, 'ID', 'IDN', 'Indonesia', 'the Republic of Indonesia', 'Indonesia', 'Indonesia', 'Indonesia', 'Indonesia', 'Indonesia', 'Indonesia', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(95, 1, 'IR', 'IRN', 'Iran (Islamic Republic of)', 'the Islamic Republic of Iran', 'Iran (Islamic Republic of)', 'Iran (Islamic Republic of)', 'Iran (Islamic Republic of)', 'Iran (Islamic Republic of)', 'Iran (Islamic Republic of)', 'Iran (Islamic Republic of)', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(96, 1, 'IQ', 'IRQ', 'Iraq', 'the Republic of Iraq', 'Iraq', 'Iraq', 'Iraq', 'Iraq', 'Iraq', 'Iraq', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(97, 1, 'IE', 'IRL', 'Ireland', 'Ireland', 'Ireland', 'Ireland', 'Ireland', 'Ireland', 'Ireland', 'Ireland', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(98, 1, 'IL', 'ISR', 'Israel', 'the State of Israel', 'Israel', 'Israel', 'Israel', 'Israel', 'Israel', 'Israel', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(99, 1, 'IT', 'ITA', 'Italy', 'the Republic of Italy', 'Italy', 'Italy', 'Italy', 'Italy', 'Italy', 'Italy', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(100, 1, 'CI', 'CIV', 'Côte d\'Ivoire', 'the Republic of Côte d\'Ivoire', 'Cote d\'Ivoire', 'Cote d\'Ivoire', 'Cote d\'Ivoire', 'Cote d\'Ivoire', 'Cote d\'Ivoire', 'Cote d\'Ivoire', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(101, 1, 'KZ', 'KAZ', 'Kazakhstan', 'the Republic of Kazakhstan', 'Kazakhstan', 'Kazakhstan', 'Kazakhstan', 'Kazakhstan', 'Kazakhstan', 'Kazakhstan', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(102, 1, 'JM', 'JAM', 'Jamaica', 'Jamaica', 'Jamaica', 'Jamaica', 'Jamaica', 'Jamaica', 'Jamaica', 'Jamaica', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(103, 1, 'JP', 'JPN', 'Japan', 'Japan', 'Japan', 'Japan', 'Japan', 'Japan', 'Japan', 'Japan', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(104, 1, 'JT', 'JTN', 'Johnston Island', 'Johnston Island', 'Johnston Island', 'Johnston Island', 'Johnston Island', 'Johnston Island', 'Johnston Island', 'Johnston Island', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(105, 1, 'JO', 'JOR', 'Jordan', 'the Hashemite Kingdom of Jordan', 'Jordan', 'Jordan', 'Jordan', 'Jordan', 'Jordan', 'Jordan', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(106, 1, 'KG', 'KGZ', 'Kyrgyzstan', 'the Kyrgyz Republic', 'Kyrgyzstan', 'Kyrgyzstan', 'Kyrgyzstan', 'Kyrgyzstan', 'Kyrgyzstan', 'Kyrgyzstan', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(107, 1, 'KE', 'KEN', 'Kenya', 'the Republic of Kenya', 'Kenya', 'Kenya', 'Kenya', 'Kenya', 'Kenya', 'Kenya', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(108, 1, 'KH', 'KHM', 'Cambodia', 'the Kingdom of Cambodia', 'Cambodia', 'Cambodia', 'Cambodia', 'Cambodia', 'Cambodia', 'Cambodia', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(109, 1, 'KP', 'PRK', 'Democratic People\'s Republic of Korea', 'the Democratic People\'s Republic of Korea', 'Democratic People\'s Republic of Korea', 'Democratic People\'s Republic of Korea', 'Democratic People\'s Republic of Korea', 'Democratic People\'s Republic of Korea', 'Democratic People\'s Republic of Korea', 'Democratic People\'s Republic of Korea', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(110, 1, 'KR', 'KOR', 'Republic of Korea', 'the Republic of Korea', 'Republic of Korea', 'Republic of Korea', 'Republic of Korea', 'Republic of Korea', 'Republic of Korea', 'Republic of Korea', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(111, 1, 'KW', 'KWT', 'Kuwait', 'the State of Kuwait', 'Kuwait', 'Kuwait', 'Kuwait', 'Kuwait', 'Kuwait', 'Kuwait', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(112, 1, 'LV', 'LVA', 'Latvia', 'the Republic of Latvia', 'Latvia', 'Latvia', 'Latvia', 'Latvia', 'Latvia', 'Latvia', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(113, 1, 'LA', 'LAO', 'Lao People\'s Democratic Republic', 'the Lao People\'s Democratic Republic', 'Lao People\'s Democratic Republic', 'Lao People\'s Democratic Republic', 'Lao People\'s Democratic Republic', 'Lao People\'s Democratic Republic', 'Lao People\'s Democratic Republic', 'Lao People\'s Democratic Republic', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(114, 1, 'LB', 'LBN', 'Lebanon', 'the Lebanese Republic', 'Lebanon', 'Lebanon', 'Lebanon', 'Lebanon', 'Lebanon', 'Lebanon', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(115, 1, 'LS', 'LSO', 'Lesotho', 'the Kingdom of Lesotho', 'Lesotho', 'Lesotho', 'Lesotho', 'Lesotho', 'Lesotho', 'Lesotho', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(116, 1, 'LR', 'LBR', 'Liberia', 'the Republic of Liberia', 'Liberia', 'Liberia', 'Liberia', 'Liberia', 'Liberia', 'Liberia', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(117, 1, 'LY', 'LBY', 'Libya', 'Libya', 'Libya', 'Libya', 'Libya', 'Libya', 'Libya', 'Libya', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(118, 1, 'LI', 'LIE', 'Liechtenstein', 'the Principality of Liechtenstein', 'Liechtenstein', 'Liechtenstein', 'Liechtenstein', 'Liechtenstein', 'Liechtenstein', 'Liechtenstein', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(119, 1, 'LT', 'LTU', 'Lithuania', 'the Republic of Lithuania', 'Lithuania', 'Lithuania', 'Lithuania', 'Lithuania', 'Lithuania', 'Lithuania', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(120, 1, 'MH', 'MHL', 'Marshall Islands', 'the Republic of the Marshall Islands', 'Marshall Islands', 'Marshall Islands', 'Marshall Islands', 'Marshall Islands', 'Marshall Islands', 'Marshall Islands', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(121, 1, 'MO', 'MAC', 'China, Macao SAR', 'China, Macao Special Administrative Region', 'China, Macao SAR', 'China, Macao SAR', 'China, Macao SAR', 'China, Macao SAR', 'China, Macao SAR', 'China, Macao SAR', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(122, 1, 'MG', 'MDG', 'Madagascar', 'the Republic of Madagascar', 'Madagascar', 'Madagascar', 'Madagascar', 'Madagascar', 'Madagascar', 'Madagascar', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(123, 1, 'MW', 'MWI', 'Malawi', 'the Republic of Malawi', 'Malawi', 'Malawi', 'Malawi', 'Malawi', 'Malawi', 'Malawi', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(124, 1, 'MY', 'MYS', 'Malaysia', 'Malaysia', 'Malaysia', 'Malaysia', 'Malaysia', 'Malaysia', 'Malaysia', 'Malaysia', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(125, 1, 'MV', 'MDV', 'Maldives', 'the Republic of Maldives', 'Maldives', 'Maldives', 'Maldives', 'Maldives', 'Maldives', 'Maldives', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(126, 1, 'ML', 'MLI', 'Mali', 'the Republic of Mali', 'Mali', 'Mali', 'Mali', 'Mali', 'Mali', 'Mali', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(127, 1, 'MT', 'MLT', 'Malta', 'the Republic of Malta', 'Malta', 'Malta', 'Malta', 'Malta', 'Malta', 'Malta', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(128, 1, 'MQ', 'MTQ', 'Martinique', 'Martinique', 'Martinique', 'Martinique', 'Martinique', 'Martinique', 'Martinique', 'Martinique', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(129, 1, 'MR', 'MRT', 'Mauritania', 'the Islamic Republic of Mauritania', 'Mauritania', 'Mauritania', 'Mauritania', 'Mauritania', 'Mauritania', 'Mauritania', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(130, 1, 'MU', 'MUS', 'Mauritius', 'the Republic of Mauritius', 'Mauritius', 'Mauritius', 'Mauritius', 'Mauritius', 'Mauritius', 'Mauritius', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(131, 1, 'MX', 'MEX', 'Mexico', 'the United Mexican States', 'Mexico', 'Mexico', 'Mexico', 'Mexico', 'Mexico', 'Mexico', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(132, 1, 'MI', 'MID', 'Midway Islands', 'Midway Islands', 'Midway Islands', 'Midway Islands', 'Midway Islands', 'Midway Islands', 'Midway Islands', 'Midway Islands', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(133, 1, 'MC', 'MCO', 'Monaco', 'the Principality of Monaco', 'Monaco', 'Monaco', 'Monaco', 'Monaco', 'Monaco', 'Monaco', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(134, 1, 'MN', 'MNG', 'Mongolia', 'Mongolia', 'Mongolia', 'Mongolia', 'Mongolia', 'Mongolia', 'Mongolia', 'Mongolia', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(135, 1, 'MS', 'MSR', 'Montserrat', 'Montserrat', 'Montserrat', 'Montserrat', 'Montserrat', 'Montserrat', 'Montserrat', 'Montserrat', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(136, 1, 'MA', 'MAR', 'Morocco', 'the Kingdom of Morocco', 'Morocco', 'Morocco', 'Morocco', 'Morocco', 'Morocco', 'Morocco', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(137, 1, 'MZ', 'MOZ', 'Mozambique', 'the Republic of Mozambique', 'Mozambique', 'Mozambique', 'Mozambique', 'Mozambique', 'Mozambique', 'Mozambique', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(138, 1, 'FM', 'FSM', 'Micronesia (Federated States of)', 'the Federated States of Micronesia', 'Micronesia (Federated States of)', 'Micronesia (Federated States of)', 'Micronesia (Federated States of)', 'Micronesia (Federated States of)', 'Micronesia (Federated States of)', 'Micronesia (Federated States of)', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(139, 1, 'MD', 'MDA', 'Republic of Moldova', 'the Republic of Moldova', 'Republic of Moldova', 'Republic of Moldova', 'Republic of Moldova', 'Republic of Moldova', 'Republic of Moldova', 'Republic of Moldova', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(140, 1, 'NA', 'NAM', 'Namibia', 'the Republic of Namibia', 'Namibia', 'Namibia', 'Namibia', 'Namibia', 'Namibia', 'Namibia', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(141, 1, 'NR', 'NRU', 'Nauru', 'the Republic of Nauru', 'Nauru', 'Nauru', 'Nauru', 'Nauru', 'Nauru', 'Nauru', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(142, 1, 'NP', 'NPL', 'Nepal', 'the Federal Democratic Republic of Nepal', 'Nepal', 'Nepal', 'Nepal', 'Nepal', 'Nepal', 'Nepal', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(143, 1, 'NL', 'NLD', 'Netherlands', 'the Kingdom of the Netherlands', 'Netherlands', 'Netherlands', 'Netherlands', 'Netherlands', 'Netherlands', 'Netherlands', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(144, 1, 'AN', 'ANT', 'Netherlands Antilles', 'Netherlands Antilles', 'Netherlands Antilles', 'Netherlands Antilles', 'Netherlands Antilles', 'Netherlands Antilles', 'Netherlands Antilles', 'Netherlands Antilles', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(145, 1, 'NC', 'NCL', 'New Caledonia', 'New Caledonia', 'New Caledonia', 'New Caledonia', 'New Caledonia', 'New Caledonia', 'New Caledonia', 'New Caledonia', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(146, 1, 'MK', 'MKD', 'The former Yugoslav Republic of Macedonia', 'The former Yugoslav Republic of Macedonia', 'The former Yugoslav Republic of Macedonia', 'The former Yugoslav Republic of Macedonia', 'The former Yugoslav Republic of Macedonia', 'The former Yugoslav Republic of Macedonia', 'The former Yugoslav Republic of Macedonia', 'The former Yugoslav Republic of Macedonia', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(147, 1, 'VU', 'VUT', 'Vanuatu', 'the Republic of Vanuatu', 'Vanuatu', 'Vanuatu', 'Vanuatu', 'Vanuatu', 'Vanuatu', 'Vanuatu', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(148, 1, 'NZ', 'NZL', 'New Zealand', 'New Zealand', 'New Zealand', 'New Zealand', 'New Zealand', 'New Zealand', 'New Zealand', 'New Zealand', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(149, 1, 'NI', 'NIC', 'Nicaragua', 'the Republic of Nicaragua', 'Nicaragua', 'Nicaragua', 'Nicaragua', 'Nicaragua', 'Nicaragua', 'Nicaragua', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(150, 1, 'NE', 'NER', 'Niger', 'the Republic of the Niger', 'Niger', 'Niger', 'Niger', 'Niger', 'Niger', 'Niger', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(151, 1, 'NG', 'NGA', 'Nigeria', 'the Federal Republic of Nigeria', 'Nigeria', 'Nigeria', 'Nigeria', 'Nigeria', 'Nigeria', 'Nigeria', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(152, 1, 'NU', 'NIU', 'Niue', 'Niue', 'Niue', 'Niue', 'Niue', 'Niue', 'Niue', 'Niue', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(153, 1, 'NF', 'NFK', 'Norfolk Island', 'Territory of Norfolk Island', 'Norfolk Island', 'Norfolk Island', 'Norfolk Island', 'Norfolk Island', 'Norfolk Island', 'Norfolk Island', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(154, 1, 'NO', 'NOR', 'Norway', 'the Kingdom of Norway', 'Norway', 'Norway', 'Norway', 'Norway', 'Norway', 'Norway', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(155, 1, 'MP', 'MNP', 'Northern Mariana Islands', 'The Commonwealth of the Northern Mariana Islands', 'Northern Mariana Islands', 'Northern Mariana Islands', 'Northern Mariana Islands', 'Northern Mariana Islands', 'Northern Mariana Islands', 'Northern Mariana Islands', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(156, 1, 'PK', 'PAK', 'Pakistan', 'the Islamic Republic of Pakistan', 'Pakistan', 'Pakistan', 'Pakistan', 'Pakistan', 'Pakistan', 'Pakistan', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(157, 1, 'PA', 'PAN', 'Panama', 'the Republic of Panama', 'Panama', 'Panama', 'Panama', 'Panama', 'Panama', 'Panama', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(158, 1, 'CZ', 'CZE', 'Czech Republic', 'the Czech Republic', 'Czech Republic', 'Czech Republic', 'Czech Republic', 'Czech Republic', 'Czech Republic', 'Czech Republic', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(159, 1, 'PG', 'PNG', 'Papua New Guinea', 'Papua New Guinea', 'Papua New Guinea', 'Papua New Guinea', 'Papua New Guinea', 'Papua New Guinea', 'Papua New Guinea', 'Papua New Guinea', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(160, 1, 'PY', 'PRY', 'Paraguay', 'the Republic of Paraguay', 'Paraguay', 'Paraguay', 'Paraguay', 'Paraguay', 'Paraguay', 'Paraguay', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(161, 1, 'PE', 'PER', 'Peru', 'the Republic of Peru', 'Peru', 'Peru', 'Peru', 'Peru', 'Peru', 'Peru', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(162, 1, 'PH', 'PHL', 'Philippines', 'the Republic of the Philippines', 'Philippines', 'Philippines', 'Philippines', 'Philippines', 'Philippines', 'Philippines', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(163, 1, 'PL', 'POL', 'Poland', 'the Republic of Poland', 'Poland', 'Poland', 'Poland', 'Poland', 'Poland', 'Poland', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(164, 1, 'PT', 'PRT', 'Portugal', 'the Portuguese Republic', 'Portugal', 'Portugal', 'Portugal', 'Portugal', 'Portugal', 'Portugal', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(165, 1, 'GW', 'GNB', 'Guinea-Bissau', 'the Republic of Guinea-Bissau', 'Guinea-Bissau', 'Guinea-Bissau', 'Guinea-Bissau', 'Guinea-Bissau', 'Guinea-Bissau', 'Guinea-Bissau', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(166, 1, 'TL', 'TLS', 'Timor-Leste', 'the Democratic Republic of Timor-Leste', 'Timor-Leste', 'Timor-Leste', 'Timor-Leste', 'Timor-Leste', 'Timor-Leste', 'Timor-Leste', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(167, 1, 'PR', 'PRI', 'Puerto Rico', 'the Commonwealth of Puerto Rico', 'Puerto Rico', 'Puerto Rico', 'Puerto Rico', 'Puerto Rico', 'Puerto Rico', 'Puerto Rico', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(168, 1, 'ER', 'ERI', 'Eritrea', 'Eritrea', 'Eritrea', 'Eritrea', 'Eritrea', 'Eritrea', 'Eritrea', 'Eritrea', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(169, 1, 'QA', 'QAT', 'Qatar', 'the State of Qatar', 'Qatar', 'Qatar', 'Qatar', 'Qatar', 'Qatar', 'Qatar', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(170, 1, 'PW', 'PLW', 'Palau', 'the Republic of Palau', 'Palau', 'Palau', 'Palau', 'Palau', 'Palau', 'Palau', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(171, 1, 'ZW', 'ZWE', 'Zimbabwe', 'the Republic of Zimbabwe', 'Zimbabwe', 'Zimbabwe', 'Zimbabwe', 'Zimbabwe', 'Zimbabwe', 'Zimbabwe', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(172, 1, 'RE', 'REU', 'Réunion', 'Réunion', 'Réunion', 'Réunion', 'Réunion', 'Réunion', 'Réunion', 'Réunion', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(173, 1, 'RO', 'ROU', 'Romania', 'Romania', 'Romania', 'Romania', 'Romania', 'Romania', 'Romania', 'Romania', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(174, 1, 'RW', 'RWA', 'Rwanda', 'the Republic of Rwanda', 'Rwanda', 'Rwanda', 'Rwanda', 'Rwanda', 'Rwanda', 'Rwanda', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(175, 1, 'RU', 'RUS', 'Russian Federation', 'the Russian Federation', 'Russian Federation', 'Russian Federation', 'Russian Federation', 'Russian Federation', 'Russian Federation', 'Russian Federation', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(176, 1, 'CS', 'SCG', 'Serbia and Montenegro', 'Serbia and Montenegro', 'Serbia and Montenegro', 'Serbia and Montenegro', 'Serbia and Montenegro', 'Serbia and Montenegro', 'Serbia and Montenegro', 'Serbia and Montenegro', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(177, 1, 'SH', 'SHN', 'Saint Helena, Ascension and Tristan da Cunha', 'Saint Helena, Ascension and Tristan da Cunha', 'Saint Helena, Ascension and Tristan da Cunha', 'Saint Helena, Ascension and Tristan da Cunha', 'Saint Helena, Ascension and Tristan da Cunha', 'Saint Helena, Ascension and Tristan da Cunha', 'Saint Helena, Ascension and Tristan da Cunha', 'Saint Helena, Ascension and Tristan da Cunha', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(178, 1, 'KN', 'KNA', 'Saint Kitts and Nevis', 'Saint Kitts and Nevis', 'Saint Kitts and Nevis', 'Saint Kitts and Nevis', 'Saint Kitts and Nevis', 'Saint Kitts and Nevis', 'Saint Kitts and Nevis', 'Saint Kitts and Nevis', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(179, 1, 'LC', 'LCA', 'Saint Lucia', 'Saint Lucia', 'Saint Lucia', 'Saint Lucia', 'Saint Lucia', 'Saint Lucia', 'Saint Lucia', 'Saint Lucia', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(180, 1, 'PM', 'SPM', 'Saint Pierre and Miquelon', 'Saint Pierre and Miquelon', 'Saint Pierre and Miquelon', 'Saint Pierre and Miquelon', 'Saint Pierre and Miquelon', 'Saint Pierre and Miquelon', 'Saint Pierre and Miquelon', 'Saint Pierre and Miquelon', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(181, 1, 'VC', 'VCT', 'Saint Vincent and the Grenadines', 'Saint Vincent and the Grenadines', 'Saint Vincent and the Grenadines', 'Saint Vincent and the Grenadines', 'Saint Vincent and the Grenadines', 'Saint Vincent and the Grenadines', 'Saint Vincent and the Grenadines', 'Saint Vincent and the Grenadines', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(182, 1, 'SM', 'SMR', 'San Marino', 'the Republic of San Marino', 'San Marino', 'San Marino', 'San Marino', 'San Marino', 'San Marino', 'San Marino', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(183, 1, 'ST', 'STP', 'Sao Tome and Principe', 'the Democratic Republic of Sao Tome and Principe', 'Sao Tome and Principe', 'Sao Tome and Principe', 'Sao Tome and Principe', 'Sao Tome and Principe', 'Sao Tome and Principe', 'Sao Tome and Principe', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(184, 1, 'SA', 'SAU', 'Saudi Arabia', 'the Kingdom of Saudi Arabia', 'Saudi Arabia', 'Saudi Arabia', 'Saudi Arabia', 'Saudi Arabia', 'Saudi Arabia', 'Saudi Arabia', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(185, 1, 'SN', 'SEN', 'Senegal', 'the Republic of Senegal', 'Senegal', 'Senegal', 'Senegal', 'Senegal', 'Senegal', 'Senegal', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(186, 1, 'SC', 'SYC', 'Seychelles', 'the Republic of Seychelles', 'Seychelles', 'Seychelles', 'Seychelles', 'Seychelles', 'Seychelles', 'Seychelles', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(187, 1, 'SL', 'SLE', 'Sierra Leone', 'the Republic of Sierra Leone', 'Sierra Leone', 'Sierra Leone', 'Sierra Leone', 'Sierra Leone', 'Sierra Leone', 'Sierra Leone', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(188, 1, 'SI', 'SVN', 'Slovenia', 'the Republic of Slovenia', 'Slovenia', 'Slovenia', 'Slovenia', 'Slovenia', 'Slovenia', 'Slovenia', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(189, 1, 'SK', 'SVK', 'Slovakia', 'the Slovak Republic', 'Slovakia', 'Slovakia', 'Slovakia', 'Slovakia', 'Slovakia', 'Slovakia', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(190, 1, 'SG', 'SGP', 'Singapore', 'the Republic of Singapore', 'Singapore', 'Singapore', 'Singapore', 'Singapore', 'Singapore', 'Singapore', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(191, 1, 'SO', 'SOM', 'Somalia', 'the Somali Republic', 'Somalia', 'Somalia', 'Somalia', 'Somalia', 'Somalia', 'Somalia', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(192, 1, 'ZA', 'ZAF', 'South Africa', 'the Republic of South Africa', 'South Africa', 'South Africa', 'South Africa', 'South Africa', 'South Africa', 'South Africa', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(193, 1, 'ES', 'ESP', 'Spain', 'the Kingdom of Spain', 'Spain', 'Spain', 'Spain', 'Spain', 'Spain', 'Spain', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(194, 1, 'EH', 'ESH', 'Western Sahara', 'Western Sahara', 'Western Sahara', 'Western Sahara', 'Western Sahara', 'Western Sahara', 'Western Sahara', 'Western Sahara', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(195, 1, 'SD', 'SDN', 'Sudan', 'the Republic of the Sudan', 'Sudan', 'Sudan', 'Sudan', 'Sudan', 'Sudan', 'Sudan', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(196, 1, 'SR', 'SUR', 'Suriname', 'the Republic of Suriname', 'Suriname', 'Suriname', 'Suriname', 'Suriname', 'Suriname', 'Suriname', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(197, 1, 'TJ', 'TJK', 'Tajikistan', 'the Republic of Tajikistan', 'Tajikistan', 'Tajikistan', 'Tajikistan', 'Tajikistan', 'Tajikistan', 'Tajikistan', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(198, 1, 'SZ', 'SWZ', 'Swaziland', 'the Kingdom of Swaziland', 'Swaziland', 'Swaziland', 'Swaziland', 'Swaziland', 'Swaziland', 'Swaziland', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(199, 1, 'SE', 'SWE', 'Sweden', 'the Kingdom of Sweden', 'Sweden', 'Sweden', 'Sweden', 'Sweden', 'Sweden', 'Sweden', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(200, 1, 'CH', 'CHE', 'Switzerland', 'the Swiss Confederation', 'Switzerland', 'Switzerland', 'Switzerland', 'Switzerland', 'Switzerland', 'Switzerland', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(201, 1, 'SY', 'SYR', 'Syrian Arab Republic', 'the Syrian Arab Republic', 'Syrian Arab Republic', 'Syrian Arab Republic', 'Syrian Arab Republic', 'Syrian Arab Republic', 'Syrian Arab Republic', 'Syrian Arab Republic', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(202, 1, 'TM', 'TKM', 'Turkmenistan', 'Turkmenistan', 'Turkmenistan', 'Turkmenistan', 'Turkmenistan', 'Turkmenistan', 'Turkmenistan', 'Turkmenistan', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(203, 1, 'TW', 'TWN', 'Chinese Taipei', 'Chinese Taipei', 'Chinese Taipei', 'Chinese Taipei', 'Chinese Taipei', 'Chinese Taipei', 'Chinese Taipei', 'Chinese Taipei', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(204, 1, 'TZ', 'TZA', 'United Republic of Tanzania', 'the United Republic of Tanzania', 'United Republic of Tanzania', 'United Republic of Tanzania', 'United Republic of Tanzania', 'United Republic of Tanzania', 'United Republic of Tanzania', 'United Republic of Tanzania', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(205, 1, 'TH', 'THA', 'Thailand', 'the Kingdom of Thailand', 'Thailand', 'Thailand', 'Thailand', 'Thailand', 'Thailand', 'Thailand', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(206, 1, 'TG', 'TGO', 'Togo', 'the Togolese Republic', 'Togo', 'Togo', 'Togo', 'Togo', 'Togo', 'Togo', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(207, 1, 'TK', 'TKL', 'Tokelau (Associate Member)', 'Tokelau', 'Tokelau (Associate Member)', 'Tokelau (Associate Member)', 'Tokelau (Associate Member)', 'Tokelau (Associate Member)', 'Tokelau (Associate Member)', 'Tokelau (Associate Member)', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(208, 1, 'TO', 'TON', 'Tonga', 'the Kingdom of Tonga', 'Tonga', 'Tonga', 'Tonga', 'Tonga', 'Tonga', 'Tonga', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(209, 1, 'TT', 'TTO', 'Trinidad and Tobago', 'the Republic of Trinidad and Tobago', 'Trinidad and Tobago', 'Trinidad and Tobago', 'Trinidad and Tobago', 'Trinidad and Tobago', 'Trinidad and Tobago', 'Trinidad and Tobago', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(210, 1, 'OM', 'OMN', 'Oman', 'the Sultanate of Oman', 'Oman', 'Oman', 'Oman', 'Oman', 'Oman', 'Oman', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59');
+INSERT INTO `cl_ref_countries` (`ID`, `ENABLED`, `CODE`, `ISO_3_CODE`, `NAME`, `DESCRIPTION`, `I18n_DEFAULT`, `I18N_EN`, `I18N_FR`, `I18N_ES`, `I18N_TH`, `I18N_VT`, `I18N_LA`, `I18N_ID`, `I18N_KH`, `UPDATER_ID`, `COMMENT`, `CREATED_AT`, `UPDATED_AT`) VALUES
+(211, 1, 'TN', 'TUN', 'Tunisia', 'the Republic of Tunisia', 'Tunisia', 'Tunisia', 'Tunisia', 'Tunisia', 'Tunisia', 'Tunisia', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(212, 1, 'TR', 'TUR', 'Turkey', 'the Republic of Turkey', 'Turkey', 'Turkey', 'Turkey', 'Turkey', 'Turkey', 'Turkey', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(213, 1, 'TC', 'TCA', 'Turks and Caicos Islands', 'Turks and Caicos Islands', 'Turks and Caicos Islands', 'Turks and Caicos Islands', 'Turks and Caicos Islands', 'Turks and Caicos Islands', 'Turks and Caicos Islands', 'Turks and Caicos Islands', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(214, 1, 'AE', 'ARE', 'United Arab Emirates', 'the United Arab Emirates', 'United Arab Emirates', 'United Arab Emirates', 'United Arab Emirates', 'United Arab Emirates', 'United Arab Emirates', 'United Arab Emirates', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(215, 1, 'UG', 'UGA', 'Uganda', 'the Republic of Uganda', 'Uganda', 'Uganda', 'Uganda', 'Uganda', 'Uganda', 'Uganda', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(216, 1, 'TV', 'TUV', 'Tuvalu', 'Tuvalu', 'Tuvalu', 'Tuvalu', 'Tuvalu', 'Tuvalu', 'Tuvalu', 'Tuvalu', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(217, 1, 'SU', 'SUN', 'Russia', 'Un. Sov. Soc. Rep.', 'Russia', 'Russia', 'Russia', 'Russia', 'Russia', 'Russia', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(218, 1, 'GB', 'GBR', 'United Kingdom', 'the United Kingdom of Great Britain and Northern Ireland', 'United Kingdom', 'United Kingdom', 'United Kingdom', 'United Kingdom', 'United Kingdom', 'United Kingdom', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(219, 1, 'UA', 'UKR', 'Ukraine', 'Ukraine', 'Ukraine', 'Ukraine', 'Ukraine', 'Ukraine', 'Ukraine', 'Ukraine', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(220, 1, 'US', 'USA', 'United States of America', 'the United States of America', 'United States of America', 'United States of America', 'United States of America', 'United States of America', 'United States of America', 'United States of America', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(221, 1, 'UM', 'UMI', 'US Minor Is.', 'US Minor Outlying Islands', 'US Minor Is.', 'US Minor Is.', 'US Minor Is.', 'US Minor Is.', 'US Minor Is.', 'US Minor Is.', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(222, 1, 'BF', 'BFA', 'Burkina Faso', 'Burkina Faso', 'Burkina Faso', 'Burkina Faso', 'Burkina Faso', 'Burkina Faso', 'Burkina Faso', 'Burkina Faso', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(223, 1, 'UY', 'URY', 'Uruguay', 'the Eastern Republic of Uruguay', 'Uruguay', 'Uruguay', 'Uruguay', 'Uruguay', 'Uruguay', 'Uruguay', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(224, 1, 'UZ', 'UZB', 'Uzbekistan', 'the Republic of Uzbekistan', 'Uzbekistan', 'Uzbekistan', 'Uzbekistan', 'Uzbekistan', 'Uzbekistan', 'Uzbekistan', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(225, 1, 'VE', 'VEN', 'Venezuela (Bolivarian Republic of)', 'the Bolivarian Republic of Venezuela', 'Venezuela (Bolivarian Republic of)', 'Venezuela (Bolivarian Republic of)', 'Venezuela (Bolivarian Republic of)', 'Venezuela (Bolivarian Republic of)', 'Venezuela (Bolivarian Republic of)', 'Venezuela (Bolivarian Republic of)', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(226, 1, 'VN', 'VNM', 'Viet Nam', 'the Socialist Republic of Viet Nam', 'Viet Nam', 'Viet Nam', 'Viet Nam', 'Viet Nam', 'Viet Nam', 'Viet Nam', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(227, 1, 'ET', 'ETH', 'Ethiopia', 'the Federal Democratic Republic of Ethiopia', 'Ethiopia', 'Ethiopia', 'Ethiopia', 'Ethiopia', 'Ethiopia', 'Ethiopia', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(228, 1, 'VG', 'VGB', 'British Virgin Islands', 'the British Virgin Islands', 'British Virgin Islands', 'British Virgin Islands', 'British Virgin Islands', 'British Virgin Islands', 'British Virgin Islands', 'British Virgin Islands', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(229, 1, 'VI', 'VIR', 'United States Virgin Islands', 'the United States Virgin Islands', 'United States Virgin Islands', 'United States Virgin Islands', 'United States Virgin Islands', 'United States Virgin Islands', 'United States Virgin Islands', 'United States Virgin Islands', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(230, 1, 'WK', 'WAK', 'Wake Island', 'Wake Island', 'Wake Island', 'Wake Island', 'Wake Island', 'Wake Island', 'Wake Island', 'Wake Island', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(231, 1, 'WF', 'WLF', 'Wallis and Futuna Islands', 'Wallis and Futuna Islands', 'Wallis and Futuna Islands', 'Wallis and Futuna Islands', 'Wallis and Futuna Islands', 'Wallis and Futuna Islands', 'Wallis and Futuna Islands', 'Wallis and Futuna Islands', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(232, 1, 'WS', 'WSM', 'Samoa', 'the Independent State of Samoa', 'Samoa', 'Samoa', 'Samoa', 'Samoa', 'Samoa', 'Samoa', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(233, 1, 'YE', 'YEM', 'Yemen', 'the Republic of Yemen', 'Yemen', 'Yemen', 'Yemen', 'Yemen', 'Yemen', 'Yemen', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(234, 1, 'CD', 'COD', 'Democratic Republic of the Congo', 'the Democratic Republic of the Congo', 'Democratic Republic of the Congo', 'Democratic Republic of the Congo', 'Democratic Republic of the Congo', 'Democratic Republic of the Congo', 'Democratic Republic of the Congo', 'Democratic Republic of the Congo', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(235, 1, 'ZM', 'ZMB', 'Zambia', 'the Republic of Zambia', 'Zambia', 'Zambia', 'Zambia', 'Zambia', 'Zambia', 'Zambia', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(236, 1, 'BE', 'BEL', 'Belgium', 'the Kingdom of Belgium', 'Belgium', 'Belgium', 'Belgium', 'Belgium', 'Belgium', 'Belgium', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(237, 1, 'LU', 'LUX', 'Luxembourg', 'the Grand Duchy of Luxembourg', 'Luxembourg', 'Luxembourg', 'Luxembourg', 'Luxembourg', 'Luxembourg', 'Luxembourg', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(238, 1, 'AI', 'AIA', 'Anguilla', 'Anguilla', 'Anguilla', 'Anguilla', 'Anguilla', 'Anguilla', 'Anguilla', 'Anguilla', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(239, 1, 'SJ', 'SJM', 'Svalbard and Jan Mayen Islands', 'Svalbard and Jan Mayen Islands', 'Svalbard and Jan Mayen Islands', 'Svalbard and Jan Mayen Islands', 'Svalbard and Jan Mayen Islands', 'Svalbard and Jan Mayen Islands', 'Svalbard and Jan Mayen Islands', 'Svalbard and Jan Mayen Islands', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(240, 1, 'IM', 'IMN', 'Isle of Man', 'Isle of Man', 'Isle of Man', 'Isle of Man', 'Isle of Man', 'Isle of Man', 'Isle of Man', 'Isle of Man', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(241, 1, 'YT', 'MYT', 'Mayotte', 'Mayotte', 'Mayotte', 'Mayotte', 'Mayotte', 'Mayotte', 'Mayotte', 'Mayotte', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(242, 1, 'GS', 'SGS', 'South Georgia and the South Sandwich Islands', 'South Georgia and the South Sandwich Islands', 'South Georgia and the South Sandwich Islands', 'South Georgia and the South Sandwich Islands', 'South Georgia and the South Sandwich Islands', 'South Georgia and the South Sandwich Islands', 'South Georgia and the South Sandwich Islands', 'South Georgia and the South Sandwich Islands', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(243, 1, 'RS', 'SRB', 'Serbia', 'Serbia', 'Serbia', 'Serbia', 'Serbia', 'Serbia', 'Serbia', 'Serbia', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(244, 1, 'ME', 'MNE', 'Montenegro', 'Montenegro', 'Montenegro', 'Montenegro', 'Montenegro', 'Montenegro', 'Montenegro', 'Montenegro', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(245, 1, 'PS', 'PSE', 'Palestine', 'Palestine', 'Palestine', 'Palestine', 'Palestine', 'Palestine', 'Palestine', 'Palestine', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(246, 1, 'DD', 'DDR', 'German Democratic Republic', 'German Democratic Republic', 'German Democratic Republic', 'German Democratic Republic', 'German Democratic Republic', 'German Democratic Republic', 'German Democratic Republic', 'German Democratic Republic', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(247, 1, 'YU', 'YUG', 'Yugoslavia', 'Socialist Federal Republic of Yugoslavia', 'Yugoslavia', 'Yugoslavia', 'Yugoslavia', 'Yugoslavia', 'Yugoslavia', 'Yugoslavia', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(248, 1, 'AX', 'ALA', 'Åland Islands', 'Åland Islands', 'Ã…land Islands', 'Ã…land Islands', 'Ã…land Islands', 'Ã…land Islands', 'Ã…land Islands', 'Ã…land Islands', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(249, 1, 'BQ', 'BES', 'Bonaire, Sint Eustatius and Saba', 'Bonaire, Sint Eustatius and Saba', 'Bonaire, Sint Eustatius and Saba', 'Bonaire, Sint Eustatius and Saba', 'Bonaire, Sint Eustatius and Saba', 'Bonaire, Sint Eustatius and Saba', 'Bonaire, Sint Eustatius and Saba', 'Bonaire, Sint Eustatius and Saba', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(250, 1, 'CW', 'CUW', 'Curaçao', 'Curaçao', 'Curasao', 'Curasao', 'Curasao', 'Curasao', 'Curasao', 'Curasao', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(251, 1, 'GG', 'GGY', 'Guernsey', 'Bailiwick of Guernsey', 'Guernsey', 'Guernsey', 'Guernsey', 'Guernsey', 'Guernsey', 'Guernsey', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(252, 1, 'JE', 'JEY', 'Jersey', 'Bailiwick of Jersey', 'Jersey', 'Jersey', 'Jersey', 'Jersey', 'Jersey', 'Jersey', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(253, 1, 'PN', 'PNC', 'Pitcairn Islands', 'Pitcairn Islands', 'Pitcairn Islands', 'Pitcairn Islands', 'Pitcairn Islands', 'Pitcairn Islands', 'Pitcairn Islands', 'Pitcairn Islands', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(254, 1, 'BL', 'BLM', 'Saint Barthélemy', 'Saint Barthélemy', 'Saint Barthélemy', 'Saint Barthélemy', 'Saint Barthélemy', 'Saint Barthélemy', 'Saint Barthélemy', 'Saint Barthélemy', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(255, 1, 'MF', 'MAF', 'Saint-Martin (French Part)', 'Saint-Martin (French Part)', 'Saint-Martin (French Part)', 'Saint-Martin (French Part)', 'Saint-Martin (French Part)', 'Saint-Martin (French Part)', 'Saint-Martin (French Part)', 'Saint-Martin (French Part)', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(256, 1, 'SX', 'SXM', 'Sint Maarten (Dutch Part)', 'Sint Maarten (Dutch Part)', 'Sint Maarten (Dutch Part)', 'Sint Maarten (Dutch Part)', 'Sint Maarten (Dutch Part)', 'Sint Maarten (Dutch Part)', 'Sint Maarten (Dutch Part)', 'Sint Maarten (Dutch Part)', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(257, 1, 'SS', 'SSD', 'South Sudan', 'the Republic of South Sudan', 'South Sudan', 'South Sudan', 'South Sudan', 'South Sudan', 'South Sudan', 'South Sudan', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(258, 1, 'UN', 'UNK', 'Unknown / Not set', 'Unknown / Not set', 'Unknown / Not set', 'Unknown / Not set', 'Unknown / Not set', 'Unknown / Not set', 'Unknown / Not set', 'Unknown / Not set', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59'),
+(259, 1, 'EU', 'EUR', 'European Union', 'European Union', 'European Union', 'European Union', 'European Union', 'European Union', 'European Union', 'European Union', NULL, NULL, NULL, 1, 'Initial import', '2014-12-31 22:00:00', '2017-09-12 13:27:59');
 
 -- --------------------------------------------------------
 
@@ -1264,6 +1549,9 @@ CREATE TABLE `cl_ref_currencies` (
   `I18N_ES` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Spanish',
   `I18N_TH` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Thai',
   `I18N_VT` varchar(256) CHARACTER SET utf8 COLLATE utf8_vietnamese_ci DEFAULT NULL COMMENT 'label in Vietnamese',
+  `I18N_LA` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Lao',
+  `I18N_ID` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in indonesian',
+  `I18N_KH` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Cambodian',
   `UPDATER_ID` int(11) NOT NULL DEFAULT '1',
   `COMMENT` varchar(512) COLLATE utf8_bin DEFAULT NULL,
   `CREATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -1274,10 +1562,10 @@ CREATE TABLE `cl_ref_currencies` (
 -- Contenu de la table `cl_ref_currencies`
 --
 
-INSERT INTO `cl_ref_currencies` (`ID`, `ENABLED`, `CODE`, `NAME`, `DESCRIPTION`, `I18n_DEFAULT`, `I18N_EN`, `I18N_FR`, `I18N_ES`, `I18N_TH`, `I18N_VT`, `UPDATER_ID`, `COMMENT`, `CREATED_AT`, `UPDATED_AT`) VALUES
-(1, 1, 'BAHT', 'Baht', 'Baht', 'Baht', 'Baht', 'Baht', NULL, 'บาท', NULL, 1, NULL, '2017-11-27 17:41:31', '2017-11-27 17:41:31'),
-(2, 1, 'USD', 'US Dollar', 'US Dollar', 'US Dollar', 'US Dollar', 'US Dollar', NULL, 'ดอลลาร์สหรัฐ', NULL, 1, NULL, '2017-11-23 19:24:58', '2017-11-23 19:24:58'),
-(3, 1, 'EUR', 'Euro', 'Euro', 'Euro', 'Euro', 'Euro', 'Euro', 'ยูโร', NULL, 1, NULL, '2017-11-23 19:24:58', '2017-11-23 19:24:58');
+INSERT INTO `cl_ref_currencies` (`ID`, `ENABLED`, `CODE`, `NAME`, `DESCRIPTION`, `I18n_DEFAULT`, `I18N_EN`, `I18N_FR`, `I18N_ES`, `I18N_TH`, `I18N_VT`, `I18N_LA`, `I18N_ID`, `I18N_KH`, `UPDATER_ID`, `COMMENT`, `CREATED_AT`, `UPDATED_AT`) VALUES
+(1, 1, 'BAHT', 'Baht', 'Baht', 'Baht', 'Baht', 'Baht', NULL, 'บาท', NULL, NULL, NULL, NULL, 1, NULL, '2017-11-27 17:41:31', '2017-11-27 17:41:31'),
+(2, 1, 'USD', 'US Dollar', 'US Dollar', 'US Dollar', 'US Dollar', 'US Dollar', NULL, 'ดอลลาร์สหรัฐ', NULL, NULL, NULL, NULL, 1, NULL, '2017-11-23 19:24:58', '2017-11-23 19:24:58'),
+(3, 1, 'EUR', 'Euro', 'Euro', 'Euro', 'Euro', 'Euro', 'Euro', 'ยูโร', NULL, NULL, NULL, NULL, 1, NULL, '2017-11-23 19:24:58', '2017-11-23 19:24:58');
 
 -- --------------------------------------------------------
 
@@ -1297,11 +1585,37 @@ CREATE TABLE `cl_ref_gears` (
   `I18N_ES` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Spanish',
   `I18N_TH` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Thai',
   `I18N_VT` varchar(256) CHARACTER SET utf8 COLLATE utf8_vietnamese_ci DEFAULT NULL COMMENT 'label in Vietnamese',
+  `I18N_LA` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Lao',
+  `I18N_ID` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in indonesian',
+  `I18N_KH` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Cambodian',
   `UPDATER_ID` int(11) NOT NULL DEFAULT '1',
   `COMMENT` varchar(512) COLLATE utf8_bin DEFAULT NULL,
   `CREATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `UPDATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `cl_ref_gear_characteristics`
+--
+
+CREATE TABLE `cl_ref_gear_characteristics` (
+  `CL_REF_GEAR_ID` int(11) NOT NULL,
+  `DESCRIPTION` varchar(512) COLLATE utf8_bin DEFAULT NULL COMMENT 'A textual description of this gear characteristic.',
+  `VALUE_MEASURE` varchar(512) COLLATE utf8_bin DEFAULT NULL COMMENT 'The value, expressed as value, for this gear characteristic.',
+  `CL_VALUE_MEASURE_UNIT_ID` int(11) DEFAULT NULL COMMENT 'The unit for the measure',
+  `VALUE_TEXT` varchar(512) COLLATE utf8_bin DEFAULT NULL COMMENT 'A value, expressed as text, of this gear characteristic.',
+  `VALUE_CODE` varchar(512) COLLATE utf8_bin DEFAULT NULL COMMENT 'A code specifying a value of this gear characteristic.',
+  `VALUE_DATE` date DEFAULT NULL COMMENT 'The value, expressed as a date, time, date time, or other date time value, of this gear characteristic.',
+  `VALUE_INDICATOR` varchar(512) COLLATE utf8_bin DEFAULT NULL COMMENT 'The value, expressed as an indicator, for this gear characteristic.',
+  `VALUE_QUANTITY` float DEFAULT NULL COMMENT 'The value, expressed as a quantity, for this gear characteristic.',
+  `CL_VALUE_QUANTITY_UNIT_ID` int(11) DEFAULT NULL,
+  `UPDATER_ID` int(11) NOT NULL DEFAULT '1',
+  `COMMENT` varchar(1024) COLLATE utf8_bin DEFAULT NULL,
+  `CREATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `UPDATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='UN/CEFACT FLUX Vessel Domain: Entity used to provide information on a prominent attribute or aspect related to a gear';
 
 -- --------------------------------------------------------
 
@@ -1322,6 +1636,9 @@ CREATE TABLE `cl_ref_landing_sites` (
   `I18N_ES` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Spanish',
   `I18N_TH` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Thai',
   `I18N_VT` varchar(256) CHARACTER SET utf8 COLLATE utf8_vietnamese_ci DEFAULT NULL COMMENT 'label in Vietnamese',
+  `I18N_LA` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Lao',
+  `I18N_ID` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in indonesian',
+  `I18N_KH` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Cambodian',
   `UPDATER_ID` int(11) NOT NULL DEFAULT '1',
   `COMMENT` varchar(512) COLLATE utf8_bin DEFAULT NULL,
   `CREATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -1346,6 +1663,9 @@ CREATE TABLE `cl_ref_languages` (
   `I18N_ES` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Spanish',
   `I18N_TH` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Thai',
   `I18N_VT` varchar(256) CHARACTER SET utf8 COLLATE utf8_vietnamese_ci DEFAULT NULL COMMENT 'label in Vietnamese',
+  `I18N_LA` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Lao',
+  `I18N_ID` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in indonesian',
+  `I18N_KH` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Cambodian',
   `UPDATER_ID` int(11) NOT NULL DEFAULT '1',
   `COMMENT` varchar(512) COLLATE utf8_bin DEFAULT NULL,
   `CREATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -1356,191 +1676,191 @@ CREATE TABLE `cl_ref_languages` (
 -- Contenu de la table `cl_ref_languages`
 --
 
-INSERT INTO `cl_ref_languages` (`ID`, `ENABLED`, `CODE`, `NAME`, `DESCRIPTION`, `I18n_DEFAULT`, `I18N_EN`, `I18N_FR`, `I18N_ES`, `I18N_TH`, `I18N_VT`, `UPDATER_ID`, `COMMENT`, `CREATED_AT`, `UPDATED_AT`) VALUES
-(1, 1, 'aa', 'Afar', 'Afar', 'Afar', 'Afar', 'Afar', 'Afar', 'Afar', 'Afar', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(2, 1, 'ab', 'Abkhazian', 'Abkhazian', 'Abkhazian', 'Abkhazian', 'Abkhazian', 'Abkhazian', 'Abkhazian', 'Abkhazian', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(3, 1, 'ae', 'Avestan', 'Avestan', 'Avestan', 'Avestan', 'Avestan', 'Avestan', 'Avestan', 'Avestan', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(4, 1, 'af', 'Afrikaans', 'Afrikaans', 'Afrikaans', 'Afrikaans', 'Afrikaans', 'Afrikaans', 'Afrikaans', 'Afrikaans', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(5, 1, 'ak', 'Akan', 'Akan', 'Akan', 'Akan', 'Akan', 'Akan', 'Akan', 'Akan', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(6, 1, 'am', 'Amharic', 'Amharic', 'Amharic', 'Amharic', 'Amharic', 'Amharic', 'Amharic', 'Amharic', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(7, 1, 'an', 'Aragonese', 'Aragonese', 'Aragonese', 'Aragonese', 'Aragonese', 'Aragonese', 'Aragonese', 'Aragonese', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(8, 1, 'ar', 'Arabic', 'Arabic', 'Arabic', 'Arabic', 'Arabic', 'Arabic', 'Arabic', 'Arabic', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(9, 1, 'as', 'Assamese', 'Assamese', 'Assamese', 'Assamese', 'Assamese', 'Assamese', 'Assamese', 'Assamese', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(10, 1, 'av', 'Avaric', 'Avaric', 'Avaric', 'Avaric', 'Avaric', 'Avaric', 'Avaric', 'Avaric', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(11, 1, 'ay', 'Aymara', 'Aymara', 'Aymara', 'Aymara', 'Aymara', 'Aymara', 'Aymara', 'Aymara', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(12, 1, 'az', 'Azerbaijani', 'Azerbaijani', 'Azerbaijani', 'Azerbaijani', 'Azerbaijani', 'Azerbaijani', 'Azerbaijani', 'Azerbaijani', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(13, 1, 'ba', 'Bashkir', 'Bashkir', 'Bashkir', 'Bashkir', 'Bashkir', 'Bashkir', 'Bashkir', 'Bashkir', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(14, 1, 'be', 'Belarusian', 'Belarusian', 'Belarusian', 'Belarusian', 'Belarusian', 'Belarusian', 'Belarusian', 'Belarusian', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(15, 1, 'bg', 'Bulgarian', 'Bulgarian', 'Bulgarian', 'Bulgarian', 'Bulgarian', 'Bulgarian', 'Bulgarian', 'Bulgarian', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(16, 1, 'bh', 'Bihari languages', 'Bihari languages', 'Bihari languages', 'Bihari languages', 'Bihari languages', 'Bihari languages', 'Bihari languages', 'Bihari languages', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(17, 1, 'bi', 'Bislama', 'Bislama', 'Bislama', 'Bislama', 'Bislama', 'Bislama', 'Bislama', 'Bislama', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(18, 1, 'bm', 'Bambara', 'Bambara', 'Bambara', 'Bambara', 'Bambara', 'Bambara', 'Bambara', 'Bambara', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(19, 1, 'bn', 'Bengali', 'Bengali', 'Bengali', 'Bengali', 'Bengali', 'Bengali', 'Bengali', 'Bengali', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(20, 1, 'bo', 'Tibetan', 'Tibetan', 'Tibetan', 'Tibetan', 'Tibetan', 'Tibetan', 'Tibetan', 'Tibetan', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(21, 1, 'br', 'Breton', 'Breton', 'Breton', 'Breton', 'Breton', 'Breton', 'Breton', 'Breton', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(22, 1, 'bs', 'Bosnian', 'Bosnian', 'Bosnian', 'Bosnian', 'Bosnian', 'Bosnian', 'Bosnian', 'Bosnian', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(23, 1, 'ca', 'Catalan; Valencian', 'Catalan; Valencian', 'Catalan; Valencian', 'Catalan; Valencian', 'Catalan; Valencian', 'Catalan; Valencian', 'Catalan; Valencian', 'Catalan; Valencian', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(24, 1, 'ce', 'Chechen', 'Chechen', 'Chechen', 'Chechen', 'Chechen', 'Chechen', 'Chechen', 'Chechen', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(25, 1, 'ch', 'Chamorro', 'Chamorro', 'Chamorro', 'Chamorro', 'Chamorro', 'Chamorro', 'Chamorro', 'Chamorro', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(26, 1, 'co', 'Corsican', 'Corsican', 'Corsican', 'Corsican', 'Corsican', 'Corsican', 'Corsican', 'Corsican', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(27, 1, 'cr', 'Cree', 'Cree', 'Cree', 'Cree', 'Cree', 'Cree', 'Cree', 'Cree', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(28, 1, 'cs', 'Czech', 'Czech', 'Czech', 'Czech', 'Czech', 'Czech', 'Czech', 'Czech', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(29, 1, 'cu', 'Church Slavic', 'Church Slavic', 'Church Slavic', 'Church Slavic', 'Church Slavic', 'Church Slavic', 'Church Slavic', 'Church Slavic', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(30, 1, 'cv', 'Chuvash', 'Chuvash', 'Chuvash', 'Chuvash', 'Chuvash', 'Chuvash', 'Chuvash', 'Chuvash', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(31, 1, 'cy', 'Welsh', 'Welsh', 'Welsh', 'Welsh', 'Welsh', 'Welsh', 'Welsh', 'Welsh', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(32, 1, 'da', 'Danish', 'Danish', 'Danish', 'Danish', 'Danish', 'Danish', 'Danish', 'Danish', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(33, 1, 'de', 'German', 'German', 'German', 'German', 'German', 'German', 'German', 'German', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(34, 1, 'dv', 'Divehi; Dhivehi; Maldivian', 'Divehi; Dhivehi; Maldivian', 'Divehi; Dhivehi; Maldivian', 'Divehi; Dhivehi; Maldivian', 'Divehi; Dhivehi; Maldivian', 'Divehi; Dhivehi; Maldivian', 'Divehi; Dhivehi; Maldivian', 'Divehi; Dhivehi; Maldivian', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(35, 1, 'dz', 'Dzongkha', 'Dzongkha', 'Dzongkha', 'Dzongkha', 'Dzongkha', 'Dzongkha', 'Dzongkha', 'Dzongkha', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(36, 1, 'ee', 'Ewe', 'Ewe', 'Ewe', 'Ewe', 'Ewe', 'Ewe', 'Ewe', 'Ewe', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(37, 1, 'el', 'Greek, Modern (1453-)', 'Greek, Modern (1453-)', 'Greek, Modern (1453-)', 'Greek, Modern (1453-)', 'Greek, Modern (1453-)', 'Greek, Modern (1453-)', 'Greek, Modern (1453-)', 'Greek, Modern (1453-)', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(38, 1, 'en', 'English', 'English', 'English', 'English', 'English', 'English', 'English', 'English', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(39, 1, 'eo', 'Esperanto', 'Esperanto', 'Esperanto', 'Esperanto', 'Esperanto', 'Esperanto', 'Esperanto', 'Esperanto', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(40, 1, 'es', 'Spanish; Castilian', 'Spanish; Castilian', 'Spanish; Castilian', 'Spanish; Castilian', 'Spanish; Castilian', 'Spanish; Castilian', 'Spanish; Castilian', 'Spanish; Castilian', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(41, 1, 'et', 'Estonian', 'Estonian', 'Estonian', 'Estonian', 'Estonian', 'Estonian', 'Estonian', 'Estonian', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(42, 1, 'eu', 'Basque', 'Basque', 'Basque', 'Basque', 'Basque', 'Basque', 'Basque', 'Basque', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(43, 1, 'fa', 'Persian', 'Persian', 'Persian', 'Persian', 'Persian', 'Persian', 'Persian', 'Persian', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(44, 1, 'ff', 'Fulah', 'Fulah', 'Fulah', 'Fulah', 'Fulah', 'Fulah', 'Fulah', 'Fulah', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(45, 1, 'fi', 'Finnish', 'Finnish', 'Finnish', 'Finnish', 'Finnish', 'Finnish', 'Finnish', 'Finnish', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(46, 1, 'fj', 'Fijian', 'Fijian', 'Fijian', 'Fijian', 'Fijian', 'Fijian', 'Fijian', 'Fijian', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(47, 1, 'fo', 'Faroese', 'Faroese', 'Faroese', 'Faroese', 'Faroese', 'Faroese', 'Faroese', 'Faroese', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(48, 1, 'fr', 'French', 'French', 'French', 'French', 'French', 'French', 'French', 'French', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(49, 1, 'fy', 'Western Frisian', 'Western Frisian', 'Western Frisian', 'Western Frisian', 'Western Frisian', 'Western Frisian', 'Western Frisian', 'Western Frisian', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(50, 1, 'ga', 'Irish', 'Irish', 'Irish', 'Irish', 'Irish', 'Irish', 'Irish', 'Irish', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(51, 1, 'gd', 'Gaelic; Scottish Gaelic', 'Gaelic; Scottish Gaelic', 'Gaelic; Scottish Gaelic', 'Gaelic; Scottish Gaelic', 'Gaelic; Scottish Gaelic', 'Gaelic; Scottish Gaelic', 'Gaelic; Scottish Gaelic', 'Gaelic; Scottish Gaelic', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(52, 1, 'gl', 'Galician', 'Galician', 'Galician', 'Galician', 'Galician', 'Galician', 'Galician', 'Galician', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(53, 1, 'gn', 'Guarani', 'Guarani', 'Guarani', 'Guarani', 'Guarani', 'Guarani', 'Guarani', 'Guarani', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(54, 1, 'gu', 'Gujarati', 'Gujarati', 'Gujarati', 'Gujarati', 'Gujarati', 'Gujarati', 'Gujarati', 'Gujarati', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(55, 1, 'gv', 'Manx', 'Manx', 'Manx', 'Manx', 'Manx', 'Manx', 'Manx', 'Manx', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(56, 1, 'ha', 'Hausa', 'Hausa', 'Hausa', 'Hausa', 'Hausa', 'Hausa', 'Hausa', 'Hausa', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(57, 1, 'he', 'Hebrew', 'Hebrew', 'Hebrew', 'Hebrew', 'Hebrew', 'Hebrew', 'Hebrew', 'Hebrew', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(58, 1, 'hi', 'Hindi', 'Hindi', 'Hindi', 'Hindi', 'Hindi', 'Hindi', 'Hindi', 'Hindi', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(59, 1, 'ho', 'Hiri Motu', 'Hiri Motu', 'Hiri Motu', 'Hiri Motu', 'Hiri Motu', 'Hiri Motu', 'Hiri Motu', 'Hiri Motu', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(60, 1, 'hr', 'Croatian', 'Croatian', 'Croatian', 'Croatian', 'Croatian', 'Croatian', 'Croatian', 'Croatian', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(61, 1, 'ht', 'Haitian; Haitian Creole', 'Haitian; Haitian Creole', 'Haitian; Haitian Creole', 'Haitian; Haitian Creole', 'Haitian; Haitian Creole', 'Haitian; Haitian Creole', 'Haitian; Haitian Creole', 'Haitian; Haitian Creole', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(62, 1, 'hu', 'Hungarian', 'Hungarian', 'Hungarian', 'Hungarian', 'Hungarian', 'Hungarian', 'Hungarian', 'Hungarian', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(63, 1, 'hy', 'Armenian', 'Armenian', 'Armenian', 'Armenian', 'Armenian', 'Armenian', 'Armenian', 'Armenian', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(64, 1, 'hz', 'Herero', 'Herero', 'Herero', 'Herero', 'Herero', 'Herero', 'Herero', 'Herero', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(65, 1, 'ia', 'Interlingua ', 'Interlingua ', 'Interlingua ', 'Interlingua ', 'Interlingua ', 'Interlingua ', 'Interlingua ', 'Interlingua ', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(66, 1, 'id', 'Indonesian', 'Indonesian', 'Indonesian', 'Indonesian', 'Indonesian', 'Indonesian', 'Indonesian', 'Indonesian', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(67, 1, 'ie', 'Interlingue; Occidental', 'Interlingue; Occidental', 'Interlingue; Occidental', 'Interlingue; Occidental', 'Interlingue; Occidental', 'Interlingue; Occidental', 'Interlingue; Occidental', 'Interlingue; Occidental', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(68, 1, 'ig', 'Igbo', 'Igbo', 'Igbo', 'Igbo', 'Igbo', 'Igbo', 'Igbo', 'Igbo', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(69, 1, 'ii', 'Sichuan Yi; Nuosu', 'Sichuan Yi; Nuosu', 'Sichuan Yi; Nuosu', 'Sichuan Yi; Nuosu', 'Sichuan Yi; Nuosu', 'Sichuan Yi; Nuosu', 'Sichuan Yi; Nuosu', 'Sichuan Yi; Nuosu', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(70, 1, 'ik', 'Inupiaq', 'Inupiaq', 'Inupiaq', 'Inupiaq', 'Inupiaq', 'Inupiaq', 'Inupiaq', 'Inupiaq', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(71, 1, 'io', 'Ido', 'Ido', 'Ido', 'Ido', 'Ido', 'Ido', 'Ido', 'Ido', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(72, 1, 'is', 'Icelandic', 'Icelandic', 'Icelandic', 'Icelandic', 'Icelandic', 'Icelandic', 'Icelandic', 'Icelandic', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(73, 1, 'it', 'Italian', 'Italian', 'Italian', 'Italian', 'Italian', 'Italian', 'Italian', 'Italian', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(74, 1, 'iu', 'Inuktitut', 'Inuktitut', 'Inuktitut', 'Inuktitut', 'Inuktitut', 'Inuktitut', 'Inuktitut', 'Inuktitut', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(75, 1, 'ja', 'Japanese', 'Japanese', 'Japanese', 'Japanese', 'Japanese', 'Japanese', 'Japanese', 'Japanese', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(76, 1, 'jv', 'Javanese', 'Javanese', 'Javanese', 'Javanese', 'Javanese', 'Javanese', 'Javanese', 'Javanese', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(77, 1, 'ka', 'Georgian', 'Georgian', 'Georgian', 'Georgian', 'Georgian', 'Georgian', 'Georgian', 'Georgian', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(78, 1, 'kg', 'Kongo', 'Kongo', 'Kongo', 'Kongo', 'Kongo', 'Kongo', 'Kongo', 'Kongo', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(79, 1, 'ki', 'Kikuyu; Gikuyu', 'Kikuyu; Gikuyu', 'Kikuyu; Gikuyu', 'Kikuyu; Gikuyu', 'Kikuyu; Gikuyu', 'Kikuyu; Gikuyu', 'Kikuyu; Gikuyu', 'Kikuyu; Gikuyu', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(80, 1, 'kj', 'Kuanyama; Kwanyama', 'Kuanyama; Kwanyama', 'Kuanyama; Kwanyama', 'Kuanyama; Kwanyama', 'Kuanyama; Kwanyama', 'Kuanyama; Kwanyama', 'Kuanyama; Kwanyama', 'Kuanyama; Kwanyama', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(81, 1, 'kk', 'Kazakh', 'Kazakh', 'Kazakh', 'Kazakh', 'Kazakh', 'Kazakh', 'Kazakh', 'Kazakh', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(82, 1, 'kl', 'Kalaallisut; Greenlandic', 'Kalaallisut; Greenlandic', 'Kalaallisut; Greenlandic', 'Kalaallisut; Greenlandic', 'Kalaallisut; Greenlandic', 'Kalaallisut; Greenlandic', 'Kalaallisut; Greenlandic', 'Kalaallisut; Greenlandic', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(83, 1, 'km', 'Central Khmer', 'Central Khmer', 'Central Khmer', 'Central Khmer', 'Central Khmer', 'Central Khmer', 'Central Khmer', 'Central Khmer', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(84, 1, 'kn', 'Kannada', 'Kannada', 'Kannada', 'Kannada', 'Kannada', 'Kannada', 'Kannada', 'Kannada', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(85, 1, 'ko', 'Korean', 'Korean', 'Korean', 'Korean', 'Korean', 'Korean', 'Korean', 'Korean', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(86, 1, 'kr', 'Kanuri', 'Kanuri', 'Kanuri', 'Kanuri', 'Kanuri', 'Kanuri', 'Kanuri', 'Kanuri', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(87, 1, 'ks', 'Kashmiri', 'Kashmiri', 'Kashmiri', 'Kashmiri', 'Kashmiri', 'Kashmiri', 'Kashmiri', 'Kashmiri', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(88, 1, 'ku', 'Kurdish', 'Kurdish', 'Kurdish', 'Kurdish', 'Kurdish', 'Kurdish', 'Kurdish', 'Kurdish', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(89, 1, 'kv', 'Komi', 'Komi', 'Komi', 'Komi', 'Komi', 'Komi', 'Komi', 'Komi', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(90, 1, 'kw', 'Cornish', 'Cornish', 'Cornish', 'Cornish', 'Cornish', 'Cornish', 'Cornish', 'Cornish', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(91, 1, 'ky', 'Kirghiz; Kyrgyz', 'Kirghiz; Kyrgyz', 'Kirghiz; Kyrgyz', 'Kirghiz; Kyrgyz', 'Kirghiz; Kyrgyz', 'Kirghiz; Kyrgyz', 'Kirghiz; Kyrgyz', 'Kirghiz; Kyrgyz', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(92, 1, 'la', 'Latin', 'Latin', 'Latin', 'Latin', 'Latin', 'Latin', 'Latin', 'Latin', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(93, 1, 'lb', 'Luxembourgish; Letzeburgesch', 'Luxembourgish; Letzeburgesch', 'Luxembourgish; Letzeburgesch', 'Luxembourgish; Letzeburgesch', 'Luxembourgish; Letzeburgesch', 'Luxembourgish; Letzeburgesch', 'Luxembourgish; Letzeburgesch', 'Luxembourgish; Letzeburgesch', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(94, 1, 'lg', 'Ganda', 'Ganda', 'Ganda', 'Ganda', 'Ganda', 'Ganda', 'Ganda', 'Ganda', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(95, 1, 'li', 'Limburgan; Limburger; Limburgish', 'Limburgan; Limburger; Limburgish', 'Limburgan; Limburger; Limburgish', 'Limburgan; Limburger; Limburgish', 'Limburgan; Limburger; Limburgish', 'Limburgan; Limburger; Limburgish', 'Limburgan; Limburger; Limburgish', 'Limburgan; Limburger; Limburgish', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(96, 1, 'ln', 'Lingala', 'Lingala', 'Lingala', 'Lingala', 'Lingala', 'Lingala', 'Lingala', 'Lingala', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(97, 1, 'lo', 'Lao', 'Lao', 'Lao', 'Lao', 'Lao', 'Lao', 'Lao', 'Lao', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(98, 1, 'lt', 'Lithuanian', 'Lithuanian', 'Lithuanian', 'Lithuanian', 'Lithuanian', 'Lithuanian', 'Lithuanian', 'Lithuanian', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(99, 1, 'lu', 'Luba-Katanga', 'Luba-Katanga', 'Luba-Katanga', 'Luba-Katanga', 'Luba-Katanga', 'Luba-Katanga', 'Luba-Katanga', 'Luba-Katanga', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(100, 1, 'lv', 'Latvian', 'Latvian', 'Latvian', 'Latvian', 'Latvian', 'Latvian', 'Latvian', 'Latvian', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(101, 1, 'mg', 'Malagasy', 'Malagasy', 'Malagasy', 'Malagasy', 'Malagasy', 'Malagasy', 'Malagasy', 'Malagasy', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(102, 1, 'mh', 'Marshallese', 'Marshallese', 'Marshallese', 'Marshallese', 'Marshallese', 'Marshallese', 'Marshallese', 'Marshallese', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(103, 1, 'mi', 'Maori', 'Maori', 'Maori', 'Maori', 'Maori', 'Maori', 'Maori', 'Maori', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(104, 1, 'mk', 'Macedonian', 'Macedonian', 'Macedonian', 'Macedonian', 'Macedonian', 'Macedonian', 'Macedonian', 'Macedonian', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(105, 1, 'ml', 'Malayalam', 'Malayalam', 'Malayalam', 'Malayalam', 'Malayalam', 'Malayalam', 'Malayalam', 'Malayalam', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(106, 1, 'mn', 'Mongolian', 'Mongolian', 'Mongolian', 'Mongolian', 'Mongolian', 'Mongolian', 'Mongolian', 'Mongolian', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(107, 1, 'mr', 'Marathi', 'Marathi', 'Marathi', 'Marathi', 'Marathi', 'Marathi', 'Marathi', 'Marathi', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(108, 1, 'ms', 'Malay', 'Malay', 'Malay', 'Malay', 'Malay', 'Malay', 'Malay', 'Malay', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(109, 1, 'mt', 'Maltese', 'Maltese', 'Maltese', 'Maltese', 'Maltese', 'Maltese', 'Maltese', 'Maltese', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(110, 1, 'my', 'Burmese', 'Burmese', 'Burmese', 'Burmese', 'Burmese', 'Burmese', 'Burmese', 'Burmese', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(111, 1, 'na', 'Nauru', 'Nauru', 'Nauru', 'Nauru', 'Nauru', 'Nauru', 'Nauru', 'Nauru', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(112, 1, 'nb', 'BokmÃ¥l, Norwegian; Norwegian BokmÃ¥l', 'BokmÃ¥l, Norwegian; Norwegian BokmÃ¥l', 'BokmÃƒÂ¥l, Norwegian; Norwegian BokmÃƒÂ¥l', 'BokmÃƒÂ¥l, Norwegian; Norwegian BokmÃƒÂ¥l', 'BokmÃƒÂ¥l, Norwegian; Norwegian BokmÃƒÂ¥l', 'BokmÃƒÂ¥l, Norwegian; Norwegian BokmÃƒÂ¥l', 'BokmÃƒÂ¥l, Norwegian; Norwegian BokmÃƒÂ¥l', 'BokmÃƒÂ¥l, Norwegian; Norwegian BokmÃƒÂ¥l', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(113, 1, 'nd', 'Ndebele, North; North Ndebele', 'Ndebele, North; North Ndebele', 'Ndebele, North; North Ndebele', 'Ndebele, North; North Ndebele', 'Ndebele, North; North Ndebele', 'Ndebele, North; North Ndebele', 'Ndebele, North; North Ndebele', 'Ndebele, North; North Ndebele', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(114, 1, 'ne', 'Nepali', 'Nepali', 'Nepali', 'Nepali', 'Nepali', 'Nepali', 'Nepali', 'Nepali', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(115, 1, 'ng', 'Ndonga', 'Ndonga', 'Ndonga', 'Ndonga', 'Ndonga', 'Ndonga', 'Ndonga', 'Ndonga', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(116, 1, 'nl', 'Dutch; Flemish', 'Dutch; Flemish', 'Dutch; Flemish', 'Dutch; Flemish', 'Dutch; Flemish', 'Dutch; Flemish', 'Dutch; Flemish', 'Dutch; Flemish', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(117, 1, 'nn', 'Norwegian Nynorsk; Nynorsk, Norwegian', 'Norwegian Nynorsk; Nynorsk, Norwegian', 'Norwegian Nynorsk; Nynorsk, Norwegian', 'Norwegian Nynorsk; Nynorsk, Norwegian', 'Norwegian Nynorsk; Nynorsk, Norwegian', 'Norwegian Nynorsk; Nynorsk, Norwegian', 'Norwegian Nynorsk; Nynorsk, Norwegian', 'Norwegian Nynorsk; Nynorsk, Norwegian', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(118, 1, 'no', 'Norwegian', 'Norwegian', 'Norwegian', 'Norwegian', 'Norwegian', 'Norwegian', 'Norwegian', 'Norwegian', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(119, 1, 'nr', 'Ndebele, South; South Ndebele', 'Ndebele, South; South Ndebele', 'Ndebele, South; South Ndebele', 'Ndebele, South; South Ndebele', 'Ndebele, South; South Ndebele', 'Ndebele, South; South Ndebele', 'Ndebele, South; South Ndebele', 'Ndebele, South; South Ndebele', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(120, 1, 'nv', 'Navajo; Navaho', 'Navajo; Navaho', 'Navajo; Navaho', 'Navajo; Navaho', 'Navajo; Navaho', 'Navajo; Navaho', 'Navajo; Navaho', 'Navajo; Navaho', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(121, 1, 'ny', 'Chichewa; Chewa; Nyanja', 'Chichewa; Chewa; Nyanja', 'Chichewa; Chewa; Nyanja', 'Chichewa; Chewa; Nyanja', 'Chichewa; Chewa; Nyanja', 'Chichewa; Chewa; Nyanja', 'Chichewa; Chewa; Nyanja', 'Chichewa; Chewa; Nyanja', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(122, 1, 'oc', 'Occitan (post 1500); ProvenÃ§al', 'Occitan (post 1500); ProvenÃ§al', 'Occitan (post 1500); ProvenÃƒÂ§al', 'Occitan (post 1500); ProvenÃƒÂ§al', 'Occitan (post 1500); ProvenÃƒÂ§al', 'Occitan (post 1500); ProvenÃƒÂ§al', 'Occitan (post 1500); ProvenÃƒÂ§al', 'Occitan (post 1500); ProvenÃƒÂ§al', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(123, 1, 'oj', 'Ojibwa', 'Ojibwa', 'Ojibwa', 'Ojibwa', 'Ojibwa', 'Ojibwa', 'Ojibwa', 'Ojibwa', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(124, 1, 'om', 'Oromo', 'Oromo', 'Oromo', 'Oromo', 'Oromo', 'Oromo', 'Oromo', 'Oromo', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(125, 1, 'or', 'Oriya', 'Oriya', 'Oriya', 'Oriya', 'Oriya', 'Oriya', 'Oriya', 'Oriya', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(126, 1, 'os', 'Ossetian; Ossetic', 'Ossetian; Ossetic', 'Ossetian; Ossetic', 'Ossetian; Ossetic', 'Ossetian; Ossetic', 'Ossetian; Ossetic', 'Ossetian; Ossetic', 'Ossetian; Ossetic', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(127, 1, 'pa', 'Panjabi; Punjabi', 'Panjabi; Punjabi', 'Panjabi; Punjabi', 'Panjabi; Punjabi', 'Panjabi; Punjabi', 'Panjabi; Punjabi', 'Panjabi; Punjabi', 'Panjabi; Punjabi', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(128, 1, 'pi', 'Pali', 'Pali', 'Pali', 'Pali', 'Pali', 'Pali', 'Pali', 'Pali', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(129, 1, 'pl', 'Polish', 'Polish', 'Polish', 'Polish', 'Polish', 'Polish', 'Polish', 'Polish', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(130, 1, 'ps', 'Pushto; Pashto', 'Pushto; Pashto', 'Pushto; Pashto', 'Pushto; Pashto', 'Pushto; Pashto', 'Pushto; Pashto', 'Pushto; Pashto', 'Pushto; Pashto', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(131, 1, 'pt', 'Portuguese', 'Portuguese', 'Portuguese', 'Portuguese', 'Portuguese', 'Portuguese', 'Portuguese', 'Portuguese', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(132, 1, 'qu', 'Quechua', 'Quechua', 'Quechua', 'Quechua', 'Quechua', 'Quechua', 'Quechua', 'Quechua', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(133, 1, 'rm', 'Romansh', 'Romansh', 'Romansh', 'Romansh', 'Romansh', 'Romansh', 'Romansh', 'Romansh', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(134, 1, 'rn', 'Rundi', 'Rundi', 'Rundi', 'Rundi', 'Rundi', 'Rundi', 'Rundi', 'Rundi', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(135, 1, 'ro', 'Romanian; Moldavian; Moldovan', 'Romanian; Moldavian; Moldovan', 'Romanian; Moldavian; Moldovan', 'Romanian; Moldavian; Moldovan', 'Romanian; Moldavian; Moldovan', 'Romanian; Moldavian; Moldovan', 'Romanian; Moldavian; Moldovan', 'Romanian; Moldavian; Moldovan', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(136, 1, 'ru', 'Russian', 'Russian', 'Russian', 'Russian', 'Russian', 'Russian', 'Russian', 'Russian', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(137, 1, 'rw', 'Kinyarwanda', 'Kinyarwanda', 'Kinyarwanda', 'Kinyarwanda', 'Kinyarwanda', 'Kinyarwanda', 'Kinyarwanda', 'Kinyarwanda', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(138, 1, 'sa', 'Sanskrit', 'Sanskrit', 'Sanskrit', 'Sanskrit', 'Sanskrit', 'Sanskrit', 'Sanskrit', 'Sanskrit', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(139, 1, 'sc', 'Sardinian', 'Sardinian', 'Sardinian', 'Sardinian', 'Sardinian', 'Sardinian', 'Sardinian', 'Sardinian', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(140, 1, 'sd', 'Sindhi', 'Sindhi', 'Sindhi', 'Sindhi', 'Sindhi', 'Sindhi', 'Sindhi', 'Sindhi', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(141, 1, 'se', 'Northern Sami', 'Northern Sami', 'Northern Sami', 'Northern Sami', 'Northern Sami', 'Northern Sami', 'Northern Sami', 'Northern Sami', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(142, 1, 'sg', 'Sango', 'Sango', 'Sango', 'Sango', 'Sango', 'Sango', 'Sango', 'Sango', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(143, 1, 'si', 'Sinhala; Sinhalese', 'Sinhala; Sinhalese', 'Sinhala; Sinhalese', 'Sinhala; Sinhalese', 'Sinhala; Sinhalese', 'Sinhala; Sinhalese', 'Sinhala; Sinhalese', 'Sinhala; Sinhalese', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(144, 1, 'sk', 'Slovak', 'Slovak', 'Slovak', 'Slovak', 'Slovak', 'Slovak', 'Slovak', 'Slovak', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(145, 1, 'sl', 'Slovenian', 'Slovenian', 'Slovenian', 'Slovenian', 'Slovenian', 'Slovenian', 'Slovenian', 'Slovenian', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(146, 1, 'sm', 'Samoan', 'Samoan', 'Samoan', 'Samoan', 'Samoan', 'Samoan', 'Samoan', 'Samoan', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(147, 1, 'sn', 'Shona', 'Shona', 'Shona', 'Shona', 'Shona', 'Shona', 'Shona', 'Shona', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(148, 1, 'so', 'Somali', 'Somali', 'Somali', 'Somali', 'Somali', 'Somali', 'Somali', 'Somali', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(149, 1, 'sq', 'Albanian', 'Albanian', 'Albanian', 'Albanian', 'Albanian', 'Albanian', 'Albanian', 'Albanian', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(150, 1, 'sr', 'Serbian', 'Serbian', 'Serbian', 'Serbian', 'Serbian', 'Serbian', 'Serbian', 'Serbian', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(151, 1, 'ss', 'Swati', 'Swati', 'Swati', 'Swati', 'Swati', 'Swati', 'Swati', 'Swati', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(152, 1, 'st', 'Sotho, Southern', 'Sotho, Southern', 'Sotho, Southern', 'Sotho, Southern', 'Sotho, Southern', 'Sotho, Southern', 'Sotho, Southern', 'Sotho, Southern', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(153, 1, 'su', 'Sundanese', 'Sundanese', 'Sundanese', 'Sundanese', 'Sundanese', 'Sundanese', 'Sundanese', 'Sundanese', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(154, 1, 'sv', 'Swedish', 'Swedish', 'Swedish', 'Swedish', 'Swedish', 'Swedish', 'Swedish', 'Swedish', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(155, 1, 'sw', 'Swahili', 'Swahili', 'Swahili', 'Swahili', 'Swahili', 'Swahili', 'Swahili', 'Swahili', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(156, 1, 'ta', 'Tamil', 'Tamil', 'Tamil', 'Tamil', 'Tamil', 'Tamil', 'Tamil', 'Tamil', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(157, 1, 'te', 'Telugu', 'Telugu', 'Telugu', 'Telugu', 'Telugu', 'Telugu', 'Telugu', 'Telugu', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(158, 1, 'tg', 'Tajik', 'Tajik', 'Tajik', 'Tajik', 'Tajik', 'Tajik', 'Tajik', 'Tajik', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(159, 1, 'th', 'Thai', 'Thai', 'Thai', 'Thai', 'Thai', 'Thai', 'Thai', 'Thai', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(160, 1, 'ti', 'Tigrinya', 'Tigrinya', 'Tigrinya', 'Tigrinya', 'Tigrinya', 'Tigrinya', 'Tigrinya', 'Tigrinya', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(161, 1, 'tk', 'Turkmen', 'Turkmen', 'Turkmen', 'Turkmen', 'Turkmen', 'Turkmen', 'Turkmen', 'Turkmen', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(162, 1, 'tl', 'Tagalog', 'Tagalog', 'Tagalog', 'Tagalog', 'Tagalog', 'Tagalog', 'Tagalog', 'Tagalog', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(163, 1, 'tn', 'Tswana', 'Tswana', 'Tswana', 'Tswana', 'Tswana', 'Tswana', 'Tswana', 'Tswana', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(164, 1, 'to', 'Tonga (Tonga Islands)', 'Tonga (Tonga Islands)', 'Tonga (Tonga Islands)', 'Tonga (Tonga Islands)', 'Tonga (Tonga Islands)', 'Tonga (Tonga Islands)', 'Tonga (Tonga Islands)', 'Tonga (Tonga Islands)', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(165, 1, 'tr', 'Turkish', 'Turkish', 'Turkish', 'Turkish', 'Turkish', 'Turkish', 'Turkish', 'Turkish', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(166, 1, 'ts', 'Tsonga', 'Tsonga', 'Tsonga', 'Tsonga', 'Tsonga', 'Tsonga', 'Tsonga', 'Tsonga', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(167, 1, 'tt', 'Tatar', 'Tatar', 'Tatar', 'Tatar', 'Tatar', 'Tatar', 'Tatar', 'Tatar', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(168, 1, 'tw', 'Twi', 'Twi', 'Twi', 'Twi', 'Twi', 'Twi', 'Twi', 'Twi', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(169, 1, 'ty', 'Tahitian', 'Tahitian', 'Tahitian', 'Tahitian', 'Tahitian', 'Tahitian', 'Tahitian', 'Tahitian', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(170, 1, 'ug', 'Uighur; Uyghur', 'Uighur; Uyghur', 'Uighur; Uyghur', 'Uighur; Uyghur', 'Uighur; Uyghur', 'Uighur; Uyghur', 'Uighur; Uyghur', 'Uighur; Uyghur', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(171, 1, 'uk', 'Ukrainian', 'Ukrainian', 'Ukrainian', 'Ukrainian', 'Ukrainian', 'Ukrainian', 'Ukrainian', 'Ukrainian', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(172, 1, 'ur', 'Urdu', 'Urdu', 'Urdu', 'Urdu', 'Urdu', 'Urdu', 'Urdu', 'Urdu', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(173, 1, 'uz', 'Uzbek', 'Uzbek', 'Uzbek', 'Uzbek', 'Uzbek', 'Uzbek', 'Uzbek', 'Uzbek', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(174, 1, 've', 'Venda', 'Venda', 'Venda', 'Venda', 'Venda', 'Venda', 'Venda', 'Venda', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(175, 1, 'vi', 'Vietnamese', 'Vietnamese', 'Vietnamese', 'Vietnamese', 'Vietnamese', 'Vietnamese', 'Vietnamese', 'Vietnamese', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(176, 1, 'vo', 'VolapÃ¼k', 'VolapÃ¼k', 'VolapÃƒÂ¼k', 'VolapÃƒÂ¼k', 'VolapÃƒÂ¼k', 'VolapÃƒÂ¼k', 'VolapÃƒÂ¼k', 'VolapÃƒÂ¼k', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(177, 1, 'wa', 'Walloon', 'Walloon', 'Walloon', 'Walloon', 'Walloon', 'Walloon', 'Walloon', 'Walloon', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(178, 1, 'wo', 'Wolof', 'Wolof', 'Wolof', 'Wolof', 'Wolof', 'Wolof', 'Wolof', 'Wolof', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(179, 1, 'xh', 'Xhosa', 'Xhosa', 'Xhosa', 'Xhosa', 'Xhosa', 'Xhosa', 'Xhosa', 'Xhosa', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(180, 1, 'yi', 'Yiddish', 'Yiddish', 'Yiddish', 'Yiddish', 'Yiddish', 'Yiddish', 'Yiddish', 'Yiddish', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(181, 1, 'yo', 'Yoruba', 'Yoruba', 'Yoruba', 'Yoruba', 'Yoruba', 'Yoruba', 'Yoruba', 'Yoruba', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(182, 1, 'za', 'Zhuang; Chuang', 'Zhuang; Chuang', 'Zhuang; Chuang', 'Zhuang; Chuang', 'Zhuang; Chuang', 'Zhuang; Chuang', 'Zhuang; Chuang', 'Zhuang; Chuang', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(183, 1, 'zh', 'Chinese', 'Chinese', 'Chinese', 'Chinese', 'Chinese', 'Chinese', 'Chinese', 'Chinese', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
-(184, 1, 'zu', 'Zulu', 'Zulu', 'Zulu', 'Zulu', 'Zulu', 'Zulu', 'Zulu', 'Zulu', 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19');
+INSERT INTO `cl_ref_languages` (`ID`, `ENABLED`, `CODE`, `NAME`, `DESCRIPTION`, `I18n_DEFAULT`, `I18N_EN`, `I18N_FR`, `I18N_ES`, `I18N_TH`, `I18N_VT`, `I18N_LA`, `I18N_ID`, `I18N_KH`, `UPDATER_ID`, `COMMENT`, `CREATED_AT`, `UPDATED_AT`) VALUES
+(1, 1, 'aa', 'Afar', 'Afar', 'Afar', 'Afar', 'Afar', 'Afar', 'Afar', 'Afar', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(2, 1, 'ab', 'Abkhazian', 'Abkhazian', 'Abkhazian', 'Abkhazian', 'Abkhazian', 'Abkhazian', 'Abkhazian', 'Abkhazian', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(3, 1, 'ae', 'Avestan', 'Avestan', 'Avestan', 'Avestan', 'Avestan', 'Avestan', 'Avestan', 'Avestan', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(4, 1, 'af', 'Afrikaans', 'Afrikaans', 'Afrikaans', 'Afrikaans', 'Afrikaans', 'Afrikaans', 'Afrikaans', 'Afrikaans', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(5, 1, 'ak', 'Akan', 'Akan', 'Akan', 'Akan', 'Akan', 'Akan', 'Akan', 'Akan', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(6, 1, 'am', 'Amharic', 'Amharic', 'Amharic', 'Amharic', 'Amharic', 'Amharic', 'Amharic', 'Amharic', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(7, 1, 'an', 'Aragonese', 'Aragonese', 'Aragonese', 'Aragonese', 'Aragonese', 'Aragonese', 'Aragonese', 'Aragonese', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(8, 1, 'ar', 'Arabic', 'Arabic', 'Arabic', 'Arabic', 'Arabic', 'Arabic', 'Arabic', 'Arabic', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(9, 1, 'as', 'Assamese', 'Assamese', 'Assamese', 'Assamese', 'Assamese', 'Assamese', 'Assamese', 'Assamese', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(10, 1, 'av', 'Avaric', 'Avaric', 'Avaric', 'Avaric', 'Avaric', 'Avaric', 'Avaric', 'Avaric', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(11, 1, 'ay', 'Aymara', 'Aymara', 'Aymara', 'Aymara', 'Aymara', 'Aymara', 'Aymara', 'Aymara', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(12, 1, 'az', 'Azerbaijani', 'Azerbaijani', 'Azerbaijani', 'Azerbaijani', 'Azerbaijani', 'Azerbaijani', 'Azerbaijani', 'Azerbaijani', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(13, 1, 'ba', 'Bashkir', 'Bashkir', 'Bashkir', 'Bashkir', 'Bashkir', 'Bashkir', 'Bashkir', 'Bashkir', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(14, 1, 'be', 'Belarusian', 'Belarusian', 'Belarusian', 'Belarusian', 'Belarusian', 'Belarusian', 'Belarusian', 'Belarusian', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(15, 1, 'bg', 'Bulgarian', 'Bulgarian', 'Bulgarian', 'Bulgarian', 'Bulgarian', 'Bulgarian', 'Bulgarian', 'Bulgarian', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(16, 1, 'bh', 'Bihari languages', 'Bihari languages', 'Bihari languages', 'Bihari languages', 'Bihari languages', 'Bihari languages', 'Bihari languages', 'Bihari languages', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(17, 1, 'bi', 'Bislama', 'Bislama', 'Bislama', 'Bislama', 'Bislama', 'Bislama', 'Bislama', 'Bislama', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(18, 1, 'bm', 'Bambara', 'Bambara', 'Bambara', 'Bambara', 'Bambara', 'Bambara', 'Bambara', 'Bambara', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(19, 1, 'bn', 'Bengali', 'Bengali', 'Bengali', 'Bengali', 'Bengali', 'Bengali', 'Bengali', 'Bengali', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(20, 1, 'bo', 'Tibetan', 'Tibetan', 'Tibetan', 'Tibetan', 'Tibetan', 'Tibetan', 'Tibetan', 'Tibetan', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(21, 1, 'br', 'Breton', 'Breton', 'Breton', 'Breton', 'Breton', 'Breton', 'Breton', 'Breton', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(22, 1, 'bs', 'Bosnian', 'Bosnian', 'Bosnian', 'Bosnian', 'Bosnian', 'Bosnian', 'Bosnian', 'Bosnian', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(23, 1, 'ca', 'Catalan; Valencian', 'Catalan; Valencian', 'Catalan; Valencian', 'Catalan; Valencian', 'Catalan; Valencian', 'Catalan; Valencian', 'Catalan; Valencian', 'Catalan; Valencian', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(24, 1, 'ce', 'Chechen', 'Chechen', 'Chechen', 'Chechen', 'Chechen', 'Chechen', 'Chechen', 'Chechen', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(25, 1, 'ch', 'Chamorro', 'Chamorro', 'Chamorro', 'Chamorro', 'Chamorro', 'Chamorro', 'Chamorro', 'Chamorro', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(26, 1, 'co', 'Corsican', 'Corsican', 'Corsican', 'Corsican', 'Corsican', 'Corsican', 'Corsican', 'Corsican', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(27, 1, 'cr', 'Cree', 'Cree', 'Cree', 'Cree', 'Cree', 'Cree', 'Cree', 'Cree', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(28, 1, 'cs', 'Czech', 'Czech', 'Czech', 'Czech', 'Czech', 'Czech', 'Czech', 'Czech', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(29, 1, 'cu', 'Church Slavic', 'Church Slavic', 'Church Slavic', 'Church Slavic', 'Church Slavic', 'Church Slavic', 'Church Slavic', 'Church Slavic', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(30, 1, 'cv', 'Chuvash', 'Chuvash', 'Chuvash', 'Chuvash', 'Chuvash', 'Chuvash', 'Chuvash', 'Chuvash', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(31, 1, 'cy', 'Welsh', 'Welsh', 'Welsh', 'Welsh', 'Welsh', 'Welsh', 'Welsh', 'Welsh', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(32, 1, 'da', 'Danish', 'Danish', 'Danish', 'Danish', 'Danish', 'Danish', 'Danish', 'Danish', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(33, 1, 'de', 'German', 'German', 'German', 'German', 'German', 'German', 'German', 'German', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(34, 1, 'dv', 'Divehi; Dhivehi; Maldivian', 'Divehi; Dhivehi; Maldivian', 'Divehi; Dhivehi; Maldivian', 'Divehi; Dhivehi; Maldivian', 'Divehi; Dhivehi; Maldivian', 'Divehi; Dhivehi; Maldivian', 'Divehi; Dhivehi; Maldivian', 'Divehi; Dhivehi; Maldivian', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(35, 1, 'dz', 'Dzongkha', 'Dzongkha', 'Dzongkha', 'Dzongkha', 'Dzongkha', 'Dzongkha', 'Dzongkha', 'Dzongkha', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(36, 1, 'ee', 'Ewe', 'Ewe', 'Ewe', 'Ewe', 'Ewe', 'Ewe', 'Ewe', 'Ewe', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(37, 1, 'el', 'Greek, Modern (1453-)', 'Greek, Modern (1453-)', 'Greek, Modern (1453-)', 'Greek, Modern (1453-)', 'Greek, Modern (1453-)', 'Greek, Modern (1453-)', 'Greek, Modern (1453-)', 'Greek, Modern (1453-)', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(38, 1, 'en', 'English', 'English', 'English', 'English', 'English', 'English', 'English', 'English', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(39, 1, 'eo', 'Esperanto', 'Esperanto', 'Esperanto', 'Esperanto', 'Esperanto', 'Esperanto', 'Esperanto', 'Esperanto', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(40, 1, 'es', 'Spanish; Castilian', 'Spanish; Castilian', 'Spanish; Castilian', 'Spanish; Castilian', 'Spanish; Castilian', 'Spanish; Castilian', 'Spanish; Castilian', 'Spanish; Castilian', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(41, 1, 'et', 'Estonian', 'Estonian', 'Estonian', 'Estonian', 'Estonian', 'Estonian', 'Estonian', 'Estonian', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(42, 1, 'eu', 'Basque', 'Basque', 'Basque', 'Basque', 'Basque', 'Basque', 'Basque', 'Basque', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(43, 1, 'fa', 'Persian', 'Persian', 'Persian', 'Persian', 'Persian', 'Persian', 'Persian', 'Persian', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(44, 1, 'ff', 'Fulah', 'Fulah', 'Fulah', 'Fulah', 'Fulah', 'Fulah', 'Fulah', 'Fulah', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(45, 1, 'fi', 'Finnish', 'Finnish', 'Finnish', 'Finnish', 'Finnish', 'Finnish', 'Finnish', 'Finnish', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(46, 1, 'fj', 'Fijian', 'Fijian', 'Fijian', 'Fijian', 'Fijian', 'Fijian', 'Fijian', 'Fijian', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(47, 1, 'fo', 'Faroese', 'Faroese', 'Faroese', 'Faroese', 'Faroese', 'Faroese', 'Faroese', 'Faroese', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(48, 1, 'fr', 'French', 'French', 'French', 'French', 'French', 'French', 'French', 'French', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(49, 1, 'fy', 'Western Frisian', 'Western Frisian', 'Western Frisian', 'Western Frisian', 'Western Frisian', 'Western Frisian', 'Western Frisian', 'Western Frisian', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(50, 1, 'ga', 'Irish', 'Irish', 'Irish', 'Irish', 'Irish', 'Irish', 'Irish', 'Irish', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(51, 1, 'gd', 'Gaelic; Scottish Gaelic', 'Gaelic; Scottish Gaelic', 'Gaelic; Scottish Gaelic', 'Gaelic; Scottish Gaelic', 'Gaelic; Scottish Gaelic', 'Gaelic; Scottish Gaelic', 'Gaelic; Scottish Gaelic', 'Gaelic; Scottish Gaelic', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(52, 1, 'gl', 'Galician', 'Galician', 'Galician', 'Galician', 'Galician', 'Galician', 'Galician', 'Galician', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(53, 1, 'gn', 'Guarani', 'Guarani', 'Guarani', 'Guarani', 'Guarani', 'Guarani', 'Guarani', 'Guarani', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(54, 1, 'gu', 'Gujarati', 'Gujarati', 'Gujarati', 'Gujarati', 'Gujarati', 'Gujarati', 'Gujarati', 'Gujarati', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(55, 1, 'gv', 'Manx', 'Manx', 'Manx', 'Manx', 'Manx', 'Manx', 'Manx', 'Manx', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(56, 1, 'ha', 'Hausa', 'Hausa', 'Hausa', 'Hausa', 'Hausa', 'Hausa', 'Hausa', 'Hausa', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(57, 1, 'he', 'Hebrew', 'Hebrew', 'Hebrew', 'Hebrew', 'Hebrew', 'Hebrew', 'Hebrew', 'Hebrew', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(58, 1, 'hi', 'Hindi', 'Hindi', 'Hindi', 'Hindi', 'Hindi', 'Hindi', 'Hindi', 'Hindi', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(59, 1, 'ho', 'Hiri Motu', 'Hiri Motu', 'Hiri Motu', 'Hiri Motu', 'Hiri Motu', 'Hiri Motu', 'Hiri Motu', 'Hiri Motu', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(60, 1, 'hr', 'Croatian', 'Croatian', 'Croatian', 'Croatian', 'Croatian', 'Croatian', 'Croatian', 'Croatian', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(61, 1, 'ht', 'Haitian; Haitian Creole', 'Haitian; Haitian Creole', 'Haitian; Haitian Creole', 'Haitian; Haitian Creole', 'Haitian; Haitian Creole', 'Haitian; Haitian Creole', 'Haitian; Haitian Creole', 'Haitian; Haitian Creole', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(62, 1, 'hu', 'Hungarian', 'Hungarian', 'Hungarian', 'Hungarian', 'Hungarian', 'Hungarian', 'Hungarian', 'Hungarian', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(63, 1, 'hy', 'Armenian', 'Armenian', 'Armenian', 'Armenian', 'Armenian', 'Armenian', 'Armenian', 'Armenian', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(64, 1, 'hz', 'Herero', 'Herero', 'Herero', 'Herero', 'Herero', 'Herero', 'Herero', 'Herero', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(65, 1, 'ia', 'Interlingua ', 'Interlingua ', 'Interlingua ', 'Interlingua ', 'Interlingua ', 'Interlingua ', 'Interlingua ', 'Interlingua ', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(66, 1, 'id', 'Indonesian', 'Indonesian', 'Indonesian', 'Indonesian', 'Indonesian', 'Indonesian', 'Indonesian', 'Indonesian', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(67, 1, 'ie', 'Interlingue; Occidental', 'Interlingue; Occidental', 'Interlingue; Occidental', 'Interlingue; Occidental', 'Interlingue; Occidental', 'Interlingue; Occidental', 'Interlingue; Occidental', 'Interlingue; Occidental', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(68, 1, 'ig', 'Igbo', 'Igbo', 'Igbo', 'Igbo', 'Igbo', 'Igbo', 'Igbo', 'Igbo', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(69, 1, 'ii', 'Sichuan Yi; Nuosu', 'Sichuan Yi; Nuosu', 'Sichuan Yi; Nuosu', 'Sichuan Yi; Nuosu', 'Sichuan Yi; Nuosu', 'Sichuan Yi; Nuosu', 'Sichuan Yi; Nuosu', 'Sichuan Yi; Nuosu', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(70, 1, 'ik', 'Inupiaq', 'Inupiaq', 'Inupiaq', 'Inupiaq', 'Inupiaq', 'Inupiaq', 'Inupiaq', 'Inupiaq', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(71, 1, 'io', 'Ido', 'Ido', 'Ido', 'Ido', 'Ido', 'Ido', 'Ido', 'Ido', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(72, 1, 'is', 'Icelandic', 'Icelandic', 'Icelandic', 'Icelandic', 'Icelandic', 'Icelandic', 'Icelandic', 'Icelandic', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(73, 1, 'it', 'Italian', 'Italian', 'Italian', 'Italian', 'Italian', 'Italian', 'Italian', 'Italian', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(74, 1, 'iu', 'Inuktitut', 'Inuktitut', 'Inuktitut', 'Inuktitut', 'Inuktitut', 'Inuktitut', 'Inuktitut', 'Inuktitut', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(75, 1, 'ja', 'Japanese', 'Japanese', 'Japanese', 'Japanese', 'Japanese', 'Japanese', 'Japanese', 'Japanese', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(76, 1, 'jv', 'Javanese', 'Javanese', 'Javanese', 'Javanese', 'Javanese', 'Javanese', 'Javanese', 'Javanese', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(77, 1, 'ka', 'Georgian', 'Georgian', 'Georgian', 'Georgian', 'Georgian', 'Georgian', 'Georgian', 'Georgian', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(78, 1, 'kg', 'Kongo', 'Kongo', 'Kongo', 'Kongo', 'Kongo', 'Kongo', 'Kongo', 'Kongo', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(79, 1, 'ki', 'Kikuyu; Gikuyu', 'Kikuyu; Gikuyu', 'Kikuyu; Gikuyu', 'Kikuyu; Gikuyu', 'Kikuyu; Gikuyu', 'Kikuyu; Gikuyu', 'Kikuyu; Gikuyu', 'Kikuyu; Gikuyu', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(80, 1, 'kj', 'Kuanyama; Kwanyama', 'Kuanyama; Kwanyama', 'Kuanyama; Kwanyama', 'Kuanyama; Kwanyama', 'Kuanyama; Kwanyama', 'Kuanyama; Kwanyama', 'Kuanyama; Kwanyama', 'Kuanyama; Kwanyama', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(81, 1, 'kk', 'Kazakh', 'Kazakh', 'Kazakh', 'Kazakh', 'Kazakh', 'Kazakh', 'Kazakh', 'Kazakh', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(82, 1, 'kl', 'Kalaallisut; Greenlandic', 'Kalaallisut; Greenlandic', 'Kalaallisut; Greenlandic', 'Kalaallisut; Greenlandic', 'Kalaallisut; Greenlandic', 'Kalaallisut; Greenlandic', 'Kalaallisut; Greenlandic', 'Kalaallisut; Greenlandic', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(83, 1, 'km', 'Central Khmer', 'Central Khmer', 'Central Khmer', 'Central Khmer', 'Central Khmer', 'Central Khmer', 'Central Khmer', 'Central Khmer', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(84, 1, 'kn', 'Kannada', 'Kannada', 'Kannada', 'Kannada', 'Kannada', 'Kannada', 'Kannada', 'Kannada', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(85, 1, 'ko', 'Korean', 'Korean', 'Korean', 'Korean', 'Korean', 'Korean', 'Korean', 'Korean', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(86, 1, 'kr', 'Kanuri', 'Kanuri', 'Kanuri', 'Kanuri', 'Kanuri', 'Kanuri', 'Kanuri', 'Kanuri', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(87, 1, 'ks', 'Kashmiri', 'Kashmiri', 'Kashmiri', 'Kashmiri', 'Kashmiri', 'Kashmiri', 'Kashmiri', 'Kashmiri', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(88, 1, 'ku', 'Kurdish', 'Kurdish', 'Kurdish', 'Kurdish', 'Kurdish', 'Kurdish', 'Kurdish', 'Kurdish', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(89, 1, 'kv', 'Komi', 'Komi', 'Komi', 'Komi', 'Komi', 'Komi', 'Komi', 'Komi', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(90, 1, 'kw', 'Cornish', 'Cornish', 'Cornish', 'Cornish', 'Cornish', 'Cornish', 'Cornish', 'Cornish', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(91, 1, 'ky', 'Kirghiz; Kyrgyz', 'Kirghiz; Kyrgyz', 'Kirghiz; Kyrgyz', 'Kirghiz; Kyrgyz', 'Kirghiz; Kyrgyz', 'Kirghiz; Kyrgyz', 'Kirghiz; Kyrgyz', 'Kirghiz; Kyrgyz', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(92, 1, 'la', 'Latin', 'Latin', 'Latin', 'Latin', 'Latin', 'Latin', 'Latin', 'Latin', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(93, 1, 'lb', 'Luxembourgish; Letzeburgesch', 'Luxembourgish; Letzeburgesch', 'Luxembourgish; Letzeburgesch', 'Luxembourgish; Letzeburgesch', 'Luxembourgish; Letzeburgesch', 'Luxembourgish; Letzeburgesch', 'Luxembourgish; Letzeburgesch', 'Luxembourgish; Letzeburgesch', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(94, 1, 'lg', 'Ganda', 'Ganda', 'Ganda', 'Ganda', 'Ganda', 'Ganda', 'Ganda', 'Ganda', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(95, 1, 'li', 'Limburgan; Limburger; Limburgish', 'Limburgan; Limburger; Limburgish', 'Limburgan; Limburger; Limburgish', 'Limburgan; Limburger; Limburgish', 'Limburgan; Limburger; Limburgish', 'Limburgan; Limburger; Limburgish', 'Limburgan; Limburger; Limburgish', 'Limburgan; Limburger; Limburgish', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(96, 1, 'ln', 'Lingala', 'Lingala', 'Lingala', 'Lingala', 'Lingala', 'Lingala', 'Lingala', 'Lingala', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(97, 1, 'lo', 'Lao', 'Lao', 'Lao', 'Lao', 'Lao', 'Lao', 'Lao', 'Lao', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(98, 1, 'lt', 'Lithuanian', 'Lithuanian', 'Lithuanian', 'Lithuanian', 'Lithuanian', 'Lithuanian', 'Lithuanian', 'Lithuanian', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(99, 1, 'lu', 'Luba-Katanga', 'Luba-Katanga', 'Luba-Katanga', 'Luba-Katanga', 'Luba-Katanga', 'Luba-Katanga', 'Luba-Katanga', 'Luba-Katanga', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(100, 1, 'lv', 'Latvian', 'Latvian', 'Latvian', 'Latvian', 'Latvian', 'Latvian', 'Latvian', 'Latvian', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(101, 1, 'mg', 'Malagasy', 'Malagasy', 'Malagasy', 'Malagasy', 'Malagasy', 'Malagasy', 'Malagasy', 'Malagasy', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(102, 1, 'mh', 'Marshallese', 'Marshallese', 'Marshallese', 'Marshallese', 'Marshallese', 'Marshallese', 'Marshallese', 'Marshallese', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(103, 1, 'mi', 'Maori', 'Maori', 'Maori', 'Maori', 'Maori', 'Maori', 'Maori', 'Maori', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(104, 1, 'mk', 'Macedonian', 'Macedonian', 'Macedonian', 'Macedonian', 'Macedonian', 'Macedonian', 'Macedonian', 'Macedonian', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(105, 1, 'ml', 'Malayalam', 'Malayalam', 'Malayalam', 'Malayalam', 'Malayalam', 'Malayalam', 'Malayalam', 'Malayalam', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(106, 1, 'mn', 'Mongolian', 'Mongolian', 'Mongolian', 'Mongolian', 'Mongolian', 'Mongolian', 'Mongolian', 'Mongolian', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(107, 1, 'mr', 'Marathi', 'Marathi', 'Marathi', 'Marathi', 'Marathi', 'Marathi', 'Marathi', 'Marathi', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(108, 1, 'ms', 'Malay', 'Malay', 'Malay', 'Malay', 'Malay', 'Malay', 'Malay', 'Malay', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(109, 1, 'mt', 'Maltese', 'Maltese', 'Maltese', 'Maltese', 'Maltese', 'Maltese', 'Maltese', 'Maltese', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(110, 1, 'my', 'Burmese', 'Burmese', 'Burmese', 'Burmese', 'Burmese', 'Burmese', 'Burmese', 'Burmese', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(111, 1, 'na', 'Nauru', 'Nauru', 'Nauru', 'Nauru', 'Nauru', 'Nauru', 'Nauru', 'Nauru', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(112, 1, 'nb', 'BokmÃ¥l, Norwegian; Norwegian BokmÃ¥l', 'BokmÃ¥l, Norwegian; Norwegian BokmÃ¥l', 'BokmÃƒÂ¥l, Norwegian; Norwegian BokmÃƒÂ¥l', 'BokmÃƒÂ¥l, Norwegian; Norwegian BokmÃƒÂ¥l', 'BokmÃƒÂ¥l, Norwegian; Norwegian BokmÃƒÂ¥l', 'BokmÃƒÂ¥l, Norwegian; Norwegian BokmÃƒÂ¥l', 'BokmÃƒÂ¥l, Norwegian; Norwegian BokmÃƒÂ¥l', 'BokmÃƒÂ¥l, Norwegian; Norwegian BokmÃƒÂ¥l', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(113, 1, 'nd', 'Ndebele, North; North Ndebele', 'Ndebele, North; North Ndebele', 'Ndebele, North; North Ndebele', 'Ndebele, North; North Ndebele', 'Ndebele, North; North Ndebele', 'Ndebele, North; North Ndebele', 'Ndebele, North; North Ndebele', 'Ndebele, North; North Ndebele', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(114, 1, 'ne', 'Nepali', 'Nepali', 'Nepali', 'Nepali', 'Nepali', 'Nepali', 'Nepali', 'Nepali', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(115, 1, 'ng', 'Ndonga', 'Ndonga', 'Ndonga', 'Ndonga', 'Ndonga', 'Ndonga', 'Ndonga', 'Ndonga', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(116, 1, 'nl', 'Dutch; Flemish', 'Dutch; Flemish', 'Dutch; Flemish', 'Dutch; Flemish', 'Dutch; Flemish', 'Dutch; Flemish', 'Dutch; Flemish', 'Dutch; Flemish', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(117, 1, 'nn', 'Norwegian Nynorsk; Nynorsk, Norwegian', 'Norwegian Nynorsk; Nynorsk, Norwegian', 'Norwegian Nynorsk; Nynorsk, Norwegian', 'Norwegian Nynorsk; Nynorsk, Norwegian', 'Norwegian Nynorsk; Nynorsk, Norwegian', 'Norwegian Nynorsk; Nynorsk, Norwegian', 'Norwegian Nynorsk; Nynorsk, Norwegian', 'Norwegian Nynorsk; Nynorsk, Norwegian', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(118, 1, 'no', 'Norwegian', 'Norwegian', 'Norwegian', 'Norwegian', 'Norwegian', 'Norwegian', 'Norwegian', 'Norwegian', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(119, 1, 'nr', 'Ndebele, South; South Ndebele', 'Ndebele, South; South Ndebele', 'Ndebele, South; South Ndebele', 'Ndebele, South; South Ndebele', 'Ndebele, South; South Ndebele', 'Ndebele, South; South Ndebele', 'Ndebele, South; South Ndebele', 'Ndebele, South; South Ndebele', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(120, 1, 'nv', 'Navajo; Navaho', 'Navajo; Navaho', 'Navajo; Navaho', 'Navajo; Navaho', 'Navajo; Navaho', 'Navajo; Navaho', 'Navajo; Navaho', 'Navajo; Navaho', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(121, 1, 'ny', 'Chichewa; Chewa; Nyanja', 'Chichewa; Chewa; Nyanja', 'Chichewa; Chewa; Nyanja', 'Chichewa; Chewa; Nyanja', 'Chichewa; Chewa; Nyanja', 'Chichewa; Chewa; Nyanja', 'Chichewa; Chewa; Nyanja', 'Chichewa; Chewa; Nyanja', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(122, 1, 'oc', 'Occitan (post 1500); ProvenÃ§al', 'Occitan (post 1500); ProvenÃ§al', 'Occitan (post 1500); ProvenÃƒÂ§al', 'Occitan (post 1500); ProvenÃƒÂ§al', 'Occitan (post 1500); ProvenÃƒÂ§al', 'Occitan (post 1500); ProvenÃƒÂ§al', 'Occitan (post 1500); ProvenÃƒÂ§al', 'Occitan (post 1500); ProvenÃƒÂ§al', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(123, 1, 'oj', 'Ojibwa', 'Ojibwa', 'Ojibwa', 'Ojibwa', 'Ojibwa', 'Ojibwa', 'Ojibwa', 'Ojibwa', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(124, 1, 'om', 'Oromo', 'Oromo', 'Oromo', 'Oromo', 'Oromo', 'Oromo', 'Oromo', 'Oromo', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(125, 1, 'or', 'Oriya', 'Oriya', 'Oriya', 'Oriya', 'Oriya', 'Oriya', 'Oriya', 'Oriya', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(126, 1, 'os', 'Ossetian; Ossetic', 'Ossetian; Ossetic', 'Ossetian; Ossetic', 'Ossetian; Ossetic', 'Ossetian; Ossetic', 'Ossetian; Ossetic', 'Ossetian; Ossetic', 'Ossetian; Ossetic', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(127, 1, 'pa', 'Panjabi; Punjabi', 'Panjabi; Punjabi', 'Panjabi; Punjabi', 'Panjabi; Punjabi', 'Panjabi; Punjabi', 'Panjabi; Punjabi', 'Panjabi; Punjabi', 'Panjabi; Punjabi', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(128, 1, 'pi', 'Pali', 'Pali', 'Pali', 'Pali', 'Pali', 'Pali', 'Pali', 'Pali', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(129, 1, 'pl', 'Polish', 'Polish', 'Polish', 'Polish', 'Polish', 'Polish', 'Polish', 'Polish', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(130, 1, 'ps', 'Pushto; Pashto', 'Pushto; Pashto', 'Pushto; Pashto', 'Pushto; Pashto', 'Pushto; Pashto', 'Pushto; Pashto', 'Pushto; Pashto', 'Pushto; Pashto', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(131, 1, 'pt', 'Portuguese', 'Portuguese', 'Portuguese', 'Portuguese', 'Portuguese', 'Portuguese', 'Portuguese', 'Portuguese', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(132, 1, 'qu', 'Quechua', 'Quechua', 'Quechua', 'Quechua', 'Quechua', 'Quechua', 'Quechua', 'Quechua', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(133, 1, 'rm', 'Romansh', 'Romansh', 'Romansh', 'Romansh', 'Romansh', 'Romansh', 'Romansh', 'Romansh', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(134, 1, 'rn', 'Rundi', 'Rundi', 'Rundi', 'Rundi', 'Rundi', 'Rundi', 'Rundi', 'Rundi', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(135, 1, 'ro', 'Romanian; Moldavian; Moldovan', 'Romanian; Moldavian; Moldovan', 'Romanian; Moldavian; Moldovan', 'Romanian; Moldavian; Moldovan', 'Romanian; Moldavian; Moldovan', 'Romanian; Moldavian; Moldovan', 'Romanian; Moldavian; Moldovan', 'Romanian; Moldavian; Moldovan', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(136, 1, 'ru', 'Russian', 'Russian', 'Russian', 'Russian', 'Russian', 'Russian', 'Russian', 'Russian', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(137, 1, 'rw', 'Kinyarwanda', 'Kinyarwanda', 'Kinyarwanda', 'Kinyarwanda', 'Kinyarwanda', 'Kinyarwanda', 'Kinyarwanda', 'Kinyarwanda', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(138, 1, 'sa', 'Sanskrit', 'Sanskrit', 'Sanskrit', 'Sanskrit', 'Sanskrit', 'Sanskrit', 'Sanskrit', 'Sanskrit', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(139, 1, 'sc', 'Sardinian', 'Sardinian', 'Sardinian', 'Sardinian', 'Sardinian', 'Sardinian', 'Sardinian', 'Sardinian', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(140, 1, 'sd', 'Sindhi', 'Sindhi', 'Sindhi', 'Sindhi', 'Sindhi', 'Sindhi', 'Sindhi', 'Sindhi', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(141, 1, 'se', 'Northern Sami', 'Northern Sami', 'Northern Sami', 'Northern Sami', 'Northern Sami', 'Northern Sami', 'Northern Sami', 'Northern Sami', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(142, 1, 'sg', 'Sango', 'Sango', 'Sango', 'Sango', 'Sango', 'Sango', 'Sango', 'Sango', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(143, 1, 'si', 'Sinhala; Sinhalese', 'Sinhala; Sinhalese', 'Sinhala; Sinhalese', 'Sinhala; Sinhalese', 'Sinhala; Sinhalese', 'Sinhala; Sinhalese', 'Sinhala; Sinhalese', 'Sinhala; Sinhalese', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(144, 1, 'sk', 'Slovak', 'Slovak', 'Slovak', 'Slovak', 'Slovak', 'Slovak', 'Slovak', 'Slovak', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(145, 1, 'sl', 'Slovenian', 'Slovenian', 'Slovenian', 'Slovenian', 'Slovenian', 'Slovenian', 'Slovenian', 'Slovenian', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(146, 1, 'sm', 'Samoan', 'Samoan', 'Samoan', 'Samoan', 'Samoan', 'Samoan', 'Samoan', 'Samoan', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(147, 1, 'sn', 'Shona', 'Shona', 'Shona', 'Shona', 'Shona', 'Shona', 'Shona', 'Shona', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(148, 1, 'so', 'Somali', 'Somali', 'Somali', 'Somali', 'Somali', 'Somali', 'Somali', 'Somali', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(149, 1, 'sq', 'Albanian', 'Albanian', 'Albanian', 'Albanian', 'Albanian', 'Albanian', 'Albanian', 'Albanian', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(150, 1, 'sr', 'Serbian', 'Serbian', 'Serbian', 'Serbian', 'Serbian', 'Serbian', 'Serbian', 'Serbian', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(151, 1, 'ss', 'Swati', 'Swati', 'Swati', 'Swati', 'Swati', 'Swati', 'Swati', 'Swati', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(152, 1, 'st', 'Sotho, Southern', 'Sotho, Southern', 'Sotho, Southern', 'Sotho, Southern', 'Sotho, Southern', 'Sotho, Southern', 'Sotho, Southern', 'Sotho, Southern', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(153, 1, 'su', 'Sundanese', 'Sundanese', 'Sundanese', 'Sundanese', 'Sundanese', 'Sundanese', 'Sundanese', 'Sundanese', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(154, 1, 'sv', 'Swedish', 'Swedish', 'Swedish', 'Swedish', 'Swedish', 'Swedish', 'Swedish', 'Swedish', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(155, 1, 'sw', 'Swahili', 'Swahili', 'Swahili', 'Swahili', 'Swahili', 'Swahili', 'Swahili', 'Swahili', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(156, 1, 'ta', 'Tamil', 'Tamil', 'Tamil', 'Tamil', 'Tamil', 'Tamil', 'Tamil', 'Tamil', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(157, 1, 'te', 'Telugu', 'Telugu', 'Telugu', 'Telugu', 'Telugu', 'Telugu', 'Telugu', 'Telugu', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(158, 1, 'tg', 'Tajik', 'Tajik', 'Tajik', 'Tajik', 'Tajik', 'Tajik', 'Tajik', 'Tajik', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(159, 1, 'th', 'Thai', 'Thai', 'Thai', 'Thai', 'Thai', 'Thai', 'Thai', 'Thai', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(160, 1, 'ti', 'Tigrinya', 'Tigrinya', 'Tigrinya', 'Tigrinya', 'Tigrinya', 'Tigrinya', 'Tigrinya', 'Tigrinya', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(161, 1, 'tk', 'Turkmen', 'Turkmen', 'Turkmen', 'Turkmen', 'Turkmen', 'Turkmen', 'Turkmen', 'Turkmen', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(162, 1, 'tl', 'Tagalog', 'Tagalog', 'Tagalog', 'Tagalog', 'Tagalog', 'Tagalog', 'Tagalog', 'Tagalog', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(163, 1, 'tn', 'Tswana', 'Tswana', 'Tswana', 'Tswana', 'Tswana', 'Tswana', 'Tswana', 'Tswana', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(164, 1, 'to', 'Tonga (Tonga Islands)', 'Tonga (Tonga Islands)', 'Tonga (Tonga Islands)', 'Tonga (Tonga Islands)', 'Tonga (Tonga Islands)', 'Tonga (Tonga Islands)', 'Tonga (Tonga Islands)', 'Tonga (Tonga Islands)', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(165, 1, 'tr', 'Turkish', 'Turkish', 'Turkish', 'Turkish', 'Turkish', 'Turkish', 'Turkish', 'Turkish', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(166, 1, 'ts', 'Tsonga', 'Tsonga', 'Tsonga', 'Tsonga', 'Tsonga', 'Tsonga', 'Tsonga', 'Tsonga', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(167, 1, 'tt', 'Tatar', 'Tatar', 'Tatar', 'Tatar', 'Tatar', 'Tatar', 'Tatar', 'Tatar', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(168, 1, 'tw', 'Twi', 'Twi', 'Twi', 'Twi', 'Twi', 'Twi', 'Twi', 'Twi', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(169, 1, 'ty', 'Tahitian', 'Tahitian', 'Tahitian', 'Tahitian', 'Tahitian', 'Tahitian', 'Tahitian', 'Tahitian', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(170, 1, 'ug', 'Uighur; Uyghur', 'Uighur; Uyghur', 'Uighur; Uyghur', 'Uighur; Uyghur', 'Uighur; Uyghur', 'Uighur; Uyghur', 'Uighur; Uyghur', 'Uighur; Uyghur', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(171, 1, 'uk', 'Ukrainian', 'Ukrainian', 'Ukrainian', 'Ukrainian', 'Ukrainian', 'Ukrainian', 'Ukrainian', 'Ukrainian', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(172, 1, 'ur', 'Urdu', 'Urdu', 'Urdu', 'Urdu', 'Urdu', 'Urdu', 'Urdu', 'Urdu', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(173, 1, 'uz', 'Uzbek', 'Uzbek', 'Uzbek', 'Uzbek', 'Uzbek', 'Uzbek', 'Uzbek', 'Uzbek', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(174, 1, 've', 'Venda', 'Venda', 'Venda', 'Venda', 'Venda', 'Venda', 'Venda', 'Venda', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(175, 1, 'vi', 'Vietnamese', 'Vietnamese', 'Vietnamese', 'Vietnamese', 'Vietnamese', 'Vietnamese', 'Vietnamese', 'Vietnamese', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(176, 1, 'vo', 'VolapÃ¼k', 'VolapÃ¼k', 'VolapÃƒÂ¼k', 'VolapÃƒÂ¼k', 'VolapÃƒÂ¼k', 'VolapÃƒÂ¼k', 'VolapÃƒÂ¼k', 'VolapÃƒÂ¼k', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(177, 1, 'wa', 'Walloon', 'Walloon', 'Walloon', 'Walloon', 'Walloon', 'Walloon', 'Walloon', 'Walloon', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(178, 1, 'wo', 'Wolof', 'Wolof', 'Wolof', 'Wolof', 'Wolof', 'Wolof', 'Wolof', 'Wolof', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(179, 1, 'xh', 'Xhosa', 'Xhosa', 'Xhosa', 'Xhosa', 'Xhosa', 'Xhosa', 'Xhosa', 'Xhosa', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(180, 1, 'yi', 'Yiddish', 'Yiddish', 'Yiddish', 'Yiddish', 'Yiddish', 'Yiddish', 'Yiddish', 'Yiddish', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(181, 1, 'yo', 'Yoruba', 'Yoruba', 'Yoruba', 'Yoruba', 'Yoruba', 'Yoruba', 'Yoruba', 'Yoruba', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(182, 1, 'za', 'Zhuang; Chuang', 'Zhuang; Chuang', 'Zhuang; Chuang', 'Zhuang; Chuang', 'Zhuang; Chuang', 'Zhuang; Chuang', 'Zhuang; Chuang', 'Zhuang; Chuang', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(183, 1, 'zh', 'Chinese', 'Chinese', 'Chinese', 'Chinese', 'Chinese', 'Chinese', 'Chinese', 'Chinese', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19'),
+(184, 1, 'zu', 'Zulu', 'Zulu', 'Zulu', 'Zulu', 'Zulu', 'Zulu', 'Zulu', 'Zulu', NULL, NULL, NULL, 1, 'ISO 639-2', '2017-11-23 10:16:19', '2017-11-23 10:16:19');
 
 -- --------------------------------------------------------
 
@@ -1561,6 +1881,9 @@ CREATE TABLE `cl_ref_languages_countries` (
   `I18N_ES` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Spanish',
   `I18N_TH` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Thai',
   `I18N_VT` varchar(256) CHARACTER SET utf8 COLLATE utf8_vietnamese_ci DEFAULT NULL COMMENT 'label in Vietnamese',
+  `I18N_LA` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Lao',
+  `I18N_ID` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in indonesian',
+  `I18N_KH` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Cambodian',
   `UPDATER_ID` int(11) NOT NULL DEFAULT '1',
   `COMMENT` varchar(512) COLLATE utf8_bin DEFAULT NULL,
   `CREATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -1571,9 +1894,9 @@ CREATE TABLE `cl_ref_languages_countries` (
 -- Contenu de la table `cl_ref_languages_countries`
 --
 
-INSERT INTO `cl_ref_languages_countries` (`CL_LANGUAGE_ID`, `CL_COUNTRY_ID`, `ENABLED`, `CODE`, `NAME`, `DESCRIPTION`, `I18n_DEFAULT`, `I18N_EN`, `I18N_FR`, `I18N_ES`, `I18N_TH`, `I18N_VT`, `UPDATER_ID`, `COMMENT`, `CREATED_AT`, `UPDATED_AT`) VALUES
-(159, 205, 1, '159', 'Thailand official language', 'Thailand official language', 'Thailand official language', 'Thailand official language', 'Langue officielle de la Thailande', NULL, 'ภาษาไทยเป็นทางการ', NULL, 1, NULL, '2017-11-04 17:08:00', '2017-11-04 17:08:00'),
-(159, 209, 1, '159', '206', 'Thailand official language', 'Thailand official language', 'Thailand official language', 'Langue officielle de la Thailande', NULL, 'ภาษาไทยเป็นทางการ', NULL, 1, NULL, '2017-11-04 18:08:00', '2017-11-04 18:08:00');
+INSERT INTO `cl_ref_languages_countries` (`CL_LANGUAGE_ID`, `CL_COUNTRY_ID`, `ENABLED`, `CODE`, `NAME`, `DESCRIPTION`, `I18n_DEFAULT`, `I18N_EN`, `I18N_FR`, `I18N_ES`, `I18N_TH`, `I18N_VT`, `I18N_LA`, `I18N_ID`, `I18N_KH`, `UPDATER_ID`, `COMMENT`, `CREATED_AT`, `UPDATED_AT`) VALUES
+(159, 205, 1, '159', 'Thailand official language', 'Thailand official language', 'Thailand official language', 'Thailand official language', 'Langue officielle de la Thailande', NULL, 'ภาษาไทยเป็นทางการ', NULL, NULL, NULL, NULL, 1, NULL, '2017-11-04 17:08:00', '2017-11-04 17:08:00'),
+(159, 209, 1, '159', '206', 'Thailand official language', 'Thailand official language', 'Thailand official language', 'Langue officielle de la Thailande', NULL, 'ภาษาไทยเป็นทางการ', NULL, NULL, NULL, NULL, 1, NULL, '2017-11-04 18:08:00', '2017-11-04 18:08:00');
 
 -- --------------------------------------------------------
 
@@ -1593,6 +1916,9 @@ CREATE TABLE `cl_ref_products` (
   `I18N_ES` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Spanish',
   `I18N_TH` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Thai',
   `I18N_VT` varchar(256) CHARACTER SET utf8 COLLATE utf8_vietnamese_ci DEFAULT NULL COMMENT 'label in Vietnamese',
+  `I18N_LA` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Lao',
+  `I18N_ID` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in indonesian',
+  `I18N_KH` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Cambodian',
   `CL_PRODUCTS_TYPE_ID` int(11) NOT NULL,
   `UPDATER_ID` int(11) NOT NULL DEFAULT '1',
   `COMMENT` varchar(512) COLLATE utf8_bin DEFAULT NULL,
@@ -1604,54 +1930,54 @@ CREATE TABLE `cl_ref_products` (
 -- Contenu de la table `cl_ref_products`
 --
 
-INSERT INTO `cl_ref_products` (`ID`, `ENABLED`, `CODE`, `NAME`, `DESCRIPTION`, `I18n_DEFAULT`, `I18N_EN`, `I18N_FR`, `I18N_ES`, `I18N_TH`, `I18N_VT`, `CL_PRODUCTS_TYPE_ID`, `UPDATER_ID`, `COMMENT`, `CREATED_AT`, `UPDATED_AT`) VALUES
-(1, 1, 'FERT-21-0-0', 'ปุ๋ยทดลองศูนย์วิจัย 21-0-0', 'ปุ๋ยทดลองศูนย์วิจัย 21-0-0', 'ปุ๋ยทดลองศูนย์วิจัย 21-0-0', 'ปุ๋ยทดลองศูนย์วิจัย 21-0-0', 'ปุ๋ยทดลองศูนย์วิจัย 21-0-0', 'ปุ๋ยทดลองศูนย์วิจัย 21-0-0', 'ปุ๋ยทดลองศูนย์วิจัย 21-0-0', 'ปุ๋ยทดลองศูนย์วิจัย 21-0-0', 50, 1, NULL, '2017-09-23 13:06:07', '2017-09-23 13:06:07'),
-(2, 1, 'FERT-30-15-10', 'ปุ๋ยน้ำหยด 30-15-10', 'ปุ๋ยน้ำหยด 30-15-10', 'ปุ๋ยน้ำหยด 30-15-10', 'ปุ๋ยน้ำหยด 30-15-10', 'ปุ๋ยน้ำหยด 30-15-10', 'ปุ๋ยน้ำหยด 30-15-10', 'ปุ๋ยน้ำหยด 30-15-10', 'ปุ๋ยน้ำหยด 30-15-10', 50, 1, NULL, '2017-09-23 13:07:02', '2017-09-23 13:07:02'),
-(3, 1, 'FERT-46-0-0', 'ปุ๋ยสูตร 46-0-0', 'ปุ๋ยสูตร 46-0-0', 'ปุ๋ยสูตร 46-0-0', 'ปุ๋ยสูตร 46-0-0', 'ปุ๋ยสูตร 46-0-0', 'ปุ๋ยสูตร 46-0-0', 'ปุ๋ยสูตร 46-0-0', 'ปุ๋ยสูตร 46-0-0', 50, 1, NULL, '2017-09-23 13:06:07', '2017-09-23 13:06:07'),
-(4, 1, 'FERT-25-8-5', 'ปุ๋ยน้ำหยด 25-8-5', 'ปุ๋ยน้ำหยด 25-8-5', 'ปุ๋ยน้ำหยด 25-8-5', 'ปุ๋ยน้ำหยด 25-8-5', 'ปุ๋ยน้ำหยด 25-8-5', 'ปุ๋ยน้ำหยด 25-8-5', 'ปุ๋ยน้ำหยด 25-8-5', 'ปุ๋ยน้ำหยด 25-8-5', 50, 1, NULL, '2017-09-23 13:06:07', '2017-09-23 13:06:07'),
-(5, 1, 'FERT-18-46-0', 'แม่ปุ๋ยผสม 18-46-0', 'แม่ปุ๋ยผสม 18-46-0', 'แม่ปุ๋ยผสม 18-46-0', 'แม่ปุ๋ยผสม 18-46-0', 'แม่ปุ๋ยผสม 18-46-0', 'แม่ปุ๋ยผสม 18-46-0', 'แม่ปุ๋ยผสม 18-46-0', 'แม่ปุ๋ยผสม 18-46-0', 50, 1, NULL, '2017-09-23 13:06:07', '2017-09-23 13:06:07'),
-(6, 1, 'FERT-21-7-18', 'ปุ๋ยสูตร 21-7-18', 'ปุ๋ยสูตร 21-7-18', 'ปุ๋ยสูตร 21-7-18', 'ปุ๋ยสูตร 21-7-18', 'ปุ๋ยสูตร 21-7-18', 'ปุ๋ยสูตร 21-7-18', 'ปุ๋ยสูตร 21-7-18', 'ปุ๋ยสูตร 21-7-18', 50, 1, NULL, '2017-09-23 13:06:07', '2017-09-23 13:06:07'),
-(7, 1, 'FERT-16-8-8', 'ปุ๋ยสูตร 16-8-8', 'ปุ๋ยสูตร 16-8-8', 'ปุ๋ยสูตร 16-8-8', 'ปุ๋ยสูตร 16-8-8', 'ปุ๋ยสูตร 16-8-8', 'ปุ๋ยสูตร 16-8-8', 'ปุ๋ยสูตร 16-8-8', 'ปุ๋ยสูตร 16-8-8', 50, 1, NULL, '2017-09-23 13:06:07', '2017-09-23 13:06:07'),
-(8, 1, 'FERT-16-16-8', 'ปุ๋ยสูตร 16-16-8', 'ปุ๋ยสูตร 16-16-8', 'ปุ๋ยสูตร 16-16-8', 'ปุ๋ยสูตร 16-16-8', 'ปุ๋ยสูตร 16-16-8', 'ปุ๋ยสูตร 16-16-8', 'ปุ๋ยสูตร 16-16-8', 'ปุ๋ยสูตร 16-16-8', 50, 1, NULL, '2017-09-23 13:06:07', '2017-09-23 13:06:07'),
-(9, 1, 'FERT-6-16-16', 'ปุ๋ยสูตร 16-16-16', 'ปุ๋ยสูตร 16-16-16', 'ปุ๋ยสูตร 16-16-16', 'ปุ๋ยสูตร 16-16-16', 'ปุ๋ยสูตร 16-16-16', 'ปุ๋ยสูตร 16-16-16', 'ปุ๋ยสูตร 16-16-16', 'ปุ๋ยสูตร 16-16-16', 50, 1, NULL, '2017-09-23 13:06:07', '2017-09-23 13:06:07'),
-(10, 1, 'FERT-16-10-0', 'ปุ๋ยสูตร 16-20-0', 'ปุ๋ยสูตร 16-20-0', 'ปุ๋ยสูตร 16-20-0', 'ปุ๋ยสูตร 16-20-0', 'ปุ๋ยสูตร 16-20-0', 'ปุ๋ยสูตร 16-20-0', 'ปุ๋ยสูตร 16-20-0', 'ปุ๋ยสูตร 16-20-0', 50, 1, NULL, '2017-09-23 13:06:07', '2017-09-23 13:06:07'),
-(11, 1, 'FERT-0-0-60', 'แม่ปุ๋ยสูตร 0-0-60', 'แม่ปุ๋ยสูตร 0-0-60', 'แม่ปุ๋ยสูตร 0-0-60', 'แม่ปุ๋ยสูตร 0-0-60', 'แม่ปุ๋ยสูตร 0-0-60', 'แม่ปุ๋ยสูตร 0-0-60', 'แม่ปุ๋ยสูตร 0-0-60', 'แม่ปุ๋ยสูตร 0-0-60', 50, 1, NULL, '2017-09-23 13:06:07', '2017-09-23 13:06:07'),
-(12, 1, 'FERT-0-0-50', 'ปุ๋ยน้ำหยด 0-0-50', 'ปุ๋ยน้ำหยด 0-0-50', 'ปุ๋ยน้ำหยด 0-0-50', 'ปุ๋ยน้ำหยด 0-0-50', 'ปุ๋ยน้ำหยด 0-0-50', 'ปุ๋ยน้ำหยด 0-0-50', 'ปุ๋ยน้ำหยด 0-0-50', 'ปุ๋ยน้ำหยด 0-0-50', 50, 1, NULL, '2017-09-23 13:06:07', '2017-09-23 13:06:07'),
-(13, 1, 'FERT-23-10-24', 'ปุ๋ยน้ำหยด 23-10-24', 'ปุ๋ยน้ำหยด 23-10-24', 'ปุ๋ยน้ำหยด 23-10-24', 'ปุ๋ยน้ำหยด 23-10-24', 'ปุ๋ยน้ำหยด 23-10-24', 'ปุ๋ยน้ำหยด 23-10-24', 'ปุ๋ยน้ำหยด 23-10-24', 'ปุ๋ยน้ำหยด 23-10-24', 50, 1, NULL, '2017-09-23 13:06:07', '2017-09-23 13:06:07'),
-(14, 1, 'FERT-18-8-0', 'ปุ๋ยสูตร 18-8-0', 'ปุ๋ยสูตร 18-8-0', 'ปุ๋ยสูตร 18-8-0', 'ปุ๋ยสูตร 18-8-0', 'ปุ๋ยสูตร 18-8-0', 'ปุ๋ยสูตร 18-8-0', 'ปุ๋ยสูตร 18-8-0', 'ปุ๋ยสูตร 18-8-0', 50, 1, NULL, '2017-09-23 13:06:07', '2017-09-23 13:06:07'),
-(15, 1, 'FERT-21-8-0', 'ปุ๋ยสูตร 21-0-0', 'ปุ๋ยสูตร 21-0-0', 'ปุ๋ยสูตร 21-0-0', 'ปุ๋ยสูตร 21-0-0', 'ปุ๋ยสูตร 21-0-0', 'ปุ๋ยสูตร 21-0-0', 'ปุ๋ยสูตร 21-0-0', 'ปุ๋ยสูตร 21-0-0', 50, 1, NULL, '2017-09-23 13:06:07', '2017-09-23 13:06:07'),
-(16, 1, 'FERT-SMS', 'ปุ๋ยอินทรีย์ SMS', 'ปุ๋ยอินทรีย์ SMS', 'ปุ๋ยอินทรีย์ SMS', 'ปุ๋ยอินทรีย์ SMS', 'ปุ๋ยอินทรีย์ SMS', 'ปุ๋ยอินทรีย์ SMS', 'ปุ๋ยอินทรีย์ SMS', 'ปุ๋ยอินทรีย์ SMS', 50, 1, NULL, '2017-09-23 13:06:07', '2017-09-23 13:06:07'),
-(17, 1, 'FERT-12-60-0', 'ปุ๋ยน้ำหยด 12-60-0', 'ปุ๋ยน้ำหยด 12-60-0', 'ปุ๋ยน้ำหยด 12-60-0', 'ปุ๋ยน้ำหยด 12-60-0', 'ปุ๋ยน้ำหยด 12-60-0', 'ปุ๋ยน้ำหยด 12-60-0', 'ปุ๋ยน้ำหยด 12-60-0', 'ปุ๋ยน้ำหยด 12-60-0', 50, 1, NULL, '2017-09-23 13:06:07', '2017-09-23 13:06:07'),
-(18, 1, 'FERT-16-16-8.2', 'ปุ๋ยรองพื้น 16-16-8 สปป.ลาว', 'ปุ๋ยรองพื้น 16-16-8 สปป.ลาว', 'ปุ๋ยรองพื้น 16-16-8 สปป.ลาว', 'ปุ๋ยรองพื้น 16-16-8 สปป.ลาว', 'ปุ๋ยรองพื้น 16-16-8 สปป.ลาว', 'ปุ๋ยรองพื้น 16-16-8 สปป.ลาว', 'ปุ๋ยรองพื้น 16-16-8 สปป.ลาว', 'ปุ๋ยรองพื้น 16-16-8 สปป.ลาว', 50, 1, NULL, '2017-09-23 13:06:07', '2017-09-23 13:06:07'),
-(19, 1, 'FERT-Soilmate', 'ปุ๋ยน้ำ Soilmate  b', 'ปุ๋ยน้ำSoilmate  b', 'ปุ๋ยน้ำ Soilmate  b', 'ปุ๋ยน้ำ Soilmate  b', 'ปุ๋ยน้ำ Soilmate  b', 'ปุ๋ยน้ำ Soilmate  b', 'ปุ๋ยน้ำ Soilmate  b', 'ปุ๋ยน้ำ Soilmate  b', 50, 1, NULL, '2017-09-23 13:06:07', '2017-09-23 13:06:07'),
-(20, 1, 'FERT-hyacinthe', 'ไฮแมก-บี', 'ไฮแมก-บี', 'ไฮแมก-บี', 'ไฮแมก-บี', 'ไฮแมก-บี', 'ไฮแมก-บี', 'ไฮแมก-บี', 'ไฮแมก-บี', 50, 1, NULL, '2017-09-23 13:06:07', '2017-09-23 13:06:07'),
-(22, 1, 'CHEM-THAI-2', ' บาก้าโซน / paraquot ', ' บาก้าโซน / paraquot ', 'บาก้าโซน / paraquot', 'บาก้าโซน / paraquot', 'บาก้าโซน / paraquot', 'บาก้าโซน / paraquot', 'บาก้าโซน / paraquot', 'บาก้าโซน / paraquot', 70, 1, NULL, '2017-09-23 11:06:07', '2017-09-23 11:06:07'),
-(23, 1, 'CHEM-THAI-3', ' ไซแอมซีน / atrazine', ' ไซแอมซีน / atrazine', 'ไซแอมซีน / atrazine', 'ไซแอมซีน / atrazine', 'ไซแอมซีน / atrazine', 'ไซแอมซีน / atrazine', 'ไซแอมซีน / atrazine', 'ไซแอมซีน / atrazine', 70, 1, NULL, '2017-09-23 11:06:07', '2017-09-23 11:06:07'),
-(24, 1, 'CHEM-THAI-4', ' ไซแอมทรีน / ametryn', ' ไซแอมทรีน / ametryn', 'ไซแอมทรีน / ametryn', 'ไซแอมทรีน / ametryn', 'ไซแอมทรีน / ametryn', 'ไซแอมทรีน / ametryn', 'ไซแอมทรีน / ametryn', 'ไซแอมทรีน / ametryn', 70, 1, NULL, '2017-09-23 11:06:07', '2017-09-23 11:06:07'),
-(25, 1, 'CHEM-THAI-5', ' บีเค แม็กพรี / atrazine ', ' บีเค แม็กพรี / atrazine ', 'บีเค แม็กพรี / atrazine', 'บีเค แม็กพรี / atrazine', 'บีเค แม็กพรี / atrazine', 'บีเค แม็กพรี / atrazine', 'บีเค แม็กพรี / atrazine', 'บีเค แม็กพรี / atrazine', 70, 1, NULL, '2017-09-23 11:06:07', '2017-09-23 11:06:07'),
-(26, 1, 'CHEM-THAI-6', ' บีเค แม็กโพส / ametryn', ' บีเค แม็กโพส / ametryn', 'ีเค แม็กโพส / ametryn', 'ีเค แม็กโพส / ametryn', 'ีเค แม็กโพส / ametryn', 'ีเค แม็กโพส / ametryn', 'ีเค แม็กโพส / ametryn', 'ีเค แม็กโพส / ametryn', 70, 1, NULL, '2017-09-23 11:06:07', '2017-09-23 11:06:07'),
-(27, 1, 'CHEM-THAI-7', ' บี เค เมทาล / pendimethalin +imazapic', ' บี เค เมทาล / pendimethalin +imazapic', ' บี เค เมทาล / pendimethalin +imazapic', ' บี เค เมทาล / pendimethalin +imazapic', ' บี เค เมทาล / pendimethalin +imazapic', ' บี เค เมทาล / pendimethalin +imazapic', ' บี เค เมทาล / pendimethalin +imazapic', ' บี เค เมทาล / pendimethalin +imazapic', 70, 1, NULL, '2017-09-23 11:06:07', '2017-09-23 11:06:07'),
-(28, 1, 'CHEM-THAI-8', ' บีเคเอมีน / 2,4 D dimetyl ammonium', ' บีเคเอมีน / 2,4 D dimetyl ammonium', ' บีเคเอมีน / 2,4 D dimetyl ammonium', ' บีเคเอมีน / 2,4 D dimetyl ammonium', ' บีเคเอมีน / 2,4 D dimetyl ammonium', ' บีเคเอมีน / 2,4 D dimetyl ammonium', ' บีเคเอมีน / 2,4 D dimetyl ammonium', ' บีเคเอมีน / 2,4 D dimetyl ammonium', 70, 1, NULL, '2017-09-23 11:06:07', '2017-09-23 11:06:07'),
-(29, 1, 'CHEM-THAI-9', ' อามีทรีน / ametryn', ' อามีทรีน / ametryn', 'อามีทรีน / ametryn', 'อามีทรีน / ametryn', 'อามีทรีน / ametryn', 'อามีทรีน / ametryn', 'อามีทรีน / ametryn', 'อามีทรีน / ametryn', 70, 1, NULL, '2017-09-23 11:06:07', '2017-09-23 11:06:07'),
-(30, 1, 'CHEM-THAI-10', ' แรงเจอร์เอ็กซ์ / pendimethalin +imazapic', ' แรงเจอร์เอ็กซ์ / pendimethalin +imazapic', 'แรงเจอร์เอ็กซ์ / pendimethalin +imazapic', 'แรงเจอร์เอ็กซ์ / pendimethalin +imazapic', 'แรงเจอร์เอ็กซ์ / pendimethalin +imazapic', 'แรงเจอร์เอ็กซ์ / pendimethalin +imazapic', 'แรงเจอร์เอ็กซ์ / pendimethalin +imazapic', 'แรงเจอร์เอ็กซ์ / pendimethalin +imazapic', 70, 1, NULL, '2017-09-23 11:06:07', '2017-09-23 11:06:07'),
-(31, 1, 'CHEM-THAI-11', ' บาก้าอัพ / glyphosate isopropylammonium', ' บาก้าอัพ / glyphosate isopropylammonium', 'บาก้าอัพ / glyphosate isopropylammonium', 'บาก้าอัพ / glyphosate isopropylammonium', 'บาก้าอัพ / glyphosate isopropylammonium', 'บาก้าอัพ / glyphosate isopropylammonium', 'บาก้าอัพ / glyphosate isopropylammonium', 'บาก้าอัพ / glyphosate isopropylammonium', 70, 1, NULL, '2017-09-23 11:06:07', '2017-09-23 11:06:07'),
-(32, 1, 'CHEM-THAI-12', ' ไซทรอน / triclopyr', ' ไซทรอน / triclopyr', 'ไซทรอน / triclopyr', 'ไซทรอน / triclopyr', 'ไซทรอน / triclopyr', 'ไซทรอน / triclopyr', 'ไซทรอน / triclopyr', 'ไซทรอน / triclopyr', 70, 1, NULL, '2017-09-23 11:06:07', '2017-09-23 11:06:07'),
-(33, 1, 'CHEM-THAI-13', ' ไซแอมคอมบี / ametryn+atrazine', ' ไซแอมคอมบี / ametryn+atrazine', 'ไซแอมคอมบี / ametryn+atrazine', 'ไซแอมคอมบี / ametryn+atrazine', 'ไซแอมคอมบี / ametryn+atrazine', 'ไซแอมคอมบี / ametryn+atrazine', 'ไซแอมคอมบี / ametryn+atrazine', 'ไซแอมคอมบี / ametryn+atrazine', 70, 1, NULL, '2017-09-23 11:06:07', '2017-09-23 11:06:07'),
-(34, 1, 'CHEM-THAI-14', ' Balance / isoxaflutole', ' Balance / isoxaflutole', 'Balance / isoxaflutole', 'Balance / isoxaflutole', 'Balance / isoxaflutole', 'Balance / isoxaflutole', 'Balance / isoxaflutole', 'Balance / isoxaflutole', 70, 1, NULL, '2017-09-23 11:06:07', '2017-09-23 11:06:07'),
-(35, 1, 'CHEM-THAI-15', ' บาซาเซ่ / DSMA + diuron + 2,4 D', ' บาซาเซ่ / DSMA + diuron + 2,4 D', ' บาซาเซ่ / DSMA + diuron + 2,4 D', ' บาซาเซ่ / DSMA + diuron + 2,4 D', ' บาซาเซ่ / DSMA + diuron + 2,4 D', ' บาซาเซ่ / DSMA + diuron + 2,4 D', ' บาซาเซ่ / DSMA + diuron + 2,4 D', ' บาซาเซ่ / DSMA + diuron + 2,4 D', 70, 1, NULL, '2017-09-23 11:06:07', '2017-09-23 11:06:07'),
-(36, 1, 'CHEM-THAI-16', ' ไซแอมโซน / paraquot ', ' ไซแอมโซน / paraquot ', 'ไซแอมโซน / paraquot', 'ไซแอมโซน / paraquot', 'ไซแอมโซน / paraquot', 'ไซแอมโซน / paraquot', 'ไซแอมโซน / paraquot', 'ไซแอมโซน / paraquot', 70, 1, NULL, '2017-09-23 11:06:07', '2017-09-23 11:06:07'),
-(37, 1, 'CHEM-THAI-17', ' โพลิดอล / ', ' โพลิดอล / ', 'โพลิดอล /', 'โพลิดอล /', 'โพลิดอล /', 'โพลิดอล /', 'โพลิดอล /', 'โพลิดอล /', 70, 1, NULL, '2017-09-23 11:06:07', '2017-09-23 11:06:07'),
-(38, 1, 'CHEM-THAI-18', ' คลอไฟลีฟอส / chlopyriphos + cypermetrin', ' คลอไฟลีฟอส / chlopyriphos + cypermetrin', 'คลอไฟลีฟอส / chlopyriphos + cypermetrin', 'คลอไฟลีฟอส / chlopyriphos + cypermetrin', 'คลอไฟลีฟอส / chlopyriphos + cypermetrin', 'คลอไฟลีฟอส / chlopyriphos + cypermetrin', 'คลอไฟลีฟอส / chlopyriphos + cypermetrin', 'คลอไฟลีฟอส / chlopyriphos + cypermetrin', 70, 1, NULL, '2017-09-23 11:06:07', '2017-09-23 11:06:07'),
-(39, 1, 'CHEM-THAI-19', ' อลาคลอร์ / alachlor', ' อลาคลอร์ / alachlor', 'อลาคลอร์ / alachlor', 'อลาคลอร์ / alachlor', 'อลาคลอร์ / alachlor', 'อลาคลอร์ / alachlor', 'อลาคลอร์ / alachlor', 'อลาคลอร์ / alachlor', 70, 1, NULL, '2017-09-23 11:06:07', '2017-09-23 11:06:07'),
-(40, 1, 'CHEM-THAI-20', ' อาเชทโตคลอร์ / alachlor', ' อาเชทโตคลอร์ / alachlor', ' อาเชทโตคลอร์ / alachlor', ' อาเชทโตคลอร์ / alachlor', ' อาเชทโตคลอร์ / alachlor', ' อาเชทโตคลอร์ / alachlor', ' อาเชทโตคลอร์ / alachlor', ' อาเชทโตคลอร์ / alachlor', 70, 1, NULL, '2017-09-23 11:06:07', '2017-09-23 11:06:07'),
-(41, 1, 'CHEM-THAI-21', ' ไซแอมควิก / quizalofop- P -ethyl', ' ไซแอมควิก / quizalofop- P -ethyl', ' ไซแอมควิก / quizalofop- P -ethyl', ' ไซแอมควิก / quizalofop- P -ethyl', ' ไซแอมควิก / quizalofop- P -ethyl', ' ไซแอมควิก / quizalofop- P -ethyl', ' ไซแอมควิก / quizalofop- P -ethyl', ' ไซแอมควิก / quizalofop- P -ethyl', 70, 1, NULL, '2017-09-23 11:06:07', '2017-09-23 11:06:07'),
-(42, 1, 'CHEM-THAI-22', ' ไซแอมซาแฟน / fumesafen 25% W/V SL', ' ไซแอมซาแฟน / fumesafen 25% W/V SL', 'ไซแอมซาแฟน / fumesafen 25% W/V SL', 'ไซแอมซาแฟน / fumesafen 25% W/V SL', 'ไซแอมซาแฟน / fumesafen 25% W/V SL', 'ไซแอมซาแฟน / fumesafen 25% W/V SL', 'ไซแอมซาแฟน / fumesafen 25% W/V SL', 'ไซแอมซาแฟน / fumesafen 25% W/V SL', 70, 1, NULL, '2017-09-23 11:06:07', '2017-09-23 11:06:07'),
-(43, 1, 'CHEM-THAI-23', ' ไซแอมฟอส / chlopyriphos + cypermetrin', ' ไซแอมฟอส / chlopyriphos + cypermetrin', 'ไซแอมฟอส / chlopyriphos + cypermetrin', 'ไซแอมฟอส / chlopyriphos + cypermetrin', 'ไซแอมฟอส / chlopyriphos + cypermetrin', 'ไซแอมฟอส / chlopyriphos + cypermetrin', 'ไซแอมฟอส / chlopyriphos + cypermetrin', 'ไซแอมฟอส / chlopyriphos + cypermetrin', 70, 1, NULL, '2017-09-23 11:06:07', '2017-09-23 11:06:07'),
-(44, 1, 'CHEM-THAI-24', ' ไซโครโบวเคล / ', ' ไซโครโบวเคล / ', 'ไซโครโบวเคล / ', 'ไซโครโบวเคล / ', 'ไซโครโบวเคล / ', 'ไซโครโบวเคล / ', 'ไซโครโบวเคล / ', 'ไซโครโบวเคล / ', 70, 1, NULL, '2017-09-23 11:06:07', '2017-09-23 11:06:07'),
-(45, 1, 'CHEM-THAI-25', ' ไซแอมเนทโทร / ', ' ไซแอมเนทโทร / ', 'ไซแอมเนทโทร /', 'ไซแอมเนทโทร /', 'ไซแอมเนทโทร /', 'ไซแอมเนทโทร /', 'ไซแอมเนทโทร /', 'ไซแอมเนทโทร /', 70, 1, NULL, '2017-09-23 11:06:07', '2017-09-23 11:06:07'),
-(46, 1, 'CHEM-THAI-26', ' คาโบซัลแฟน / carbosulfan', ' คาโบซัลแฟน / carbosulfan', 'คาโบซัลแฟน / carbosulfan', 'คาโบซัลแฟน / carbosulfan', 'คาโบซัลแฟน / carbosulfan', 'คาโบซัลแฟน / carbosulfan', 'คาโบซัลแฟน / carbosulfan', 'คาโบซัลแฟน / carbosulfan', 70, 1, NULL, '2017-09-23 11:06:07', '2017-09-23 11:06:07'),
-(47, 1, 'CHEM-THAI-27', ' บาก้าเคน / hexazinone ', ' บาก้าเคน / hexazinone ', 'บาก้าเคน / hexazinone', 'บาก้าเคน / hexazinone', 'บาก้าเคน / hexazinone', 'บาก้าเคน / hexazinone', 'บาก้าเคน / hexazinone', 'บาก้าเคน / hexazinone', 70, 1, NULL, '2017-09-23 11:06:07', '2017-09-23 11:06:07'),
-(48, 1, 'CHEM-THAI-28', ' ไซแอมพรี / ', ' ไซแอมพรี / ', 'ไซแอมพรี / ', 'ไซแอมพรี / ', 'ไซแอมพรี / ', 'ไซแอมพรี / ', 'ไซแอมพรี / ', 'ไซแอมพรี / ', 70, 1, NULL, '2017-09-23 11:06:07', '2017-09-23 11:06:07');
+INSERT INTO `cl_ref_products` (`ID`, `ENABLED`, `CODE`, `NAME`, `DESCRIPTION`, `I18n_DEFAULT`, `I18N_EN`, `I18N_FR`, `I18N_ES`, `I18N_TH`, `I18N_VT`, `I18N_LA`, `I18N_ID`, `I18N_KH`, `CL_PRODUCTS_TYPE_ID`, `UPDATER_ID`, `COMMENT`, `CREATED_AT`, `UPDATED_AT`) VALUES
+(1, 1, 'FERT-21-0-0', 'ปุ๋ยทดลองศูนย์วิจัย 21-0-0', 'ปุ๋ยทดลองศูนย์วิจัย 21-0-0', 'ปุ๋ยทดลองศูนย์วิจัย 21-0-0', 'ปุ๋ยทดลองศูนย์วิจัย 21-0-0', 'ปุ๋ยทดลองศูนย์วิจัย 21-0-0', 'ปุ๋ยทดลองศูนย์วิจัย 21-0-0', 'ปุ๋ยทดลองศูนย์วิจัย 21-0-0', 'ปุ๋ยทดลองศูนย์วิจัย 21-0-0', NULL, NULL, NULL, 50, 1, NULL, '2017-09-23 13:06:07', '2017-09-23 13:06:07'),
+(2, 1, 'FERT-30-15-10', 'ปุ๋ยน้ำหยด 30-15-10', 'ปุ๋ยน้ำหยด 30-15-10', 'ปุ๋ยน้ำหยด 30-15-10', 'ปุ๋ยน้ำหยด 30-15-10', 'ปุ๋ยน้ำหยด 30-15-10', 'ปุ๋ยน้ำหยด 30-15-10', 'ปุ๋ยน้ำหยด 30-15-10', 'ปุ๋ยน้ำหยด 30-15-10', NULL, NULL, NULL, 50, 1, NULL, '2017-09-23 13:07:02', '2017-09-23 13:07:02'),
+(3, 1, 'FERT-46-0-0', 'ปุ๋ยสูตร 46-0-0', 'ปุ๋ยสูตร 46-0-0', 'ปุ๋ยสูตร 46-0-0', 'ปุ๋ยสูตร 46-0-0', 'ปุ๋ยสูตร 46-0-0', 'ปุ๋ยสูตร 46-0-0', 'ปุ๋ยสูตร 46-0-0', 'ปุ๋ยสูตร 46-0-0', NULL, NULL, NULL, 50, 1, NULL, '2017-09-23 13:06:07', '2017-09-23 13:06:07'),
+(4, 1, 'FERT-25-8-5', 'ปุ๋ยน้ำหยด 25-8-5', 'ปุ๋ยน้ำหยด 25-8-5', 'ปุ๋ยน้ำหยด 25-8-5', 'ปุ๋ยน้ำหยด 25-8-5', 'ปุ๋ยน้ำหยด 25-8-5', 'ปุ๋ยน้ำหยด 25-8-5', 'ปุ๋ยน้ำหยด 25-8-5', 'ปุ๋ยน้ำหยด 25-8-5', NULL, NULL, NULL, 50, 1, NULL, '2017-09-23 13:06:07', '2017-09-23 13:06:07'),
+(5, 1, 'FERT-18-46-0', 'แม่ปุ๋ยผสม 18-46-0', 'แม่ปุ๋ยผสม 18-46-0', 'แม่ปุ๋ยผสม 18-46-0', 'แม่ปุ๋ยผสม 18-46-0', 'แม่ปุ๋ยผสม 18-46-0', 'แม่ปุ๋ยผสม 18-46-0', 'แม่ปุ๋ยผสม 18-46-0', 'แม่ปุ๋ยผสม 18-46-0', NULL, NULL, NULL, 50, 1, NULL, '2017-09-23 13:06:07', '2017-09-23 13:06:07'),
+(6, 1, 'FERT-21-7-18', 'ปุ๋ยสูตร 21-7-18', 'ปุ๋ยสูตร 21-7-18', 'ปุ๋ยสูตร 21-7-18', 'ปุ๋ยสูตร 21-7-18', 'ปุ๋ยสูตร 21-7-18', 'ปุ๋ยสูตร 21-7-18', 'ปุ๋ยสูตร 21-7-18', 'ปุ๋ยสูตร 21-7-18', NULL, NULL, NULL, 50, 1, NULL, '2017-09-23 13:06:07', '2017-09-23 13:06:07'),
+(7, 1, 'FERT-16-8-8', 'ปุ๋ยสูตร 16-8-8', 'ปุ๋ยสูตร 16-8-8', 'ปุ๋ยสูตร 16-8-8', 'ปุ๋ยสูตร 16-8-8', 'ปุ๋ยสูตร 16-8-8', 'ปุ๋ยสูตร 16-8-8', 'ปุ๋ยสูตร 16-8-8', 'ปุ๋ยสูตร 16-8-8', NULL, NULL, NULL, 50, 1, NULL, '2017-09-23 13:06:07', '2017-09-23 13:06:07'),
+(8, 1, 'FERT-16-16-8', 'ปุ๋ยสูตร 16-16-8', 'ปุ๋ยสูตร 16-16-8', 'ปุ๋ยสูตร 16-16-8', 'ปุ๋ยสูตร 16-16-8', 'ปุ๋ยสูตร 16-16-8', 'ปุ๋ยสูตร 16-16-8', 'ปุ๋ยสูตร 16-16-8', 'ปุ๋ยสูตร 16-16-8', NULL, NULL, NULL, 50, 1, NULL, '2017-09-23 13:06:07', '2017-09-23 13:06:07'),
+(9, 1, 'FERT-6-16-16', 'ปุ๋ยสูตร 16-16-16', 'ปุ๋ยสูตร 16-16-16', 'ปุ๋ยสูตร 16-16-16', 'ปุ๋ยสูตร 16-16-16', 'ปุ๋ยสูตร 16-16-16', 'ปุ๋ยสูตร 16-16-16', 'ปุ๋ยสูตร 16-16-16', 'ปุ๋ยสูตร 16-16-16', NULL, NULL, NULL, 50, 1, NULL, '2017-09-23 13:06:07', '2017-09-23 13:06:07'),
+(10, 1, 'FERT-16-10-0', 'ปุ๋ยสูตร 16-20-0', 'ปุ๋ยสูตร 16-20-0', 'ปุ๋ยสูตร 16-20-0', 'ปุ๋ยสูตร 16-20-0', 'ปุ๋ยสูตร 16-20-0', 'ปุ๋ยสูตร 16-20-0', 'ปุ๋ยสูตร 16-20-0', 'ปุ๋ยสูตร 16-20-0', NULL, NULL, NULL, 50, 1, NULL, '2017-09-23 13:06:07', '2017-09-23 13:06:07'),
+(11, 1, 'FERT-0-0-60', 'แม่ปุ๋ยสูตร 0-0-60', 'แม่ปุ๋ยสูตร 0-0-60', 'แม่ปุ๋ยสูตร 0-0-60', 'แม่ปุ๋ยสูตร 0-0-60', 'แม่ปุ๋ยสูตร 0-0-60', 'แม่ปุ๋ยสูตร 0-0-60', 'แม่ปุ๋ยสูตร 0-0-60', 'แม่ปุ๋ยสูตร 0-0-60', NULL, NULL, NULL, 50, 1, NULL, '2017-09-23 13:06:07', '2017-09-23 13:06:07'),
+(12, 1, 'FERT-0-0-50', 'ปุ๋ยน้ำหยด 0-0-50', 'ปุ๋ยน้ำหยด 0-0-50', 'ปุ๋ยน้ำหยด 0-0-50', 'ปุ๋ยน้ำหยด 0-0-50', 'ปุ๋ยน้ำหยด 0-0-50', 'ปุ๋ยน้ำหยด 0-0-50', 'ปุ๋ยน้ำหยด 0-0-50', 'ปุ๋ยน้ำหยด 0-0-50', NULL, NULL, NULL, 50, 1, NULL, '2017-09-23 13:06:07', '2017-09-23 13:06:07'),
+(13, 1, 'FERT-23-10-24', 'ปุ๋ยน้ำหยด 23-10-24', 'ปุ๋ยน้ำหยด 23-10-24', 'ปุ๋ยน้ำหยด 23-10-24', 'ปุ๋ยน้ำหยด 23-10-24', 'ปุ๋ยน้ำหยด 23-10-24', 'ปุ๋ยน้ำหยด 23-10-24', 'ปุ๋ยน้ำหยด 23-10-24', 'ปุ๋ยน้ำหยด 23-10-24', NULL, NULL, NULL, 50, 1, NULL, '2017-09-23 13:06:07', '2017-09-23 13:06:07'),
+(14, 1, 'FERT-18-8-0', 'ปุ๋ยสูตร 18-8-0', 'ปุ๋ยสูตร 18-8-0', 'ปุ๋ยสูตร 18-8-0', 'ปุ๋ยสูตร 18-8-0', 'ปุ๋ยสูตร 18-8-0', 'ปุ๋ยสูตร 18-8-0', 'ปุ๋ยสูตร 18-8-0', 'ปุ๋ยสูตร 18-8-0', NULL, NULL, NULL, 50, 1, NULL, '2017-09-23 13:06:07', '2017-09-23 13:06:07'),
+(15, 1, 'FERT-21-8-0', 'ปุ๋ยสูตร 21-0-0', 'ปุ๋ยสูตร 21-0-0', 'ปุ๋ยสูตร 21-0-0', 'ปุ๋ยสูตร 21-0-0', 'ปุ๋ยสูตร 21-0-0', 'ปุ๋ยสูตร 21-0-0', 'ปุ๋ยสูตร 21-0-0', 'ปุ๋ยสูตร 21-0-0', NULL, NULL, NULL, 50, 1, NULL, '2017-09-23 13:06:07', '2017-09-23 13:06:07'),
+(16, 1, 'FERT-SMS', 'ปุ๋ยอินทรีย์ SMS', 'ปุ๋ยอินทรีย์ SMS', 'ปุ๋ยอินทรีย์ SMS', 'ปุ๋ยอินทรีย์ SMS', 'ปุ๋ยอินทรีย์ SMS', 'ปุ๋ยอินทรีย์ SMS', 'ปุ๋ยอินทรีย์ SMS', 'ปุ๋ยอินทรีย์ SMS', NULL, NULL, NULL, 50, 1, NULL, '2017-09-23 13:06:07', '2017-09-23 13:06:07'),
+(17, 1, 'FERT-12-60-0', 'ปุ๋ยน้ำหยด 12-60-0', 'ปุ๋ยน้ำหยด 12-60-0', 'ปุ๋ยน้ำหยด 12-60-0', 'ปุ๋ยน้ำหยด 12-60-0', 'ปุ๋ยน้ำหยด 12-60-0', 'ปุ๋ยน้ำหยด 12-60-0', 'ปุ๋ยน้ำหยด 12-60-0', 'ปุ๋ยน้ำหยด 12-60-0', NULL, NULL, NULL, 50, 1, NULL, '2017-09-23 13:06:07', '2017-09-23 13:06:07'),
+(18, 1, 'FERT-16-16-8.2', 'ปุ๋ยรองพื้น 16-16-8 สปป.ลาว', 'ปุ๋ยรองพื้น 16-16-8 สปป.ลาว', 'ปุ๋ยรองพื้น 16-16-8 สปป.ลาว', 'ปุ๋ยรองพื้น 16-16-8 สปป.ลาว', 'ปุ๋ยรองพื้น 16-16-8 สปป.ลาว', 'ปุ๋ยรองพื้น 16-16-8 สปป.ลาว', 'ปุ๋ยรองพื้น 16-16-8 สปป.ลาว', 'ปุ๋ยรองพื้น 16-16-8 สปป.ลาว', NULL, NULL, NULL, 50, 1, NULL, '2017-09-23 13:06:07', '2017-09-23 13:06:07'),
+(19, 1, 'FERT-Soilmate', 'ปุ๋ยน้ำ Soilmate  b', 'ปุ๋ยน้ำSoilmate  b', 'ปุ๋ยน้ำ Soilmate  b', 'ปุ๋ยน้ำ Soilmate  b', 'ปุ๋ยน้ำ Soilmate  b', 'ปุ๋ยน้ำ Soilmate  b', 'ปุ๋ยน้ำ Soilmate  b', 'ปุ๋ยน้ำ Soilmate  b', NULL, NULL, NULL, 50, 1, NULL, '2017-09-23 13:06:07', '2017-09-23 13:06:07'),
+(20, 1, 'FERT-hyacinthe', 'ไฮแมก-บี', 'ไฮแมก-บี', 'ไฮแมก-บี', 'ไฮแมก-บี', 'ไฮแมก-บี', 'ไฮแมก-บี', 'ไฮแมก-บี', 'ไฮแมก-บี', NULL, NULL, NULL, 50, 1, NULL, '2017-09-23 13:06:07', '2017-09-23 13:06:07'),
+(22, 1, 'CHEM-THAI-2', ' บาก้าโซน / paraquot ', ' บาก้าโซน / paraquot ', 'บาก้าโซน / paraquot', 'บาก้าโซน / paraquot', 'บาก้าโซน / paraquot', 'บาก้าโซน / paraquot', 'บาก้าโซน / paraquot', 'บาก้าโซน / paraquot', NULL, NULL, NULL, 70, 1, NULL, '2017-09-23 11:06:07', '2017-09-23 11:06:07'),
+(23, 1, 'CHEM-THAI-3', ' ไซแอมซีน / atrazine', ' ไซแอมซีน / atrazine', 'ไซแอมซีน / atrazine', 'ไซแอมซีน / atrazine', 'ไซแอมซีน / atrazine', 'ไซแอมซีน / atrazine', 'ไซแอมซีน / atrazine', 'ไซแอมซีน / atrazine', NULL, NULL, NULL, 70, 1, NULL, '2017-09-23 11:06:07', '2017-09-23 11:06:07'),
+(24, 1, 'CHEM-THAI-4', ' ไซแอมทรีน / ametryn', ' ไซแอมทรีน / ametryn', 'ไซแอมทรีน / ametryn', 'ไซแอมทรีน / ametryn', 'ไซแอมทรีน / ametryn', 'ไซแอมทรีน / ametryn', 'ไซแอมทรีน / ametryn', 'ไซแอมทรีน / ametryn', NULL, NULL, NULL, 70, 1, NULL, '2017-09-23 11:06:07', '2017-09-23 11:06:07'),
+(25, 1, 'CHEM-THAI-5', ' บีเค แม็กพรี / atrazine ', ' บีเค แม็กพรี / atrazine ', 'บีเค แม็กพรี / atrazine', 'บีเค แม็กพรี / atrazine', 'บีเค แม็กพรี / atrazine', 'บีเค แม็กพรี / atrazine', 'บีเค แม็กพรี / atrazine', 'บีเค แม็กพรี / atrazine', NULL, NULL, NULL, 70, 1, NULL, '2017-09-23 11:06:07', '2017-09-23 11:06:07'),
+(26, 1, 'CHEM-THAI-6', ' บีเค แม็กโพส / ametryn', ' บีเค แม็กโพส / ametryn', 'ีเค แม็กโพส / ametryn', 'ีเค แม็กโพส / ametryn', 'ีเค แม็กโพส / ametryn', 'ีเค แม็กโพส / ametryn', 'ีเค แม็กโพส / ametryn', 'ีเค แม็กโพส / ametryn', NULL, NULL, NULL, 70, 1, NULL, '2017-09-23 11:06:07', '2017-09-23 11:06:07'),
+(27, 1, 'CHEM-THAI-7', ' บี เค เมทาล / pendimethalin +imazapic', ' บี เค เมทาล / pendimethalin +imazapic', ' บี เค เมทาล / pendimethalin +imazapic', ' บี เค เมทาล / pendimethalin +imazapic', ' บี เค เมทาล / pendimethalin +imazapic', ' บี เค เมทาล / pendimethalin +imazapic', ' บี เค เมทาล / pendimethalin +imazapic', ' บี เค เมทาล / pendimethalin +imazapic', NULL, NULL, NULL, 70, 1, NULL, '2017-09-23 11:06:07', '2017-09-23 11:06:07'),
+(28, 1, 'CHEM-THAI-8', ' บีเคเอมีน / 2,4 D dimetyl ammonium', ' บีเคเอมีน / 2,4 D dimetyl ammonium', ' บีเคเอมีน / 2,4 D dimetyl ammonium', ' บีเคเอมีน / 2,4 D dimetyl ammonium', ' บีเคเอมีน / 2,4 D dimetyl ammonium', ' บีเคเอมีน / 2,4 D dimetyl ammonium', ' บีเคเอมีน / 2,4 D dimetyl ammonium', ' บีเคเอมีน / 2,4 D dimetyl ammonium', NULL, NULL, NULL, 70, 1, NULL, '2017-09-23 11:06:07', '2017-09-23 11:06:07'),
+(29, 1, 'CHEM-THAI-9', ' อามีทรีน / ametryn', ' อามีทรีน / ametryn', 'อามีทรีน / ametryn', 'อามีทรีน / ametryn', 'อามีทรีน / ametryn', 'อามีทรีน / ametryn', 'อามีทรีน / ametryn', 'อามีทรีน / ametryn', NULL, NULL, NULL, 70, 1, NULL, '2017-09-23 11:06:07', '2017-09-23 11:06:07'),
+(30, 1, 'CHEM-THAI-10', ' แรงเจอร์เอ็กซ์ / pendimethalin +imazapic', ' แรงเจอร์เอ็กซ์ / pendimethalin +imazapic', 'แรงเจอร์เอ็กซ์ / pendimethalin +imazapic', 'แรงเจอร์เอ็กซ์ / pendimethalin +imazapic', 'แรงเจอร์เอ็กซ์ / pendimethalin +imazapic', 'แรงเจอร์เอ็กซ์ / pendimethalin +imazapic', 'แรงเจอร์เอ็กซ์ / pendimethalin +imazapic', 'แรงเจอร์เอ็กซ์ / pendimethalin +imazapic', NULL, NULL, NULL, 70, 1, NULL, '2017-09-23 11:06:07', '2017-09-23 11:06:07'),
+(31, 1, 'CHEM-THAI-11', ' บาก้าอัพ / glyphosate isopropylammonium', ' บาก้าอัพ / glyphosate isopropylammonium', 'บาก้าอัพ / glyphosate isopropylammonium', 'บาก้าอัพ / glyphosate isopropylammonium', 'บาก้าอัพ / glyphosate isopropylammonium', 'บาก้าอัพ / glyphosate isopropylammonium', 'บาก้าอัพ / glyphosate isopropylammonium', 'บาก้าอัพ / glyphosate isopropylammonium', NULL, NULL, NULL, 70, 1, NULL, '2017-09-23 11:06:07', '2017-09-23 11:06:07'),
+(32, 1, 'CHEM-THAI-12', ' ไซทรอน / triclopyr', ' ไซทรอน / triclopyr', 'ไซทรอน / triclopyr', 'ไซทรอน / triclopyr', 'ไซทรอน / triclopyr', 'ไซทรอน / triclopyr', 'ไซทรอน / triclopyr', 'ไซทรอน / triclopyr', NULL, NULL, NULL, 70, 1, NULL, '2017-09-23 11:06:07', '2017-09-23 11:06:07'),
+(33, 1, 'CHEM-THAI-13', ' ไซแอมคอมบี / ametryn+atrazine', ' ไซแอมคอมบี / ametryn+atrazine', 'ไซแอมคอมบี / ametryn+atrazine', 'ไซแอมคอมบี / ametryn+atrazine', 'ไซแอมคอมบี / ametryn+atrazine', 'ไซแอมคอมบี / ametryn+atrazine', 'ไซแอมคอมบี / ametryn+atrazine', 'ไซแอมคอมบี / ametryn+atrazine', NULL, NULL, NULL, 70, 1, NULL, '2017-09-23 11:06:07', '2017-09-23 11:06:07'),
+(34, 1, 'CHEM-THAI-14', ' Balance / isoxaflutole', ' Balance / isoxaflutole', 'Balance / isoxaflutole', 'Balance / isoxaflutole', 'Balance / isoxaflutole', 'Balance / isoxaflutole', 'Balance / isoxaflutole', 'Balance / isoxaflutole', NULL, NULL, NULL, 70, 1, NULL, '2017-09-23 11:06:07', '2017-09-23 11:06:07'),
+(35, 1, 'CHEM-THAI-15', ' บาซาเซ่ / DSMA + diuron + 2,4 D', ' บาซาเซ่ / DSMA + diuron + 2,4 D', ' บาซาเซ่ / DSMA + diuron + 2,4 D', ' บาซาเซ่ / DSMA + diuron + 2,4 D', ' บาซาเซ่ / DSMA + diuron + 2,4 D', ' บาซาเซ่ / DSMA + diuron + 2,4 D', ' บาซาเซ่ / DSMA + diuron + 2,4 D', ' บาซาเซ่ / DSMA + diuron + 2,4 D', NULL, NULL, NULL, 70, 1, NULL, '2017-09-23 11:06:07', '2017-09-23 11:06:07'),
+(36, 1, 'CHEM-THAI-16', ' ไซแอมโซน / paraquot ', ' ไซแอมโซน / paraquot ', 'ไซแอมโซน / paraquot', 'ไซแอมโซน / paraquot', 'ไซแอมโซน / paraquot', 'ไซแอมโซน / paraquot', 'ไซแอมโซน / paraquot', 'ไซแอมโซน / paraquot', NULL, NULL, NULL, 70, 1, NULL, '2017-09-23 11:06:07', '2017-09-23 11:06:07'),
+(37, 1, 'CHEM-THAI-17', ' โพลิดอล / ', ' โพลิดอล / ', 'โพลิดอล /', 'โพลิดอล /', 'โพลิดอล /', 'โพลิดอล /', 'โพลิดอล /', 'โพลิดอล /', NULL, NULL, NULL, 70, 1, NULL, '2017-09-23 11:06:07', '2017-09-23 11:06:07'),
+(38, 1, 'CHEM-THAI-18', ' คลอไฟลีฟอส / chlopyriphos + cypermetrin', ' คลอไฟลีฟอส / chlopyriphos + cypermetrin', 'คลอไฟลีฟอส / chlopyriphos + cypermetrin', 'คลอไฟลีฟอส / chlopyriphos + cypermetrin', 'คลอไฟลีฟอส / chlopyriphos + cypermetrin', 'คลอไฟลีฟอส / chlopyriphos + cypermetrin', 'คลอไฟลีฟอส / chlopyriphos + cypermetrin', 'คลอไฟลีฟอส / chlopyriphos + cypermetrin', NULL, NULL, NULL, 70, 1, NULL, '2017-09-23 11:06:07', '2017-09-23 11:06:07'),
+(39, 1, 'CHEM-THAI-19', ' อลาคลอร์ / alachlor', ' อลาคลอร์ / alachlor', 'อลาคลอร์ / alachlor', 'อลาคลอร์ / alachlor', 'อลาคลอร์ / alachlor', 'อลาคลอร์ / alachlor', 'อลาคลอร์ / alachlor', 'อลาคลอร์ / alachlor', NULL, NULL, NULL, 70, 1, NULL, '2017-09-23 11:06:07', '2017-09-23 11:06:07'),
+(40, 1, 'CHEM-THAI-20', ' อาเชทโตคลอร์ / alachlor', ' อาเชทโตคลอร์ / alachlor', ' อาเชทโตคลอร์ / alachlor', ' อาเชทโตคลอร์ / alachlor', ' อาเชทโตคลอร์ / alachlor', ' อาเชทโตคลอร์ / alachlor', ' อาเชทโตคลอร์ / alachlor', ' อาเชทโตคลอร์ / alachlor', NULL, NULL, NULL, 70, 1, NULL, '2017-09-23 11:06:07', '2017-09-23 11:06:07'),
+(41, 1, 'CHEM-THAI-21', ' ไซแอมควิก / quizalofop- P -ethyl', ' ไซแอมควิก / quizalofop- P -ethyl', ' ไซแอมควิก / quizalofop- P -ethyl', ' ไซแอมควิก / quizalofop- P -ethyl', ' ไซแอมควิก / quizalofop- P -ethyl', ' ไซแอมควิก / quizalofop- P -ethyl', ' ไซแอมควิก / quizalofop- P -ethyl', ' ไซแอมควิก / quizalofop- P -ethyl', NULL, NULL, NULL, 70, 1, NULL, '2017-09-23 11:06:07', '2017-09-23 11:06:07'),
+(42, 1, 'CHEM-THAI-22', ' ไซแอมซาแฟน / fumesafen 25% W/V SL', ' ไซแอมซาแฟน / fumesafen 25% W/V SL', 'ไซแอมซาแฟน / fumesafen 25% W/V SL', 'ไซแอมซาแฟน / fumesafen 25% W/V SL', 'ไซแอมซาแฟน / fumesafen 25% W/V SL', 'ไซแอมซาแฟน / fumesafen 25% W/V SL', 'ไซแอมซาแฟน / fumesafen 25% W/V SL', 'ไซแอมซาแฟน / fumesafen 25% W/V SL', NULL, NULL, NULL, 70, 1, NULL, '2017-09-23 11:06:07', '2017-09-23 11:06:07'),
+(43, 1, 'CHEM-THAI-23', ' ไซแอมฟอส / chlopyriphos + cypermetrin', ' ไซแอมฟอส / chlopyriphos + cypermetrin', 'ไซแอมฟอส / chlopyriphos + cypermetrin', 'ไซแอมฟอส / chlopyriphos + cypermetrin', 'ไซแอมฟอส / chlopyriphos + cypermetrin', 'ไซแอมฟอส / chlopyriphos + cypermetrin', 'ไซแอมฟอส / chlopyriphos + cypermetrin', 'ไซแอมฟอส / chlopyriphos + cypermetrin', NULL, NULL, NULL, 70, 1, NULL, '2017-09-23 11:06:07', '2017-09-23 11:06:07'),
+(44, 1, 'CHEM-THAI-24', ' ไซโครโบวเคล / ', ' ไซโครโบวเคล / ', 'ไซโครโบวเคล / ', 'ไซโครโบวเคล / ', 'ไซโครโบวเคล / ', 'ไซโครโบวเคล / ', 'ไซโครโบวเคล / ', 'ไซโครโบวเคล / ', NULL, NULL, NULL, 70, 1, NULL, '2017-09-23 11:06:07', '2017-09-23 11:06:07'),
+(45, 1, 'CHEM-THAI-25', ' ไซแอมเนทโทร / ', ' ไซแอมเนทโทร / ', 'ไซแอมเนทโทร /', 'ไซแอมเนทโทร /', 'ไซแอมเนทโทร /', 'ไซแอมเนทโทร /', 'ไซแอมเนทโทร /', 'ไซแอมเนทโทร /', NULL, NULL, NULL, 70, 1, NULL, '2017-09-23 11:06:07', '2017-09-23 11:06:07'),
+(46, 1, 'CHEM-THAI-26', ' คาโบซัลแฟน / carbosulfan', ' คาโบซัลแฟน / carbosulfan', 'คาโบซัลแฟน / carbosulfan', 'คาโบซัลแฟน / carbosulfan', 'คาโบซัลแฟน / carbosulfan', 'คาโบซัลแฟน / carbosulfan', 'คาโบซัลแฟน / carbosulfan', 'คาโบซัลแฟน / carbosulfan', NULL, NULL, NULL, 70, 1, NULL, '2017-09-23 11:06:07', '2017-09-23 11:06:07'),
+(47, 1, 'CHEM-THAI-27', ' บาก้าเคน / hexazinone ', ' บาก้าเคน / hexazinone ', 'บาก้าเคน / hexazinone', 'บาก้าเคน / hexazinone', 'บาก้าเคน / hexazinone', 'บาก้าเคน / hexazinone', 'บาก้าเคน / hexazinone', 'บาก้าเคน / hexazinone', NULL, NULL, NULL, 70, 1, NULL, '2017-09-23 11:06:07', '2017-09-23 11:06:07'),
+(48, 1, 'CHEM-THAI-28', ' ไซแอมพรี / ', ' ไซแอมพรี / ', 'ไซแอมพรี / ', 'ไซแอมพรี / ', 'ไซแอมพรี / ', 'ไซแอมพรี / ', 'ไซแอมพรี / ', 'ไซแอมพรี / ', NULL, NULL, NULL, 70, 1, NULL, '2017-09-23 11:06:07', '2017-09-23 11:06:07');
 
 -- --------------------------------------------------------
 
@@ -1671,6 +1997,9 @@ CREATE TABLE `cl_ref_product_types` (
   `I18N_ES` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Spanish',
   `I18N_TH` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Thai',
   `I18N_VT` varchar(256) CHARACTER SET utf8 COLLATE utf8_vietnamese_ci DEFAULT NULL COMMENT 'label in Vietnamese',
+  `I18N_LA` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Lao',
+  `I18N_ID` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in indonesian',
+  `I18N_KH` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Cambodian',
   `PARENT_CODE` int(11) DEFAULT NULL,
   `UPDATER_ID` int(11) NOT NULL DEFAULT '1',
   `COMMENT` varchar(512) COLLATE utf8_bin DEFAULT NULL,
@@ -1682,13 +2011,41 @@ CREATE TABLE `cl_ref_product_types` (
 -- Contenu de la table `cl_ref_product_types`
 --
 
-INSERT INTO `cl_ref_product_types` (`ID`, `ENABLED`, `CODE`, `NAME`, `DESCRIPTION`, `I18n_DEFAULT`, `I18N_EN`, `I18N_FR`, `I18N_ES`, `I18N_TH`, `I18N_VT`, `PARENT_CODE`, `UPDATER_ID`, `COMMENT`, `CREATED_AT`, `UPDATED_AT`) VALUES
-(1, 1, 'DRUGCHEM', 'Drugs and Chemicals ', 'Drugs and Chemicals', 'Drugs and Chemicals ', 'Drugs and Chemicals ', 'Drogues et produits chimiques', NULL, 'ยาและสารเคมี', NULL, NULL, 1, NULL, '2016-10-23 09:13:07', '2017-09-12 13:36:24'),
-(5, 1, 'PHYTO', 'Phyto Sanitary products', 'Phyto Sanitary products', 'Phyto Sanitary products', 'Phyto Sanitary products', 'Produits phytosanitaires', NULL, 'ผลิตภัณฑ์สุขอนามัยพืช', NULL, 1, 1, NULL, '2017-09-23 13:05:23', '2017-09-23 13:05:23'),
-(50, 1, 'FERT', 'Fertilizers', 'Fertilizers', 'Fertilizers', 'Fertilizers', 'Engrais', NULL, 'ปุ๋ย', NULL, 5, 1, NULL, '2017-09-23 13:05:23', '2017-09-23 13:05:23'),
-(60, 1, 'PEST', 'Pesticides', 'Pesticides', 'Pesticides', 'Pesticides', 'Pesticides', NULL, 'สารกำจัดศัตรูพืช', NULL, 5, 1, NULL, '2017-09-23 13:05:23', '2017-09-23 13:05:23'),
-(70, 1, 'HERB', 'Herbicides', 'Herbicides', 'Herbicides', 'Herbicides', 'Herbicides', NULL, 'สารเคมีกำจัดวัชพืช', NULL, 5, 1, NULL, '2017-09-23 13:05:23', '2017-09-23 13:05:23'),
-(80, 1, 'FONG', 'Fungicides', 'Fungicides', 'Fungicides', 'Fungicides', 'Fongicides', NULL, 'สารฆ่าเชื้อรา', NULL, 5, 1, NULL, '2017-09-23 13:05:23', '2017-09-23 13:05:23');
+INSERT INTO `cl_ref_product_types` (`ID`, `ENABLED`, `CODE`, `NAME`, `DESCRIPTION`, `I18n_DEFAULT`, `I18N_EN`, `I18N_FR`, `I18N_ES`, `I18N_TH`, `I18N_VT`, `I18N_LA`, `I18N_ID`, `I18N_KH`, `PARENT_CODE`, `UPDATER_ID`, `COMMENT`, `CREATED_AT`, `UPDATED_AT`) VALUES
+(1, 1, 'DRUGCHEM', 'Drugs and Chemicals ', 'Drugs and Chemicals', 'Drugs and Chemicals ', 'Drugs and Chemicals ', 'Drogues et produits chimiques', NULL, 'ยาและสารเคมี', NULL, NULL, NULL, NULL, NULL, 1, NULL, '2016-10-23 09:13:07', '2017-09-12 13:36:24'),
+(5, 1, 'PHYTO', 'Phyto Sanitary products', 'Phyto Sanitary products', 'Phyto Sanitary products', 'Phyto Sanitary products', 'Produits phytosanitaires', NULL, 'ผลิตภัณฑ์สุขอนามัยพืช', NULL, NULL, NULL, NULL, 1, 1, NULL, '2017-09-23 13:05:23', '2017-09-23 13:05:23'),
+(50, 1, 'FERT', 'Fertilizers', 'Fertilizers', 'Fertilizers', 'Fertilizers', 'Engrais', NULL, 'ปุ๋ย', NULL, NULL, NULL, NULL, 5, 1, NULL, '2017-09-23 13:05:23', '2017-09-23 13:05:23'),
+(60, 1, 'PEST', 'Pesticides', 'Pesticides', 'Pesticides', 'Pesticides', 'Pesticides', NULL, 'สารกำจัดศัตรูพืช', NULL, NULL, NULL, NULL, 5, 1, NULL, '2017-09-23 13:05:23', '2017-09-23 13:05:23'),
+(70, 1, 'HERB', 'Herbicides', 'Herbicides', 'Herbicides', 'Herbicides', 'Herbicides', NULL, 'สารเคมีกำจัดวัชพืช', NULL, NULL, NULL, NULL, 5, 1, NULL, '2017-09-23 13:05:23', '2017-09-23 13:05:23'),
+(80, 1, 'FONG', 'Fungicides', 'Fungicides', 'Fungicides', 'Fungicides', 'Fongicides', NULL, 'สารฆ่าเชื้อรา', NULL, NULL, NULL, NULL, 5, 1, NULL, '2017-09-23 13:05:23', '2017-09-23 13:05:23');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `cl_ref_regions`
+--
+
+CREATE TABLE `cl_ref_regions` (
+  `ID` int(11) NOT NULL COMMENT 'The REGION codelist ID',
+  `ENABLED` tinyint(1) NOT NULL DEFAULT '1',
+  `CODE` char(2) CHARACTER SET utf8 NOT NULL,
+  `ISO_3_CODE` char(3) CHARACTER SET utf8 DEFAULT NULL,
+  `NAME` varchar(64) CHARACTER SET utf8 NOT NULL,
+  `DESCRIPTION` varchar(128) CHARACTER SET utf8 NOT NULL,
+  `I18n_DEFAULT` varchar(256) COLLATE utf8_bin NOT NULL COMMENT 'default label',
+  `I18N_EN` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in English',
+  `I18N_FR` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in French',
+  `I18N_ES` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Spanish',
+  `I18N_TH` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Thai',
+  `I18N_VT` varchar(256) CHARACTER SET utf8 COLLATE utf8_vietnamese_ci DEFAULT NULL COMMENT 'label in Vietnamese',
+  `I18N_LA` varchar(256) COLLATE utf8_bin DEFAULT NULL,
+  `I18N_ID` varchar(256) COLLATE utf8_bin DEFAULT NULL,
+  `I18N_KH` varchar(256) COLLATE utf8_bin DEFAULT NULL,
+  `UPDATER_ID` int(11) NOT NULL DEFAULT '1',
+  `COMMENT` varchar(1024) CHARACTER SET utf8 DEFAULT NULL,
+  `CREATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `UPDATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='The REGION codelist';
 
 -- --------------------------------------------------------
 
@@ -1708,6 +2065,9 @@ CREATE TABLE `cl_ref_species` (
   `I18N_ES` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Spanish',
   `I18N_TH` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Thai',
   `I18N_VT` varchar(256) CHARACTER SET utf8 COLLATE utf8_vietnamese_ci DEFAULT NULL COMMENT 'label in Vietnamese',
+  `I18N_LA` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Lao',
+  `I18N_ID` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in indonesian',
+  `I18N_KH` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Cambodian',
   `SCIENTIFIC_NAME` varchar(512) CHARACTER SET utf8 DEFAULT NULL,
   `UPDATER_ID` int(11) NOT NULL DEFAULT '1',
   `COMMENT` varchar(1024) CHARACTER SET utf8 DEFAULT NULL,
@@ -1719,11 +2079,11 @@ CREATE TABLE `cl_ref_species` (
 -- Contenu de la table `cl_ref_species`
 --
 
-INSERT INTO `cl_ref_species` (`ID`, `ENABLED`, `CODE`, `NAME`, `DESCRIPTION`, `I18n_DEFAULT`, `I18N_EN`, `I18N_FR`, `I18N_ES`, `I18N_TH`, `I18N_VT`, `SCIENTIFIC_NAME`, `UPDATER_ID`, `COMMENT`, `CREATED_AT`, `UPDATED_AT`) VALUES
-(1, 1, 'VAN', 'Vannamei', 'Vannamei species', 'Vannamei species', 'Vannamei species', 'Crevettes Vannamei ', NULL, 'กุ้ง Vannamei', NULL, 'Vannamei', 1, NULL, '2017-01-01 08:02:11', '2017-09-12 13:33:00'),
-(2, 1, 'MON', 'Monodon', 'Monodon species', 'Monodon species', 'Monodon species', 'Crevette Monodon', NULL, 'กุ้งกอนโดดอน', NULL, 'Monodon', 1, NULL, '2017-01-01 08:02:11', '2017-09-12 13:33:00'),
-(3, 1, 'TIL', 'Tilapia', 'Tilapia species', 'Tilapia', 'Tilapia', 'Tilapia', NULL, 'Plā nil', NULL, 'Tilapia', 1, NULL, '2017-01-01 08:02:11', '2017-09-12 13:33:00'),
-(4, 1, 'MIL', 'Milkfish', 'Milkfish species', 'Milkfish', 'Milkfish', 'Chanidés', NULL, 'ปลานวลจันทร์ทะเล', NULL, 'Milkfish', 1, NULL, '2017-01-01 08:02:11', '2017-09-12 13:33:00');
+INSERT INTO `cl_ref_species` (`ID`, `ENABLED`, `CODE`, `NAME`, `DESCRIPTION`, `I18n_DEFAULT`, `I18N_EN`, `I18N_FR`, `I18N_ES`, `I18N_TH`, `I18N_VT`, `I18N_LA`, `I18N_ID`, `I18N_KH`, `SCIENTIFIC_NAME`, `UPDATER_ID`, `COMMENT`, `CREATED_AT`, `UPDATED_AT`) VALUES
+(1, 1, 'VAN', 'Vannamei', 'Vannamei species', 'Vannamei species', 'Vannamei species', 'Crevettes Vannamei ', NULL, 'กุ้ง Vannamei', NULL, NULL, NULL, NULL, 'Vannamei', 1, NULL, '2017-01-01 08:02:11', '2017-09-12 13:33:00'),
+(2, 1, 'MON', 'Monodon', 'Monodon species', 'Monodon species', 'Monodon species', 'Crevette Monodon', NULL, 'กุ้งกอนโดดอน', NULL, NULL, NULL, NULL, 'Monodon', 1, NULL, '2017-01-01 08:02:11', '2017-09-12 13:33:00'),
+(3, 1, 'TIL', 'Tilapia', 'Tilapia species', 'Tilapia', 'Tilapia', 'Tilapia', NULL, 'Plā nil', NULL, NULL, NULL, NULL, 'Tilapia', 1, NULL, '2017-01-01 08:02:11', '2017-09-12 13:33:00'),
+(4, 1, 'MIL', 'Milkfish', 'Milkfish species', 'Milkfish', 'Milkfish', 'Chanidés', NULL, 'ปลานวลจันทร์ทะเล', NULL, NULL, NULL, NULL, 'Milkfish', 1, NULL, '2017-01-01 08:02:11', '2017-09-12 13:33:00');
 
 -- --------------------------------------------------------
 
@@ -1743,6 +2103,9 @@ CREATE TABLE `cl_ref_vessel_types` (
   `I18N_ES` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Spanish',
   `I18N_TH` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Thai',
   `I18N_VT` varchar(256) CHARACTER SET utf8 COLLATE utf8_vietnamese_ci DEFAULT NULL COMMENT 'label in Vietnamese',
+  `I18N_LA` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Lao',
+  `I18N_ID` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in indonesian',
+  `I18N_KH` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Cambodian',
   `UPDATER_ID` int(11) NOT NULL DEFAULT '1',
   `COMMENT` varchar(512) COLLATE utf8_bin DEFAULT NULL,
   `CREATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -2441,103 +2804,261 @@ CREATE TABLE `reg_entity_staff_other_attribute_definition` (
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `reg_pictures`
+--
+
+CREATE TABLE `reg_pictures` (
+  `ID` int(11) NOT NULL COMMENT 'The identifier of this FLUX picture.',
+  `CL_PICTURE_TYPE_ID` int(11) NOT NULL DEFAULT '1' COMMENT 'The code specifying a type of FLUX picture.',
+  `DESCRIPTION` varchar(512) COLLATE utf8_bin DEFAULT NULL COMMENT 'The textual description of this FLUX picture.',
+  `TAKEN` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'The date, time, date time, or other date value of when this FLUX picture was created.',
+  `AREA_INCLUDED` int(11) DEFAULT NULL COMMENT 'The area or location, expressed as an identifier, that is included in this FLUX picture.',
+  `CL_FOR_AREA_INCLUDED` varchar(512) COLLATE utf8_bin DEFAULT NULL COMMENT 'Name of the table used as reference for the area (country, island, etc..)',
+  `IMAGE_URL` varchar(512) COLLATE utf8_bin NOT NULL COMMENT 'The link to the image (UN/CEFACT stores it as a blob)'
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='UN/CEFACT FLUX Vessel Domain: Entity used to provide information about a picture, such as a digital photograph, used in the context of Fisheries Languages for Universal eXchange (FLUX).';
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `reg_vessels`
 --
 
 CREATE TABLE `reg_vessels` (
   `ID` int(11) NOT NULL,
-  `CL_VESSEL_STATUS_ID` int(11) NOT NULL,
   `NAME` varchar(64) COLLATE utf8_bin NOT NULL,
-  `CL_COUNTRY_ID_FLAG` int(11) DEFAULT NULL,
-  `IRCS` varchar(16) COLLATE utf8_bin DEFAULT NULL,
-  `NRN` varchar(45) COLLATE utf8_bin DEFAULT NULL,
-  `HOME_PORT` varchar(64) COLLATE utf8_bin NOT NULL,
-  `CL_ISLAND_ID_HOME_PORT` int(11) NOT NULL,
+  `REGISTRATION_NUMBER` varchar(45) COLLATE utf8_bin DEFAULT NULL,
+  `CL_VESSEL_TYPE_ID` int(11) DEFAULT NULL,
+  `COMMISSIONING` timestamp NULL DEFAULT NULL,
+  `CL_APP_VESSEL_OPERATIONAL_STATUS_ID` int(11) NOT NULL COMMENT 'The code indicating the operational status for this vessel transport means, such as in service/commission, broken up, total loss, continued existence in doubt, laid-up.',
   `CL_HULL_TYPE_ID` int(11) DEFAULT NULL,
   `LOA` float UNSIGNED DEFAULT NULL,
   `CL_QUANTITY_UNIT_ID_LOA` int(11) DEFAULT NULL,
-  `LBP` float UNSIGNED DEFAULT NULL,
-  `CL_QUANTITY_UNIT_ID_LBP` int(11) DEFAULT NULL,
-  `MLD` float UNSIGNED DEFAULT NULL,
-  `CL_QUANTITY_UNIT_ID_MLD` int(11) DEFAULT NULL,
   `DRA` float UNSIGNED DEFAULT NULL,
   `CL_QUANTITY_UNIT_ID_DRA` int(11) DEFAULT NULL,
   `GT` float UNSIGNED DEFAULT NULL,
   `CL_QUANTITY_UNIT_ID_GT` int(11) DEFAULT NULL,
-  `GRT` float UNSIGNED DEFAULT NULL,
-  `CL_QUANTITY_UNIT_ID_GRT` int(11) DEFAULT NULL,
-  `CL_VESSEL_TYPE_ID` int(11) DEFAULT NULL,
-  `CL_LICENSE_TYPE_ID` int(11) DEFAULT NULL,
-  `POWER` float UNSIGNED DEFAULT NULL,
-  `CL_POWER_UNIT_ID` int(11) DEFAULT NULL,
-  `CL_ENERGY_TYPE_ID` int(11) DEFAULT NULL,
-  `BUILDING_YEAR` int(11) DEFAULT NULL,
+  `REG_VESSEL_ENGINE_ID` int(11) DEFAULT NULL,
   `REG_ENTITY_ID_OWNER` int(11) DEFAULT NULL,
   `REG_ENTITY_ID_CAPTAIN` int(11) DEFAULT NULL,
+  `CL_VESSEL_ROLE_ID` int(11) DEFAULT NULL COMMENT 'The code specifying the role of this vessel transport means.',
+  `SPEED` float DEFAULT NULL COMMENT 'The speed measured for this transport means vessel.',
+  `CL_SPEED_UNIT_ID` int(11) DEFAULT NULL COMMENT 'Unit for the speed measured for this transport means vessel.',
+  `TRAWLING_SPEED` float DEFAULT NULL COMMENT 'The trawling speed measured for this transport means vessel.',
+  `CL_TRAWLING_SPEED_UNIT_ID` int(11) DEFAULT NULL COMMENT 'Unit for the trawling speed measured for this transport means vessel.',
   `UPDATER_ID` int(11) NOT NULL DEFAULT '1',
-  `UPDATE_DATE` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `COMMENT` varchar(1024) COLLATE utf8_bin DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+  `COMMENT` varchar(512) COLLATE utf8_bin DEFAULT NULL,
+  `CREATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `UPDATED_AT` timestamp NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='UN/CEFACT FLUX Vessel Domain: Entity containing the identification and characteristic information of a ship or boat.';
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `reg_vessels_license_permit`
+-- Structure de la table `reg_vessel_administrative_characteristics`
 --
 
-CREATE TABLE `reg_vessels_license_permit` (
-  `ID` int(11) NOT NULL,
+CREATE TABLE `reg_vessel_administrative_characteristics` (
   `REG_VESSEL_ID` int(11) NOT NULL,
-  `PERMIT_NUMBER` varchar(45) COLLATE utf8_bin NOT NULL,
-  `APPLICATION_DATE` date NOT NULL,
-  `PERMIT_DATE` date NOT NULL,
-  `DATE_FROM` date NOT NULL,
-  `DATE_TO` date DEFAULT NULL,
-  `PERSONS_CARRIED_ONBOARD` int(11) DEFAULT NULL,
-  `REG_ENTITY_ID_APPLICANT` int(11) NOT NULL,
-  `APPLICANT_IS_OWNER` tinyint(1) DEFAULT NULL,
-  `SPECIAL_CONDITIONS` varchar(2048) COLLATE utf8_bin DEFAULT NULL,
+  `CL_ADMINISTRATIVE_CHARACTERISTIC_TYPE_ID` int(11) DEFAULT NULL COMMENT 'The code specifying a type of administrative characteristic of a vessel, such as mainland fleet, aquaculture, public aid code, administrative decision code.',
+  `DESCRIPTION` varchar(512) COLLATE utf8_bin DEFAULT NULL COMMENT 'A textual description of this vessel administrative characteristic.',
+  `VALUE_MEASURE` varchar(512) COLLATE utf8_bin DEFAULT NULL COMMENT 'The value, expressed as value, for this vessel administrative characteristic.',
+  `CL_VALUE_MEASURE_UNIT_ID` int(11) DEFAULT NULL COMMENT 'The unit for the measure',
+  `VALUE_TEXT` varchar(512) COLLATE utf8_bin DEFAULT NULL COMMENT 'A value, expressed as text, of this vessel administrative characteristic.',
+  `VALUE_CODE` varchar(512) COLLATE utf8_bin DEFAULT NULL COMMENT 'A code specifying a value of this vessel administrative characteristic.',
+  `VALUE_DATE` date DEFAULT NULL COMMENT 'The value, expressed as a date, time, date time, or other date time value, of this vessel administrative characteristic.',
+  `VALUE_INDICATOR` varchar(512) COLLATE utf8_bin DEFAULT NULL COMMENT 'The value, expressed as an indicator, for this vessel administrative characteristic.',
+  `VALUE_QUANTITY` float DEFAULT NULL COMMENT 'The value, expressed as a quantity, for this vessel administrative characteristic.',
+  `CL_VALUE_QUANTITY_UNIT_ID` int(11) DEFAULT NULL,
+  `VALUE_FLUX_BINARY_FILE` varchar(512) COLLATE utf8_bin DEFAULT NULL COMMENT 'The value for this vessel administrative characteristic, such as radio certificate, expressed in a FLUX binary file.',
   `UPDATER_ID` int(11) NOT NULL DEFAULT '1',
-  `UPDATE_DATE` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `COMMENT` varchar(1024) COLLATE utf8_bin DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+  `COMMENT` varchar(1024) COLLATE utf8_bin DEFAULT NULL,
+  `CREATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `UPDATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='UN/CEFACT FLUX Vessel Domain: vessel administrative characteristics';
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `reg_vessel_characteristics`
+-- Structure de la table `reg_vessel_construction_event`
 --
 
-CREATE TABLE `reg_vessel_characteristics` (
-  `REG_VESSEL_ID` int(11) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Structure de la table `reg_vessel_equipments`
---
-
-CREATE TABLE `reg_vessel_equipments` (
+CREATE TABLE `reg_vessel_construction_event` (
   `REG_VESSEL_ID` int(11) NOT NULL,
-  `CL_EQUIPMENT_TYPE_ID` int(11) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 COMMENT='container for vessel equipment';
+  `DESCRIPTION` varchar(512) COLLATE utf8_bin DEFAULT NULL,
+  `CONSTRUCTION_DATE` timestamp NULL DEFAULT NULL,
+  `CL_APP_LOCATION_ID` int(11) DEFAULT NULL,
+  `UPDATER_ID` int(11) NOT NULL DEFAULT '1',
+  `COMMENT` varchar(1024) COLLATE utf8_bin DEFAULT NULL,
+  `CREATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `UPDATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='UN/CEFACT FLUX Vessel Domain: Entity used to provide information on a significant occurrence related to a construction of an object.';
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `reg_vessel_license_permits_to_gears`
+-- Structure de la table `reg_vessel_dimensions`
 --
 
-CREATE TABLE `reg_vessel_license_permits_to_gears` (
-  `REG_PERMIT_ID` int(11) NOT NULL,
-  `CL_GEAR_ID` int(11) NOT NULL,
-  `PRIMARY_GEAR` tinyint(1) NOT NULL,
-  `ADDITIONAL_INFORMATION` varchar(2048) COLLATE utf8_bin DEFAULT NULL,
+CREATE TABLE `reg_vessel_dimensions` (
+  `REG_VESSEL_ID` int(11) NOT NULL,
+  `CL_DIMENSION_TYPE_ID` int(11) DEFAULT NULL COMMENT 'The code specifying a type of dimension of this vessel.',
+  `VALUE_MEASURE` varchar(512) COLLATE utf8_bin DEFAULT NULL COMMENT 'The value, expressed as value, for this vessel equipment characteristic.',
+  `CL_VALUE_MEASURE_UNIT_ID` int(11) DEFAULT NULL COMMENT 'The unit for the measure',
   `UPDATER_ID` int(11) NOT NULL DEFAULT '1',
-  `UPDATE_DATE` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `COMMENT` varchar(1024) COLLATE utf8_bin DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+  `COMMENT` varchar(1024) COLLATE utf8_bin DEFAULT NULL,
+  `CREATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `UPDATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='UN/CEFACT FLUX Vessel Domain: A measure of length, tonnage, depth or breadth, expressed as type and value, for this vessel.';
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `reg_vessel_engines`
+--
+
+CREATE TABLE `reg_vessel_engines` (
+  `REG_VESSEL_ID` int(11) NOT NULL,
+  `SERIAL_NUMBER` varchar(512) COLLATE utf8_bin DEFAULT NULL COMMENT 'The serial number identifier of this vessel engine.',
+  `CL_ENGINE_TYPE_ID` int(11) NOT NULL COMMENT 'The code specifying the type of vessel engine.',
+  `CL_ENGINE_ROLE_ID` int(11) NOT NULL DEFAULT '1' COMMENT 'The code specifying the role of this vessel engine, such as main or secondary.',
+  `CL_PROPULSION_TYPE_ID` int(11) NOT NULL DEFAULT '1' COMMENT 'The code specifying the type of propulsion for this vessel engine.',
+  `POWER` float DEFAULT NULL COMMENT 'A measure of the power produced by this vessel engine, expressed in a unit such as horsepower.',
+  `CL_POWER_UNIT_ID` int(11) DEFAULT NULL COMMENT 'The code specifying the measurement method used for measuring the power of this vessel engine.',
+  `CL_REG_ENTITY_MANUFACTURER_ID` int(11) DEFAULT NULL COMMENT 'The code specifying the manufacturer of this vessel engine.',
+  `MANUFACTURER` varchar(128) COLLATE utf8_bin DEFAULT NULL COMMENT 'The manufacturer, expressed as a text, of this vessel engine.',
+  `MODEL` varchar(128) COLLATE utf8_bin DEFAULT NULL COMMENT 'The model, expressed as a text, of this vessel engine.',
+  `CL_REG_PICTURE_ID` int(11) DEFAULT NULL COMMENT 'A FLUX picture illustrating this vessel engine.',
+  `UPDATER_ID` int(11) NOT NULL DEFAULT '1',
+  `COMMENT` varchar(1024) COLLATE utf8_bin DEFAULT NULL,
+  `CREATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `UPDATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='UN/CEFACT FLUX Vessel Domain: Entity used to provide information of an engine which is used to move a ship or boat.';
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `reg_vessel_equipments_characteristics`
+--
+
+CREATE TABLE `reg_vessel_equipments_characteristics` (
+  `REG_VESSEL_ID` int(11) NOT NULL,
+  `CL_EQUIPMENT_TYPE_ID` int(11) DEFAULT NULL COMMENT 'The code specifying a type of vessel equipment characteristic, such as Vessel Monitoring System (VMS), Automatic Identification System (AIS)',
+  `DESCRIPTION` varchar(512) COLLATE utf8_bin DEFAULT NULL COMMENT 'A textual description of this vessel equipment characteristic.',
+  `VALUE_MEASURE` varchar(512) COLLATE utf8_bin DEFAULT NULL COMMENT 'The value, expressed as value, for this vessel equipment characteristic.',
+  `CL_VALUE_MEASURE_UNIT_ID` int(11) DEFAULT NULL COMMENT 'The unit for the measure',
+  `VALUE_TEXT` varchar(512) COLLATE utf8_bin DEFAULT NULL COMMENT 'A value, expressed as text, of this vessel equipment characteristic.',
+  `VALUE_CODE` varchar(512) COLLATE utf8_bin DEFAULT NULL COMMENT 'A code specifying a value of this vessel equipment characteristic.',
+  `VALUE_DATE` date DEFAULT NULL COMMENT 'The value, expressed as a date, time, date time, or other date time value, of this vessel equipment characteristic.',
+  `VALUE_INDICATOR` varchar(512) COLLATE utf8_bin DEFAULT NULL COMMENT 'The value, expressed as an indicator, for this vessel equipment characteristic.',
+  `VALUE_QUANTITY` float DEFAULT NULL COMMENT 'The value, expressed as a quantity, for this vessel equipment characteristic.',
+  `CL_VALUE_QUANTITY_UNIT_ID` int(11) DEFAULT NULL,
+  `VALUE_FLUX_BINARY_FILE` varchar(512) COLLATE utf8_bin DEFAULT NULL COMMENT 'The value for this vessel equipment characteristic, such as radio certificate, expressed in a FLUX binary file.',
+  `UPDATER_ID` int(11) NOT NULL DEFAULT '1',
+  `COMMENT` varchar(1024) COLLATE utf8_bin DEFAULT NULL,
+  `CREATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `UPDATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='UN/CEFACT FLUX Vessel Domain: vessel equipment characteristics';
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `reg_vessel_event`
+--
+
+CREATE TABLE `reg_vessel_event` (
+  `REG_VESSEL_ID` int(11) NOT NULL,
+  `CL_EVENT_TYPE_ID` int(11) DEFAULT NULL COMMENT 'The code specifying the type for this vessel event',
+  `DESCRIPTION` varchar(512) COLLATE utf8_bin DEFAULT NULL,
+  `OCCURENCE_DATE` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `UPDATER_ID` int(11) NOT NULL DEFAULT '1',
+  `COMMENT` varchar(1024) COLLATE utf8_bin DEFAULT NULL,
+  `CREATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `UPDATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='UN/CEFACT FLUX Vessel Domain: Entity containing information of a significant occurrence or happening related to a vessel';
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `reg_vessel_gears`
+--
+
+CREATE TABLE `reg_vessel_gears` (
+  `REG_VESSEL_ID` int(11) NOT NULL,
+  `CL_REF_GEAR_ID` int(11) NOT NULL COMMENT 'The code specifying the type of fishing gear.',
+  `CL_APP_GEAR_ROLE_ID` int(11) NOT NULL DEFAULT '1' COMMENT 'The code specifying the type of fishing gear. Default is primary',
+  `CL_REG_PICTURE_ID` int(11) DEFAULT NULL COMMENT 'A FLUX picture illustrating this vessel engine.',
+  `DESCRIPTION` varchar(512) COLLATE utf8_bin DEFAULT NULL COMMENT 'A characteristic applicable to this fishing gear.',
+  `UPDATER_ID` int(11) NOT NULL DEFAULT '1',
+  `COMMENT` varchar(1024) COLLATE utf8_bin DEFAULT NULL,
+  `CREATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `UPDATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='UN/CEFACT FLUX Vessel Domain: Entity used to provide information on the apparatus which is used for fishing.';
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `reg_vessel_historical_characteristics`
+--
+
+CREATE TABLE `reg_vessel_historical_characteristics` (
+  `REG_VESSEL_ID` int(11) NOT NULL,
+  `CL_APP_VESSEL_HISTORICAL_CHARACTERISTIC_ID` int(11) NOT NULL COMMENT 'The code specifying a type of historical characteristic of a vessel.',
+  `DESCRIPTION` varchar(512) COLLATE utf8_bin DEFAULT NULL COMMENT 'A textual description of this vessel historical characteristic.',
+  `VALUE_MEASURE` varchar(512) COLLATE utf8_bin DEFAULT NULL COMMENT 'The value, expressed as value, for this vessel historical characteristic.',
+  `CL_VALUE_MEASURE_UNIT_ID` int(11) DEFAULT NULL COMMENT 'The unit for the measure',
+  `VALUE_TEXT` varchar(512) COLLATE utf8_bin DEFAULT NULL COMMENT 'A value, expressed as text, of this vessel historical characteristic.',
+  `VALUE_CODE` varchar(512) COLLATE utf8_bin DEFAULT NULL COMMENT 'A code specifying a value of this vessel historical characteristic.',
+  `VALUE_DATE` date DEFAULT NULL COMMENT 'The value, expressed as a date, time, date time, or other date time value, of this vessel historical characteristic.',
+  `VALUE_INDICATOR` varchar(512) COLLATE utf8_bin DEFAULT NULL COMMENT 'The value, expressed as an indicator, for this vessel historical characteristic.',
+  `VALUE_QUANTITY` float DEFAULT NULL COMMENT 'The value, expressed as a quantity, for this vessel historical characteristic.',
+  `CL_VALUE_QUANTITY_UNIT_ID` int(11) DEFAULT NULL,
+  `UPDATER_ID` int(11) NOT NULL DEFAULT '1',
+  `COMMENT` varchar(1024) COLLATE utf8_bin DEFAULT NULL,
+  `CREATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `UPDATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='UN/CEFACT FLUX Vessel Domain: A prominent attribute or aspect of the history related to a particular vessel.';
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `reg_vessel_registration_event`
+--
+
+CREATE TABLE `reg_vessel_registration_event` (
+  `REG_VESSEL_ID` int(11) NOT NULL,
+  `DESCRIPTION` varchar(512) COLLATE utf8_bin DEFAULT NULL,
+  `REGISTRATION_DATE` timestamp NULL DEFAULT NULL,
+  `CL_APP_LOCATION_ID` int(11) DEFAULT NULL,
+  `UPDATER_ID` int(11) NOT NULL DEFAULT '1',
+  `COMMENT` varchar(1024) COLLATE utf8_bin DEFAULT NULL,
+  `CREATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `UPDATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='UN/CEFACT FLUX Vessel Domain: Entity used to provide information on a significant occurrence related to a registration of person, animal, object or process.';
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `reg_vessel_technical_characteristics`
+--
+
+CREATE TABLE `reg_vessel_technical_characteristics` (
+  `REG_VESSEL_ID` int(11) NOT NULL,
+  `CL_APP_VESSEL_CHARACTERISTIC_ID` int(11) NOT NULL COMMENT 'The code specifying a type of vessel technical characteristic, such as maximum speed, trawling speed or hull material.',
+  `DESCRIPTION` varchar(512) COLLATE utf8_bin DEFAULT NULL COMMENT 'A textual description of this vessel technical characteristic.',
+  `VALUE_MEASURE` varchar(512) COLLATE utf8_bin DEFAULT NULL COMMENT 'The value, expressed as value, for this vessel technical characteristic.',
+  `CL_VALUE_MEASURE_UNIT_ID` int(11) DEFAULT NULL COMMENT 'The unit for the measure',
+  `VALUE_TEXT` varchar(512) COLLATE utf8_bin DEFAULT NULL COMMENT 'A value, expressed as text, of this vessel technical characteristic.',
+  `VALUE_CODE` varchar(512) COLLATE utf8_bin DEFAULT NULL COMMENT 'A code specifying a value of this vessel technical characteristic.',
+  `VALUE_DATE` date DEFAULT NULL COMMENT 'The value, expressed as a date, time, date time, or other date time value, of this vessel technical characteristic.',
+  `VALUE_INDICATOR` varchar(512) COLLATE utf8_bin DEFAULT NULL COMMENT 'The value, expressed as an indicator, for this vessel technical characteristic.',
+  `VALUE_QUANTITY` float DEFAULT NULL COMMENT 'The value, expressed as a quantity, for this vessel technical characteristic.',
+  `CL_VALUE_QUANTITY_UNIT_ID` int(11) DEFAULT NULL,
+  `VALUE_FLUX_BINARY_FILE` varchar(512) COLLATE utf8_bin DEFAULT NULL COMMENT 'The value for this vessel technical characteristic, such as or tonnage certificate, expressed in a FLUX binary file.',
+  `UPDATER_ID` int(11) NOT NULL DEFAULT '1',
+  `COMMENT` varchar(1024) COLLATE utf8_bin DEFAULT NULL,
+  `CREATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `UPDATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='UN/CEFACT FLUX Vessel Domain: vessel technical characteristics';
 
 -- --------------------------------------------------------
 
@@ -2604,6 +3125,14 @@ INSERT INTO `sys_users` (`ID`, `name`, `email`, `password`, `remember_token`, `S
 --
 
 --
+-- Index pour la table `cl_app_administrative_characteristic_types`
+--
+ALTER TABLE `cl_app_administrative_characteristic_types`
+  ADD PRIMARY KEY (`ID`),
+  ADD UNIQUE KEY `UNIQUE_CL_ADMINISTRATIVE_CHARACTERISTIC_TYPE` (`CODE`),
+  ADD KEY `cl_app_administrative_characteristic_types_updater_id_idx` (`UPDATER_ID`);
+
+--
 -- Index pour la table `cl_app_company_position_types`
 --
 ALTER TABLE `cl_app_company_position_types`
@@ -2624,6 +3153,22 @@ ALTER TABLE `cl_app_energy_types`
   ADD PRIMARY KEY (`ID`),
   ADD UNIQUE KEY `ENERGY_TYPE_CODE_UNIQUE` (`CODE`),
   ADD KEY `cl_energy_types_updater_id_idx` (`UPDATER_ID`);
+
+--
+-- Index pour la table `cl_app_engine_roles`
+--
+ALTER TABLE `cl_app_engine_roles`
+  ADD PRIMARY KEY (`ID`),
+  ADD UNIQUE KEY `ENGINE_ROLE_CODE_UNIQUE` (`CODE`),
+  ADD KEY `cl_app_engine_roles_updater_id_idx` (`UPDATER_ID`);
+
+--
+-- Index pour la table `cl_app_engine_types`
+--
+ALTER TABLE `cl_app_engine_types`
+  ADD PRIMARY KEY (`ID`),
+  ADD UNIQUE KEY `ENGINE_TYPE_CODE_UNIQUE` (`CODE`),
+  ADD KEY `cl_app_engine_types_updater_id_idx` (`UPDATER_ID`);
 
 --
 -- Index pour la table `cl_app_entity_types`
@@ -2670,6 +3215,22 @@ ALTER TABLE `cl_app_license_types`
   ADD KEY `cl_license_types_updater_id_idx` (`UPDATER_ID`);
 
 --
+-- Index pour la table `cl_app_locations`
+--
+ALTER TABLE `cl_app_locations`
+  ADD PRIMARY KEY (`ID`),
+  ADD UNIQUE KEY `CONSTRUCTION_LOCATION_CODE_UNIQUE` (`CODE`),
+  ADD KEY `cl_app_construction_location_updater_id_idx` (`UPDATER_ID`);
+
+--
+-- Index pour la table `cl_app_location_types`
+--
+ALTER TABLE `cl_app_location_types`
+  ADD PRIMARY KEY (`ID`),
+  ADD UNIQUE KEY `CONSTRUCTION_LOCATION_TYPE_CODE_UNIQUE` (`CODE`),
+  ADD KEY `cl_app_construction_location_type_updater_id_idx` (`UPDATER_ID`);
+
+--
 -- Index pour la table `cl_app_measure_types`
 --
 ALTER TABLE `cl_app_measure_types`
@@ -2690,6 +3251,14 @@ ALTER TABLE `cl_app_power_units`
   ADD PRIMARY KEY (`ID`),
   ADD UNIQUE KEY `POWER_UNIT_CODE_UNIQUE` (`CODE`),
   ADD KEY `cl_power_units_updater_id_idx` (`UPDATER_ID`);
+
+--
+-- Index pour la table `cl_app_propulsion_types`
+--
+ALTER TABLE `cl_app_propulsion_types`
+  ADD PRIMARY KEY (`ID`),
+  ADD UNIQUE KEY `PROPULSION_TYPE_CODE_UNIQUE` (`CODE`),
+  ADD KEY `cl_app_propulsion_types_updater_id_idx` (`UPDATER_ID`);
 
 --
 -- Index pour la table `cl_app_quantity_units`
@@ -2731,12 +3300,20 @@ ALTER TABLE `cl_app_vessel_equipment_types`
   ADD PRIMARY KEY (`ID`);
 
 --
--- Index pour la table `cl_app_vessel_status`
+-- Index pour la table `cl_app_vessel_historical_characteristic_types`
 --
-ALTER TABLE `cl_app_vessel_status`
+ALTER TABLE `cl_app_vessel_historical_characteristic_types`
   ADD PRIMARY KEY (`ID`),
-  ADD UNIQUE KEY `STATUS_CODE_UNIQUE` (`CODE`),
-  ADD KEY `cl_vessel_status_updater_id_idx` (`UPDATER_ID`);
+  ADD UNIQUE KEY `UNIQUE_CL_ADMINISTRATIVE_CHARACTERISTIC_TYPE` (`CODE`),
+  ADD KEY `cl_app_administrative_characteristic_types_updater_id_idx` (`UPDATER_ID`);
+
+--
+-- Index pour la table `cl_app_vessel_operational_status`
+--
+ALTER TABLE `cl_app_vessel_operational_status`
+  ADD PRIMARY KEY (`ID`),
+  ADD UNIQUE KEY `UNIQUE_CL_VESSEL_OP_STATUS` (`CODE`),
+  ADD KEY `cl_vessel_operational_status_updater_id_idx` (`UPDATER_ID`);
 
 --
 -- Index pour la table `cl_farm_building_types`
@@ -2778,9 +3355,9 @@ ALTER TABLE `cl_farm_types`
   ADD KEY `cl_entity_types_updater_id_idx` (`UPDATER_ID`);
 
 --
--- Index pour la table `cl_fish_fishing_type`
+-- Index pour la table `cl_fish_fishing_types`
 --
-ALTER TABLE `cl_fish_fishing_type`
+ALTER TABLE `cl_fish_fishing_types`
   ADD PRIMARY KEY (`ID`),
   ADD UNIQUE KEY `ITEM_CODE_UNIQUE` (`CODE`),
   ADD KEY `cl_fishing_type_updater_id_idx` (`UPDATER_ID`);
@@ -2832,6 +3409,12 @@ ALTER TABLE `cl_ref_gears`
   ADD KEY `cl_gears_updater_id_idx` (`UPDATER_ID`);
 
 --
+-- Index pour la table `cl_ref_gear_characteristics`
+--
+ALTER TABLE `cl_ref_gear_characteristics`
+  ADD PRIMARY KEY (`CL_REF_GEAR_ID`);
+
+--
 -- Index pour la table `cl_ref_landing_sites`
 --
 ALTER TABLE `cl_ref_landing_sites`
@@ -2863,6 +3446,14 @@ ALTER TABLE `cl_ref_products`
 --
 ALTER TABLE `cl_ref_product_types`
   ADD PRIMARY KEY (`ID`);
+
+--
+-- Index pour la table `cl_ref_regions`
+--
+ALTER TABLE `cl_ref_regions`
+  ADD PRIMARY KEY (`ID`),
+  ADD UNIQUE KEY `UNIQUE_CL_REGIPN` (`CODE`,`ISO_3_CODE`),
+  ADD KEY `cl_region_updater_id_idx` (`UPDATER_ID`);
 
 --
 -- Index pour la table `cl_ref_species`
@@ -3047,6 +3638,12 @@ ALTER TABLE `reg_entity_staff_other_attribute_definition`
   ADD PRIMARY KEY (`ID`);
 
 --
+-- Index pour la table `reg_pictures`
+--
+ALTER TABLE `reg_pictures`
+  ADD PRIMARY KEY (`ID`);
+
+--
 -- Index pour la table `reg_vessels`
 --
 ALTER TABLE `reg_vessels`
@@ -3054,51 +3651,74 @@ ALTER TABLE `reg_vessels`
   ADD UNIQUE KEY `reg_vessel_unique` (`ID`),
   ADD KEY `cl_vessel_type_reg_vessel_idx` (`CL_VESSEL_TYPE_ID`),
   ADD KEY `reg_vessels_updater_id_idx` (`UPDATER_ID`),
-  ADD KEY `reg_vessels_cl_vessel_status_idx` (`CL_VESSEL_STATUS_ID`),
-  ADD KEY `reg_vessel_cl_power_units_idx` (`CL_POWER_UNIT_ID`),
+  ADD KEY `reg_vessels_cl_vessel_status_idx` (`CL_APP_VESSEL_OPERATIONAL_STATUS_ID`),
   ADD KEY `reg_vessel_reg_entity_owner_idx` (`REG_ENTITY_ID_OWNER`),
-  ADD KEY `reg_vessel_cl_license_type_idx` (`CL_LICENSE_TYPE_ID`),
   ADD KEY `reg_vessels_history_reg_entity_captain` (`REG_ENTITY_ID_CAPTAIN`),
-  ADD KEY `reg_vessels_history_loa_quantity_unit_idx` (`CL_QUANTITY_UNIT_ID_LOA`,`CL_QUANTITY_UNIT_ID_LBP`,`CL_QUANTITY_UNIT_ID_MLD`,`CL_QUANTITY_UNIT_ID_DRA`,`CL_QUANTITY_UNIT_ID_GT`,`CL_QUANTITY_UNIT_ID_GRT`),
-  ADD KEY `reg_vessels_history_quantity_unit_lbp` (`CL_QUANTITY_UNIT_ID_LBP`),
-  ADD KEY `reg_vessels_history_quantity_unit_mld` (`CL_QUANTITY_UNIT_ID_MLD`),
   ADD KEY `reg_vessels_history_quantity_unit_dra` (`CL_QUANTITY_UNIT_ID_DRA`),
   ADD KEY `reg_vessels_history_quantity_unit_gt` (`CL_QUANTITY_UNIT_ID_GT`),
-  ADD KEY `reg_vessels_history_quantity_unit_grt` (`CL_QUANTITY_UNIT_ID_GRT`),
-  ADD KEY `reg_vessels_history_cl_island_home_port_idx` (`CL_ISLAND_ID_HOME_PORT`),
-  ADD KEY `reg_vessels_history_cl_country_flag_idx` (`CL_COUNTRY_ID_FLAG`),
   ADD KEY `reg_vessels_history_hull_type_idx` (`CL_HULL_TYPE_ID`),
-  ADD KEY `reg_vessels_history_energy_type_idx` (`CL_ENERGY_TYPE_ID`);
+  ADD KEY `reg_vessels_history_energy_type_idx` (`REG_VESSEL_ENGINE_ID`),
+  ADD KEY `reg_vessels_history_loa_quantity_unit_idx` (`CL_QUANTITY_UNIT_ID_LOA`,`CL_QUANTITY_UNIT_ID_DRA`,`CL_QUANTITY_UNIT_ID_GT`);
 
 --
--- Index pour la table `reg_vessels_license_permit`
+-- Index pour la table `reg_vessel_administrative_characteristics`
 --
-ALTER TABLE `reg_vessels_license_permit`
-  ADD PRIMARY KEY (`ID`),
-  ADD UNIQUE KEY `reg_vessels_license_permit_unique` (`PERMIT_NUMBER`,`PERMIT_DATE`),
-  ADD KEY `reg_vessels_license_permit_updater_id_idx` (`UPDATER_ID`),
-  ADD KEY `reg_vessels_license_permit_applicant_idx` (`REG_ENTITY_ID_APPLICANT`),
-  ADD KEY `reg_vessels_license_permit_reg_vessel_idx` (`REG_VESSEL_ID`);
-
---
--- Index pour la table `reg_vessel_characteristics`
---
-ALTER TABLE `reg_vessel_characteristics`
+ALTER TABLE `reg_vessel_administrative_characteristics`
   ADD PRIMARY KEY (`REG_VESSEL_ID`);
 
 --
--- Index pour la table `reg_vessel_equipments`
+-- Index pour la table `reg_vessel_construction_event`
 --
-ALTER TABLE `reg_vessel_equipments`
+ALTER TABLE `reg_vessel_construction_event`
   ADD PRIMARY KEY (`REG_VESSEL_ID`);
 
 --
--- Index pour la table `reg_vessel_license_permits_to_gears`
+-- Index pour la table `reg_vessel_dimensions`
 --
-ALTER TABLE `reg_vessel_license_permits_to_gears`
-  ADD PRIMARY KEY (`REG_PERMIT_ID`,`CL_GEAR_ID`,`PRIMARY_GEAR`),
-  ADD KEY `reg_vessel_registration_gear_cl_gear_idx` (`CL_GEAR_ID`),
-  ADD KEY `reg_vessel_registrations_to_gears_updater_id_idx` (`UPDATER_ID`);
+ALTER TABLE `reg_vessel_dimensions`
+  ADD PRIMARY KEY (`REG_VESSEL_ID`);
+
+--
+-- Index pour la table `reg_vessel_engines`
+--
+ALTER TABLE `reg_vessel_engines`
+  ADD PRIMARY KEY (`REG_VESSEL_ID`);
+
+--
+-- Index pour la table `reg_vessel_equipments_characteristics`
+--
+ALTER TABLE `reg_vessel_equipments_characteristics`
+  ADD PRIMARY KEY (`REG_VESSEL_ID`);
+
+--
+-- Index pour la table `reg_vessel_event`
+--
+ALTER TABLE `reg_vessel_event`
+  ADD PRIMARY KEY (`REG_VESSEL_ID`);
+
+--
+-- Index pour la table `reg_vessel_gears`
+--
+ALTER TABLE `reg_vessel_gears`
+  ADD PRIMARY KEY (`REG_VESSEL_ID`);
+
+--
+-- Index pour la table `reg_vessel_historical_characteristics`
+--
+ALTER TABLE `reg_vessel_historical_characteristics`
+  ADD PRIMARY KEY (`REG_VESSEL_ID`);
+
+--
+-- Index pour la table `reg_vessel_registration_event`
+--
+ALTER TABLE `reg_vessel_registration_event`
+  ADD PRIMARY KEY (`REG_VESSEL_ID`);
+
+--
+-- Index pour la table `reg_vessel_technical_characteristics`
+--
+ALTER TABLE `reg_vessel_technical_characteristics`
+  ADD PRIMARY KEY (`REG_VESSEL_ID`);
 
 --
 -- Index pour la table `sys_roles`
@@ -3119,6 +3739,11 @@ ALTER TABLE `sys_users`
 --
 
 --
+-- AUTO_INCREMENT pour la table `cl_app_administrative_characteristic_types`
+--
+ALTER TABLE `cl_app_administrative_characteristic_types`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Administrative characteristic type';
+--
 -- AUTO_INCREMENT pour la table `cl_app_company_position_types`
 --
 ALTER TABLE `cl_app_company_position_types`
@@ -3127,6 +3752,16 @@ ALTER TABLE `cl_app_company_position_types`
 -- AUTO_INCREMENT pour la table `cl_app_energy_types`
 --
 ALTER TABLE `cl_app_energy_types`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT pour la table `cl_app_engine_roles`
+--
+ALTER TABLE `cl_app_engine_roles`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT pour la table `cl_app_engine_types`
+--
+ALTER TABLE `cl_app_engine_types`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT pour la table `cl_app_entity_types`
@@ -3159,6 +3794,16 @@ ALTER TABLE `cl_app_legal_status`
 ALTER TABLE `cl_app_license_types`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
 --
+-- AUTO_INCREMENT pour la table `cl_app_locations`
+--
+ALTER TABLE `cl_app_locations`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT pour la table `cl_app_location_types`
+--
+ALTER TABLE `cl_app_location_types`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+--
 -- AUTO_INCREMENT pour la table `cl_app_measure_types`
 --
 ALTER TABLE `cl_app_measure_types`
@@ -3167,6 +3812,11 @@ ALTER TABLE `cl_app_measure_types`
 -- AUTO_INCREMENT pour la table `cl_app_power_units`
 --
 ALTER TABLE `cl_app_power_units`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT pour la table `cl_app_propulsion_types`
+--
+ALTER TABLE `cl_app_propulsion_types`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT pour la table `cl_app_quantity_units`
@@ -3194,10 +3844,15 @@ ALTER TABLE `cl_app_vessel_characteristics`
 ALTER TABLE `cl_app_vessel_equipment_types`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT pour la table `cl_app_vessel_status`
+-- AUTO_INCREMENT pour la table `cl_app_vessel_historical_characteristic_types`
 --
-ALTER TABLE `cl_app_vessel_status`
+ALTER TABLE `cl_app_vessel_historical_characteristic_types`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT pour la table `cl_app_vessel_operational_status`
+--
+ALTER TABLE `cl_app_vessel_operational_status`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT COMMENT 'The REGION codelist ID';
 --
 -- AUTO_INCREMENT pour la table `cl_farm_building_types`
 --
@@ -3224,9 +3879,9 @@ ALTER TABLE `cl_farm_pond_types`
 ALTER TABLE `cl_farm_types`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
--- AUTO_INCREMENT pour la table `cl_fish_fishing_type`
+-- AUTO_INCREMENT pour la table `cl_fish_fishing_types`
 --
-ALTER TABLE `cl_fish_fishing_type`
+ALTER TABLE `cl_fish_fishing_types`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT pour la table `cl_fish_fishing_zones`
@@ -3269,6 +3924,11 @@ ALTER TABLE `cl_ref_languages`
 ALTER TABLE `cl_ref_product_types`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=81;
 --
+-- AUTO_INCREMENT pour la table `cl_ref_regions`
+--
+ALTER TABLE `cl_ref_regions`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT COMMENT 'The REGION codelist ID';
+--
 -- AUTO_INCREMENT pour la table `cl_ref_species`
 --
 ALTER TABLE `cl_ref_species`
@@ -3287,7 +3947,7 @@ ALTER TABLE `dt_farmag_plot_management`
 -- AUTO_INCREMENT pour la table `dt_farmag_production`
 --
 ALTER TABLE `dt_farmag_production`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT pour la table `dt_farmaq_plot_measurements`
 --
@@ -3307,7 +3967,7 @@ ALTER TABLE `dt_farmaq_pond_measurements`
 -- AUTO_INCREMENT pour la table `dt_soil_analysis`
 --
 ALTER TABLE `dt_soil_analysis`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT pour la table `dt_water_analysis`
 --
@@ -3317,7 +3977,7 @@ ALTER TABLE `dt_water_analysis`
 -- AUTO_INCREMENT pour la table `reg_entities`
 --
 ALTER TABLE `reg_entities`
-  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=149;
+  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=142;
 --
 -- AUTO_INCREMENT pour la table `reg_entity_farmag_details`
 --
@@ -3327,7 +3987,7 @@ ALTER TABLE `reg_entity_farmag_details`
 -- AUTO_INCREMENT pour la table `reg_entity_farmag_plots`
 --
 ALTER TABLE `reg_entity_farmag_plots`
-  MODIFY `ID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `ID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 --
 -- AUTO_INCREMENT pour la table `reg_entity_farmaq_details`
 --
@@ -3342,12 +4002,12 @@ ALTER TABLE `reg_entity_farmaq_ponds`
 -- AUTO_INCREMENT pour la table `reg_entity_farm_details`
 --
 ALTER TABLE `reg_entity_farm_details`
-  MODIFY `ID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
+  MODIFY `ID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
 --
 -- AUTO_INCREMENT pour la table `reg_entity_farm_providers`
 --
 ALTER TABLE `reg_entity_farm_providers`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 --
 -- AUTO_INCREMENT pour la table `reg_entity_product_suppliers`
 --
@@ -3373,11 +4033,6 @@ ALTER TABLE `reg_entity_staff_other_attribute`
 --
 ALTER TABLE `reg_entity_staff_other_attribute_definition`
   MODIFY `ID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT pour la table `reg_vessels_license_permit`
---
-ALTER TABLE `reg_vessels_license_permit`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT pour la table `sys_roles`
 --
@@ -3422,20 +4077,6 @@ ALTER TABLE `reg_entity_farmaq_ponds`
 --
 ALTER TABLE `reg_entity_farm_providers`
   ADD CONSTRAINT `FK_CL_PRODUCTTYPE` FOREIGN KEY (`CL_PRODUCT_TYPES_ID`) REFERENCES `cl_ref_product_types` (`ID`);
-
---
--- Contraintes pour la table `reg_vessels_license_permit`
---
-ALTER TABLE `reg_vessels_license_permit`
-  ADD CONSTRAINT `reg_vessels_license_permit_applicant` FOREIGN KEY (`REG_ENTITY_ID_APPLICANT`) REFERENCES `reg_entities` (`ID`) ON UPDATE NO ACTION,
-  ADD CONSTRAINT `reg_vessels_license_permit_reg_vessel_id` FOREIGN KEY (`REG_VESSEL_ID`) REFERENCES `reg_vessels` (`ID`) ON DELETE CASCADE ON UPDATE NO ACTION;
-
---
--- Contraintes pour la table `reg_vessel_license_permits_to_gears`
---
-ALTER TABLE `reg_vessel_license_permits_to_gears`
-  ADD CONSTRAINT `reg_vessel_license_permit_gear_license_permit` FOREIGN KEY (`REG_PERMIT_ID`) REFERENCES `reg_vessels_license_permit` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `reg_vessel_registration_gear_cl_gear` FOREIGN KEY (`CL_GEAR_ID`) REFERENCES `cl_ref_gears` (`ID`) ON UPDATE NO ACTION;
 
 --
 -- Contraintes pour la table `sys_users`
