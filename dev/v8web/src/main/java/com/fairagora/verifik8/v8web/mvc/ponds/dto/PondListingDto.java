@@ -8,7 +8,7 @@ public class PondListingDto {
 	protected String farm;
 	protected String number;
 	protected String description;
-	protected V8MeasureDto volume;
+	protected V8MeasureDto size;
 	protected String type;
 	protected String species;
 
@@ -44,12 +44,12 @@ public class PondListingDto {
 		this.description = description;
 	}
 
-	public V8MeasureDto getVolume() {
-		return volume;
+	public V8MeasureDto getSize() {
+		return size;
 	}
 
-	public void setVolume(V8MeasureDto volume) {
-		this.volume = volume;
+	public void setSize(V8MeasureDto size) {
+		this.size = size;
 	}
 
 	public String getType() {

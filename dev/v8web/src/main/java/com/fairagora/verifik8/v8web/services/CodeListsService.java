@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.fairagora.verifik8.v8web.data.domain.cl.CLRefCommodities;
+import com.fairagora.verifik8.v8web.data.domain.cl.CLAppAdministrativeCharacteristicType;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLAppCompanyPositionType;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLAppContractType;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLRefCountry;
@@ -19,6 +20,7 @@ import com.fairagora.verifik8.v8web.data.domain.cl.CLAppLegalStatus;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLAppMeasureType;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLAppPaymentFrequency;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLFarmPlotActivityType;
+import com.fairagora.verifik8.v8web.data.domain.cl.CLFarmPondActivityType;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLFarmPondType;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLRefProduct;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLRefProductType;
@@ -39,6 +41,7 @@ import com.fairagora.verifik8.v8web.data.repo.cl.CLAppLegalStatusRepository;
 import com.fairagora.verifik8.v8web.data.repo.cl.CLAppMeasureTypeRepository;
 import com.fairagora.verifik8.v8web.data.repo.cl.CLAppPaymentFrequenciesRepository;
 import com.fairagora.verifik8.v8web.data.repo.cl.CLFarmPlotActivityTypeRepository;
+import com.fairagora.verifik8.v8web.data.repo.cl.CLFarmPondActivityTypeRepository;
 import com.fairagora.verifik8.v8web.data.repo.cl.CLFarmPondTypeRepository;
 import com.fairagora.verifik8.v8web.data.repo.cl.CLRefProductRepository;
 import com.fairagora.verifik8.v8web.data.repo.cl.CLRefProductTypesRepository;
@@ -76,13 +79,16 @@ public class CodeListsService {
 
 	@Autowired
 	private CLAppCompanyPositionTypeRepository companyPositionTypeRepository;
-
+	
 	@Autowired
 	private CLAppHvHeExpensionTypeRepository highValueExpensionTypeRepository;
 
 	@Autowired
 	private CLFarmPlotActivityTypeRepository plotActivityTypesRepository;
 
+	@Autowired
+	private CLFarmPondActivityTypeRepository pondActivityTypesRepository;
+	
 	@Autowired
 	private CLRefProductRepository productRepository;
 
@@ -195,6 +201,10 @@ public class CodeListsService {
 		return plotActivityTypesRepository.findByEnabledTrueOrderByName();
 	}
 
+	public List<CLFarmPondActivityType> listActivePondActivityTypes() {
+		return pondActivityTypesRepository.findByEnabledTrueOrderByName();
+	}
+	
 	public List<CLRefProduct> listActiveProducts() {
 		return productRepository.findByEnabledTrueOrderByName();
 	}

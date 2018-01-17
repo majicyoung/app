@@ -16,16 +16,19 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.fairagora.verifik8.v8web.data.application.V8Page;
 import com.fairagora.verifik8.v8web.data.domain.dt.DTFarmAgProduction;
+import com.fairagora.verifik8.v8web.data.domain.dt.DTFarmAqProduction;
 import com.fairagora.verifik8.v8web.data.domain.dt.DTSoilAnalysis;
 import com.fairagora.verifik8.v8web.data.domain.dt.DTWaterAnalysis;
 import com.fairagora.verifik8.v8web.data.domain.reg.RegEntity;
 import com.fairagora.verifik8.v8web.data.repo.dt.DTFarmAgProductionRepository;
+import com.fairagora.verifik8.v8web.data.repo.dt.DTFarmAqProductionRepository;
 import com.fairagora.verifik8.v8web.data.repo.dt.DTSoilAnalysisRepository;
 import com.fairagora.verifik8.v8web.data.repo.dt.DTWaterAnalysisRepository;
 import com.fairagora.verifik8.v8web.data.repo.reg.RegEntityFarmPlotRepository;
 import com.fairagora.verifik8.v8web.data.repo.reg.RegEntityFarmPondRepository;
 import com.fairagora.verifik8.v8web.mvc.AbstractV8Controller;
 import com.fairagora.verifik8.v8web.mvc.farms.dto.DTFarmAgProductionDto;
+import com.fairagora.verifik8.v8web.mvc.farms.dto.DTFarmAqProductionDto;
 import com.fairagora.verifik8.v8web.mvc.farms.dto.DTSoilAnalysisDto;
 import com.fairagora.verifik8.v8web.mvc.farms.dto.DTWaterAnalysisDto;
 
@@ -42,8 +45,12 @@ public class FarmProductionProfileController extends AbstractV8Controller {
 	private RegEntityFarmPlotRepository regEntityFarmPlotRepository;
 
 	@Autowired
-	private DTFarmAgProductionRepository totalProductionRepository;
+	private DTFarmAgProductionRepository totalAgProductionRepository;
 
+	@Autowired
+	private DTFarmAqProductionRepository totalAqProductionRepository;
+	
+	
 	@Autowired
 	private DTSoilAnalysisRepository soilAnalysisRepository;
 
@@ -62,11 +69,16 @@ public class FarmProductionProfileController extends AbstractV8Controller {
 	public String showFarmProductionProfile(@PathVariable(name = "id") Long id, Model mv) {
 		RegEntity farm = regEntityRepository.findOne(id);
 
-		List<DTFarmAgProductionDto> prods = totalProductionRepository.findByFarmId(id).stream()
+		List<DTFarmAgProductionDto> agProds = totalAgProductionRepository.findByFarmId(id).stream()
 				.filter(p -> p.getDataEntryType().isManualEntry()).map(regFarmDtoMapper::toProductionDto)
 				.collect(Collectors.toList());
-		mv.addAttribute("productionListing", prods);
+		mv.addAttribute("productionAgListing", agProds);
 
+		List<DTFarmAqProductionDto> aqProds = totalAqProductionRepository.findByFarmId(id).stream()
+				.filter(p -> p.getDataEntryType().isManualEntry()).map(regFarmDtoMapper::toProductionDto)
+				.collect(Collectors.toList());
+		mv.addAttribute("productionAqListing", aqProds);
+		
 		List<DTSoilAnalysisDto> soilAnalysis = soilAnalysisRepository.findByPlotFarmId(id).stream()
 				.map(regFarmDtoMapper::toSoilAnalysisDto).collect(Collectors.toList());
 		mv.addAttribute("soilAnalysisListing", soilAnalysis);
@@ -129,12 +141,12 @@ public class FarmProductionProfileController extends AbstractV8Controller {
 	}
 
 	@Transactional
-	@RequestMapping(value = "/farm/{farmId}/production-profile/total-production/update.html", method = RequestMethod.POST)
-	public String updateProduction(@PathVariable(name = "farmId") Long farmid, DTFarmAgProductionDto dto) {
+	@RequestMapping(value = "/farm/{farmId}/production-profile/total-productionAg/update.html", method = RequestMethod.POST)
+	public String updateAgProduction(@PathVariable(name = "farmId") Long farmid, DTFarmAgProductionDto dto) {
 		DTFarmAgProduction prod = null;
 
 		if (dto.getId() != null) {
-			prod = totalProductionRepository.findOne(dto.getId());
+			prod = totalAgProductionRepository.findOne(dto.getId());
 		} else {
 			prod = new DTFarmAgProduction();
 		}
@@ -146,18 +158,51 @@ public class FarmProductionProfileController extends AbstractV8Controller {
 
 		// override what ever was on the DTO - truth is from URL
 		prod.setFarm(regEntityRepository.findOne(farmid));
-		totalProductionRepository.save(prod);
+		totalAgProductionRepository.save(prod);
 
 		return "redirect:/farm/" + farmid + "/production-profile.html";
 	}
 
 	@Transactional
-	@RequestMapping(value = "/farm/{farmId}/production-profile/total-production/delete.html", method = RequestMethod.POST)
-	public String deleteTotalProduction(@PathVariable(name = "farmId") Long farmid, @RequestParam("id") Long id) {
-		totalProductionRepository.delete(id);
+	@RequestMapping(value = "/farm/{farmId}/production-profile/total-productionAq/update.html", method = RequestMethod.POST)
+	public String updateAqProduction(@PathVariable(name = "farmId") Long farmid, DTFarmAqProductionDto dto) {
+		DTFarmAqProduction Aqprod = null;
+
+		if (dto.getId() != null) {
+			Aqprod = totalAqProductionRepository.findOne(dto.getId());
+		} else {
+			Aqprod = new DTFarmAqProduction();
+		}
+
+		if (dto.getDataEntryType() == null)
+			dto.setDataEntryType(1l);
+
+		regFarmDtoMapper.fillEntity(dto, Aqprod);
+
+		// override what ever was on the DTO - truth is from URL
+		Aqprod.setFarm(regEntityRepository.findOne(farmid));
+		totalAqProductionRepository.save(Aqprod);
+
+		return "redirect:/farm/" + farmid + "/production-profile.html";
+	}
+	
+	
+	@Transactional
+	@RequestMapping(value = "/farm/{farmId}/production-profile/total-productionAg/delete.html", method = RequestMethod.POST)
+	public String deleteTotalAgProduction(@PathVariable(name = "farmId") Long farmid, @RequestParam("id") Long id) {
+		totalAgProductionRepository.delete(id);
 		return "redirect:/farm/" + farmid + "/production-profile.html";
 	}
 
+	@Transactional
+	@RequestMapping(value = "/farm/{farmId}/production-profile/total-productionAq/delete.html", method = RequestMethod.POST)
+	public String deleteTotalAqProduction(@PathVariable(name = "farmId") Long farmid, @RequestParam("id") Long id) {
+		totalAqProductionRepository.delete(id);
+		return "redirect:/farm/" + farmid + "/production-profile.html";
+	}
+	
+	
+	
 	/**
 	 * 
 	 * @param farm
@@ -180,6 +225,7 @@ public class FarmProductionProfileController extends AbstractV8Controller {
 		mv.addAttribute("plotListing", regEntityFarmPlotRepository.findByFarmId(farm.getId()));
 		mv.addAttribute("allQuantityUnits", codeListservice.listActiveQuantityUnit());
 		mv.addAttribute("allCommodities", codeListservice.listActiveCommodities());
+		mv.addAttribute("allSpecies", codeListservice.listActiveSpecies());
 		mv.addAttribute("soilAnalysisTypeListing", codeListservice.listActiveSoilAnalysisType());
 	}
 }

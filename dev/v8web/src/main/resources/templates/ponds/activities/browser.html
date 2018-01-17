@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html layout:decorator="inc/main-layout" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<div layout:fragment="content">
+
+
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="box">
+				<div class="box-header with-border">
+					<h3 class="box-title pull-left" th:text="#{farm.pond_activity_title}"></h3>
+					<div class="alert-wrapper col-xs-6">
+						<!-- messages here -->
+					</div>
+					<div class="box-tools">
+						<a th:href="@{'/ponds/'+${pondId}+'/activities/create.html'}" class="btn btn-sm btn-flat btn-success"><i class="fa fa-plus"></i> <span th:text="#{farm.pond_activity_add}">farm.add_pond_activity</span></a>
+					</div>
+				</div>
+				<div class="box-body">
+					<table class="table table-hover table-striped table-bordered datatable" id="datatables-pond-activities">
+						<thead>
+							<tr>
+								<th th:text="#{farm.pond_activity_start}">farm.pond_activity_start</th>
+								<th th:text="#{farm.pond_activity_end}">farm.pond_activity_end</th>
+								<th th:text="#{farm.pond_activity_name}">farm.pond_activity_name</th>
+								<th th:text="#{farm.pond_activity_comment}">farm.pond_activity_name</th>
+								<th width="120"></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="act:${activities}">
+								<td th:text="${#dates.format(act.activityStartDate,'yyyy-MM-dd HH:mm:ss')}"></td>
+								<td th:text="${#dates.format(act.activityEndDate,'yyyy-MM-dd HH:mm:ss')}"></td>
+								<td th:text="${act.activityType.localisedName}"></td>
+								<td th:text="${act.comment}"></td>
+								<td align="center">
+									<a href="javascript:void(0);" th:attr="data-id=${act.id}" class="btn btn-xs btn-flat btn-primary editActBtn"><i class="fa fa-edit"></i></a>
+									<form th:action="@{'/ponds/'+${pondId}+'/activities/delete.html'}" method="post" style="display: inline;">
+										<input type="hidden" th:value="${act.id}" th:name="activityId" />
+										<button type="submit" class="btn btn-xs btn-flat btn-danger">
+											<i class="fa fa-remove"></i>
+										</button>
+									</form>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<th:block layout:fragment="page-scripts">
+	<script type="text/javascript" th:inline="javascript">
+		$(document).ready(function() {
+			$('.editActBtn').click(function(){
+				var id = $(this).attr("data-id");
+				document.location=[[@{/ponds/}]]+'/'+[[${pondId}]]+'/activities/'+id+'/edit.html';
+			});
+		 
+			$('#datatables-pond-activities').DataTable({
+				"order": [[ 0, "desc" ]],
+				"language": {
+		            "url": langURL
+		        }
+			});
+		});
+		
+	</script>
+</th:block>
+</html>

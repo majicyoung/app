@@ -15,8 +15,9 @@ public class FarmPondDto {
 	protected Long type;
 
 	protected Long species;
-
-	protected V8MeasureDto volume;
+	protected String speciesName;
+	
+	protected V8MeasureDto size;
 
 	protected String comment;
 
@@ -68,12 +69,12 @@ public class FarmPondDto {
 		this.species = species;
 	}
 
-	public V8MeasureDto getVolume() {
-		return volume;
+	public V8MeasureDto getSize() {
+		return size;
 	}
 
-	public void setVolume(V8MeasureDto volume) {
-		this.volume = volume;
+	public void setSize(V8MeasureDto size) {
+		this.size = size;
 	}
 
 	public String getComment() {
@@ -82,5 +83,14 @@ public class FarmPondDto {
 
 	public void setComment(String comment) {
 		this.comment = comment;
+	}
+	
+	
+	public String getSpeciesName() {
+		return speciesName;
+	}
+
+	public void setSpeciesName(String speciesName) {
+		this.speciesName = speciesName;
 	}
 }

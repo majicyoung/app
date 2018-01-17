@@ -33,10 +33,10 @@
 									<label for="inputFarmPondArea" class="col-xs-3 control-label" th:text="|#{default.area}*|">default.area*</label>
 									<div class="col-xs-9 no-padding">
 										<div class="col-xs-6">
-											<input type="text" class="form-control form-pond form-pond-required" id="inputFarmPondArea" th:placeholder="#{default.area}" th:field="*{volume.quantity}" />
+											<input type="text" class="form-control form-pond form-pond-required" id="inputFarmPondArea" th:placeholder="#{default.area}" th:field="*{size.quantity}" />
 										</div>
 										<div class="col-xs-6">
-											<select class="form-control form-pond form-pond-required" id="inputFarmPondAreaUnit" th:field="*{volume.unit}">
+											<select class="form-control form-pond form-pond-required" id="inputFarmPondAreaUnit" th:field="*{size.unit}">
 												<option value="" th:text="|-- #{default.select_unit} --|"></option>
 												<option th:each="unit : ${allQuantityUnits}" th:value="${unit.id}" th:text="${unit.localisedName}"></option>
 											</select>

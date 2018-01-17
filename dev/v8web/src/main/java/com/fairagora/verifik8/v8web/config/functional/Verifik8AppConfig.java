@@ -13,6 +13,8 @@ public class Verifik8AppConfig {
 
 	private boolean pondProfile;
 	private boolean plotProfile;
+	private boolean fishMngt;
+	private String themeColor ;
 
 	public Verifik8AppConfig() {
 		languages = new ArrayList<>();
@@ -31,6 +33,14 @@ public class Verifik8AppConfig {
 		return appName;
 	}
 
+	public String getThemeColor() {
+		return themeColor;
+	}
+
+	public void setThemeColor(String themeColor) {
+		this.themeColor = themeColor;
+	}
+	
 	public V8AppLanguage getCurrentLanguage() {
 
 		Locale l = LocaleContextHolder.getLocale();
@@ -49,7 +59,11 @@ public class Verifik8AppConfig {
 	public boolean isPlotProfile() {
 		return plotProfile;
 	}
-
+	
+	public boolean isFishMngt() {
+		return fishMngt;
+	}
+	
 	public void setPlotProfile(boolean plotProfile) {
 		this.plotProfile = plotProfile;
 	}
@@ -58,4 +72,9 @@ public class Verifik8AppConfig {
 		this.pondProfile = pondProfile;
 	}
 
+	public void setFishMngt(boolean fishMngt) {
+		this.fishMngt = fishMngt;
+	}
+
+	
 }

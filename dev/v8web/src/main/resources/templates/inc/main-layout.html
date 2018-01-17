@@ -2,9 +2,10 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
 <object th:include="inc/includes :: head" th:remove="tag"></object>
-<title th:text="|${v8App.appName} ${'|'} #{page.home.title}|"></title>
+<title th:text="|${v8App.appName} ${'|'} #{page.home.title}|"  ></title>
 </head>
-<body class="hold-transition skin-green sidebar-mini">
+
+<body class="hold-transition sidebar-mini" th:classappend="${v8App.themeColor}"><!--  add a selector to change CSS depending on the aqua or the agri -->
 <div class="wrapper">
 <header class="main-header" th:include="inc/includes :: main-header"></header>
 <aside class="main-sidebar" th:include="inc/includes :: main-sidebar"></aside>

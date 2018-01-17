@@ -49,9 +49,9 @@ public class RegEntityFarmPond implements V8Entity{
 
 	@Embedded
 	@AttributeOverrides({ 
-		@AttributeOverride(name = "quantity", column = @Column(name = "POND_VOLUME")), })
-		@AssociationOverrides({			@AssociationOverride(name = "unit", joinColumns = @JoinColumn(name = "CL_POND_VOLUME_UNIT_ID")) })
-	protected V8Measure volume;
+		@AttributeOverride(name = "quantity", column = @Column(name = "POND_SIZE")), })
+		@AssociationOverrides({			@AssociationOverride(name = "unit", joinColumns = @JoinColumn(name = "CL_POND_SIZE_UNIT_ID")) })
+	protected V8Measure size;
 
 	@Column(name = "COMMENT", length = 512)
 	protected String comment;
@@ -88,12 +88,12 @@ public class RegEntityFarmPond implements V8Entity{
 		this.species = species;
 	}
 
-	public V8Measure getVolume() {
-		return volume;
+	public V8Measure getSize() {
+		return size;
 	}
 
-	public void setVolume(V8Measure volume) {
-		this.volume = volume;
+	public void setSize(V8Measure size) {
+		this.size = size;
 	}
 
 	public String getComment() {
