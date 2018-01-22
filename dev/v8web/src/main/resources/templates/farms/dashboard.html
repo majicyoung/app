@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html layout:decorator="inc/main-layout" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<div layout:fragment="content">
+	<div class="row">
+		 <div class="col-xs-12">
+      <div class="box" id="farm-box">
+        <div class="box-header with-border">
+	          <h3  class="box-title" th:text="#{farm.edit}">farm.dashboard</h3> 
+        </div>
+        <form role="form"  th:action="@{'/farm/'+${farmId}+'/dashboard-update.html'}" th:object="${farmDto}" method="post" class="form-horizontal" enctype="multipart/form-data" onsubmit="return !hasEmptyFields('#farm-box form .form-control[required]');">
+        <div class="box-body" style="padding:0;">
+          <div class="nav-tabs-custom">
+           <ul th:include="farms/farms-includes :: farms-tabs" class="nav nav-tabs"></ul>
+            <div class="tab-content">
+              <div class="tab-pane active" id="tab_3">
+              <div class="col-xs-12">
+                        <div class="col-xs-12">
+                            <h4 th:text="#{farm.siting_hvh}">farm.siting_hvh</h4>
+                            
+                            <div class="form-group row">
+                                <label for="inputFarmImpactAssesment" class="col-xs-4 control-label" th:text="#{farm.envi_impact_assessment}">farm.envi_impact_assessment</label>
+                                <div class="col-xs-5">
+                                    <input type="file" class="form-control" th:field="*{environmentImpactAssessmentDoc}" th:placeholder="#{farm.upload_study}" accept=".xlsx, .xls, .doc, .docx, .pdf, image/*" />
+                                </div>
+                                <div class="col-xs-2 bloc-file-uploaded" >
+                                   	<a th:if="${!#strings.isEmpty(farmDto.environmentImpactAssessmentDocUrl)}" th:href="@{'/downloard/'+${farmDto.environmentImpactAssessmentDocUrl}}" target="_blank">
+                                   		<i class="fa fa-download"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="inputFarmConstructionPermit" class="col-xs-4 control-label" th:text="#{default.construction_permit}"></label>
+                                <div class="col-xs-5">
+                                    <input type="file" class="form-control" th:field="*{contructionPermit}"  th:placeholder="#{farm.upload_permit}" accept=".xlsx, .xls, .doc, .docx, .pdf, image/*"  />
+                                </div>
+                                <div class="col-xs-2 bloc-file-uploaded" >
+                                  	<a th:if="${!#strings.isEmpty(farmDto.contructionPermitUrl)}" th:href="@{'/downloard/'+${farmDto.contructionPermitUrl}}" target="_blank">
+                                   		<i class="fa fa-download"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="inputFarmLandTitle" class="col-xs-4 control-label" th:text="#{default.land_title}">default.land_title</label>
+                                <div class="col-xs-5">
+                                    <input type="file" class="form-control" th:field="*{landTitle}" th:placeholder="#{farm.upload_land_title}" accept=".xlsx, .xls, .doc, .docx, .pdf, image/*"  />
+                                </div>
+                                <div class="col-xs-2 bloc-file-uploaded">
+                                  	<a th:if="${!#strings.isEmpty(farmDto.landTitleUrl)}" th:href="@{'/downloard/'+${farmDto.landTitleUrl}}" target="_blank">
+                                   		<i class="fa fa-download"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12" th:if="${v8App.pondProfile}">
+                            <h4 th:text="#{farm.siting_protected_area}">farm.siting_protected_area</h4>
+                            <div class="form-group row">
+                                <label class="col-xs-1 control-label"></label>
+                                <div class="col-xs-11">
+                                    <div class="checkbox">
+                                        <label><input type="checkbox" th:field="*{sittingProtectedArea}"  /> <span th:text="#{farm.is_it_siting_protected_area}">farm.is_it_siting_protected_area</span></label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="inputFarmAuthorization" class="col-xs-4 control-label"><span th:text="#{farm.authorization_siting_hvh}">farm.authorization_siting_hvh</span></label>
+                                <div class="col-xs-5">
+                                    <input type="file" class="form-control" th:field="*{sittingProtectedAreaDoc}" th:placeholder="#{farm.upload_authorization}" accept=".xlsx, .xls, .doc, .docx, .pdf, image/*"  />
+                                </div>
+                                <div class="col-xs-2 bloc-file-uploaded">
+                                    <a th:if="${!#strings.isEmpty(farmDto.sittingProtectedAreaUrl)}" th:href="@{'/downloard/'+${farmDto.sittingProtectedAreaUrl}}" target="_blank">
+                                   		<i class="fa fa-download"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="box-footer text-center">
+        	<small>* <span th:text="#{default.mandatory_field}"></span></small>
+            <a th:href="@{/farms.html}" class="btn btn-flat btn-warning"><i class="fa fa-times"></i><span th:text="#{default.cancel}">default.cancel</span></a>
+            
+            <button type="submit" class="btn btn-success">
+				<span th:text="#{default.submit}">default.submit</span> <i class="fa fa-check"></i>
+			</button>
+        </div>
+        </form>
+      </div>
+    </div>
+
+	</div>
+
+</div>
+
+
+<th:block layout:fragment="page-scripts">
+	<script type="text/javascript">
+		$( document ).ready(function() {
+		});
+	</script>
+</th:block>
+
+</html>
