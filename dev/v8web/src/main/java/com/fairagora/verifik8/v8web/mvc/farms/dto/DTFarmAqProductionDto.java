@@ -2,26 +2,9 @@ package com.fairagora.verifik8.v8web.mvc.farms.dto;
 
 import java.util.Date;
 
-import javax.persistence.AssociationOverride;
-import javax.persistence.AssociationOverrides;
-import javax.persistence.AttributeOverride;
-import javax.persistence.AttributeOverrides;
-import javax.persistence.Column;
-import javax.persistence.Embedded;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import com.fairagora.verifik8.v8web.data.domain.V8EntitySupport;
-import com.fairagora.verifik8.v8web.data.domain.cl.CLRefSpecies;
-import com.fairagora.verifik8.v8web.data.domain.commons.V8Measure;
-import com.fairagora.verifik8.v8web.data.domain.reg.RegEntity;
 import com.fairagora.verifik8.v8web.mvc.infra.dtomapping.commons.V8MeasureDto;
 
 public class DTFarmAqProductionDto {

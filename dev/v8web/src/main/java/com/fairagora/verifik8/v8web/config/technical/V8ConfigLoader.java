@@ -21,13 +21,22 @@ public class V8ConfigLoader {
 	
 	@Value("${v8app.themeColor}")
 	private String themeColor;
+
+	@Value("${v8app.socioEco}")
+	private String socioEco;
+	
+	@Value("${v8app.appName}")
+	private String appName;
+	
 	
 	@Bean(name = "v8App")
 	public Verifik8AppConfig v8App() {
 		Verifik8AppConfig appConfig = new Verifik8AppConfig();
 		appConfig.setPlotProfile(plotProfile);
 		appConfig.setPondProfile(pondProfile);
-		appConfig.setPondProfile(fishMngt);
+		appConfig.setFishMngt(fishMngt);
+		appConfig.setSocioEco(fishMngt);
+		appConfig.setAppName(appName);
 		appConfig.setThemeColor(themeColor);
 		return appConfig;
 	}

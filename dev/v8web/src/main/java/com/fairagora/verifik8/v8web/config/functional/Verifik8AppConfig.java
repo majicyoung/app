@@ -8,12 +8,13 @@ import org.springframework.context.i18n.LocaleContextHolder;
 
 public class Verifik8AppConfig {
 
-	private String appName = "Verifik8";
+	private String appName;
 	private final List<V8AppLanguage> languages;
 
 	private boolean pondProfile;
 	private boolean plotProfile;
 	private boolean fishMngt;
+	private boolean socioEco;
 	private String themeColor ;
 
 	public Verifik8AppConfig() {
@@ -33,6 +34,11 @@ public class Verifik8AppConfig {
 		return appName;
 	}
 
+	public void setAppName(String appName) {
+		this.appName = appName;
+	}
+	
+	
 	public String getThemeColor() {
 		return themeColor;
 	}
@@ -63,6 +69,10 @@ public class Verifik8AppConfig {
 	public boolean isFishMngt() {
 		return fishMngt;
 	}
+
+	public boolean isSocioEco() {
+		return socioEco;
+	}
 	
 	public void setPlotProfile(boolean plotProfile) {
 		this.plotProfile = plotProfile;
@@ -75,6 +85,8 @@ public class Verifik8AppConfig {
 	public void setFishMngt(boolean fishMngt) {
 		this.fishMngt = fishMngt;
 	}
-
+	public void setSocioEco(boolean socioEco) {
+		this.socioEco = socioEco;
+	}
 	
 }
