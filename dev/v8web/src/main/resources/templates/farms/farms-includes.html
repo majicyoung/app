@@ -7,9 +7,11 @@
 		<th:block th:if="${farmId!=null AND farmId&gt;0}">
 			<li id="farmtab_dashboard"><a th:href="@{${'/farm/'+farmId+'/dashboard.html'}}" th:text="#{farm.dashboard}">farm.dashboard</a></li>
 			<li id="farmtab_profile"><a th:href="@{${'/farm/'+farmId+'/edit.html'}}" th:text="#{farm.profile}">farm.profile</a></li>
+			<li id="farmtab_facilities"><a th:href="@{${'/farm/'+farmId+'/facilities.html'}}" th:text="#{default.facilities}">default.facilities</a></li>
 			<li id="farmtab_staff-general-info"><a th:href="@{${'/farm/'+farmId+'/staff-general-info.html'}}" th:text="#{farm.staff_general_info}">farm.staff_general_info</a></li>
 			<li id="farmtab_staff"><a th:href="@{${'/farm/'+farmId+'/staff.html'}}" th:text="#{farm.contact_staff}">farm.contact_staff</a></li>
 			<li id="farmtab_hiring"><a th:href="@{${'/farm/'+farmId+'/hiring-recruitment.html'}}" th:text="#{farm.hiring_recruitment}">farm.hiring_recruitment</a></li>
+			<li id="farmtab_safety"><a th:href="@{${'/farm/'+farmId+'/safety.html'}}" th:text="#{default.safety}">default.safety</a></li>
 			<li id="farmtab_environmental"><a th:href="@{${'/farm/'+farmId+'/environmental.html'}}" th:text="#{farm.env_details}">farm.env_details</a></li>
 			<li id="farmtab_suppliers"><a th:href="@{${'/farm/'+farmId+'/suppliers.html'}}" th:text="#{default.suppliers}">default.suppliers</a></li>
 			<li id="farmtab_production-profile"><a th:href="@{${'/farm/'+farmId+'/production-profile.html'}}" th:text="#{default.production_profile}">default.ponds</a></li>
@@ -19,9 +21,11 @@
 		<th:block th:if="${farmId==null OR farmId==0}">
 		    <li class="disabled"><a data-toggle="tab" th:text="#{farm.dashboard}">farm.dashboard</a></li>
 			<li class="active"><a data-toggle="tab" th:text="#{farm.profile}">farm.profile</a></li>
+			<li class="disabled"><a data-toggle="tab" th:text="#{default.facilities}">default.facilities</a></li>
 			<li class="disabled"><a th:text="#{farm.staff_general_info}">farm.staff_general_info</a></li>
 			<li class="disabled"><a th:text="#{farm.contact_staff}">farm.contact_staff</a></li>
 			<li class="disabled"><a th:text="#{farm.hiring_recruitment}">farm.hiring_recruitment</a></li>
+			<li class="disabled"><a th:text="#{default.safety}">default.safety</a></li>
 			<li class="disabled"><a th:text="#{farm.env_details}">farm.env_details</a></li>
 			<li class="disabled"><a th:text="#{default.suppliers}">default.suppliers</a></li>
 			<li class="disabled"><a th:text="#{default.production_profile}">default.suppliers</a></li>
