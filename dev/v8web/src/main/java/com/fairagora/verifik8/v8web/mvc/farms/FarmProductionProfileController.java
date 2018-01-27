@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -64,6 +65,9 @@ public class FarmProductionProfileController extends AbstractV8Controller {
 	 * @param farmId
 	 * @return
 	 */
+	@Autowired
+	 protected JdbcTemplate jdbc;
+	
 	@Transactional
 	@RequestMapping(value = "/farm/{id}/production-profile.html", method = RequestMethod.GET)
 	public String showFarmProductionProfile(@PathVariable(name = "id") Long id, Model mv) {
@@ -86,7 +90,7 @@ public class FarmProductionProfileController extends AbstractV8Controller {
 		List<DTWaterAnalysisDto> waterAnalysis = waterAnalysisRepository.findByPondFarmId(id).stream()
 				.map(regFarmDtoMapper::toWaterAnalysisDto).collect(Collectors.toList());
 		mv.addAttribute("waterAnalysisListing", waterAnalysis);
-
+		mv.addAttribute("farmName", jdbc.queryForObject("SELECT name FROM reg_entities WHERE id="+id, String.class));
 		preparePage(farm, mv);
 
 		return "farms/production-profile";

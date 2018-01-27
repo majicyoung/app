@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -50,6 +51,9 @@ public class FarmsController extends AbstractV8Controller {
 	@Autowired
 	private RegFarmDTOMapper regFarmDtoMapper;
 
+	@Autowired
+	 protected JdbcTemplate jdbc;
+	
 	@RequestMapping(value = "/farms.html", method = RequestMethod.GET)
 	public String showFarmsList(Model mv) {
 
@@ -138,6 +142,7 @@ public class FarmsController extends AbstractV8Controller {
 		regFarmDtoMapper.toDto(regEntityFarmDetailsRepository.findByEntityId(id).get(), dto);
 
 		prepareForFarmEdition(id, dto, mv);
+		mv.addAttribute("farmName", jdbc.queryForObject("SELECT name FROM reg_entities WHERE id="+id, String.class));
 		return "farms/environmental";
 	}
 

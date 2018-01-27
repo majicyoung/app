@@ -5,6 +5,7 @@ import java.sql.Time;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -82,8 +83,8 @@ public class FarmGeneralInfoController extends AbstractV8Controller {
 		return "redirect:/farm/" + farmId + "/staff-general-info.html";
 	}
 
-	
-
+	@Autowired
+	 protected JdbcTemplate jdbc;
 	
 	/**
 	 * 
@@ -101,6 +102,7 @@ public class FarmGeneralInfoController extends AbstractV8Controller {
 		mv.addAttribute("activeTab", "staff-general-info");
 
 		mv.addAttribute("farmDto", dto);
+		mv.addAttribute("farmName", jdbc.queryForObject("SELECT name FROM reg_entities WHERE id="+id, String.class));
 		mv.addAttribute("farmId", dto.getFarmId());
 
 		mv.addAttribute("allHazardousWorkType", codeListservice.listActiveHazardousWorkType());

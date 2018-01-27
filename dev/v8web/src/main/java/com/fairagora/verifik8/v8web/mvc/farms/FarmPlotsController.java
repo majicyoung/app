@@ -3,6 +3,7 @@ package com.fairagora.verifik8.v8web.mvc.farms;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,6 +27,9 @@ public class FarmPlotsController extends AbstractV8Controller {
 	@Autowired
 	private RegEntityFarmPlotRepository regEntityFarmPlotRepository;
 
+	@Autowired
+	 protected JdbcTemplate jdbc;
+	
 	@RequestMapping(value = "/farm/{id}/plots.html", method = RequestMethod.GET)
 	public String showPlotsManagementPage(@PathVariable("id") Long id, Model mv) {
 
@@ -35,11 +39,13 @@ public class FarmPlotsController extends AbstractV8Controller {
 
 		FarmPlotDto dto = new FarmPlotDto();
 		dto.setFarm(id);
+		mv.addAttribute("farmName", jdbc.queryForObject("SELECT name FROM reg_entities WHERE id="+id, String.class));
 		mv.addAttribute("plotDto", dto);
 
 		return "farms/plots";
 	}
 
+	
 	@Transactional
 	@RequestMapping(value = "/farm/{id}/plot.html", method = RequestMethod.POST)
 	public String addPlot(@PathVariable("id") Long id, FarmPlotDto dto, Model mv) {
@@ -56,10 +62,11 @@ public class FarmPlotsController extends AbstractV8Controller {
 
 		regFarmDtoMapper.fillEntity(dto, plot);
 		regEntityFarmPlotRepository.save(plot);
-
+		mv.addAttribute("farmName", jdbc.queryForObject("SELECT name FROM reg_entities WHERE id="+id, String.class));
 		preparePage(farm, mv);
 
 		dto.setFarm(id);
+		
 		mv.addAttribute("plotDto", dto);
 
 		return "redirect:/farm/" + id + "/plots.html";

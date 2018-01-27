@@ -5,6 +5,7 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,13 +26,16 @@ public class FarmSuppliersController extends AbstractV8Controller {
 	@Autowired
 	protected RegEntityFarmSupplierAssignmentRepository regEntityFarmSupplierAssignmentRepository;
 
+	@Autowired
+	 protected JdbcTemplate jdbc;
+	
 	@RequestMapping(value = "/farm/{id}/suppliers.html", method = RequestMethod.GET)
 	public String showEditStaff(@PathVariable("id") Long id, Model mv) {
 
 		RegEntity farm = regEntityRepository.findOne(id);
 
 		preparePage(farm, mv);
-
+		mv.addAttribute("farmName", jdbc.queryForObject("SELECT name FROM reg_entities WHERE id="+id, String.class));
 		return "farms/suppliers";
 	}
 

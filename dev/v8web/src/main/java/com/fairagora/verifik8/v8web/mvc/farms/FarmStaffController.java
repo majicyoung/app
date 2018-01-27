@@ -3,6 +3,7 @@ package com.fairagora.verifik8.v8web.mvc.farms;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,6 +31,9 @@ public class FarmStaffController extends AbstractV8Controller {
 	@Autowired
 	private RegFarmDTOMapper regFarmDtoMapper;
 
+	@Autowired
+	 protected JdbcTemplate jdbc;
+	
 	@RequestMapping(value = "/farm/{id}/staff.html", method = RequestMethod.GET)
 	public String showEditStaff(@PathVariable("id") Long id, Model mv) {
 
@@ -39,7 +43,7 @@ public class FarmStaffController extends AbstractV8Controller {
 
 		StaffFarmFormDto dto = new StaffFarmFormDto();
 		mv.addAttribute("staffDto", dto);
-
+		mv.addAttribute("farmName", jdbc.queryForObject("SELECT name FROM reg_entities WHERE id="+id, String.class));
 		return "farms/staff";
 	}
 

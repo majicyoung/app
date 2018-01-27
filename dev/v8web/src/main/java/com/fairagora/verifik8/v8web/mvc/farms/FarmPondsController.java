@@ -3,6 +3,7 @@ package com.fairagora.verifik8.v8web.mvc.farms;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,6 +27,9 @@ public class FarmPondsController extends AbstractV8Controller {
 	@Autowired
 	private RegEntityFarmPondRepository regEntityFarmPondRepository;
 
+	@Autowired
+	 protected JdbcTemplate jdbc;
+	
 	@RequestMapping(value = "/farm/{id}/ponds.html", method = RequestMethod.GET)
 	public String showPondsManagementPage(@PathVariable("id") Long id, Model mv) {
 
@@ -35,11 +39,14 @@ public class FarmPondsController extends AbstractV8Controller {
 
 		FarmPondDto dto = new FarmPondDto();
 		dto.setFarm(id);
+		mv.addAttribute("farmName", jdbc.queryForObject("SELECT name FROM reg_entities WHERE id="+id, String.class));
 		mv.addAttribute("pondDto", dto);
 
 		return "farms/ponds";
 	}
 
+
+	
 	@Transactional
 	@RequestMapping(value = "/farm/{id}/pond.html", method = RequestMethod.POST)
 	public String addPond(@PathVariable("id") Long id, FarmPondDto dto, Model mv) {
@@ -56,7 +63,7 @@ public class FarmPondsController extends AbstractV8Controller {
 
 		regFarmDtoMapper.fillEntity(dto, pond);
 		regEntityFarmPondRepository.save(pond);
-
+		mv.addAttribute("farmName", jdbc.queryForObject("SELECT name FROM reg_entities WHERE id="+id, String.class));
 		preparePage(farm, mv);
 
 		dto.setFarm(id);
