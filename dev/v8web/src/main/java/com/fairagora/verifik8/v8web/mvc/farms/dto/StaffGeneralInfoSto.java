@@ -7,7 +7,9 @@ public class StaffGeneralInfoSto {
 	protected Long farmId;
 	protected int numberOfStaffAsToday;
 	protected int nbRestDays;
+
 	protected boolean workersRepresentativeGroup;
+	protected int nbRepresentativeGroupsInArea;
 
 	protected int nbWorkersChildLivingInFarm;
 	protected int nbWorkersChildHelpingInFarm;
@@ -19,7 +21,7 @@ public class StaffGeneralInfoSto {
 	protected boolean accessToProtectiveEquipment;
 	protected MultipartFile protectiveEquipment;
 	protected String protectiveEquipmentUrl;
-	
+
 	protected boolean existenceWorkAccidentRecord;
 
 	protected MultipartFile workAccidentRecord;
@@ -28,6 +30,17 @@ public class StaffGeneralInfoSto {
 	protected boolean existenceFarmPolicies;
 	protected MultipartFile farmPolicies;
 	protected String farmPoliciesUrl;
+
+	protected int nbOfSchoolInArea;
+
+	protected boolean existenceGrievingSystem;
+	protected boolean recordGrievingSystem;
+
+	protected boolean joinWorkersRepresentativeGroup;
+	protected int nbMigrantWorkers;
+
+	protected boolean workerHurt;
+	protected String workerHurtExplaination;
 
 	public Long getFarmId() {
 		return farmId;
@@ -172,4 +185,69 @@ public class StaffGeneralInfoSto {
 	public void setProtectiveEquipmentUrl(String protectiveEquipmentUrl) {
 		this.protectiveEquipmentUrl = protectiveEquipmentUrl;
 	}
+
+	public int getNbOfSchoolInArea() {
+		return nbOfSchoolInArea;
+	}
+
+	public void setNbOfSchoolInArea(int nbOfSchoolInArea) {
+		this.nbOfSchoolInArea = nbOfSchoolInArea;
+	}
+
+	public int getNbRepresentativeGroupsInArea() {
+		return nbRepresentativeGroupsInArea;
+	}
+
+	public void setNbRepresentativeGroupsInArea(int nbRepresentativeGroupsInArea) {
+		this.nbRepresentativeGroupsInArea = nbRepresentativeGroupsInArea;
+	}
+
+	public boolean isRecordGrievingSystem() {
+		return recordGrievingSystem;
+	}
+
+	public void setRecordGrievingSystem(boolean recordGrievingSystem) {
+		this.recordGrievingSystem = recordGrievingSystem;
+	}
+
+	public boolean isJoinWorkersRepresentativeGroup() {
+		return joinWorkersRepresentativeGroup;
+	}
+
+	public void setJoinWorkersRepresentativeGroup(boolean joinWorkersRepresentativeGroup) {
+		this.joinWorkersRepresentativeGroup = joinWorkersRepresentativeGroup;
+	}
+
+	public int getNbMigrantWorkers() {
+		return nbMigrantWorkers;
+	}
+
+	public void setNbMigrantWorkers(int nbMigrantWorkers) {
+		this.nbMigrantWorkers = nbMigrantWorkers;
+	}
+
+	public boolean isExistenceGrievingSystem() {
+		return existenceGrievingSystem;
+	}
+
+	public void setExistenceGrievingSystem(boolean existenceGrievingSystem) {
+		this.existenceGrievingSystem = existenceGrievingSystem;
+	}
+
+	public boolean isWorkerHurt() {
+		return workerHurt;
+	}
+
+	public void setWorkerHurt(boolean workerHurt) {
+		this.workerHurt = workerHurt;
+	}
+
+	public String getWorkerHurtExplaination() {
+		return workerHurtExplaination;
+	}
+
+	public void setWorkerHurtExplaination(String workerHurtExplaination) {
+		this.workerHurtExplaination = workerHurtExplaination;
+	}
+
 }

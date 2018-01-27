@@ -32,6 +32,7 @@ import com.fairagora.verifik8.v8web.mvc.farms.dto.DTSoilAnalysisDto;
 import com.fairagora.verifik8.v8web.mvc.farms.dto.DTWaterAnalysisDto;
 import com.fairagora.verifik8.v8web.mvc.farms.dto.FarmEnvironmentalDto;
 import com.fairagora.verifik8.v8web.mvc.farms.dto.FarmFormDto;
+import com.fairagora.verifik8.v8web.mvc.farms.dto.FarmHiringRecruitmentDto;
 import com.fairagora.verifik8.v8web.mvc.farms.dto.FarmPlotDto;
 import com.fairagora.verifik8.v8web.mvc.farms.dto.FarmPondDto;
 import com.fairagora.verifik8.v8web.mvc.farms.dto.StaffContractDto;
@@ -92,6 +93,11 @@ public interface RegFarmDTOMapper {
 	@Mapping(target = "protectiveEquipmentUrl", source = "protectiveEquipment.resourcePath")
 	void toDto(RegEntityStaffManagement findByFarmId, @MappingTarget StaffGeneralInfoSto dto);
 
+	void toDto(RegEntityStaffManagement farmStafMgmt, @MappingTarget FarmHiringRecruitmentDto dto);
+
+	@Mapping(target = "farmId", ignore = true)
+	void fillEntity(FarmHiringRecruitmentDto farmDto, @MappingTarget RegEntityStaffManagement ent);
+
 	@Mapping(source = "m.species.localisedName", target = "speciesName")
 	void toDto(RegEntityFarmPond m, @MappingTarget FarmPondDto dto);
 
@@ -116,8 +122,7 @@ public interface RegFarmDTOMapper {
 	void toDto(DTFarmPondActivity m, @MappingTarget PondActivityDto dto);
 
 	void fillEntity(PondActivityDto dto, @MappingTarget DTFarmPondActivity m);
-	
-	
+
 	void toDto(V8Measure m, @MappingTarget V8MeasureDto dto);
 
 	@Mapping(source = "m.unit.localisedName", target = "unitName")
@@ -151,14 +156,14 @@ public interface RegFarmDTOMapper {
 
 	@Mapping(source = "e.commodities.localisedName", target = "commoditiesName")
 	DTFarmAgProductionDto toProductionDto(DTFarmAgProduction e);
+
 	void fillEntity(DTFarmAgProductionDto dto, @MappingTarget DTFarmAgProduction measure);
 
 	@Mapping(source = "e.species.localisedName", target = "speciesName")
 	DTFarmAqProductionDto toProductionDto(DTFarmAqProduction e);
 
 	void fillEntity(DTFarmAqProductionDto dto, @MappingTarget DTFarmAqProduction measure);
-	
-	
+
 	@Mapping(source = "e.plot.number", target = "plotNumber")
 	@Mapping(source = "e.soilAnalysisType.localisedName", target = "soilAnalysisTypeName")
 	@Mapping(target = "analysis", ignore = true)
@@ -170,8 +175,6 @@ public interface RegFarmDTOMapper {
 	@Mapping(target = "analysis", ignore = true)
 	@Mapping(target = "analysisUrl", source = "analysis.resourcePath")
 	DTWaterAnalysisDto toWaterAnalysisDto(DTWaterAnalysis e);
-
-
 
 	@Mapping(source = "m.supplier.address.city", target = "city")
 	@Mapping(source = "m.productType.localisedName", target = "productType")
@@ -215,4 +218,5 @@ public interface RegFarmDTOMapper {
 	@Mapping(target = "farm", ignore = true)
 	@Mapping(target = "entity", ignore = true)
 	void fillEntity(StaffContractDto dto, @MappingTarget RegEntityStaffContract e);
+
 }

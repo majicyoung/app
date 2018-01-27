@@ -12,7 +12,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fairagora.verifik8.v8web.data.domain.cl.CLAppGetBackFinancialDepositReason;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLAppHazardousWorkType;
+import com.fairagora.verifik8.v8web.data.domain.cl.CLAppHiringRestrictionType;
+import com.fairagora.verifik8.v8web.data.domain.cl.CLAppNoEarlyTerminationContractReason;
+import com.fairagora.verifik8.v8web.data.domain.cl.CLAppPaymentDebtType;
+import com.fairagora.verifik8.v8web.data.domain.cl.CLAppSalaryDeductionType;
+import com.fairagora.verifik8.v8web.data.domain.cl.CLAppWorkerEntityDocumentTypes;
+import com.fairagora.verifik8.v8web.data.domain.cl.ClAppTerminationContractReason;
 import com.fairagora.verifik8.v8web.data.domain.commons.Attachment;
 
 @Entity
@@ -32,6 +39,12 @@ public class RegEntityStaffManagement {
 	@Column(name = "WORKERS_REPRESENTATIVE_GROUP")
 	protected boolean workersRepresentativeGroup;
 
+	@Column(name = "JOIN_WORKERS_REPRESENTATIVE_GROUP")
+	protected boolean joinWorkersRepresentativeGroup;
+
+	@Column(name = "NB_REPRESENTATIVE_GROUPS_IN_AREA")
+	protected Integer nbRepresentativeGroupsInArea;
+
 	@Column(name = "REGULAR_WORK_START_HOUR")
 	protected Time regularWorkStartHour;
 
@@ -50,8 +63,11 @@ public class RegEntityStaffManagement {
 	@Column(name = "NB_WORKERS_CHILD_ENROLLED_SCHOOL")
 	protected int nbWorkersChildEnrolledSchool;
 
+	@Column(name = "NB_SCHOOL_IN_AREA")
+	protected Integer nbOfSchoolInArea;
+
 	@Column(name = "NB_WORKERS_MIGRANTS")
-	protected int nbWorkerMigrants;
+	protected Integer nbWorkerMigrants;
 
 	@Column(name = "MIMINUM_WAGES_APPLIED_TO_CONTRACT")
 	protected boolean minimumWagesAppliedToContract;
@@ -96,7 +112,7 @@ public class RegEntityStaffManagement {
 	@AttributeOverrides({
 			@AttributeOverride(name = "resourcePath", column = @Column(name = "PROTECTIVE_EQUIPMENT_URL")) })
 	protected Attachment protectiveEquipment;
-	
+
 	@Column(name = "EMPLOYER_ISSUE_RECORD")
 	protected boolean empolyerIssueRecord;
 
@@ -127,6 +143,9 @@ public class RegEntityStaffManagement {
 			@AttributeOverride(name = "resourcePath", column = @Column(name = "DISCRIMINATION_REGULATION_URL")) })
 	protected Attachment discriminationRegulationUrl;
 
+	@Column(name = "NB_MIGRANT_WORKERS")
+	protected Integer nbMigrantWorkers;
+
 	@Column(name = "EXISTENCE_DISCIPLINARY_POLICIES")
 	protected boolean existenceDisciplinaryPolicies;
 
@@ -135,16 +154,128 @@ public class RegEntityStaffManagement {
 	protected Attachment disciplinaryPoliciesUrl;
 
 	@Column(name = "EXISTENCE_GRIEVING_SYSTEM")
-	protected boolean existenceGrievinSystem;
+	protected boolean existenceGrievingSystem;
+
+	@Column(name = "RECORD_GRIEVING_SYSTEM")
+	protected boolean recordGrievingSystem;
 
 	@Embedded
 	@AttributeOverrides({ @AttributeOverride(name = "resourcePath", column = @Column(name = "GRIEVING_SYSTEM_URL")) })
 	protected Attachment grievingSystemUrl;
 
-	
-
 	@Column(name = "SAFETY_CONDITION")
 	protected String safetyCondition;
+
+	@Column(name = "WORKER_HURT")
+	protected boolean workerHurt;
+
+	@Column(name = "WORKER_HURT_EXPLANATION")
+	protected String workerHurtExplaination;
+
+	// --- HIRING SECTION ---------------------------------------------
+
+	@Column(name = "WORKERS_MAKE_FINANCIAL_DEPOSIT")
+	protected Boolean workersMakeFinancialDeposit;
+
+	@ManyToOne(optional = true)
+	@JoinColumn(name = "CL_GET_BACK_FINANCIAL_DEPOSIT_REASON_ID")
+	protected CLAppGetBackFinancialDepositReason getBackFinancialDepositReason;
+
+	@ManyToOne(optional = true)
+	@JoinColumn(name = "CL_NO_EARLY_CONTRACT_TERMINATION_REASON_ID")
+	protected CLAppNoEarlyTerminationContractReason noEarlyTerminationContractReason;
+
+	@ManyToOne(optional = true)
+	@JoinColumn(name = "CL_CONTRACT_TERMINATION_REASON_ID")
+	protected ClAppTerminationContractReason contractTerminationReason;
+
+	@Column(name = "CONTRACT_TERMINATION_OTHER_REASON")
+	protected String contractTerminationOtherReason;
+
+	@Column(name = "KEEP_WORKER_DOCUMENTS_SAFEKEEPING")
+	protected Boolean keepWorkerDocumentSafeKeeping;
+
+	@ManyToOne(optional = true)
+	@JoinColumn(name = "CL_KEPT_WORKER_ENTITY_DOCUMENT_TYPE_ID_1")
+	protected CLAppWorkerEntityDocumentTypes keptWorkerEntityDocumentType1;
+
+	@ManyToOne(optional = true)
+	@JoinColumn(name = "CL_KEPT_WORKER_ENTITY_DOCUMENT_TYPE_ID_2")
+	protected CLAppWorkerEntityDocumentTypes keptWorkerEntityDocumentType2;
+
+	@ManyToOne(optional = true)
+	@JoinColumn(name = "CL_KEPT_WORKER_ENTITY_DOCUMENT_TYPE_ID_3")
+	protected CLAppWorkerEntityDocumentTypes keptWorkerEntityDocumentType3;
+
+	@ManyToOne(optional = true)
+	@JoinColumn(name = "CL_KEPT_WORKER_ENTITY_DOCUMENT_TYPE_ID_4")
+	protected CLAppWorkerEntityDocumentTypes keptWorkerEntityDocumentType4;
+
+	@Column(name = "ANY_CONTRACT_SIGNED_WITH_WORKERS")
+	protected Boolean anyContractSignedWithWorkers;
+
+	@Column(name = "STAFF_HIRED_DIRECTY")
+	protected Boolean staffHiredDirectly;
+
+	@Column(name = "STAFF_HIRED_THROUGH_AGENT")
+	protected Boolean staffHiredThroughAgent;
+
+	@ManyToOne(optional = true)
+	@JoinColumn(name = "CL_DEDUCTION_SALARY_ID_1")
+	protected CLAppSalaryDeductionType salaryDeductionType1;
+
+	@ManyToOne(optional = true)
+	@JoinColumn(name = "CL_DEDUCTION_SALARY_ID_2")
+	protected CLAppSalaryDeductionType salaryDeductionType2;
+
+	@ManyToOne(optional = true)
+	@JoinColumn(name = "CL_DEDUCTION_SALARY_ID_3")
+	protected CLAppSalaryDeductionType salaryDeductionType3;
+
+	@ManyToOne(optional = true)
+	@JoinColumn(name = "CL_DEDUCTION_SALARY_ID_4")
+	protected CLAppSalaryDeductionType salaryDeductionType4;
+
+	@Column(name = "DEDUCTION_SALARY_OTHER")
+	protected String salaryDeductionOther;
+
+	@Column(name = "AMOUNT_SALARY_DEDUCED_MONTH")
+	protected Float amountSalaryDeducedMonth;
+
+	@Column(name = "PAYMENT_SLIP_PROVIDED_TO_WORKER")
+	protected Boolean paymentSlipProvidedToWorker;
+
+	@Column(name = "WORKERS_IN_DEBT")
+	protected Boolean workerInDebt;
+
+	@ManyToOne(optional = true)
+	@JoinColumn(name = "CL_PAYMENT_DEBT_TYPE_ID_1")
+	protected CLAppPaymentDebtType paymentDebtType1;
+
+	@ManyToOne(optional = true)
+	@JoinColumn(name = "CL_PAYMENT_DEBT_TYPE_ID_2")
+	protected CLAppPaymentDebtType paymentDebtType2;
+
+	@ManyToOne(optional = true)
+	@JoinColumn(name = "CL_PAYMENT_DEBT_TYPE_ID_3")
+	protected CLAppPaymentDebtType paymentDebtType3;
+
+	@ManyToOne(optional = true)
+	@JoinColumn(name = "CL_PAYMENT_DEBT_TYPE_ID_4")
+	protected CLAppPaymentDebtType paymentDebtType4;
+
+	@Column(name = "WORKERS_IN_DEBT_OTHER_STAKEHOLDER")
+	protected Boolean workersInDebtOtherStakeHolder;
+
+	@Column(name = "IN_KIND_PAYMENT")
+	protected Boolean inKindPayment;
+
+	@Column(name = "IN_KIND_PAYMENT_TYPE")
+	protected String inKindPaymentType;
+
+	@ManyToOne(optional = true)
+	@JoinColumn(name = "CL_HIRING_RESTRICTION_ID")
+	protected CLAppHiringRestrictionType hiringRestriction;
 
 	public Long getFarmId() {
 		return farmId;
@@ -402,12 +533,12 @@ public class RegEntityStaffManagement {
 		this.disciplinaryPoliciesUrl = disciplinaryPoliciesUrl;
 	}
 
-	public boolean isExistenceGrievinSystem() {
-		return existenceGrievinSystem;
+	public boolean isExistenceGrievingSystem() {
+		return existenceGrievingSystem;
 	}
 
-	public void setExistenceGrievinSystem(boolean existenceGrievinSystem) {
-		this.existenceGrievinSystem = existenceGrievinSystem;
+	public void setExistenceGrievingSystem(boolean existenceGrievingSystem) {
+		this.existenceGrievingSystem = existenceGrievingSystem;
 	}
 
 	public Attachment getGrievingSystemUrl() {
@@ -417,8 +548,6 @@ public class RegEntityStaffManagement {
 	public void setGrievingSystemUrl(Attachment grievingSystemUrl) {
 		this.grievingSystemUrl = grievingSystemUrl;
 	}
-
-	 
 
 	public Attachment getProtectiveEquipment() {
 		return protectiveEquipment;
@@ -442,6 +571,299 @@ public class RegEntityStaffManagement {
 
 	public void setWorkersRepresentativeGroup(boolean workersRepresentativeGroup) {
 		this.workersRepresentativeGroup = workersRepresentativeGroup;
+	}
+
+	public Integer getNbRepresentativeGroupsInArea() {
+		return nbRepresentativeGroupsInArea;
+	}
+
+	public void setNbRepresentativeGroupsInArea(Integer nbRepresentativeGroupsInArea) {
+		this.nbRepresentativeGroupsInArea = nbRepresentativeGroupsInArea;
+	}
+
+	public Integer getNbOfSchoolInArea() {
+		return nbOfSchoolInArea;
+	}
+
+	public void setNbOfSchoolInArea(Integer nbOfSchoolInArea) {
+		this.nbOfSchoolInArea = nbOfSchoolInArea;
+	}
+
+	public boolean isJoinWorkersRepresentativeGroup() {
+		return joinWorkersRepresentativeGroup;
+	}
+
+	public void setJoinWorkersRepresentativeGroup(boolean joinWorkersRepresentativeGroup) {
+		this.joinWorkersRepresentativeGroup = joinWorkersRepresentativeGroup;
+	}
+
+	public boolean isRecordGrievingSystem() {
+		return recordGrievingSystem;
+	}
+
+	public void setRecordGrievingSystem(boolean recordGrievingSystem) {
+		this.recordGrievingSystem = recordGrievingSystem;
+	}
+
+	public Integer getNbMigrantWorkers() {
+		return nbMigrantWorkers;
+	}
+
+	public void setNbMigrantWorkers(Integer nbMigrantWorkers) {
+		this.nbMigrantWorkers = nbMigrantWorkers;
+	}
+
+	public boolean isWorkerHurt() {
+		return workerHurt;
+	}
+
+	public void setWorkerHurt(boolean workerHurt) {
+		this.workerHurt = workerHurt;
+	}
+
+	public String getWorkerHurtExplaination() {
+		return workerHurtExplaination;
+	}
+
+	public void setWorkerHurtExplaination(String workerHurtExplaination) {
+		this.workerHurtExplaination = workerHurtExplaination;
+	}
+
+	public void setNbWorkerMigrants(Integer nbWorkerMigrants) {
+		this.nbWorkerMigrants = nbWorkerMigrants;
+	}
+
+	public Boolean getWorkersMakeFinancialDeposit() {
+		return workersMakeFinancialDeposit;
+	}
+
+	public void setWorkersMakeFinancialDeposit(Boolean workersMakeFinancialDeposit) {
+		this.workersMakeFinancialDeposit = workersMakeFinancialDeposit;
+	}
+
+	public CLAppGetBackFinancialDepositReason getGetBackFinancialDepositReason() {
+		return getBackFinancialDepositReason;
+	}
+
+	public void setGetBackFinancialDepositReason(CLAppGetBackFinancialDepositReason getBackFinancialDepositReason) {
+		this.getBackFinancialDepositReason = getBackFinancialDepositReason;
+	}
+
+	public CLAppNoEarlyTerminationContractReason getNoEarlyTerminationContractReason() {
+		return noEarlyTerminationContractReason;
+	}
+
+	public void setNoEarlyTerminationContractReason(
+			CLAppNoEarlyTerminationContractReason noEarlyTerminationContractReason) {
+		this.noEarlyTerminationContractReason = noEarlyTerminationContractReason;
+	}
+
+	public ClAppTerminationContractReason getContractTerminationReason() {
+		return contractTerminationReason;
+	}
+
+	public void setContractTerminationReason(ClAppTerminationContractReason contractTerminationReason) {
+		this.contractTerminationReason = contractTerminationReason;
+	}
+
+	public String getContractTerminationOtherReason() {
+		return contractTerminationOtherReason;
+	}
+
+	public void setContractTerminationOtherReason(String contractTerminationOtherReason) {
+		this.contractTerminationOtherReason = contractTerminationOtherReason;
+	}
+
+	public Boolean getKeepWorkerDocumentSafeKeeping() {
+		return keepWorkerDocumentSafeKeeping;
+	}
+
+	public void setKeepWorkerDocumentSafeKeeping(Boolean keepWorkerDocumentSafeKeeping) {
+		this.keepWorkerDocumentSafeKeeping = keepWorkerDocumentSafeKeeping;
+	}
+
+	public CLAppWorkerEntityDocumentTypes getKeptWorkerEntityDocumentType1() {
+		return keptWorkerEntityDocumentType1;
+	}
+
+	public void setKeptWorkerEntityDocumentType1(CLAppWorkerEntityDocumentTypes keptWorkerEntityDocumentType1) {
+		this.keptWorkerEntityDocumentType1 = keptWorkerEntityDocumentType1;
+	}
+
+	public CLAppWorkerEntityDocumentTypes getKeptWorkerEntityDocumentType2() {
+		return keptWorkerEntityDocumentType2;
+	}
+
+	public void setKeptWorkerEntityDocumentType2(CLAppWorkerEntityDocumentTypes keptWorkerEntityDocumentType2) {
+		this.keptWorkerEntityDocumentType2 = keptWorkerEntityDocumentType2;
+	}
+
+	public CLAppWorkerEntityDocumentTypes getKeptWorkerEntityDocumentType3() {
+		return keptWorkerEntityDocumentType3;
+	}
+
+	public void setKeptWorkerEntityDocumentType3(CLAppWorkerEntityDocumentTypes keptWorkerEntityDocumentType3) {
+		this.keptWorkerEntityDocumentType3 = keptWorkerEntityDocumentType3;
+	}
+
+	public CLAppWorkerEntityDocumentTypes getKeptWorkerEntityDocumentType4() {
+		return keptWorkerEntityDocumentType4;
+	}
+
+	public void setKeptWorkerEntityDocumentType4(CLAppWorkerEntityDocumentTypes keptWorkerEntityDocumentType4) {
+		this.keptWorkerEntityDocumentType4 = keptWorkerEntityDocumentType4;
+	}
+
+	public Boolean getAnyContractSignedWithWorkers() {
+		return anyContractSignedWithWorkers;
+	}
+
+	public void setAnyContractSignedWithWorkers(Boolean anyContractSignedWithWorkers) {
+		this.anyContractSignedWithWorkers = anyContractSignedWithWorkers;
+	}
+
+	public Boolean getStaffHiredDirectly() {
+		return staffHiredDirectly;
+	}
+
+	public void setStaffHiredDirectly(Boolean staffHiredDirectly) {
+		this.staffHiredDirectly = staffHiredDirectly;
+	}
+
+	public Boolean getStaffHiredThroughAgent() {
+		return staffHiredThroughAgent;
+	}
+
+	public void setStaffHiredThroughAgent(Boolean staffHiredThroughAgent) {
+		this.staffHiredThroughAgent = staffHiredThroughAgent;
+	}
+
+	public CLAppSalaryDeductionType getSalaryDeductionType1() {
+		return salaryDeductionType1;
+	}
+
+	public void setSalaryDeductionType1(CLAppSalaryDeductionType salaryDeductionType1) {
+		this.salaryDeductionType1 = salaryDeductionType1;
+	}
+
+	public CLAppSalaryDeductionType getSalaryDeductionType2() {
+		return salaryDeductionType2;
+	}
+
+	public void setSalaryDeductionType2(CLAppSalaryDeductionType salaryDeductionType2) {
+		this.salaryDeductionType2 = salaryDeductionType2;
+	}
+
+	public CLAppSalaryDeductionType getSalaryDeductionType3() {
+		return salaryDeductionType3;
+	}
+
+	public void setSalaryDeductionType3(CLAppSalaryDeductionType salaryDeductionType3) {
+		this.salaryDeductionType3 = salaryDeductionType3;
+	}
+
+	public CLAppSalaryDeductionType getSalaryDeductionType4() {
+		return salaryDeductionType4;
+	}
+
+	public void setSalaryDeductionType4(CLAppSalaryDeductionType salaryDeductionType4) {
+		this.salaryDeductionType4 = salaryDeductionType4;
+	}
+
+	public String getSalaryDeductionOther() {
+		return salaryDeductionOther;
+	}
+
+	public void setSalaryDeductionOther(String salaryDeductionOther) {
+		this.salaryDeductionOther = salaryDeductionOther;
+	}
+
+	public Float getAmountSalaryDeducedMonth() {
+		return amountSalaryDeducedMonth;
+	}
+
+	public void setAmountSalaryDeducedMonth(Float amountSalaryDeducedMonth) {
+		this.amountSalaryDeducedMonth = amountSalaryDeducedMonth;
+	}
+
+	public Boolean getPaymentSlipProvidedToWorker() {
+		return paymentSlipProvidedToWorker;
+	}
+
+	public void setPaymentSlipProvidedToWorker(Boolean paymentSlipProvidedToWorker) {
+		this.paymentSlipProvidedToWorker = paymentSlipProvidedToWorker;
+	}
+
+	public Boolean getWorkerInDebt() {
+		return workerInDebt;
+	}
+
+	public void setWorkerInDebt(Boolean workerInDebt) {
+		this.workerInDebt = workerInDebt;
+	}
+
+	public CLAppPaymentDebtType getPaymentDebtType1() {
+		return paymentDebtType1;
+	}
+
+	public void setPaymentDebtType1(CLAppPaymentDebtType paymentDebtType1) {
+		this.paymentDebtType1 = paymentDebtType1;
+	}
+
+	public CLAppPaymentDebtType getPaymentDebtType2() {
+		return paymentDebtType2;
+	}
+
+	public void setPaymentDebtType2(CLAppPaymentDebtType paymentDebtType2) {
+		this.paymentDebtType2 = paymentDebtType2;
+	}
+
+	public CLAppPaymentDebtType getPaymentDebtType3() {
+		return paymentDebtType3;
+	}
+
+	public void setPaymentDebtType3(CLAppPaymentDebtType paymentDebtType3) {
+		this.paymentDebtType3 = paymentDebtType3;
+	}
+
+	public CLAppPaymentDebtType getPaymentDebtType4() {
+		return paymentDebtType4;
+	}
+
+	public void setPaymentDebtType4(CLAppPaymentDebtType paymentDebtType4) {
+		this.paymentDebtType4 = paymentDebtType4;
+	}
+
+	public Boolean getWorkersInDebtOtherStakeHolder() {
+		return workersInDebtOtherStakeHolder;
+	}
+
+	public void setWorkersInDebtOtherStakeHolder(Boolean workersInDebtOtherStakeHolder) {
+		this.workersInDebtOtherStakeHolder = workersInDebtOtherStakeHolder;
+	}
+
+	public Boolean getInKindPayment() {
+		return inKindPayment;
+	}
+
+	public void setInKindPayment(Boolean inKindPayment) {
+		this.inKindPayment = inKindPayment;
+	}
+
+	public String getInKindPaymentType() {
+		return inKindPaymentType;
+	}
+
+	public void setInKindPaymentType(String inKindPaymentType) {
+		this.inKindPaymentType = inKindPaymentType;
+	}
+
+	public CLAppHiringRestrictionType getHiringRestriction() {
+		return hiringRestriction;
+	}
+
+	public void setHiringRestriction(CLAppHiringRestrictionType hiringRestriction) {
+		this.hiringRestriction = hiringRestriction;
 	}
 
 }

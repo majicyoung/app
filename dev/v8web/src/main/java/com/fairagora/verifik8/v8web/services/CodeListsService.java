@@ -6,49 +6,62 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.fairagora.verifik8.v8web.data.domain.cl.CLRefCommodities;
-import com.fairagora.verifik8.v8web.data.domain.cl.CLAppAdministrativeCharacteristicType;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLAppCompanyPositionType;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLAppContractType;
-import com.fairagora.verifik8.v8web.data.domain.cl.CLRefCountry;
-import com.fairagora.verifik8.v8web.data.domain.cl.CLRefCurrency;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLAppEntityType;
+import com.fairagora.verifik8.v8web.data.domain.cl.CLAppGetBackFinancialDepositReason;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLAppHazardousWorkType;
+import com.fairagora.verifik8.v8web.data.domain.cl.CLAppHiringRestrictionType;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLAppHvHeExpensionType;
-import com.fairagora.verifik8.v8web.data.domain.cl.CLRefLanguage;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLAppLegalStatus;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLAppMeasureType;
+import com.fairagora.verifik8.v8web.data.domain.cl.CLAppNoEarlyTerminationContractReason;
+import com.fairagora.verifik8.v8web.data.domain.cl.CLAppPaymentDebtType;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLAppPaymentFrequency;
+import com.fairagora.verifik8.v8web.data.domain.cl.CLAppQuantityUnit;
+import com.fairagora.verifik8.v8web.data.domain.cl.CLAppSalaryDeductionType;
+import com.fairagora.verifik8.v8web.data.domain.cl.CLAppSoilAnalysisType;
+import com.fairagora.verifik8.v8web.data.domain.cl.CLAppTilingActivityType;
+import com.fairagora.verifik8.v8web.data.domain.cl.CLAppWorkerEntityDocumentTypes;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLFarmPlotActivityType;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLFarmPondActivityType;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLFarmPondType;
+import com.fairagora.verifik8.v8web.data.domain.cl.CLRefCommodities;
+import com.fairagora.verifik8.v8web.data.domain.cl.CLRefCountry;
+import com.fairagora.verifik8.v8web.data.domain.cl.CLRefCurrency;
+import com.fairagora.verifik8.v8web.data.domain.cl.CLRefLanguage;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLRefProduct;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLRefProductType;
-import com.fairagora.verifik8.v8web.data.domain.cl.CLAppQuantityUnit;
-import com.fairagora.verifik8.v8web.data.domain.cl.CLAppSoilAnalysisType;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLRefSpecies;
-import com.fairagora.verifik8.v8web.data.domain.cl.CLAppTilingActivityType;
-import com.fairagora.verifik8.v8web.data.repo.cl.CLRefCommoditiesRepository;
+import com.fairagora.verifik8.v8web.data.domain.cl.ClAppTerminationContractReason;
 import com.fairagora.verifik8.v8web.data.repo.cl.CLAppCompanyPositionTypeRepository;
 import com.fairagora.verifik8.v8web.data.repo.cl.CLAppContractTypeRepository;
-import com.fairagora.verifik8.v8web.data.repo.cl.CLRefCountryRepository;
-import com.fairagora.verifik8.v8web.data.repo.cl.CLRefCurrencyRepository;
 import com.fairagora.verifik8.v8web.data.repo.cl.CLAppEntityTypeRepository;
+import com.fairagora.verifik8.v8web.data.repo.cl.CLAppGetBackFinancialDepositReasonRepository;
 import com.fairagora.verifik8.v8web.data.repo.cl.CLAppHazardousWorkTypeRepository;
+import com.fairagora.verifik8.v8web.data.repo.cl.CLAppHiringRestrictionTypeRepository;
 import com.fairagora.verifik8.v8web.data.repo.cl.CLAppHvHeExpensionTypeRepository;
-import com.fairagora.verifik8.v8web.data.repo.cl.CLRefLanguageRepository;
 import com.fairagora.verifik8.v8web.data.repo.cl.CLAppLegalStatusRepository;
 import com.fairagora.verifik8.v8web.data.repo.cl.CLAppMeasureTypeRepository;
+import com.fairagora.verifik8.v8web.data.repo.cl.CLAppNoEarlyTerminationContractReasonRepository;
+import com.fairagora.verifik8.v8web.data.repo.cl.CLAppPaymentDebtTypeRepository;
 import com.fairagora.verifik8.v8web.data.repo.cl.CLAppPaymentFrequenciesRepository;
+import com.fairagora.verifik8.v8web.data.repo.cl.CLAppQuantityUnitRepository;
+import com.fairagora.verifik8.v8web.data.repo.cl.CLAppSalaryDeductionTypeRepository;
+import com.fairagora.verifik8.v8web.data.repo.cl.CLAppSoilAnalysisTypeRepository;
+import com.fairagora.verifik8.v8web.data.repo.cl.CLAppTilingActivityTypeRepository;
+import com.fairagora.verifik8.v8web.data.repo.cl.CLAppWorkerEntityDocumentTypesRepository;
 import com.fairagora.verifik8.v8web.data.repo.cl.CLFarmPlotActivityTypeRepository;
 import com.fairagora.verifik8.v8web.data.repo.cl.CLFarmPondActivityTypeRepository;
 import com.fairagora.verifik8.v8web.data.repo.cl.CLFarmPondTypeRepository;
+import com.fairagora.verifik8.v8web.data.repo.cl.CLRefCommoditiesRepository;
+import com.fairagora.verifik8.v8web.data.repo.cl.CLRefCountryRepository;
+import com.fairagora.verifik8.v8web.data.repo.cl.CLRefCurrencyRepository;
+import com.fairagora.verifik8.v8web.data.repo.cl.CLRefLanguageRepository;
 import com.fairagora.verifik8.v8web.data.repo.cl.CLRefProductRepository;
 import com.fairagora.verifik8.v8web.data.repo.cl.CLRefProductTypesRepository;
-import com.fairagora.verifik8.v8web.data.repo.cl.CLAppQuantityUnitRepository;
-import com.fairagora.verifik8.v8web.data.repo.cl.CLAppSoilAnalysisTypeRepository;
 import com.fairagora.verifik8.v8web.data.repo.cl.CLRefSpeciesRepository;
-import com.fairagora.verifik8.v8web.data.repo.cl.CLAppTilingActivityTypeRepository;
+import com.fairagora.verifik8.v8web.data.repo.cl.ClAppTerminationContractReasonRepository;
 
 @Service
 public class CodeListsService {
@@ -79,7 +92,7 @@ public class CodeListsService {
 
 	@Autowired
 	private CLAppCompanyPositionTypeRepository companyPositionTypeRepository;
-	
+
 	@Autowired
 	private CLAppHvHeExpensionTypeRepository highValueExpensionTypeRepository;
 
@@ -88,7 +101,7 @@ public class CodeListsService {
 
 	@Autowired
 	private CLFarmPondActivityTypeRepository pondActivityTypesRepository;
-	
+
 	@Autowired
 	private CLRefProductRepository productRepository;
 
@@ -111,6 +124,27 @@ public class CodeListsService {
 
 	@Autowired
 	private CLAppPaymentFrequenciesRepository paymentFrequenciesRepository;
+
+	@Autowired
+	private CLAppGetBackFinancialDepositReasonRepository getBackFinancialDepositReasonRepository;
+
+	@Autowired
+	private CLAppHiringRestrictionTypeRepository hiringRestrictionTypeRepository;
+
+	@Autowired
+	private CLAppNoEarlyTerminationContractReasonRepository noEarlyTerminationContractReasonRepository;
+
+	@Autowired
+	private CLAppPaymentDebtTypeRepository paymentDebtTypeRepository;
+
+	@Autowired
+	private CLAppSalaryDeductionTypeRepository salaryDeductionTypeRepository;
+
+	@Autowired
+	private ClAppTerminationContractReasonRepository terminationContractReasonRepository;
+
+	@Autowired
+	private CLAppWorkerEntityDocumentTypesRepository workerEntityDocumentTypesRepository;
 
 	/**
 	 * 
@@ -204,7 +238,7 @@ public class CodeListsService {
 	public List<CLFarmPondActivityType> listActivePondActivityTypes() {
 		return pondActivityTypesRepository.findByEnabledTrueOrderByName();
 	}
-	
+
 	public List<CLRefProduct> listActiveProducts() {
 		return productRepository.findByEnabledTrueOrderByName();
 	}
@@ -257,6 +291,34 @@ public class CodeListsService {
 
 	public List<CLRefCurrency> listActiveCurrencies() {
 		return currencyRepository.findByEnabledTrueOrderByName();
+	}
+
+	public List<CLAppGetBackFinancialDepositReason> listActiveGetBackFinancialDepositReason() {
+		return getBackFinancialDepositReasonRepository.findByEnabledTrueOrderByName();
+	}
+
+	public List<CLAppNoEarlyTerminationContractReason> listActiveNoEarlyTerminationContractReason() {
+		return noEarlyTerminationContractReasonRepository.findByEnabledTrueOrderByName();
+	}
+
+	public List<ClAppTerminationContractReason> listActiveTerminationContractReason() {
+		return terminationContractReasonRepository.findByEnabledTrueOrderByName();
+	}
+
+	public List<CLAppWorkerEntityDocumentTypes> listActiveWorkerEntityDocumentTypes() {
+		return workerEntityDocumentTypesRepository.findByEnabledTrueOrderByName();
+	}
+
+	public List<CLAppSalaryDeductionType> listActiveSalaryDeductionType() {
+		return salaryDeductionTypeRepository.findByEnabledTrueOrderByName();
+	}
+
+	public List<CLAppPaymentDebtType> listActivePaymentDebtType() {
+		return paymentDebtTypeRepository.findByEnabledTrueOrderByName();
+	}
+
+	public List<CLAppHiringRestrictionType> listActiveHiringRestrictionTypeRepository() {
+		return hiringRestrictionTypeRepository.findByEnabledTrueOrderByName();
 	}
 
 }

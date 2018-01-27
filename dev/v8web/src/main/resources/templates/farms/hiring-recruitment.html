@@ -9,86 +9,292 @@
         <div class="box-header with-border">
 	          <h3  class="box-title" th:text="#{farm.edit}">farm.hiring_recruitment</h3> 
         </div>
-        <form role="form"  th:action="@{'/farm/'+${farmId}+'/hiring-update.html'}" th:object="${farmDto}" method="post" class="form-horizontal" enctype="multipart/form-data" onsubmit="return !hasEmptyFields('#farm-box form .form-control[required]');">
+        <form role="form"  th:action="@{'/farm/'+${farmId}+'/hiring-recruitment.html'}" th:object="${farmDto}" method="post" class="form-horizontal" enctype="multipart/form-data" onsubmit="return !hasEmptyFields('#farm-box form .form-control[required]');">
         <div class="box-body" style="padding:0;">
           <div class="nav-tabs-custom">
            <ul th:include="farms/farms-includes :: farms-tabs" class="nav nav-tabs"></ul>
+          </div>
             <div class="tab-content">
               <div class="tab-pane active" id="tab_3">
-              <div class="col-xs-12">
-                        <div class="col-xs-12">
-                            <h4 th:text="#{farm.siting_hvh}">farm.siting_hvh</h4>
-                            
-                            <div class="form-group row">
-                                <label for="inputFarmImpactAssesment" class="col-xs-4 control-label" th:text="#{farm.envi_impact_assessment}">farm.envi_impact_assessment</label>
-                                <div class="col-xs-5">
-                                    <input type="file" class="form-control" th:field="*{environmentImpactAssessmentDoc}" th:placeholder="#{farm.upload_study}" accept=".xlsx, .xls, .doc, .docx, .pdf, image/*" />
-                                </div>
-                                <div class="col-xs-2 bloc-file-uploaded" >
-                                   	<a th:if="${!#strings.isEmpty(farmDto.environmentImpactAssessmentDocUrl)}" th:href="@{'/downloard/'+${farmDto.environmentImpactAssessmentDocUrl}}" target="_blank">
-                                   		<i class="fa fa-download"></i>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="inputFarmConstructionPermit" class="col-xs-4 control-label" th:text="#{default.construction_permit}"></label>
-                                <div class="col-xs-5">
-                                    <input type="file" class="form-control" th:field="*{contructionPermit}"  th:placeholder="#{farm.upload_permit}" accept=".xlsx, .xls, .doc, .docx, .pdf, image/*"  />
-                                </div>
-                                <div class="col-xs-2 bloc-file-uploaded" >
-                                  	<a th:if="${!#strings.isEmpty(farmDto.contructionPermitUrl)}" th:href="@{'/downloard/'+${farmDto.contructionPermitUrl}}" target="_blank">
-                                   		<i class="fa fa-download"></i>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="inputFarmLandTitle" class="col-xs-4 control-label" th:text="#{default.land_title}">default.land_title</label>
-                                <div class="col-xs-5">
-                                    <input type="file" class="form-control" th:field="*{landTitle}" th:placeholder="#{farm.upload_land_title}" accept=".xlsx, .xls, .doc, .docx, .pdf, image/*"  />
-                                </div>
-                                <div class="col-xs-2 bloc-file-uploaded">
-                                  	<a th:if="${!#strings.isEmpty(farmDto.landTitleUrl)}" th:href="@{'/downloard/'+${farmDto.landTitleUrl}}" target="_blank">
-                                   		<i class="fa fa-download"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xs-12" th:if="${v8App.pondProfile}">
-                            <h4 th:text="#{farm.siting_protected_area}">farm.siting_protected_area</h4>
-                            <div class="form-group row">
-                                <label class="col-xs-1 control-label"></label>
-                                <div class="col-xs-11">
-                                    <div class="checkbox">
-                                        <label><input type="checkbox" th:field="*{sittingProtectedArea}"  /> <span th:text="#{farm.is_it_siting_protected_area}">farm.is_it_siting_protected_area</span></label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="inputFarmAuthorization" class="col-xs-4 control-label"><span th:text="#{farm.authorization_siting_hvh}">farm.authorization_siting_hvh</span></label>
-                                <div class="col-xs-5">
-                                    <input type="file" class="form-control" th:field="*{sittingProtectedAreaDoc}" th:placeholder="#{farm.upload_authorization}" accept=".xlsx, .xls, .doc, .docx, .pdf, image/*"  />
-                                </div>
-                                <div class="col-xs-2 bloc-file-uploaded">
-                                    <a th:if="${!#strings.isEmpty(farmDto.sittingProtectedAreaUrl)}" th:href="@{'/downloard/'+${farmDto.sittingProtectedAreaUrl}}" target="_blank">
-                                   		<i class="fa fa-download"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
+				<div class="row">
+					<div class="col-xs-12">
+					<h4 th:text="#{hiring_recruitment.fair-recruitment}"></h4>
+					<div class="col-xs-12">
+						<div class="form-group row col-xs-12">
+							<div class="col-xs-12">
+								<input type="checkbox" th:field="*{workersMakeFinancialDeposit}" /> <span th:text="|#{hiring_recruitment.workersMakeFinancialDeposit}*|"></span>
+							</div>
+						</div>
+					</div>
+					<div class="form-group row col-xs-12">
+						<label for="getBackFinancialDepositReason" class="col-xs-6 control-label" th:text="|#{hiring_recruitment.getBackFinancialDepositReason}|"></label>
+						<div class="col-xs-6">
+							<select class="form-control" th:field="*{getBackFinancialDepositReason}">
+								<option value="" ></option>
+								<option th:each="wtype:${allgetBackFinancialDepositReason}" th:value="${wtype.id}" th:text="${wtype.localisedName}"></option>
+							</select>
+						</div>
+					</div>
+					<div class="form-group row col-xs-12">
+						<label for="noEarlyTerminationContractReason" class="col-xs-6 control-label" th:text="|#{hiring_recruitment.noEarlyTerminationContractReason}|"></label>
+						<div class="col-xs-6">
+							<select class="form-control" th:field="*{noEarlyTerminationContractReason}">
+								<option value="" ></option>
+								<option th:each="wtype:${allnoEarlyTerminationContractReason}" th:value="${wtype.id}" th:text="${wtype.localisedName}"></option>
+							</select>
+						</div>
+					</div>
+					<div class="form-group row col-xs-12">
+						<label for="contractTerminationReason" class="col-xs-6 control-label" th:text="|#{hiring_recruitment.contractTerminationReason}|"></label>
+						<div class="col-xs-6">
+							<select class="form-control" th:field="*{contractTerminationReason}">
+								<option value="" ></option>
+								<option th:each="wtype:${allcontractTerminationReason}" th:value="${wtype.id}" th:text="${wtype.localisedName}"></option>
+							</select>
+						</div>
+					</div>
+					<div class="form-group row col-xs-12">
+						<label for="contractTerminationOtherReason" class="col-xs-6 control-label" th:text="|#{hiring_recruitment.contractTerminationOtherReason}|"></label>
+						<div class="col-xs-6">
+							<input type="text" class="form-control" th:field="*{contractTerminationOtherReason}"></input>
+						</div>
+					</div>
+					
+					<!--  -->
+					<div class="col-xs-12">
+						<div class="form-group row col-xs-12">
+							<div class="col-xs-12">
+								<input type="checkbox" th:field="*{keepWorkerDocumentSafeKeeping}" /> <span th:text="|#{hiring_recruitment.keepWorkerDocumentSafeKeeping}*|"></span>
+							</div>
+						</div>
+					</div>
+					<div class="form-group row col-xs-12">
+						<label for="keptWorkerEntityDocumentType1" class="col-xs-6 control-label" th:text="|#{hiring_recruitment.keptWorkerEntityDocumentType1}|"></label>
+						<div class="col-xs-6">
+							<select class="form-control" th:field="*{keptWorkerEntityDocumentType1}">
+								<option value="" ></option>
+								<option th:each="wtype:${allWorkerEntrityDocumentTypes}" th:value="${wtype.id}" th:text="${wtype.localisedName}"></option>
+							</select>
+						</div>
+					</div>
+					<div class="form-group row col-xs-12">
+						<label for="keptWorkerEntityDocumentType2" class="col-xs-6 control-label" th:text="|#{hiring_recruitment.keptWorkerEntityDocumentType2}|"></label>
+						<div class="col-xs-6">
+							<select class="form-control" th:field="*{keptWorkerEntityDocumentType2}">
+								<option value="" ></option>
+								<option th:each="wtype:${allWorkerEntrityDocumentTypes}" th:value="${wtype.id}" th:text="${wtype.localisedName}"></option>
+							</select>
+						</div>
+					</div>
+					<div class="form-group row col-xs-12">
+						<label for="keptWorkerEntityDocumentType3" class="col-xs-6 control-label" th:text="|#{hiring_recruitment.keptWorkerEntityDocumentType3}|"></label>
+						<div class="col-xs-6">
+							<select class="form-control" th:field="*{keptWorkerEntityDocumentType3}">
+								<option value="" ></option>
+								<option th:each="wtype:${allWorkerEntrityDocumentTypes}" th:value="${wtype.id}" th:text="${wtype.localisedName}"></option>
+							</select>
+						</div>
+					</div>
+					<div class="form-group row col-xs-12">
+						<label for="keptWorkerEntityDocumentType4" class="col-xs-6 control-label" th:text="|#{hiring_recruitment.keptWorkerEntityDocumentType4}|"></label>
+						<div class="col-xs-6">
+							<select class="form-control" th:field="*{keptWorkerEntityDocumentType4}">
+								<option value="" ></option>
+								<option th:each="wtype:${allWorkerEntrityDocumentTypes}" th:value="${wtype.id}" th:text="${wtype.localisedName}"></option>
+							</select>
+						</div>
+					</div>
+					
+					<!--  -->
+					<div class="col-xs-12">
+						<div class="form-group row col-xs-12">
+							<div class="col-xs-12">
+								<input type="checkbox" th:field="*{anyContractSignedWithWorkers}" /> <span th:text="|#{hiring_recruitment.anyContractSignedWithWorkers}|"></span>
+							</div>
+						</div>
+					</div>
+					<div class="col-xs-12">
+						<div class="form-group row col-xs-12">
+							<div class="col-xs-12">
+								<input type="checkbox" th:field="*{staffHiredDirectly}" /> <span th:text="|#{hiring_recruitment.staffHiredDirectly}|"></span>
+							</div>
+						</div>
+					</div>
+					<div class="col-xs-12">
+						<div class="form-group row col-xs-12">
+							<div class="col-xs-12">
+								<input type="checkbox" th:field="*{staffHiredDirectly}" /> <span th:text="|#{hiring_recruitment.staffHiredDirectly}|"></span>
+							</div>
+						</div>
+					</div>
+					<div class="col-xs-12">
+						<div class="form-group row col-xs-12">
+							<div class="col-xs-12">
+								<input type="checkbox" th:field="*{staffHiredDirectly}" /> <span th:text="|#{hiring_recruitment.staffHiredDirectly}|"></span>
+							</div>
+						</div>
+					</div>
+					
+				</div>
+			</div>
 
-                    </div>
-              </div>
+			<div class="row">
+				<div class="col-xs-12">					
+					<h4 th:text="#{hiring_recruitment.fair-remuneration}"></h4>
+					<div class="form-group row col-xs-12">
+						<label for="salaryDeductionType1" class="col-xs-6 control-label" th:text="|#{hiring_recruitment.salaryDeductionType1}|"></label>
+						<div class="col-xs-6">
+							<select class="form-control" th:field="*{salaryDeductionType1}">
+								<option value="" ></option>
+								<option th:each="wtype:${allSalaryDeductionTypes}" th:value="${wtype.id}" th:text="${wtype.localisedName}"></option>
+							</select>
+						</div>
+					</div>
+					<div class="form-group row col-xs-12">
+						<label for="salaryDeductionType2" class="col-xs-6 control-label" th:text="|#{hiring_recruitment.salaryDeductionType2}|"></label>
+						<div class="col-xs-6">
+							<select class="form-control" th:field="*{salaryDeductionType2}">
+								<option value="" ></option>
+								<option th:each="wtype:${allSalaryDeductionTypes}" th:value="${wtype.id}" th:text="${wtype.localisedName}"></option>
+							</select>
+						</div>
+					</div>
+					<div class="form-group row col-xs-12">
+						<label for="salaryDeductionType3" class="col-xs-6 control-label" th:text="|#{hiring_recruitment.salaryDeductionType3}|"></label>
+						<div class="col-xs-6">
+							<select class="form-control" th:field="*{salaryDeductionType3}">
+								<option value="" ></option>
+								<option th:each="wtype:${allSalaryDeductionTypes}" th:value="${wtype.id}" th:text="${wtype.localisedName}"></option>
+							</select>
+						</div>
+					</div>
+					<div class="form-group row col-xs-12">
+						<label for="salaryDeductionType4" class="col-xs-6 control-label" th:text="|#{hiring_recruitment.salaryDeductionType4}|"></label>
+						<div class="col-xs-6">
+							<select class="form-control" th:field="*{salaryDeductionType4}">
+								<option value="" ></option>
+								<option th:each="wtype:${allSalaryDeductionTypes}" th:value="${wtype.id}" th:text="${wtype.localisedName}"></option>
+							</select>
+						</div>
+					</div>
+					<div class="form-group row col-xs-12">
+						<label for="salaryDeductionOther" class="col-xs-6 control-label" th:text="|#{hiring_recruitment.salaryDeductionOther}|"></label>
+						<div class="col-xs-6">
+							<input type="text" class="form-control" th:field="*{salaryDeductionOther}"></input>
+						</div>
+					</div>		
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-xs-12">							
+					<!--  -->			
+					<div class="col-xs-12">
+						<div class="form-group row col-xs-12">
+							<label for="amountSalaryDeducedMonth" class="col-xs-6 control-label" th:text="|#{hiring_recruitment.amountSalaryDeducedMonth}|"></label>
+							<div class="col-xs-6">
+								<input class="form-control" type="text" th:field="*{amountSalaryDeducedMonth}" /> <span th:text="|#{hiring_recruitment.amountSalaryDeducedMonth}|"></span>
+							</div>
+						</div>
+					</div>
+					<div class="col-xs-12">
+						<div class="form-group row col-xs-12">
+							<div class="col-xs-12">
+								<input type="checkbox" th:field="*{paymentSlipProvidedToWorker}" /> <span th:text="|#{hiring_recruitment.paymentSlipProvidedToWorker}|"></span>
+							</div>
+						</div>
+					</div>
+					<div class="col-xs-12">
+						<div class="form-group row col-xs-12">
+							<div class="col-xs-12">
+								<input type="checkbox" th:field="*{workerInDebt}" /> <span th:text="|#{hiring_recruitment.workerInDebt}|"></span>
+							</div>
+						</div>
+					</div>
+					<div class="form-group row col-xs-12">
+						<label for="paymentDebtType1" class="col-xs-6 control-label" th:text="|#{hiring_recruitment.paymentDebtType1}|"></label>
+						<div class="col-xs-6">
+							<select class="form-control" th:field="*{paymentDebtType1}">
+								<option value="" ></option>
+								<option th:each="wtype:${allPaymentDebtTypes}" th:value="${wtype.id}" th:text="${wtype.localisedName}"></option>
+							</select>
+						</div>
+					</div>
+					<div class="form-group row col-xs-12">
+						<label for="paymentDebtType1" class="col-xs-6 control-label" th:text="|#{hiring_recruitment.paymentDebtType2}|"></label>
+						<div class="col-xs-6">
+							<select class="form-control" th:field="*{paymentDebtType2}">
+								<option value="" ></option>
+								<option th:each="wtype:${allPaymentDebtTypes}" th:value="${wtype.id}" th:text="${wtype.localisedName}"></option>
+							</select>
+						</div>
+					</div>
+					<div class="form-group row col-xs-12">
+						<label for="paymentDebtType1" class="col-xs-6 control-label" th:text="|#{hiring_recruitment.paymentDebtType3}|"></label>
+						<div class="col-xs-6">
+							<select class="form-control" th:field="*{paymentDebtType3}">
+								<option value="" ></option>
+								<option th:each="wtype:${allPaymentDebtTypes}" th:value="${wtype.id}" th:text="${wtype.localisedName}"></option>
+							</select>
+						</div>
+					</div>
+					<div class="form-group row col-xs-12">
+						<label for="paymentDebtType1" class="col-xs-6 control-label" th:text="|#{hiring_recruitment.paymentDebtType4}|"></label>
+						<div class="col-xs-6">
+							<select class="form-control" th:field="*{paymentDebtType4}">
+								<option value="" ></option>
+								<option th:each="wtype:${allPaymentDebtTypes}" th:value="${wtype.id}" th:text="${wtype.localisedName}"></option>
+							</select>
+						</div>
+					</div>
+		
+					<div class="col-xs-12">
+						<div class="form-group row col-xs-12">
+							<div class="col-xs-12">
+								<input type="checkbox" th:field="*{workersInDebtOtherStakeHolder}" /> <span th:text="|#{hiring_recruitment.workersInDebtOtherStakeHolder}|"></span>
+							</div>
+						</div>
+					</div>
+					<div class="col-xs-12">
+						<div class="form-group row col-xs-12">
+							<div class="col-xs-12">
+								<input type="checkbox" th:field="*{inKindPayment}" /> <span th:text="|#{hiring_recruitment.inKindPayment}|"></span>
+							</div>
+						</div>
+					</div>
+					<div class="col-xs-12">
+						<div class="form-group row col-xs-12">
+							<label for="inKindPaymentType" class="col-xs-6 control-label" th:text="|#{hiring_recruitment.inKindPaymentType}|"></label>
+							<div class="col-xs-6">
+								<input class="form-control" type="text" th:field="*{inKindPaymentType}" />
+							</div>
+						</div>
+					</div>
+					
+					<div class="form-group row col-xs-12">
+						<label for="paymentDebtType1" class="col-xs-6 control-label" th:text="|#{hiring_recruitment.hiringRestriction}|"></label>
+						<div class="col-xs-6">
+							<select class="form-control" th:field="*{hiringRestriction}">
+								<option value="" ></option>
+								<option th:each="wtype:${allHiringRestrictionsTypes}" th:value="${wtype.id}" th:text="${wtype.localisedName}"></option>
+							</select>
+						</div>
+					</div>
+				</div>
+				</div>
             </div>
           </div>
-        </div>
-        <div class="box-footer text-center">
-        	<small>* <span th:text="#{default.mandatory_field}"></span></small>
-            <a th:href="@{/farms.html}" class="btn btn-flat btn-warning"><i class="fa fa-times"></i><span th:text="#{default.cancel}">default.cancel</span></a>
-            
-            <button type="submit" class="btn btn-success">
-				<span th:text="#{default.submit}">default.submit</span> <i class="fa fa-check"></i>
-			</button>
-        </div>
+          </div>
+          
+          
+	        <div class="box-footer text-center">
+	        	<small>* <span th:text="#{default.mandatory_field}"></span></small>
+	            <a th:href="@{/farms.html}" class="btn btn-flat btn-warning"><i class="fa fa-times"></i><span th:text="#{default.cancel}">default.cancel</span></a>
+	            
+	            <button type="submit" class="btn btn-success">
+					<span th:text="#{default.submit}">default.submit</span> <i class="fa fa-check"></i>
+				</button>
+	        </div>
         </form>
       </div>
     </div>
