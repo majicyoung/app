@@ -107,6 +107,9 @@ public class RegEntityFarmDetails extends V8EntitySupport {
 	@Column(name = "HAS_A_LAB")
 	protected boolean hasALab;
 
+	
+	
+	
 	public Long getId() {
 		return id;
 	}
