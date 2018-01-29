@@ -83,20 +83,14 @@
 		function activityTypeChanged(){
 			
 			$('#actiProductGroup').show();
-			$('#tilingActiGroup').show();
 			
 			var actVal = $("#activityType").val();
 			
 			if(actVal!=null){
 				actVal=parseInt(actVal);			
 				
-				if($.inArray(actVal,noProductNorTilingActivity)>=0){
+				if(actVal!=3)
 					$('#actiProductGroup').hide();
-					$('#tilingActiGroup').hide();
-				}
-				
-				if(actVal!=11)
-					$('#tilingActiGroup').hide();
 				
 			}
 			

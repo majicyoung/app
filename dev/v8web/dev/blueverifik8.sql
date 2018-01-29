@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Client :  127.0.0.1
--- Généré le :  Lun 22 Janvier 2018 à 18:14
+-- Généré le :  Lun 29 Janvier 2018 à 20:33
 -- Version du serveur :  5.7.14
 -- Version de PHP :  5.6.25
 
@@ -125,6 +125,113 @@ INSERT INTO `cl_app_contract_types` (`ID`, `ENABLED`, `CODE`, `NAME`, `DESCRIPTI
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `cl_app_debt_types`
+--
+
+CREATE TABLE `cl_app_debt_types` (
+  `ID` int(11) NOT NULL,
+  `ENABLED` tinyint(1) NOT NULL DEFAULT '1',
+  `CODE` varchar(16) COLLATE utf8_bin NOT NULL,
+  `NAME` varchar(64) COLLATE utf8_bin NOT NULL,
+  `DESCRIPTION` varchar(512) COLLATE utf8_bin DEFAULT NULL,
+  `I18n_DEFAULT` varchar(256) COLLATE utf8_bin NOT NULL COMMENT 'default label',
+  `I18N_EN` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in English',
+  `I18N_FR` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in French',
+  `I18N_ES` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Spanish',
+  `I18N_TH` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Thai',
+  `I18N_VT` varchar(256) CHARACTER SET utf8 COLLATE utf8_vietnamese_ci DEFAULT NULL COMMENT 'label in Vietnamese',
+  `I18N_LA` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Lao',
+  `I18N_ID` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in indonesian',
+  `I18N_KH` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Cambodian',
+  `UPDATER_ID` int(11) NOT NULL DEFAULT '1',
+  `COMMENT` varchar(512) COLLATE utf8_bin DEFAULT NULL,
+  `CREATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `UPDATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Contenu de la table `cl_app_debt_types`
+--
+
+INSERT INTO `cl_app_debt_types` (`ID`, `ENABLED`, `CODE`, `NAME`, `DESCRIPTION`, `I18n_DEFAULT`, `I18N_EN`, `I18N_FR`, `I18N_ES`, `I18N_TH`, `I18N_VT`, `I18N_LA`, `I18N_ID`, `I18N_KH`, `UPDATER_ID`, `COMMENT`, `CREATED_AT`, `UPDATED_AT`) VALUES
+(1, 1, 'CASH', 'Debt in Cash', 'Debt in Cash', 'Debt in Cash', 'Debt in Cash', 'Dette en liquide', 'Debt in Cash', 'หนี้สินในรูปเงินสด', 'Debt in Cash', 'Debt in Cash', 'Debt in Cash', 'Debt in Cash', 1, NULL, '2018-01-29 15:30:05', '2018-01-29 15:30:05'),
+(2, 1, 'TRAVEL', 'Payment for travel', 'Payment for travel', 'Payment for travel', 'Payment for travel', 'Paiement voyage', 'Payment for travel', 'การชำระเงินค่าเดินทาง', 'Payment for travel', 'Payment for travel', 'Payment for travel', 'Payment for travel', 1, NULL, '2018-01-29 15:31:44', '2018-01-29 15:31:44'),
+(3, 1, 'MEDIC', 'Payment for medical expenses', 'Payment for medical expenses', 'Payment for medical expenses', 'Payment for medical expenses', 'Paiement frais médicaux', 'Payment for medical expenses', 'การชำระค่ารักษาพยาบาล', 'Payment for medical expenses', 'Payment for medical expenses', 'Payment for medical expenses', 'Payment for medical expenses', 1, NULL, '2018-01-29 15:33:04', '2018-01-29 15:33:04');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `cl_app_declaration_sources_types`
+--
+
+CREATE TABLE `cl_app_declaration_sources_types` (
+  `ID` int(11) NOT NULL,
+  `ENABLED` tinyint(1) NOT NULL DEFAULT '1',
+  `CODE` varchar(16) COLLATE utf8_bin NOT NULL,
+  `NAME` varchar(64) COLLATE utf8_bin NOT NULL,
+  `DESCRIPTION` varchar(512) COLLATE utf8_bin DEFAULT NULL,
+  `I18n_DEFAULT` varchar(256) COLLATE utf8_bin NOT NULL COMMENT 'default label',
+  `I18N_EN` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in English',
+  `I18N_FR` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in French',
+  `I18N_ES` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Spanish',
+  `I18N_TH` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Thai',
+  `I18N_VT` varchar(256) CHARACTER SET utf8 COLLATE utf8_vietnamese_ci DEFAULT NULL COMMENT 'label in Vietnamese',
+  `I18N_LA` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Lao',
+  `I18N_ID` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in indonesian',
+  `I18N_KH` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Cambodian',
+  `UPDATER_ID` int(11) NOT NULL DEFAULT '1',
+  `COMMENT` varchar(512) COLLATE utf8_bin DEFAULT NULL,
+  `CREATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `UPDATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='type of contracts';
+
+--
+-- Contenu de la table `cl_app_declaration_sources_types`
+--
+
+INSERT INTO `cl_app_declaration_sources_types` (`ID`, `ENABLED`, `CODE`, `NAME`, `DESCRIPTION`, `I18n_DEFAULT`, `I18N_EN`, `I18N_FR`, `I18N_ES`, `I18N_TH`, `I18N_VT`, `I18N_LA`, `I18N_ID`, `I18N_KH`, `UPDATER_ID`, `COMMENT`, `CREATED_AT`, `UPDATED_AT`) VALUES
+(1, 1, 'ULULA', 'ULULA', 'ULULA', 'ULULA', 'ULULA', 'ULULA', 'ULULA', 'ULULA', 'ULULA', 'ULULA', 'ULULA', 'ULULA', 1, NULL, '2018-01-29 15:50:35', '2018-01-29 15:50:35');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `cl_app_deduction_salary_types`
+--
+
+CREATE TABLE `cl_app_deduction_salary_types` (
+  `ID` int(11) NOT NULL,
+  `ENABLED` tinyint(1) NOT NULL DEFAULT '1',
+  `CODE` varchar(16) COLLATE utf8_bin NOT NULL,
+  `NAME` varchar(64) COLLATE utf8_bin NOT NULL,
+  `DESCRIPTION` varchar(512) COLLATE utf8_bin DEFAULT NULL,
+  `I18n_DEFAULT` varchar(256) COLLATE utf8_bin NOT NULL COMMENT 'default label',
+  `I18N_EN` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in English',
+  `I18N_FR` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in French',
+  `I18N_ES` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Spanish',
+  `I18N_TH` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Thai',
+  `I18N_VT` varchar(256) CHARACTER SET utf8 COLLATE utf8_vietnamese_ci DEFAULT NULL COMMENT 'label in Vietnamese',
+  `I18N_LA` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Lao',
+  `I18N_ID` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in indonesian',
+  `I18N_KH` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Cambodian',
+  `UPDATER_ID` int(11) NOT NULL DEFAULT '1',
+  `COMMENT` varchar(512) COLLATE utf8_bin DEFAULT NULL,
+  `CREATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `UPDATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Contenu de la table `cl_app_deduction_salary_types`
+--
+
+INSERT INTO `cl_app_deduction_salary_types` (`ID`, `ENABLED`, `CODE`, `NAME`, `DESCRIPTION`, `I18n_DEFAULT`, `I18N_EN`, `I18N_FR`, `I18N_ES`, `I18N_TH`, `I18N_VT`, `I18N_LA`, `I18N_ID`, `I18N_KH`, `UPDATER_ID`, `COMMENT`, `CREATED_AT`, `UPDATED_AT`) VALUES
+(1, 1, 'ACCOM', 'Accommodation', 'Accommodation', 'Accommodation', 'Accommodation', 'Logement', 'Accommodation', 'ที่พัก', 'Accommodation', 'Accommodation', 'Accommodation', 'Accommodation', 1, NULL, '2018-01-27 05:46:58', '2018-01-27 05:46:58'),
+(2, 1, 'TRANSPFEE', 'Transportation fee', 'Transportation fee', 'Transportation fee', 'Transportation fee', 'Frais de transport', 'Transportation fee', 'ค่าขนส่ง', 'Transportation fee', 'Transportation fee', 'Transportation fee', 'Transportation fee', 1, NULL, '2018-01-27 05:46:58', '2018-01-27 05:46:58'),
+(3, 1, 'FOOD', 'Food fee', 'Food fee', 'Food fee', 'Food fee', 'Frais de Nourriture', 'Food fee', 'ค่าอาหาร', 'Food fee', 'Food fee', 'Food fee', 'Food fee', 1, NULL, '2018-01-29 15:40:25', '2018-01-29 15:40:25'),
+(4, 1, 'OTHER', 'Other', 'Other', 'Other', 'Other', 'Autres', 'Other', 'อื่น ๆ', 'Other', 'Other', 'Other', 'Other', 1, NULL, '2018-01-29 15:41:47', '2018-01-29 15:41:47');
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `cl_app_energy_types`
 --
 
@@ -206,6 +313,43 @@ CREATE TABLE `cl_app_engine_types` (
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `cl_app_entity_document_types`
+--
+
+CREATE TABLE `cl_app_entity_document_types` (
+  `ID` int(11) NOT NULL,
+  `ENABLED` tinyint(1) NOT NULL DEFAULT '1',
+  `CODE` varchar(16) COLLATE utf8_bin NOT NULL,
+  `NAME` varchar(64) COLLATE utf8_bin NOT NULL,
+  `DESCRIPTION` varchar(512) COLLATE utf8_bin DEFAULT NULL,
+  `I18n_DEFAULT` varchar(256) COLLATE utf8_bin NOT NULL COMMENT 'default label',
+  `I18N_EN` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in English',
+  `I18N_FR` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in French',
+  `I18N_ES` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Spanish',
+  `I18N_TH` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Thai',
+  `I18N_VT` varchar(256) CHARACTER SET utf8 COLLATE utf8_vietnamese_ci DEFAULT NULL COMMENT 'label in Vietnamese',
+  `I18N_LA` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Lao',
+  `I18N_ID` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in indonesian',
+  `I18N_KH` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Cambodian',
+  `UPDATER_ID` int(11) NOT NULL DEFAULT '1',
+  `COMMENT` varchar(512) COLLATE utf8_bin DEFAULT NULL,
+  `CREATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `UPDATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Contenu de la table `cl_app_entity_document_types`
+--
+
+INSERT INTO `cl_app_entity_document_types` (`ID`, `ENABLED`, `CODE`, `NAME`, `DESCRIPTION`, `I18n_DEFAULT`, `I18N_EN`, `I18N_FR`, `I18N_ES`, `I18N_TH`, `I18N_VT`, `I18N_LA`, `I18N_ID`, `I18N_KH`, `UPDATER_ID`, `COMMENT`, `CREATED_AT`, `UPDATED_AT`) VALUES
+(1, 1, 'IDCARD', 'ID card', 'ID card', 'ID card', 'ID card', 'Carte d\'identité', 'ID card', 'บัตรประชาชน', 'ID card', 'ID card', 'ID card', 'ID card', 1, NULL, '2018-01-27 05:34:34', '2018-01-27 05:34:34'),
+(2, 1, 'PASSPORT', 'Passport', 'Passport', 'Passport', 'Passport', 'Passport', 'Passport', 'Passport', 'หนังสือเดินทาง', 'Passport', 'Passport', 'Passport', 1, NULL, '2018-01-27 05:34:34', '2018-01-27 05:34:34'),
+(3, 1, 'DRIVINGL', 'Driving License', 'Driving License', 'Driving License', 'Driving License', 'Permis de conduire', 'Driving License', 'ใบขับขี่', 'Driving License', 'Driving License', 'Driving License', 'Driving License', 1, NULL, '2018-01-29 15:53:32', '2018-01-29 15:53:32'),
+(4, 1, 'WORKPERMIT', 'Work Permit', 'Work Permit', 'Work Permit', 'Work Permit', 'Permis de travail', 'Work Permit', 'ใบอนุญาตทำงาน', 'Work Permit', 'Work Permit', 'Work Permit', 'Work Permit', 1, NULL, '2018-01-29 15:53:32', '2018-01-29 15:53:32');
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `cl_app_entity_types`
 --
 
@@ -249,6 +393,105 @@ INSERT INTO `cl_app_entity_types` (`ID`, `ENABLED`, `CODE`, `NAME`, `DESCRIPTION
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `cl_app_fresh_water_sypply_types`
+--
+
+CREATE TABLE `cl_app_fresh_water_sypply_types` (
+  `ID` int(11) NOT NULL,
+  `ENABLED` tinyint(1) NOT NULL DEFAULT '1',
+  `CODE` varchar(16) COLLATE utf8_bin NOT NULL,
+  `NAME` varchar(64) COLLATE utf8_bin NOT NULL,
+  `DESCRIPTION` varchar(512) COLLATE utf8_bin DEFAULT NULL,
+  `I18n_DEFAULT` varchar(256) COLLATE utf8_bin NOT NULL COMMENT 'default label',
+  `I18N_EN` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in English',
+  `I18N_FR` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in French',
+  `I18N_ES` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Spanish',
+  `I18N_TH` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Thai',
+  `I18N_VT` varchar(256) CHARACTER SET utf8 COLLATE utf8_vietnamese_ci DEFAULT NULL COMMENT 'label in Vietnamese',
+  `I18N_LA` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Lao',
+  `I18N_ID` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in indonesian',
+  `I18N_KH` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Cambodian',
+  `UPDATER_ID` int(11) NOT NULL DEFAULT '1',
+  `COMMENT` varchar(512) COLLATE utf8_bin DEFAULT NULL,
+  `CREATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `UPDATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `cl_app_get_back_financial_deposit_reasons`
+--
+
+CREATE TABLE `cl_app_get_back_financial_deposit_reasons` (
+  `ID` int(11) NOT NULL,
+  `ENABLED` tinyint(1) NOT NULL DEFAULT '1',
+  `CODE` varchar(16) COLLATE utf8_bin NOT NULL,
+  `NAME` varchar(64) COLLATE utf8_bin NOT NULL,
+  `DESCRIPTION` varchar(512) COLLATE utf8_bin DEFAULT NULL,
+  `I18n_DEFAULT` varchar(256) COLLATE utf8_bin NOT NULL COMMENT 'default label',
+  `I18N_EN` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in English',
+  `I18N_FR` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in French',
+  `I18N_ES` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Spanish',
+  `I18N_TH` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Thai',
+  `I18N_VT` varchar(256) CHARACTER SET utf8 COLLATE utf8_vietnamese_ci DEFAULT NULL COMMENT 'label in Vietnamese',
+  `I18N_LA` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Lao',
+  `I18N_ID` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in indonesian',
+  `I18N_KH` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Cambodian',
+  `UPDATER_ID` int(11) NOT NULL DEFAULT '1',
+  `COMMENT` varchar(512) COLLATE utf8_bin DEFAULT NULL,
+  `CREATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `UPDATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Contenu de la table `cl_app_get_back_financial_deposit_reasons`
+--
+
+INSERT INTO `cl_app_get_back_financial_deposit_reasons` (`ID`, `ENABLED`, `CODE`, `NAME`, `DESCRIPTION`, `I18n_DEFAULT`, `I18N_EN`, `I18N_FR`, `I18N_ES`, `I18N_TH`, `I18N_VT`, `I18N_LA`, `I18N_ID`, `I18N_KH`, `UPDATER_ID`, `COMMENT`, `CREATED_AT`, `UPDATED_AT`) VALUES
+(1, 1, 'ENDCONTRACT', 'At the end of the contract', 'At the end of the contract', 'At the end of the contract', 'At the end of the contract', 'A la fin du contrat', 'At the end of the contract', 'เมื่อสิ้นสุดสัญญา', 'At the end of the contract', 'At the end of the contract', 'At the end of the contract', 'At the end of the contract', 1, NULL, '2018-01-27 05:25:08', '2018-01-27 05:25:08'),
+(2, 1, 'DURINGCONTRACT', 'During contract', 'During contract', 'During contract', 'During contract', 'Pendant la durée du contrat', 'During contract', 'ระหว่างที่อยู่ในสัญญา', 'During contract', 'During contract', 'During contract', 'During contract', 1, NULL, '2018-01-29 15:56:11', '2018-01-29 15:56:11'),
+(3, 1, 'LEAVINGFARM', 'When leaving the farm', 'When leaving the farm', 'When leaving the farm', 'When leaving the farm', 'En quittant la ferme', 'When leaving the farm', 'เมื่ออกจากงาน', 'When leaving the farm', 'When leaving the farm', 'When leaving the farm', 'When leaving the farm', 1, NULL, '2018-01-29 20:14:46', '2018-01-29 20:14:46'),
+(99, 1, 'OTHER', 'Other', 'Other (specify)', 'Other (specify)', 'Other (specify)', 'Autre (Préciser)', 'Other (specify)', 'อื่น ๆ (ระบุ)', 'Other (specify)', 'Other (specify)', 'Other (specify)', 'Other (specify)', 1, NULL, '2018-01-29 20:14:46', '2018-01-29 20:14:46');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `cl_app_hazardous_training_types`
+--
+
+CREATE TABLE `cl_app_hazardous_training_types` (
+  `ID` int(11) NOT NULL,
+  `ENABLED` tinyint(1) NOT NULL DEFAULT '1',
+  `CODE` varchar(16) COLLATE utf8_bin NOT NULL,
+  `NAME` varchar(64) COLLATE utf8_bin NOT NULL,
+  `DESCRIPTION` varchar(512) COLLATE utf8_bin DEFAULT NULL,
+  `I18n_DEFAULT` varchar(256) COLLATE utf8_bin NOT NULL COMMENT 'default label',
+  `I18N_EN` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in English',
+  `I18N_FR` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in French',
+  `I18N_ES` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Spanish',
+  `I18N_TH` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Thai',
+  `I18N_VT` varchar(256) CHARACTER SET utf8 COLLATE utf8_vietnamese_ci DEFAULT NULL COMMENT 'label in Vietnamese',
+  `I18N_LA` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Lao',
+  `I18N_ID` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in indonesian',
+  `I18N_KH` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Cambodian',
+  `UPDATER_ID` int(11) NOT NULL DEFAULT '1',
+  `COMMENT` varchar(512) COLLATE utf8_bin DEFAULT NULL,
+  `CREATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `UPDATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Contenu de la table `cl_app_hazardous_training_types`
+--
+
+INSERT INTO `cl_app_hazardous_training_types` (`ID`, `ENABLED`, `CODE`, `NAME`, `DESCRIPTION`, `I18n_DEFAULT`, `I18N_EN`, `I18N_FR`, `I18N_ES`, `I18N_TH`, `I18N_VT`, `I18N_LA`, `I18N_ID`, `I18N_KH`, `UPDATER_ID`, `COMMENT`, `CREATED_AT`, `UPDATED_AT`) VALUES
+(1, 1, 'FILETFISH', 'Processing Fish (Cutting / fillet) ', 'Processing Fish (Cutting / fillet) ', 'Processing Fish (Cutting / fillet) ', 'Processing Fish (Cutting / fillet) ', 'Transformer le poisson ( découpe / filet)', 'Processing Fish (Cutting / fillet) ', 'การประมวลผลปลา (ตัด / เนื้อ)', 'Processing Fish (Cutting / fillet) ', 'Processing Fish (Cutting / fillet) ', 'Processing Fish (Cutting / fillet) ', 'Processing Fish (Cutting / fillet) ', 1, NULL, '2018-01-29 15:58:15', '2018-01-29 15:58:15'),
+(99, 1, 'NONE', 'None', 'None', 'None', 'None', 'Aucun', 'None', 'ไม่มี', 'None', 'None', 'None', 'None', 1, NULL, '2018-01-29 16:05:04', '2018-01-29 16:05:04');
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `cl_app_hazardous_work_type`
 --
 
@@ -258,6 +501,8 @@ CREATE TABLE `cl_app_hazardous_work_type` (
   `CODE` varchar(16) COLLATE utf8_bin NOT NULL,
   `NAME` varchar(64) COLLATE utf8_bin NOT NULL,
   `DESCRIPTION` varchar(512) COLLATE utf8_bin DEFAULT NULL,
+  `CL_ENTITY_TYPE_ID` int(11) DEFAULT NULL COMMENT 'A possible restriction of the type of hazardous work per entity type',
+  `CL_FARM_TYPE_ID` int(11) DEFAULT NULL COMMENT 'Additional restrictions to farm type (for agriculture or aquaculture)',
   `I18n_DEFAULT` varchar(256) COLLATE utf8_bin NOT NULL COMMENT 'default label',
   `I18N_EN` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in English',
   `I18N_FR` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in French',
@@ -277,12 +522,47 @@ CREATE TABLE `cl_app_hazardous_work_type` (
 -- Contenu de la table `cl_app_hazardous_work_type`
 --
 
-INSERT INTO `cl_app_hazardous_work_type` (`ID`, `ENABLED`, `CODE`, `NAME`, `DESCRIPTION`, `I18n_DEFAULT`, `I18N_EN`, `I18N_FR`, `I18N_ES`, `I18N_TH`, `I18N_VT`, `I18N_LA`, `I18N_ID`, `I18N_KH`, `UPDATER_ID`, `COMMENT`, `CREATED_AT`, `UPDATED_AT`) VALUES
-(1, 1, 'SUGHARV', 'Sugar Cane harvester', 'Sugar Cane harvester', 'Sugar Cane harvester', 'Sugar Cane harvester', 'Coupeur de canne à sucre', NULL, 'เครื่องเก็บเกี่ยวอ้อย', NULL, NULL, NULL, NULL, 1, NULL, '2017-09-23 10:18:02', '2017-09-23 10:18:02'),
-(2, 1, 'MANCUT', 'Manual Cutting', 'Manual Cutting', 'Manual Cutting', 'Manual Cutting', 'Coupe manuelle', NULL, 'ตัดด้วยมือ', NULL, NULL, NULL, NULL, 1, NULL, '2017-11-28 13:35:34', '2017-11-28 13:35:34'),
-(3, 1, 'PESTSP', 'Pesticides Spraying', 'Pesticides Spraying', 'Pesticides Spraying', 'Pesticides Spraying', NULL, NULL, 'พ่นยาฆ่าแมลง', NULL, NULL, NULL, NULL, 1, NULL, '2017-11-28 13:43:12', '2017-11-28 13:43:12'),
-(4, 1, 'MECHTIL', 'Mechanical tillage', 'Mechanical tillage', 'Mechanical tillage', 'Mechanical tillage', 'Travail du sol manuel', NULL, 'การไถพรวนแบบเครื่องกล', NULL, NULL, NULL, NULL, 1, NULL, '2017-11-28 13:43:12', '2017-11-28 13:43:12'),
-(5, 1, 'FERT', 'Fertilizer Use', 'Fertilizer Use', 'Fertilizer Use', 'Fertilizer Use', 'Utilisation d\'engrais', NULL, 'การใช้ปุ๋ย', NULL, NULL, NULL, NULL, 1, NULL, '2017-11-28 13:43:12', '2017-11-28 13:43:12');
+INSERT INTO `cl_app_hazardous_work_type` (`ID`, `ENABLED`, `CODE`, `NAME`, `DESCRIPTION`, `CL_ENTITY_TYPE_ID`, `CL_FARM_TYPE_ID`, `I18n_DEFAULT`, `I18N_EN`, `I18N_FR`, `I18N_ES`, `I18N_TH`, `I18N_VT`, `I18N_LA`, `I18N_ID`, `I18N_KH`, `UPDATER_ID`, `COMMENT`, `CREATED_AT`, `UPDATED_AT`) VALUES
+(1, 1, 'FILETFISH', 'Processing Fish (Cutting / fillet)', 'Processing Fish (Cutting / fillet)', NULL, NULL, 'Processing Fish (Cutting / fillet)', 'Processing Fish (Cutting / fillet)', 'Processing Fish (Cutting / fillet)', 'Processing Fish (Cutting / fillet)', 'การประมวลผลปลา (ตัด / เนื้อ)', 'Processing Fish (Cutting / fillet)', 'Processing Fish (Cutting / fillet)', 'Processing Fish (Cutting / fillet)', 'Processing Fish (Cutting / fillet)', 1, NULL, '2017-09-23 10:18:02', '2017-09-23 10:18:02'),
+(99, 1, 'NONE', 'none', 'none', NULL, NULL, 'none', 'none', 'none', 'none', '	\r\nไม่มี', 'none', 'none', 'none', 'none', 1, NULL, '2018-01-29 16:07:18', '2018-01-29 16:07:18');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `cl_app_hiring_restriction_types`
+--
+
+CREATE TABLE `cl_app_hiring_restriction_types` (
+  `ID` int(11) NOT NULL,
+  `ENABLED` tinyint(1) NOT NULL DEFAULT '1',
+  `CODE` varchar(16) COLLATE utf8_bin NOT NULL,
+  `NAME` varchar(64) COLLATE utf8_bin NOT NULL,
+  `DESCRIPTION` varchar(512) COLLATE utf8_bin DEFAULT NULL,
+  `I18n_DEFAULT` varchar(256) COLLATE utf8_bin NOT NULL COMMENT 'default label',
+  `I18N_EN` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in English',
+  `I18N_FR` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in French',
+  `I18N_ES` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Spanish',
+  `I18N_TH` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Thai',
+  `I18N_VT` varchar(256) CHARACTER SET utf8 COLLATE utf8_vietnamese_ci DEFAULT NULL COMMENT 'label in Vietnamese',
+  `I18N_LA` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Lao',
+  `I18N_ID` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in indonesian',
+  `I18N_KH` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Cambodian',
+  `UPDATER_ID` int(11) NOT NULL DEFAULT '1',
+  `COMMENT` varchar(512) COLLATE utf8_bin DEFAULT NULL,
+  `CREATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `UPDATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Contenu de la table `cl_app_hiring_restriction_types`
+--
+
+INSERT INTO `cl_app_hiring_restriction_types` (`ID`, `ENABLED`, `CODE`, `NAME`, `DESCRIPTION`, `I18n_DEFAULT`, `I18N_EN`, `I18N_FR`, `I18N_ES`, `I18N_TH`, `I18N_VT`, `I18N_LA`, `I18N_ID`, `I18N_KH`, `UPDATER_ID`, `COMMENT`, `CREATED_AT`, `UPDATED_AT`) VALUES
+(1, 1, 'GENDER', 'Gender Restriction ', 'Gender Restriction ', 'Gender Restriction ', 'Gender Restriction ', 'Restriction sur le genre', 'Gender Restriction ', 'ข้อ จำกัด เรื่องเพศ', 'Gender Restriction ', 'Gender Restriction ', 'Gender Restriction ', 'Gender Restriction ', 1, NULL, '2018-01-29 20:00:53', '2018-01-29 20:00:53'),
+(2, 1, 'RELIGION', 'Religion restriction', 'Religion restriction', 'Religion restriction', 'Religion restriction', 'Restirctions dues à la religion', 'Religion restriction', 'ข้อ จำกัด ของศาสนา', 'Religion restriction', 'Religion restriction', 'Religion restriction', 'Religion restriction', 1, NULL, '2018-01-29 20:00:53', '2018-01-29 20:00:53'),
+(3, 1, 'AGE', 'Age restriction', 'Age restriction', 'Age restriction', 'Age restriction', 'Restrictions liées à l\'age', 'Age restriction', 'ข้อ จำกัด ด้านอายุ', 'Age restriction', 'Age restriction', 'Age restriction', 'v', 1, NULL, '2018-01-29 20:02:37', '2018-01-29 20:02:37'),
+(4, 1, 'NONE', 'None', 'None', 'None', 'None', 'Aucune', 'None', 'ไม่มี', 'None', 'None', 'None', 'None', 1, NULL, '2018-01-29 20:02:37', '2018-01-29 20:02:37'),
+(5, 1, 'OTHER', 'Other', 'Other', 'Other', 'Other', 'Autres', 'Other', 'อื่น ๆ', 'Other', 'Other', 'Other', 'Other', 1, NULL, '2018-01-29 20:05:09', '2018-01-29 20:05:09');
 
 -- --------------------------------------------------------
 
@@ -509,6 +789,77 @@ INSERT INTO `cl_app_measure_types` (`ID`, `ENABLED`, `CODE`, `NAME`, `DESCRIPTIO
 (3, 1, 'DO', 'Dissolved Oxygen', 'Dissolved Oxygen', 'Dissolved Oxygen', 'Dissolved Oxygen', 'Oxygène dissous', NULL, 'ออกซิเจนละลาย', NULL, NULL, NULL, NULL, 1, NULL, '2016-10-23 17:02:34', '2017-09-12 13:30:11'),
 (4, 1, 'SAL', 'Salinity', 'Salinity', 'Salinity', 'Salinity', 'Salinité', NULL, 'ความเค็ม', NULL, NULL, NULL, NULL, 1, NULL, '2016-10-23 17:02:34', '2017-09-12 13:30:11'),
 (5, 1, 'AMMO', 'Ammonia', 'Ammonia', 'Ammonia', 'Ammonia', 'Ammoniac', NULL, 'สารแอมโมเนีย', NULL, NULL, NULL, NULL, 1, NULL, '2016-10-23 17:03:03', '2017-09-12 13:30:11');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `cl_app_no_early_termination_contract_reasons`
+--
+
+CREATE TABLE `cl_app_no_early_termination_contract_reasons` (
+  `ID` int(11) NOT NULL,
+  `ENABLED` tinyint(1) NOT NULL DEFAULT '1',
+  `CODE` varchar(16) COLLATE utf8_bin NOT NULL,
+  `NAME` varchar(64) COLLATE utf8_bin NOT NULL,
+  `DESCRIPTION` varchar(512) COLLATE utf8_bin DEFAULT NULL,
+  `I18n_DEFAULT` varchar(256) COLLATE utf8_bin NOT NULL COMMENT 'default label',
+  `I18N_EN` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in English',
+  `I18N_FR` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in French',
+  `I18N_ES` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Spanish',
+  `I18N_TH` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Thai',
+  `I18N_VT` varchar(256) CHARACTER SET utf8 COLLATE utf8_vietnamese_ci DEFAULT NULL COMMENT 'label in Vietnamese',
+  `I18N_LA` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Lao',
+  `I18N_ID` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in indonesian',
+  `I18N_KH` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Cambodian',
+  `UPDATER_ID` int(11) NOT NULL DEFAULT '1',
+  `COMMENT` varchar(512) COLLATE utf8_bin DEFAULT NULL,
+  `CREATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `UPDATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Contenu de la table `cl_app_no_early_termination_contract_reasons`
+--
+
+INSERT INTO `cl_app_no_early_termination_contract_reasons` (`ID`, `ENABLED`, `CODE`, `NAME`, `DESCRIPTION`, `I18n_DEFAULT`, `I18N_EN`, `I18N_FR`, `I18N_ES`, `I18N_TH`, `I18N_VT`, `I18N_LA`, `I18N_ID`, `I18N_KH`, `UPDATER_ID`, `COMMENT`, `CREATED_AT`, `UPDATED_AT`) VALUES
+(1, 1, 'FININCENTIVE', 'Financial Incentive (lump sum)', 'Financial Incentive (lump sum)', 'Financial Incentive (lump sum)', 'Financial Incentive (lump sum)', 'Incitations financières (Montant fixe)', 'Financial Incentive (lump sum)', 'สิ่งจูงใจทางการเงิน (เงินก้อน)', 'Financial Incentive (lump sum)', 'Financial Incentive (lump sum)', 'Financial Incentive (lump sum)', 'Financial Incentive (lump sum)', 1, NULL, '2018-01-29 16:09:21', '2018-01-29 16:09:21'),
+(2, 1, 'INCRESALARY', 'Increase salary', 'Increase salary', 'Increase salary', 'Increase salary', 'Augmentation de salaire', 'Increase salary', 'เพิ่มเงินเดือน', 'Increase salary', 'Increase salary', 'Increase salary', 'Increase salary', 1, NULL, '2018-01-29 16:10:17', '2018-01-29 16:10:17');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `cl_app_payment_debt_types`
+--
+
+CREATE TABLE `cl_app_payment_debt_types` (
+  `ID` int(11) NOT NULL,
+  `ENABLED` tinyint(1) NOT NULL DEFAULT '1',
+  `CODE` varchar(16) COLLATE utf8_bin NOT NULL,
+  `NAME` varchar(64) COLLATE utf8_bin NOT NULL,
+  `DESCRIPTION` varchar(512) COLLATE utf8_bin DEFAULT NULL,
+  `I18n_DEFAULT` varchar(256) COLLATE utf8_bin NOT NULL COMMENT 'default label',
+  `I18N_EN` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in English',
+  `I18N_FR` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in French',
+  `I18N_ES` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Spanish',
+  `I18N_TH` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Thai',
+  `I18N_VT` varchar(256) CHARACTER SET utf8 COLLATE utf8_vietnamese_ci DEFAULT NULL COMMENT 'label in Vietnamese',
+  `I18N_LA` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Lao',
+  `I18N_ID` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in indonesian',
+  `I18N_KH` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Cambodian',
+  `UPDATER_ID` int(11) NOT NULL DEFAULT '1',
+  `COMMENT` varchar(512) COLLATE utf8_bin DEFAULT NULL,
+  `CREATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `UPDATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Contenu de la table `cl_app_payment_debt_types`
+--
+
+INSERT INTO `cl_app_payment_debt_types` (`ID`, `ENABLED`, `CODE`, `NAME`, `DESCRIPTION`, `I18n_DEFAULT`, `I18N_EN`, `I18N_FR`, `I18N_ES`, `I18N_TH`, `I18N_VT`, `I18N_LA`, `I18N_ID`, `I18N_KH`, `UPDATER_ID`, `COMMENT`, `CREATED_AT`, `UPDATED_AT`) VALUES
+(1, 1, 'MONTHFEE', 'Month fixed fee deducted from salary', 'Month fixed fee deducted from salary', 'Month fixed fee deducted from salary', 'Month fixed fee deducted from salary', 'Retenue mensuelle sur salaire', 'Month fixed fee deducted from salary', 'ค่าคงที่เดือนที่หักจากเงินเดือน', 'Month fixed fee deducted from salary', 'Month fixed fee deducted from salary', 'Month fixed fee deducted from salary', 'Month fixed fee deducted from salary', 1, NULL, '2018-01-29 16:13:45', '2018-01-29 16:13:45'),
+(2, 1, 'PAYMENTHALFCONT', 'Payment at half contract', 'Payment at half contract', 'Payment at half contract', 'Payment at half contract', 'Paiement à la moitié du contrat', 'Payment at half contract', 'ชำระเงินตามสัญญาครึ่งหนึ่ง', 'Payment at half contract', 'Payment at half contract', 'Payment at half contract', 'Payment at half contract', 1, NULL, '2018-01-29 16:13:45', '2018-01-29 16:13:45'),
+(3, 1, 'WORKMORE', 'Days worked for free at the end of the contract', 'Days worked for free at the end of the contract', 'Days worked for free at the end of the contract', 'Days worked for free at the end of the contract', 'Jours travaillés sans rémunération à la fin du contrat', 'Days worked for free at the end of the contract', 'วันทำงานฟรีเมื่อสิ้นสุดสัญญา', 'Days worked for free at the end of the contract', 'Days worked for free at the end of the contract', 'Days worked for free at the end of the contract', 'Days worked for free at the end of the contract', 1, NULL, '2018-01-29 16:15:25', '2018-01-29 16:15:25');
 
 -- --------------------------------------------------------
 
@@ -804,6 +1155,43 @@ CREATE TABLE `cl_app_staff_declaration_types` (
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `cl_app_termination_contract_reasons`
+--
+
+CREATE TABLE `cl_app_termination_contract_reasons` (
+  `ID` int(11) NOT NULL,
+  `ENABLED` tinyint(1) NOT NULL DEFAULT '1',
+  `CODE` varchar(16) COLLATE utf8_bin NOT NULL,
+  `NAME` varchar(64) COLLATE utf8_bin NOT NULL,
+  `DESCRIPTION` varchar(512) COLLATE utf8_bin DEFAULT NULL,
+  `I18n_DEFAULT` varchar(256) COLLATE utf8_bin NOT NULL COMMENT 'default label',
+  `I18N_EN` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in English',
+  `I18N_FR` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in French',
+  `I18N_ES` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Spanish',
+  `I18N_TH` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Thai',
+  `I18N_VT` varchar(256) CHARACTER SET utf8 COLLATE utf8_vietnamese_ci DEFAULT NULL COMMENT 'label in Vietnamese',
+  `I18N_LA` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Lao',
+  `I18N_ID` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in indonesian',
+  `I18N_KH` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Cambodian',
+  `UPDATER_ID` int(11) NOT NULL DEFAULT '1',
+  `COMMENT` varchar(512) COLLATE utf8_bin DEFAULT NULL,
+  `CREATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `UPDATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Contenu de la table `cl_app_termination_contract_reasons`
+--
+
+INSERT INTO `cl_app_termination_contract_reasons` (`ID`, `ENABLED`, `CODE`, `NAME`, `DESCRIPTION`, `I18n_DEFAULT`, `I18N_EN`, `I18N_FR`, `I18N_ES`, `I18N_TH`, `I18N_VT`, `I18N_LA`, `I18N_ID`, `I18N_KH`, `UPDATER_ID`, `COMMENT`, `CREATED_AT`, `UPDATED_AT`) VALUES
+(1, 1, 'BADWORK', 'Not satisfactory work', 'Not satisfactory work', 'Not satisfactory work', 'Not satisfactory work', 'Travail non satisfaisant', 'Not satisfactory work', 'ไม่น่าพอใจงาน', 'Not satisfactory work', 'Not satisfactory work', 'Not satisfactory work', 'Not satisfactory work', 1, NULL, '2018-01-29 16:17:50', '2018-01-29 16:17:50'),
+(2, 1, 'SICK', 'Long period of sickness', 'Long period of sickness', 'Long period of sickness', 'Long period of sickness', 'Longues périodes de maladie', 'Long period of sickness', 'ระยะเวลาการป่วยเป็นเวลานาน', 'Long period of sickness', 'Long period of sickness', 'Long period of sickness', 'Long period of sickness', 1, NULL, '2018-01-29 16:17:50', '2018-01-29 16:17:50'),
+(3, 1, 'NORESPECT', 'Lack of respect for employer', 'Lack of respect for employer', 'Lack of respect for employer', 'Lack of respect for employer', 'Manque de respect envers l\'employeur', 'Lack of respect for employer', 'ขาดความเคารพต่อนายจ้าง', 'Lack of respect for employer', 'Lack of respect for employer', 'Lack of respect for employer', 'Lack of respect for employer', 1, NULL, '2018-01-29 16:18:44', '2018-01-29 16:18:44'),
+(99, 1, 'OTHER', 'Other', 'Other', 'Other', 'Other', 'Autre', 'Other', 'อื่น ๆ', 'Other', 'Other', 'Other', NULL, 1, NULL, '2018-01-29 16:19:19', '2018-01-29 16:19:19');
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `cl_app_tiling_activity_types`
 --
 
@@ -948,6 +1336,33 @@ CREATE TABLE `cl_app_vessel_operational_status` (
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `cl_app_water_supply_types`
+--
+
+CREATE TABLE `cl_app_water_supply_types` (
+  `ID` int(11) NOT NULL,
+  `ENABLED` tinyint(1) NOT NULL DEFAULT '1',
+  `CODE` varchar(16) COLLATE utf8_bin NOT NULL,
+  `NAME` varchar(64) COLLATE utf8_bin NOT NULL,
+  `DESCRIPTION` varchar(512) COLLATE utf8_bin DEFAULT NULL,
+  `I18n_DEFAULT` varchar(256) COLLATE utf8_bin NOT NULL COMMENT 'default label',
+  `I18N_EN` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in English',
+  `I18N_FR` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in French',
+  `I18N_ES` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Spanish',
+  `I18N_TH` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Thai',
+  `I18N_VT` varchar(256) CHARACTER SET utf8 COLLATE utf8_vietnamese_ci DEFAULT NULL COMMENT 'label in Vietnamese',
+  `I18N_LA` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Lao',
+  `I18N_ID` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in indonesian',
+  `I18N_KH` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Cambodian',
+  `UPDATER_ID` int(11) NOT NULL DEFAULT '1',
+  `COMMENT` varchar(512) COLLATE utf8_bin DEFAULT NULL,
+  `CREATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `UPDATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `cl_farm_building_types`
 --
 
@@ -1051,7 +1466,8 @@ CREATE TABLE `cl_farm_pond_activity_types` (
 
 INSERT INTO `cl_farm_pond_activity_types` (`ID`, `ENABLED`, `CODE`, `NAME`, `DESCRIPTION`, `I18n_DEFAULT`, `I18N_EN`, `I18N_FR`, `I18N_ES`, `I18N_TH`, `I18N_VT`, `I18N_LA`, `I18N_ID`, `I18N_KH`, `UPDATER_ID`, `COMMENT`, `CREATED_AT`, `UPDATED_AT`) VALUES
 (1, 1, 'SEED', 'Pond Seeding', 'Pond seeding with seed/juveniles', 'Pond Seeding', 'Pond Seeding', 'Ensemmencement Bassin', 'Pond Seeding', 'การเพาะเมล็ดบ่อ', 'Pond Seeding', 'Pond Seeding', 'Pond Seeding', 'Pond Seeding', 1, NULL, '2018-01-17 09:31:45', '2018-01-17 09:31:45'),
-(2, 1, 'HARV', 'Pond Harvesting', 'Pond Harvesting', 'Pond Harvesting', 'Pond Harvesting', 'Récolte du bassin', 'Pond Harvesting', 'การเก็บเกี่ยวบ่อน้ำ', 'Pond Harvesting', 'Pond Harvesting', 'Pond Harvesting', 'Pond Harvesting', 1, NULL, '2018-01-17 09:31:45', '2018-01-17 09:31:45');
+(2, 1, 'HARV', 'Pond Harvesting', 'Pond Harvesting', 'Pond Harvesting', 'Pond Harvesting', 'Récolte du bassin', 'Pond Harvesting', 'การเก็บเกี่ยวบ่อน้ำ', 'Pond Harvesting', 'Pond Harvesting', 'Pond Harvesting', 'Pond Harvesting', 1, NULL, '2018-01-17 09:31:45', '2018-01-17 09:31:45'),
+(3, 1, 'FEED', 'Feeding', 'Feeding', 'Feeding', 'Feeding', 'Nourrir', 'Feeding', 'การให้อาหาร', 'Feeding', 'Feeding', 'Feeding', 'Feeding', 1, NULL, '2018-01-29 20:16:39', '2018-01-29 20:16:39');
 
 -- --------------------------------------------------------
 
@@ -1089,6 +1505,33 @@ INSERT INTO `cl_farm_pond_types` (`ID`, `ENABLED`, `CODE`, `NAME`, `DESCRIPTION`
 (2, 1, 'GROW', 'Pond for growing', 'Pond for fish growing', 'Pond for growing', 'Pond for growing', 'Bassin pour engraissement', 'Pond for growing', 'บ่อเพาะปลูก', 'Pond for growing', 'Pond for growing', 'Pond for growing', NULL, 1, NULL, '2017-01-06 11:25:19', '2017-09-12 13:35:05'),
 (3, 1, 'REP', 'Pond for reproduction', 'Pond for fish reproduction', 'Pond for fish reproduction', 'Pond for fish reproduction', 'Bassin pour la reproduction', 'Pond for fish reproduction', 'บ่อเพื่อการสืบพันธุ์', 'Pond for fish reproduction', 'Pond for fish reproduction', 'Pond for fish reproduction', NULL, 1, NULL, '2017-01-06 11:25:19', '2017-09-12 13:35:05'),
 (4, 1, 'SEW', 'Sewage Pond', 'Pond for sewage cleaning', 'Pond for sewage cleaning', 'Pond for sewage cleaning', 'Bassin d\'épandange', 'Pond for sewage cleaning', 'บ่อบำบัดน้ำเสีย', 'Pond for sewage cleaning', 'Pond for sewage cleaning', 'Pond for sewage cleaning', 'Pond for sewage cleaning', 1, NULL, '2017-01-06 11:25:19', '2017-09-12 13:35:05');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `cl_farm_production_types`
+--
+
+CREATE TABLE `cl_farm_production_types` (
+  `ID` int(11) NOT NULL,
+  `ENABLED` tinyint(1) NOT NULL DEFAULT '1',
+  `CODE` varchar(16) COLLATE utf8_bin NOT NULL,
+  `NAME` varchar(64) COLLATE utf8_bin NOT NULL,
+  `DESCRIPTION` varchar(512) COLLATE utf8_bin DEFAULT NULL,
+  `I18n_DEFAULT` varchar(256) COLLATE utf8_bin NOT NULL COMMENT 'default label',
+  `I18N_EN` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in English',
+  `I18N_FR` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in French',
+  `I18N_ES` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Spanish',
+  `I18N_TH` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Thai',
+  `I18N_VT` varchar(256) CHARACTER SET utf8 COLLATE utf8_vietnamese_ci DEFAULT NULL COMMENT 'label in Vietnamese',
+  `I18N_LA` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Lao',
+  `I18N_ID` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in indonesian',
+  `I18N_KH` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'label in Cambodian',
+  `UPDATER_ID` int(11) NOT NULL DEFAULT '1',
+  `COMMENT` varchar(512) COLLATE utf8_bin DEFAULT NULL,
+  `CREATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `UPDATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- --------------------------------------------------------
 
@@ -1993,53 +2436,8 @@ CREATE TABLE `cl_ref_products` (
 --
 
 INSERT INTO `cl_ref_products` (`ID`, `ENABLED`, `CODE`, `NAME`, `DESCRIPTION`, `I18n_DEFAULT`, `I18N_EN`, `I18N_FR`, `I18N_ES`, `I18N_TH`, `I18N_VT`, `I18N_LA`, `I18N_ID`, `I18N_KH`, `CL_PRODUCTS_TYPE_ID`, `UPDATER_ID`, `COMMENT`, `CREATED_AT`, `UPDATED_AT`) VALUES
-(1, 1, 'FERT-21-0-0', 'ปุ๋ยทดลองศูนย์วิจัย 21-0-0', 'ปุ๋ยทดลองศูนย์วิจัย 21-0-0', 'ปุ๋ยทดลองศูนย์วิจัย 21-0-0', 'ปุ๋ยทดลองศูนย์วิจัย 21-0-0', 'ปุ๋ยทดลองศูนย์วิจัย 21-0-0', 'ปุ๋ยทดลองศูนย์วิจัย 21-0-0', 'ปุ๋ยทดลองศูนย์วิจัย 21-0-0', 'ปุ๋ยทดลองศูนย์วิจัย 21-0-0', NULL, NULL, NULL, 50, 1, NULL, '2017-09-23 13:06:07', '2017-09-23 13:06:07'),
-(2, 1, 'FERT-30-15-10', 'ปุ๋ยน้ำหยด 30-15-10', 'ปุ๋ยน้ำหยด 30-15-10', 'ปุ๋ยน้ำหยด 30-15-10', 'ปุ๋ยน้ำหยด 30-15-10', 'ปุ๋ยน้ำหยด 30-15-10', 'ปุ๋ยน้ำหยด 30-15-10', 'ปุ๋ยน้ำหยด 30-15-10', 'ปุ๋ยน้ำหยด 30-15-10', NULL, NULL, NULL, 50, 1, NULL, '2017-09-23 13:07:02', '2017-09-23 13:07:02'),
-(3, 1, 'FERT-46-0-0', 'ปุ๋ยสูตร 46-0-0', 'ปุ๋ยสูตร 46-0-0', 'ปุ๋ยสูตร 46-0-0', 'ปุ๋ยสูตร 46-0-0', 'ปุ๋ยสูตร 46-0-0', 'ปุ๋ยสูตร 46-0-0', 'ปุ๋ยสูตร 46-0-0', 'ปุ๋ยสูตร 46-0-0', NULL, NULL, NULL, 50, 1, NULL, '2017-09-23 13:06:07', '2017-09-23 13:06:07'),
-(4, 1, 'FERT-25-8-5', 'ปุ๋ยน้ำหยด 25-8-5', 'ปุ๋ยน้ำหยด 25-8-5', 'ปุ๋ยน้ำหยด 25-8-5', 'ปุ๋ยน้ำหยด 25-8-5', 'ปุ๋ยน้ำหยด 25-8-5', 'ปุ๋ยน้ำหยด 25-8-5', 'ปุ๋ยน้ำหยด 25-8-5', 'ปุ๋ยน้ำหยด 25-8-5', NULL, NULL, NULL, 50, 1, NULL, '2017-09-23 13:06:07', '2017-09-23 13:06:07'),
-(5, 1, 'FERT-18-46-0', 'แม่ปุ๋ยผสม 18-46-0', 'แม่ปุ๋ยผสม 18-46-0', 'แม่ปุ๋ยผสม 18-46-0', 'แม่ปุ๋ยผสม 18-46-0', 'แม่ปุ๋ยผสม 18-46-0', 'แม่ปุ๋ยผสม 18-46-0', 'แม่ปุ๋ยผสม 18-46-0', 'แม่ปุ๋ยผสม 18-46-0', NULL, NULL, NULL, 50, 1, NULL, '2017-09-23 13:06:07', '2017-09-23 13:06:07'),
-(6, 1, 'FERT-21-7-18', 'ปุ๋ยสูตร 21-7-18', 'ปุ๋ยสูตร 21-7-18', 'ปุ๋ยสูตร 21-7-18', 'ปุ๋ยสูตร 21-7-18', 'ปุ๋ยสูตร 21-7-18', 'ปุ๋ยสูตร 21-7-18', 'ปุ๋ยสูตร 21-7-18', 'ปุ๋ยสูตร 21-7-18', NULL, NULL, NULL, 50, 1, NULL, '2017-09-23 13:06:07', '2017-09-23 13:06:07'),
-(7, 1, 'FERT-16-8-8', 'ปุ๋ยสูตร 16-8-8', 'ปุ๋ยสูตร 16-8-8', 'ปุ๋ยสูตร 16-8-8', 'ปุ๋ยสูตร 16-8-8', 'ปุ๋ยสูตร 16-8-8', 'ปุ๋ยสูตร 16-8-8', 'ปุ๋ยสูตร 16-8-8', 'ปุ๋ยสูตร 16-8-8', NULL, NULL, NULL, 50, 1, NULL, '2017-09-23 13:06:07', '2017-09-23 13:06:07'),
-(8, 1, 'FERT-16-16-8', 'ปุ๋ยสูตร 16-16-8', 'ปุ๋ยสูตร 16-16-8', 'ปุ๋ยสูตร 16-16-8', 'ปุ๋ยสูตร 16-16-8', 'ปุ๋ยสูตร 16-16-8', 'ปุ๋ยสูตร 16-16-8', 'ปุ๋ยสูตร 16-16-8', 'ปุ๋ยสูตร 16-16-8', NULL, NULL, NULL, 50, 1, NULL, '2017-09-23 13:06:07', '2017-09-23 13:06:07'),
-(9, 1, 'FERT-6-16-16', 'ปุ๋ยสูตร 16-16-16', 'ปุ๋ยสูตร 16-16-16', 'ปุ๋ยสูตร 16-16-16', 'ปุ๋ยสูตร 16-16-16', 'ปุ๋ยสูตร 16-16-16', 'ปุ๋ยสูตร 16-16-16', 'ปุ๋ยสูตร 16-16-16', 'ปุ๋ยสูตร 16-16-16', NULL, NULL, NULL, 50, 1, NULL, '2017-09-23 13:06:07', '2017-09-23 13:06:07'),
-(10, 1, 'FERT-16-10-0', 'ปุ๋ยสูตร 16-20-0', 'ปุ๋ยสูตร 16-20-0', 'ปุ๋ยสูตร 16-20-0', 'ปุ๋ยสูตร 16-20-0', 'ปุ๋ยสูตร 16-20-0', 'ปุ๋ยสูตร 16-20-0', 'ปุ๋ยสูตร 16-20-0', 'ปุ๋ยสูตร 16-20-0', NULL, NULL, NULL, 50, 1, NULL, '2017-09-23 13:06:07', '2017-09-23 13:06:07'),
-(11, 1, 'FERT-0-0-60', 'แม่ปุ๋ยสูตร 0-0-60', 'แม่ปุ๋ยสูตร 0-0-60', 'แม่ปุ๋ยสูตร 0-0-60', 'แม่ปุ๋ยสูตร 0-0-60', 'แม่ปุ๋ยสูตร 0-0-60', 'แม่ปุ๋ยสูตร 0-0-60', 'แม่ปุ๋ยสูตร 0-0-60', 'แม่ปุ๋ยสูตร 0-0-60', NULL, NULL, NULL, 50, 1, NULL, '2017-09-23 13:06:07', '2017-09-23 13:06:07'),
-(12, 1, 'FERT-0-0-50', 'ปุ๋ยน้ำหยด 0-0-50', 'ปุ๋ยน้ำหยด 0-0-50', 'ปุ๋ยน้ำหยด 0-0-50', 'ปุ๋ยน้ำหยด 0-0-50', 'ปุ๋ยน้ำหยด 0-0-50', 'ปุ๋ยน้ำหยด 0-0-50', 'ปุ๋ยน้ำหยด 0-0-50', 'ปุ๋ยน้ำหยด 0-0-50', NULL, NULL, NULL, 50, 1, NULL, '2017-09-23 13:06:07', '2017-09-23 13:06:07'),
-(13, 1, 'FERT-23-10-24', 'ปุ๋ยน้ำหยด 23-10-24', 'ปุ๋ยน้ำหยด 23-10-24', 'ปุ๋ยน้ำหยด 23-10-24', 'ปุ๋ยน้ำหยด 23-10-24', 'ปุ๋ยน้ำหยด 23-10-24', 'ปุ๋ยน้ำหยด 23-10-24', 'ปุ๋ยน้ำหยด 23-10-24', 'ปุ๋ยน้ำหยด 23-10-24', NULL, NULL, NULL, 50, 1, NULL, '2017-09-23 13:06:07', '2017-09-23 13:06:07'),
-(14, 1, 'FERT-18-8-0', 'ปุ๋ยสูตร 18-8-0', 'ปุ๋ยสูตร 18-8-0', 'ปุ๋ยสูตร 18-8-0', 'ปุ๋ยสูตร 18-8-0', 'ปุ๋ยสูตร 18-8-0', 'ปุ๋ยสูตร 18-8-0', 'ปุ๋ยสูตร 18-8-0', 'ปุ๋ยสูตร 18-8-0', NULL, NULL, NULL, 50, 1, NULL, '2017-09-23 13:06:07', '2017-09-23 13:06:07'),
-(15, 1, 'FERT-21-8-0', 'ปุ๋ยสูตร 21-0-0', 'ปุ๋ยสูตร 21-0-0', 'ปุ๋ยสูตร 21-0-0', 'ปุ๋ยสูตร 21-0-0', 'ปุ๋ยสูตร 21-0-0', 'ปุ๋ยสูตร 21-0-0', 'ปุ๋ยสูตร 21-0-0', 'ปุ๋ยสูตร 21-0-0', NULL, NULL, NULL, 50, 1, NULL, '2017-09-23 13:06:07', '2017-09-23 13:06:07'),
-(16, 1, 'FERT-SMS', 'ปุ๋ยอินทรีย์ SMS', 'ปุ๋ยอินทรีย์ SMS', 'ปุ๋ยอินทรีย์ SMS', 'ปุ๋ยอินทรีย์ SMS', 'ปุ๋ยอินทรีย์ SMS', 'ปุ๋ยอินทรีย์ SMS', 'ปุ๋ยอินทรีย์ SMS', 'ปุ๋ยอินทรีย์ SMS', NULL, NULL, NULL, 50, 1, NULL, '2017-09-23 13:06:07', '2017-09-23 13:06:07'),
-(17, 1, 'FERT-12-60-0', 'ปุ๋ยน้ำหยด 12-60-0', 'ปุ๋ยน้ำหยด 12-60-0', 'ปุ๋ยน้ำหยด 12-60-0', 'ปุ๋ยน้ำหยด 12-60-0', 'ปุ๋ยน้ำหยด 12-60-0', 'ปุ๋ยน้ำหยด 12-60-0', 'ปุ๋ยน้ำหยด 12-60-0', 'ปุ๋ยน้ำหยด 12-60-0', NULL, NULL, NULL, 50, 1, NULL, '2017-09-23 13:06:07', '2017-09-23 13:06:07'),
-(18, 1, 'FERT-16-16-8.2', 'ปุ๋ยรองพื้น 16-16-8 สปป.ลาว', 'ปุ๋ยรองพื้น 16-16-8 สปป.ลาว', 'ปุ๋ยรองพื้น 16-16-8 สปป.ลาว', 'ปุ๋ยรองพื้น 16-16-8 สปป.ลาว', 'ปุ๋ยรองพื้น 16-16-8 สปป.ลาว', 'ปุ๋ยรองพื้น 16-16-8 สปป.ลาว', 'ปุ๋ยรองพื้น 16-16-8 สปป.ลาว', 'ปุ๋ยรองพื้น 16-16-8 สปป.ลาว', NULL, NULL, NULL, 50, 1, NULL, '2017-09-23 13:06:07', '2017-09-23 13:06:07'),
-(19, 1, 'FERT-Soilmate', 'ปุ๋ยน้ำ Soilmate  b', 'ปุ๋ยน้ำSoilmate  b', 'ปุ๋ยน้ำ Soilmate  b', 'ปุ๋ยน้ำ Soilmate  b', 'ปุ๋ยน้ำ Soilmate  b', 'ปุ๋ยน้ำ Soilmate  b', 'ปุ๋ยน้ำ Soilmate  b', 'ปุ๋ยน้ำ Soilmate  b', NULL, NULL, NULL, 50, 1, NULL, '2017-09-23 13:06:07', '2017-09-23 13:06:07'),
-(20, 1, 'FERT-hyacinthe', 'ไฮแมก-บี', 'ไฮแมก-บี', 'ไฮแมก-บี', 'ไฮแมก-บี', 'ไฮแมก-บี', 'ไฮแมก-บี', 'ไฮแมก-บี', 'ไฮแมก-บี', NULL, NULL, NULL, 50, 1, NULL, '2017-09-23 13:06:07', '2017-09-23 13:06:07'),
-(22, 1, 'CHEM-THAI-2', ' บาก้าโซน / paraquot ', ' บาก้าโซน / paraquot ', 'บาก้าโซน / paraquot', 'บาก้าโซน / paraquot', 'บาก้าโซน / paraquot', 'บาก้าโซน / paraquot', 'บาก้าโซน / paraquot', 'บาก้าโซน / paraquot', NULL, NULL, NULL, 70, 1, NULL, '2017-09-23 11:06:07', '2017-09-23 11:06:07'),
-(23, 1, 'CHEM-THAI-3', ' ไซแอมซีน / atrazine', ' ไซแอมซีน / atrazine', 'ไซแอมซีน / atrazine', 'ไซแอมซีน / atrazine', 'ไซแอมซีน / atrazine', 'ไซแอมซีน / atrazine', 'ไซแอมซีน / atrazine', 'ไซแอมซีน / atrazine', NULL, NULL, NULL, 70, 1, NULL, '2017-09-23 11:06:07', '2017-09-23 11:06:07'),
-(24, 1, 'CHEM-THAI-4', ' ไซแอมทรีน / ametryn', ' ไซแอมทรีน / ametryn', 'ไซแอมทรีน / ametryn', 'ไซแอมทรีน / ametryn', 'ไซแอมทรีน / ametryn', 'ไซแอมทรีน / ametryn', 'ไซแอมทรีน / ametryn', 'ไซแอมทรีน / ametryn', NULL, NULL, NULL, 70, 1, NULL, '2017-09-23 11:06:07', '2017-09-23 11:06:07'),
-(25, 1, 'CHEM-THAI-5', ' บีเค แม็กพรี / atrazine ', ' บีเค แม็กพรี / atrazine ', 'บีเค แม็กพรี / atrazine', 'บีเค แม็กพรี / atrazine', 'บีเค แม็กพรี / atrazine', 'บีเค แม็กพรี / atrazine', 'บีเค แม็กพรี / atrazine', 'บีเค แม็กพรี / atrazine', NULL, NULL, NULL, 70, 1, NULL, '2017-09-23 11:06:07', '2017-09-23 11:06:07'),
-(26, 1, 'CHEM-THAI-6', ' บีเค แม็กโพส / ametryn', ' บีเค แม็กโพส / ametryn', 'ีเค แม็กโพส / ametryn', 'ีเค แม็กโพส / ametryn', 'ีเค แม็กโพส / ametryn', 'ีเค แม็กโพส / ametryn', 'ีเค แม็กโพส / ametryn', 'ีเค แม็กโพส / ametryn', NULL, NULL, NULL, 70, 1, NULL, '2017-09-23 11:06:07', '2017-09-23 11:06:07'),
-(27, 1, 'CHEM-THAI-7', ' บี เค เมทาล / pendimethalin +imazapic', ' บี เค เมทาล / pendimethalin +imazapic', ' บี เค เมทาล / pendimethalin +imazapic', ' บี เค เมทาล / pendimethalin +imazapic', ' บี เค เมทาล / pendimethalin +imazapic', ' บี เค เมทาล / pendimethalin +imazapic', ' บี เค เมทาล / pendimethalin +imazapic', ' บี เค เมทาล / pendimethalin +imazapic', NULL, NULL, NULL, 70, 1, NULL, '2017-09-23 11:06:07', '2017-09-23 11:06:07'),
-(28, 1, 'CHEM-THAI-8', ' บีเคเอมีน / 2,4 D dimetyl ammonium', ' บีเคเอมีน / 2,4 D dimetyl ammonium', ' บีเคเอมีน / 2,4 D dimetyl ammonium', ' บีเคเอมีน / 2,4 D dimetyl ammonium', ' บีเคเอมีน / 2,4 D dimetyl ammonium', ' บีเคเอมีน / 2,4 D dimetyl ammonium', ' บีเคเอมีน / 2,4 D dimetyl ammonium', ' บีเคเอมีน / 2,4 D dimetyl ammonium', NULL, NULL, NULL, 70, 1, NULL, '2017-09-23 11:06:07', '2017-09-23 11:06:07'),
-(29, 1, 'CHEM-THAI-9', ' อามีทรีน / ametryn', ' อามีทรีน / ametryn', 'อามีทรีน / ametryn', 'อามีทรีน / ametryn', 'อามีทรีน / ametryn', 'อามีทรีน / ametryn', 'อามีทรีน / ametryn', 'อามีทรีน / ametryn', NULL, NULL, NULL, 70, 1, NULL, '2017-09-23 11:06:07', '2017-09-23 11:06:07'),
-(30, 1, 'CHEM-THAI-10', ' แรงเจอร์เอ็กซ์ / pendimethalin +imazapic', ' แรงเจอร์เอ็กซ์ / pendimethalin +imazapic', 'แรงเจอร์เอ็กซ์ / pendimethalin +imazapic', 'แรงเจอร์เอ็กซ์ / pendimethalin +imazapic', 'แรงเจอร์เอ็กซ์ / pendimethalin +imazapic', 'แรงเจอร์เอ็กซ์ / pendimethalin +imazapic', 'แรงเจอร์เอ็กซ์ / pendimethalin +imazapic', 'แรงเจอร์เอ็กซ์ / pendimethalin +imazapic', NULL, NULL, NULL, 70, 1, NULL, '2017-09-23 11:06:07', '2017-09-23 11:06:07'),
-(31, 1, 'CHEM-THAI-11', ' บาก้าอัพ / glyphosate isopropylammonium', ' บาก้าอัพ / glyphosate isopropylammonium', 'บาก้าอัพ / glyphosate isopropylammonium', 'บาก้าอัพ / glyphosate isopropylammonium', 'บาก้าอัพ / glyphosate isopropylammonium', 'บาก้าอัพ / glyphosate isopropylammonium', 'บาก้าอัพ / glyphosate isopropylammonium', 'บาก้าอัพ / glyphosate isopropylammonium', NULL, NULL, NULL, 70, 1, NULL, '2017-09-23 11:06:07', '2017-09-23 11:06:07'),
-(32, 1, 'CHEM-THAI-12', ' ไซทรอน / triclopyr', ' ไซทรอน / triclopyr', 'ไซทรอน / triclopyr', 'ไซทรอน / triclopyr', 'ไซทรอน / triclopyr', 'ไซทรอน / triclopyr', 'ไซทรอน / triclopyr', 'ไซทรอน / triclopyr', NULL, NULL, NULL, 70, 1, NULL, '2017-09-23 11:06:07', '2017-09-23 11:06:07'),
-(33, 1, 'CHEM-THAI-13', ' ไซแอมคอมบี / ametryn+atrazine', ' ไซแอมคอมบี / ametryn+atrazine', 'ไซแอมคอมบี / ametryn+atrazine', 'ไซแอมคอมบี / ametryn+atrazine', 'ไซแอมคอมบี / ametryn+atrazine', 'ไซแอมคอมบี / ametryn+atrazine', 'ไซแอมคอมบี / ametryn+atrazine', 'ไซแอมคอมบี / ametryn+atrazine', NULL, NULL, NULL, 70, 1, NULL, '2017-09-23 11:06:07', '2017-09-23 11:06:07'),
-(34, 1, 'CHEM-THAI-14', ' Balance / isoxaflutole', ' Balance / isoxaflutole', 'Balance / isoxaflutole', 'Balance / isoxaflutole', 'Balance / isoxaflutole', 'Balance / isoxaflutole', 'Balance / isoxaflutole', 'Balance / isoxaflutole', NULL, NULL, NULL, 70, 1, NULL, '2017-09-23 11:06:07', '2017-09-23 11:06:07'),
-(35, 1, 'CHEM-THAI-15', ' บาซาเซ่ / DSMA + diuron + 2,4 D', ' บาซาเซ่ / DSMA + diuron + 2,4 D', ' บาซาเซ่ / DSMA + diuron + 2,4 D', ' บาซาเซ่ / DSMA + diuron + 2,4 D', ' บาซาเซ่ / DSMA + diuron + 2,4 D', ' บาซาเซ่ / DSMA + diuron + 2,4 D', ' บาซาเซ่ / DSMA + diuron + 2,4 D', ' บาซาเซ่ / DSMA + diuron + 2,4 D', NULL, NULL, NULL, 70, 1, NULL, '2017-09-23 11:06:07', '2017-09-23 11:06:07'),
-(36, 1, 'CHEM-THAI-16', ' ไซแอมโซน / paraquot ', ' ไซแอมโซน / paraquot ', 'ไซแอมโซน / paraquot', 'ไซแอมโซน / paraquot', 'ไซแอมโซน / paraquot', 'ไซแอมโซน / paraquot', 'ไซแอมโซน / paraquot', 'ไซแอมโซน / paraquot', NULL, NULL, NULL, 70, 1, NULL, '2017-09-23 11:06:07', '2017-09-23 11:06:07'),
-(37, 1, 'CHEM-THAI-17', ' โพลิดอล / ', ' โพลิดอล / ', 'โพลิดอล /', 'โพลิดอล /', 'โพลิดอล /', 'โพลิดอล /', 'โพลิดอล /', 'โพลิดอล /', NULL, NULL, NULL, 70, 1, NULL, '2017-09-23 11:06:07', '2017-09-23 11:06:07'),
-(38, 1, 'CHEM-THAI-18', ' คลอไฟลีฟอส / chlopyriphos + cypermetrin', ' คลอไฟลีฟอส / chlopyriphos + cypermetrin', 'คลอไฟลีฟอส / chlopyriphos + cypermetrin', 'คลอไฟลีฟอส / chlopyriphos + cypermetrin', 'คลอไฟลีฟอส / chlopyriphos + cypermetrin', 'คลอไฟลีฟอส / chlopyriphos + cypermetrin', 'คลอไฟลีฟอส / chlopyriphos + cypermetrin', 'คลอไฟลีฟอส / chlopyriphos + cypermetrin', NULL, NULL, NULL, 70, 1, NULL, '2017-09-23 11:06:07', '2017-09-23 11:06:07'),
-(39, 1, 'CHEM-THAI-19', ' อลาคลอร์ / alachlor', ' อลาคลอร์ / alachlor', 'อลาคลอร์ / alachlor', 'อลาคลอร์ / alachlor', 'อลาคลอร์ / alachlor', 'อลาคลอร์ / alachlor', 'อลาคลอร์ / alachlor', 'อลาคลอร์ / alachlor', NULL, NULL, NULL, 70, 1, NULL, '2017-09-23 11:06:07', '2017-09-23 11:06:07'),
-(40, 1, 'CHEM-THAI-20', ' อาเชทโตคลอร์ / alachlor', ' อาเชทโตคลอร์ / alachlor', ' อาเชทโตคลอร์ / alachlor', ' อาเชทโตคลอร์ / alachlor', ' อาเชทโตคลอร์ / alachlor', ' อาเชทโตคลอร์ / alachlor', ' อาเชทโตคลอร์ / alachlor', ' อาเชทโตคลอร์ / alachlor', NULL, NULL, NULL, 70, 1, NULL, '2017-09-23 11:06:07', '2017-09-23 11:06:07'),
-(41, 1, 'CHEM-THAI-21', ' ไซแอมควิก / quizalofop- P -ethyl', ' ไซแอมควิก / quizalofop- P -ethyl', ' ไซแอมควิก / quizalofop- P -ethyl', ' ไซแอมควิก / quizalofop- P -ethyl', ' ไซแอมควิก / quizalofop- P -ethyl', ' ไซแอมควิก / quizalofop- P -ethyl', ' ไซแอมควิก / quizalofop- P -ethyl', ' ไซแอมควิก / quizalofop- P -ethyl', NULL, NULL, NULL, 70, 1, NULL, '2017-09-23 11:06:07', '2017-09-23 11:06:07'),
-(42, 1, 'CHEM-THAI-22', ' ไซแอมซาแฟน / fumesafen 25% W/V SL', ' ไซแอมซาแฟน / fumesafen 25% W/V SL', 'ไซแอมซาแฟน / fumesafen 25% W/V SL', 'ไซแอมซาแฟน / fumesafen 25% W/V SL', 'ไซแอมซาแฟน / fumesafen 25% W/V SL', 'ไซแอมซาแฟน / fumesafen 25% W/V SL', 'ไซแอมซาแฟน / fumesafen 25% W/V SL', 'ไซแอมซาแฟน / fumesafen 25% W/V SL', NULL, NULL, NULL, 70, 1, NULL, '2017-09-23 11:06:07', '2017-09-23 11:06:07'),
-(43, 1, 'CHEM-THAI-23', ' ไซแอมฟอส / chlopyriphos + cypermetrin', ' ไซแอมฟอส / chlopyriphos + cypermetrin', 'ไซแอมฟอส / chlopyriphos + cypermetrin', 'ไซแอมฟอส / chlopyriphos + cypermetrin', 'ไซแอมฟอส / chlopyriphos + cypermetrin', 'ไซแอมฟอส / chlopyriphos + cypermetrin', 'ไซแอมฟอส / chlopyriphos + cypermetrin', 'ไซแอมฟอส / chlopyriphos + cypermetrin', NULL, NULL, NULL, 70, 1, NULL, '2017-09-23 11:06:07', '2017-09-23 11:06:07'),
-(44, 1, 'CHEM-THAI-24', ' ไซโครโบวเคล / ', ' ไซโครโบวเคล / ', 'ไซโครโบวเคล / ', 'ไซโครโบวเคล / ', 'ไซโครโบวเคล / ', 'ไซโครโบวเคล / ', 'ไซโครโบวเคล / ', 'ไซโครโบวเคล / ', NULL, NULL, NULL, 70, 1, NULL, '2017-09-23 11:06:07', '2017-09-23 11:06:07'),
-(45, 1, 'CHEM-THAI-25', ' ไซแอมเนทโทร / ', ' ไซแอมเนทโทร / ', 'ไซแอมเนทโทร /', 'ไซแอมเนทโทร /', 'ไซแอมเนทโทร /', 'ไซแอมเนทโทร /', 'ไซแอมเนทโทร /', 'ไซแอมเนทโทร /', NULL, NULL, NULL, 70, 1, NULL, '2017-09-23 11:06:07', '2017-09-23 11:06:07'),
-(46, 1, 'CHEM-THAI-26', ' คาโบซัลแฟน / carbosulfan', ' คาโบซัลแฟน / carbosulfan', 'คาโบซัลแฟน / carbosulfan', 'คาโบซัลแฟน / carbosulfan', 'คาโบซัลแฟน / carbosulfan', 'คาโบซัลแฟน / carbosulfan', 'คาโบซัลแฟน / carbosulfan', 'คาโบซัลแฟน / carbosulfan', NULL, NULL, NULL, 70, 1, NULL, '2017-09-23 11:06:07', '2017-09-23 11:06:07'),
-(47, 1, 'CHEM-THAI-27', ' บาก้าเคน / hexazinone ', ' บาก้าเคน / hexazinone ', 'บาก้าเคน / hexazinone', 'บาก้าเคน / hexazinone', 'บาก้าเคน / hexazinone', 'บาก้าเคน / hexazinone', 'บาก้าเคน / hexazinone', 'บาก้าเคน / hexazinone', NULL, NULL, NULL, 70, 1, NULL, '2017-09-23 11:06:07', '2017-09-23 11:06:07'),
-(48, 1, 'CHEM-THAI-28', ' ไซแอมพรี / ', ' ไซแอมพรี / ', 'ไซแอมพรี / ', 'ไซแอมพรี / ', 'ไซแอมพรี / ', 'ไซแอมพรี / ', 'ไซแอมพรี / ', 'ไซแอมพรี / ', NULL, NULL, NULL, 70, 1, NULL, '2017-09-23 11:06:07', '2017-09-23 11:06:07');
+(1, 1, '1', 'Shrimp food', 'Shrimp food', 'Shrimp food', 'Shrimp food', 'Shrimp food', 'Shrimp food', 'Shrimp food', 'Shrimp food', 'Shrimp food', 'Shrimp food', 'Shrimp food', 42, 1, NULL, '2018-01-29 20:24:14', '2018-01-29 20:24:14'),
+(2, 1, 'TILFOOD', 'Tilapia food', 'Tilapia food', 'Tilapia food', 'Tilapia food', 'Tilapia food', 'Tilapia food', 'Tilapia food', 'Tilapia food', 'Tilapia food', 'Tilapia food', 'Tilapia food', 41, 1, NULL, '2018-01-29 20:25:00', '2018-01-29 20:25:00');
 
 -- --------------------------------------------------------
 
@@ -2223,6 +2621,18 @@ CREATE TABLE `dt_farmag_plot_management` (
   `UPDATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
+--
+-- Contenu de la table `dt_farmag_plot_management`
+--
+
+INSERT INTO `dt_farmag_plot_management` (`ID`, `REG_ENTITY_FARM_PLOT_ID`, `ACTIVITY_START_DATE`, `ACTIVITY_END_DATE`, `CL_PLOT_ACTIVITY_TYPE_ID`, `CL_PRODUCT_ID`, `MEASURE_VALUE`, `CL_MEASURE_VALUE_UNIT_ID`, `ADDITIONNAL_MEASURE_VALUE`, `CL_ADDITIONNAL_MEASURE_VALUE_UNIT_ID`, `CL_TILING_ACTIVITY_TYPE_ID`, `UPDATER_ID`, `COMMENT`, `CREATED_AT`, `UPDATED_AT`) VALUES
+(18, 19, '2016-06-15 07:17:00', '2016-06-22 07:17:33', 1, NULL, 0, NULL, NULL, NULL, NULL, 4, '', '2017-12-06 02:17:57', '2017-12-06 02:17:57'),
+(19, 19, '2016-11-17 09:18:15', '2016-11-16 22:00:00', 6, NULL, 0, NULL, NULL, NULL, NULL, 4, '', '2017-12-06 02:18:51', '2017-12-06 02:18:51'),
+(20, 19, '2016-08-10 07:19:05', '2016-08-10 20:00:00', 10, 2, 450, 2, NULL, NULL, NULL, 4, '', '2017-12-06 02:19:47', '2017-12-06 02:19:47'),
+(21, 19, '2016-12-23 09:20:18', '2017-03-07 09:20:49', 4, NULL, 0, NULL, NULL, NULL, NULL, 4, '', '2017-12-06 02:21:29', '2017-12-06 02:21:29'),
+(22, 19, '2017-12-05 10:41:57', '2017-12-07 10:42:07', 10, 18, 0, NULL, NULL, NULL, NULL, 4, '', '2017-12-06 03:42:27', '2017-12-06 03:42:27'),
+(23, 20, '2017-12-19 11:25:33', '2017-12-20 11:25:36', 6, NULL, 0, NULL, NULL, NULL, NULL, 4, '', '2017-12-20 04:25:44', '2017-12-20 04:25:44');
+
 -- --------------------------------------------------------
 
 --
@@ -2243,6 +2653,17 @@ CREATE TABLE `dt_farmag_production` (
   `CREATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `UPDATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='soil analysis record';
+
+--
+-- Contenu de la table `dt_farmag_production`
+--
+
+INSERT INTO `dt_farmag_production` (`ID`, `REG_ENTITY_FARM_ID`, `CL_PROD_DATA_ENTRY_TYPE_ID`, `DATE_FROM`, `DATE_TO`, `CL_COMMODITIES_ID`, `PRODUCTION_QUANTITY`, `CL_PRODUCTION_QUANTITY_UNIT_ID`, `UPDATER_ID`, `COMMENT`, `CREATED_AT`, `UPDATED_AT`) VALUES
+(11, 135, 1, '2016-12-16', '2017-03-22', 1, '3400.0', 11, 4, '', '2017-12-06 02:14:58', '2017-12-06 02:14:58'),
+(12, 135, 1, '2017-12-13', '2017-12-15', 1, '33.0', 29, 4, '', '2017-12-12 06:28:57', '2017-12-12 06:28:57'),
+(13, 141, 1, '2018-01-16', '2018-01-17', 1, '450.0', 11, 3, '', '2018-01-16 08:43:45', '2018-01-16 08:43:45'),
+(14, 141, 1, '2018-01-09', '2018-01-10', 1, '12.0', 11, 3, '', '2018-01-16 13:30:48', '2018-01-16 13:30:48'),
+(15, 141, 1, '2018-01-02', '2018-01-03', 1, '412.0', 11, 3, '', '2018-01-16 16:17:09', '2018-01-16 16:17:09');
 
 -- --------------------------------------------------------
 
@@ -2286,6 +2707,13 @@ CREATE TABLE `dt_farmaq_pond_management` (
   `UPDATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
+--
+-- Contenu de la table `dt_farmaq_pond_management`
+--
+
+INSERT INTO `dt_farmaq_pond_management` (`ID`, `REG_ENTITY_FARM_POND_ID`, `ACTIVITY_START_DATE`, `ACTIVITY_END_DATE`, `CL_POND_ACTIVITY_TYPE_ID`, `CL_PRODUCT_ID`, `MEASURE_VALUE`, `CL_MEASURE_VALUE_UNIT_ID`, `ADDITIONNAL_MEASURE_VALUE`, `CL_ADDITIONNAL_MEASURE_VALUE_UNIT_ID`, `UPDATER_ID`, `COMMENT`, `CREATED_AT`, `UPDATED_AT`) VALUES
+(1, 176, '2018-01-02 08:25:17', '2018-01-03 08:25:19', 3, 1, 45, 2, NULL, NULL, 3, '', '2018-01-29 20:25:27', '2018-01-29 20:25:27');
+
 -- --------------------------------------------------------
 
 --
@@ -2325,6 +2753,14 @@ CREATE TABLE `dt_farmaq_production` (
   `CREATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `UPDATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Aquaculture farm total production';
+
+--
+-- Contenu de la table `dt_farmaq_production`
+--
+
+INSERT INTO `dt_farmaq_production` (`ID`, `REG_ENTITY_FARM_ID`, `CL_PROD_DATA_ENTRY_TYPE_ID`, `DATE_FROM`, `DATE_TO`, `CL_SPECIES_ID`, `PRODUCTION_QUANTITY`, `CL_PRODUCTION_QUANTITY_UNIT_ID`, `UPDATER_ID`, `COMMENT`, `CREATED_AT`, `UPDATED_AT`) VALUES
+(13, 141, 1, '2017-01-01', '2017-12-30', 1, '12.0', 11, 3, '', '2018-01-16 16:35:44', '2018-01-16 16:35:44'),
+(14, 141, 1, '2018-01-18', '2018-01-19', 2, '456.0', 11, 3, '', '2018-01-16 18:10:53', '2018-01-16 18:10:53');
 
 -- --------------------------------------------------------
 
@@ -2407,95 +2843,37 @@ CREATE TABLE `reg_entities` (
 --
 
 INSERT INTO `reg_entities` (`ID`, `CL_ENTITY_UID_TYPE_ID`, `IDENTIFIER`, `STANDARD_IDENTIFIER`, `CL_NATIONALITY_COUNTRY_ID`, `NAME`, `SURNAME`, `MIDDLE_NAME`, `SUFFIX_NAME`, `ACRONYM`, `SALUTATION`, `GENDER`, `DATE_OF_BIRTH`, `CL_ADDRESS_COUNTRY_ID`, `ADDRESS_CITY`, `ADDRESS`, `ADDRESS_ZIP_CODE`, `CL_ADML1_ID`, `PHONE_NUMBER`, `MOBILE_NUMBER`, `FAX_NUMBER`, `E_MAIL`, `INSTANT_MESSANGER`, `WEBSITE`, `REGISTRATION_NUMBER`, `IMG_URL`, `LTO_NUMBER`, `LTO_VALIDITY_DATE`, `UPDATER_ID`, `COMMENT`, `CREATED_AT`, `UPDATED_AT`) VALUES
-(1, 1, NULL, NULL, 205, 'Tew', '', '', NULL, NULL, 'Mr.', 'M', NULL, 205, '', '', '', 0, '', 'TBC', '', '', NULL, NULL, '', NULL, 0, NULL, 3, '', '2018-01-16 20:49:55', '2018-01-16 20:49:55'),
-(2, 2, NULL, NULL, NULL, 'Tew Farm', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 205, 'Chantaburi', 'Khung district, Chantaburi province', '', 0, '', 'TBC', '', '', '', NULL, NULL, NULL, 0, NULL, 3, '', '2018-01-16 20:50:36', '2018-01-16 20:50:36'),
-(3, 1, NULL, NULL, 108, 'Trane', '', '', NULL, NULL, 'Mr.', 'M', NULL, 205, '', '', '', 0, '', 'TBC', '', '', NULL, NULL, '', NULL, 0, NULL, 3, '', '2018-01-16 20:52:03', '2018-01-16 20:52:03'),
-(4, 8, NULL, NULL, 205, 'Andaman Seafood CO.,LTD.', NULL, NULL, NULL, '', NULL, NULL, NULL, 205, 'Bangkok', 'SUIT 216/44,49 L.P.N. TOWER 21TH FLOOR , NONGLINCHEE RD.,CHONGNONSEE, YANNAWA', '10120', 0, '66 2285 2450-1', '66 7783 5579-80', '66 2285 2911', 'group@andaman-food.com', NULL, NULL, '1', NULL, 0, NULL, 3, '', '2018-01-16 20:53:36', '2018-01-16 20:53:36'),
-(5, 5, NULL, NULL, 94, 'Atina Farms Cooperative', NULL, NULL, NULL, '', NULL, NULL, NULL, 94, '', '', '', 0, '', 'TBC', '', '', NULL, NULL, '2', NULL, 0, NULL, 3, '', '2018-01-16 20:54:13', '2018-01-16 20:54:13'),
-(6, 5, NULL, NULL, 205, 'Sam Roi Yot Shrimp Farm Cooperative', NULL, NULL, NULL, '', NULL, NULL, NULL, 205, 'Prachuap Khiri Khan', '', '', 0, '', 'TBC', '', '', NULL, NULL, '3', NULL, 0, NULL, 3, '', '2018-01-16 20:54:53', '2018-01-16 20:54:53'),
-(7, 8, NULL, NULL, 205, 'Thai Union Feed Mill Co., Ltd.', NULL, NULL, NULL, '', NULL, NULL, NULL, 205, 'Samutsakorn', '89/1 Moo 2, Rama II Road, Kalong Subdistrict, Muang District', '74000', 0, '66 (0) 3481-6500', '66 (0) 63 230 9410', '66 (0) 3481-6629', 'Yurachat.Sangsingkaew@thaiunion.com', NULL, NULL, '4', NULL, 0, NULL, 3, '', '2018-01-16 20:55:36', '2018-01-16 20:55:36'),
-(8, 8, NULL, NULL, 205, 'Thai Union Hatchery Co., Ltd.', NULL, NULL, NULL, '', NULL, NULL, NULL, 205, 'Phang Nga', '42 Moo 14, Kokkloy Sub-district, Takuatung District', '82140', 0, '66 (0) 7658-4000-27', '66 (0) 7658-4000-27', '66 (0) 7658-4028-9', 'Yurachat.Sangsingkaew@thaiunion.com', NULL, NULL, '5', NULL, 0, NULL, 3, '', '2018-01-16 20:56:20', '2018-01-16 20:56:20'),
-(9, 1, '', NULL, 205, 'Jaruk', 'Prapom', '', '', '', 'Mr.', 'M', NULL, 205, '', '', '', 0, '', 'TBC', '', '', NULL, '', '', '', 0, NULL, 2, '', '2017-01-11 08:40:35', '2017-01-11 08:40:35'),
-(10, 1, '', NULL, 108, 'Tew Worker 2', '', '', '', '', 'Mrs.', 'F', NULL, 205, '', '', '', 0, '', 'TBC', '', '', NULL, '', '', '', 0, NULL, 2, '', '2017-01-11 09:20:55', '2017-01-11 09:20:55'),
-(11, 1, '', NULL, 205, 'Decha', 'Barnleudech', '', '', '', 'Mr.', 'M', NULL, 205, 'Prachuap Khiri Khan', 'Moo 2, Rai Kao Subdistrict, Sam Roi Yot District', '77180', 0, '', '0898364133', '', '', NULL, '', '', '', 0, NULL, 2, '', '2017-01-11 15:10:47', '2017-01-20 11:16:44'),
-(12, 1, '', NULL, 205, 'Ning Nong (Nickname)', '', '', '', '', 'Mr.', 'M', NULL, 205, 'Prachuap Khiri Khan', 'Moo 2, Rai Kao Subdistrict, Sam Roi Yot District', '77180', 0, '', 'TBC', '', '', NULL, '', '', '', 0, NULL, 2, '', '2017-01-11 15:22:26', '2017-01-20 11:17:21'),
-(13, 1, '', NULL, 205, 'Chen', 'Huaheng', '', '', '', 'Mr.', 'M', NULL, 205, 'Prachuap Khiri Khan', 'Moo 1, Sam Krathai Subdistrict, Kui Buri District ', '77150', 0, '', '0861757989', '', '', NULL, '', '', '', 0, NULL, 2, '', '2017-01-17 08:37:54', '2017-01-20 10:14:09'),
-(14, 1, '', NULL, 205, 'Naiyana', 'Phuengphakdi', '', '', '', 'Mrs.', 'F', NULL, 205, 'Prachuap Khiri Khan', 'Moo 2, Rai Kao Subdistrict, Sam Roi Yot District', '', 0, '', '0892595298', '', '', NULL, '', '', '', 0, NULL, 2, '', '2017-01-17 08:59:40', '2017-01-20 11:03:46'),
-(15, 1, '', NULL, 205, 'Thongthern', 'Phuangphet', '', '', '', 'Mr.', 'M', NULL, 205, 'Prachuap Khiri Khan', 'Moo 1, Sam Krathai Subdistrict, Kui Buri District ', '77150', 0, '', '0984295819', '', '', NULL, '', '', '', 0, NULL, 2, '', '2017-01-17 09:07:42', '2017-01-20 09:18:37'),
-(16, 1, '', NULL, 205, 'Seri', 'Kochio', '', '', '', 'Mr.', 'M', NULL, 205, 'Prachuap Khiri Khan', 'Moo 1, Sam Krathai Subdistrict, Kui Buri District ', '77150', 0, '', '0852162592', '', '', NULL, '', '', '', 0, NULL, 2, '', '2017-01-17 09:13:02', '2017-01-20 11:06:32'),
-(17, 1, '', NULL, 205, 'Sunan', 'Rakyim', '', '', '', 'Mr.', 'M', NULL, 205, 'Prachuap Khiri Khan', 'Moo 2, Rai Kao Subdistrict, Sam Roi Yot District', '77180', 0, '', '0852661378', '', '', NULL, '', '', '', 0, NULL, 2, '', '2017-01-17 09:16:37', '2017-01-20 11:12:46'),
-(18, 1, '', NULL, 205, 'Somsak', 'Thongtun', '', '', '', 'Mr.', 'M', NULL, 205, 'Prachuap Khiri Khan', 'Moo 1, Sam Krathai Subdistrict, Kui Buri District ', '77150', 0, '', '0839746629', '', '', NULL, '', '', '', 0, NULL, 2, '', '2017-01-17 09:21:22', '2017-01-20 11:10:30'),
-(19, 1, '', NULL, 205, 'Bunloed', 'Phuengphakdi', '', '', '', 'Mr.', 'M', NULL, 205, 'Prachuap Khiri Khan', 'Moo 2, Rai Kao Subdistrict, Sam Roi Yot District', '77180', 0, '', '0870722281', '', '', NULL, '', '', '', 0, NULL, 2, '', '2017-01-17 09:38:33', '2017-01-20 10:03:21'),
-(20, 1, '', NULL, 205, 'Vichai', 'Huaheng', '', '', '', 'Mr.', 'M', NULL, 205, 'Prachuap Khiri Khan', 'Moo 1, Sam Krathai Subdistrict, Kui Buri District ', '77150', 0, '', '0860366905', '', '', NULL, '', '', '', 0, NULL, 2, '', '2017-01-17 09:55:03', '2017-01-20 08:37:47'),
-(21, 1, '', NULL, 205, 'Man ', 'Temta', '', '', '', 'Mr.', 'M', NULL, 205, 'Prachuap Khiri Khan', 'Moo 1, Sam Krathai Subdistrict, Kui Buri District ', '77150', 0, '', '0951085528', '', '', NULL, '', '', '', 0, NULL, 2, '', '2017-01-17 10:01:24', '2017-01-20 08:41:44'),
-(22, 1, '', NULL, 205, 'Arnon', 'Manesuwan', '', '', '', 'Mr.', 'M', NULL, 205, 'Prachuap Khiri Khan', 'Moo 5, Rai Mai Subdistrict, Sam Roi Yot District', '77180', 0, '', '0927010684', '', '', NULL, '', '', '', 0, NULL, 2, '', '2017-01-17 10:08:35', '2017-01-20 08:50:04'),
-(23, 1, '', NULL, 205, 'Oangchan', 'Mansuwan', '', '', '', 'Mrs.', 'F', NULL, 205, 'Prachuap Khiri Khan', 'Moo 5, Rai Mai Subdistrict, Sam Roi Yot District', '77180', 0, '', '0927010684', '', '', NULL, '', '', '', 0, NULL, 2, '', '2017-01-17 10:14:18', '2017-01-20 08:52:23'),
-(24, 1, '', NULL, 205, 'Sangat', 'Chaibun', '', '', '', 'Mr.', 'M', NULL, 205, 'Prachuap Khiri Khan', 'Moo 2, Rai Kao Subdistrict, Sam Roi Yot District', '77180', 0, '', '0822494743', '', '', NULL, '', '', '', 0, NULL, 2, '', '2017-01-17 11:26:27', '2017-01-20 10:12:49'),
-(25, 1, '', NULL, 205, 'Somchai', 'Loekam', '', '', '', 'Mr.', 'M', NULL, 205, 'Prachuap Khiri Khan', 'Moo 5, Rai Mai Subdistrict, Sam Roi Yot District', '77180', 0, '', '0898296805', '', '', NULL, '', '', '', 0, NULL, 2, '', '2017-01-17 11:41:10', '2017-01-20 09:57:52'),
-(26, 1, '', NULL, 205, 'Phuvadon', 'Phetpradub', '', '', '', 'Mr.', 'M', NULL, 205, 'Prachuap Khiri Khan', 'Moo 9, Kui Nua Subdistrict, Kui Buri District', '77150', 0, '', '0843196654', '', '', NULL, '', '', '', 0, NULL, 2, '', '2017-01-17 11:46:34', '2017-01-20 09:54:26'),
-(27, 1, '', NULL, 205, 'Thongdee', 'Phetpradub', '', '', '', 'Mr.', 'M', NULL, 205, 'Prachuap Khiri Khan', 'Moo 9, Kui Nua Subdistrict, Kui Buri District', '77150', 0, '', '0857026937', '', '', NULL, '', '', '', 0, NULL, 2, '', '2017-01-17 11:52:04', '2017-01-20 09:46:08'),
-(28, 1, '', NULL, 205, 'Thongpoon ', 'Torrasap', '', '', '', 'Mr.', 'M', NULL, 205, 'Prachuap Khiri Khan', 'Moo 9, Kui Nua Subdistrict, Kui Buri District', '77150', 0, '', '0849715564', '', '', NULL, '', '', '', 0, NULL, 2, '', '2017-01-17 11:56:42', '2017-01-20 09:43:20'),
-(29, 1, '', NULL, 205, 'Samran', 'Hatsadam', '', '', '', 'Mrs.', 'F', NULL, 205, 'Prachuap Khiri Khan', 'Moo 5, Rai Mai Subdistrict, Sam Roi Yot District', '77180', 0, '', '0822414116', '', '', NULL, '', '', '', 0, NULL, 2, '', '2017-01-17 12:00:54', '2017-01-20 09:38:55'),
-(30, 1, '', NULL, 205, 'Tongchai', 'Thorasab', '', '', '', 'Mr.', 'M', NULL, 205, 'Prachuap Khiri Khan', 'Moo 9, Kui Nua Subdistrict, Kui Buri District', '77150', 0, '', '0810110371', '', '', NULL, '', '', '', 0, NULL, 2, '', '2017-01-17 12:06:26', '2017-01-20 09:37:38'),
-(31, 1, '', NULL, 205, 'Prakit', 'Uthaitipwuttikorn', '', '', '', 'Mr.', 'M', NULL, 205, 'Prachuap Khiri Khan', 'Moo 1, Sam Krathai Subdistrict, Kui Buri District ', '77150', 0, '', '0910123417', '', '', NULL, '', '', '', 0, NULL, 2, '', '2017-01-17 12:11:06', '2017-01-20 09:30:29'),
-(32, 1, '', NULL, 205, 'Prani', 'Yamyai', '', '', '', 'Mrs.', 'F', NULL, 205, 'Prachuap Khiri Khan', 'Moo 5, Rai Mai Subdistrict, Sam Roi Yot District', '77180', 0, '', '0844139444', '', '', NULL, '', '', '', 0, NULL, 2, '', '2017-01-17 12:17:46', '2017-01-20 09:26:02'),
-(33, 1, '', NULL, 205, 'Chomkhan', 'Meuansuwan', '', '', '', 'Mrs.', 'F', NULL, 205, 'Prachuap Khiri Khan', 'Moo 5, Rai Mai Subdistrict, Sam Roi Yot District', '77180', 0, '', '0822408337', '', '', NULL, '', '', '', 0, NULL, 2, '', '2017-01-17 12:23:11', '2017-01-20 09:04:58'),
-(34, 1, '', NULL, 205, 'Pathomkan', 'Yimyai', '', '', '', 'Mrs.', 'F', NULL, 205, 'Prachuap Khiri Khan', 'Moo 1, Sam Krathai Subdistrict, Kui Buri District ', '77150', 0, '', '0819952083', '', '', NULL, '', '', '', 0, NULL, 2, '', '2017-01-17 12:30:15', '2017-01-20 09:04:07'),
-(35, 1, '', NULL, 205, 'Prachern', 'Yimyai', '', '', '', 'Mr.', 'M', NULL, 205, 'Prachuap Khiri Khan', 'Moo 1, Sam Krathai Subdistrict, Kui Buri District ', '77150', 0, '', '0804322933', '', '', NULL, '', '', '', 0, NULL, 2, '', '2017-01-17 12:36:17', '2017-01-20 08:54:26'),
-(36, 1, '', NULL, 205, 'Somphan', 'Laosuan', '', '', '', 'Mr.', 'M', NULL, 205, 'Prachuap Khiri Khan', 'Moo 1, Sam Krathai Subdistrict, Kui Buri District ', '77150', 0, '', '0870067416', '', '', NULL, '', '', '', 0, NULL, 2, '', '2017-01-17 13:14:03', '2017-01-20 08:25:22'),
-(37, 1, '', NULL, 205, 'Somkhit ', 'Phuangphae', '', '', '', 'Mr.', 'M', NULL, 205, 'Prachuap Khiri Khan', 'Moo 5, Rai Mai Subdistrict, Sam Roi Yot District', '77180', 0, '', '0877178509', '', '', NULL, '', '', '', 0, NULL, 2, '', '2017-01-17 13:20:55', '2017-01-18 10:08:22'),
-(38, 1, '', NULL, 205, 'Sayan', 'Bunma', '', '', '', 'Mr.', 'M', NULL, 205, 'Prachuap Khiri Khan', 'Moo 2, Rai Kao Subdistrict, Sam Roi Yot District', '77180', 0, '', '0891582857', '', '', NULL, '', '', '', 0, NULL, 2, '', '2017-01-17 13:23:30', '2017-01-18 10:10:03'),
-(39, 1, '', NULL, 205, 'Somnuek', 'Loekam', '', '', '', 'Mr.', 'M', NULL, 205, 'Prachuap Khiri Khan', 'Moo 2, Rai Kao Subdistrict, Sam Roi Yot District', '77180', 0, '', '0897412416', '', '', NULL, '', '', '', 0, NULL, 2, '', '2017-01-17 13:24:48', '2017-01-18 08:58:27'),
-(40, 1, '', NULL, 205, 'Siri', 'Ainpasit', '', '', '', 'Mr.', 'M', NULL, 205, 'Prachuap Khiri Khan', 'Moo 5, Rai Mai Subdistrict, Sam Roi Yot District', '77180', 0, '', '0840154443', '', '', NULL, '', '', '', 0, NULL, 2, '', '2017-01-17 13:26:18', '2017-01-18 08:56:46'),
-(41, 1, '', NULL, 205, 'Saman', ' Sukkrom', '', '', '', 'Mr.', 'M', NULL, 205, 'Prachuap Khiri Khan', 'Moo 2, Rai Kao Subdistrict, Sam Roi Yot District', '77180', 0, '', '0811912347', '', '', NULL, '', '', '', 0, NULL, 2, '', '2017-01-17 13:27:26', '2017-01-18 08:54:29'),
-(42, 1, '', NULL, 205, 'Woravit', 'Rodbowonwittahaya', '', '', '', 'Mr.', 'M', NULL, 205, 'Prachuap Khiri Khan', 'Moo 5, Rai Mai Subdistrict, Sam Roi Yot District', '77180', 0, '', '0833175803', '', '', NULL, '', '', '', 0, NULL, 2, '', '2017-01-17 13:28:36', '2017-01-18 08:43:13'),
-(43, 1, '', NULL, 205, 'Somsong ', 'Nessuwan', '', '', '', 'Mr.', 'M', NULL, 205, 'Prachuap Khiri Khan', 'Moo 2, Rai Kao Subdistrict, Sam Roi Yot District', '77180', 0, '', '0890764380', '', '', NULL, '', '', '', 0, NULL, 2, '', '2017-01-17 13:29:45', '2017-01-18 08:33:36'),
-(44, 1, '', NULL, 205, 'Setthakit ', 'Laochuan', '', '', '', 'Mr.', 'M', NULL, 205, 'Prachuap Khiri Khan', 'Moo 1, Sam Krathai Subdistrict, Kui Buri District', '77150', 0, '', '0983705194', '', '', NULL, '', '', '', 0, NULL, 2, '', '2017-01-17 13:30:51', '2017-01-18 07:55:28'),
-(45, 1, '', NULL, 205, 'Nuengruethai', 'Gojiw', '', '', '', 'Mrs.', 'F', NULL, 205, '', '', '', 0, '', '0833175449', '', '', NULL, '', '', '', 0, NULL, 2, '', '2017-01-17 13:34:11', '2017-01-17 13:34:11'),
-(46, 1, '', NULL, 205, 'Lamphu', 'Vasayangkui', '', '', '', 'Mrs.', 'F', NULL, 205, 'Prachuap Khiri Khan', 'Moo 5, Rai Mai Subdistrict, Sam Roi Yot District', '77180', 0, '', '0957956624', '', '', NULL, '', '', '', 0, NULL, 2, '', '2017-01-17 13:36:13', '2017-01-18 10:11:37'),
-(47, 1, '', NULL, 205, 'Rawisara', 'Authaithipwutthikon', '', '', '', 'Mrs.', 'F', NULL, 205, '', '', '', 0, '', '0874141765', '', '', NULL, '', '', '', 0, NULL, 2, '', '2017-01-17 13:38:56', '2017-01-17 13:41:52'),
-(48, 1, '', NULL, 205, 'Ratchaset', 'Wongsawat', '', '', '', 'Mr.', 'M', NULL, 205, 'Prachuap Khiri Khan', '111 Moo 2, Rai Kao Subdistrict, Sam Roi Yot District', '77180', 0, '', '0863264268', '', '', NULL, '', '', '', 0, NULL, 2, '', '2017-01-17 13:45:21', '2017-01-18 10:25:08'),
-(49, 1, '', NULL, 205, 'Supot', 'Yudee', '', '', '', 'Mr.', 'M', NULL, 205, 'Prachuap Khiri Khan', 'Moo 2, Rai Kao Subdistrict, Sam Roi Yot District', '77180', 0, '', '0877178509', '', '', NULL, '', '', '', 0, NULL, 2, '', '2017-01-17 14:03:36', '2017-01-18 09:00:27'),
-(50, 1, '', NULL, 205, 'Phanjaporn', 'Bunma', '', '', '', 'Mr.', 'M', NULL, 205, 'Prachuap Khiri Khan', 'Moo 2, Rai Kao Subdistrict, Sam Roi Yot District', '77180', 0, '', '0888498838', '', '', NULL, '', '', '', 0, NULL, 2, '', '2017-01-17 14:20:12', '2017-01-18 08:52:12'),
-(51, 2, NULL, NULL, NULL, 'Decha Farm', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 205, 'Prachuap Khiri Khan', 'Moo 2, Rai Kao Subdistrict, Sam Roi Yot District', '77180', 0, '', '0898364133', '', '', '', NULL, NULL, NULL, 0, NULL, 3, '', '2018-01-17 10:22:16', '2018-01-17 10:22:16'),
-(52, 2, NULL, NULL, NULL, 'Naiyana Farm', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 205, 'Prachuap Khiri Khan', 'Moo 2, Rai Kao Subdistrict, Sam Roi Yot District', '77180', 0, '', '0892595298', '', '', '', NULL, NULL, NULL, 0, NULL, 3, '', '2018-01-17 10:24:28', '2018-01-17 10:24:28'),
-(53, 2, NULL, NULL, NULL, 'Chen Farm', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 205, 'Prachuap Khiri Khan', 'Moo 1, Sam Krathai Subdistrict, Kui Buri District ', '77150', 0, '', '0861757989', '', '', '', NULL, NULL, NULL, 0, NULL, 3, '', '2018-01-17 10:25:44', '2018-01-17 10:25:44'),
-(54, 2, NULL, NULL, NULL, 'Thongthern Farm', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 205, 'Prachuap Khiri Khan', 'Moo 1, Sam Krathai Subdistrict, Kui Buri District ', '77150', 0, '', '0984295819', '', '', '', NULL, NULL, NULL, 0, NULL, 3, '', '2018-01-17 10:26:44', '2018-01-17 10:26:44'),
-(55, 2, NULL, NULL, NULL, 'Seri Farm', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 205, 'Prachuap Khiri Khan', 'Moo 1, Sam Krathai Subdistrict, Kui Buri District ', '77150', 0, '', '0852162592', '', '', '', NULL, NULL, NULL, 0, NULL, 3, '', '2018-01-17 10:27:42', '2018-01-17 10:27:42'),
-(56, 2, NULL, NULL, NULL, 'Sunan Farm', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 205, 'Prachuap Khiri Khan', 'Moo 2, Rai Kao Subdistrict, Sam Roi Yot District', '77180', 0, '', '0852661378', '', '', '', NULL, NULL, NULL, 0, NULL, 3, '', '2018-01-17 10:28:46', '2018-01-17 10:28:46'),
-(57, 2, NULL, NULL, NULL, 'Somsak Farm', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 205, 'Prachuap Khiri Khan', 'Moo 1, Samkrat Tai, Kui Buri', '77150', 0, '', '0839746629', '', '', '', NULL, NULL, NULL, 0, NULL, 3, '', '2018-01-17 10:29:42', '2018-01-17 10:29:42'),
-(58, 2, NULL, NULL, NULL, 'Somphan Farm', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 205, 'Prachuap Khiri Khan', 'Moo 1, Sam Krathai Subdistrict, Kui Buri District ', '77150', 0, '', '0870067416', '', '', '', NULL, NULL, NULL, 0, NULL, 3, '', '2018-01-17 10:30:48', '2018-01-17 10:30:48'),
-(59, 2, NULL, NULL, NULL, 'Sangat Farm', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 205, 'Prachuap Khiri Khan', 'Moo 2, Rai Kao Subdistrict, Sam Roi Yot District', '77180', 0, '', '0822494743', '', '', '', NULL, NULL, NULL, 0, NULL, 3, '', '2018-01-17 10:32:18', '2018-01-17 10:32:18'),
-(60, 2, NULL, NULL, NULL, 'Vichai Farm', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 205, 'Prachuap Khiri Khan', 'Moo 1, Sam Krathai Subdistrict, Kui Buri District ', '77150', 0, '', '0860366905', '', '', '', NULL, NULL, NULL, 0, NULL, 3, '', '2018-01-17 10:33:18', '2018-01-17 10:33:18'),
-(61, 2, NULL, NULL, NULL, 'Man Farm', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 205, 'Prachuap Khiri Khan', 'Moo 1, Sam Krathai Subdistrict, Kui Buri District ', '77150', 0, '', '0951085528', '', '', '', NULL, NULL, NULL, 0, NULL, 3, '', '2018-01-17 10:34:13', '2018-01-17 10:34:13'),
-(62, 2, NULL, NULL, NULL, 'Arnon Farm', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 205, 'Prachuap Khiri Khan', 'Moo 5, Rai Mai Subdistrict, Sam Roi Yot District', '77180', 0, '', '0927010684', '', '', '', NULL, NULL, NULL, 0, NULL, 3, '', '2018-01-17 10:35:29', '2018-01-17 10:35:29'),
-(63, 2, NULL, NULL, NULL, 'Oangchan Farm', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 205, 'Prachuap Khiri Khan', 'Moo 5, Rai Mai Subdistrict, Sam Roi Yot District', '77180', 0, '', '0927010684', '', '', '', NULL, NULL, NULL, 0, NULL, 3, '', '2018-01-17 10:41:57', '2018-01-17 10:41:57'),
-(64, 2, NULL, NULL, NULL, 'Bunloed Farm', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 205, 'Prachuap Khiri Khan', 'Moo 2, Rai Kao Subdistrict, Sam Roi Yot District', '77180', 0, '', '0870722281', '', '', '', NULL, NULL, NULL, 0, NULL, 3, '', '2018-01-17 10:43:29', '2018-01-17 10:43:29'),
-(65, 2, NULL, NULL, NULL, 'Somchai Farm', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 205, 'Prachuap Khiri Khan', 'Moo 5, Rai Mai Subdistrict, Sam Roi Yot District', '77180', 0, '', '0898296805', '', '', '', NULL, NULL, NULL, 0, NULL, 3, '', '2018-01-17 10:44:16', '2018-01-17 10:44:16'),
-(66, 2, NULL, NULL, NULL, 'Phuvadon Farm', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 205, 'Prachuap Khiri Khan', 'Moo 9, Kui Nua Subdistrict, Kui Buri District', '77150', 0, '', '0843196654', '', '', '', NULL, NULL, NULL, 0, NULL, 3, '', '2018-01-17 10:45:30', '2018-01-17 10:45:30'),
-(67, 2, NULL, NULL, NULL, 'Thongdee Farm', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 205, 'Prachuap Khiri Khan', 'Moo 9, Kui Nua Subdistrict, Kui Buri District', '77150', 0, '', '0857026937', '', '', '', NULL, NULL, NULL, 0, NULL, 3, '', '2018-01-17 10:46:34', '2018-01-17 10:46:34'),
-(68, 2, NULL, NULL, NULL, 'Thongpoon Farm', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 205, 'Prachuap Khiri Khan', 'Moo 9, Kui Nua Subdistrict, Kui Buri District', '77150', 0, '', '0849715564', '', '', '', NULL, NULL, NULL, 0, NULL, 3, '', '2018-01-17 10:47:29', '2018-01-17 10:47:29'),
-(69, 2, NULL, NULL, NULL, 'Samran Farm', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 205, 'Prachuap Khiri Khan', 'Moo 5, Rai Mai Subdistrict, Sam Roi Yot District', '77180', 0, '', '0822414116', '', '', '', NULL, NULL, NULL, 0, NULL, 3, '', '2018-01-17 10:48:42', '2018-01-17 10:48:42'),
-(70, 2, NULL, NULL, NULL, 'Tongchai Farm', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 205, 'Prachuap Khiri Khan', 'Moo 9, Kui Nua Subdistrict, Kui Buri District', '77150', 0, '', '0810110371', '', '', '', NULL, NULL, NULL, 0, NULL, 3, '', '2018-01-17 10:49:51', '2018-01-17 10:49:51'),
-(71, 2, NULL, NULL, NULL, 'Prakit Farm', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 205, 'Prachuap Khiri Khan', 'Moo 1, Sam Krathai Subdistrict, Kui Buri District ', '77150', 0, '', '0910123417', '', '', '', NULL, NULL, NULL, 0, NULL, 3, '', '2018-01-17 10:50:43', '2018-01-17 10:50:43'),
-(72, 2, NULL, NULL, NULL, 'Prani Farm', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 205, 'Prachuap Khiri Khan', 'Moo 5, Rai Mai Subdistrict, Sam Roi Yot District', '77180', 0, '', '0844139444', '', '', '', NULL, NULL, NULL, 0, NULL, 3, '', '2018-01-17 10:51:33', '2018-01-17 10:51:33'),
-(73, 2, NULL, NULL, NULL, 'Chomkhan Farm', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 205, 'Prachuap Khiri Khan', 'Moo 5, Rai Mai Subdistrict, Sam Roi Yot District', '77180', 0, '', '0822408337', '', '', '', NULL, NULL, NULL, 0, NULL, 3, '', '2018-01-17 11:48:04', '2018-01-17 11:48:04'),
-(74, 2, NULL, NULL, NULL, 'Patomkan Farm', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 205, 'Prachuap Khiri Khan', 'Moo 1, Samkrat Tai, Kui Buri', '77180', 0, '', '0819952083', '', '', '', NULL, NULL, NULL, 0, NULL, 3, '', '2018-01-17 11:49:29', '2018-01-17 11:49:29'),
-(75, 2, NULL, NULL, NULL, 'Prachern Farm', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 205, 'Prachuap Khiri Khan', 'Moo 1, Sam Krathai Subdistrict, Kui Buri District ', '77150', 0, '', '0804322933', '', '', '', NULL, NULL, NULL, 0, NULL, 3, '', '2018-01-17 11:50:31', '2018-01-17 11:50:31'),
-(76, 2, NULL, NULL, NULL, 'Somkhit Farm', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 205, 'Prachuap Khiri Khan', 'Moo 5, Rai Mai Subdistrict, Sam Roi Yot District', '77180', 0, '', '0877178509', '', '', '', NULL, NULL, NULL, 0, NULL, 3, '', '2018-01-17 11:51:37', '2018-01-17 11:51:37'),
-(77, 2, NULL, NULL, NULL, 'Sayan Farm', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 205, 'Prachuap Khiri Khan', 'Moo 2, Rai Kao Subdistrict, Sam Roi Yot District', '77180', 0, '', '0891582857', '', '', '', NULL, NULL, NULL, 0, NULL, 3, '', '2018-01-17 11:52:55', '2018-01-17 11:52:55'),
-(78, 2, NULL, NULL, NULL, 'Somnuek Farm', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 205, 'Prachuap Khiri Khan', 'Moo 2, Rai Kao Subdistrict, Sam Roi Yot District', '77180', 0, '', '0897412416', '', '', '', NULL, NULL, NULL, 0, NULL, 3, '', '2018-01-17 11:54:02', '2018-01-17 11:54:02'),
-(79, 2, NULL, NULL, NULL, 'Siri Farm', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 205, 'Prachuap Khiri Khan', 'Moo 5, Rai Mai Subdistrict, Sam Roi Yot District', '77180', 0, '', '0947374352', '', '', '', NULL, NULL, NULL, 0, NULL, 3, '', '2018-01-17 11:55:22', '2018-01-17 11:55:22'),
-(80, 2, NULL, NULL, NULL, 'Saman Farm', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 205, 'Prachuap Khiri Khan', 'Moo 2, Rai Kao District, Sam Roi Yot', '77180', 0, '', '0811912347', '', '', '', NULL, NULL, NULL, 0, NULL, 3, '', '2018-01-17 11:56:40', '2018-01-17 11:56:40'),
-(81, 2, NULL, NULL, NULL, 'Woravit Farm', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 205, 'Prachuap Khiri Khan', 'Moo 5, Rai Mai Subdistrict, Sam Roi Yot District', '77180', 0, '', '0833175803', '', '', '', NULL, NULL, NULL, 0, NULL, 3, '', '2018-01-17 11:57:41', '2018-01-17 11:57:41'),
-(82, 2, NULL, NULL, NULL, 'Somsong Farm', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 205, 'Prachuap Khiri Khan', 'Moo 2, Rai Kao Subdistrict, Sam Roi Yot District', '77180', 0, '', '0890764380', '', '', '', NULL, NULL, NULL, 0, NULL, 3, '', '2018-01-17 11:58:49', '2018-01-17 11:58:49'),
-(83, 2, NULL, NULL, NULL, 'Setthakit Farm', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 205, 'Prachuap Khiri Khan', 'Moo 1, Sam Krathai Subdistrict, Kui Buri District ', '77150', 0, '', '0983705194', '', '', '', NULL, NULL, NULL, 0, NULL, 3, '', '2018-01-17 11:59:56', '2018-01-17 11:59:56'),
-(84, 2, NULL, NULL, NULL, 'Nuengruethai Farm', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 205, 'Prachuap Khiri Khan', 'Moo 1, Samkrat Tai, Kui Buri', '77150', 0, '', '0833175449', '', '', '', NULL, NULL, NULL, 0, NULL, 3, '', '2018-01-17 12:00:48', '2018-01-17 12:00:48'),
-(85, 2, NULL, NULL, NULL, 'Lamphu Farm', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 205, 'Prachuap Khiri Khan', 'Moo 5, Rai Mai Subdistrict, Sam Roi Yot District', '77180', 0, '', '0957956624', '', '', '', NULL, NULL, NULL, 0, NULL, 3, '', '2018-01-17 12:01:44', '2018-01-17 12:01:44'),
-(86, 2, NULL, NULL, NULL, 'Rawisara Farm', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 205, 'Prachuap Khiri Khan', 'Moo 1, Sam Krathai Subdistrict, Kui Buri District ', '77150', 0, '', '0874141765', '', '', '', NULL, NULL, NULL, 0, NULL, 3, '', '2018-01-17 12:02:45', '2018-01-17 12:02:45'),
-(87, 2, NULL, NULL, NULL, 'Farm Thung Ngan', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 205, 'Prachuap Khiri Khan', '111 Moo 2, Rai Kao Subdistrict, Sam Roi Yot District', '77180', 0, '', '0863264268', '', '', '', NULL, NULL, NULL, 0, NULL, 3, '', '2018-01-17 12:03:51', '2018-01-17 12:03:51'),
-(88, 2, NULL, NULL, NULL, 'Supot Farm', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 205, 'Prachuap Khiri Khan', 'Moo 2, Rai Kao Subdistrict, Sam Roi Yot District', '77180', 0, '', '0877178509', '', '', '', NULL, NULL, NULL, 0, NULL, 3, '', '2018-01-17 12:04:47', '2018-01-17 12:04:47'),
-(89, 2, NULL, NULL, NULL, 'Phanjaporn Farm', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 205, 'Prachuap Khiri Khan', 'Moo 2, Rai Kao Subdistrict, Sam Roi Yot District', '77180', 0, '', '0888498838', '', '', '', NULL, NULL, NULL, 0, NULL, 3, '', '2018-01-17 12:05:48', '2018-01-17 12:05:48');
+(49, 1, '', NULL, 205, 'Thongdee', 'Phetpradub', '', '', '', 'Mr.', 'M', NULL, 205, 'Prachuap Khiri Khan', 'Prachuap Khiri Khan, Moo 9, Kui Nua Subdistrict, Kui Buri District', '77150', 0, '', '0857026937', '', '', '', '', '', '', 0, NULL, 2, 'test-data', '2017-03-17 09:52:04', '2017-03-20 07:46:08'),
+(134, 1, NULL, NULL, 205, 'Somchai', 'Sawaengha', '', NULL, NULL, 'Mr.', 'M', NULL, 205, '', '', '', 0, '', '98639274937', '', '', NULL, NULL, '1', NULL, 0, NULL, 4, '', '2017-12-06 01:58:50', '2017-12-06 01:58:50'),
+(135, 2, NULL, NULL, NULL, 'PhuKiew SugarLand ', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 205, 'Chayaphum', '', '', 0, '', '9997546908', '', 'pau__badia@hotmail.com', '', NULL, NULL, NULL, 0, NULL, 4, '', '2017-12-06 02:00:12', '2017-12-06 02:00:12'),
+(136, 1, NULL, NULL, 205, 'Suchard', 'Phongeun', '', NULL, NULL, 'Mr.', 'M', NULL, 205, '', '', '', 0, '', '09888777689', '', '', NULL, NULL, '', NULL, 0, NULL, 4, '', '2017-12-06 02:03:21', '2017-12-06 02:03:21'),
+(137, 1, NULL, NULL, 205, 'Titiporn', 'Choteekul', '', NULL, NULL, 'Mr.', 'M', NULL, 205, '', '', '', 0, '', '09888777679', '', '', NULL, NULL, '', NULL, 0, NULL, 4, '', '2017-12-06 02:06:05', '2017-12-06 02:06:05'),
+(138, 8, NULL, NULL, 205, 'Mitr Phol', NULL, NULL, NULL, 'MP', NULL, NULL, NULL, 205, '', '', '', 0, '', '09887899999', '', '', NULL, NULL, '', NULL, 0, NULL, 4, '', '2017-12-06 02:10:00', '2017-12-06 02:10:00'),
+(139, 8, NULL, NULL, 205, 'ChemiAgronos Ltd.', NULL, NULL, NULL, '', NULL, NULL, NULL, 205, '', '', '', 0, '', '099999999', '', '', NULL, NULL, '', NULL, 0, NULL, 4, '', '2017-12-06 02:11:39', '2017-12-06 02:11:39'),
+(141, 2, NULL, NULL, NULL, 'Somchai Sawaengha', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 205, '???????', '', '', 0, '', '0955461566', '', '', '', NULL, NULL, NULL, 0, NULL, 13, '', '2017-12-20 02:34:51', '2017-12-20 02:34:51');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `reg_entity_facilities`
+--
+
+CREATE TABLE `reg_entity_facilities` (
+  `REG_ENTITY_FARM_ID` int(11) NOT NULL,
+  `ACCESS_TOILETS` tinyint(1) NOT NULL,
+  `ACCESS_TOILETS_URL` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'Pictures of toilets',
+  `ACCESS_SHOWER` tinyint(1) NOT NULL,
+  `ACCESS_SHOWER_URL` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'Picture of shower',
+  `ACCESS_TO_FREE_DRINKING` tinyint(1) DEFAULT NULL,
+  `ACCESS_TO_FREE_DRINKING_URL` varchar(256) COLLATE utf8_bin DEFAULT NULL,
+  `ACCESS_REST_ROOM` tinyint(1) NOT NULL,
+  `ACCESS_REST_ROOM_URL` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'Pictures of private room',
+  `PRESENCE_FIRST_AID_KIT` tinyint(1) DEFAULT NULL,
+  `UPDATER_ID` int(11) NOT NULL DEFAULT '1',
+  `COMMENT` varchar(1024) COLLATE utf8_bin DEFAULT NULL,
+  `CREATED_AT` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `UPDATED_AT` timestamp NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='descirption of existing facilities';
 
 -- --------------------------------------------------------
 
@@ -2524,16 +2902,24 @@ CREATE TABLE `reg_entity_farmag_plots` (
   `ID` int(11) UNSIGNED NOT NULL,
   `REG_ENTITY_FARM_ID` int(11) NOT NULL DEFAULT '0',
   `PLOT_NUMBER` varchar(10) COLLATE utf8_bin NOT NULL,
-  `PLOT_DESCRIPTION` varchar(256) COLLATE utf8_bin NOT NULL,
+  `PLOT_DESCRIPTION` varchar(256) COLLATE utf8_bin DEFAULT NULL,
   `CL_COMMODITIES_ID` int(11) NOT NULL DEFAULT '0',
   `PLOT_SIZE` double(8,2) NOT NULL DEFAULT '0.00',
-  `CL_PLOT_SIZE_UNIT_ID` tinyint(1) NOT NULL DEFAULT '0',
+  `CL_PLOT_SIZE_UNIT_ID` int(11) NOT NULL DEFAULT '0',
   `IS_IRRIGATED` int(11) NOT NULL DEFAULT '0',
   `UPDATER_ID` int(11) NOT NULL DEFAULT '1',
-  `CREATED_AT` timestamp NULL DEFAULT NULL,
-  `UPDATED_AT` timestamp NULL DEFAULT NULL,
-  `COMMENT` varchar(512) COLLATE utf8_bin DEFAULT NULL
+  `COMMENT` varchar(512) COLLATE utf8_bin DEFAULT NULL,
+  `CREATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `UPDATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Contenu de la table `reg_entity_farmag_plots`
+--
+
+INSERT INTO `reg_entity_farmag_plots` (`ID`, `REG_ENTITY_FARM_ID`, `PLOT_NUMBER`, `PLOT_DESCRIPTION`, `CL_COMMODITIES_ID`, `PLOT_SIZE`, `CL_PLOT_SIZE_UNIT_ID`, `IS_IRRIGATED`, `UPDATER_ID`, `COMMENT`, `CREATED_AT`, `UPDATED_AT`) VALUES
+(19, 135, '1', 'Old plot', 1, 30.00, 29, 1, 0, NULL, '2017-12-31 23:00:00', '2017-12-31 23:00:00'),
+(20, 135, '2', 'New plot', 1, 50.00, 29, 1, 0, NULL, '2017-12-31 23:00:00', '2017-12-31 23:00:00');
 
 -- --------------------------------------------------------
 
@@ -2544,21 +2930,21 @@ CREATE TABLE `reg_entity_farmag_plots` (
 CREATE TABLE `reg_entity_farmaq_details` (
   `ID` int(10) UNSIGNED NOT NULL,
   `REG_ENTITY_FARM_ID` int(11) NOT NULL,
-  `ESCAPE_PREVENTION_DEVICE_URL` varchar(256) COLLATE utf8_bin NOT NULL,
-  `RECORD_INSPECTION` varchar(45) COLLATE utf8_bin NOT NULL,
-  `FRY_FROM_WILD` tinyint(1) NOT NULL,
-  `USE_OF_ADDITIVE` tinyint(1) NOT NULL,
-  `CL_FARM_PRODUCTION_TYPE_ID` int(11) NOT NULL,
-  `TIDAL_FLOW_SYSTEM` tinyint(1) NOT NULL,
-  `RAS` tinyint(1) NOT NULL,
-  `CL_FARM_WATER_SUPPLY_ID` int(11) NOT NULL,
-  `USE_FRESH_GROUNDWATER` tinyint(1) NOT NULL,
-  `USE_FRESH_GROUNDWATER_URL` varchar(256) COLLATE utf8_bin NOT NULL,
-  `DISHARGE_SALINE_IN_FRESH` tinyint(1) NOT NULL,
-  `DISHARGE_SALINE_IN_FRESH_URL` varchar(256) COLLATE utf8_bin NOT NULL,
-  `DISPOSAL_SLUDGE` varchar(256) COLLATE utf8_bin NOT NULL,
+  `ESCAPE_PREVENTION_DEVICE_URL` varchar(256) COLLATE utf8_bin DEFAULT NULL,
+  `RECORD_INSPECTION` varchar(45) COLLATE utf8_bin DEFAULT NULL,
+  `FRY_FROM_WILD` tinyint(1) DEFAULT NULL,
+  `USE_OF_ADDITIVE` tinyint(1) DEFAULT NULL,
+  `CL_FARM_PRODUCTION_TYPE_ID` int(11) DEFAULT NULL,
+  `TIDAL_FLOW_SYSTEM` tinyint(1) DEFAULT NULL,
+  `RAS` tinyint(1) DEFAULT NULL,
+  `CL_FARM_WATER_SUPPLY_ID` int(11) DEFAULT NULL,
+  `USE_FRESH_GROUNDWATER` tinyint(1) DEFAULT NULL,
+  `USE_FRESH_GROUNDWATER_URL` varchar(256) COLLATE utf8_bin DEFAULT NULL,
+  `DISHARGE_SALINE_IN_FRESH` tinyint(1) DEFAULT NULL,
+  `DISHARGE_SALINE_IN_FRESH_URL` varchar(256) COLLATE utf8_bin DEFAULT NULL,
+  `DISPOSAL_SLUDGE` varchar(256) COLLATE utf8_bin DEFAULT NULL,
   `UPDATER_ID` int(11) NOT NULL DEFAULT '1',
-  `COMMENT` varchar(512) COLLATE utf8_bin NOT NULL,
+  `COMMENT` varchar(512) COLLATE utf8_bin DEFAULT NULL,
   `CREATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `UPDATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
@@ -2577,9 +2963,9 @@ CREATE TABLE `reg_entity_farmaq_ponds` (
   `CL_POND_TYPE_ID` int(11) NOT NULL DEFAULT '0',
   `CL_SPECIES_ID` int(11) DEFAULT '0',
   `POND_SIZE` double(8,2) NOT NULL DEFAULT '0.00',
-  `CL_POND_SIZE_UNIT_ID` int(11) NOT NULL DEFAULT '0',
+  `CL_POND_SIZE_UNIT_ID` int(11) DEFAULT NULL,
   `POND_VOLUME` double(8,2) NOT NULL DEFAULT '0.00',
-  `CL_POND_VOLUME_UNIT_ID` int(11) NOT NULL DEFAULT '0',
+  `CL_POND_VOLUME_UNIT_ID` int(11) DEFAULT NULL,
   `UPDATER_ID` int(11) NOT NULL DEFAULT '1',
   `COMMENT` varchar(512) COLLATE utf8_bin DEFAULT NULL,
   `CREATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -2591,174 +2977,8 @@ CREATE TABLE `reg_entity_farmaq_ponds` (
 --
 
 INSERT INTO `reg_entity_farmaq_ponds` (`ID`, `REG_ENTITY_FARM_ID`, `POND_NUMBER`, `POND_DESCRIPTION`, `CL_POND_TYPE_ID`, `CL_SPECIES_ID`, `POND_SIZE`, `CL_POND_SIZE_UNIT_ID`, `POND_VOLUME`, `CL_POND_VOLUME_UNIT_ID`, `UPDATER_ID`, `COMMENT`, `CREATED_AT`, `UPDATED_AT`) VALUES
-(1, 2, '1', 'Growing-out pond', 2, 1, 5.00, 29, 0.00, 0, 2, '', '2017-01-11 09:05:28', '2017-01-11 10:44:11'),
-(2, 2, '2', 'Growing-out pond', 2, 1, 5.00, 29, 0.00, 0, 2, '', '2017-01-11 09:06:33', '2017-01-11 09:54:06'),
-(3, 2, '3', 'Growing-out pond', 2, 1, 6.00, 29, 0.00, 0, 2, '', '2017-01-11 09:08:32', '2017-01-11 09:54:10'),
-(4, 2, '4', 'Growing-out pond', 2, 1, 8.00, 29, 0.00, 0, 2, '', '2017-01-11 09:09:06', '2017-01-11 09:54:15'),
-(5, 2, '5', 'Reservoir pond', 1, NULL, 12.00, 29, 0.00, 0, 2, '', '2017-01-11 09:11:07', '2017-01-11 09:52:55'),
-(6, 2, '6', 'Reservoir pond', 1, NULL, 6.00, 29, 0.00, 0, 2, '', '2017-01-11 09:12:28', '2017-01-11 09:53:42'),
-(7, 2, '7', 'Sediment pond', 4, NULL, 5.00, 29, 0.00, 0, 2, '', '2017-01-11 09:13:52', '2017-01-11 09:13:52'),
-(8, 51, '1', 'Growing-out pond', 2, 1, 3.92, 29, 0.00, 0, 2, '', '2017-01-11 15:39:22', '2017-01-17 13:06:44'),
-(9, 51, '2', 'Growing-out pond', 2, 1, 3.06, 29, 0.00, 0, 2, '', '2017-01-11 15:39:46', '2017-01-17 13:06:53'),
-(10, 51, '3', 'Growing-out pond', 2, 1, 2.87, 29, 0.00, 0, 2, '', '2017-01-11 15:40:11', '2017-01-17 13:07:11'),
-(11, 51, '4', 'Growing fish (recycling water)', 2, 4, 4.88, 29, 0.00, 0, 2, '', '2017-01-11 15:49:40', '2017-01-17 13:07:51'),
-(12, 51, '5', 'Reservoir pond', 1, NULL, 3.68, 29, 0.00, 0, 2, '', '2017-01-11 15:50:39', '2017-01-17 13:08:58'),
-(18, 52, '1', 'Growing', 2, 1, 0.00, 29, 0.00, 0, 2, '', '2017-01-17 09:01:35', '2017-01-17 09:01:35'),
-(19, 52, '2', 'Recycling pond', 4, NULL, 0.00, 29, 0.00, 0, 2, '', '2017-01-17 09:03:10', '2017-01-17 09:03:10'),
-(20, 54, '1', 'Growing', 2, 1, 2.00, 29, 0.00, 0, 2, '', '2017-01-17 09:09:04', '2017-01-17 12:56:35'),
-(21, 54, '2', 'Recycling water pond', 4, NULL, 0.00, 29, 0.00, 0, 2, '', '2017-01-17 09:09:26', '2017-01-17 09:09:26'),
-(22, 54, '3', 'empty pond', 1, NULL, 0.00, 29, 0.00, 0, 2, '', '2017-01-17 09:10:00', '2017-01-17 09:10:00'),
-(23, 54, '4', 'Empty pond', 1, NULL, 0.00, 29, 0.00, 0, 2, '', '2017-01-17 09:10:25', '2017-01-17 09:10:25'),
-(24, 55, '1', 'Growing', 2, 1, 0.00, 29, 0.00, 0, 2, '', '2017-01-17 09:13:56', '2017-01-17 09:13:56'),
-(25, 55, '2', 'Recycling water pond', 4, NULL, 0.00, 29, 0.00, 0, 2, '', '2017-01-17 09:14:23', '2017-01-17 09:14:23'),
-(26, 55, '3', 'Empty pond', 1, NULL, 0.00, 29, 0.00, 0, 2, '', '2017-01-17 09:14:55', '2017-01-17 09:14:55'),
-(27, 56, '1', 'Growing', 2, 1, 0.00, 29, 0.00, 0, 2, '', '2017-01-17 09:17:37', '2017-01-17 09:17:37'),
-(28, 56, '2', 'Sludge +++', 4, NULL, 0.00, 29, 0.00, 0, 2, '', '2017-01-17 09:18:02', '2017-01-17 09:18:02'),
-(29, 56, '3', 'Recycling water pond', 4, NULL, 0.00, 29, 0.00, 0, 2, '', '2017-01-17 09:18:34', '2017-01-17 09:18:34'),
-(30, 57, '1', 'Growing', 2, 1, 0.00, 29, 0.00, 0, 2, '', '2017-01-17 09:22:22', '2017-01-17 09:22:22'),
-(31, 57, '2', 'Sludge +++', 4, NULL, 0.00, 29, 0.00, 0, 2, '', '2017-01-17 09:22:39', '2017-01-17 09:22:39'),
-(32, 57, '3', 'Recycling water pond', 4, NULL, 0.00, 29, 0.00, 0, 2, '', '2017-01-17 09:23:01', '2017-01-17 09:23:01'),
-(33, 57, '4', 'Empty pond', 1, NULL, 0.00, 29, 0.00, 0, 2, '', '2017-01-17 09:23:27', '2017-01-17 09:23:27'),
-(34, 58, '1', 'Growing', 2, 1, 0.00, 29, 0.00, 0, 2, '', '2017-01-17 09:26:53', '2017-01-17 09:26:53'),
-(35, 58, '2', 'Recycling water pond', 4, NULL, 0.00, 29, 0.00, 0, 2, '', '2017-01-17 09:27:19', '2017-01-17 09:27:19'),
-(36, 58, '3', 'Empty pond', 1, NULL, 0.00, 29, 0.00, 0, 2, '', '2017-01-17 09:28:03', '2017-01-17 09:28:03'),
-(37, 58, '4', 'Empty pond', 1, NULL, 0.00, 29, 0.00, 0, 2, '', '2017-01-17 09:28:25', '2017-01-17 09:28:25'),
-(38, 58, '5', 'Empty pond', 1, NULL, 0.00, 29, 0.00, 0, 2, '', '2017-01-17 09:28:47', '2017-01-17 09:28:47'),
-(39, 58, '6', 'Empty pond', 1, NULL, 0.00, 29, 0.00, 0, 2, '', '2017-01-17 09:29:16', '2017-01-17 09:29:16'),
-(40, 58, '7', 'Empty pond', 1, NULL, 0.00, 29, 0.00, 0, 2, '', '2017-01-17 09:29:49', '2017-01-17 09:29:49'),
-(41, 59, '1', 'Growing', 2, 1, 0.00, 29, 0.00, 0, 2, '', '2017-01-17 09:39:25', '2017-01-17 09:39:25'),
-(42, 59, '2', 'Sludge +++', 4, NULL, 0.00, 29, 0.00, 0, 2, '', '2017-01-17 09:40:41', '2017-01-17 09:40:41'),
-(43, 59, '3', 'Recycling water pond', 4, NULL, 0.00, 29, 0.00, 0, 2, '', '2017-01-17 09:41:07', '2017-01-17 09:41:07'),
-(44, 59, '4', 'Empty pond', 1, NULL, 0.00, 29, 0.00, 0, 2, '', '2017-01-17 09:41:27', '2017-01-17 09:41:27'),
-(45, 59, '5', 'Empty pond', 1, NULL, 0.00, 29, 0.00, 0, 2, '', '2017-01-17 09:41:46', '2017-01-17 09:41:46'),
-(46, 60, '1', 'Growing ', 2, 1, 0.00, 29, 0.00, 0, 2, '', '2017-01-17 09:56:26', '2017-01-17 09:56:26'),
-(47, 60, '2', 'Recycling water pond', 4, NULL, 0.00, 29, 0.00, 0, 2, '', '2017-01-17 09:56:43', '2017-01-17 09:56:43'),
-(48, 60, '3', 'Empty pond', 1, NULL, 0.00, 29, 0.00, 0, 2, '', '2017-01-17 09:57:23', '2017-01-17 09:57:23'),
-(49, 60, '4', 'Empty pond', 1, NULL, 0.00, 29, 0.00, 0, 2, '', '2017-01-17 09:57:49', '2017-01-17 09:57:49'),
-(50, 60, '5', 'Empty pond', 1, NULL, 0.00, 29, 0.00, 0, 2, '', '2017-01-17 09:58:10', '2017-01-17 09:58:10'),
-(51, 60, '6', 'Empty pond', 1, NULL, 0.00, 29, 0.00, 0, 2, '', '2017-01-17 09:58:30', '2017-01-17 09:58:30'),
-(52, 60, '7', 'Empty pond', 1, NULL, 0.00, 29, 0.00, 0, 2, '', '2017-01-17 09:58:53', '2017-01-17 09:58:53'),
-(53, 60, '8', 'Empty pond', 1, NULL, 0.00, 29, 0.00, 0, 2, '', '2017-01-17 09:59:16', '2017-01-17 09:59:16'),
-(54, 61, '1', 'Growing', 2, 1, 0.00, 29, 0.00, 0, 2, '', '2017-01-17 10:04:00', '2017-01-17 10:04:00'),
-(55, 61, '2', 'Sludge +++', 4, NULL, 0.00, 29, 0.00, 0, 2, '', '2017-01-17 10:04:35', '2017-01-17 10:04:35'),
-(56, 61, '3', 'Recycling water pond', 4, NULL, 0.00, 29, 0.00, 0, 2, '', '2017-01-17 10:04:59', '2017-01-17 10:04:59'),
-(57, 61, '4', 'Empty pond', 1, NULL, 0.00, 29, 0.00, 0, 2, '', '2017-01-17 10:05:26', '2017-01-17 10:05:26'),
-(58, 61, '5', 'Empty pond', 1, NULL, 0.00, 29, 0.00, 0, 2, '', '2017-01-17 10:05:57', '2017-01-17 10:05:57'),
-(59, 62, '1', 'Growing', 2, 1, 2.25, 29, 0.00, 0, 2, '', '2017-01-17 10:09:33', '2017-01-17 10:09:33'),
-(60, 62, '2', 'Sludge +++', 4, NULL, 0.00, 29, 0.00, 0, 2, '', '2017-01-17 10:09:48', '2017-01-17 10:09:48'),
-(61, 62, '3', 'Recycling water pond', 4, NULL, 0.00, 29, 0.00, 0, 2, '', '2017-01-17 10:10:20', '2017-01-17 10:12:08'),
-(62, 62, '4', 'Empty pond', 1, NULL, 0.00, 29, 0.00, 0, 2, '', '2017-01-17 10:12:23', '2017-01-17 10:12:23'),
-(63, 63, '1', 'growing', 2, 1, 2.50, 29, 0.00, 0, 2, '', '2017-01-17 10:15:26', '2017-01-17 10:15:26'),
-(64, 63, '2', 'Sludge +++', 4, NULL, 0.00, 29, 0.00, 0, 2, '', '2017-01-17 10:15:39', '2017-01-17 10:15:39'),
-(65, 63, '3', 'Recycling water pond', 4, NULL, 0.00, 29, 0.00, 0, 2, '', '2017-01-17 10:16:06', '2017-01-17 10:16:06'),
-(66, 63, '4', 'Empty pond', 1, NULL, 0.00, 29, 0.00, 0, 2, '', '2017-01-17 10:16:30', '2017-01-17 10:16:30'),
-(67, 64, '1', 'Growing', 3, 1, 0.00, 29, 0.00, 0, 2, '', '2017-01-17 11:32:46', '2017-01-17 11:32:46'),
-(68, 64, '2', 'Sludge +++', 4, NULL, 0.00, 29, 0.00, 0, 2, '', '2017-01-17 11:33:53', '2017-01-17 11:33:53'),
-(69, 64, '3', 'Recycling water pond', 4, NULL, 0.00, 29, 0.00, 0, 2, '', '2017-01-17 11:34:27', '2017-01-17 11:34:27'),
-(70, 64, '4', 'Empty pond', 1, NULL, 0.00, 29, 0.00, 0, 2, '', '2017-01-17 11:34:55', '2017-01-17 11:34:55'),
-(71, 64, '5', 'Empty pond', 1, NULL, 0.00, 29, 0.00, 0, 2, '', '2017-01-17 11:35:20', '2017-01-17 11:35:20'),
-(72, 64, '6', 'Empty pond', 1, NULL, 0.00, 29, 0.00, 0, 2, '', '2017-01-17 11:35:42', '2017-01-17 11:35:42'),
-(73, 64, '7', 'Empty pond', 1, NULL, 0.00, 29, 0.00, 0, 2, '', '2017-01-17 11:36:02', '2017-01-17 11:36:02'),
-(74, 64, '8', 'Empty pond', 1, NULL, 0.00, 29, 0.00, 0, 2, '', '2017-01-17 11:36:34', '2017-01-17 11:36:34'),
-(75, 64, '9', 'Empty pond', 1, NULL, 0.00, 29, 0.00, 0, 2, '', '2017-01-17 11:37:07', '2017-01-17 11:37:07'),
-(76, 64, '10', 'Empty pond', 1, NULL, 0.00, 29, 0.00, 0, 2, '', '2017-01-17 11:37:47', '2017-01-17 11:37:47'),
-(77, 64, '11', 'Empty pond', 1, NULL, 0.00, 29, 0.00, 0, 2, '', '2017-01-17 11:38:08', '2017-01-17 11:38:08'),
-(78, 65, '1', 'Growing', 2, 1, 2.25, 29, 0.00, 0, 2, '', '2017-01-17 11:42:04', '2017-01-17 11:42:04'),
-(79, 65, '2', 'Sludge +++', 4, NULL, 0.00, 29, 0.00, 0, 2, '', '2017-01-17 11:42:19', '2017-01-17 11:42:19'),
-(80, 65, '3', 'Recycling water pond', 4, NULL, 0.00, 29, 0.00, 0, 2, '', '2017-01-17 11:42:52', '2017-01-17 11:42:52'),
-(81, 65, '4', 'Empty pond', 1, NULL, 0.00, 29, 0.00, 0, 2, '', '2017-01-17 11:43:12', '2017-01-17 11:43:12'),
-(82, 66, '1', 'Growing', 2, 1, 2.30, 29, 0.00, 0, 2, '', '2017-01-17 11:47:22', '2017-01-17 11:47:22'),
-(83, 66, '2', 'Sludge +++', 4, NULL, 0.00, 29, 0.00, 0, 2, '', '2017-01-17 11:47:37', '2017-01-17 11:47:37'),
-(84, 66, '3', 'Recycling water pond', 4, NULL, 0.00, 29, 0.00, 0, 2, '', '2017-01-17 11:47:58', '2017-01-17 11:47:58'),
-(85, 66, '4', 'Empty pond', 1, NULL, 0.00, 29, 0.00, 0, 2, '', '2017-01-17 11:48:45', '2017-01-17 11:48:45'),
-(86, 67, '1', 'Growing', 2, 1, 1.15, 29, 0.00, 0, 2, '', '2017-01-17 11:53:09', '2017-01-17 11:53:09'),
-(87, 67, '2', 'Sludge +++', 4, NULL, 0.00, 29, 0.00, 0, 2, '', '2017-01-17 11:53:31', '2017-01-17 11:53:31'),
-(88, 67, '3', 'Recycling water pond', 4, NULL, 0.00, 29, 0.00, 0, 2, '', '2017-01-17 11:53:52', '2017-01-17 11:53:52'),
-(89, 67, '4', 'Empty pond', 1, NULL, 0.00, 29, 0.00, 0, 2, '', '2017-01-17 11:54:12', '2017-01-17 11:54:12'),
-(90, 68, '1', 'Growing', 2, 1, 2.65, 29, 0.00, 0, 2, '', '2017-01-17 11:57:26', '2017-01-17 11:57:26'),
-(91, 68, '2', 'Sludge +++', 4, NULL, 0.00, 29, 0.00, 0, 2, '', '2017-01-17 11:57:42', '2017-01-17 11:57:42'),
-(92, 68, '3', 'Recycling water pond', 4, NULL, 0.00, 29, 0.00, 0, 2, '', '2017-01-17 11:58:05', '2017-01-17 11:58:05'),
-(93, 68, '4', 'Empty pond', 1, NULL, 0.00, 29, 0.00, 0, 2, '', '2017-01-17 11:58:33', '2017-01-17 11:58:33'),
-(94, 69, '1', 'Growing', 2, 1, 2.35, 29, 0.00, 0, 2, '', '2017-01-17 12:01:52', '2017-01-17 12:01:52'),
-(95, 69, '2', 'Sludge +++', 4, NULL, 0.00, 29, 0.00, 0, 2, '', '2017-01-17 12:02:13', '2017-01-17 12:02:13'),
-(96, 69, '3', 'Recycling water pond', 4, NULL, 0.00, 29, 0.00, 0, 2, '', '2017-01-17 12:02:40', '2017-01-17 12:02:40'),
-(97, 70, '1', 'Growing', 2, 1, 2.00, 29, 0.00, 0, 2, '', '2017-01-17 12:07:15', '2017-01-17 12:07:15'),
-(98, 70, '2', 'Sludge +++', 4, NULL, 0.00, 29, 0.00, 0, 2, '', '2017-01-17 12:07:32', '2017-01-17 12:07:32'),
-(99, 70, '3', 'Recycling water pond', 4, NULL, 0.00, 29, 0.00, 0, 2, '', '2017-01-17 12:07:54', '2017-01-17 12:07:54'),
-(100, 70, '4', 'Empty pond', 1, NULL, 0.00, 29, 0.00, 0, 2, '', '2017-01-17 12:08:15', '2017-01-17 12:08:15'),
-(101, 71, '1', 'Growing ', 2, 1, 0.00, 29, 0.00, 0, 2, '', '2017-01-17 12:11:50', '2017-01-17 12:11:50'),
-(102, 71, '2', 'Recycling water pond', 4, NULL, 0.00, 29, 0.00, 0, 2, '', '2017-01-17 12:12:14', '2017-01-17 12:12:14'),
-(103, 72, '1', 'Growing', 2, 1, 4.00, 29, 0.00, 0, 2, '', '2017-01-17 12:18:37', '2017-01-17 12:18:37'),
-(104, 72, '2', 'Sludge +++', 4, NULL, 0.00, 29, 0.00, 0, 2, '', '2017-01-17 12:18:59', '2017-01-17 12:18:59'),
-(105, 72, '3', 'Recycling water pond', 4, NULL, 0.00, 29, 0.00, 0, 2, '', '2017-01-17 12:19:42', '2017-01-17 12:19:42'),
-(106, 72, '4', 'Empty pond', 1, NULL, 0.00, 29, 0.00, 0, 2, '', '2017-01-17 12:20:00', '2017-01-17 12:20:00'),
-(107, 72, '5', 'Empty pond', 1, NULL, 0.00, 29, 0.00, 0, 2, '', '2017-01-17 12:20:26', '2017-01-17 12:20:26'),
-(108, 72, '6', 'Empty pond', 1, NULL, 0.00, 29, 0.00, 0, 2, '', '2017-01-17 12:21:04', '2017-01-17 12:21:04'),
-(109, 73, '1', 'Growing', 2, 1, 2.75, 29, 0.00, 0, 2, '', '2017-01-17 12:24:49', '2017-01-17 12:24:49'),
-(110, 73, '2', 'Sludge +++', 4, NULL, 0.00, 29, 0.00, 0, 2, '', '2017-01-17 12:25:02', '2017-01-17 12:25:02'),
-(111, 73, '3', 'Recycling water pond', 4, NULL, 0.00, 29, 0.00, 0, 2, '', '2017-01-17 12:25:46', '2017-01-17 12:25:46'),
-(112, 73, '4', 'Empty pond', 1, NULL, 0.00, 29, 0.00, 0, 2, '', '2017-01-17 12:28:11', '2017-01-17 12:28:11'),
-(113, 74, '1', 'Growing ', 2, 1, 0.00, 29, 0.00, 0, 2, '', '2017-01-17 12:31:05', '2017-01-17 12:31:05'),
-(114, 74, '2', 'Recycling water pond', 4, NULL, 0.00, 29, 0.00, 0, 2, '', '2017-01-17 12:31:20', '2017-01-17 12:31:20'),
-(115, 74, '3', 'Empty pond', 1, NULL, 0.00, 29, 0.00, 0, 2, '', '2017-01-17 12:31:39', '2017-01-17 12:31:39'),
-(116, 75, '1', 'Growing', 2, 1, 0.00, 29, 0.00, 0, 2, '', '2017-01-17 12:37:33', '2017-01-17 12:37:33'),
-(117, 75, '2', 'Recycling water pond', 4, NULL, 0.00, 29, 0.00, 0, 2, '', '2017-01-17 12:56:01', '2017-01-17 12:56:01'),
-(118, 75, '3', 'Empty pond', 1, NULL, 0.00, 29, 0.00, 0, 2, '', '2017-01-17 12:57:07', '2017-01-17 12:57:07'),
-(119, 75, '4', 'Empty pond', 1, NULL, 0.00, 29, 0.00, 0, 2, '', '2017-01-17 12:58:00', '2017-01-17 12:58:00'),
-(120, 75, '5', 'Empty pond', 1, NULL, 0.00, 29, 0.00, 0, 2, '', '2017-01-17 12:58:25', '2017-01-17 12:58:25'),
-(121, 51, '6', 'Reservoir pond', 1, NULL, 2.81, 29, 0.00, 0, 2, '', '2017-01-17 13:09:19', '2017-01-17 13:09:19'),
-(122, 51, '7', 'Reservoir pond', 1, NULL, 4.33, 29, 0.00, 0, 2, '', '2017-01-17 13:10:05', '2017-01-17 13:10:05'),
-(123, 86, '1', 'Growing', 2, 1, 2.71, 29, 0.00, 0, 2, '', '2017-01-17 13:39:21', '2017-01-17 13:39:21'),
-(124, 86, '2', 'Sludge +++', 4, NULL, 0.00, 29, 0.00, 0, 2, '', '2017-01-17 13:39:35', '2017-01-17 13:39:35'),
-(125, 86, '3', 'Recycling water pond', 4, NULL, 0.00, 29, 0.00, 0, 2, '', '2017-01-17 13:40:04', '2017-01-17 13:40:04'),
-(126, 87, '1', 'Growing ', 2, 1, 3.07, 29, 0.00, 0, 2, '', '2017-01-17 13:46:50', '2017-01-17 13:46:50'),
-(127, 87, '2', 'Sludge +++', 4, NULL, 0.00, 29, 0.00, 0, 2, '', '2017-01-17 13:47:08', '2017-01-17 13:47:08'),
-(128, 87, '3', 'Sludge ++', 4, NULL, 0.00, 29, 0.00, 0, 2, '', '2017-01-17 13:47:39', '2017-01-17 13:47:39'),
-(129, 87, '4', 'Sludge +', 4, NULL, 0.00, 29, 0.00, 0, 2, '', '2017-01-17 13:48:03', '2017-01-17 13:48:03'),
-(130, 85, '1', 'Growig', 2, 1, 2.30, 29, 0.00, 0, 2, '', '2017-01-17 13:53:22', '2017-01-17 13:53:22'),
-(131, 85, '2', 'Sludge +++', 4, NULL, 0.00, 29, 0.00, 0, 2, '', '2017-01-17 13:53:41', '2017-01-17 13:53:41'),
-(132, 85, '3', 'Sludge ++', 4, NULL, 0.00, 29, 0.00, 0, 2, '', '2017-01-17 13:54:03', '2017-01-17 13:54:03'),
-(133, 85, '4', 'Sludge +', 4, NULL, 0.00, 29, 0.00, 0, 2, '', '2017-01-17 13:54:26', '2017-01-17 13:54:26'),
-(134, 77, '1', 'Growing', 2, 1, 2.00, 29, 0.00, 0, 2, '', '2017-01-17 13:58:02', '2017-01-17 13:58:02'),
-(135, 77, '2', 'Sludge +++', 4, NULL, 0.00, 29, 0.00, 0, 2, '', '2017-01-17 13:58:19', '2017-01-17 13:58:19'),
-(136, 77, '3', 'Sludge ++', 4, NULL, 0.00, 29, 0.00, 0, 2, '', '2017-01-17 13:58:44', '2017-01-17 13:58:44'),
-(137, 77, '4', 'Sludge +', 4, NULL, 0.00, 29, 0.00, 0, 2, '', '2017-01-17 13:59:09', '2017-01-17 13:59:09'),
-(138, 76, '1', 'Growing', 2, 1, 2.32, 29, 0.00, 0, 2, '', '2017-01-17 14:00:28', '2017-01-17 14:00:28'),
-(139, 76, '2', 'Sludge +++', 4, NULL, 0.00, 29, 0.00, 0, 2, '', '2017-01-17 14:00:40', '2017-01-17 14:00:40'),
-(140, 76, '3', 'Sludge ++', 4, NULL, 0.00, 29, 0.00, 0, 2, '', '2017-01-17 14:01:01', '2017-01-17 14:01:01'),
-(141, 76, '4', 'Sludge +', 4, NULL, 0.00, 29, 0.00, 0, 2, '', '2017-01-17 14:01:24', '2017-01-17 14:01:24'),
-(142, 88, '1', 'Growing', 2, 1, 2.50, 29, 0.00, 0, 2, '', '2017-01-17 14:05:02', '2017-01-17 14:05:02'),
-(143, 88, '2', 'Sludge +++', 4, NULL, 0.00, 29, 0.00, 0, 2, '', '2017-01-17 14:05:29', '2017-01-17 14:05:29'),
-(144, 88, '3', 'Sludge ++', 4, NULL, 0.00, 29, 0.00, 0, 2, '', '2017-01-17 14:05:53', '2017-01-17 14:05:53'),
-(145, 88, '4', 'Sludge +', 4, NULL, 0.00, 29, 0.00, 0, 2, '', '2017-01-17 14:06:12', '2017-01-17 14:06:12'),
-(146, 78, '1', 'Growing', 2, 1, 2.00, 29, 0.00, 0, 2, '', '2017-01-17 14:08:45', '2017-01-17 14:08:45'),
-(147, 78, '2', 'Sludge +++', 4, NULL, 0.00, 29, 0.00, 0, 2, '', '2017-01-17 14:08:58', '2017-01-17 14:08:58'),
-(148, 78, '3', 'Sludge ++', 4, NULL, 0.00, 29, 0.00, 0, 2, '', '2017-01-17 14:09:20', '2017-01-17 14:09:20'),
-(149, 78, '4', 'Sludge +', 4, NULL, 0.00, 29, 0.00, 0, 2, '', '2017-01-17 14:09:42', '2017-01-17 14:09:42'),
-(150, 79, '1', 'Growing', 2, 1, 2.75, 29, 0.00, 0, 2, '', '2017-01-17 14:12:30', '2017-01-17 14:12:30'),
-(151, 79, '2', 'Sludge +++', 4, NULL, 0.00, 29, 0.00, 0, 2, '', '2017-01-17 14:12:43', '2017-01-17 14:12:43'),
-(152, 79, '3', 'Sludge ++', 4, NULL, 0.00, 29, 0.00, 0, 2, '', '2017-01-17 14:13:12', '2017-01-17 14:13:12'),
-(153, 79, '4', 'Sludge +', 4, NULL, 0.00, 29, 0.00, 0, 2, '', '2017-01-17 14:14:10', '2017-01-17 14:14:10'),
-(154, 80, '1', 'Growing', 2, 1, 2.00, 29, 0.00, 0, 2, '', '2017-01-17 14:15:19', '2017-01-17 14:15:19'),
-(155, 80, '2', 'Sludge +++', 4, NULL, 0.00, 29, 0.00, 0, 2, '', '2017-01-17 14:15:35', '2017-01-17 14:15:35'),
-(156, 80, '3', 'Sludge ++', 4, NULL, 0.00, 29, 0.00, 0, 2, '', '2017-01-17 14:17:44', '2017-01-17 14:17:44'),
-(157, 80, '4', 'Sludge +', 4, NULL, 0.00, 29, 0.00, 0, 2, '', '2017-01-17 14:18:07', '2017-01-17 14:18:07'),
-(158, 83, '1', 'Growing', 2, 1, 2.50, 29, 0.00, 0, 2, '', '2017-01-18 07:46:44', '2017-01-18 07:46:44'),
-(161, 83, '2', 'Sludge +++', 4, NULL, 0.00, 29, 0.00, 0, 2, '', '2017-01-18 07:48:44', '2017-01-18 07:49:35'),
-(162, 83, '3', 'Recycling water pond', 4, NULL, 0.00, 29, 0.00, 0, 2, '', '2017-01-18 07:50:36', '2017-01-18 07:50:36'),
-(163, 82, '1', 'Growing', 2, 1, 2.50, 29, 0.00, 0, 2, '', '2017-01-18 08:05:55', '2017-01-18 08:05:55'),
-(164, 82, '2', 'Sludge +++', 4, NULL, 0.00, 29, 0.00, 0, 2, '', '2017-01-18 08:11:35', '2017-01-18 08:11:35'),
-(165, 82, '3', 'Sludge ++', 4, NULL, 0.00, 29, 0.00, 0, 2, '', '2017-01-18 08:12:08', '2017-01-18 08:12:08'),
-(166, 82, '4', 'Sludge +', 4, NULL, 0.00, 29, 0.00, 0, 2, '', '2017-01-18 08:13:02', '2017-01-18 08:13:02'),
-(167, 81, '1', 'Growing', 2, 1, 2.00, 29, 0.00, 0, 2, '', '2017-01-18 08:41:06', '2017-01-18 08:41:06'),
-(168, 81, '2', 'Sludge +++', 4, NULL, 0.00, 29, 0.00, 0, 2, '', '2017-01-18 08:41:29', '2017-01-18 08:41:29'),
-(169, 81, '3', 'Sludge ++', 4, NULL, 0.00, 29, 0.00, 0, 2, '', '2017-01-18 08:41:56', '2017-01-18 08:41:56'),
-(170, 81, '4', 'Sludge +', 4, NULL, 0.00, 29, 0.00, 0, 2, '', '2017-01-18 08:42:26', '2017-01-18 08:42:26'),
-(171, 89, '1', 'Growing', 2, 1, 2.30, 29, 0.00, 0, 2, '', '2017-01-18 08:45:47', '2017-01-18 08:45:47'),
-(172, 89, '2', 'Sludge +++', 4, NULL, 0.00, 29, 0.00, 0, 2, '', '2017-01-18 08:46:04', '2017-01-18 08:46:04'),
-(173, 89, '3', 'Sludge ++', 4, NULL, 0.00, 29, 0.00, 0, 2, '', '2017-01-18 08:48:13', '2017-01-18 08:48:13'),
-(174, 89, '4', 'Sludge +', 4, NULL, 0.00, 29, 0.00, 0, 2, '', '2017-01-18 08:51:35', '2017-01-18 08:51:35'),
-(175, 60, '9', 'Empty pond', 1, NULL, 0.00, 29, 0.00, 0, 2, '', '2017-01-20 08:33:49', '2017-01-20 08:33:49');
+(176, 135, '1', 'Plot1', 2, 1, 45.00, 29, 0.00, NULL, 1, NULL, '2018-01-22 18:32:15', '2018-01-22 18:32:15'),
+(177, 141, '1', 'Pond 1', 2, 1, 23.00, 29, 0.00, NULL, 1, NULL, '2018-01-29 20:17:26', '2018-01-29 20:17:26');
 
 -- --------------------------------------------------------
 
@@ -2812,8 +3032,14 @@ CREATE TABLE `reg_entity_farm_details` (
   `HEALTH_MANAGEMENT_PLAN` varchar(256) COLLATE utf8_bin DEFAULT NULL,
   `ESCAPE_PREVENTION_DEVICE_URL` varchar(256) COLLATE utf8_bin DEFAULT NULL,
   `RECORD_INSPECTION` varchar(45) COLLATE utf8_bin DEFAULT NULL,
+  `STAKEHOLDER_MEETING_PARTICIPATION` tinyint(1) DEFAULT NULL,
+  `STAKEHOLDER_MEETING_DATE` date DEFAULT NULL,
+  `STAKEHOLDER_MEETING_LOCATION` varchar(256) COLLATE utf8_bin DEFAULT NULL,
+  `MEMBER_OF_ASSOCIATION` tinyint(1) DEFAULT NULL,
+  `COMMITTED_TO_SUSTAINABLE_PRACTICES` tinyint(1) DEFAULT NULL,
+  `COMMITTED_TO_SUSTAINABLE_PRACTICES_URL` varchar(256) COLLATE utf8_bin DEFAULT NULL,
   `UPDATER_ID` int(11) NOT NULL DEFAULT '1',
-  `COMMENT` varchar(512) COLLATE utf8_bin NOT NULL,
+  `COMMENT` varchar(512) COLLATE utf8_bin DEFAULT NULL,
   `CREATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `UPDATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
@@ -2822,47 +3048,9 @@ CREATE TABLE `reg_entity_farm_details` (
 -- Contenu de la table `reg_entity_farm_details`
 --
 
-INSERT INTO `reg_entity_farm_details` (`ID`, `REG_ENTITY_FARM_ID`, `REG_ENTITY_OWNER_ID`, `SYS_USER_FARMADMIN_ID`, `SIZE`, `CL_SIZE_UNIT_ID`, `LONGITUDE`, `LATITUDE`, `AERIAL_VIEW`, `QUOTA_ID`, `WATER_USE_AUTHORIZATION`, `LAND_USE_AUTHORIZATION`, `ENVIRONMENT_IMPACT_ASSESSMENT`, `ENVIRONMENT_IMPACT_ASSESSMENT_URL`, `HVH_CONSTRUCT_PERMIT`, `HVH_LAND_TITLE`, `SITING_PROTECTED_AREA`, `SITING_PROTECTED_AREA_AUTHORIZATION_URL`, `HVHE_FARM_EXPENSION`, `HVHE_YES_IN_HVH`, `CL_HVHE_EXPENSION_TYPE_ID`, `HVHE_CANAL_RESTAURATION_PLAN`, `CUMUL_IMPACTS`, `MEMBER_COOP_ID`, `HAS_A_LAB`, `HEALTH_MANAGEMENT_TRAINING`, `HEALTH_MANAGEMENT_PLAN`, `ESCAPE_PREVENTION_DEVICE_URL`, `RECORD_INSPECTION`, `UPDATER_ID`, `COMMENT`, `CREATED_AT`, `UPDATED_AT`) VALUES
-(59, 2, 1, NULL, 83.00, 29, NULL, NULL, NULL, '', NULL, NULL, 0, NULL, NULL, NULL, 0, NULL, 0, 0, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, 3, '', '2018-01-16 20:50:36', '2018-01-16 20:50:36'),
-(60, 51, 11, NULL, 34.03, 29, '99.910355', '12.227958', NULL, '', NULL, NULL, 0, NULL, NULL, NULL, 0, NULL, 0, 0, NULL, NULL, NULL, 6, 0, NULL, NULL, NULL, NULL, 3, '', '2018-01-17 10:22:16', '2018-01-17 10:22:16'),
-(61, 52, 14, NULL, 0.00, 29, '98.36361', '8.689209', NULL, '', NULL, NULL, 0, NULL, NULL, NULL, 0, NULL, 0, 0, NULL, NULL, NULL, 6, 0, NULL, NULL, NULL, NULL, 3, '', '2018-01-17 10:24:28', '2018-01-17 10:24:28'),
-(62, 53, 13, NULL, 0.00, 29, NULL, NULL, NULL, '', NULL, NULL, 0, NULL, NULL, NULL, 0, NULL, 0, 0, NULL, NULL, NULL, 6, 0, NULL, NULL, NULL, NULL, 3, '', '2018-01-17 10:25:44', '2018-01-17 10:25:44'),
-(63, 54, 15, NULL, 0.00, 29, NULL, NULL, NULL, '', NULL, NULL, 0, NULL, NULL, NULL, 0, NULL, 0, 0, NULL, NULL, NULL, 6, 0, NULL, NULL, NULL, NULL, 3, '', '2018-01-17 10:26:44', '2018-01-17 10:26:44'),
-(64, 55, 16, NULL, 0.00, 29, NULL, NULL, NULL, '', NULL, NULL, 0, NULL, NULL, NULL, 0, NULL, 0, 0, NULL, NULL, NULL, 6, 0, NULL, NULL, NULL, NULL, 3, '', '2018-01-17 10:27:42', '2018-01-17 10:27:42'),
-(65, 56, 17, NULL, 0.00, 29, '99.9457', '12.201573', NULL, '', NULL, NULL, 0, NULL, NULL, NULL, 0, NULL, 0, 0, NULL, NULL, NULL, 6, 0, NULL, NULL, NULL, NULL, 3, '', '2018-01-17 10:28:46', '2018-01-17 10:28:46'),
-(66, 57, 18, NULL, 0.00, 29, NULL, NULL, NULL, '', NULL, NULL, 0, NULL, NULL, NULL, 0, NULL, 0, 0, NULL, NULL, NULL, 6, 0, NULL, NULL, NULL, NULL, 3, '', '2018-01-17 10:29:42', '2018-01-17 10:29:42'),
-(67, 58, 36, NULL, 0.00, 29, NULL, NULL, NULL, '', NULL, NULL, 0, NULL, NULL, NULL, 0, NULL, 0, 0, NULL, NULL, NULL, 6, 0, NULL, NULL, NULL, NULL, 3, '', '2018-01-17 10:30:48', '2018-01-17 10:30:48'),
-(68, 59, 24, NULL, 0.00, 29, '99.9457', '12.201573', NULL, '', NULL, NULL, 0, NULL, NULL, NULL, 0, NULL, 0, 0, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, 3, '', '2018-01-17 10:32:18', '2018-01-17 10:32:18'),
-(69, 60, 20, NULL, 0.00, 29, NULL, NULL, NULL, '', NULL, NULL, 0, NULL, NULL, NULL, 0, NULL, 0, 0, NULL, NULL, NULL, 6, 0, NULL, NULL, NULL, NULL, 3, '', '2018-01-17 10:33:18', '2018-01-17 10:33:18'),
-(70, 61, 21, NULL, 0.00, 29, NULL, NULL, NULL, '', NULL, NULL, 0, NULL, NULL, NULL, 0, NULL, 0, 0, NULL, NULL, NULL, 6, 0, NULL, NULL, NULL, NULL, 3, '', '2018-01-17 10:34:13', '2018-01-17 10:34:13'),
-(71, 62, 22, NULL, 0.00, 29, NULL, NULL, NULL, '', NULL, NULL, 0, NULL, NULL, NULL, 0, NULL, 0, 0, NULL, NULL, NULL, 6, 0, NULL, NULL, NULL, NULL, 3, '', '2018-01-17 10:35:29', '2018-01-17 10:35:29'),
-(72, 63, 23, NULL, 0.00, 29, NULL, NULL, NULL, '', NULL, NULL, 0, NULL, NULL, NULL, 0, NULL, 0, 0, NULL, NULL, NULL, 6, 0, NULL, NULL, NULL, NULL, 3, '', '2018-01-17 10:41:57', '2018-01-17 10:41:57'),
-(73, 64, 19, NULL, 0.00, 29, NULL, NULL, NULL, '', NULL, NULL, 0, NULL, NULL, NULL, 0, NULL, 0, 0, NULL, NULL, NULL, 6, 0, NULL, NULL, NULL, NULL, 3, '', '2018-01-17 10:43:29', '2018-01-17 10:43:29'),
-(74, 65, 25, NULL, 0.00, 29, NULL, NULL, NULL, '', NULL, NULL, 0, NULL, NULL, NULL, 0, NULL, 0, 0, NULL, NULL, NULL, 6, 0, NULL, NULL, NULL, NULL, 3, '', '2018-01-17 10:44:16', '2018-01-17 10:44:16'),
-(75, 66, 26, NULL, 0.00, 29, '99.46396', '11.113116', NULL, '', NULL, NULL, 0, NULL, NULL, NULL, 0, NULL, 0, 0, NULL, NULL, NULL, 6, 0, NULL, NULL, NULL, NULL, 3, '', '2018-01-17 10:45:30', '2018-01-17 10:45:30'),
-(76, 67, 27, NULL, 0.00, 29, NULL, NULL, NULL, '', NULL, NULL, 0, NULL, NULL, NULL, 0, NULL, 0, 0, NULL, NULL, NULL, 6, 0, NULL, NULL, NULL, NULL, 3, '', '2018-01-17 10:46:34', '2018-01-17 10:46:34'),
-(77, 68, 28, NULL, 0.00, 29, NULL, NULL, NULL, '', NULL, NULL, 0, NULL, NULL, NULL, 0, NULL, 0, 0, NULL, NULL, NULL, 6, 0, NULL, NULL, NULL, NULL, 3, '', '2018-01-17 10:47:29', '2018-01-17 10:47:29'),
-(78, 69, 29, NULL, 0.00, 29, NULL, NULL, NULL, '', NULL, NULL, 0, NULL, NULL, NULL, 0, NULL, 0, 0, NULL, NULL, NULL, 6, 0, NULL, NULL, NULL, NULL, 3, '', '2018-01-17 10:48:42', '2018-01-17 10:48:42'),
-(79, 70, 30, NULL, 0.00, 29, NULL, NULL, NULL, '', NULL, NULL, 0, NULL, NULL, NULL, 0, NULL, 0, 0, NULL, NULL, NULL, 6, 0, NULL, NULL, NULL, NULL, 3, '', '2018-01-17 10:49:51', '2018-01-17 10:49:51'),
-(80, 71, 31, NULL, 0.00, 29, NULL, NULL, NULL, '', NULL, NULL, 0, NULL, NULL, NULL, 0, NULL, 0, 0, NULL, NULL, NULL, 6, 0, NULL, NULL, NULL, NULL, 3, '', '2018-01-17 10:50:43', '2018-01-17 10:50:43'),
-(81, 72, 32, NULL, 0.00, 29, NULL, NULL, NULL, '', NULL, NULL, 0, NULL, NULL, NULL, 0, NULL, 0, 0, NULL, NULL, NULL, 6, 0, NULL, NULL, NULL, NULL, 3, '', '2018-01-17 10:51:33', '2018-01-17 10:51:33'),
-(82, 73, 33, NULL, 0.00, 29, NULL, NULL, NULL, '', NULL, NULL, 0, NULL, NULL, NULL, 0, NULL, 0, 0, NULL, NULL, NULL, 6, 0, NULL, NULL, NULL, NULL, 3, '', '2018-01-17 11:48:05', '2018-01-17 11:48:05'),
-(83, 74, 34, NULL, 0.00, 29, NULL, NULL, NULL, '', NULL, NULL, 0, NULL, NULL, NULL, 0, NULL, 0, 0, NULL, NULL, NULL, 6, 0, NULL, NULL, NULL, NULL, 3, '', '2018-01-17 11:49:29', '2018-01-17 11:49:29'),
-(84, 75, 35, NULL, 0.00, 29, NULL, NULL, NULL, '', NULL, NULL, 0, NULL, NULL, NULL, 0, NULL, 0, 0, NULL, NULL, NULL, 6, 0, NULL, NULL, NULL, NULL, 3, '', '2018-01-17 11:50:31', '2018-01-17 11:50:31'),
-(85, 76, 37, NULL, 0.00, 29, NULL, NULL, NULL, '', NULL, NULL, 0, NULL, NULL, NULL, 0, NULL, 0, 0, NULL, NULL, NULL, 6, 0, NULL, NULL, NULL, NULL, 3, '', '2018-01-17 11:51:37', '2018-01-17 11:51:37'),
-(86, 77, 38, NULL, 0.00, 29, NULL, NULL, NULL, '', NULL, NULL, 0, NULL, NULL, NULL, 0, NULL, 0, 0, NULL, NULL, NULL, 6, 0, NULL, NULL, NULL, NULL, 3, '', '2018-01-17 11:52:55', '2018-01-17 11:52:55'),
-(87, 78, 39, NULL, 0.00, 29, NULL, NULL, NULL, '', NULL, NULL, 0, NULL, NULL, NULL, 0, NULL, 0, 0, NULL, NULL, NULL, 6, 0, NULL, NULL, NULL, NULL, 3, '', '2018-01-17 11:54:02', '2018-01-17 11:54:02'),
-(88, 79, 40, NULL, 0.00, 29, '100.99254', '15.870032', NULL, '', NULL, NULL, 0, NULL, NULL, NULL, 0, NULL, 0, 0, NULL, NULL, NULL, 6, 0, NULL, NULL, NULL, NULL, 3, '', '2018-01-17 11:55:22', '2018-01-17 11:55:22'),
-(89, 80, 41, NULL, 0.00, 29, '99.9457', '12.201573', NULL, '', NULL, NULL, 0, NULL, NULL, NULL, 0, NULL, 0, 0, NULL, NULL, NULL, 6, 0, NULL, NULL, NULL, NULL, 3, '', '2018-01-17 11:56:40', '2018-01-17 11:56:40'),
-(90, 81, 42, NULL, 0.00, 29, NULL, NULL, NULL, '', NULL, NULL, 0, NULL, NULL, NULL, 0, NULL, 0, 0, NULL, NULL, NULL, 6, 0, NULL, NULL, NULL, NULL, 3, '', '2018-01-17 11:57:41', '2018-01-17 11:57:41'),
-(91, 82, 43, NULL, 0.00, 29, '99.9457', '12.201573', NULL, '', NULL, NULL, 0, NULL, NULL, NULL, 0, NULL, 0, 0, NULL, NULL, NULL, 6, 0, NULL, NULL, NULL, NULL, 3, '', '2018-01-17 11:58:49', '2018-01-17 11:58:49'),
-(92, 83, 44, NULL, 0.00, 29, NULL, NULL, NULL, '', NULL, NULL, 0, NULL, NULL, NULL, 0, NULL, 0, 0, NULL, NULL, NULL, 6, 0, NULL, NULL, NULL, NULL, 3, '', '2018-01-17 11:59:56', '2018-01-17 11:59:56'),
-(93, 84, 45, NULL, 0.00, 29, NULL, NULL, NULL, '', NULL, NULL, 0, NULL, NULL, NULL, 0, NULL, 0, 0, NULL, NULL, NULL, 6, 0, NULL, NULL, NULL, NULL, 3, '', '2018-01-17 12:00:48', '2018-01-17 12:00:48'),
-(94, 85, 46, NULL, 0.00, 29, NULL, NULL, NULL, '', NULL, NULL, 0, NULL, NULL, NULL, 0, NULL, 0, 0, NULL, NULL, NULL, 6, 0, NULL, NULL, NULL, NULL, 3, '', '2018-01-17 12:01:44', '2018-01-17 12:01:44'),
-(95, 86, 47, NULL, 0.00, 29, NULL, NULL, NULL, '', NULL, NULL, 0, NULL, NULL, NULL, 0, NULL, 0, 0, NULL, NULL, NULL, 6, 0, NULL, NULL, NULL, NULL, 3, '', '2018-01-17 12:02:45', '2018-01-17 12:02:45'),
-(96, 87, 48, NULL, 0.00, 29, NULL, NULL, NULL, '', NULL, NULL, 0, NULL, NULL, NULL, 0, NULL, 0, 0, NULL, NULL, NULL, 6, 0, NULL, NULL, NULL, NULL, 3, '', '2018-01-17 12:03:51', '2018-01-17 12:03:51'),
-(97, 88, 49, NULL, 0.00, 29, '99.9457', '12.201573', NULL, '', NULL, NULL, 0, NULL, NULL, NULL, 0, NULL, 0, 0, NULL, NULL, NULL, 6, 0, NULL, NULL, NULL, NULL, 3, '', '2018-01-17 12:04:47', '2018-01-17 12:04:47'),
-(98, 89, 50, NULL, 0.00, 29, '99.9457', '12.201573', NULL, '', NULL, NULL, 0, NULL, NULL, NULL, 0, NULL, 0, 0, NULL, NULL, NULL, 6, 0, NULL, NULL, NULL, NULL, 3, '', '2018-01-17 12:05:48', '2018-01-17 12:05:48');
+INSERT INTO `reg_entity_farm_details` (`ID`, `REG_ENTITY_FARM_ID`, `REG_ENTITY_OWNER_ID`, `SYS_USER_FARMADMIN_ID`, `SIZE`, `CL_SIZE_UNIT_ID`, `LONGITUDE`, `LATITUDE`, `AERIAL_VIEW`, `QUOTA_ID`, `WATER_USE_AUTHORIZATION`, `LAND_USE_AUTHORIZATION`, `ENVIRONMENT_IMPACT_ASSESSMENT`, `ENVIRONMENT_IMPACT_ASSESSMENT_URL`, `HVH_CONSTRUCT_PERMIT`, `HVH_LAND_TITLE`, `SITING_PROTECTED_AREA`, `SITING_PROTECTED_AREA_AUTHORIZATION_URL`, `HVHE_FARM_EXPENSION`, `HVHE_YES_IN_HVH`, `CL_HVHE_EXPENSION_TYPE_ID`, `HVHE_CANAL_RESTAURATION_PLAN`, `CUMUL_IMPACTS`, `MEMBER_COOP_ID`, `HAS_A_LAB`, `HEALTH_MANAGEMENT_TRAINING`, `HEALTH_MANAGEMENT_PLAN`, `ESCAPE_PREVENTION_DEVICE_URL`, `RECORD_INSPECTION`, `STAKEHOLDER_MEETING_PARTICIPATION`, `STAKEHOLDER_MEETING_DATE`, `STAKEHOLDER_MEETING_LOCATION`, `MEMBER_OF_ASSOCIATION`, `COMMITTED_TO_SUSTAINABLE_PRACTICES`, `COMMITTED_TO_SUSTAINABLE_PRACTICES_URL`, `UPDATER_ID`, `COMMENT`, `CREATED_AT`, `UPDATED_AT`) VALUES
+(56, 135, 134, NULL, 70.00, 29, '102.0315', '15.806817', '0_Sugarcane map.jpg', '13889332', NULL, NULL, 0, NULL, NULL, NULL, 0, NULL, 0, 0, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 4, '', '2017-12-06 02:00:12', '2017-12-06 02:00:12'),
+(58, 141, 134, NULL, 35.00, 29, NULL, NULL, NULL, '', NULL, NULL, 0, NULL, NULL, NULL, 0, NULL, 0, 0, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 13, '', '2017-12-20 02:34:51', '2017-12-20 02:34:51');
 
 -- --------------------------------------------------------
 
@@ -2878,26 +3066,6 @@ CREATE TABLE `reg_entity_farm_details_farm_type` (
   `CREATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `UPDATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-
--- --------------------------------------------------------
-
---
--- Structure de la table `reg_entity_farm_facilities`
---
-
-CREATE TABLE `reg_entity_farm_facilities` (
-  `REG_ENTITY_FARM_ID` int(11) NOT NULL,
-  `ACCESS_TOILETS` tinyint(1) NOT NULL,
-  `ACCESS_TOILETS_URL` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'Pictures of toilets',
-  `ACCESS_SHOWER` tinyint(1) NOT NULL,
-  `ACCESS_SHOWER_URL` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'Picture of shower',
-  `ACCESS_PRIVATE_ROOM` tinyint(1) NOT NULL,
-  `ACCESS_PRIVATE_ROOM_URL` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'Pictures of private room',
-  `UPDATER_ID` int(11) NOT NULL DEFAULT '1',
-  `COMMENT` varchar(1024) COLLATE utf8_bin DEFAULT NULL,
-  `CREATED_AT` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `UPDATED_AT` timestamp NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='descirption of existing facilities';
 
 -- --------------------------------------------------------
 
@@ -2921,8 +3089,9 @@ CREATE TABLE `reg_entity_farm_providers` (
 --
 
 INSERT INTO `reg_entity_farm_providers` (`ID`, `REG_ENTITY_FARM_ID`, `REG_ENTITY_SUPPLIER_ID`, `CL_PRODUCT_TYPES_ID`, `UPDATER_ID`, `COMMENT`, `CREATED_AT`, `UPDATED_AT`) VALUES
-(20, 2, 7, 42, 1, NULL, '2018-01-16 21:09:55', '2018-01-16 21:09:55'),
-(21, 2, 8, 4, 1, NULL, '2018-01-16 21:10:13', '2018-01-16 21:10:13');
+(17, 135, 139, 1, 1, NULL, '2017-12-06 02:13:27', '2017-12-06 02:13:27'),
+(18, 135, 138, 50, 1, NULL, '2017-12-06 02:13:49', '2017-12-06 02:13:49'),
+(19, 135, 138, 80, 1, NULL, '2017-12-20 02:17:38', '2017-12-20 02:17:38');
 
 -- --------------------------------------------------------
 
@@ -2939,6 +3108,22 @@ CREATE TABLE `reg_entity_farm_water_supply` (
   `CREATED_AT` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `UPDATED_AT` timestamp NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='description of farm water source';
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `reg_entity_hazardous_work`
+--
+
+CREATE TABLE `reg_entity_hazardous_work` (
+  `REG_ENTITY_FARM_ID` int(11) NOT NULL,
+  `CL_APP_HAZARDOUS_WORK_TYPE_ID` int(11) NOT NULL,
+  `DESCRIPTION` varchar(45) COLLATE utf8_bin DEFAULT NULL,
+  `UPDATER_ID` int(11) NOT NULL DEFAULT '1',
+  `COMMENT` varchar(1024) COLLATE utf8_bin DEFAULT NULL,
+  `CREATED_AT` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `UPDATED_AT` timestamp NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='list of hazardous work done in a farm, in a plant etc...';
 
 -- --------------------------------------------------------
 
@@ -2963,7 +3148,7 @@ CREATE TABLE `reg_entity_product_suppliers` (
 --
 
 CREATE TABLE `reg_entity_staff` (
-  `REG_ENTITY_ID` int(10) UNSIGNED NOT NULL,
+  `REG_ENTITY_ID` int(11) NOT NULL,
   `REG_ENTITY_FARM_ID` int(11) NOT NULL,
   `CL_LANGUAGE_ID` int(11) DEFAULT NULL,
   `CL_POSITION_TYPE_ID` int(11) NOT NULL,
@@ -2988,47 +3173,9 @@ CREATE TABLE `reg_entity_staff` (
 --
 
 INSERT INTO `reg_entity_staff` (`REG_ENTITY_ID`, `REG_ENTITY_FARM_ID`, `CL_LANGUAGE_ID`, `CL_POSITION_TYPE_ID`, `CL_LEGAL_STATUS_ID`, `CHARACTERISTICS_1`, `CHARACTERISTICS_2`, `NOT_EMPLOYED_ANYMORE`, `TELEPHONE_OFFICE`, `MOBILE_OFFICE`, `EMAIL_OFFICE`, `FROM_LOCAL_COMMUNITY`, `COMPANY_FOCAL_POINT`, `WORKING_PERMIT_URL`, `UPDATER_ID`, `COMMENT`, `CREATED_AT`, `UPDATED_AT`) VALUES
-(3, 2, 83, 5, NULL, NULL, NULL, 0, '', '', '', 0, 0, NULL, 3, '', '2018-01-16 20:52:20', '2018-01-16 20:52:20'),
-(11, 51, 159, 1, NULL, NULL, NULL, 0, '', '', '', 0, 0, NULL, 3, '', '2018-01-17 10:22:58', '2018-01-17 10:22:58'),
-(12, 51, 159, 3, NULL, NULL, NULL, 0, '', '', '', 0, 0, NULL, 3, '', '2018-01-17 10:22:41', '2018-01-17 10:22:41'),
-(13, 53, 159, 1, NULL, NULL, NULL, 0, '', '', '', 0, 0, NULL, 3, '', '2018-01-17 10:26:00', '2018-01-17 10:26:00'),
-(14, 52, 159, 1, NULL, NULL, NULL, 0, '', '', '', 0, 0, NULL, 3, '', '2018-01-17 10:24:51', '2018-01-17 10:24:51'),
-(15, 54, 159, 1, NULL, NULL, NULL, 0, '', '', '', 0, 0, NULL, 3, '', '2018-01-17 10:27:00', '2018-01-17 10:27:00'),
-(16, 55, 159, 1, NULL, NULL, NULL, 0, '', '', '', 0, 0, NULL, 3, '', '2018-01-17 10:27:54', '2018-01-17 10:27:54'),
-(17, 56, 159, 1, NULL, NULL, NULL, 0, '', '', '', 0, 0, NULL, 3, '', '2018-01-17 10:29:00', '2018-01-17 10:29:00'),
-(18, 57, 159, 1, NULL, NULL, NULL, 0, '', '', '', 0, 0, NULL, 3, '', '2018-01-17 10:29:55', '2018-01-17 10:29:55'),
-(19, 64, 159, 1, NULL, NULL, NULL, 0, '', '', '', 0, 0, NULL, 3, '', '2018-01-17 10:43:42', '2018-01-17 10:43:42'),
-(20, 60, 159, 1, NULL, NULL, NULL, 0, '', '', '', 0, 0, NULL, 3, '', '2018-01-17 10:33:34', '2018-01-17 10:33:34'),
-(21, 61, 159, 1, NULL, NULL, NULL, 0, '', '', '', 0, 0, NULL, 3, '', '2018-01-17 10:34:26', '2018-01-17 10:34:26'),
-(22, 62, 159, 1, NULL, NULL, NULL, 0, '', '', '', 0, 0, NULL, 3, '', '2018-01-17 10:35:45', '2018-01-17 10:35:45'),
-(23, 63, 159, 1, NULL, NULL, NULL, 0, '', '', '', 0, 0, NULL, 3, '', '2018-01-17 10:42:53', '2018-01-17 10:42:53'),
-(24, 59, 159, 1, NULL, NULL, NULL, 0, '', '', '', 0, 0, NULL, 3, '', '2018-01-17 10:32:30', '2018-01-17 10:32:30'),
-(25, 65, 159, 1, NULL, NULL, NULL, 0, '', '', '', 0, 0, NULL, 3, '', '2018-01-17 10:44:30', '2018-01-17 10:44:30'),
-(26, 66, 159, 1, NULL, NULL, NULL, 0, '', '', '', 0, 0, NULL, 3, '', '2018-01-17 10:45:44', '2018-01-17 10:45:44'),
-(27, 67, 159, 1, NULL, NULL, NULL, 0, '', '', '', 0, 0, NULL, 3, '', '2018-01-17 10:46:50', '2018-01-17 10:46:50'),
-(28, 68, 159, 1, NULL, NULL, NULL, 0, '', '', '', 0, 0, NULL, 3, '', '2018-01-17 10:47:51', '2018-01-17 10:47:51'),
-(29, 69, 159, 1, NULL, NULL, NULL, 0, '', '', '', 0, 0, NULL, 3, '', '2018-01-17 10:48:58', '2018-01-17 10:48:58'),
-(30, 70, 159, 1, NULL, NULL, NULL, 0, '', '', '', 0, 0, NULL, 3, '', '2018-01-17 10:50:04', '2018-01-17 10:50:04'),
-(31, 71, 159, 1, NULL, NULL, NULL, 0, '', '', '', 0, 0, NULL, 3, '', '2018-01-17 10:50:54', '2018-01-17 10:50:54'),
-(32, 72, 159, 1, NULL, NULL, NULL, 0, '', '', '', 0, 0, NULL, 3, '', '2018-01-17 10:51:52', '2018-01-17 10:51:52'),
-(33, 73, 159, 1, NULL, NULL, NULL, 0, '', '', '', 0, 0, NULL, 3, '', '2018-01-17 11:48:18', '2018-01-17 11:48:18'),
-(34, 74, 159, 1, NULL, NULL, NULL, 0, '', '', '', 0, 0, NULL, 3, '', '2018-01-17 11:49:44', '2018-01-17 11:49:44'),
-(35, 75, 159, 1, NULL, NULL, NULL, 0, '', '', '', 0, 0, NULL, 3, '', '2018-01-17 11:50:50', '2018-01-17 11:50:50'),
-(36, 58, 159, 1, NULL, NULL, NULL, 0, '', '', '', 0, 0, NULL, 3, '', '2018-01-17 10:31:24', '2018-01-17 10:31:24'),
-(37, 76, 159, 1, NULL, NULL, NULL, 0, '', '', '', 0, 0, NULL, 3, '', '2018-01-17 11:52:04', '2018-01-17 11:52:04'),
-(38, 77, 159, 1, NULL, NULL, NULL, 0, '', '', '', 0, 0, NULL, 3, '', '2018-01-17 11:53:14', '2018-01-17 11:53:14'),
-(39, 78, 159, 1, NULL, NULL, NULL, 0, '', '', '', 0, 0, NULL, 3, '', '2018-01-17 11:54:25', '2018-01-17 11:54:25'),
-(40, 79, 159, 1, NULL, NULL, NULL, 0, '', '', '', 0, 0, NULL, 3, '', '2018-01-17 11:55:35', '2018-01-17 11:55:35'),
-(41, 80, 159, 1, NULL, NULL, NULL, 0, '', '', '', 0, 0, NULL, 3, '', '2018-01-17 11:56:56', '2018-01-17 11:56:56'),
-(42, 81, 159, 1, NULL, NULL, NULL, 0, '', '', '', 0, 0, NULL, 3, '', '2018-01-17 11:57:59', '2018-01-17 11:57:59'),
-(43, 82, 159, 1, NULL, NULL, NULL, 0, '', '', '', 0, 0, NULL, 3, '', '2018-01-17 11:59:10', '2018-01-17 11:59:10'),
-(44, 83, 159, 1, NULL, NULL, NULL, 0, '', '', '', 0, 0, NULL, 3, '', '2018-01-17 12:00:10', '2018-01-17 12:00:10'),
-(45, 84, 159, 1, NULL, NULL, NULL, 0, '', '', '', 0, 0, NULL, 3, '', '2018-01-17 12:01:02', '2018-01-17 12:01:02'),
-(46, 85, 159, 1, NULL, NULL, NULL, 0, '', '', '', 0, 0, NULL, 3, '', '2018-01-17 12:02:08', '2018-01-17 12:02:08'),
-(47, 86, 159, 1, NULL, NULL, NULL, 0, '', '', '', 0, 0, NULL, 3, '', '2018-01-17 12:03:04', '2018-01-17 12:03:04'),
-(48, 87, 159, 1, NULL, NULL, NULL, 0, '', '', '', 0, 0, NULL, 3, '', '2018-01-17 12:04:03', '2018-01-17 12:04:03'),
-(49, 88, 159, 1, NULL, NULL, NULL, 0, '', '', '', 0, 0, NULL, 3, '', '2018-01-17 12:04:58', '2018-01-17 12:04:58'),
-(50, 89, 159, 1, NULL, NULL, NULL, 0, '', '', '', 0, 0, NULL, 3, '', '2018-01-17 12:06:01', '2018-01-17 12:06:01');
+(49, 135, 159, 5, 4, NULL, NULL, 0, '', '09888777890', '', 1, 0, NULL, 4, '', '2017-12-06 02:08:14', '2017-12-06 02:08:14'),
+(136, 135, 159, 5, 1, NULL, NULL, 0, '', '0987578906', '', 1, 0, NULL, 4, '', '2017-12-06 02:04:34', '2017-12-06 02:04:34'),
+(137, 135, 159, 5, 4, NULL, NULL, 0, '', '9876545678', '', 1, 0, NULL, 4, '', '2017-12-06 02:06:46', '2017-12-06 02:06:46');
 
 -- --------------------------------------------------------
 
@@ -3204,8 +3351,10 @@ CREATE TABLE `reg_entity_staff_management` (
   `NB_WORKERS_CHILD_LIVING_IN_FARM` int(4) NOT NULL DEFAULT '0',
   `NB_WORKERS_CHILD_HELPING_IN_FARM` int(4) NOT NULL DEFAULT '0',
   `NB_WORKERS_CHILD_ENROLLED_SCHOOL` int(4) NOT NULL DEFAULT '0',
+  `NB_SCHOOL_IN_AREA` int(3) DEFAULT NULL,
   `NB_WORKERS_MIGRANTS` int(4) NOT NULL DEFAULT '0',
   `MIMINUM_WAGES_APPLIED_TO_CONTRACT` tinyint(1) DEFAULT NULL,
+  `JOIN_WORKERS_REPRESENTATIVE_GROUP` tinyint(4) NOT NULL DEFAULT '0',
   `WORKER_OVERTIME` tinyint(1) DEFAULT NULL,
   `IS_OVERTIME_VOLUNTARY` tinyint(1) DEFAULT NULL,
   `NB_REST_DAYS` int(3) DEFAULT '0',
@@ -3230,26 +3379,57 @@ CREATE TABLE `reg_entity_staff_management` (
   `DISCIPLINARY_POLICIES` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'URL of uploaded Disciplinary policies ',
   `EXISTENCE_GRIEVING_SYSTEM` tinyint(1) DEFAULT NULL,
   `GRIEVING_SYSTEM_URL` varchar(45) COLLATE utf8_bin DEFAULT NULL COMMENT 'URL of uploaded grieving system description or picture',
+  `RECORD_GRIEVING_SYSTEM` tinyint(1) NOT NULL DEFAULT '0',
   `PROTECTIVE_EQUIPMENT_AVAILABLE` tinyint(1) DEFAULT NULL,
   `PROTECTIVE_EQUIPMENT_URL` varchar(256) COLLATE utf8_bin DEFAULT NULL,
   `SAFETY_CONDITION` varchar(256) COLLATE utf8_bin DEFAULT NULL COMMENT 'URL of uploaded safety condition - can be a picture',
   `WORKERS_REPRESENTATIVE_GROUP` tinyint(1) DEFAULT '0',
+  `NB_REPRESENTATIVE_GROUPS_IN_AREA` int(3) DEFAULT NULL,
+  `WORKERS_MAKE_FINANCIAL_DEPOSIT` tinyint(1) DEFAULT NULL,
+  `CL_GET_BACK_FINANCIAL_DEPOSIT_REASON_ID` int(11) DEFAULT NULL,
+  `CL_NO_EARLY_CONTRACT_TERMINATION_REASON_ID` int(11) DEFAULT NULL,
+  `CL_CONTRACT_TERMINATION_REASON_ID` int(11) DEFAULT NULL,
+  `CONTRACT_TERMINATION_OTHER_REASON` varchar(256) COLLATE utf8_bin DEFAULT NULL,
+  `CL_DEDUCTION_SALARY_ID_1` int(11) DEFAULT NULL,
+  `CL_DEDUCTION_SALARY_ID_2` int(11) DEFAULT NULL,
+  `CL_DEDUCTION_SALARY_ID_3` int(11) DEFAULT NULL,
+  `CL_DEDUCTION_SALARY_ID_4` int(11) DEFAULT NULL,
+  `DEDUCTION_SALARY_OTHER` varchar(256) COLLATE utf8_bin DEFAULT NULL,
+  `AMOUNT_SALARY_DEDUCED_MONTH` float DEFAULT NULL,
+  `PAYMENT_SLIP_PROVIDED_TO_WORKER` tinyint(1) DEFAULT NULL,
+  `WORKERS_IN_DEBT` tinyint(1) DEFAULT NULL,
+  `CL_PAYMENT_DEBT_TYPE_ID_1` int(11) DEFAULT NULL,
+  `CL_PAYMENT_DEBT_TYPE_ID_2` int(11) DEFAULT NULL,
+  `CL_PAYMENT_DEBT_TYPE_ID_3` int(11) DEFAULT NULL,
+  `CL_PAYMENT_DEBT_TYPE_ID_4` int(11) DEFAULT NULL,
+  `WORKERS_IN_DEBT_OTHER_STAKEHOLDER` tinyint(1) DEFAULT NULL,
+  `IN_KIND_PAYMENT` tinyint(11) DEFAULT NULL,
+  `IN_KIND_PAYMENT_TYPE` varchar(256) COLLATE utf8_bin DEFAULT NULL,
+  `CL_HIRING_RESTRICTION_ID` int(11) DEFAULT NULL,
+  `NB_MIGRANT_WORKERS` int(4) DEFAULT NULL,
+  `WORKER_HURT` tinyint(1) NOT NULL DEFAULT '0',
+  `WORKER_HURT_EXPLANATION` varchar(256) COLLATE utf8_bin DEFAULT NULL,
   `UPDATER_ID` int(11) DEFAULT '1',
   `COMMENT` varchar(1024) COLLATE utf8_bin DEFAULT NULL,
   `CREATED_AT` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `UPDATED_AT` timestamp NULL DEFAULT CURRENT_TIMESTAMP
+  `UPDATED_AT` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `ANY_CONTRACT_SIGNED_WITH_WORKERS` bit(1) DEFAULT NULL,
+  `KEEP_WORKER_DOCUMENTS_SAFEKEEPING` bit(1) DEFAULT NULL,
+  `STAFF_HIRED_DIRECTY` bit(1) DEFAULT NULL,
+  `STAFF_HIRED_THROUGH_AGENT` bit(1) DEFAULT NULL,
+  `CL_KEPT_WORKER_ENTITY_DOCUMENT_TYPE_ID_1` bigint(20) DEFAULT NULL,
+  `CL_KEPT_WORKER_ENTITY_DOCUMENT_TYPE_ID_2` bigint(20) DEFAULT NULL,
+  `CL_KEPT_WORKER_ENTITY_DOCUMENT_TYPE_ID_3` bigint(20) DEFAULT NULL,
+  `CL_KEPT_WORKER_ENTITY_DOCUMENT_TYPE_ID_4` bigint(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Additional information regarding staff at the farm level';
 
 --
 -- Contenu de la table `reg_entity_staff_management`
 --
 
-INSERT INTO `reg_entity_staff_management` (`REG_ENTITY_FARM_ID`, `NUMBER_STAFF_FARM_AS_TODAY`, `REGULAR_WORK_START_HOUR`, `REGULAR_WORK_END_HOUR`, `NB_WORKERS_LIVING_IN_FARM`, `NB_WORKERS_CHILD_LIVING_IN_FARM`, `NB_WORKERS_CHILD_HELPING_IN_FARM`, `NB_WORKERS_CHILD_ENROLLED_SCHOOL`, `NB_WORKERS_MIGRANTS`, `MIMINUM_WAGES_APPLIED_TO_CONTRACT`, `WORKER_OVERTIME`, `IS_OVERTIME_VOLUNTARY`, `NB_REST_DAYS`, `EXISTENCE_HAZARDOUS_WORK`, `CL_HARZARDOUS_WORK_TYPE_ID`, `EXISTENCE_FARM_POLICIES`, `FARM_POLICIES`, `EXISTENCE_HEALTH_SAFETY_POLICIES`, `HEALTH_SAFETY_POLICIES`, `EXISTENCE_WORK_ACCIDENT_RECORD`, `WORK_ACCIDENT_RECORD`, `ACCESS_TO_PROTECTIVE_EQUIPMENT`, `EMPLOYER_ISSUE_RECORD`, `ISSUE_RECORD_URL`, `EXISTENCE_EXTRA_WORK_RECORD`, `EXTRA_WORK_RECORD_URL`, `EXISTENCE_FREEDOM_ASSOCIATION_DISCLAIMER`, `FREEDOM_ASSOCIATION_DISCLAIMER_URL`, `EXISTENCE_DISCRIMINATION_REGULATION`, `DISCRIMINATION_REGULATION_URL`, `EXISTENCE_DISCIPLINARY_POLICIES`, `DISCIPLINARY_POLICIES`, `EXISTENCE_GRIEVING_SYSTEM`, `GRIEVING_SYSTEM_URL`, `PROTECTIVE_EQUIPMENT_AVAILABLE`, `PROTECTIVE_EQUIPMENT_URL`, `SAFETY_CONDITION`, `WORKERS_REPRESENTATIVE_GROUP`, `UPDATER_ID`, `COMMENT`, `CREATED_AT`, `UPDATED_AT`) VALUES
-(2, 0, '08:00:00', '18:00:00', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0, NULL, 0, NULL, 0, 0, NULL, 0, NULL, 0, NULL, 0, NULL, 0, NULL, 0, NULL, NULL, NULL, NULL, 0, 1, NULL, '2018-01-16 20:50:43', '2018-01-16 20:50:43'),
-(62, 0, '08:00:00', '18:00:00', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0, NULL, 0, NULL, 0, 0, NULL, 0, NULL, 0, NULL, 0, NULL, 0, NULL, 0, NULL, NULL, NULL, NULL, 0, 1, NULL, '2018-01-17 13:00:44', '2018-01-17 13:00:44'),
-(72, 0, '08:00:00', '18:00:00', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0, NULL, 0, NULL, 0, 0, NULL, 0, NULL, 0, NULL, 0, NULL, 0, NULL, 0, NULL, NULL, NULL, NULL, 0, 1, NULL, '2018-01-17 10:51:33', '2018-01-17 10:51:33'),
-(73, 0, '08:00:00', '18:00:00', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0, NULL, 0, NULL, 0, 0, NULL, 0, NULL, 0, NULL, 0, NULL, 0, NULL, 0, NULL, NULL, NULL, NULL, 0, 1, NULL, '2018-01-17 11:48:06', '2018-01-17 11:48:06'),
-(83, 0, '08:00:00', '18:00:00', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0, NULL, 0, NULL, 0, 0, NULL, 0, NULL, 0, NULL, 0, NULL, 0, NULL, 0, NULL, NULL, NULL, NULL, 0, 1, NULL, '2018-01-17 11:59:57', '2018-01-17 11:59:57');
+INSERT INTO `reg_entity_staff_management` (`REG_ENTITY_FARM_ID`, `NUMBER_STAFF_FARM_AS_TODAY`, `REGULAR_WORK_START_HOUR`, `REGULAR_WORK_END_HOUR`, `NB_WORKERS_LIVING_IN_FARM`, `NB_WORKERS_CHILD_LIVING_IN_FARM`, `NB_WORKERS_CHILD_HELPING_IN_FARM`, `NB_WORKERS_CHILD_ENROLLED_SCHOOL`, `NB_SCHOOL_IN_AREA`, `NB_WORKERS_MIGRANTS`, `MIMINUM_WAGES_APPLIED_TO_CONTRACT`, `JOIN_WORKERS_REPRESENTATIVE_GROUP`, `WORKER_OVERTIME`, `IS_OVERTIME_VOLUNTARY`, `NB_REST_DAYS`, `EXISTENCE_HAZARDOUS_WORK`, `CL_HARZARDOUS_WORK_TYPE_ID`, `EXISTENCE_FARM_POLICIES`, `FARM_POLICIES`, `EXISTENCE_HEALTH_SAFETY_POLICIES`, `HEALTH_SAFETY_POLICIES`, `EXISTENCE_WORK_ACCIDENT_RECORD`, `WORK_ACCIDENT_RECORD`, `ACCESS_TO_PROTECTIVE_EQUIPMENT`, `EMPLOYER_ISSUE_RECORD`, `ISSUE_RECORD_URL`, `EXISTENCE_EXTRA_WORK_RECORD`, `EXTRA_WORK_RECORD_URL`, `EXISTENCE_FREEDOM_ASSOCIATION_DISCLAIMER`, `FREEDOM_ASSOCIATION_DISCLAIMER_URL`, `EXISTENCE_DISCRIMINATION_REGULATION`, `DISCRIMINATION_REGULATION_URL`, `EXISTENCE_DISCIPLINARY_POLICIES`, `DISCIPLINARY_POLICIES`, `EXISTENCE_GRIEVING_SYSTEM`, `GRIEVING_SYSTEM_URL`, `RECORD_GRIEVING_SYSTEM`, `PROTECTIVE_EQUIPMENT_AVAILABLE`, `PROTECTIVE_EQUIPMENT_URL`, `SAFETY_CONDITION`, `WORKERS_REPRESENTATIVE_GROUP`, `NB_REPRESENTATIVE_GROUPS_IN_AREA`, `WORKERS_MAKE_FINANCIAL_DEPOSIT`, `CL_GET_BACK_FINANCIAL_DEPOSIT_REASON_ID`, `CL_NO_EARLY_CONTRACT_TERMINATION_REASON_ID`, `CL_CONTRACT_TERMINATION_REASON_ID`, `CONTRACT_TERMINATION_OTHER_REASON`, `CL_DEDUCTION_SALARY_ID_1`, `CL_DEDUCTION_SALARY_ID_2`, `CL_DEDUCTION_SALARY_ID_3`, `CL_DEDUCTION_SALARY_ID_4`, `DEDUCTION_SALARY_OTHER`, `AMOUNT_SALARY_DEDUCED_MONTH`, `PAYMENT_SLIP_PROVIDED_TO_WORKER`, `WORKERS_IN_DEBT`, `CL_PAYMENT_DEBT_TYPE_ID_1`, `CL_PAYMENT_DEBT_TYPE_ID_2`, `CL_PAYMENT_DEBT_TYPE_ID_3`, `CL_PAYMENT_DEBT_TYPE_ID_4`, `WORKERS_IN_DEBT_OTHER_STAKEHOLDER`, `IN_KIND_PAYMENT`, `IN_KIND_PAYMENT_TYPE`, `CL_HIRING_RESTRICTION_ID`, `NB_MIGRANT_WORKERS`, `WORKER_HURT`, `WORKER_HURT_EXPLANATION`, `UPDATER_ID`, `COMMENT`, `CREATED_AT`, `UPDATED_AT`, `ANY_CONTRACT_SIGNED_WITH_WORKERS`, `KEEP_WORKER_DOCUMENTS_SAFEKEEPING`, `STAFF_HIRED_DIRECTY`, `STAFF_HIRED_THROUGH_AGENT`, `CL_KEPT_WORKER_ENTITY_DOCUMENT_TYPE_ID_1`, `CL_KEPT_WORKER_ENTITY_DOCUMENT_TYPE_ID_2`, `CL_KEPT_WORKER_ENTITY_DOCUMENT_TYPE_ID_3`, `CL_KEPT_WORKER_ENTITY_DOCUMENT_TYPE_ID_4`) VALUES
+(135, 3, '08:00:00', '18:00:00', 0, 0, 0, 0, NULL, 0, 0, 0, 0, 0, 4, 1, 1, 0, NULL, 0, NULL, 0, NULL, 1, 0, NULL, 0, NULL, 0, NULL, 0, NULL, 0, NULL, 0, NULL, 0, NULL, '0_Protective equipment.jpg', NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, '2017-12-06 02:01:10', '2017-12-06 02:01:10', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(141, 0, '08:00:00', '18:00:00', 0, 0, 0, 0, 92, 0, 0, 0, 0, 0, 0, 0, 1, 0, NULL, 0, NULL, 0, NULL, 0, 0, NULL, 0, NULL, 0, NULL, 0, NULL, 0, NULL, 0, NULL, 0, NULL, NULL, NULL, 0, 2, 1, 1, NULL, NULL, '', NULL, NULL, NULL, NULL, '', 123, 1, 1, NULL, NULL, NULL, NULL, 0, 0, '', NULL, NULL, 0, NULL, NULL, NULL, '2017-12-20 02:34:54', '2017-12-20 02:34:54', b'0', b'0', b'0', NULL, 1, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -3295,6 +3475,44 @@ CREATE TABLE `reg_entity_staff_other_attribute_definition` (
   `CREATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `UPDATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Store definition of additional attributes';
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `reg_entity_staff_safety`
+--
+
+CREATE TABLE `reg_entity_staff_safety` (
+  `REG_ENTITY_FARM_ID` int(11) NOT NULL,
+  `SAFETY_EQUIPMENT_IN_FARM` tinyint(1) DEFAULT NULL,
+  `WORKERS_USE_SAFETY_EQUIPMENT` tinyint(1) DEFAULT NULL,
+  `FREE_SAFETY_EQUIPMENT` tinyint(1) DEFAULT NULL,
+  `NUMBER_TRAINED_STAFF` int(4) DEFAULT '0',
+  `PREVENTION_ACCIDENT_MEASURES` tinyint(1) DEFAULT NULL,
+  `UPDATER_ID` int(11) DEFAULT '1',
+  `COMMENT` varchar(1024) COLLATE utf8_bin DEFAULT NULL,
+  `CREATED_AT` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `UPDATED_AT` timestamp NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='General information on staff safety at the farm level';
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `reg_entity_staff_training`
+--
+
+CREATE TABLE `reg_entity_staff_training` (
+  `REG_ENTITY_FARM_ID` int(11) NOT NULL,
+  `FIRST_AID_TRAINING` tinyint(1) DEFAULT NULL,
+  `HAZARDOUS_ACTIVITIES_TRAINING` tinyint(1) DEFAULT NULL,
+  `CL_HAZARDOUS_ACTIVITIES_TRAINING_TYPE_ID` int(11) DEFAULT NULL,
+  `HAZARDOUS_ACTIVITIES_TRAINING_DATE` time DEFAULT '00:00:00',
+  `HAZARDOUS_ACTIVITIES_NUMBER_TRAINED_STAFF` int(4) DEFAULT '0',
+  `UPDATER_ID` int(11) DEFAULT '1',
+  `COMMENT` varchar(1024) COLLATE utf8_bin DEFAULT NULL,
+  `CREATED_AT` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `UPDATED_AT` timestamp NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='General information on staff training at the farm level';
 
 -- --------------------------------------------------------
 
@@ -3646,6 +3864,29 @@ ALTER TABLE `cl_app_contract_types`
   ADD KEY `FK_CONTRACT_TYPE_UPDATER_ID` (`UPDATER_ID`);
 
 --
+-- Index pour la table `cl_app_debt_types`
+--
+ALTER TABLE `cl_app_debt_types`
+  ADD PRIMARY KEY (`ID`),
+  ADD UNIQUE KEY `DEBT_TYPE_CODE_UNIQUE` (`CODE`),
+  ADD KEY `cl_app_debt_types_updater_id_idx` (`UPDATER_ID`);
+
+--
+-- Index pour la table `cl_app_declaration_sources_types`
+--
+ALTER TABLE `cl_app_declaration_sources_types`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `KEY_DECL_SOURCE_UPDATER_ID` (`UPDATER_ID`);
+
+--
+-- Index pour la table `cl_app_deduction_salary_types`
+--
+ALTER TABLE `cl_app_deduction_salary_types`
+  ADD PRIMARY KEY (`ID`),
+  ADD UNIQUE KEY `DEDUCTION_SALARY_TYPE_CODE_UNIQUE` (`CODE`),
+  ADD KEY `cl_app_deduction_salary_types_updater_id_idx` (`UPDATER_ID`);
+
+--
 -- Index pour la table `cl_app_energy_types`
 --
 ALTER TABLE `cl_app_energy_types`
@@ -3670,6 +3911,14 @@ ALTER TABLE `cl_app_engine_types`
   ADD KEY `cl_app_engine_types_updater_id_idx` (`UPDATER_ID`);
 
 --
+-- Index pour la table `cl_app_entity_document_types`
+--
+ALTER TABLE `cl_app_entity_document_types`
+  ADD PRIMARY KEY (`ID`),
+  ADD UNIQUE KEY `ENTITY_DOCUMENT_TYPE_CODE_UNIQUE` (`CODE`),
+  ADD KEY `cl_app_entity_document_types_updater_id_idx` (`UPDATER_ID`);
+
+--
 -- Index pour la table `cl_app_entity_types`
 --
 ALTER TABLE `cl_app_entity_types`
@@ -3678,11 +3927,43 @@ ALTER TABLE `cl_app_entity_types`
   ADD KEY `cl_entity_types_updater_id_idx` (`UPDATER_ID`);
 
 --
+-- Index pour la table `cl_app_fresh_water_sypply_types`
+--
+ALTER TABLE `cl_app_fresh_water_sypply_types`
+  ADD PRIMARY KEY (`ID`),
+  ADD UNIQUE KEY `FRESH_WATER_CODE_UNIQUE` (`CODE`),
+  ADD KEY `cl_app_fresh_water_sypply_types_updater_id_idx` (`UPDATER_ID`);
+
+--
+-- Index pour la table `cl_app_get_back_financial_deposit_reasons`
+--
+ALTER TABLE `cl_app_get_back_financial_deposit_reasons`
+  ADD PRIMARY KEY (`ID`),
+  ADD UNIQUE KEY `FINAN_DEPOSIT_BACK_REASON_CODE_UNIQUE` (`CODE`),
+  ADD KEY `cl_app_get_back_financial_deposit_reasons_updater_id_idx` (`UPDATER_ID`);
+
+--
+-- Index pour la table `cl_app_hazardous_training_types`
+--
+ALTER TABLE `cl_app_hazardous_training_types`
+  ADD PRIMARY KEY (`ID`),
+  ADD UNIQUE KEY `HAZARD_TYPE_CODE_UNIQUE` (`CODE`),
+  ADD KEY `cl_app_hazardous_training_types_updater_id_idx` (`UPDATER_ID`);
+
+--
 -- Index pour la table `cl_app_hazardous_work_type`
 --
 ALTER TABLE `cl_app_hazardous_work_type`
   ADD PRIMARY KEY (`ID`),
   ADD KEY `FK_HAZ_WORK_TYPE_UPDATER_ID` (`UPDATER_ID`);
+
+--
+-- Index pour la table `cl_app_hiring_restriction_types`
+--
+ALTER TABLE `cl_app_hiring_restriction_types`
+  ADD PRIMARY KEY (`ID`),
+  ADD UNIQUE KEY `HIRING_RESTRICTION_TYPE_CODE_UNIQUE` (`CODE`),
+  ADD KEY `cl_app_hiring_restriction_types_updater_id_idx` (`UPDATER_ID`);
 
 --
 -- Index pour la table `cl_app_hull_types`
@@ -3738,6 +4019,22 @@ ALTER TABLE `cl_app_measure_types`
   ADD PRIMARY KEY (`ID`),
   ADD UNIQUE KEY `MEASURE_CODE_UNIQUE` (`CODE`),
   ADD KEY `cl_measure_type_updater_id_idx` (`UPDATER_ID`);
+
+--
+-- Index pour la table `cl_app_no_early_termination_contract_reasons`
+--
+ALTER TABLE `cl_app_no_early_termination_contract_reasons`
+  ADD PRIMARY KEY (`ID`),
+  ADD UNIQUE KEY `NO_EARLY_TERMINATION_REASON_CODE_UNIQUE` (`CODE`),
+  ADD KEY `cl_app_no_early_termination_contract_reasons_updater_id_idx` (`UPDATER_ID`);
+
+--
+-- Index pour la table `cl_app_payment_debt_types`
+--
+ALTER TABLE `cl_app_payment_debt_types`
+  ADD PRIMARY KEY (`ID`),
+  ADD UNIQUE KEY `PAYMENT_DEBT_TYPE_CODE_UNIQUE` (`CODE`),
+  ADD KEY `cl_app_payment_debt_types_updater_id_idx` (`UPDATER_ID`);
 
 --
 -- Index pour la table `cl_app_payment_frequencies`
@@ -3801,6 +4098,14 @@ ALTER TABLE `cl_app_staff_declaration_types`
   ADD KEY `cl_app_staff_declaration_types_id_idx` (`UPDATER_ID`);
 
 --
+-- Index pour la table `cl_app_termination_contract_reasons`
+--
+ALTER TABLE `cl_app_termination_contract_reasons`
+  ADD PRIMARY KEY (`ID`),
+  ADD UNIQUE KEY `TERMINATION_REASON_CODE_UNIQUE` (`CODE`),
+  ADD KEY `cl_app_no_early_termination_contract_reasons_updater_id_idx` (`UPDATER_ID`);
+
+--
 -- Index pour la table `cl_app_tiling_activity_types`
 --
 ALTER TABLE `cl_app_tiling_activity_types`
@@ -3838,6 +4143,14 @@ ALTER TABLE `cl_app_vessel_operational_status`
   ADD KEY `cl_vessel_operational_status_updater_id_idx` (`UPDATER_ID`);
 
 --
+-- Index pour la table `cl_app_water_supply_types`
+--
+ALTER TABLE `cl_app_water_supply_types`
+  ADD PRIMARY KEY (`ID`),
+  ADD UNIQUE KEY `WATER_SUPPLY_TYPE_CODE_UNIQUE` (`CODE`),
+  ADD KEY `cl_app_water_supply_types_updater_id_idx` (`UPDATER_ID`);
+
+--
 -- Index pour la table `cl_farm_building_types`
 --
 ALTER TABLE `cl_farm_building_types`
@@ -3868,6 +4181,14 @@ ALTER TABLE `cl_farm_pond_types`
   ADD PRIMARY KEY (`ID`),
   ADD UNIQUE KEY `POND_TYPE_CODE_UNIQUE` (`CODE`),
   ADD KEY `FK_FARM_POND_TYPE_UPDATER_ID` (`UPDATER_ID`);
+
+--
+-- Index pour la table `cl_farm_production_types`
+--
+ALTER TABLE `cl_farm_production_types`
+  ADD PRIMARY KEY (`ID`),
+  ADD UNIQUE KEY `FARM_PROD_TYPE_CODE_UNIQUE` (`CODE`),
+  ADD KEY `cl_farm_production_types_updater_id_idx` (`UPDATER_ID`);
 
 --
 -- Index pour la table `cl_farm_types`
@@ -3913,6 +4234,7 @@ ALTER TABLE `cl_ref_admin_level_2`
 -- Index pour la table `cl_ref_commodities`
 --
 ALTER TABLE `cl_ref_commodities`
+  ADD PRIMARY KEY (`ID`),
   ADD KEY `FK_COMMODITIES_UPDATER_ID` (`UPDATER_ID`);
 
 --
@@ -4100,11 +4422,19 @@ ALTER TABLE `reg_entities`
   ADD KEY `FK_REG_ENTITIES_UPDATER_ID` (`UPDATER_ID`);
 
 --
+-- Index pour la table `reg_entity_facilities`
+--
+ALTER TABLE `reg_entity_facilities`
+  ADD PRIMARY KEY (`REG_ENTITY_FARM_ID`),
+  ADD KEY `FK_REG_ENTITY_FARM_FACILITIES_UPDATER_ID` (`UPDATER_ID`);
+
+--
 -- Index pour la table `reg_entity_farmag_details`
 --
 ALTER TABLE `reg_entity_farmag_details`
   ADD PRIMARY KEY (`ID`),
-  ADD KEY `FK_REG_ENTITY_FARMAG_DETAILS_UPDATER_ID` (`UPDATER_ID`);
+  ADD KEY `FK_REG_ENTITY_FARMAG_DETAILS_UPDATER_ID` (`UPDATER_ID`),
+  ADD KEY `FK_REG_ENTITY_FARMAG_DETAILS_FARM_ID_idx` (`REG_ENTITY_FARM_ID`);
 
 --
 -- Index pour la table `reg_entity_farmag_plots`
@@ -4112,17 +4442,19 @@ ALTER TABLE `reg_entity_farmag_details`
 ALTER TABLE `reg_entity_farmag_plots`
   ADD PRIMARY KEY (`ID`),
   ADD KEY `REG_ENTITY_FARM_ID` (`REG_ENTITY_FARM_ID`),
-  ADD KEY `REG_ENTITY_FARM_ID_2` (`REG_ENTITY_FARM_ID`),
-  ADD KEY `REG_ENTITY_FARM_ID_3` (`REG_ENTITY_FARM_ID`),
-  ADD KEY `REG_ENTITY_FARM_ID_4` (`REG_ENTITY_FARM_ID`),
-  ADD KEY `FK_REG_ENTITY_FARMAG_PLOTS_UPDATER_ID` (`UPDATER_ID`);
+  ADD KEY `FK_REG_ENTITY_FARMAG_PLOTS_UPDATER_ID` (`UPDATER_ID`),
+  ADD KEY `FK_REG_ENTITY_FARMAG_PLOTS_CL_COMMODITIES_ID` (`CL_COMMODITIES_ID`),
+  ADD KEY `FK_REG_ENTITY_FARMAG_PLOTS_CL_PLOT_SIZE_UNIT_ID_idx` (`CL_PLOT_SIZE_UNIT_ID`);
 
 --
 -- Index pour la table `reg_entity_farmaq_details`
 --
 ALTER TABLE `reg_entity_farmaq_details`
   ADD PRIMARY KEY (`ID`),
-  ADD KEY `FK_REG_ENTITY_FARMAQ_DETAILS_UPDATER_ID` (`UPDATER_ID`);
+  ADD KEY `FK_REG_ENTITY_FARMAQ_DETAILS_UPDATER_ID` (`UPDATER_ID`),
+  ADD KEY `FK_REG_ENTITY_FARMAQ_DETAILS_CL_FARM_PROD_TYPE_ID_idx` (`CL_FARM_PRODUCTION_TYPE_ID`),
+  ADD KEY `FK_REG_ENTITY_FARMAQ_DETAILS_CLFRESH_WATER_ID_idx` (`CL_FARM_WATER_SUPPLY_ID`),
+  ADD KEY `FK_REG_ENTITY_FARMAQ_DETAILS_FARM_ID_idx` (`REG_ENTITY_FARM_ID`);
 
 --
 -- Index pour la table `reg_entity_farmaq_ponds`
@@ -4131,34 +4463,38 @@ ALTER TABLE `reg_entity_farmaq_ponds`
   ADD PRIMARY KEY (`ID`),
   ADD KEY `REG_ENTITY_FARM_ID` (`REG_ENTITY_FARM_ID`),
   ADD KEY `REG_ENTITY_FARM_ID_2` (`REG_ENTITY_FARM_ID`),
-  ADD KEY `FK_REG_ENTITY_FARMAQ_PONDS_UPDATER_ID` (`UPDATER_ID`);
+  ADD KEY `FK_REG_ENTITY_FARMAQ_PONDS_UPDATER_ID` (`UPDATER_ID`),
+  ADD KEY `FK_REG_ENTITY_FARMAQ_PONDS_CL_PONDS_TYPE_ID_idx` (`CL_POND_TYPE_ID`),
+  ADD KEY `FK_REG_ENTITY_FARMAQ_PONDS_CL_SPECIES_ID_idx` (`CL_SPECIES_ID`),
+  ADD KEY `FK_REG_ENTITY_FARMAQ_PONDS_CL_UNIT_TYPE_ID_idx` (`CL_POND_SIZE_UNIT_ID`),
+  ADD KEY `FK_REG_ENTITY_FARMAQ_PONDS_CL_VOL_UNIT_TYPE_ID` (`CL_POND_VOLUME_UNIT_ID`);
 
 --
 -- Index pour la table `reg_entity_farm_buildings`
 --
 ALTER TABLE `reg_entity_farm_buildings`
   ADD PRIMARY KEY (`REG_ENTITY_FARM_ID`),
-  ADD KEY `FK_REG_ENTITY_FARM_BUILDING_UPDATER_ID` (`UPDATER_ID`);
+  ADD KEY `FK_REG_ENTITY_FARM_BUILDING_UPDATER_ID` (`UPDATER_ID`),
+  ADD KEY `FK_REG_ENTITY_FARM_BUILDING_CL_BUILDING_TYPE_ID_idx` (`CL_FARM_BUILDING_TYPE_ID`);
 
 --
 -- Index pour la table `reg_entity_farm_details`
 --
 ALTER TABLE `reg_entity_farm_details`
   ADD PRIMARY KEY (`ID`),
-  ADD KEY `FK_REG_ENTITY_FARM_DETAILS_UPDATER_ID` (`UPDATER_ID`);
+  ADD KEY `FK_REG_ENTITY_FARM_DETAILS_UPDATER_ID` (`UPDATER_ID`),
+  ADD KEY `FK_REG_ENTITY_FARM_DETAILS_FARM_ID_idx` (`REG_ENTITY_FARM_ID`),
+  ADD KEY `FK_REG_ENTITY_FARM_DETAILS_OWNER_ID_idx` (`REG_ENTITY_OWNER_ID`),
+  ADD KEY `FK_REG_ENTITY_FARM_DETAILS_CL_SIZE_UNIT_ID_idx` (`CL_SIZE_UNIT_ID`),
+  ADD KEY `FK_REG_ENTITY_FARM_DETAILS_CL_HVHE_TYPE_ID_idx` (`CL_HVHE_EXPENSION_TYPE_ID`);
 
 --
 -- Index pour la table `reg_entity_farm_details_farm_type`
 --
 ALTER TABLE `reg_entity_farm_details_farm_type`
-  ADD KEY `FK_REG_ENTITY_FARM_DETAILS_TYPE_UPDATER_ID` (`UPDATER_ID`);
-
---
--- Index pour la table `reg_entity_farm_facilities`
---
-ALTER TABLE `reg_entity_farm_facilities`
-  ADD PRIMARY KEY (`REG_ENTITY_FARM_ID`),
-  ADD KEY `FK_REG_ENTITY_FARM_FACILITIES_UPDATER_ID` (`UPDATER_ID`);
+  ADD KEY `FK_REG_ENTITY_FARM_DETAILS_TYPE_UPDATER_ID` (`UPDATER_ID`),
+  ADD KEY `FK_REG_ENTITY_FARM_DETAILS_TYPE_FARM_ID_idx` (`REG_ENTITY_FARM_ID`),
+  ADD KEY `FK_REG_ENTITY_FARM_DETAILS_TYPE_CL_FARM_TYPE_ID_idx` (`CL_FARM_TYPE_ID`);
 
 --
 -- Index pour la table `reg_entity_farm_providers`
@@ -4175,35 +4511,59 @@ ALTER TABLE `reg_entity_farm_providers`
 --
 ALTER TABLE `reg_entity_farm_water_supply`
   ADD PRIMARY KEY (`REG_ENTITY_FARM_ID`),
-  ADD KEY `FK_REG_ENTITY_FARM_SUPPLY_UPDATER_ID` (`UPDATER_ID`);
+  ADD KEY `FK_REG_ENTITY_FARM_SUPPLY_UPDATER_ID` (`UPDATER_ID`),
+  ADD KEY `FK_REG_ENTITY_FARM_SUPPLY_CL_WATER_SUP_TYPE_ID_idx` (`CL_WATER_SUPPLY_TYPE_ID`);
+
+--
+-- Index pour la table `reg_entity_hazardous_work`
+--
+ALTER TABLE `reg_entity_hazardous_work`
+  ADD PRIMARY KEY (`REG_ENTITY_FARM_ID`),
+  ADD KEY `FK_REG_ENTITY_HAZARDOUS_WORK_TYPE_UPDATER_ID` (`UPDATER_ID`),
+  ADD KEY `FK_REG_ENTITY_HAZARDOUS_WORK_TYPE_CL_HAAZRD_WORK_TYPE_ID_idx` (`CL_APP_HAZARDOUS_WORK_TYPE_ID`);
 
 --
 -- Index pour la table `reg_entity_product_suppliers`
 --
 ALTER TABLE `reg_entity_product_suppliers`
   ADD PRIMARY KEY (`ID`),
-  ADD KEY `FK_REG_ENTITY_PRODUCT_SUPPLIER_UPDATER_ID` (`UPDATER_ID`);
+  ADD KEY `FK_REG_ENTITY_PRODUCT_SUPPLIER_UPDATER_ID` (`UPDATER_ID`),
+  ADD KEY `FK_REG_ENTITY_PRODUCT_SUPPLIER_CL_PRODUCTS_TYPE_ID_idx` (`CL_PRODUCT_TYPES_ID`),
+  ADD KEY `FK_REG_ENTITY_PRODUCT_SUPPLIER_ENTITY_ID_idx` (`ENTITY_ID`);
 
 --
 -- Index pour la table `reg_entity_staff`
 --
 ALTER TABLE `reg_entity_staff`
   ADD UNIQUE KEY `FK_COMPKEY` (`REG_ENTITY_ID`,`REG_ENTITY_FARM_ID`),
-  ADD KEY `FK_REG_ENTITY_STAFF_UPDATER_ID` (`UPDATER_ID`);
+  ADD KEY `FK_REG_ENTITY_STAFF_UPDATER_ID` (`UPDATER_ID`),
+  ADD KEY `FK_REG_ENTITY_STAFF_CL_LANGUAGE_ID_idx` (`CL_LANGUAGE_ID`),
+  ADD KEY `FK_REG_ENTITY_STAFF_CL_POS_TYPE_ID_idx` (`CL_POSITION_TYPE_ID`),
+  ADD KEY `FK_REG_ENTITY_STAFF_CL_LEGAL_STATUS_ID_idx` (`CL_LEGAL_STATUS_ID`),
+  ADD KEY `FK_REG_ENTITY_STAFF_FARM_ID_idx` (`REG_ENTITY_FARM_ID`);
 
 --
 -- Index pour la table `reg_entity_staff_contract`
 --
 ALTER TABLE `reg_entity_staff_contract`
   ADD PRIMARY KEY (`ID`),
-  ADD KEY `FK_REG_ENTITY_STAFF_CONTRACT_DETAILS_UPDATER_ID` (`UPDATER_ID`);
+  ADD KEY `FK_REG_ENTITY_STAFF_CONTRACT_DETAILS_UPDATER_ID` (`UPDATER_ID`),
+  ADD KEY `FK_REG_ENTITY_STAFF_CONTRACT_DETAILS_CL_CONTRACT_TYPE_ID_idx` (`CL_CONTRACT_TYPE_ID`),
+  ADD KEY `FK_REG_ENTITY_STAFF_CONTRACT_CL_PAYMENT_FREQ_ID_idx` (`CL_PAYMENT_FREQUENCY_ID`),
+  ADD KEY `FK_REG_ENTITY_STAFF_CONTRACT_DETAILS_CL_COUNTRY_ID_idx` (`CL_COUNTRY_ID`),
+  ADD KEY `FK_REG_ENTITY_STAFF_CONTRACT_DETAILS_STAFF_ID_idx` (`REG_ENTITY_ID`),
+  ADD KEY `FK_REG_ENTITY_STAFF_CONTRACT_DETAILS_FARM_ID_idx` (`REG_ENTITY_FARM_ID`);
 
 --
 -- Index pour la table `reg_entity_staff_declaration`
 --
 ALTER TABLE `reg_entity_staff_declaration`
   ADD PRIMARY KEY (`ID`),
-  ADD KEY `FK_REG_ENTITY_STAFF_DECLARATION_UPDATER_ID` (`UPDATER_ID`);
+  ADD KEY `FK_REG_ENTITY_STAFF_DECLARATION_UPDATER_ID` (`UPDATER_ID`),
+  ADD KEY `FK_REG_ENTITY_STAFF_DECLARATION_CL_STAFF_DECL_TYPE_ID_idx` (`CL_STAFF_DECLARATION_TYPE`),
+  ADD KEY `FK_REG_ENTITY_STAFF_DECLARATION_CL_DECL_SOURCE_ID_idx` (`CL_DECLARATION_SOURCE`),
+  ADD KEY `FK_REG_ENTITY_STAFF_DECLARATION_FARM_ID_idx` (`REG_ENTITY_FARM_ID`),
+  ADD KEY `FK_REG_ENTITY_STAFF_DECLARATION_STAFF_ID_idx` (`REG_ENTITY_STAFF_ID`);
 
 --
 -- Index pour la table `reg_entity_staff_declaration_child`
@@ -4231,21 +4591,39 @@ ALTER TABLE `reg_entity_staff_declaration_grievance`
 --
 ALTER TABLE `reg_entity_staff_declaration_remuneration`
   ADD PRIMARY KEY (`REG_ENTITY_STAFF_DECLARATION_ID`),
-  ADD KEY `FK_DECLARATION_GRIVANCE_UPDATER_ID_idx` (`UPDATER_ID`);
+  ADD KEY `FK_DECLARATION_GRIVANCE_UPDATER_ID_idx` (`UPDATER_ID`),
+  ADD KEY `FK_DECLARATION_CL_DEBT_TYPE_1_idx` (`CL_DEBT_TYPE_1_ID`),
+  ADD KEY `FK_DECLARATION_CL_DEBT_TYPE_2_idx` (`CL_DEBT_TYPE_2_ID`),
+  ADD KEY `FK_DECLARATION_CL_DEBT_TYPE_3_idx` (`CL_DEBT_TYPE_3_ID`);
 
 --
 -- Index pour la table `reg_entity_staff_declaration_working_hours`
 --
 ALTER TABLE `reg_entity_staff_declaration_working_hours`
   ADD PRIMARY KEY (`REG_ENTITY_STAFF_DECLARATION_ID`),
-  ADD KEY `FK_DECLARATION_WORKING_HOURS_UPDATER_ID_idx` (`UPDATER_ID`);
+  ADD KEY `FK_DECLARATION_WORKING_HOURS_UPDATER_ID_idx` (`UPDATER_ID`),
+  ADD KEY `FK_DECLARATION_WORKING_HOURS_CL_QUANTITY_REST_DAY_ID_idx` (`CL_QUANTITY_REST_PER_DAY_UNIT_ID`),
+  ADD KEY `FK_DECLARATION_WORKING_HOURS_CL_QUANTITY_REST_WEEK_ID_idx` (`CL_QUANTITY_REST_PER_WEEK_UNIT_ID`),
+  ADD KEY `FK_DECLARATION_WORKING_HOURS_CL_QUANTITY_OVERTIME_WEEK_ID_idx` (`CL_QUANTITY_OVERTIME_PER_WEEK_UNIT_ID`);
 
 --
 -- Index pour la table `reg_entity_staff_management`
 --
 ALTER TABLE `reg_entity_staff_management`
   ADD PRIMARY KEY (`REG_ENTITY_FARM_ID`),
-  ADD KEY `FK_REG_ENTITY_STAFF_MANAGEMENT_UPDATER_ID` (`UPDATER_ID`);
+  ADD KEY `FK_REG_ENTITY_STAFF_MANAGEMENT_UPDATER_ID` (`UPDATER_ID`),
+  ADD KEY `FK_REG_ENTITY_STAFF_MANAGEMENT_HAZARD_TYPE_ID` (`CL_HARZARDOUS_WORK_TYPE_ID`),
+  ADD KEY `FK_REG_ENTITY_STAFF_MANAGEMENT_CL_NO_TERMIN_REASON_ID_idx` (`CL_NO_EARLY_CONTRACT_TERMINATION_REASON_ID`),
+  ADD KEY `FK_REG_ENTITY_STAFF_MANAGEMENT_CL_GET_BACK_DEPO_ID_idx` (`CL_GET_BACK_FINANCIAL_DEPOSIT_REASON_ID`),
+  ADD KEY `FK_REG_ENTITY_STAFF_MANAGEMENT_TERM_CONTRACT_REASON_ID_idx` (`CL_CONTRACT_TERMINATION_REASON_ID`),
+  ADD KEY `FK_REG_ENTITY_STAFF_MANAGEMENT_CL_DEDUC_TYPE_ID_1_idx` (`CL_DEDUCTION_SALARY_ID_1`),
+  ADD KEY `FK_REG_ENTITY_STAFF_MANAGEMENT_CL_DEDUC_TYPE_ID_2_idx` (`CL_DEDUCTION_SALARY_ID_2`),
+  ADD KEY `FK_REG_ENTITY_STAFF_MANAGEMENT_CL_DEDUC_TYPE_ID_3_idx` (`CL_DEDUCTION_SALARY_ID_3`),
+  ADD KEY `FK_REG_ENTITY_STAFF_MANAGEMENT_CL_DEDUC_TYPE_ID_4_idx` (`CL_DEDUCTION_SALARY_ID_4`),
+  ADD KEY `FK_REG_ENTITY_STAFF_MANAGEMENT_CL_PAY_DEBT_TYPE_ID_2_idx` (`CL_PAYMENT_DEBT_TYPE_ID_2`),
+  ADD KEY `FK_REG_ENTITY_STAFF_MANAGEMENT_CL_PAY_DEBT_TYPE_ID_3_idx` (`CL_PAYMENT_DEBT_TYPE_ID_3`),
+  ADD KEY `FK_REG_ENTITY_STAFF_MANAGEMENT_CL_PAY_DEBT_TYPE_ID_4_idx` (`CL_PAYMENT_DEBT_TYPE_ID_4`),
+  ADD KEY `FK_REG_ENTITY_STAFF_MANAGEMENT_CL_HIRING_RESTR_ID_idx` (`CL_HIRING_RESTRICTION_ID`);
 
 --
 -- Index pour la table `reg_entity_staff_other_attribute`
@@ -4260,6 +4638,21 @@ ALTER TABLE `reg_entity_staff_other_attribute`
 ALTER TABLE `reg_entity_staff_other_attribute_definition`
   ADD PRIMARY KEY (`ID`),
   ADD KEY `FK_REG_ENTITY_STAFF_OTHER_ATTRIBUTES_DEF_UPDATER_ID` (`UPDATER_ID`);
+
+--
+-- Index pour la table `reg_entity_staff_safety`
+--
+ALTER TABLE `reg_entity_staff_safety`
+  ADD PRIMARY KEY (`REG_ENTITY_FARM_ID`),
+  ADD KEY `FK_REG_ENTITY_STAFF_SAFETY_UPDATER_ID` (`UPDATER_ID`);
+
+--
+-- Index pour la table `reg_entity_staff_training`
+--
+ALTER TABLE `reg_entity_staff_training`
+  ADD PRIMARY KEY (`REG_ENTITY_FARM_ID`),
+  ADD KEY `FK_REG_ENTITY_STAFF_TRAINING_UPDATER_ID` (`UPDATER_ID`),
+  ADD KEY `FK_REG_ENTITY_STAFF_TRAINING_HAZARD_TYPE_ID` (`CL_HAZARDOUS_ACTIVITIES_TRAINING_TYPE_ID`);
 
 --
 -- Index pour la table `reg_pictures`
@@ -4383,6 +4776,16 @@ ALTER TABLE `cl_app_administrative_characteristic_types`
 ALTER TABLE `cl_app_company_position_types`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
+-- AUTO_INCREMENT pour la table `cl_app_debt_types`
+--
+ALTER TABLE `cl_app_debt_types`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT pour la table `cl_app_deduction_salary_types`
+--
+ALTER TABLE `cl_app_deduction_salary_types`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+--
 -- AUTO_INCREMENT pour la table `cl_app_energy_types`
 --
 ALTER TABLE `cl_app_energy_types`
@@ -4398,14 +4801,39 @@ ALTER TABLE `cl_app_engine_roles`
 ALTER TABLE `cl_app_engine_types`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
 --
+-- AUTO_INCREMENT pour la table `cl_app_entity_document_types`
+--
+ALTER TABLE `cl_app_entity_document_types`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+--
 -- AUTO_INCREMENT pour la table `cl_app_entity_types`
 --
 ALTER TABLE `cl_app_entity_types`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100;
 --
+-- AUTO_INCREMENT pour la table `cl_app_fresh_water_sypply_types`
+--
+ALTER TABLE `cl_app_fresh_water_sypply_types`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT pour la table `cl_app_get_back_financial_deposit_reasons`
+--
+ALTER TABLE `cl_app_get_back_financial_deposit_reasons`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100;
+--
+-- AUTO_INCREMENT pour la table `cl_app_hazardous_training_types`
+--
+ALTER TABLE `cl_app_hazardous_training_types`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100;
+--
 -- AUTO_INCREMENT pour la table `cl_app_hazardous_work_type`
 --
 ALTER TABLE `cl_app_hazardous_work_type`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100;
+--
+-- AUTO_INCREMENT pour la table `cl_app_hiring_restriction_types`
+--
+ALTER TABLE `cl_app_hiring_restriction_types`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT pour la table `cl_app_hull_types`
@@ -4443,6 +4871,16 @@ ALTER TABLE `cl_app_location_types`
 ALTER TABLE `cl_app_measure_types`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
+-- AUTO_INCREMENT pour la table `cl_app_no_early_termination_contract_reasons`
+--
+ALTER TABLE `cl_app_no_early_termination_contract_reasons`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT pour la table `cl_app_payment_debt_types`
+--
+ALTER TABLE `cl_app_payment_debt_types`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
 -- AUTO_INCREMENT pour la table `cl_app_power_units`
 --
 ALTER TABLE `cl_app_power_units`
@@ -4473,6 +4911,11 @@ ALTER TABLE `cl_app_soil_analysis_types`
 ALTER TABLE `cl_app_staff_declaration_types`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT COMMENT 'declaration type ID';
 --
+-- AUTO_INCREMENT pour la table `cl_app_termination_contract_reasons`
+--
+ALTER TABLE `cl_app_termination_contract_reasons`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100;
+--
 -- AUTO_INCREMENT pour la table `cl_app_vessel_characteristics`
 --
 ALTER TABLE `cl_app_vessel_characteristics`
@@ -4493,6 +4936,11 @@ ALTER TABLE `cl_app_vessel_historical_characteristic_types`
 ALTER TABLE `cl_app_vessel_operational_status`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT COMMENT 'The REGION codelist ID';
 --
+-- AUTO_INCREMENT pour la table `cl_app_water_supply_types`
+--
+ALTER TABLE `cl_app_water_supply_types`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+--
 -- AUTO_INCREMENT pour la table `cl_farm_building_types`
 --
 ALTER TABLE `cl_farm_building_types`
@@ -4506,12 +4954,17 @@ ALTER TABLE `cl_farm_plot_activity_types`
 -- AUTO_INCREMENT pour la table `cl_farm_pond_activity_types`
 --
 ALTER TABLE `cl_farm_pond_activity_types`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT pour la table `cl_farm_pond_types`
 --
 ALTER TABLE `cl_farm_pond_types`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+--
+-- AUTO_INCREMENT pour la table `cl_farm_production_types`
+--
+ALTER TABLE `cl_farm_production_types`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT pour la table `cl_farm_types`
 --
@@ -4586,12 +5039,12 @@ ALTER TABLE `cl_ref_vessel_types`
 -- AUTO_INCREMENT pour la table `dt_farmag_plot_management`
 --
 ALTER TABLE `dt_farmag_plot_management`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 --
 -- AUTO_INCREMENT pour la table `dt_farmag_production`
 --
 ALTER TABLE `dt_farmag_production`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 --
 -- AUTO_INCREMENT pour la table `dt_farmaq_plot_measurements`
 --
@@ -4601,7 +5054,7 @@ ALTER TABLE `dt_farmaq_plot_measurements`
 -- AUTO_INCREMENT pour la table `dt_farmaq_pond_management`
 --
 ALTER TABLE `dt_farmaq_pond_management`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT pour la table `dt_farmaq_pond_measurements`
 --
@@ -4611,7 +5064,7 @@ ALTER TABLE `dt_farmaq_pond_measurements`
 -- AUTO_INCREMENT pour la table `dt_farmaq_production`
 --
 ALTER TABLE `dt_farmaq_production`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 --
 -- AUTO_INCREMENT pour la table `dt_soil_analysis`
 --
@@ -4626,7 +5079,7 @@ ALTER TABLE `dt_water_analysis`
 -- AUTO_INCREMENT pour la table `reg_entities`
 --
 ALTER TABLE `reg_entities`
-  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=90;
+  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=142;
 --
 -- AUTO_INCREMENT pour la table `reg_entity_farmag_details`
 --
@@ -4636,7 +5089,7 @@ ALTER TABLE `reg_entity_farmag_details`
 -- AUTO_INCREMENT pour la table `reg_entity_farmag_plots`
 --
 ALTER TABLE `reg_entity_farmag_plots`
-  MODIFY `ID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 --
 -- AUTO_INCREMENT pour la table `reg_entity_farmaq_details`
 --
@@ -4646,17 +5099,17 @@ ALTER TABLE `reg_entity_farmaq_details`
 -- AUTO_INCREMENT pour la table `reg_entity_farmaq_ponds`
 --
 ALTER TABLE `reg_entity_farmaq_ponds`
-  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=176;
+  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=178;
 --
 -- AUTO_INCREMENT pour la table `reg_entity_farm_details`
 --
 ALTER TABLE `reg_entity_farm_details`
-  MODIFY `ID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=99;
+  MODIFY `ID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
 --
 -- AUTO_INCREMENT pour la table `reg_entity_farm_providers`
 --
 ALTER TABLE `reg_entity_farm_providers`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 --
 -- AUTO_INCREMENT pour la table `reg_entity_product_suppliers`
 --
@@ -4710,6 +5163,24 @@ ALTER TABLE `cl_app_contract_types`
   ADD CONSTRAINT `FK_CONTRACT_TYPE_UPDATER_ID` FOREIGN KEY (`UPDATER_ID`) REFERENCES `sys_users` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
+-- Contraintes pour la table `cl_app_debt_types`
+--
+ALTER TABLE `cl_app_debt_types`
+  ADD CONSTRAINT `FK_DEBT_TYPE_UPDATER_ID` FOREIGN KEY (`UPDATER_ID`) REFERENCES `sys_users` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Contraintes pour la table `cl_app_declaration_sources_types`
+--
+ALTER TABLE `cl_app_declaration_sources_types`
+  ADD CONSTRAINT `FK_DECL_SOURCE_UPDATER_ID` FOREIGN KEY (`UPDATER_ID`) REFERENCES `sys_users` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Contraintes pour la table `cl_app_deduction_salary_types`
+--
+ALTER TABLE `cl_app_deduction_salary_types`
+  ADD CONSTRAINT `FK_DEDUCTION_SALARY_UPDATER_ID` FOREIGN KEY (`UPDATER_ID`) REFERENCES `sys_users` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
 -- Contraintes pour la table `cl_app_energy_types`
 --
 ALTER TABLE `cl_app_energy_types`
@@ -4728,16 +5199,46 @@ ALTER TABLE `cl_app_engine_types`
   ADD CONSTRAINT `FK_ENGINE_TYPE_UPDATER_ID` FOREIGN KEY (`UPDATER_ID`) REFERENCES `sys_users` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
+-- Contraintes pour la table `cl_app_entity_document_types`
+--
+ALTER TABLE `cl_app_entity_document_types`
+  ADD CONSTRAINT `FK_ENTITY_DOCUMENT_TYPE_UPDATER_ID` FOREIGN KEY (`UPDATER_ID`) REFERENCES `sys_users` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
 -- Contraintes pour la table `cl_app_entity_types`
 --
 ALTER TABLE `cl_app_entity_types`
   ADD CONSTRAINT `FK_ENTITY_TYPE_UPDATER_ID` FOREIGN KEY (`UPDATER_ID`) REFERENCES `sys_users` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
+-- Contraintes pour la table `cl_app_fresh_water_sypply_types`
+--
+ALTER TABLE `cl_app_fresh_water_sypply_types`
+  ADD CONSTRAINT `FK_FRESH_WATER_UPDATER_ID` FOREIGN KEY (`UPDATER_ID`) REFERENCES `sys_users` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Contraintes pour la table `cl_app_get_back_financial_deposit_reasons`
+--
+ALTER TABLE `cl_app_get_back_financial_deposit_reasons`
+  ADD CONSTRAINT `FK_FINAN_DEPOSIT_BACK_REASON_UPDATER_ID` FOREIGN KEY (`UPDATER_ID`) REFERENCES `sys_users` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Contraintes pour la table `cl_app_hazardous_training_types`
+--
+ALTER TABLE `cl_app_hazardous_training_types`
+  ADD CONSTRAINT `FK_HAZARD_TYPE_UPDATER_ID` FOREIGN KEY (`UPDATER_ID`) REFERENCES `sys_users` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
 -- Contraintes pour la table `cl_app_hazardous_work_type`
 --
 ALTER TABLE `cl_app_hazardous_work_type`
   ADD CONSTRAINT `FK_HAZ_WORK_TYPE_UPDATER_ID` FOREIGN KEY (`UPDATER_ID`) REFERENCES `sys_users` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Contraintes pour la table `cl_app_hiring_restriction_types`
+--
+ALTER TABLE `cl_app_hiring_restriction_types`
+  ADD CONSTRAINT `FK_HIRING_RESTRICTION_UPDATER_ID` FOREIGN KEY (`UPDATER_ID`) REFERENCES `sys_users` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Contraintes pour la table `cl_app_hull_types`
@@ -4780,6 +5281,18 @@ ALTER TABLE `cl_app_location_types`
 --
 ALTER TABLE `cl_app_measure_types`
   ADD CONSTRAINT `FK_MEASURE_TYPE_UPDATER_ID` FOREIGN KEY (`UPDATER_ID`) REFERENCES `sys_users` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Contraintes pour la table `cl_app_no_early_termination_contract_reasons`
+--
+ALTER TABLE `cl_app_no_early_termination_contract_reasons`
+  ADD CONSTRAINT `FK_NO_EARLY_TERMINATION_REASON_UPDATER_ID` FOREIGN KEY (`UPDATER_ID`) REFERENCES `sys_users` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Contraintes pour la table `cl_app_payment_debt_types`
+--
+ALTER TABLE `cl_app_payment_debt_types`
+  ADD CONSTRAINT `FK_PAYMENT_DEBT_UPDATER_ID` FOREIGN KEY (`UPDATER_ID`) REFERENCES `sys_users` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Contraintes pour la table `cl_app_payment_frequencies`
@@ -4830,6 +5343,12 @@ ALTER TABLE `cl_app_staff_declaration_types`
   ADD CONSTRAINT `FKSTAFF_DECLARATION_TYPE_UPDATER_ID` FOREIGN KEY (`UPDATER_ID`) REFERENCES `sys_users` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
+-- Contraintes pour la table `cl_app_termination_contract_reasons`
+--
+ALTER TABLE `cl_app_termination_contract_reasons`
+  ADD CONSTRAINT `FK_TERMINATION_REASON_UPDATER_ID` FOREIGN KEY (`UPDATER_ID`) REFERENCES `sys_users` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
 -- Contraintes pour la table `cl_app_tiling_activity_types`
 --
 ALTER TABLE `cl_app_tiling_activity_types`
@@ -4860,6 +5379,12 @@ ALTER TABLE `cl_app_vessel_operational_status`
   ADD CONSTRAINT `FK_VESSEL_OPERATIONAL_STATUS_UPDATER_ID` FOREIGN KEY (`UPDATER_ID`) REFERENCES `sys_users` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
+-- Contraintes pour la table `cl_app_water_supply_types`
+--
+ALTER TABLE `cl_app_water_supply_types`
+  ADD CONSTRAINT `FK_WATER_SUPPLY_TYPE_UPDATER_ID` FOREIGN KEY (`UPDATER_ID`) REFERENCES `sys_users` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
 -- Contraintes pour la table `cl_farm_building_types`
 --
 ALTER TABLE `cl_farm_building_types`
@@ -4882,6 +5407,12 @@ ALTER TABLE `cl_farm_pond_activity_types`
 --
 ALTER TABLE `cl_farm_pond_types`
   ADD CONSTRAINT `FK_FARM_POND_TYPE_UPDATER_ID` FOREIGN KEY (`UPDATER_ID`) REFERENCES `sys_users` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Contraintes pour la table `cl_farm_production_types`
+--
+ALTER TABLE `cl_farm_production_types`
+  ADD CONSTRAINT `FK_FARM_PROD_TYPE_UPDATER_ID` FOREIGN KEY (`UPDATER_ID`) REFERENCES `sys_users` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Contraintes pour la table `cl_farm_types`
@@ -5069,9 +5600,17 @@ ALTER TABLE `reg_entities`
   ADD CONSTRAINT `FK_REG_ENTITIES_UPDATER_ID` FOREIGN KEY (`UPDATER_ID`) REFERENCES `sys_users` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
+-- Contraintes pour la table `reg_entity_facilities`
+--
+ALTER TABLE `reg_entity_facilities`
+  ADD CONSTRAINT `FK_REG_ENTITY_FARM_FACILITIES_FARM_ID` FOREIGN KEY (`REG_ENTITY_FARM_ID`) REFERENCES `reg_entities` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `FK_REG_ENTITY_FARM_FACILITIES_UPDATER_ID` FOREIGN KEY (`UPDATER_ID`) REFERENCES `sys_users` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
 -- Contraintes pour la table `reg_entity_farmag_details`
 --
 ALTER TABLE `reg_entity_farmag_details`
+  ADD CONSTRAINT `FK_REG_ENTITY_FARMAG_DETAILS_FARM_ID` FOREIGN KEY (`REG_ENTITY_FARM_ID`) REFERENCES `reg_entities` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `FK_REG_ENTITY_FARMAG_DETAILS_UPDATER_ID` FOREIGN KEY (`UPDATER_ID`) REFERENCES `sys_users` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
@@ -5079,12 +5618,17 @@ ALTER TABLE `reg_entity_farmag_details`
 --
 ALTER TABLE `reg_entity_farmag_plots`
   ADD CONSTRAINT `FK_PLOT2FARMS` FOREIGN KEY (`REG_ENTITY_FARM_ID`) REFERENCES `reg_entities` (`ID`),
+  ADD CONSTRAINT `FK_REG_ENTITY_FARMAG_PLOTS_CL_COMMODITIES_ID` FOREIGN KEY (`CL_COMMODITIES_ID`) REFERENCES `cl_ref_commodities` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `FK_REG_ENTITY_FARMAG_PLOTS_CL_PLOT_SIZE_UNIT_ID` FOREIGN KEY (`CL_PLOT_SIZE_UNIT_ID`) REFERENCES `cl_app_quantity_units` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `FK_REG_ENTITY_FARMAG_PLOTS_UPDATER_ID` FOREIGN KEY (`UPDATER_ID`) REFERENCES `sys_users` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Contraintes pour la table `reg_entity_farmaq_details`
 --
 ALTER TABLE `reg_entity_farmaq_details`
+  ADD CONSTRAINT `FK_REG_ENTITY_FARMAQ_DETAILS_CLFRESH_WATER_ID` FOREIGN KEY (`CL_FARM_WATER_SUPPLY_ID`) REFERENCES `cl_app_fresh_water_sypply_types` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `FK_REG_ENTITY_FARMAQ_DETAILS_CL_FARM_PROD_TYPE_ID` FOREIGN KEY (`CL_FARM_PRODUCTION_TYPE_ID`) REFERENCES `cl_farm_production_types` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `FK_REG_ENTITY_FARMAQ_DETAILS_FARM_ID` FOREIGN KEY (`REG_ENTITY_FARM_ID`) REFERENCES `reg_entities` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `FK_REG_ENTITY_FARMAQ_DETAILS_UPDATER_ID` FOREIGN KEY (`UPDATER_ID`) REFERENCES `sys_users` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
@@ -5092,67 +5636,101 @@ ALTER TABLE `reg_entity_farmaq_details`
 --
 ALTER TABLE `reg_entity_farmaq_ponds`
   ADD CONSTRAINT `FK_PONDS2FARM` FOREIGN KEY (`REG_ENTITY_FARM_ID`) REFERENCES `reg_entities` (`ID`),
+  ADD CONSTRAINT `FK_REG_ENTITY_FARMAQ_PONDS_CL_PONDS_TYPE_ID` FOREIGN KEY (`CL_POND_TYPE_ID`) REFERENCES `cl_farm_pond_types` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `FK_REG_ENTITY_FARMAQ_PONDS_CL_SPECIES_ID` FOREIGN KEY (`CL_SPECIES_ID`) REFERENCES `cl_ref_species` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `FK_REG_ENTITY_FARMAQ_PONDS_CL_UNIT_TYPE_ID` FOREIGN KEY (`CL_POND_SIZE_UNIT_ID`) REFERENCES `cl_app_quantity_units` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `FK_REG_ENTITY_FARMAQ_PONDS_CL_VOL_UNIT_TYPE_ID` FOREIGN KEY (`CL_POND_VOLUME_UNIT_ID`) REFERENCES `cl_app_quantity_units` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `FK_REG_ENTITY_FARMAQ_PONDS_UPDATER_ID` FOREIGN KEY (`UPDATER_ID`) REFERENCES `sys_users` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Contraintes pour la table `reg_entity_farm_buildings`
 --
 ALTER TABLE `reg_entity_farm_buildings`
+  ADD CONSTRAINT `FK_REG_ENTITY_FARM_BUILDING_CL_BUILDING_TYPE_ID` FOREIGN KEY (`CL_FARM_BUILDING_TYPE_ID`) REFERENCES `cl_farm_building_types` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `FK_REG_ENTITY_FARM_BUILDING_FARM_ID` FOREIGN KEY (`REG_ENTITY_FARM_ID`) REFERENCES `reg_entities` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `FK_REG_ENTITY_FARM_BUILDING_UPDATER_ID` FOREIGN KEY (`UPDATER_ID`) REFERENCES `sys_users` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Contraintes pour la table `reg_entity_farm_details`
 --
 ALTER TABLE `reg_entity_farm_details`
+  ADD CONSTRAINT `FK_REG_ENTITY_FARM_DETAILS_CL_HVHE_TYPE_ID` FOREIGN KEY (`CL_HVHE_EXPENSION_TYPE_ID`) REFERENCES `cl_app_hvhe_expension_types` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `FK_REG_ENTITY_FARM_DETAILS_CL_SIZE_UNIT_ID` FOREIGN KEY (`CL_SIZE_UNIT_ID`) REFERENCES `cl_app_quantity_units` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `FK_REG_ENTITY_FARM_DETAILS_FARM_ID` FOREIGN KEY (`REG_ENTITY_FARM_ID`) REFERENCES `reg_entities` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `FK_REG_ENTITY_FARM_DETAILS_OWNER_ID` FOREIGN KEY (`REG_ENTITY_OWNER_ID`) REFERENCES `reg_entities` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `FK_REG_ENTITY_FARM_DETAILS_UPDATER_ID` FOREIGN KEY (`UPDATER_ID`) REFERENCES `sys_users` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Contraintes pour la table `reg_entity_farm_details_farm_type`
 --
 ALTER TABLE `reg_entity_farm_details_farm_type`
+  ADD CONSTRAINT `FK_REG_ENTITY_FARM_DETAILS_TYPE_CL_FARM_TYPE_ID` FOREIGN KEY (`CL_FARM_TYPE_ID`) REFERENCES `cl_farm_types` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `FK_REG_ENTITY_FARM_DETAILS_TYPE_FARM_ID` FOREIGN KEY (`REG_ENTITY_FARM_ID`) REFERENCES `reg_entities` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `FK_REG_ENTITY_FARM_DETAILS_TYPE_UPDATER_ID` FOREIGN KEY (`UPDATER_ID`) REFERENCES `sys_users` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Contraintes pour la table `reg_entity_farm_facilities`
---
-ALTER TABLE `reg_entity_farm_facilities`
-  ADD CONSTRAINT `FK_REG_ENTITY_FARM_FACILITIES_UPDATER_ID` FOREIGN KEY (`UPDATER_ID`) REFERENCES `sys_users` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Contraintes pour la table `reg_entity_farm_providers`
 --
 ALTER TABLE `reg_entity_farm_providers`
   ADD CONSTRAINT `FK_CL_PRODUCTTYPE` FOREIGN KEY (`CL_PRODUCT_TYPES_ID`) REFERENCES `cl_ref_product_types` (`ID`),
+  ADD CONSTRAINT `FK_REG_ENTITY_FARM_PROVIDER_FARM_ID` FOREIGN KEY (`REG_ENTITY_FARM_ID`) REFERENCES `reg_entities` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `FK_REG_ENTITY_FARM_PROVIDER_SUPPLIER_ID` FOREIGN KEY (`REG_ENTITY_SUPPLIER_ID`) REFERENCES `reg_entities` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `FK_REG_ENTITY_FARM_PROVIDER_UPDATER_ID` FOREIGN KEY (`UPDATER_ID`) REFERENCES `sys_users` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Contraintes pour la table `reg_entity_farm_water_supply`
 --
 ALTER TABLE `reg_entity_farm_water_supply`
+  ADD CONSTRAINT `FK_REG_ENTITY_FARM_SUPPLY_CL_WATER_SUP_TYPE_ID` FOREIGN KEY (`CL_WATER_SUPPLY_TYPE_ID`) REFERENCES `cl_app_water_supply_types` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `FK_REG_ENTITY_FARM_SUPPLY_REG_ENTITY_ID` FOREIGN KEY (`REG_ENTITY_FARM_ID`) REFERENCES `reg_entities` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `FK_REG_ENTITY_FARM_SUPPLY_UPDATER_ID` FOREIGN KEY (`UPDATER_ID`) REFERENCES `sys_users` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Contraintes pour la table `reg_entity_hazardous_work`
+--
+ALTER TABLE `reg_entity_hazardous_work`
+  ADD CONSTRAINT `FK_REG_ENTITY_HAZARDOUS_WORK_TYPE_CL_HAAZRD_WORK_TYPE_ID` FOREIGN KEY (`CL_APP_HAZARDOUS_WORK_TYPE_ID`) REFERENCES `cl_app_hazardous_work_type` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `FK_REG_ENTITY_HAZARDOUS_WORK_TYPE_FARM_ID` FOREIGN KEY (`REG_ENTITY_FARM_ID`) REFERENCES `reg_entities` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `FK_REG_ENTITY_HAZARDOUS_WORK_TYPE_UPDATER_ID` FOREIGN KEY (`UPDATER_ID`) REFERENCES `sys_users` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Contraintes pour la table `reg_entity_product_suppliers`
 --
 ALTER TABLE `reg_entity_product_suppliers`
+  ADD CONSTRAINT `FK_REG_ENTITY_PRODUCT_SUPPLIER_CL_PRODUCTS_TYPE_ID` FOREIGN KEY (`CL_PRODUCT_TYPES_ID`) REFERENCES `cl_ref_product_types` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `FK_REG_ENTITY_PRODUCT_SUPPLIER_ENTITY_ID` FOREIGN KEY (`ENTITY_ID`) REFERENCES `reg_entities` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `FK_REG_ENTITY_PRODUCT_SUPPLIER_UPDATER_ID` FOREIGN KEY (`UPDATER_ID`) REFERENCES `sys_users` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Contraintes pour la table `reg_entity_staff`
 --
 ALTER TABLE `reg_entity_staff`
+  ADD CONSTRAINT `FK_REG_ENTITY_STAFF_CL_LANGUAGE_ID` FOREIGN KEY (`CL_LANGUAGE_ID`) REFERENCES `cl_ref_languages` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `FK_REG_ENTITY_STAFF_CL_LEGAL_STATUS_ID` FOREIGN KEY (`CL_LEGAL_STATUS_ID`) REFERENCES `cl_app_legal_status` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `FK_REG_ENTITY_STAFF_CL_POS_TYPE_ID` FOREIGN KEY (`CL_POSITION_TYPE_ID`) REFERENCES `cl_app_company_position_types` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `FK_REG_ENTITY_STAFF_FARM_ID` FOREIGN KEY (`REG_ENTITY_FARM_ID`) REFERENCES `reg_entities` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `FK_REG_ENTITY_STAFF_STAFF_ID` FOREIGN KEY (`REG_ENTITY_ID`) REFERENCES `reg_entities` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `FK_REG_ENTITY_STAFF_UPDATER_ID` FOREIGN KEY (`UPDATER_ID`) REFERENCES `sys_users` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Contraintes pour la table `reg_entity_staff_contract`
 --
 ALTER TABLE `reg_entity_staff_contract`
+  ADD CONSTRAINT `FK_REG_ENTITY_STAFF_CONTRACT_CL_PAYMENT_FREQ_ID` FOREIGN KEY (`CL_PAYMENT_FREQUENCY_ID`) REFERENCES `cl_app_payment_frequencies` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `FK_REG_ENTITY_STAFF_CONTRACT_DETAILS_CL_CONTRACT_TYPE_ID` FOREIGN KEY (`CL_CONTRACT_TYPE_ID`) REFERENCES `cl_app_contract_types` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `FK_REG_ENTITY_STAFF_CONTRACT_DETAILS_CL_COUNTRY_ID` FOREIGN KEY (`CL_COUNTRY_ID`) REFERENCES `cl_ref_countries` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `FK_REG_ENTITY_STAFF_CONTRACT_DETAILS_FARM_ID` FOREIGN KEY (`REG_ENTITY_FARM_ID`) REFERENCES `reg_entities` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `FK_REG_ENTITY_STAFF_CONTRACT_DETAILS_STAFF_ID` FOREIGN KEY (`REG_ENTITY_ID`) REFERENCES `reg_entities` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `FK_REG_ENTITY_STAFF_CONTRACT_DETAILS_UPDATER_ID` FOREIGN KEY (`UPDATER_ID`) REFERENCES `sys_users` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Contraintes pour la table `reg_entity_staff_declaration`
 --
 ALTER TABLE `reg_entity_staff_declaration`
+  ADD CONSTRAINT `FK_REG_ENTITY_STAFF_DECLARATION_CL_DECL_SOURCE_ID` FOREIGN KEY (`CL_DECLARATION_SOURCE`) REFERENCES `cl_app_declaration_sources_types` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `FK_REG_ENTITY_STAFF_DECLARATION_CL_STAFF_DECL_TYPE_ID` FOREIGN KEY (`CL_STAFF_DECLARATION_TYPE`) REFERENCES `cl_app_staff_declaration_types` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `FK_REG_ENTITY_STAFF_DECLARATION_FARM_ID` FOREIGN KEY (`REG_ENTITY_FARM_ID`) REFERENCES `reg_entities` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `FK_REG_ENTITY_STAFF_DECLARATION_STAFF_ID` FOREIGN KEY (`REG_ENTITY_STAFF_ID`) REFERENCES `reg_entities` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `FK_REG_ENTITY_STAFF_DECLARATION_UPDATER_ID` FOREIGN KEY (`UPDATER_ID`) REFERENCES `sys_users` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
@@ -5180,6 +5758,9 @@ ALTER TABLE `reg_entity_staff_declaration_grievance`
 -- Contraintes pour la table `reg_entity_staff_declaration_remuneration`
 --
 ALTER TABLE `reg_entity_staff_declaration_remuneration`
+  ADD CONSTRAINT `FK_DECLARATION_CL_DEBT_TYPE_1` FOREIGN KEY (`CL_DEBT_TYPE_1_ID`) REFERENCES `cl_app_debt_types` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `FK_DECLARATION_CL_DEBT_TYPE_2` FOREIGN KEY (`CL_DEBT_TYPE_2_ID`) REFERENCES `cl_app_debt_types` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `FK_DECLARATION_CL_DEBT_TYPE_3` FOREIGN KEY (`CL_DEBT_TYPE_3_ID`) REFERENCES `cl_app_debt_types` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `FK_DECLARATION_REMUNERATION_UNIK` FOREIGN KEY (`REG_ENTITY_STAFF_DECLARATION_ID`) REFERENCES `reg_entity_staff_declaration` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `FK_DECLARATION_REMUNERATION_UPDATER_ID` FOREIGN KEY (`UPDATER_ID`) REFERENCES `sys_users` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
@@ -5187,6 +5768,9 @@ ALTER TABLE `reg_entity_staff_declaration_remuneration`
 -- Contraintes pour la table `reg_entity_staff_declaration_working_hours`
 --
 ALTER TABLE `reg_entity_staff_declaration_working_hours`
+  ADD CONSTRAINT `FK_DECLARATION_WORKING_HOURS_CL_QUANTITY_OVERTIME_WEEK_ID` FOREIGN KEY (`CL_QUANTITY_OVERTIME_PER_WEEK_UNIT_ID`) REFERENCES `cl_app_quantity_units` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `FK_DECLARATION_WORKING_HOURS_CL_QUANTITY_REST_DAY_ID` FOREIGN KEY (`CL_QUANTITY_REST_PER_DAY_UNIT_ID`) REFERENCES `cl_app_quantity_units` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `FK_DECLARATION_WORKING_HOURS_CL_QUANTITY_REST_WEEK_ID` FOREIGN KEY (`CL_QUANTITY_REST_PER_WEEK_UNIT_ID`) REFERENCES `cl_app_quantity_units` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `FK_DECLARATION_WORKING_HOURS_UNIK` FOREIGN KEY (`REG_ENTITY_STAFF_DECLARATION_ID`) REFERENCES `reg_entity_staff_declaration` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `FK_DECLARATION_WORKING_HOURS_UPDATER_ID` FOREIGN KEY (`UPDATER_ID`) REFERENCES `sys_users` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
@@ -5194,6 +5778,19 @@ ALTER TABLE `reg_entity_staff_declaration_working_hours`
 -- Contraintes pour la table `reg_entity_staff_management`
 --
 ALTER TABLE `reg_entity_staff_management`
+  ADD CONSTRAINT `FK_REG_ENTITY_STAFF_MANAGEMENT_CL_DEDUC_TYPE_ID_1` FOREIGN KEY (`CL_DEDUCTION_SALARY_ID_1`) REFERENCES `cl_app_deduction_salary_types` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `FK_REG_ENTITY_STAFF_MANAGEMENT_CL_DEDUC_TYPE_ID_2` FOREIGN KEY (`CL_DEDUCTION_SALARY_ID_2`) REFERENCES `cl_app_deduction_salary_types` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `FK_REG_ENTITY_STAFF_MANAGEMENT_CL_DEDUC_TYPE_ID_3` FOREIGN KEY (`CL_DEDUCTION_SALARY_ID_3`) REFERENCES `cl_app_deduction_salary_types` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `FK_REG_ENTITY_STAFF_MANAGEMENT_CL_DEDUC_TYPE_ID_4` FOREIGN KEY (`CL_DEDUCTION_SALARY_ID_4`) REFERENCES `cl_app_deduction_salary_types` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `FK_REG_ENTITY_STAFF_MANAGEMENT_CL_GET_BACK_DEPO_ID` FOREIGN KEY (`CL_GET_BACK_FINANCIAL_DEPOSIT_REASON_ID`) REFERENCES `cl_app_get_back_financial_deposit_reasons` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `FK_REG_ENTITY_STAFF_MANAGEMENT_CL_HIRING_RESTR_ID` FOREIGN KEY (`CL_HIRING_RESTRICTION_ID`) REFERENCES `cl_app_hiring_restriction_types` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `FK_REG_ENTITY_STAFF_MANAGEMENT_CL_NO_TERMIN_REASON_ID` FOREIGN KEY (`CL_NO_EARLY_CONTRACT_TERMINATION_REASON_ID`) REFERENCES `cl_app_no_early_termination_contract_reasons` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `FK_REG_ENTITY_STAFF_MANAGEMENT_CL_PAY_DEBT_TYPE_ID_2` FOREIGN KEY (`CL_PAYMENT_DEBT_TYPE_ID_2`) REFERENCES `cl_app_payment_debt_types` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `FK_REG_ENTITY_STAFF_MANAGEMENT_CL_PAY_DEBT_TYPE_ID_3` FOREIGN KEY (`CL_PAYMENT_DEBT_TYPE_ID_3`) REFERENCES `cl_app_payment_debt_types` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `FK_REG_ENTITY_STAFF_MANAGEMENT_CL_PAY_DEBT_TYPE_ID_4` FOREIGN KEY (`CL_PAYMENT_DEBT_TYPE_ID_4`) REFERENCES `cl_app_payment_debt_types` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `FK_REG_ENTITY_STAFF_MANAGEMENT_FARM_ID` FOREIGN KEY (`REG_ENTITY_FARM_ID`) REFERENCES `reg_entities` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `FK_REG_ENTITY_STAFF_MANAGEMENT_HAZARD_TYPE_ID` FOREIGN KEY (`CL_HARZARDOUS_WORK_TYPE_ID`) REFERENCES `cl_app_hazardous_work_type` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `FK_REG_ENTITY_STAFF_MANAGEMENT_TERM_CONTRACT_REASON_ID` FOREIGN KEY (`CL_CONTRACT_TERMINATION_REASON_ID`) REFERENCES `cl_app_termination_contract_reasons` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `FK_REG_ENTITY_STAFF_MANAGEMENT_UPDATER_ID` FOREIGN KEY (`UPDATER_ID`) REFERENCES `sys_users` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
@@ -5207,6 +5804,20 @@ ALTER TABLE `reg_entity_staff_other_attribute`
 --
 ALTER TABLE `reg_entity_staff_other_attribute_definition`
   ADD CONSTRAINT `FK_REG_ENTITY_STAFF_OTHER_ATTRIBUTES_DEF_UPDATER_ID` FOREIGN KEY (`UPDATER_ID`) REFERENCES `sys_users` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Contraintes pour la table `reg_entity_staff_safety`
+--
+ALTER TABLE `reg_entity_staff_safety`
+  ADD CONSTRAINT `FK_REG_ENTITY_STAFF_SAFETY_UPDATER_ID` FOREIGN KEY (`UPDATER_ID`) REFERENCES `sys_users` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Contraintes pour la table `reg_entity_staff_training`
+--
+ALTER TABLE `reg_entity_staff_training`
+  ADD CONSTRAINT `FK_REG_ENTITY_STAFF_TRAINING_FARM_ID` FOREIGN KEY (`REG_ENTITY_FARM_ID`) REFERENCES `reg_entities` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `FK_REG_ENTITY_STAFF_TRAINING_HAZARD_TYPE_ID` FOREIGN KEY (`CL_HAZARDOUS_ACTIVITIES_TRAINING_TYPE_ID`) REFERENCES `cl_app_hazardous_training_types` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `FK_REG_ENTITY_STAFF_TRAINING_UPDATER_ID` FOREIGN KEY (`UPDATER_ID`) REFERENCES `sys_users` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Contraintes pour la table `reg_vessels`
