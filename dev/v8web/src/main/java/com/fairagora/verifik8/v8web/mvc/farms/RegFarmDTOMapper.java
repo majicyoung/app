@@ -17,6 +17,7 @@ import com.fairagora.verifik8.v8web.data.domain.dt.DTFarmPondMeasurement;
 import com.fairagora.verifik8.v8web.data.domain.dt.DTSoilAnalysis;
 import com.fairagora.verifik8.v8web.data.domain.dt.DTWaterAnalysis;
 import com.fairagora.verifik8.v8web.data.domain.reg.RegEntity;
+import com.fairagora.verifik8.v8web.data.domain.reg.farm.RegEntityFacilities;
 import com.fairagora.verifik8.v8web.data.domain.reg.farm.RegEntityFarmDetails;
 import com.fairagora.verifik8.v8web.data.domain.reg.farm.RegEntityFarmPlot;
 import com.fairagora.verifik8.v8web.data.domain.reg.farm.RegEntityFarmPond;
@@ -37,6 +38,7 @@ import com.fairagora.verifik8.v8web.mvc.farms.dto.FarmHiringRecruitmentDto;
 import com.fairagora.verifik8.v8web.mvc.farms.dto.FarmPlotDto;
 import com.fairagora.verifik8.v8web.mvc.farms.dto.FarmPondDto;
 import com.fairagora.verifik8.v8web.mvc.farms.dto.FarmStaffSafetyDto;
+import com.fairagora.verifik8.v8web.mvc.farms.dto.RegEntityFacilitiesDto;
 import com.fairagora.verifik8.v8web.mvc.farms.dto.StaffContractDto;
 import com.fairagora.verifik8.v8web.mvc.farms.dto.StaffFarmFormDto;
 import com.fairagora.verifik8.v8web.mvc.farms.dto.StaffGeneralInfoSto;
@@ -225,5 +227,18 @@ public interface RegFarmDTOMapper {
 
 	@Mapping(target = "farmId", ignore = true)
 	void fillEntity(FarmStaffSafetyDto farmDto, @MappingTarget RegEntityStaffSafety ent);
+
+	@Mapping(target = "accessToiletsAttachment", ignore = true)
+	@Mapping(target = "accessToiletsAttachmentUrl", source = "accessToiletsAttachment.resourcePath")
+	@Mapping(target = "accessRestRoomAttachment", ignore = true)
+	@Mapping(target = "accessRestRoomAttachmentUrl", source = "accessRestRoomAttachment.resourcePath")
+	@Mapping(target = "accessShowerAttachment", ignore = true)
+	@Mapping(target = "accessShowerAttachmentUrl", source = "accessShowerAttachment.resourcePath")
+	@Mapping(target = "accessToFreeDrinkingAttachment", ignore = true)
+	@Mapping(target = "accessToFreeDrinkingAttachmentUrl", source = "accessToFreeDrinkingAttachment.resourcePath")
+	void toDto(RegEntityFacilities entity, @MappingTarget RegEntityFacilitiesDto dto);
+
+	@Mapping(target = "farmId", ignore = true)
+	void fillEntity(RegEntityFacilitiesDto farmDto, @MappingTarget RegEntityFacilities ent);
 
 }

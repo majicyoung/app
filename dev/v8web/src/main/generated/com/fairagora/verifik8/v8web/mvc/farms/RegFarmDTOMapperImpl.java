@@ -82,6 +82,8 @@ import com.fairagora.verifik8.v8web.data.domain.dt.DTWaterAnalysis;
 
 import com.fairagora.verifik8.v8web.data.domain.reg.RegEntity;
 
+import com.fairagora.verifik8.v8web.data.domain.reg.farm.RegEntityFacilities;
+
 import com.fairagora.verifik8.v8web.data.domain.reg.farm.RegEntityFarmDetails;
 
 import com.fairagora.verifik8.v8web.data.domain.reg.farm.RegEntityFarmPlot;
@@ -121,6 +123,8 @@ import com.fairagora.verifik8.v8web.mvc.farms.dto.FarmPlotDto;
 import com.fairagora.verifik8.v8web.mvc.farms.dto.FarmPondDto;
 
 import com.fairagora.verifik8.v8web.mvc.farms.dto.FarmStaffSafetyDto;
+
+import com.fairagora.verifik8.v8web.mvc.farms.dto.RegEntityFacilitiesDto;
 
 import com.fairagora.verifik8.v8web.mvc.farms.dto.StaffContractDto;
 
@@ -162,7 +166,7 @@ import org.springframework.stereotype.Component;
 
     value = "org.mapstruct.ap.MappingProcessor",
 
-    date = "2018-02-06T22:35:10+0100",
+    date = "2018-02-06T23:27:54+0100",
 
     comments = "version: 1.1.0.Final, compiler: javac, environment: Java 1.8.0_112 (Oracle Corporation)"
 
@@ -2280,6 +2284,116 @@ public class RegFarmDTOMapperImpl implements RegFarmDTOMapper {
         ent.setPreventionAccidentMeasures( farmDto.getPreventionAccidentMeasures() );
     }
 
+    @Override
+
+    public void toDto(RegEntityFacilities entity, RegEntityFacilitiesDto dto) {
+
+        if ( entity == null ) {
+
+            return;
+        }
+
+        dto.setAccessRestRoomAttachmentUrl( entityAccessRestRoomAttachmentResourcePath( entity ) );
+
+        dto.setAccessShowerAttachmentUrl( entityAccessShowerAttachmentResourcePath( entity ) );
+
+        dto.setAccessToiletsAttachmentUrl( entityAccessToiletsAttachmentResourcePath( entity ) );
+
+        dto.setAccessToFreeDrinkingAttachmentUrl( entityAccessToFreeDrinkingAttachmentResourcePath( entity ) );
+
+        dto.setFarmId( entity.getFarmId() );
+
+        dto.setAccessToilets( entity.getAccessToilets() );
+
+        dto.setAccessRestRoom( entity.getAccessRestRoom() );
+
+        dto.setAccessShower( entity.getAccessShower() );
+
+        dto.setAccessToFreeDrinking( entity.getAccessToFreeDrinking() );
+
+        dto.setPresenceFirstAidKit( entity.getPresenceFirstAidKit() );
+    }
+
+    @Override
+
+    public void fillEntity(RegEntityFacilitiesDto farmDto, RegEntityFacilities ent) {
+
+        if ( farmDto == null ) {
+
+            return;
+        }
+
+        ent.setAccessToilets( farmDto.getAccessToilets() );
+
+        if ( farmDto.getAccessToiletsAttachment() != null ) {
+
+            if ( ent.getAccessToiletsAttachment() == null ) {
+
+                ent.setAccessToiletsAttachment( new Attachment() );
+            }
+
+            entityDtoMapper.map( farmDto.getAccessToiletsAttachment(), ent.getAccessToiletsAttachment() );
+        }
+
+        else {
+
+            ent.setAccessToiletsAttachment( null );
+        }
+
+        ent.setAccessRestRoom( farmDto.getAccessRestRoom() );
+
+        if ( farmDto.getAccessRestRoomAttachment() != null ) {
+
+            if ( ent.getAccessRestRoomAttachment() == null ) {
+
+                ent.setAccessRestRoomAttachment( new Attachment() );
+            }
+
+            entityDtoMapper.map( farmDto.getAccessRestRoomAttachment(), ent.getAccessRestRoomAttachment() );
+        }
+
+        else {
+
+            ent.setAccessRestRoomAttachment( null );
+        }
+
+        ent.setAccessShower( farmDto.getAccessShower() );
+
+        if ( farmDto.getAccessShowerAttachment() != null ) {
+
+            if ( ent.getAccessShowerAttachment() == null ) {
+
+                ent.setAccessShowerAttachment( new Attachment() );
+            }
+
+            entityDtoMapper.map( farmDto.getAccessShowerAttachment(), ent.getAccessShowerAttachment() );
+        }
+
+        else {
+
+            ent.setAccessShowerAttachment( null );
+        }
+
+        ent.setAccessToFreeDrinking( farmDto.getAccessToFreeDrinking() );
+
+        if ( farmDto.getAccessToFreeDrinkingAttachment() != null ) {
+
+            if ( ent.getAccessToFreeDrinkingAttachment() == null ) {
+
+                ent.setAccessToFreeDrinkingAttachment( new Attachment() );
+            }
+
+            entityDtoMapper.map( farmDto.getAccessToFreeDrinkingAttachment(), ent.getAccessToFreeDrinkingAttachment() );
+        }
+
+        else {
+
+            ent.setAccessToFreeDrinkingAttachment( null );
+        }
+
+        ent.setPresenceFirstAidKit( farmDto.getPresenceFirstAidKit() );
+    }
+
     private String farmAerialViewResourcePath(RegEntityFarmDetails regEntityFarmDetails) {
 
         if ( regEntityFarmDetails == null ) {
@@ -2926,6 +3040,102 @@ public class RegFarmDTOMapperImpl implements RegFarmDTOMapper {
         }
 
         String resourcePath = workingPermit.getResourcePath();
+
+        if ( resourcePath == null ) {
+
+            return null;
+        }
+
+        return resourcePath;
+    }
+
+    private String entityAccessRestRoomAttachmentResourcePath(RegEntityFacilities regEntityFacilities) {
+
+        if ( regEntityFacilities == null ) {
+
+            return null;
+        }
+
+        Attachment accessRestRoomAttachment = regEntityFacilities.getAccessRestRoomAttachment();
+
+        if ( accessRestRoomAttachment == null ) {
+
+            return null;
+        }
+
+        String resourcePath = accessRestRoomAttachment.getResourcePath();
+
+        if ( resourcePath == null ) {
+
+            return null;
+        }
+
+        return resourcePath;
+    }
+
+    private String entityAccessShowerAttachmentResourcePath(RegEntityFacilities regEntityFacilities) {
+
+        if ( regEntityFacilities == null ) {
+
+            return null;
+        }
+
+        Attachment accessShowerAttachment = regEntityFacilities.getAccessShowerAttachment();
+
+        if ( accessShowerAttachment == null ) {
+
+            return null;
+        }
+
+        String resourcePath = accessShowerAttachment.getResourcePath();
+
+        if ( resourcePath == null ) {
+
+            return null;
+        }
+
+        return resourcePath;
+    }
+
+    private String entityAccessToiletsAttachmentResourcePath(RegEntityFacilities regEntityFacilities) {
+
+        if ( regEntityFacilities == null ) {
+
+            return null;
+        }
+
+        Attachment accessToiletsAttachment = regEntityFacilities.getAccessToiletsAttachment();
+
+        if ( accessToiletsAttachment == null ) {
+
+            return null;
+        }
+
+        String resourcePath = accessToiletsAttachment.getResourcePath();
+
+        if ( resourcePath == null ) {
+
+            return null;
+        }
+
+        return resourcePath;
+    }
+
+    private String entityAccessToFreeDrinkingAttachmentResourcePath(RegEntityFacilities regEntityFacilities) {
+
+        if ( regEntityFacilities == null ) {
+
+            return null;
+        }
+
+        Attachment accessToFreeDrinkingAttachment = regEntityFacilities.getAccessToFreeDrinkingAttachment();
+
+        if ( accessToFreeDrinkingAttachment == null ) {
+
+            return null;
+        }
+
+        String resourcePath = accessToFreeDrinkingAttachment.getResourcePath();
 
         if ( resourcePath == null ) {
 
