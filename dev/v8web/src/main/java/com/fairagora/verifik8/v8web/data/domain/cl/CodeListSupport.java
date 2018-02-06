@@ -26,6 +26,9 @@ public abstract class CodeListSupport extends V8EntitySupport {
 	@Column(name = "NAME", length = 64, nullable = false)
 	protected String name;
 
+	@Column(name = "RANKING", length = 6, nullable = false)
+	protected Long ranking;
+	
 	@Column(name = "DESCRIPTION", length = 128, nullable = false)
 	protected String description;
 
