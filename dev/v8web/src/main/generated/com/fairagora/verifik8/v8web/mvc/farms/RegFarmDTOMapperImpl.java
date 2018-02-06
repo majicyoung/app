@@ -92,6 +92,8 @@ import com.fairagora.verifik8.v8web.data.domain.reg.farm.RegEntityFarmSupplierAs
 
 import com.fairagora.verifik8.v8web.data.domain.reg.farm.RegEntityStaffManagement;
 
+import com.fairagora.verifik8.v8web.data.domain.reg.farm.RegEntityStaffSafety;
+
 import com.fairagora.verifik8.v8web.data.domain.reg.staff.RegEntityStaff;
 
 import com.fairagora.verifik8.v8web.data.domain.reg.staff.RegEntityStaffContract;
@@ -117,6 +119,8 @@ import com.fairagora.verifik8.v8web.mvc.farms.dto.FarmHiringRecruitmentDto;
 import com.fairagora.verifik8.v8web.mvc.farms.dto.FarmPlotDto;
 
 import com.fairagora.verifik8.v8web.mvc.farms.dto.FarmPondDto;
+
+import com.fairagora.verifik8.v8web.mvc.farms.dto.FarmStaffSafetyDto;
 
 import com.fairagora.verifik8.v8web.mvc.farms.dto.StaffContractDto;
 
@@ -158,7 +162,7 @@ import org.springframework.stereotype.Component;
 
     value = "org.mapstruct.ap.MappingProcessor",
 
-    date = "2018-01-27T09:32:36+0200",
+    date = "2018-02-06T22:35:10+0100",
 
     comments = "version: 1.1.0.Final, compiler: javac, environment: Java 1.8.0_112 (Oracle Corporation)"
 
@@ -2236,6 +2240,44 @@ public class RegFarmDTOMapperImpl implements RegFarmDTOMapper {
         e.setId( dto.getId() );
 
         e.setRemunerationCurrency( entityDtoMapper.resolve( dto.getRemunerationCurrency(), CLRefCurrency.class ) );
+    }
+
+    @Override
+
+    public void toDto(RegEntityStaffSafety entity, FarmStaffSafetyDto dto) {
+
+        if ( entity == null ) {
+
+            return;
+        }
+
+        dto.setFarmId( entity.getFarmId() );
+
+        dto.setSafeyEquipmentInFarm( entity.getSafeyEquipmentInFarm() );
+
+        dto.setFreeSafetyEquipment( entity.getFreeSafetyEquipment() );
+
+        dto.setNumberTrainedStaff( entity.getNumberTrainedStaff() );
+
+        dto.setPreventionAccidentMeasures( entity.getPreventionAccidentMeasures() );
+    }
+
+    @Override
+
+    public void fillEntity(FarmStaffSafetyDto farmDto, RegEntityStaffSafety ent) {
+
+        if ( farmDto == null ) {
+
+            return;
+        }
+
+        ent.setSafeyEquipmentInFarm( farmDto.getSafeyEquipmentInFarm() );
+
+        ent.setFreeSafetyEquipment( farmDto.getFreeSafetyEquipment() );
+
+        ent.setNumberTrainedStaff( farmDto.getNumberTrainedStaff() );
+
+        ent.setPreventionAccidentMeasures( farmDto.getPreventionAccidentMeasures() );
     }
 
     private String farmAerialViewResourcePath(RegEntityFarmDetails regEntityFarmDetails) {

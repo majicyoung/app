@@ -22,6 +22,7 @@ import com.fairagora.verifik8.v8web.data.domain.reg.farm.RegEntityFarmPlot;
 import com.fairagora.verifik8.v8web.data.domain.reg.farm.RegEntityFarmPond;
 import com.fairagora.verifik8.v8web.data.domain.reg.farm.RegEntityFarmSupplierAssignment;
 import com.fairagora.verifik8.v8web.data.domain.reg.farm.RegEntityStaffManagement;
+import com.fairagora.verifik8.v8web.data.domain.reg.farm.RegEntityStaffSafety;
 import com.fairagora.verifik8.v8web.data.domain.reg.staff.RegEntityStaff;
 import com.fairagora.verifik8.v8web.data.domain.reg.staff.RegEntityStaffContract;
 import com.fairagora.verifik8.v8web.mvc.companies.dto.CompanyDto;
@@ -35,6 +36,7 @@ import com.fairagora.verifik8.v8web.mvc.farms.dto.FarmFormDto;
 import com.fairagora.verifik8.v8web.mvc.farms.dto.FarmHiringRecruitmentDto;
 import com.fairagora.verifik8.v8web.mvc.farms.dto.FarmPlotDto;
 import com.fairagora.verifik8.v8web.mvc.farms.dto.FarmPondDto;
+import com.fairagora.verifik8.v8web.mvc.farms.dto.FarmStaffSafetyDto;
 import com.fairagora.verifik8.v8web.mvc.farms.dto.StaffContractDto;
 import com.fairagora.verifik8.v8web.mvc.farms.dto.StaffFarmFormDto;
 import com.fairagora.verifik8.v8web.mvc.farms.dto.StaffGeneralInfoSto;
@@ -218,5 +220,10 @@ public interface RegFarmDTOMapper {
 	@Mapping(target = "farm", ignore = true)
 	@Mapping(target = "entity", ignore = true)
 	void fillEntity(StaffContractDto dto, @MappingTarget RegEntityStaffContract e);
+
+	void toDto(RegEntityStaffSafety entity, @MappingTarget FarmStaffSafetyDto dto);
+
+	@Mapping(target = "farmId", ignore = true)
+	void fillEntity(FarmStaffSafetyDto farmDto, @MappingTarget RegEntityStaffSafety ent);
 
 }
