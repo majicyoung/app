@@ -18,13 +18,9 @@ import com.fairagora.verifik8.v8web.data.domain.reg.staff.RegEntityStaff;
 import com.fairagora.verifik8.v8web.data.repo.reg.RegEntityStaffRepository;
 import com.fairagora.verifik8.v8web.mvc.AbstractV8Controller;
 import com.fairagora.verifik8.v8web.mvc.farms.dto.StaffFarmFormDto;
-import com.fairagora.verifik8.v8web.services.FarmService;
 
 @Controller
 public class FarmStaffController extends AbstractV8Controller {
-
-	@Autowired
-	private FarmService farmService;
 
 	@Autowired
 	private RegEntityStaffRepository regEntityStaffRepository;
@@ -32,8 +28,8 @@ public class FarmStaffController extends AbstractV8Controller {
 	private RegFarmDTOMapper regFarmDtoMapper;
 
 	@Autowired
-	 protected JdbcTemplate jdbc;
-	
+	protected JdbcTemplate jdbc;
+
 	@RequestMapping(value = "/farm/{id}/staff.html", method = RequestMethod.GET)
 	public String showEditStaff(@PathVariable("id") Long id, Model mv) {
 
@@ -43,7 +39,7 @@ public class FarmStaffController extends AbstractV8Controller {
 
 		StaffFarmFormDto dto = new StaffFarmFormDto();
 		mv.addAttribute("staffDto", dto);
-		mv.addAttribute("farmName", jdbc.queryForObject("SELECT name FROM reg_entities WHERE id="+id, String.class));
+		mv.addAttribute("farmName", jdbc.queryForObject("SELECT name FROM reg_entities WHERE id=" + id, String.class));
 		return "farms/staff";
 	}
 
