@@ -41,13 +41,18 @@
 													<td th:text="${pond.type.name}"></td>
 													<td th:text="${pond.species}"></td>
 													<td align="center">
-														<a href="javascript:void(0);" th:attr="data-id=${pond.id}" class="btn btn-xs btn-flat btn-primary editPondBtn"><i class="fa fa-edit"></i></a> 
-														 <form th:action="@{'/farm/'+${farmId}+'/pond/delete.html'}" method="post" style="display: inline;">
-				                                        	<input type="hidden" th:value="${pond.id}" th:name="pondId" />
-				                                        	<button type="submit" class="btn btn-xs btn-flat btn-danger">
-																<i class="fa fa-remove"></i> 
+														<a href="javascript:void(0);" th:attr="data-id=${pond.id}" class="btn btn-xs btn-flat btn-info addActivitiesPondDataBtn" th:title="#{tooltip.add_pond_activity}"><i class="fa fa-plus"></i></a> 
+														<a href="javascript:void(0);" th:attr="data-id=${pond.id}" class="btn btn-xs btn-flat btn-info viewActivitiesPondDataBtn" th:title="#{tooltip.view_pond_activity}"><i class="fa fa-eye"></i></a>									<!--  <a href="javascript:void(0);" th:attr="data-id=${plot.id}" class="btn btn-xs btn-flat btn-info viewDataPlotDataBtn" th:title="#{tooltip.view_plot_data}"><i class="fa fa-bar-chart"></i></a>--> 
+										
+														<a href="javascript:void(0);" th:attr="data-id=${pond.id}" class="btn btn-xs btn-flat btn-info addPondDataBtn" th:title="#{tooltip.add_pond_data}"><i class="fa fa-plus"></i></a> 
+														<a href="javascript:void(0);" th:attr="data-id=${pond.id}" class="btn btn-xs btn-flat btn-info viewDataPondDataBtn" th:title="#{tooltip.view_pond_data}"><i class="fa fa-bar-chart"></i></a> 
+														<a href="javascript:void(0);" th:attr="data-id=${pond.id}" class="btn btn-xs btn-flat btn-primary editPondBtn" th:title="#{tooltip.edit_pond}"><i class="fa fa-edit"></i></a>
+														<form th:action="@{/ponds/delete.html}" method="post" style="display: inline;">
+															<input type="hidden" th:value="${pond.id}" th:name="pondId" />
+															<button type="submit" class="btn btn-xs btn-flat btn-danger" th:title="#{tooltip.delete_pond}">
+																<i class="fa fa-trash"></i>
 															</button>
-				                                        </form>
+														</form>
 				                                        <script type="text/javascript" th:inline="javascript">
 				                                        	var i=[[${pond.id}]];
 				                                        	ponds[i]=([[${pond}]]);
@@ -130,8 +135,35 @@
 
 
 <th:block layout:fragment="page-scripts">
-	<script type="text/javascript">
+	<script th:inline="javascript">
+	/*<![CDATA[*/
 		$(document).ready(function() {
+
+			$('.addPondDataBtn').click(function(){
+				var id = $(this).attr("data-id");
+				document.location=[[@{/ponds/}]]+id+'/measures/create.html';
+			});
+			
+			$('.editPondBtn').click(function(){
+				var id = $(this).attr("data-id");
+				document.location=[[@{/ponds/}]]+id+'/edit.html';
+			});
+
+
+			$('.viewDataPondDataBtn').click(function(){
+				var id = $(this).attr("data-id");
+				document.location=[[@{/ponds/}]]+id+'/measures/browser.html';
+			});
+
+			$('.viewActivitiesPondDataBtn').click(function(){
+				var id = $(this).attr("data-id");
+				document.location=[[@{/ponds/}]]+id+'/activities/browser.html';
+			});
+			
+			$('.addActivitiesPondDataBtn').click(function(){
+				var id = $(this).attr("data-id");
+				document.location=[[@{/ponds/}]]+id+'/activities/create.html';
+			});	
 			
 			$(".editPondBtn").click(function(){
 				var id = $(this).attr("data-id");
@@ -155,7 +187,7 @@
 		function addFarmPond(){
 			$("#pondEditorForm").submit();
 		}
-		
+		/*]]>*/		
 	</script>
 </th:block>
 
