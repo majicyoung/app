@@ -6,6 +6,8 @@ public class FarmStaffSafetyDto {
 
 	protected Boolean safeyEquipmentInFarm;
 
+	protected Boolean workerUseEquipmentInFarm;
+	
 	protected Boolean freeSafetyEquipment;
 
 	protected int numberTrainedStaff;
@@ -28,6 +30,15 @@ public class FarmStaffSafetyDto {
 		this.safeyEquipmentInFarm = safeyEquipmentInFarm;
 	}
 
+	public Boolean getWorkerUseEquipmentInFarm() {
+		return workerUseEquipmentInFarm;
+	}
+
+	public void setWorkerUseEquipmentInFarm(Boolean workerUseEquipmentInFarm) {
+		this.workerUseEquipmentInFarm = workerUseEquipmentInFarm;
+	}
+	
+	
 	public Boolean getFreeSafetyEquipment() {
 		return freeSafetyEquipment;
 	}

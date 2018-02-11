@@ -18,6 +18,9 @@ public class RegEntityStaffSafety extends V8Base {
 	@Column(name = "SAFETY_EQUIPMENT_IN_FARM")
 	protected Boolean safeyEquipmentInFarm;
 
+	@Column(name = "WORKERS_USE_SAFETY_EQUIPMENT")
+	protected Boolean workerUseEquipmentInFarm;
+	
 	@Column(name = "FREE_SAFETY_EQUIPMENT")
 	protected Boolean freeSafetyEquipment;
 
@@ -43,6 +46,14 @@ public class RegEntityStaffSafety extends V8Base {
 		this.safeyEquipmentInFarm = safeyEquipmentInFarm;
 	}
 
+	public Boolean getWorkerUseEquipmentInFarm() {
+		return workerUseEquipmentInFarm;
+	}
+
+	public void setWorkerUseEquipmentInFarm(Boolean workerUseEquipmentInFarm) {
+		this.workerUseEquipmentInFarm = workerUseEquipmentInFarm;
+	}
+	
 	public Boolean getFreeSafetyEquipment() {
 		return freeSafetyEquipment;
 	}

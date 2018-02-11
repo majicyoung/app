@@ -11,6 +11,7 @@ import com.fairagora.verifik8.v8web.data.domain.cl.CLAppContractType;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLAppEntityType;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLAppGetBackFinancialDepositReason;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLAppHazardousWorkType;
+import com.fairagora.verifik8.v8web.data.domain.cl.CLAppHazardousTrainingType;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLAppHiringRestrictionType;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLAppHvHeExpensionType;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLAppLegalStatus;
@@ -39,6 +40,7 @@ import com.fairagora.verifik8.v8web.data.repo.cl.CLAppContractTypeRepository;
 import com.fairagora.verifik8.v8web.data.repo.cl.CLAppEntityTypeRepository;
 import com.fairagora.verifik8.v8web.data.repo.cl.CLAppGetBackFinancialDepositReasonRepository;
 import com.fairagora.verifik8.v8web.data.repo.cl.CLAppHazardousWorkTypeRepository;
+import com.fairagora.verifik8.v8web.data.repo.cl.CLAppHazardousTrainingTypeRepository;
 import com.fairagora.verifik8.v8web.data.repo.cl.CLAppHiringRestrictionTypeRepository;
 import com.fairagora.verifik8.v8web.data.repo.cl.CLAppHvHeExpensionTypeRepository;
 import com.fairagora.verifik8.v8web.data.repo.cl.CLAppLegalStatusRepository;
@@ -81,6 +83,9 @@ public class CodeListsService {
 	@Autowired
 	private CLAppHazardousWorkTypeRepository hazardousWorkTypeRepository;
 
+	@Autowired
+	private CLAppHazardousTrainingTypeRepository hazardousTrainingTypeRepository;
+	
 	@Autowired
 	private CLRefProductTypesRepository productTypesRepository;
 
@@ -319,6 +324,10 @@ public class CodeListsService {
 
 	public List<CLAppHiringRestrictionType> listActiveHiringRestrictionTypeRepository() {
 		return hiringRestrictionTypeRepository.findByEnabledTrueOrderByName();
+	}
+
+	public List<CLAppHazardousTrainingType> listHazardousTrainingTypeRepository() {
+		return hazardousTrainingTypeRepository.findByEnabledTrueOrderByName();
 	}
 
 }

@@ -126,31 +126,49 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-xs-12">
-                        <div class="col-xs-12"><h4 th:text="#{farm.localization}">farm.localization</h4></div>
-                        <div class="col-xs-12" style="margin-bottom:10px;">
-                        	<div id="map_farm" class="col-xs-12 col-sm-12 col-md-12" style="height:250px;"></div>
-                        </div>
-                        <div class="col-xs-6">
-                        	<div class="form-group row">
-                                <label for="lat" class="col-xs-3 control-label" th:text="#{default.latitude}">default.latitude</label>
-                                <div class="col-xs-9">
-                                    <input type="text" class="form-control" id="lat" th:field="*{latitude}" th:placeholder="#{default.latitude}" onchange="setCoord();" />
-                                </div>
-                            </div>
-						</div>
-                        <div class="col-xs-6">
-                            <div class="form-group row">
-                                <label for="lng" class="col-xs-3 control-label" th:text="#{default.longitude}">default.longitude</label>
-                                <div class="col-xs-9">
-                                    <input type="text" class="form-control" id="lng" th:field="*{longitude}" th:placeholder="#{default.longitude}" onchange="setCoord();" />
-                                </div>
-                            </div>
-                    	</div>
-                    </div>
-                </div>
-                <div class="row">
+               <div class="row">
+                 <div class="col-xs-12">
+                     <div class="col-xs-12"><h4 th:text="#{farm.localCommunityActivity}">farm.local_community</h4></div>
+	                     <div class="col-xs-6">
+	                         <div class="form-group row">
+	                             <label for="stakeholderMeetingParticipation" class="col-xs-3 control-label" th:text="#{farm.stakeholderMeetingParticipation}" >farm.stakeholderMeetingParticipation</label>
+	                             <div class="col-xs-9 no-padding">
+	                                 <div class="col-xs-6">
+	                                     <input type="checkbox" th:field="*{stakeholderMeetingParticipation}" id="stakeholderMeetingParticipation" onChange="manageStakeholderMeeting();"/> 
+	                                 </div>
+	                             </div>
+	                         </div>
+	                         <div class="form-group row" id="divStakeHolderMeetingDate">
+	                             <label for="stakeholderMeetingDate" class="col-xs-3 control-label" th:text="#{farm.stakeholderMeetingDate}" >farm.stakeholderMeetingDate</label>
+	                             <div class="col-xs-9 no-padding">
+	                                 <div class="col-xs-6">
+	                                     <input type="text" class="form-control form-pond datefield" th:field="*{stakeholderMeetingDate}" th:placeholder="#{farm.stakeholderMeetingDate}" maxlength="10"/> 
+									</div>
+	                             </div>
+	                         </div>
+	                     </div>
+	                     <div class="col-xs-6">
+	                         <div class="form-group row">
+	                             <label for="memberAssociation" class="col-xs-3 control-label" th:text="#{farm.memberAssociation}" >farm.memberAssociation</label>
+	                             <div class="col-xs-9 no-padding">
+	                                 <div class="col-xs-6">
+	                                     <input type="checkbox" th:field="*{memberAssociation}" /> 
+	                                 </div>
+	                             </div>
+	                         </div>
+	                           <div class="form-group row" id="divStakeHolderMeetingLocation">
+	                             <label for="stakeholderMeetingLocation" class="col-xs-3 control-label" th:text="#{farm.stakeholderMeetingLocation}" >farm.stakeholderMeetingLocation</label>
+	                             <div class="col-xs-9 no-padding">
+	                                 <div class="col-xs-6">
+	                                     <input type="text" th:field="*{stakeholderMeetingLocation}" /> 
+	                                 </div>
+	                             </div>
+	                         </div>
+	                     </div>
+               		  </div>
+ 				</div>
+ 
+                 <div class="row">
                     <div class="col-xs-12">
                         <div class="col-xs-12"><h4 th:text="#{farm.env_info}">farm.env_info</h4></div>
                         <div class="col-xs-6">
@@ -186,6 +204,33 @@
                         </div>
                     </div>
                 </div>
+ 
+ 
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="col-xs-12"><h4 th:text="#{farm.localization}">farm.localization</h4></div>
+                        <div class="col-xs-12" style="margin-bottom:10px;">
+                        	<div id="map_farm" class="col-xs-12 col-sm-12 col-md-12" style="height:250px;"></div>
+                        </div>
+                        <div class="col-xs-6">
+                        	<div class="form-group row">
+                                <label for="lat" class="col-xs-3 control-label" th:text="#{default.latitude}">default.latitude</label>
+                                <div class="col-xs-9">
+                                    <input type="text" class="form-control" id="lat" th:field="*{latitude}" th:placeholder="#{default.latitude}" onchange="setCoord();" />
+                                </div>
+                            </div>
+						</div>
+                        <div class="col-xs-6">
+                            <div class="form-group row">
+                                <label for="lng" class="col-xs-3 control-label" th:text="#{default.longitude}">default.longitude</label>
+                                <div class="col-xs-9">
+                                    <input type="text" class="form-control" id="lng" th:field="*{longitude}" th:placeholder="#{default.longitude}" onchange="setCoord();" />
+                                </div>
+                            </div>
+                    	</div>
+                    </div>
+                </div>
+
               </div>
             </div>
           </div>
@@ -232,6 +277,13 @@
 		
 		$( document ).ready(function() {
 			
+			$(document).ready(function() {
+				$('.datefield').datetimepicker({
+					format: 'Y-m-d h:i:s',
+					closeOnDateSelect:true
+				});
+
+			});
 			
 			if ([[${farmDto.id}]] ==0) {
 				document.getElementById("areaUnit").value = "29"; // only for Thailand and sugar cane - to be removed when expanding
@@ -249,8 +301,29 @@
 				document.location='cooperative-editor.html';
 			});
 			
+			manageStakeholderMeeting();
+			
 		});
 
+		function manageStakeholderMeeting(){
+			// hide the blocks for kept documents
+			$('#divStakeHolderMeetingDate').hide();
+			$('#divStakeHolderMeetingLocation').hide();
+			var fieldVal = $("#stakeholderMeetingParticipation").is(':checked');
+			if(fieldVal!=null){
+				if(fieldVal){
+					$('#divStakeHolderMeetingDate').show();
+					$('#divStakeHolderMeetingLocation').show();
+				} else {
+					$('#dstakeHolderMeetingDate').val("");
+					$('#dstakeHolderMeetingLocation').val("");	
+					$('#divStakeHolderMeetingDate').hide();
+					$('#divStakeHolderMeetingLocation').hide();	
+				}
+			}
+		}
+	
+	
 		function actionDone(item){
 			console.log(item);
 			if(item.itemType=='individual'){

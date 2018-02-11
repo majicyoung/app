@@ -1,5 +1,10 @@
 package com.fairagora.verifik8.v8web.mvc.farms.dto;
 
+import java.util.Date;
+
+import javax.persistence.Column;
+
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.fairagora.verifik8.v8web.mvc.infra.dtomapping.commons.AddressDto;
@@ -38,6 +43,15 @@ public class FarmFormDto {
 	protected MultipartFile aerialView;
 	protected String aerialViewUrl;
 
+	protected boolean stakeholderMeetingParticipation;
+	
+	protected boolean memberAssociation;
+	
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	protected Date stakeholderMeetingDate;
+	
+	protected String stakeholderMeetingLocation;
+	
 	public Long getId() {
 		return id;
 	}
@@ -173,4 +187,38 @@ public class FarmFormDto {
 	public void setQuotaId(String quotaId) {
 		this.quotaId = quotaId;
 	}
+	
+	public boolean isStakeholderMeetingParticipation() {
+		return stakeholderMeetingParticipation;
+	}
+
+	public void setStakeholderMeetingParticipation(boolean stakeholderMeetingParticipation) {
+		this.stakeholderMeetingParticipation = stakeholderMeetingParticipation;
+	}
+	
+	public boolean isMemberAssociation() {
+		return memberAssociation;
+	}
+
+	public void setMemberAssociation(boolean memberAssociation) {
+		this.memberAssociation = memberAssociation;
+	}	
+
+	public Date getStakeholderMeetingDate() {
+		return stakeholderMeetingDate;
+	}
+
+	public void setStakeholderMeetingDate(Date stakeholderMeetingDate) {
+		this.stakeholderMeetingDate = stakeholderMeetingDate;
+	}
+	
+	public String getStakeholderMeetingLocation() {
+		return stakeholderMeetingLocation;
+	}
+
+	public void setStakeholderMeetingLocation(String stakeholderMeetingLocation) {
+		this.stakeholderMeetingLocation = stakeholderMeetingLocation;
+	}
+	
+	
 }

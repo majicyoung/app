@@ -1,5 +1,7 @@
 package com.fairagora.verifik8.v8web.data.domain.reg.farm;
 
+import java.util.Date;
+
 import javax.persistence.AssociationOverride;
 import javax.persistence.AssociationOverrides;
 import javax.persistence.AttributeOverride;
@@ -107,7 +109,17 @@ public class RegEntityFarmDetails extends V8EntitySupport {
 	@Column(name = "HAS_A_LAB")
 	protected boolean hasALab;
 
+	@Column(name = "STAKEHOLDER_MEETING_PARTICIPATION")
+	protected boolean stakeholderMeetingParticipation;
+
+	@Column(name = "MEMBER_OF_ASSOCIATION")
+	protected boolean memberAssociation;
 	
+	@Column(name = "STAKEHOLDER_MEETING_DATE")
+	protected Date stakeholderMeetingDate;
+
+	@Column(name = "STAKEHOLDER_MEETING_LOCATION")
+	protected String stakeholderMeetingLocation;
 	
 	
 	public Long getId() {
@@ -278,4 +290,38 @@ public class RegEntityFarmDetails extends V8EntitySupport {
 	public void setQuotaId(String quotaId) {
 		this.quotaId = quotaId;
 	}
+	
+	public boolean isStakeholderMeetingParticipation() {
+		return stakeholderMeetingParticipation;
+	}
+
+	public void setStakeholderMeetingParticipation(boolean stakeholderMeetingParticipation) {
+		this.stakeholderMeetingParticipation = stakeholderMeetingParticipation;
+	}
+	
+	public boolean isMemberAssociation() {
+		return memberAssociation;
+	}
+
+	public void setMemberAssociation(boolean memberAssociation) {
+		this.memberAssociation = memberAssociation;
+	}
+
+	public Date getStakeholderMeetingDate() {
+		return stakeholderMeetingDate;
+	}
+
+	public void setStakeholderMeetingDate(Date stakeholderMeetingDate) {
+		this.stakeholderMeetingDate = stakeholderMeetingDate;
+	}
+	
+	public String getStakeholderMeetingLocation() {
+		return stakeholderMeetingLocation;
+	}
+
+	public void setStakeholderMeetingLocation(String stakeholderMeetingLocation) {
+		this.stakeholderMeetingLocation = stakeholderMeetingLocation;
+	}
+	
+	
 }
