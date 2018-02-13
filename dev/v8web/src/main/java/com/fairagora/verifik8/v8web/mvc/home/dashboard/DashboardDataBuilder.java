@@ -28,6 +28,7 @@ public class DashboardDataBuilder {
 		return dash;
 	}
 
+	
 	private void buildTimeSeries(HomeDashboardDto dash) {
 		DashboardTimeSeries ts = new DashboardTimeSeries<>();
 		ts.setKey("kpi1");

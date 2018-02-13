@@ -216,14 +216,14 @@
 	                <div class="col-xs-12">
 	                	<div class="form-group" th:if="${v8App.plotProfile}">
 	                      <label th:text="|#{farm.plot_commodities}*|">unit*</label>
-	                      <select class="form-control" name="commodities" id="totalProductionForm_commodities">
+	                      <select class="form-control" name="commodities" id="totalProductionForm_commodities" required="required">
 	                      	<option value="" th:text="|-- #{farm.select_plot_commodities} --|">farm.select_plot_type</option>
 							<option th:each="ptype : ${allCommodities}" th:value="${ptype.id}" th:text="${ptype.localisedName}"></option>
 	                      </select>
 	                    </div>
 	                	<div class="form-group" th:if="${v8App.pondProfile}">
 	                      <label th:text="|#{default.species}*|">unit*</label>
-	                      <select class="form-control" name="species" id="totalProductionForm_species">
+	                      <select class="form-control" name="species" id="totalProductionForm_species" required="required">
 	                      	<option value="" th:text="|-- #{default.select_species} --|">farm.select_plot_type</option>
 							<option th:each="sp : ${allSpecies}" th:value="${sp.id}" th:text="${sp.localisedName}"></option>
 	                      </select>
@@ -382,6 +382,8 @@
 			});
 			
 			
+
+			
 			$(".editSoilAnalysisBtn").click(function(){
 				var id = $(this).attr("data-id");
 				var e = soilAnalysis[id];
@@ -449,10 +451,23 @@
 		}
 		
 		function submitTotalProductionAgForm(){
+			var dateFrom = $("#totalProductionForm_dateFrom").val();
+			var dateTo = $("#totalProductionForm_dateTo").val();
+			if (dateFrom > dateTo) {
+				alert('Date from must be before date to ');
+				return;
+			}
 			$('#totalProductionAgForm').submit();
 		}
 	
 		function submitTotalProductionAqForm(){
+			var dateFrom = $("#totalProductionForm_dateFrom").val();
+			var dateTo = $("#totalProductionForm_dateTo").val();
+			if (dateFrom > dateTo) {
+				alert('Date from must be before date to ');
+				return;
+			}
+			
 			$('#totalProductionAqForm').submit();
 		}
 		
