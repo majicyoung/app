@@ -21,6 +21,7 @@ import com.fairagora.verifik8.v8web.data.application.V8Page;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLAppEntityType;
 import com.fairagora.verifik8.v8web.data.domain.sys.SYSUser;
 import com.fairagora.verifik8.v8web.mvc.AbstractV8Controller;
+import com.fairagora.verifik8.v8web.mvc.farms.dto.FarmFormDto;
 import com.fairagora.verifik8.v8web.mvc.infra.dtomapping.SysUserDTOMapper;
 import com.fairagora.verifik8.v8web.mvc.users.dto.UserFormDto;
 
@@ -65,7 +66,10 @@ public class UsersController extends AbstractV8Controller {
 	@RequestMapping(value = "/users/create.html", method = RequestMethod.GET)
 	public String showCreateUserForm(Model mv) {
 
-		prepareForUserEdition(new UserFormDto(), mv);
+
+		UserFormDto dto = new UserFormDto();
+		dto.setId(0l);
+		prepareForUserEdition (dto, mv);
 
 		return "users/create";
 
