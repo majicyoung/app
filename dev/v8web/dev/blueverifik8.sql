@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  localhost
--- Généré le :  Dim 11 Février 2018 à 07:38
+-- Généré le :  Mer 14 Février 2018 à 07:00
 -- Version du serveur :  5.7.21-0ubuntu0.16.04.1
 -- Version de PHP :  7.0.22-0ubuntu0.16.04.1
 
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 --
 -- Base de données :  `blueverifik8`
 --
-CREATE DATABASE IF NOT EXISTS `blueverifik8` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+CREATE DATABASE IF NOT EXISTS `blueverifik8` DEFAULT CHARACTER SET utf8 COLLATE utf8_bin;
 USE `blueverifik8`;
 
 -- --------------------------------------------------------
@@ -2992,6 +2992,7 @@ CREATE TABLE `reg_entity_facilities` (
 --
 
 INSERT INTO `reg_entity_facilities` (`REG_ENTITY_FARM_ID`, `ACCESS_TOILETS`, `ACCESS_TOILETS_URL`, `ACCESS_SHOWER`, `ACCESS_SHOWER_URL`, `ACCESS_TO_FREE_DRINKING`, `ACCESS_TO_FREE_DRINKING_URL`, `ACCESS_REST_ROOM`, `ACCESS_REST_ROOM_URL`, `PRESENCE_FIRST_AID_KIT`, `UPDATER_ID`, `COMMENT`, `CREATED_AT`, `UPDATED_AT`) VALUES
+(2, 0, NULL, 0, NULL, 0, NULL, 0, NULL, NULL, 4, '', '2018-02-12 02:52:09', '2018-02-12 02:52:09'),
 (51, 0, NULL, 0, NULL, 0, NULL, 0, NULL, NULL, 4, '', '2018-02-10 03:15:20', '2018-02-10 03:15:20'),
 (58, 0, NULL, 0, NULL, 0, NULL, 0, NULL, NULL, 3, '', '2018-02-08 10:43:04', '2018-02-08 10:43:04'),
 (89, 0, NULL, 0, NULL, 0, NULL, 0, NULL, NULL, 3, '', '2018-02-08 12:42:43', '2018-02-08 12:42:43');
@@ -3860,6 +3861,7 @@ CREATE TABLE `reg_entity_staff_safety` (
 --
 
 INSERT INTO `reg_entity_staff_safety` (`REG_ENTITY_FARM_ID`, `SAFETY_EQUIPMENT_IN_FARM`, `WORKERS_USE_SAFETY_EQUIPMENT`, `FREE_SAFETY_EQUIPMENT`, `NUMBER_TRAINED_STAFF`, `PREVENTION_ACCIDENT_MEASURES`, `UPDATER_ID`, `COMMENT`, `CREATED_AT`, `UPDATED_AT`) VALUES
+(2, NULL, NULL, NULL, 0, NULL, 4, '', '2018-02-12 02:54:20', '2018-02-12 02:54:20'),
 (51, NULL, NULL, NULL, 0, NULL, 4, '', '2018-02-10 03:16:43', '2018-02-10 03:16:43'),
 (58, NULL, NULL, NULL, 0, NULL, 3, '', '2018-02-08 10:43:09', '2018-02-08 10:43:09'),
 (89, NULL, NULL, NULL, 0, NULL, 3, '', '2018-02-08 12:44:04', '2018-02-08 12:44:04');
@@ -3882,6 +3884,14 @@ CREATE TABLE `reg_entity_staff_training` (
   `CREATED_AT` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `UPDATED_AT` timestamp NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='General information on staff training at the farm level';
+
+--
+-- Contenu de la table `reg_entity_staff_training`
+--
+
+INSERT INTO `reg_entity_staff_training` (`REG_ENTITY_FARM_ID`, `FIRST_AID_TRAINING`, `HAZARDOUS_ACTIVITIES_TRAINING`, `CL_HAZARDOUS_ACTIVITIES_TRAINING_TYPE_ID`, `HAZARDOUS_ACTIVITIES_TRAINING_DATE`, `HAZARDOUS_ACTIVITIES_NUMBER_TRAINED_STAFF`, `UPDATER_ID`, `COMMENT`, `CREATED_AT`, `UPDATED_AT`) VALUES
+(2, NULL, NULL, NULL, NULL, 0, 4, '', '2018-02-12 02:54:57', '2018-02-12 02:54:57'),
+(89, NULL, NULL, NULL, NULL, 0, 3, '', '2018-02-11 08:07:23', '2018-02-11 08:07:23');
 
 -- --------------------------------------------------------
 
@@ -4171,7 +4181,7 @@ INSERT INTO `sys_roles` (`ID`, `CODE`, `LABEL`) VALUES
 --
 
 CREATE TABLE `sys_users` (
-  `ID` int(11) NOT NULL,
+  `ID` int(10) NOT NULL,
   `name` varchar(255) COLLATE utf8_bin NOT NULL,
   `email` varchar(255) COLLATE utf8_bin NOT NULL,
   `password` varchar(255) COLLATE utf8_bin NOT NULL,
@@ -4191,7 +4201,7 @@ CREATE TABLE `sys_users` (
 --
 
 INSERT INTO `sys_users` (`ID`, `name`, `email`, `password`, `remember_token`, `SYS_ROLE_ID`, `CL_COUNTRY_ID`, `REG_ENTITY_FARM_ID`, `REG_ENTITY_COOP_ID`, `access`, `CREATED_AT`, `UPDATED_AT`, `active`) VALUES
-(0, 'MACHINE USER', 'gregoire@mac.comX', 'a', NULL, 2, 3, NULL, NULL, 0, '2017-10-12 21:15:38', '2017-10-12 21:15:38', 1),
+(0, 'Paweena Prachasuksanti', 'ann@fairagora.com', 'ann', NULL, 1, NULL, NULL, NULL, 0, '2017-10-12 21:15:38', '2017-10-12 21:15:38', 1),
 (1, 'Sylvain', 'smathieu@sy2media.com', 'a', 'wn6u8ekuSSGVEkNU7iB4Ny7MoUTrg4Wr02WMX7KmhycjCQ11WAKOTEZFqahm', 1, NULL, NULL, NULL, 0, '2016-12-13 12:15:10', '2017-01-19 15:26:10', 1),
 (2, 'Emmanuelle', 'emabourgois@fairagora.com', 'a', 'fEgzdBjgx4NyG88Z2nOfcSgjk0gOQy8AC7qQDHCQ9bj9p0bxEvTtOyhrEBxy', 1, NULL, NULL, NULL, 0, '2016-12-31 13:19:35', '2017-04-10 21:40:14', 1),
 (3, 'Yann', 'yann.laurent@pagre-it.com', 'a', 'bYKYqJbPQyaBXur7vBYDe4Fca0U4yP0BTgK9N0BT4iGpN0lYyWkKeIIV8ZLw', 1, NULL, NULL, NULL, 0, '2016-12-31 13:20:49', '2017-09-12 06:47:48', 1),
@@ -5509,6 +5519,11 @@ ALTER TABLE `reg_entity_staff_other_attribute_definition`
 --
 ALTER TABLE `sys_roles`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+--
+-- AUTO_INCREMENT pour la table `sys_users`
+--
+ALTER TABLE `sys_users`
+  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 --
 -- Contraintes pour les tables exportées
 --

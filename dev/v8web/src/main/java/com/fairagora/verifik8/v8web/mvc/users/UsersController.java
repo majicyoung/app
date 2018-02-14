@@ -68,7 +68,7 @@ public class UsersController extends AbstractV8Controller {
 
 
 		UserFormDto dto = new UserFormDto();
-		dto.setId(0l);
+
 		prepareForUserEdition (dto, mv);
 
 		return "users/create";
