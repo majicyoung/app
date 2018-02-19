@@ -65,7 +65,7 @@ public class FarmService extends AbstractV8Service {
 				});
 
 		Map<Long, V8Measure> sizesPerFarms = new HashMap<>();
-		jdbc.query("select ID, SIZE,CL_SIZE_UNIT_ID FROM reg_entity_farm_details", rs -> {
+		jdbc.query("select REG_ENTITY_FARM_ID, SIZE,CL_SIZE_UNIT_ID FROM reg_entity_farm_details", rs -> {
 			sizesPerFarms.put(rs.getLong(1),
 					new V8Measure().setup(rs.getFloat(2), clQtUnityRepository.findOne(rs.getLong(3))));
 		});
@@ -79,8 +79,8 @@ public class FarmService extends AbstractV8Service {
 			f.setStaffCount(staffCountPerFarms.getOrDefault(e.getId(), 0));
 			f.setPondsCount(pondsCountPerFarms.getOrDefault(e.getId(), 0));
 			f.setPlotsCount(plotsCountPerFarms.getOrDefault(e.getId(), 0));
-			f.setSize(sizesPerFarms.get(e.getId()));
-			farms.add(f);
+			f.setSize(sizesPerFarms.get(e.getId())); 
+			farms.add(f); 
 		}
 
 		return farms;
