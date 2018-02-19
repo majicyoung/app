@@ -17,7 +17,9 @@ public class SYSRole implements V8Entity {
 	public static final String country = "country";
 	public static final String coop = "coop";
 	public static final String farm = "farm";
-
+	public static final String buyer = "buyer";
+	public static final String supplier = "supplier";	
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID")
@@ -26,8 +28,8 @@ public class SYSRole implements V8Entity {
 	@Column(name = "CODE", unique = true, length = 2, nullable = false)
 	protected String code;
 
-	@Column(name = "LABEL", length = 64, nullable = false)
-	protected String label;
+	@Column(name = "NAME", length = 64, nullable = false)
+	protected String name;
 
 	public Long getId() {
 		return id;
@@ -45,17 +47,14 @@ public class SYSRole implements V8Entity {
 		this.code = code;
 	}
 
-	public String getLabel() {
-		return label;
-	}
-
-	public void setLabel(String label) {
-		this.label = label;
-	}
-
-	@Override
 	public String getName() {
-		return getLabel();
+		return name;
 	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+
 
 }

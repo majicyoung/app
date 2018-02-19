@@ -64,7 +64,7 @@ public class AbstractV8Controller {
 
 	@ModelAttribute("applicationRoles")
 	public List<SYSRole> applicationRoles() {
-		return roleRepository.findAll(new Sort("label"));
+		return roleRepository.findAll(new Sort("name"));
 	}
 
 }

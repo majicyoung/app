@@ -10,7 +10,7 @@ public class RoleFormDto {
 
 	protected Long id;
 	protected String code;
-	protected String label;
+	protected String name;
 
 	public Long getId() {
 		return id;
@@ -28,12 +28,12 @@ public class RoleFormDto {
 		this.code = code;
 	}
 
-	public String getLabel() {
-		return label;
+	public String getName() {
+		return name;
 	}
 
-	public void setLabel(String label) {
-		this.label = label;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 }
