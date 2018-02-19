@@ -40,6 +40,7 @@ public class FarmPondsController extends AbstractV8Controller {
 		FarmPondDto dto = new FarmPondDto();
 		dto.setFarm(id);
 		mv.addAttribute("farmName", jdbc.queryForObject("SELECT name FROM reg_entities WHERE id="+id, String.class));
+		mv.addAttribute("farmSize", jdbc.queryForObject("SELECT size FROM reg_entity_farm_details WHERE reg_entity_farm_id="+id, String.class));
 		mv.addAttribute("pondDto", dto);
 
 		return "farms/ponds";
@@ -64,6 +65,7 @@ public class FarmPondsController extends AbstractV8Controller {
 		regFarmDtoMapper.fillEntity(dto, pond);
 		regEntityFarmPondRepository.save(pond);
 		mv.addAttribute("farmName", jdbc.queryForObject("SELECT name FROM reg_entities WHERE id="+id, String.class));
+		mv.addAttribute("farmSize", jdbc.queryForObject("SELECT size FROM reg_entity_farm_details WHERE reg_entity_farm_id="+id, String.class));
 		preparePage(farm, mv);
 
 		dto.setFarm(id);
