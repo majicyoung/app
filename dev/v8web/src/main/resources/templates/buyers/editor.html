@@ -4,53 +4,53 @@
 <div layout:fragment="content">
 	<div class="row">
 		<div class="col-xs-12">
-			<div class="box" id="supplier-box">
+			<div class="box" id="buyer-box">
 				<div class="box-header with-border">
-					<h3 class="box-title" th:text="#{suppliers.add_supplier}">suppliers.add_supplier</h3>
+					<h3 class="box-title" th:text="#{buyers.add_buyer}">buyers.add_buyer</h3>
 					<div class="box-tools">
-						<a th:href="@{/suppliers/browser.html}" class="btn btn-sm btn-flat btn-warning"><i class="fa fa-backward"></i> <span th:text="#{default.back}"></span></a>
+						<a th:href="@{/buyers/browser.html}" class="btn btn-sm btn-flat btn-warning"><i class="fa fa-backward"></i> <span th:text="#{default.back}"></span></a>
 					</div>
 				</div>
-				<form th:action="@{'/suppliers/'+${supplierId}+'/update.html'}" id="supplierEditorForm" method="post">
+				<form th:action="@{'/buyers/'+${buyerId}+'/update.html'}" id="buyerEditorForm" method="post">
 					<div class="box-body">
 						<div class="row">
 							<div class="col-xs-12">
 								<div class="form-group row">
-									<label for="inputFarmSupplierProducts" class="col-xs-3 control-label" th:text="|#{default.select_farm}*|">default.select_farm*</label>
+									<label for="inputFarmBuyerProducts" class="col-xs-3 control-label" th:text="|#{default.select_farm}*|">default.select_farm*</label>
 									<div class="col-xs-9">
-										<select class="form-control form-supplier" id="inputFarmSupplierFarm" th:name="farm" required="required">
+										<select class="form-control form-buyer" id="inputFarmBuyerFarm" th:name="farm" required="required">
 											<option value="" th:text="|-- #{default.select_farm} --|">-- default.select_product --</option>
 											<option th:each="f:${allFarmsForUser}" th:value="${f.id}" th:text="${f.name}" th:selected="${f.id}==${farm}"></option>
 										</select>
 									</div>
 								</div>
 								<div class="form-group row">
-									<label for="inputFarmSupplierProducts" class="col-xs-3 control-label" th:text="|#{default.select_product}*|">default.select_product*</label>
+									<label for="inputFarmBuyerProducts" class="col-xs-3 control-label" th:text="|#{default.select_product}*|">default.select_product*</label>
 									<div class="col-xs-9">
-										<select class="form-control form-supplier" id="inputFarmSupplierProducts" th:name="productType" required="required">
+										<select class="form-control form-buyer" id="inputFarmBuyerProducts" th:name="productType" required="required">
 											<option value="" th:text="|-- #{default.select_product} --|">-- default.select_product --</option>
 											<option th:each="product:${allProductTypes}" th:value="${product.id}" th:text="${product.name}"  th:selected="${productType}==${product.id}"></option>
 										</select>
 									</div>
 								</div>
 								<div class="form-group row">
-									<label for="inputFarmSupplier" class="col-xs-3 control-label" th:text="|#{supplier.name}*|">*</label>
+									<label for="inputFarmBuyer" class="col-xs-3 control-label" th:text="|#{buyer.name}*|">*</label>
 									<div class="col-xs-9 no-padding">
 										<div class="col-xs-10">
-											<select class="form-control form-supplier" id="inputFarmSupplier" th:name="supplier" required="required">
-												<option value="" th:text="|-- #{supplier.select} --|">supplier.select</option>
-												<option th:each="comp:${allCompanies}" th:value="${comp.id}" th:attr="data-name=${comp.name},data-city=${comp.address.city}"  th:selected="${supplier}==${comp.id}" th:text="${comp.name}"></option>
+											<select class="form-control form-buyer" id="inputFarmBuyer" th:name="buyer" required="required">
+												<option value="" th:text="|-- #{buyer.select} --|">buyer.select</option>
+												<option th:each="comp:${allCompanies}" th:value="${comp.id}" th:attr="data-name=${comp.name},data-city=${comp.address.city}"  th:selected="${buyer}==${comp.id}" th:text="${comp.name}"></option>
 											</select>
 										</div>
 										<div class="col-xs-2">
-											<!--  <a href="javascript:void(0);" class="btn btn-flat btn-primary" th:title="#{supplier.add}" onclick="openNewSupplier();"><i class="fa fa-plus"></i></a>  -->
+											<!--  <a href="javascript:void(0);" class="btn btn-flat btn-primary" th:title="#{buyer.add}" onclick="openNewBuyer();"><i class="fa fa-plus"></i></a>  -->
 										</div>
 									</div>
 								</div>
 								<div class="form-group row">
 									<div class="col-xs-9 col-xs-offset-3 text-left" style="margin-top: 20px;">
-										<button type="submit" class="btn btn-flat btn-primary btn-form-supplier">
-											<i class="fa fa-plus"></i> <span th:text="#{supplier.save}">#{supplier.save}</span>
+										<button type="submit" class="btn btn-flat btn-primary btn-form-buyer">
+											<i class="fa fa-plus"></i> <span th:text="#{buyer.save}">#{buyer.save}</span>
 										</button>
 									</div>
 								</div>

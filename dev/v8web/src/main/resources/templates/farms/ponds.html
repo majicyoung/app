@@ -16,7 +16,7 @@
 								<div class="row">
 									<div class="col-xs-12">
 										<div class="col-xs-12">
-											<h4 th:text="#{farm.ponds}">farm.ponds</h4>
+											<h4 th:text="#{farm.ponds}">farm.ponds</h4>  
 										</div>
 										<div class="col-xs-12">
 											<script type="text/javascript" th:inline="javascript">
@@ -48,8 +48,9 @@
 														<a href="javascript:void(0);" th:attr="data-id=${pond.id}" class="btn btn-xs btn-flat btn-warning addPondDataBtn" th:title="#{tooltip.add_pond_data}"><i class="fa fa-plus-square"></i></a> 
 														<a href="javascript:void(0);" th:attr="data-id=${pond.id}" class="btn btn-xs btn-flat btn-warning viewDataPondDataBtn" th:title="#{tooltip.view_pond_data}"><i class="fa fa-bar-chart"></i></a> 
 														<a href="javascript:void(0);" th:attr="data-id=${pond.id}" class="btn btn-xs btn-flat btn-primary editPondBtn" th:title="#{tooltip.edit_pond}"><i class="fa fa-edit"></i></a>
-														<form th:action="@{/ponds/delete.html}" method="post" style="display: inline;">
+														<form th:action="@{'/farm/'+${farmId}+'/pond/delete.html'}" method="post" style="display: inline;">
 															<input type="hidden" th:value="${pond.id}" th:name="pondId" />
+															<input type="hidden" th:value="${farmId}" th:name="farmId" />
 															<button type="submit" class="btn btn-xs btn-flat btn-danger" th:title="#{tooltip.delete_pond}">
 																<i class="fa fa-trash"></i>
 															</button>
@@ -61,15 +62,28 @@
 				                                        </script>
 													</td>
 												</tr>
-												<tr>
+												<tr class="bg-secondary">
 													<th th:text="#{farm.total_pond_area}"> </th>
 													<th > </th>
-													<th id="totalFarmPondSize"> </th>
+													<th id="totalFarmPondSize" class="bg-dark"> </th>
 													<th th:text="#{farm.area}"></th>
-													<th th:text="${farmSize}">farmSize</th>
+													<th th:text="${farmSize}" class="bg-success">farmSize</th>
 													<th ></th>
 													<th width="120"></th>											
 												</tr>
+												<script type="text/javascript" th:inline="javascript">
+													/*<![CDATA[*/
+													var farmSize = [[${farmSize}]];
+													if (totalFarmPondSize.valueOf() > farmSize.valueOf()){
+														document.getElementById("totalFarmPondSize").classList.add('bg-danger');
+														document.getElementById("totalFarmPondSize").classList.remove('bg-success');
+													} else {
+														document.getElementById("totalFarmPondSize").classList.remove('bg-danger');
+														document.getElementById("totalFarmPondSize").classList.add('bg-success');
+														
+													}
+													/*]]>*/	
+				                                 </script>
 											</table>
 										</div>
 									</div>
@@ -148,32 +162,30 @@
 <th:block layout:fragment="page-scripts">
 	<script th:inline="javascript">
 	/*<![CDATA[*/
+		var farmSize = [[${farmSize}]];
+		var farmId = [[${farmId}]]; 
 		$(document).ready(function() {
 			
-			$('.addPondDataBtn').click(function(){
-				var id = $(this).attr("data-id");
-				document.location=[[@{/ponds/}]]+id+'/measures/create.html';
-			});
-			
-			$('.editPondBtn').click(function(){
-				var id = $(this).attr("data-id");
-				document.location=[[@{/ponds/}]]+id+'/edit.html';
-			});
 
+			$('.addPondDataBtn').click(function(){
+
+				var id = $(this).attr("data-id");
+				document.location=[[@{/farm/}]]+farmId+[[@{/pond/}]]+id+'/measures/create.html';
+			});
 
 			$('.viewDataPondDataBtn').click(function(){
 				var id = $(this).attr("data-id");
-				document.location=[[@{/ponds/}]]+id+'/measures/browser.html';
+				document.location=[[@{/farm/}]]+farmId+[[@{/pond/}]]+id+'/measures/browser.html';
 			});
 
 			$('.viewActivitiesPondDataBtn').click(function(){
 				var id = $(this).attr("data-id");
-				document.location=[[@{/ponds/}]]+id+'/activities/browser.html';
+				document.location=[[@{/farm/}]]+farmId+[[@{/pond/}]]+id+'/activities/browser.html';
 			});
 			
 			$('.addActivitiesPondDataBtn').click(function(){
 				var id = $(this).attr("data-id");
-				document.location=[[@{/ponds/}]]+id+'/activities/create.html';
+				document.location=[[@{/farm/}]]+farmId+[[@{/pond/}]]+id+'/activities/create.html';
 			});	
 			
 			$(".editPondBtn").click(function(){
@@ -201,14 +213,16 @@
 			var tempTotalFarmPondSize = 0;
 			var farmPondArea =  $('#inputFarmPondArea').val();
 			tempTotalFarmPondSize = Number(farmPondArea) + totalFarmPondSize.valueOf(); 
-			var farmSize = [[${farmSize}]];
 			if (tempTotalFarmPondSize.valueOf() > farmSize.valueOf()){
 				alert([[#{farm.msg_sizePond_exceeds_farmSize}]]);
-				return;
-				
-			}
+				$('#totalFarmPondSize').addClass("bg-danger");
+				$('#totalFarmPondSize').removeClass("bg-success");
+			} 
 			$("#pondEditorForm").submit();
 		}
+		
+		
+		
 		/*]]>*/		
 	</script>
 </th:block>

@@ -21,6 +21,7 @@ import com.fairagora.verifik8.v8web.data.domain.reg.farm.RegEntityFacilities;
 import com.fairagora.verifik8.v8web.data.domain.reg.farm.RegEntityFarmDetails;
 import com.fairagora.verifik8.v8web.data.domain.reg.farm.RegEntityFarmPlot;
 import com.fairagora.verifik8.v8web.data.domain.reg.farm.RegEntityFarmPond;
+import com.fairagora.verifik8.v8web.data.domain.reg.farm.RegEntityFarmBuyerAssignment;
 import com.fairagora.verifik8.v8web.data.domain.reg.farm.RegEntityFarmSupplierAssignment;
 import com.fairagora.verifik8.v8web.data.domain.reg.farm.RegEntityStaffManagement;
 import com.fairagora.verifik8.v8web.data.domain.reg.farm.RegEntityStaffSafety;
@@ -56,6 +57,7 @@ import com.fairagora.verifik8.v8web.mvc.plots.dto.PlotMeasurementDto;
 import com.fairagora.verifik8.v8web.mvc.ponds.dto.PondListingDto;
 import com.fairagora.verifik8.v8web.mvc.ponds.dto.PondMeasurementDto;
 import com.fairagora.verifik8.v8web.mvc.suppliers.dto.SupplierListingDto;
+import com.fairagora.verifik8.v8web.mvc.buyers.dto.BuyerListingDto;
 
 @Mapper(componentModel = "spring", uses = EntityDtoMapper.class, unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface RegFarmDTOMapper {
@@ -186,6 +188,11 @@ public interface RegFarmDTOMapper {
 	@Mapping(source = "m.productType.localisedName", target = "productType")
 	SupplierListingDto toListing(RegEntityFarmSupplierAssignment m);
 
+	@Mapping(source = "m.buyer.address.city", target = "city")
+	@Mapping(source = "m.productType.localisedName", target = "productType")
+	BuyerListingDto toListing(RegEntityFarmBuyerAssignment m);
+	
+	
 	@Mapping(source = "m.address.city", target = "city")
 	IndividualListingDto toListing(RegEntity m);
 

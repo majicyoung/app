@@ -68,9 +68,15 @@ public class DashboardDataBuilder {
 		dash.getTopKpis().add(new DashboardTopKpi<Integer>().setup("Number of Plots", "nbPlots",
 				jdbc.queryForObject("SELECT count(ID) FROM reg_entity_farmag_plots", Integer.class)));
 
-		dash.getTopKpis().add(new DashboardTopKpi<Integer>().setup("Total Production in 2017", "totalProduction",
+		dash.getTopKpis().add(new DashboardTopKpi<Integer>().setup("Number of Ponds", "nbPonds",
+				jdbc.queryForObject("SELECT count(ID) FROM reg_entity_farmaq_ponds", Integer.class)));
+		
+		dash.getTopKpis().add(new DashboardTopKpi<Integer>().setup("Total Production in 2017", "totalAgProduction",
 				jdbc.queryForObject("SELECT SUM(CONVERT(PRODUCTION_QUANTITY, SIGNED INTEGER)) FROM `dt_farmag_production` where YEAR(DATE_FROM) >= 2017", Integer.class)));
 		
+		dash.getTopKpis().add(new DashboardTopKpi<Integer>().setup("Total Production in 2017", "totalAqProduction",
+				jdbc.queryForObject("SELECT SUM(CONVERT(PRODUCTION_QUANTITY, SIGNED INTEGER)) FROM `dt_farmaq_production` where YEAR(DATE_FROM) >= 2017", Integer.class)));
+	
 		
 		dash.getTopKpis().add(new DashboardTopKpi<Integer>().setup("Employees", "nbEmployees",
 				jdbc.queryForObject("SELECT count(*) FROM reg_entity_staff", Integer.class)));

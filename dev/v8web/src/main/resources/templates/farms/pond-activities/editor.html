@@ -6,12 +6,12 @@
 		<div class="col-xs-12">
 			<div class="box" id="pond-box">
 				<div class="box-header with-border">
-					<h3 class="box-title" th:text="#{farm.pond_activity_add}"></h3> 
+					<h3 class="box-title" th:text="#{farm.pond_activity_add}"></h3> - <span th:text="${farmName}">farmname</span> 
 					<div class="box-tools">
-						<a th:href="@{'/ponds/'+${pondId}+'/activities/browser.html'}" class="btn btn-sm btn-flat btn-warning"><i class="fa fa-backward"></i> <span th:text="#{default.back}"></span></a>
+						<a th:href="@{'/farm/'+${farmId}+'/ponds.html'}" class="btn btn-sm btn-flat btn-warning"><i class="fa fa-backward"></i> <span th:text="#{default.back}"></span></a>
 					</div>
 				</div>
-				<form th:action="@{'/ponds/'+${pondId}+'/activities/update.html'}" th:object="${activityDto}" id="pondEditorForm" method="post">
+				<form th:action="@{'/farm/'+${farmId}+'/pond/'+${pondId}+'/activities/update.html'}" th:object="${activityDto}" id="pondEditorForm" method="post">
 					<input type="hidden" id="pondId" th:field="*{pond}" />
 					<input type="hidden" id="activityId" th:field="*{id}" />
 					<div class="box-body">
@@ -57,7 +57,7 @@
 					<div class="box-footer text-center">
 						<small>* <span th:text="#{default.mandatory_field}"></span></small> 
 						
-						<a th:href="@{'/ponds/'+${pondId}+'/activities/browser.html'}" class="btn btn-warning"><i class="fa fa-times"></i><span th:text="#{default.cancel}"></span></a>
+						<a th:href="@{'/farm/'+${farmId}+'/ponds.html'}" class="btn btn-warning"><i class="fa fa-times"></i><span th:text="#{default.cancel}"></span></a>
 						<button type="submit" class="btn btn-success">
 							<span th:text="#{default.submit}"></span> <i class="fa fa-check"></i>
 						</button>
@@ -69,7 +69,9 @@
 </div>
 
 <th:block layout:fragment="page-scripts">
-	<script type="text/javascript">
+	<script th:inline="javascript">
+	/*<![CDATA[*/
+		
 		$(document).ready(function() {
 			$('.datefield').datetimepicker({
 				format: 'Y-m-d h:i:s',
@@ -104,6 +106,8 @@
 			});
 			return hasError;
 		}
-	</script>
+		
+		/*]]>*/
+		</script>
 </th:block>
 </html>

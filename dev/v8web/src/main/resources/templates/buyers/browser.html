@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html layout:decorator="inc/main-layout" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<div layout:fragment="content">
+
+
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="box">
+				<div class="box-header with-border">
+					<h3 class="box-title pull-left" th:text="#{buyers.buyer_listing}"></h3>
+					<div class="alert-wrapper col-xs-6">
+						<!-- messages here -->
+					</div>
+					<div class="box-tools">
+						<a th:href="@{/buyers/create.html}" class="btn btn-sm btn-flat btn-success"><i class="fa fa-plus"></i> <span th:text="#{buyers.add_buyer_to_farm}">buyers.add_buyer_to_farm</span></a>
+					</div>
+				</div>
+				<div class="box-body">
+					<table class="table table-hover table-striped table-bordered datatable" id="datatables-browser">
+						<thead>
+							<tr>
+								<th th:text="#{default.farm}">default.farm</th>
+                                <th th:text="#{buyer.name}">buyer.name</th>
+								<th th:text="#{default.product_type}">default.product_type</th>
+                                <th th:text="#{default.city}"></th>
+                                <th width="90"></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="buyer:${listing}">
+								<td th:text="${buyer.farm}"></td>
+								<td th:text="${buyer.buyer}"></td>
+								<td th:text="${buyer.productType}"></td>
+								<td th:text="${buyer.city}"></td>
+								<td align="center">
+									<a href="javascript:void(0);" th:attr="data-id=${buyer.id}" class="btn btn-xs btn-flat btn-primary editBuyerBtn" th:title="#{tooltip.edit_buyer}"><i class="fa fa-edit"></i></a>
+									<form th:action="@{/buyers/delete.html}" method="post" style="display: inline;">
+										<input type="hidden" th:value="${buyer.id}" th:name="buyerId" />
+										<button type="submit" class="btn btn-xs btn-flat btn-danger" th:title="#{tooltip.delete_buyer}">
+											<i class="fa fa-trash"></i>
+										</button>
+									</form>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<th:block layout:fragment="page-scripts">
+	<script type="text/javascript" th:inline="javascript">
+		$(document).ready(function() {
+			
+			
+			$('.editBuyerBtn').click(function(){
+				var id = $(this).attr("data-id");
+				document.location=[[@{/buyers/}]]+id+'/edit.html';
+			});
+
+			
+			 $('#datatables-browser').DataTable({
+				"order": [[ 0, "desc" ]],
+				"columnDefs": [{"orderable":false,"targets":4}],
+				"language": {
+		            "url": langURL
+		        }
+			});
+		 
+		});
+		
+	</script>
+</th:block>
+</html>

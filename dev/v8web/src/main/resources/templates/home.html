@@ -36,10 +36,15 @@
         <div class="col-md-3 col-sm-6 col-xs-12">
           <div class="info-box">
             <span class="info-box-icon bg-red"><i class="fa fa-line-chart"></i></span>
-            <div class="info-box-content">
+            <div class="info-box-content" th:if="${v8App.plotProfile}">
               <span class="info-box-text" th:text="#{farm.plot_count}"></span>
-              <span class="info-box-number" th:text="${dashboard.topKpisMap['nbPlots'].value}"></span>
+              <span class="info-box-number" th:text="${dashboard.topKpisMap['nbPlots'].value}" ></span>
             </div>
+             <div class="info-box-content" th:if="${v8App.pondProfile}">
+              <span class="info-box-text" th:text="#{farm.pond_count}"></span>
+              <span class="info-box-number" th:text="${dashboard.topKpisMap['nbPonds'].value}" ></span>
+            </div>
+ 
           </div>
         </div>
         <div class="clearfix visible-sm-block"></div>
@@ -48,9 +53,10 @@
             <span class="info-box-icon bg-green"><i class="fa fa-money"></i></span>
             <div class="info-box-content">
               <span class="info-box-text" th:text="#{production_profile.total_production}"></span>
-              <span class="info-box-number" th:text="${dashboard.topKpisMap['totalProduction'].value}"> </span><span>MT</span>
-              
+              <span class="info-box-number" th:text="${dashboard.topKpisMap['totalAgProduction'].value}" th:if="${v8App.plotProfile}"> </span>
+               <span class="info-box-number" th:text="${dashboard.topKpisMap['totalAqProduction'].value}" th:if="${v8App.pondProfile}"> </span><span>MT</span>
             </div>
+
           </div>
         </div>
         <div class="col-md-3 col-sm-6 col-xs-12">
@@ -71,22 +77,30 @@
 					<button type="button" class="btn btn-primary  btnAddFarm" th:title="#{tooltip.add}" th:text="#{farm.add}">Add a farm</button>
             </div>
         </div>
-        <div class="col-md-3 col-sm-6 col-xs-12">
-            <div class="text-center">
+        <div class="col-md-3 col-sm-6 col-xs-12" >
+            <div class="text-center" th:if="${v8App.plotProfile}">
 					<button type="button" class="btn btn-danger  btnPlotList" th:title="#{tooltip.view}" th:text="#{farm.plots_list}">View plot list</button>
 					<button type="button" class="btn btn-danger  btnAddPlot" th:title="#{tooltip.add}" th:text="#{farm.add_plot}">Add a plot</button>       
+	        </div>
+              <div class="text-center" th:if="${v8App.pondProfile}">
+					<button type="button" class="btn btn-danger  btnPondList" th:title="#{tooltip.view}" th:text="#{farm.ponds_list}">View plot list</button>
+					<button type="button" class="btn btn-danger  btnAddPond" th:title="#{tooltip.add}" th:text="#{farm.add_pond}">Add a pond</button>       
 	        </div>
         </div>
 
         <div class="clearfix visible-sm-block"></div>
         <div class="col-md-3 col-sm-6 col-xs-12">
-            <div class="text-center">
+            <div class="text-center" th:if="${v8App.plotProfile}">
 					<button type="button" class="btn btn-success btnPlotList" th:title="#{tooltip.view}" th:text="#{farm.plots_list}">View plot list</button>
-					<button type="button" class="btn btn-success btnAddActivity" th:title="#{tooltip.add}" th:text="#{farm.plot_activity_add}">Add production to a plot</button>        
+					<button type="button" class="btn btn-success btnAddPlotActivity" th:title="#{tooltip.add}" th:text="#{farm.plot_activity_add}">Add production to a plot</button>        
+	        </div>
+            <div class="text-center" th:if="${v8App.pondProfile}">
+					<button type="button" class="btn btn-success btnPondList" th:title="#{tooltip.view}" th:text="#{farm.ponds_list}">View plot list</button>
+					<button type="button" class="btn btn-success btnAddPondActivity" th:title="#{tooltip.add}" th:text="#{farm.pond_activity_add}">Add production to a plot</button>        
 	        </div>
         </div>
         <div class="col-md-3 col-sm-6 col-xs-12">
-            <div class="text-center">
+            <div class="text-center" th:if="${v8App.pondProfile}">
 					<button type="button" class="btn btn-warning  btnStaffList" th:title="#{tooltip.view}" th:text="#{staff.list}">View employee list</button>
 					<button type="button" class="btn btn-warning  btnAddStaff" th:title="#{tooltip.add}" th:text="#{staff.add}">Add an employee</button>        
 	        </div>
@@ -150,9 +164,16 @@
                       <div class="progress-bar progress-bar-green" style="width: 100%"></div>
                     </div>
                   </div>
-                  <div class="progress-group">
+                  <div class="progress-group" th:if="${v8App.plotProfile}">
                     <span class="progress-text" th:text="#{dashboard.plot_profile_completed}">Plot profile completed</span>
                     <span class="progress-number" th:text="${dashboard.topKpisMap['nbPlots'].value}+ '/100'"></span>
+                    <div class="progress sm">
+                      <div class="progress-bar progress-bar-yellow" style="width: 6%"></div>
+                    </div>
+                  </div>
+                  <div class="progress-group" th:if="${v8App.pondProfile}">
+                    <span class="progress-text" th:text="#{dashboard.pond_profile_completed}">Ponds profile completed</span>
+                    <span class="progress-number" th:text="${dashboard.topKpisMap['nbPonds'].value}+ '/100'"></span>
                     <div class="progress sm">
                       <div class="progress-bar progress-bar-yellow" style="width: 6%"></div>
                     </div>
@@ -226,11 +247,23 @@
 		$('.btnAddPlot').click(function(){
 			document.location='/plots/create.html';
 		});
+
+		$('.btnPondList').click(function(){
+			document.location='/ponds/browser.html';
+		});
 		
-		$('.btnAddActivity').click(function(){
+		$('.btnAddPond').click(function(){
+			document.location='/ponds/create.html';
+		});
+		
+		$('.btnAddPlotActivity').click(function(){
 			document.location='/plots/browser.html';
 		});		
 
+		$('.btnAddPondActivity').click(function(){
+			document.location='/ponds/browser.html';
+		});	
+		
 		$('.btnStaffList').click(function(){
 			document.location='/individuals/browser.html';
 		});	
