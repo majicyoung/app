@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Client :  127.0.0.1
--- Généré le :  Lun 19 Février 2018 à 11:06
+-- Généré le :  Jeu 22 Février 2018 à 17:46
 -- Version du serveur :  5.7.14
 -- Version de PHP :  5.6.25
 
@@ -1507,9 +1507,16 @@ CREATE TABLE `cl_farm_pond_activity_types` (
 --
 
 INSERT INTO `cl_farm_pond_activity_types` (`ID`, `ENABLED`, `CODE`, `RANKING`, `NAME`, `DESCRIPTION`, `I18n_DEFAULT`, `I18N_EN`, `I18N_FR`, `I18N_ES`, `I18N_TH`, `I18N_VT`, `I18N_LA`, `I18N_ID`, `I18N_KH`, `UPDATER_ID`, `COMMENT`, `CREATED_AT`, `UPDATED_AT`) VALUES
-(1, 1, 'SEED', 1, 'Pond Seeding', 'Pond seeding with seed/juveniles', 'Pond Seeding', 'Pond Seeding', 'Ensemmencement Bassin', 'Pond Seeding', 'การเพาะเมล็ดบ่อ', 'Pond Seeding', 'Pond Seeding', 'Pond Seeding', 'Pond Seeding', 1, NULL, '2018-01-17 09:31:45', '2018-01-17 09:31:45'),
-(2, 1, 'HARV', 1, 'Pond Harvesting', 'Pond Harvesting', 'Pond Harvesting', 'Pond Harvesting', 'Récolte du bassin', 'Pond Harvesting', 'การเก็บเกี่ยวบ่อน้ำ', 'Pond Harvesting', 'Pond Harvesting', 'Pond Harvesting', 'Pond Harvesting', 1, NULL, '2018-01-17 09:31:45', '2018-01-17 09:31:45'),
-(3, 1, 'FEED', 1, 'Feeding', 'Feeding', 'Feeding', 'Feeding', 'Nourrir', 'Feeding', 'การให้อาหาร', 'Feeding', 'Feeding', 'Feeding', 'Feeding', 1, NULL, '2018-01-29 20:16:39', '2018-01-29 20:16:39');
+(1, 1, 'PONDSTOCK', 1, 'Pond Stocking ', 'Pond Stocking with seed/juveniles', 'Pond Stocking ', 'Pond Stocking ', 'Ensemmencement Bassin', 'Pond Stocking ', 'การปล่อยลูกพันธ์ุ', 'Pond Stocking ', 'Pond Stocking ', 'Pond Stocking ', 'Pond Stocking ', 1, NULL, '2018-01-17 09:31:45', '2018-01-17 09:31:45'),
+(2, 1, 'PONDHARV', 1, 'Pond Harvesting', 'Pond Harvesting', 'Pond Harvesting', 'Pond Harvesting', 'Récolte du bassin', 'Pond Harvesting', 'การเก็บเกี่ยวผลผลิตเมื่อครบรอบการเลี้ยง', 'Pond Harvesting', 'Pond Harvesting', 'Pond Harvesting', 'Pond Harvesting', 1, NULL, '2018-01-17 09:31:45', '2018-01-17 09:31:45'),
+(3, 1, 'FEEDUSE', 1, 'Feeding', 'Feeding', 'Feeding', 'Feeding', 'Nourrir', 'Feeding', 'การให้อาหาร', 'Feeding', 'Feeding', 'Feeding', 'Feeding', 1, NULL, '2018-01-29 20:16:39', '2018-01-29 20:16:39'),
+(4, 1, 'ADDITIVEUSE', 1, 'Distribution of Additive', 'Distribution of Additive', 'Distribution of Additive', 'Distribution of Additive', 'Distribution d\'additifs', 'Distribution of Additive', 'การใช้ยาสารเคมีหรือผลิตภัณฑ์อื่นๆในบ่อเลี้ยง', 'Distribution of Additive', 'Distribution of Additive', 'Distribution of Additive', 'Distribution of Additive', 3, NULL, '2018-02-21 17:13:11', '2018-02-21 17:13:11'),
+(5, 1, 'ANTIBIOUSE', 1, 'Distribution of Antibiotics', 'Distribution of Antibiotics', 'Distribution of Antibiotics', 'Distribution of Antibiotics', 'Distribution d\'antibiotics', 'Distribution of Antibiotics', 'การใช้ยาปฎิชีวนะในบ่อเลี้ยง', 'Distribution of Antibiotics', 'Distribution of Antibiotics', 'Distribution of Antibiotics', 'Distribution of Antibiotics', 3, NULL, '2018-02-21 16:13:11', '2018-02-21 16:13:11'),
+(6, 1, 'PONDLIME', 1, 'Pond liming', 'Pond liming', 'Pond liming', 'Pond liming', 'Chaulage du bassin', 'Pond liming', 'การใช้ปูนในบ่อเลี้ยง', 'Pond liming', 'Pond liming', 'Pond liming', 'Pond liming', 3, NULL, '2018-02-21 16:13:11', '2018-02-21 16:13:11'),
+(7, 1, 'PONDWASH', 1, 'Pond washing', 'Pond washing', 'Pond washing', 'Pond washing', 'Nettoyage du bassin', 'Pond washing', 'การทำความสะอาดบ่อเลี้ยง', 'Pond washing', 'Pond washing', 'Pond washing ', 'Pond washing', 3, NULL, '2018-02-21 16:13:11', '2018-02-21 16:13:11'),
+(8, 1, 'PONDMAINT', 1, 'Pond maintenance', 'Pond maintenance  ', 'Pond maintenance', 'Pond maintenance', 'Nettoyage du bassin', 'Pond maintenance', 'การทำความสะอาดบ่อเลี้ยง', 'Pond maintenance', 'Pond maintenance', 'Pond maintenance', 'Pond maintenance', 3, NULL, '2018-02-21 16:13:11', '2018-02-21 16:13:11'),
+(9, 1, 'FERTUSE', 1, 'Pond Fertilizing', 'Pond Fertilizing  ', 'Pond Fertilizing', 'Pond Fertilizing', 'Fertilisation du bassin', 'Pond Fertilizing', 'การหมักบ่อเลี้ยง', 'Pond Fertilizing', 'Pond Fertilizing', 'Pond Fertilizing', 'Pond Fertilizing', 3, NULL, '2018-02-21 16:13:11', '2018-02-21 16:13:11'),
+(10, 1, 'PONDLEVEL', 1, 'Pond leveling', 'Pond leveling  ', 'Pond leveling', 'Pond leveling', 'Mise à niveau du bassin', 'Pond leveling', 'การหมักบ่อเลี้ยง', 'Pond leveling', 'Pond leveling', 'Pond Fertilizing', 'Pond leveling', 3, NULL, '2018-02-21 16:13:11', '2018-02-21 16:13:11');
 
 -- --------------------------------------------------------
 
@@ -2495,8 +2502,11 @@ CREATE TABLE `cl_ref_products` (
 --
 
 INSERT INTO `cl_ref_products` (`ID`, `ENABLED`, `CODE`, `RANKING`, `NAME`, `DESCRIPTION`, `I18n_DEFAULT`, `I18N_EN`, `I18N_FR`, `I18N_ES`, `I18N_TH`, `I18N_VT`, `I18N_LA`, `I18N_ID`, `I18N_KH`, `CL_PRODUCTS_TYPE_ID`, `CL_RECOMMAND_UNIT_ID`, `UPDATER_ID`, `COMMENT`, `CREATED_AT`, `UPDATED_AT`) VALUES
-(1, 1, '1', 1, 'Shrimp food', 'Shrimp food', 'Shrimp food', 'Shrimp food', 'Shrimp food', 'Shrimp food', 'Shrimp food', 'Shrimp food', 'Shrimp food', 'Shrimp food', 'Shrimp food', 42, NULL, 1, NULL, '2018-01-29 20:24:14', '2018-01-29 20:24:14'),
-(2, 1, 'TILFOOD', 1, 'Tilapia food', 'Tilapia food', 'Tilapia food', 'Tilapia food', 'Tilapia food', 'Tilapia food', 'Tilapia food', 'Tilapia food', 'Tilapia food', 'Tilapia food', 'Tilapia food', 41, NULL, 1, NULL, '2018-01-29 20:25:00', '2018-01-29 20:25:00');
+(1, 1, '1', 1, 'Shrimp food', 'Shrimp food', 'Shrimp food', 'Shrimp food', 'Shrimp food', 'Shrimp food', 'Shrimp food', 'Shrimp food', 'Shrimp food', 'Shrimp food', 'Shrimp food', 42, 2, 1, NULL, '2018-01-29 20:24:14', '2018-01-29 20:24:14'),
+(2, 1, 'TILFOOD', 1, 'Tilapia food', 'Tilapia food', 'Tilapia food', 'Tilapia food', 'Tilapia food', 'Tilapia food', 'Tilapia food', 'Tilapia food', 'Tilapia food', 'Tilapia food', 'Tilapia food', 41, 2, 1, NULL, '2018-01-29 20:25:00', '2018-01-29 20:25:00'),
+(3, 1, 'TU01', 1, 'Thai union antiobatics product 1', 'Thai union antiobatics product 1', 'Thai union antiobatics product 1', 'Thai union antiobatics product 1', 'Thai union antiobatics product 1', 'Thai union antiobatics product 1', 'Thai union antiobatics product 1', 'Thai union antiobatics product 1', 'Thai union antiobatics product 1', 'Thai union antiobatics product 1', 'Thai union antiobatics product 1', 3, 2, 1, NULL, '2018-02-21 17:02:31', '2018-02-21 17:02:31'),
+(4, 1, 'THANT2', 1, 'Thai union antiobatics product 2', 'Thai union antiobatics product 2', 'Thai union antiobatics product 2', 'Thai union antiobatics product 2', 'Thai union antiobatics product 2', 'Thai union antiobatics product 2', 'Thai union antiobatics product 2', 'Thai union antiobatics product 2', 'Thai union antiobatics product 2', 'Thai union antiobatics product 2', 'Thai union antiobatics product 2', 3, 2, 1, NULL, '2018-02-21 17:04:04', '2018-02-21 17:04:04'),
+(5, 1, 'SEED', 1, 'Seed from thai union hatchery', 'Seed from thai union hatchery', 'Seed from thai union hatchery', 'Seed from thai union hatchery', 'Seed from thai union hatchery', 'Seed from thai union hatchery', 'Seed from thai union hatchery', 'Seed from thai union hatchery', 'Seed from thai union hatchery', 'Seed from thai union hatchery', 'Seed from thai union hatchery', 4, 2, 1, NULL, '2018-02-21 17:06:15', '2018-02-21 17:06:15');
 
 -- --------------------------------------------------------
 
@@ -2536,7 +2546,7 @@ INSERT INTO `cl_ref_product_types` (`ID`, `ENABLED`, `CODE`, `RANKING`, `NAME`, 
 (1, 1, 'DRUGCHEM', 1, 'Drugs and Chemicals ', 'Drugs and Chemicals', NULL, 'Drugs and Chemicals ', 'Drugs and Chemicals ', 'Drogues et produits chimiques', NULL, 'ยาและสารเคมี', NULL, NULL, NULL, NULL, NULL, 1, NULL, '2016-10-23 09:13:07', '2017-09-12 13:36:24'),
 (2, 1, 'DRUGS', 1, 'Drugs for animals ', 'Drugs for animals (execpt antibiotics)', NULL, 'Drugs for animals (execpt antibiotics)', 'Drugs for animals ', 'Médicaments pour animaux', 'Drugs for animals ', 'ยาเสพติดสำหรับสัตว์', 'Drugs for animals ', 'Drugs for animals ', 'Drugs for animals ', 'Drugs for animals ', 1, 1, NULL, '2016-10-23 07:13:07', '2017-09-12 11:36:24'),
 (3, 1, 'ANTIBIO', 1, 'Antibiotics for animals ', 'Drugs for animals', NULL, 'Drugs for animals', 'Antibiotics for animals ', 'Antibiotiques pour animals ', 'Antibiotics for animals ', 'ยาปฏิชีวนะสำหรับสัตว์', 'Antibiotics for animals ', 'Antibiotics for animals ', 'Antibiotics for animals ', 'Antibiotics for animals ', 1, 1, NULL, '2016-10-23 07:13:07', '2017-09-12 11:36:24'),
-(4, 1, 'SEEDSHRIMP', 1, 'Shrimp seed', 'Shrimp seed', NULL, 'Shrimp seed', 'Shrimp seed', 'Alevins de crevettes', 'Shrimp seed', 'เมล็ดกุ้ง', 'Shrimp seed', 'Shrimp seed', 'Shrimp seed', 'Shrimp seed', 1, 1, NULL, '2016-10-23 07:13:07', '2017-09-12 11:36:24'),
+(4, 1, 'SEED', 1, 'Seed for pond stocking', 'Seed for pond stocking', NULL, 'Seed for pond stocking', 'Seed for pond stocking', 'Alevins pour l\'ensemmencement de bassins', 'Seed for pond stocking', 'เมล็ดกุ้ง', 'Seed for pond stocking', 'Seed for pond stocking', 'Seed for pond stocking', 'Seed for pond stocking', 1, 1, NULL, '2016-10-23 07:13:07', '2017-09-12 11:36:24'),
 (5, 1, 'PHYTO', 1, 'Phyto Sanitary products', 'Phyto Sanitary products', NULL, 'Phyto Sanitary products', 'Phyto Sanitary products', 'Produits phytosanitaires', NULL, 'ผลิตภัณฑ์สุขอนามัยพืช', NULL, NULL, NULL, NULL, 1, 1, NULL, '2017-09-23 13:05:23', '2017-09-23 13:05:23'),
 (10, 1, 'PROBIO', 1, 'Probiotics', 'Probiotics', NULL, 'Probiotics', 'Probiotics', 'Probiotiques', 'Probiotics', 'โปรไบโอติก', 'Probiotics', 'Probiotics', 'Probiotics', 'Probiotics', NULL, 1, NULL, '2016-10-23 07:13:07', '2017-09-12 11:36:24'),
 (20, 1, 'ADDI', 1, 'Additives', 'Additives', NULL, 'Additives', 'Additives', 'Additifs', 'Additives', 'สารเติมแต่ง', 'Additives', 'Additives', 'Additives', 'Additives', NULL, 1, NULL, '2016-10-23 07:13:07', '2017-09-12 11:36:24'),
@@ -2546,7 +2556,8 @@ INSERT INTO `cl_ref_product_types` (`ID`, `ENABLED`, `CODE`, `RANKING`, `NAME`, 
 (50, 1, 'FERT', 1, 'Fertilizers', 'Fertilizers', NULL, 'Fertilizers', 'Fertilizers', 'Engrais', NULL, 'ปุ๋ย', NULL, NULL, NULL, NULL, 5, 1, NULL, '2017-09-23 13:05:23', '2017-09-23 13:05:23'),
 (60, 1, 'PEST', 1, 'Pesticides', 'Pesticides', NULL, 'Pesticides', 'Pesticides', 'Pesticides', NULL, 'สารกำจัดศัตรูพืช', NULL, NULL, NULL, NULL, 5, 1, NULL, '2017-09-23 13:05:23', '2017-09-23 13:05:23'),
 (70, 1, 'HERB', 1, 'Herbicides', 'Herbicides', NULL, 'Herbicides', 'Herbicides', 'Herbicides', NULL, 'สารเคมีกำจัดวัชพืช', NULL, NULL, NULL, NULL, 5, 1, NULL, '2017-09-23 13:05:23', '2017-09-23 13:05:23'),
-(80, 1, 'FONG', 1, 'Fungicides', 'Fungicides', NULL, 'Fungicides', 'Fungicides', 'Fongicides', NULL, 'สารฆ่าเชื้อรา', NULL, NULL, NULL, NULL, 5, 1, NULL, '2017-09-23 13:05:23', '2017-09-23 13:05:23');
+(80, 1, 'FONG', 1, 'Fungicides', 'Fungicides', NULL, 'Fungicides', 'Fungicides', 'Fongicides', NULL, 'สารฆ่าเชื้อรา', NULL, NULL, NULL, NULL, 5, 1, NULL, '2017-09-23 13:05:23', '2017-09-23 13:05:23'),
+(100, 1, 'LIME', 1, 'Lime / whitewash family', 'Lime / whitewash family', NULL, 'Lime / whitewash family', 'Lime / whitewash family', 'Lime / whitewash family', 'Lime / whitewash family', 'Lime / whitewash family', 'Lime / whitewash family', 'Lime / whitewash family', 'Lime / whitewash family', 'Lime / whitewash family', NULL, 3, NULL, '2018-02-22 13:44:09', '2018-02-22 13:44:09');
 
 -- --------------------------------------------------------
 
@@ -2685,18 +2696,6 @@ CREATE TABLE `dt_farmag_plot_management` (
   `UPDATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
---
--- Contenu de la table `dt_farmag_plot_management`
---
-
-INSERT INTO `dt_farmag_plot_management` (`ID`, `REG_ENTITY_FARM_PLOT_ID`, `ACTIVITY_START_DATE`, `ACTIVITY_END_DATE`, `CL_PLOT_ACTIVITY_TYPE_ID`, `CL_PRODUCT_ID`, `MEASURE_VALUE`, `CL_MEASURE_VALUE_UNIT_ID`, `ADDITIONNAL_MEASURE_VALUE`, `CL_ADDITIONNAL_MEASURE_VALUE_UNIT_ID`, `CL_TILING_ACTIVITY_TYPE_ID`, `UPDATER_ID`, `COMMENT`, `CREATED_AT`, `UPDATED_AT`) VALUES
-(18, 19, '2016-06-15 05:17:00', '2016-06-22 05:17:33', 1, NULL, 0, NULL, NULL, NULL, NULL, 4, '', '2017-12-06 01:17:57', '2017-12-06 01:17:57'),
-(19, 19, '2016-11-17 08:18:15', '2016-11-16 21:00:00', 6, NULL, 0, NULL, NULL, NULL, NULL, 4, '', '2017-12-06 01:18:51', '2017-12-06 01:18:51'),
-(20, 19, '2016-08-10 05:19:05', '2016-08-10 18:00:00', 10, 2, 450, 2, NULL, NULL, NULL, 4, '', '2017-12-06 01:19:47', '2017-12-06 01:19:47'),
-(21, 19, '2016-12-23 08:20:18', '2017-03-07 08:20:49', 4, NULL, 0, NULL, NULL, NULL, NULL, 4, '', '2017-12-06 01:21:29', '2017-12-06 01:21:29'),
-(22, 19, '2017-12-05 09:41:57', '2017-12-07 09:42:07', 10, 18, 0, NULL, NULL, NULL, NULL, 4, '', '2017-12-06 02:42:27', '2017-12-06 02:42:27'),
-(23, 20, '2017-12-19 10:25:33', '2017-12-20 10:25:36', 6, NULL, 0, NULL, NULL, NULL, NULL, 4, '', '2017-12-20 03:25:44', '2017-12-20 03:25:44');
-
 -- --------------------------------------------------------
 
 --
@@ -2717,17 +2716,6 @@ CREATE TABLE `dt_farmag_production` (
   `CREATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `UPDATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='soil analysis record';
-
---
--- Contenu de la table `dt_farmag_production`
---
-
-INSERT INTO `dt_farmag_production` (`ID`, `REG_ENTITY_FARM_ID`, `CL_PROD_DATA_ENTRY_TYPE_ID`, `DATE_FROM`, `DATE_TO`, `CL_COMMODITIES_ID`, `PRODUCTION_QUANTITY`, `CL_PRODUCTION_QUANTITY_UNIT_ID`, `UPDATER_ID`, `COMMENT`, `CREATED_AT`, `UPDATED_AT`) VALUES
-(11, 135, 1, '2016-12-16', '2017-03-22', 1, '3400.0', 11, 4, '', '2017-12-06 01:14:58', '2017-12-06 01:14:58'),
-(12, 135, 1, '2017-12-13', '2017-12-15', 1, '33.0', 29, 4, '', '2017-12-12 05:28:57', '2017-12-12 05:28:57'),
-(13, 141, 1, '2018-01-16', '2018-01-17', 1, '450.0', 11, 3, '', '2018-01-16 07:43:45', '2018-01-16 07:43:45'),
-(14, 141, 1, '2018-01-09', '2018-01-10', 1, '12.0', 11, 3, '', '2018-01-16 12:30:48', '2018-01-16 12:30:48'),
-(15, 141, 1, '2018-01-02', '2018-01-03', 1, '412.0', 11, 3, '', '2018-01-16 15:17:09', '2018-01-16 15:17:09');
 
 -- --------------------------------------------------------
 
@@ -2776,8 +2764,22 @@ CREATE TABLE `dt_farmaq_pond_management` (
 --
 
 INSERT INTO `dt_farmaq_pond_management` (`ID`, `REG_ENTITY_FARM_POND_ID`, `ACTIVITY_START_DATE`, `ACTIVITY_END_DATE`, `CL_POND_ACTIVITY_TYPE_ID`, `CL_PRODUCT_ID`, `MEASURE_VALUE`, `CL_MEASURE_VALUE_UNIT_ID`, `ADDITIONNAL_MEASURE_VALUE`, `CL_ADDITIONNAL_MEASURE_VALUE_UNIT_ID`, `UPDATER_ID`, `COMMENT`, `CREATED_AT`, `UPDATED_AT`) VALUES
-(1, 1, '2017-07-03 00:32:45', '2017-07-07 00:33:00', 2, NULL, 45, 2, NULL, NULL, 3, '', '2018-02-13 13:33:15', '2018-02-13 13:33:15'),
-(2, 1, '2018-01-01 01:33:39', '2018-01-01 01:33:42', 2, NULL, 45, 2, NULL, NULL, 3, '', '2018-02-13 13:33:56', '2018-02-13 13:33:56');
+(1, 176, '2018-01-02 07:25:17', '2018-01-03 07:25:19', 3, 1, 45, 2, NULL, NULL, 3, '', '2018-01-29 19:25:27', '2018-01-29 19:25:27'),
+(2, 178, '2016-02-09 10:18:20', '2016-02-09 01:19:36', 1, NULL, 30000, 3, NULL, NULL, 4, '', '2018-02-16 03:20:01', '2018-02-16 03:20:01'),
+(3, 178, '2016-02-15 10:20:27', '2016-02-15 11:20:44', 3, 1, 15, 2, NULL, NULL, 4, '', '2018-02-16 03:21:37', '2018-02-16 03:21:37'),
+(4, 178, '2016-02-24 10:22:02', '2016-02-24 11:22:18', 3, 1, 17, 2, NULL, NULL, 4, '', '2018-02-16 03:22:45', '2018-02-16 03:22:45'),
+(5, 178, '2016-03-08 10:26:29', '2016-03-08 11:26:42', 3, 1, 20, 2, NULL, NULL, 4, '', '2018-02-16 03:27:21', '2018-02-16 03:27:21'),
+(6, 178, '2016-03-22 10:27:34', '2016-03-22 11:00:00', 3, 1, 22, 2, NULL, NULL, 4, '', '2018-02-16 03:28:13', '2018-02-16 03:28:13'),
+(7, 178, '2016-03-31 09:28:39', '2016-03-31 03:29:00', 3, 1, 24, 2, NULL, NULL, 4, '', '2018-02-16 03:29:23', '2018-02-16 03:29:23'),
+(8, 178, '2016-04-05 09:29:37', '2016-04-05 10:00:00', 3, 1, 25, 2, NULL, NULL, 4, '', '2018-02-16 03:30:06', '2018-02-16 03:30:06'),
+(9, 178, '2016-04-20 09:30:16', '2016-04-20 10:00:00', 3, 1, 30, 2, NULL, NULL, 4, '', '2018-02-16 03:30:50', '2018-02-16 03:30:50'),
+(10, 178, '2016-05-11 09:31:50', '2016-05-11 10:00:00', 3, 1, 35, 2, NULL, NULL, 4, '', '2018-02-16 03:32:17', '2018-02-16 03:32:17'),
+(11, 178, '2016-06-02 09:32:30', '2016-06-02 10:00:00', 3, 1, 45, 2, NULL, NULL, 4, '', '2018-02-16 03:33:00', '2018-02-16 03:33:00'),
+(12, 178, '2016-06-27 09:33:18', '2016-06-26 23:33:00', 3, 1, 50, 2, NULL, NULL, 4, '', '2018-02-16 03:33:56', '2018-02-16 03:33:56'),
+(13, 178, '2016-06-29 09:34:19', '2016-07-01 09:34:41', 2, NULL, 7, 11, NULL, NULL, 4, '', '2018-02-16 03:35:15', '2018-02-16 03:35:15'),
+(14, 178, '2016-11-25 08:46:46', '2016-11-25 11:00:00', 3, 1, 600, 2, NULL, NULL, 4, '', '2018-02-16 04:05:52', '2018-02-16 04:05:52'),
+(15, 178, '2016-09-13 06:50:03', '2016-09-13 10:00:00', 1, NULL, 30000, 3, NULL, NULL, 4, '', '2018-02-16 06:50:43', '2018-02-16 06:50:43'),
+(17, 178, '2016-11-28 01:51:07', '2016-11-29 11:00:00', 2, NULL, 4, 11, NULL, NULL, 4, '', '2018-02-16 06:52:54', '2018-02-16 06:52:54');
 
 -- --------------------------------------------------------
 
@@ -2797,6 +2799,28 @@ CREATE TABLE `dt_farmaq_pond_measurements` (
   `CREATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `UPDATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Contenu de la table `dt_farmaq_pond_measurements`
+--
+
+INSERT INTO `dt_farmaq_pond_measurements` (`ID`, `REG_ENTITY_FARM_POND_ID`, `MEASURE_DATE`, `CL_MEASURE_TYPE_ID`, `MEASURE_VALUE`, `CL_MEASURE_VALUE_UNIT_ID`, `UPDATER_ID`, `COMMENT`, `CREATED_AT`, `UPDATED_AT`) VALUES
+(1, 178, '2016-02-03 11:37:06', 5, 0.03, 20, 4, '', '2018-02-16 03:39:21', '2018-02-16 03:39:21'),
+(2, 178, '2016-02-24 11:39:43', 5, 0.25, 20, 4, '', '2018-02-16 03:40:21', '2018-02-16 03:40:21'),
+(3, 178, '2016-03-08 11:40:33', 5, 0.15, 20, 4, '', '2018-02-16 03:41:11', '2018-02-16 03:41:11'),
+(4, 178, '2016-04-10 11:41:45', 5, 0.3, 20, 4, '', '2018-02-16 03:42:13', '2018-02-16 03:42:13'),
+(5, 178, '2016-05-11 11:42:28', 5, 0.25, 20, 4, '', '2018-02-16 03:42:49', '2018-02-16 03:42:49'),
+(6, 178, '2016-06-08 11:42:59', 5, 0.4, 20, 4, '', '2018-02-16 03:43:22', '2018-02-16 03:43:22'),
+(7, 178, '2016-06-29 11:43:39', 5, 0.5, 20, 4, '', '2018-02-16 03:44:09', '2018-02-16 03:44:09'),
+(8, 178, '2016-09-09 11:54:35', 5, 0.02, 20, 4, '', '2018-02-16 03:55:21', '2018-02-16 03:55:21'),
+(9, 178, '2016-09-09 12:00:00', 2, 31, 17, 4, '', '2018-02-16 03:58:08', '2018-02-16 03:58:08'),
+(10, 178, '2016-02-03 12:00:00', 2, 26, 17, 4, '', '2018-02-16 03:58:40', '2018-02-16 03:58:40'),
+(11, 178, '2016-02-24 12:00:00', 2, 26, 17, 4, '', '2018-02-16 03:59:07', '2018-02-16 03:59:07'),
+(12, 178, '2016-03-08 12:00:00', 2, 26.5, 17, 4, '', '2018-02-16 03:59:48', '2018-02-16 03:59:48'),
+(13, 178, '2016-04-10 12:00:00', 2, 32, 17, 4, '', '2018-02-16 04:00:29', '2018-02-16 04:00:29'),
+(14, 178, '2016-05-11 12:00:00', 2, 33, 17, 4, '', '2018-02-16 04:01:03', '2018-02-16 04:01:03'),
+(15, 178, '2016-06-08 12:00:00', 2, 34, 17, 4, '', '2018-02-16 04:01:36', '2018-02-16 04:01:36'),
+(16, 178, '2016-06-29 12:00:00', 2, 33.5, 17, 4, '', '2018-02-16 04:02:26', '2018-02-16 04:02:26');
 
 -- --------------------------------------------------------
 
@@ -2824,11 +2848,10 @@ CREATE TABLE `dt_farmaq_production` (
 --
 
 INSERT INTO `dt_farmaq_production` (`ID`, `REG_ENTITY_FARM_ID`, `CL_PROD_DATA_ENTRY_TYPE_ID`, `DATE_FROM`, `DATE_TO`, `CL_SPECIES_ID`, `PRODUCTION_QUANTITY`, `CL_PRODUCTION_QUANTITY_UNIT_ID`, `UPDATER_ID`, `COMMENT`, `CREATED_AT`, `UPDATED_AT`) VALUES
-(1, 142, 1, '2018-02-13', '2018-02-01', 2, '345.0', 11, 3, '', '2018-02-12 20:09:44', '2018-02-12 20:09:44'),
-(2, 142, 1, '2018-02-17', '2018-02-02', 3, '34.0', 11, 3, '', '2018-02-12 20:32:26', '2018-02-12 20:32:26'),
-(3, 142, 1, '2018-02-16', '2018-02-02', 2, '234.0', 11, 3, '', '2018-02-12 20:36:35', '2018-02-12 20:36:35'),
-(4, 141, 1, '2017-07-04', '2018-02-23', 2, '345.0', 11, 3, '', '2018-02-12 20:53:17', '2018-02-12 20:53:17'),
-(5, 135, 1, '2017-06-06', '2017-10-20', 1, '234.0', 11, 3, '', '2018-02-12 20:54:45', '2018-02-12 20:54:45');
+(15, 144, 1, '2016-02-09', '2016-07-01', 1, '12.0', 11, 4, '', '2018-02-16 02:32:14', '2018-02-16 02:32:14'),
+(16, 144, 1, '2016-09-13', '2016-11-29', 1, '8.0', 11, 4, '', '2018-02-16 02:33:49', '2018-02-16 02:33:49'),
+(17, 144, 1, '2017-01-25', '2017-05-29', 1, '6.5', 11, 4, '', '2018-02-16 02:35:09', '2018-02-16 02:35:09'),
+(18, 144, 1, '2017-08-07', '2017-12-21', 1, '12.5', 11, 4, '', '2018-02-16 02:36:17', '2018-02-16 02:36:17');
 
 -- --------------------------------------------------------
 
@@ -2897,6 +2920,19 @@ CREATE TABLE `jt_pond_activity_product_types` (
   `UPDATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='type of contracts';
 
+--
+-- Contenu de la table `jt_pond_activity_product_types`
+--
+
+INSERT INTO `jt_pond_activity_product_types` (`CL_FARM_POND_ACTIVITY_ID`, `CL_PRODUCT_TYPE_ID`, `DESCRIPTION`, `UPDATER_ID`, `COMMENT`, `CREATED_AT`, `UPDATED_AT`) VALUES
+(1, 4, 'Seed for pond stocking', 3, NULL, '2018-02-21 17:50:59', '2018-02-21 17:50:59'),
+(3, 40, 'Feeding fish / shrimp', 3, NULL, '2018-02-21 17:54:41', '2018-02-21 17:54:41'),
+(3, 41, 'Feeding shrimp', 3, NULL, '2018-02-22 13:30:19', '2018-02-22 13:30:19'),
+(3, 42, 'Feeding fish', 3, NULL, '2018-02-22 13:30:19', '2018-02-22 13:30:19'),
+(4, 20, 'Addiditive use', 3, NULL, '2018-02-22 13:40:11', '2018-02-22 13:40:11'),
+(5, 3, 'Antibiotics use', 3, NULL, '2018-02-22 13:40:57', '2018-02-22 13:40:57'),
+(9, 50, 'Fertilizer use', 3, NULL, '2018-02-22 13:41:38', '2018-02-22 13:41:38');
+
 -- --------------------------------------------------------
 
 --
@@ -2943,17 +2979,99 @@ CREATE TABLE `reg_entities` (
 --
 
 INSERT INTO `reg_entities` (`ID`, `CL_ENTITY_UID_TYPE_ID`, `IDENTIFIER`, `STANDARD_IDENTIFIER`, `CL_NATIONALITY_COUNTRY_ID`, `NAME`, `SURNAME`, `MIDDLE_NAME`, `SUFFIX_NAME`, `ACRONYM`, `SALUTATION`, `GENDER`, `DATE_OF_BIRTH`, `CL_ADDRESS_COUNTRY_ID`, `ADDRESS_CITY`, `ADDRESS`, `ADDRESS_ZIP_CODE`, `CL_ADML1_ID`, `PHONE_NUMBER`, `MOBILE_NUMBER`, `FAX_NUMBER`, `E_MAIL`, `INSTANT_MESSANGER`, `WEBSITE`, `REGISTRATION_NUMBER`, `IMG_URL`, `LTO_NUMBER`, `LTO_VALIDITY_DATE`, `UPDATER_ID`, `COMMENT`, `CREATED_AT`, `UPDATED_AT`) VALUES
-(49, 1, '', NULL, 205, 'Thongdee', 'Phetpradub', '', '', '', 'Mr.', 'M', NULL, 205, 'Prachuap Khiri Khan', 'Prachuap Khiri Khan, Moo 9, Kui Nua Subdistrict, Kui Buri District', '77150', 0, '', '0857026937', '', '', '', '', '', '', 0, NULL, 2, 'test-data', '2017-03-17 08:52:04', '2017-03-20 06:46:08'),
-(134, 1, NULL, NULL, 205, 'Somchai', 'Sawaengha', '', NULL, NULL, 'Mr.', 'M', NULL, 205, '', '', '', 0, '', '98639274937', '', '', NULL, NULL, '1', NULL, 0, NULL, 4, '', '2017-12-06 00:58:50', '2017-12-06 00:58:50'),
-(135, 2, NULL, NULL, NULL, 'PhuKiew SugarLand ', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 205, 'Chayaphum', '', '', 0, '', '9997546908', '', 'pau__badia@hotmail.com', '', NULL, NULL, NULL, 0, NULL, 4, '', '2017-12-06 01:00:12', '2017-12-06 01:00:12'),
-(136, 1, NULL, NULL, 205, 'Suchard', 'Phongeun', '', NULL, NULL, 'Mr.', 'M', NULL, 205, '', '', '', 0, '', '09888777689', '', '', NULL, NULL, '', NULL, 0, NULL, 4, '', '2017-12-06 01:03:21', '2017-12-06 01:03:21'),
-(137, 1, NULL, NULL, 205, 'Titiporn', 'Choteekul', '', NULL, NULL, 'Mr.', 'M', NULL, 205, '', '', '', 0, '', '09888777679', '', '', NULL, NULL, '', NULL, 0, NULL, 4, '', '2017-12-06 01:06:05', '2017-12-06 01:06:05'),
-(138, 8, NULL, NULL, 205, 'Mitr Phol', NULL, NULL, NULL, 'MP', NULL, NULL, NULL, 205, '', '', '', 0, '', '09887899999', '', '', NULL, NULL, '', NULL, 0, NULL, 4, '', '2017-12-06 01:10:00', '2017-12-06 01:10:00'),
-(139, 8, NULL, NULL, 205, 'ChemiAgronos Ltd.', NULL, NULL, NULL, '', NULL, NULL, NULL, 205, '', '', '', 0, '', '099999999', '', '', NULL, NULL, '', NULL, 0, NULL, 4, '', '2017-12-06 01:11:39', '2017-12-06 01:11:39'),
-(141, 2, NULL, NULL, NULL, 'Somchai Sawaengha', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 205, '???????', '', '', 0, '', '0955461566', '', '', '', NULL, NULL, NULL, 0, NULL, 13, '', '2017-12-20 01:34:51', '2017-12-20 01:34:51'),
-(142, 2, NULL, NULL, NULL, 'test', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 205, 'BKK', '', '', 0, '', '5555', '', '', '', NULL, NULL, NULL, 0, NULL, 3, '', '2018-01-29 19:39:28', '2018-01-29 19:39:28'),
-(143, 5, NULL, NULL, 205, 'test-coop', NULL, NULL, NULL, '', NULL, NULL, NULL, 205, '', '', '', 0, '', '5555', '', '', NULL, NULL, '', NULL, 0, NULL, 3, '', '2018-02-14 06:49:05', '2018-02-14 06:49:05'),
-(144, 2, NULL, NULL, NULL, 'test', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 205, 'City test', '', '', 0, '', '55555', '', '', '', NULL, NULL, NULL, 0, NULL, 3, '', '2018-02-19 05:22:29', '2018-02-19 05:22:29');
+(1, 1, NULL, NULL, 205, 'Tew', '', '', NULL, NULL, 'Mr.', 'M', NULL, 205, '', '', '', 0, '', 'TBC', '', '', NULL, NULL, '', NULL, 0, NULL, 3, '', '2018-01-16 19:49:55', '2018-01-16 19:49:55'),
+(2, 2, NULL, NULL, NULL, 'Tew Farm', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 205, 'Chantaburi', 'Khung district, Chantaburi province', '', 0, '', 'TBC', '', '', '', NULL, NULL, NULL, 0, NULL, 3, '', '2018-01-16 19:50:36', '2018-01-16 19:50:36'),
+(3, 1, NULL, NULL, 108, 'Trane', '', '', NULL, NULL, 'Mr.', 'M', NULL, 205, '', '', '', 0, '', 'TBC', '', '', NULL, NULL, '', NULL, 0, NULL, 3, '', '2018-01-16 19:52:03', '2018-01-16 19:52:03'),
+(4, 8, NULL, NULL, 205, 'Andaman Seafood CO.,LTD.', NULL, NULL, NULL, '', NULL, NULL, NULL, 205, 'Bangkok', 'SUIT 216/44,49 L.P.N. TOWER 21TH FLOOR , NONGLINCHEE RD.,CHONGNONSEE, YANNAWA', '10120', 0, '66 2285 2450-1', '66 7783 5579-80', '66 2285 2911', 'group@andaman-food.com', NULL, NULL, '1', NULL, 0, NULL, 3, '', '2018-01-16 19:53:36', '2018-01-16 19:53:36'),
+(5, 5, NULL, NULL, 94, 'Atina Farms Cooperative', NULL, NULL, NULL, '', NULL, NULL, NULL, 94, '', '', '', 0, '', 'TBC', '', '', NULL, NULL, '2', NULL, 0, NULL, 3, '', '2018-01-16 19:54:13', '2018-01-16 19:54:13'),
+(6, 5, NULL, NULL, 205, 'Sam Roi Yot Shrimp Farm Cooperative', NULL, NULL, NULL, '', NULL, NULL, NULL, 205, 'Prachuap Khiri Khan', '', '', 0, '', 'TBC', '', '', NULL, NULL, '3', NULL, 0, NULL, 3, '', '2018-01-16 19:54:53', '2018-01-16 19:54:53'),
+(7, 8, NULL, NULL, 205, 'Thai Union Feed Mill Co., Ltd.', NULL, NULL, NULL, '', NULL, NULL, NULL, 205, 'Samutsakorn', '89/1 Moo 2, Rama II Road, Kalong Subdistrict, Muang District', '74000', 0, '66 (0) 3481-6500', '66 (0) 63 230 9410', '66 (0) 3481-6629', 'Yurachat.Sangsingkaew@thaiunion.com', NULL, NULL, '4', NULL, 0, NULL, 3, '', '2018-01-16 19:55:36', '2018-01-16 19:55:36'),
+(8, 8, NULL, NULL, 205, 'Thai Union Hatchery Co., Ltd.', NULL, NULL, NULL, '', NULL, NULL, NULL, 205, 'Phang Nga', '42 Moo 14, Kokkloy Sub-district, Takuatung District', '82140', 0, '66 (0) 7658-4000-27', '66 (0) 7658-4000-27', '66 (0) 7658-4028-9', 'Yurachat.Sangsingkaew@thaiunion.com', NULL, NULL, '5', NULL, 0, NULL, 3, '', '2018-01-16 19:56:20', '2018-01-16 19:56:20'),
+(9, 1, '', NULL, 205, 'Jaruk', 'Prapom', '', '', '', 'Mr.', 'M', NULL, 205, '', '', '', 0, '', 'TBC', '', '', NULL, '', '', '', 0, NULL, 2, '', '2017-01-11 07:40:35', '2017-01-11 07:40:35'),
+(10, 1, '', NULL, 108, 'Tew Worker 2', '', '', '', '', 'Mrs.', 'F', NULL, 205, '', '', '', 0, '', 'TBC', '', '', NULL, '', '', '', 0, NULL, 2, '', '2017-01-11 08:20:55', '2017-01-11 08:20:55'),
+(11, 1, '', NULL, 205, 'Decha', 'Barnleudech', '', '', '', 'Mr.', 'M', NULL, 205, 'Prachuap Khiri Khan', 'Moo 2, Rai Kao Subdistrict, Sam Roi Yot District', '77180', 0, '', '0898364133', '', '', NULL, '', '', '', 0, NULL, 2, '', '2017-01-11 14:10:47', '2017-01-20 10:16:44'),
+(12, 1, '', NULL, 205, 'Ning Nong (Nickname)', '', '', '', '', 'Mr.', 'M', NULL, 205, 'Prachuap Khiri Khan', 'Moo 2, Rai Kao Subdistrict, Sam Roi Yot District', '77180', 0, '', 'TBC', '', '', NULL, '', '', '', 0, NULL, 2, '', '2017-01-11 14:22:26', '2017-01-20 10:17:21'),
+(13, 1, '', NULL, 205, 'Chen', 'Huaheng', '', '', '', 'Mr.', 'M', NULL, 205, 'Prachuap Khiri Khan', 'Moo 1, Sam Krathai Subdistrict, Kui Buri District ', '77150', 0, '', '0861757989', '', '', NULL, '', '', '', 0, NULL, 2, '', '2017-01-17 07:37:54', '2017-01-20 09:14:09'),
+(14, 1, '', NULL, 205, 'Naiyana', 'Phuengphakdi', '', '', '', 'Mrs.', 'F', NULL, 205, 'Prachuap Khiri Khan', 'Moo 2, Rai Kao Subdistrict, Sam Roi Yot District', '', 0, '', '0892595298', '', '', NULL, '', '', '', 0, NULL, 2, '', '2017-01-17 07:59:40', '2017-01-20 10:03:46'),
+(15, 1, '', NULL, 205, 'Thongthern', 'Phuangphet', '', '', '', 'Mr.', 'M', NULL, 205, 'Prachuap Khiri Khan', 'Moo 1, Sam Krathai Subdistrict, Kui Buri District ', '77150', 0, '', '0984295819', '', '', NULL, '', '', '', 0, NULL, 2, '', '2017-01-17 08:07:42', '2017-01-20 08:18:37'),
+(16, 1, '', NULL, 205, 'Seri', 'Kochio', '', '', '', 'Mr.', 'M', NULL, 205, 'Prachuap Khiri Khan', 'Moo 1, Sam Krathai Subdistrict, Kui Buri District ', '77150', 0, '', '0852162592', '', '', NULL, '', '', '', 0, NULL, 2, '', '2017-01-17 08:13:02', '2017-01-20 10:06:32'),
+(17, 1, '', NULL, 205, 'Sunan', 'Rakyim', '', '', '', 'Mr.', 'M', NULL, 205, 'Prachuap Khiri Khan', 'Moo 2, Rai Kao Subdistrict, Sam Roi Yot District', '77180', 0, '', '0852661378', '', '', NULL, '', '', '', 0, NULL, 2, '', '2017-01-17 08:16:37', '2017-01-20 10:12:46'),
+(18, 1, '', NULL, 205, 'Somsak', 'Thongtun', '', '', '', 'Mr.', 'M', NULL, 205, 'Prachuap Khiri Khan', 'Moo 1, Sam Krathai Subdistrict, Kui Buri District ', '77150', 0, '', '0839746629', '', '', NULL, '', '', '', 0, NULL, 2, '', '2017-01-17 08:21:22', '2017-01-20 10:10:30'),
+(19, 1, '', NULL, 205, 'Bunloed', 'Phuengphakdi', '', '', '', 'Mr.', 'M', NULL, 205, 'Prachuap Khiri Khan', 'Moo 2, Rai Kao Subdistrict, Sam Roi Yot District', '77180', 0, '', '0870722281', '', '', NULL, '', '', '', 0, NULL, 2, '', '2017-01-17 08:38:33', '2017-01-20 09:03:21'),
+(20, 1, '', NULL, 205, 'Vichai', 'Huaheng', '', '', '', 'Mr.', 'M', NULL, 205, 'Prachuap Khiri Khan', 'Moo 1, Sam Krathai Subdistrict, Kui Buri District ', '77150', 0, '', '0860366905', '', '', NULL, '', '', '', 0, NULL, 2, '', '2017-01-17 08:55:03', '2017-01-20 07:37:47'),
+(21, 1, '', NULL, 205, 'Man ', 'Temta', '', '', '', 'Mr.', 'M', NULL, 205, 'Prachuap Khiri Khan', 'Moo 1, Sam Krathai Subdistrict, Kui Buri District ', '77150', 0, '', '0951085528', '', '', NULL, '', '', '', 0, NULL, 2, '', '2017-01-17 09:01:24', '2017-01-20 07:41:44'),
+(22, 1, '', NULL, 205, 'Arnon', 'Manesuwan', '', '', '', 'Mr.', 'M', NULL, 205, 'Prachuap Khiri Khan', 'Moo 5, Rai Mai Subdistrict, Sam Roi Yot District', '77180', 0, '', '0927010684', '', '', NULL, '', '', '', 0, NULL, 2, '', '2017-01-17 09:08:35', '2017-01-20 07:50:04'),
+(23, 1, '', NULL, 205, 'Oangchan', 'Mansuwan', '', '', '', 'Mrs.', 'F', NULL, 205, 'Prachuap Khiri Khan', 'Moo 5, Rai Mai Subdistrict, Sam Roi Yot District', '77180', 0, '', '0927010684', '', '', NULL, '', '', '', 0, NULL, 2, '', '2017-01-17 09:14:18', '2017-01-20 07:52:23'),
+(24, 1, '', NULL, 205, 'Sangat', 'Chaibun', '', '', '', 'Mr.', 'M', NULL, 205, 'Prachuap Khiri Khan', 'Moo 2, Rai Kao Subdistrict, Sam Roi Yot District', '77180', 0, '', '0822494743', '', '', NULL, '', '', '', 0, NULL, 2, '', '2017-01-17 10:26:27', '2017-01-20 09:12:49'),
+(25, 1, '', NULL, 205, 'Somchai', 'Loekam', '', '', '', 'Mr.', 'M', NULL, 205, 'Prachuap Khiri Khan', 'Moo 5, Rai Mai Subdistrict, Sam Roi Yot District', '77180', 0, '', '0898296805', '', '', NULL, '', '', '', 0, NULL, 2, '', '2017-01-17 10:41:10', '2017-01-20 08:57:52'),
+(26, 1, '', NULL, 205, 'Phuvadon', 'Phetpradub', '', '', '', 'Mr.', 'M', NULL, 205, 'Prachuap Khiri Khan', 'Moo 9, Kui Nua Subdistrict, Kui Buri District', '77150', 0, '', '0843196654', '', '', NULL, '', '', '', 0, NULL, 2, '', '2017-01-17 10:46:34', '2017-01-20 08:54:26'),
+(27, 1, '', NULL, 205, 'Thongdee', 'Phetpradub', '', '', '', 'Mr.', 'M', NULL, 205, 'Prachuap Khiri Khan', 'Moo 9, Kui Nua Subdistrict, Kui Buri District', '77150', 0, '', '0857026937', '', '', NULL, '', '', '', 0, NULL, 2, '', '2017-01-17 10:52:04', '2017-01-20 08:46:08'),
+(28, 1, '', NULL, 205, 'Thongpoon ', 'Torrasap', '', '', '', 'Mr.', 'M', NULL, 205, 'Prachuap Khiri Khan', 'Moo 9, Kui Nua Subdistrict, Kui Buri District', '77150', 0, '', '0849715564', '', '', NULL, '', '', '', 0, NULL, 2, '', '2017-01-17 10:56:42', '2017-01-20 08:43:20'),
+(29, 1, '', NULL, 205, 'Samran', 'Hatsadam', '', '', '', 'Mrs.', 'F', NULL, 205, 'Prachuap Khiri Khan', 'Moo 5, Rai Mai Subdistrict, Sam Roi Yot District', '77180', 0, '', '0822414116', '', '', NULL, '', '', '', 0, NULL, 2, '', '2017-01-17 11:00:54', '2017-01-20 08:38:55'),
+(30, 1, '', NULL, 205, 'Tongchai', 'Thorasab', '', '', '', 'Mr.', 'M', NULL, 205, 'Prachuap Khiri Khan', 'Moo 9, Kui Nua Subdistrict, Kui Buri District', '77150', 0, '', '0810110371', '', '', NULL, '', '', '', 0, NULL, 2, '', '2017-01-17 11:06:26', '2017-01-20 08:37:38'),
+(31, 1, '', NULL, 205, 'Prakit', 'Uthaitipwuttikorn', '', '', '', 'Mr.', 'M', NULL, 205, 'Prachuap Khiri Khan', 'Moo 1, Sam Krathai Subdistrict, Kui Buri District ', '77150', 0, '', '0910123417', '', '', NULL, '', '', '', 0, NULL, 2, '', '2017-01-17 11:11:06', '2017-01-20 08:30:29'),
+(32, 1, '', NULL, 205, 'Prani', 'Yamyai', '', '', '', 'Mrs.', 'F', NULL, 205, 'Prachuap Khiri Khan', 'Moo 5, Rai Mai Subdistrict, Sam Roi Yot District', '77180', 0, '', '0844139444', '', '', NULL, '', '', '', 0, NULL, 2, '', '2017-01-17 11:17:46', '2017-01-20 08:26:02'),
+(33, 1, '', NULL, 205, 'Chomkhan', 'Meuansuwan', '', '', '', 'Mrs.', 'F', NULL, 205, 'Prachuap Khiri Khan', 'Moo 5, Rai Mai Subdistrict, Sam Roi Yot District', '77180', 0, '', '0822408337', '', '', NULL, '', '', '', 0, NULL, 2, '', '2017-01-17 11:23:11', '2017-01-20 08:04:58'),
+(34, 1, '', NULL, 205, 'Pathomkan', 'Yimyai', '', '', '', 'Mrs.', 'F', NULL, 205, 'Prachuap Khiri Khan', 'Moo 1, Sam Krathai Subdistrict, Kui Buri District ', '77150', 0, '', '0819952083', '', '', NULL, '', '', '', 0, NULL, 2, '', '2017-01-17 11:30:15', '2017-01-20 08:04:07'),
+(35, 1, '', NULL, 205, 'Prachern', 'Yimyai', '', '', '', 'Mr.', 'M', NULL, 205, 'Prachuap Khiri Khan', 'Moo 1, Sam Krathai Subdistrict, Kui Buri District ', '77150', 0, '', '0804322933', '', '', NULL, '', '', '', 0, NULL, 2, '', '2017-01-17 11:36:17', '2017-01-20 07:54:26'),
+(36, 1, '', NULL, 205, 'Somphan', 'Laosuan', '', '', '', 'Mr.', 'M', NULL, 205, 'Prachuap Khiri Khan', 'Moo 1, Sam Krathai Subdistrict, Kui Buri District ', '77150', 0, '', '0870067416', '', '', NULL, '', '', '', 0, NULL, 2, '', '2017-01-17 12:14:03', '2017-01-20 07:25:22'),
+(37, 1, '', NULL, 205, 'Somkhit ', 'Phuangphae', '', '', '', 'Mr.', 'M', NULL, 205, 'Prachuap Khiri Khan', 'Moo 5, Rai Mai Subdistrict, Sam Roi Yot District', '77180', 0, '', '0877178509', '', '', NULL, '', '', '', 0, NULL, 2, '', '2017-01-17 12:20:55', '2017-01-18 09:08:22'),
+(38, 1, '', NULL, 205, 'Sayan', 'Bunma', '', '', '', 'Mr.', 'M', NULL, 205, 'Prachuap Khiri Khan', 'Moo 2, Rai Kao Subdistrict, Sam Roi Yot District', '77180', 0, '', '0891582857', '', '', NULL, '', '', '', 0, NULL, 2, '', '2017-01-17 12:23:30', '2017-01-18 09:10:03'),
+(39, 1, '', NULL, 205, 'Somnuek', 'Loekam', '', '', '', 'Mr.', 'M', NULL, 205, 'Prachuap Khiri Khan', 'Moo 2, Rai Kao Subdistrict, Sam Roi Yot District', '77180', 0, '', '0897412416', '', '', NULL, '', '', '', 0, NULL, 2, '', '2017-01-17 12:24:48', '2017-01-18 07:58:27'),
+(40, 1, '', NULL, 205, 'Siri', 'Ainpasit', '', '', '', 'Mr.', 'M', NULL, 205, 'Prachuap Khiri Khan', 'Moo 5, Rai Mai Subdistrict, Sam Roi Yot District', '77180', 0, '', '0840154443', '', '', NULL, '', '', '', 0, NULL, 2, '', '2017-01-17 12:26:18', '2017-01-18 07:56:46'),
+(41, 1, '', NULL, 205, 'Saman', ' Sukkrom', '', '', '', 'Mr.', 'M', NULL, 205, 'Prachuap Khiri Khan', 'Moo 2, Rai Kao Subdistrict, Sam Roi Yot District', '77180', 0, '', '0811912347', '', '', NULL, '', '', '', 0, NULL, 2, '', '2017-01-17 12:27:26', '2017-01-18 07:54:29'),
+(42, 1, '', NULL, 205, 'Woravit', 'Rodbowonwittahaya', '', '', '', 'Mr.', 'M', NULL, 205, 'Prachuap Khiri Khan', 'Moo 5, Rai Mai Subdistrict, Sam Roi Yot District', '77180', 0, '', '0833175803', '', '', NULL, '', '', '', 0, NULL, 2, '', '2017-01-17 12:28:36', '2017-01-18 07:43:13'),
+(43, 1, '', NULL, 205, 'Somsong ', 'Nessuwan', '', '', '', 'Mr.', 'M', NULL, 205, 'Prachuap Khiri Khan', 'Moo 2, Rai Kao Subdistrict, Sam Roi Yot District', '77180', 0, '', '0890764380', '', '', NULL, '', '', '', 0, NULL, 2, '', '2017-01-17 12:29:45', '2017-01-18 07:33:36'),
+(44, 1, '', NULL, 205, 'Setthakit ', 'Laochuan', '', '', '', 'Mr.', 'M', NULL, 205, 'Prachuap Khiri Khan', 'Moo 1, Sam Krathai Subdistrict, Kui Buri District', '77150', 0, '', '0983705194', '', '', NULL, '', '', '', 0, NULL, 2, '', '2017-01-17 12:30:51', '2017-01-18 06:55:28'),
+(45, 1, '', NULL, 205, 'Nuengruethai', 'Gojiw', '', '', '', 'Mrs.', 'F', NULL, 205, '', '', '', 0, '', '0833175449', '', '', NULL, '', '', '', 0, NULL, 2, '', '2017-01-17 12:34:11', '2017-01-17 12:34:11'),
+(46, 1, '', NULL, 205, 'Lamphu', 'Vasayangkui', '', '', '', 'Mrs.', 'F', NULL, 205, 'Prachuap Khiri Khan', 'Moo 5, Rai Mai Subdistrict, Sam Roi Yot District', '77180', 0, '', '0957956624', '', '', NULL, '', '', '', 0, NULL, 2, '', '2017-01-17 12:36:13', '2017-01-18 09:11:37'),
+(47, 1, '', NULL, 205, 'Rawisara', 'Authaithipwutthikon', '', '', '', 'Mrs.', 'F', NULL, 205, '', '', '', 0, '', '0874141765', '', '', NULL, '', '', '', 0, NULL, 2, '', '2017-01-17 12:38:56', '2017-01-17 12:41:52'),
+(48, 1, '', NULL, 205, 'Ratchaset', 'Wongsawat', '', '', '', 'Mr.', 'M', NULL, 205, 'Prachuap Khiri Khan', '111 Moo 2, Rai Kao Subdistrict, Sam Roi Yot District', '77180', 0, '', '0863264268', '', '', NULL, '', '', '', 0, NULL, 2, '', '2017-01-17 12:45:21', '2017-01-18 09:25:08'),
+(49, 1, '', NULL, 205, 'Supot', 'Yudee', '', '', '', 'Mr.', 'M', NULL, 205, 'Prachuap Khiri Khan', 'Moo 2, Rai Kao Subdistrict, Sam Roi Yot District', '77180', 0, '', '0877178509', '', '', NULL, '', '', '', 0, NULL, 2, '', '2017-01-17 13:03:36', '2017-01-18 08:00:27'),
+(50, 1, '', NULL, 205, 'Phanjaporn', 'Bunma', '', '', '', 'Mr.', 'M', NULL, 205, 'Prachuap Khiri Khan', 'Moo 2, Rai Kao Subdistrict, Sam Roi Yot District', '77180', 0, '', '0888498838', '', '', NULL, '', '', '', 0, NULL, 2, '', '2017-01-17 13:20:12', '2017-01-18 07:52:12'),
+(51, 2, NULL, NULL, NULL, 'Decha Farm', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 205, 'Prachuap Khiri Khan', 'Moo 2, Rai Kao Subdistrict, Sam Roi Yot District', '77180', 0, '', '0898364133', '', '', '', NULL, NULL, NULL, 0, NULL, 3, '', '2018-01-17 09:22:16', '2018-01-17 09:22:16'),
+(52, 2, NULL, NULL, NULL, 'Naiyana Farm', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 205, 'Prachuap Khiri Khan', 'Moo 2, Rai Kao Subdistrict, Sam Roi Yot District', '77180', 0, '', '0892595298', '', '', '', NULL, NULL, NULL, 0, NULL, 3, '', '2018-01-17 09:24:28', '2018-01-17 09:24:28'),
+(53, 2, NULL, NULL, NULL, 'Chen Farm', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 205, 'Prachuap Khiri Khan', 'Moo 1, Sam Krathai Subdistrict, Kui Buri District ', '77150', 0, '', '0861757989', '', '', '', NULL, NULL, NULL, 0, NULL, 3, '', '2018-01-17 09:25:44', '2018-01-17 09:25:44'),
+(54, 2, NULL, NULL, NULL, 'Thongthern Farm', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 205, 'Prachuap Khiri Khan', 'Moo 1, Sam Krathai Subdistrict, Kui Buri District ', '77150', 0, '', '0984295819', '', '', '', NULL, NULL, NULL, 0, NULL, 3, '', '2018-01-17 09:26:44', '2018-01-17 09:26:44'),
+(55, 2, NULL, NULL, NULL, 'Seri Farm', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 205, 'Prachuap Khiri Khan', 'Moo 1, Sam Krathai Subdistrict, Kui Buri District ', '77150', 0, '', '0852162592', '', '', '', NULL, NULL, NULL, 0, NULL, 3, '', '2018-01-17 09:27:42', '2018-01-17 09:27:42'),
+(56, 2, NULL, NULL, NULL, 'Sunan Farm', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 205, 'Prachuap Khiri Khan', 'Moo 2, Rai Kao Subdistrict, Sam Roi Yot District', '77180', 0, '', '0852661378', '', '', '', NULL, NULL, NULL, 0, NULL, 3, '', '2018-01-17 09:28:46', '2018-01-17 09:28:46'),
+(57, 2, NULL, NULL, NULL, 'Somsak Farm', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 205, 'Prachuap Khiri Khan', 'Moo 1, Samkrat Tai, Kui Buri', '77150', 0, '', '0839746629', '', '', '', NULL, NULL, NULL, 0, NULL, 3, '', '2018-01-17 09:29:42', '2018-01-17 09:29:42'),
+(58, 2, NULL, NULL, NULL, 'Somphan Farm', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 205, 'Prachuap Khiri Khan', 'Moo 1, Sam Krathai Subdistrict, Kui Buri District ', '77150', 0, '', '0870067416', '', '', '', NULL, NULL, NULL, 0, NULL, 3, '', '2018-01-17 09:30:48', '2018-01-17 09:30:48'),
+(59, 2, NULL, NULL, NULL, 'Sangat Farm', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 205, 'Prachuap Khiri Khan', 'Moo 2, Rai Kao Subdistrict, Sam Roi Yot District', '77180', 0, '', '0822494743', '', '', '', NULL, NULL, NULL, 0, NULL, 3, '', '2018-01-17 09:32:18', '2018-01-17 09:32:18'),
+(60, 2, NULL, NULL, NULL, 'Vichai Farm', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 205, 'Prachuap Khiri Khan', 'Moo 1, Sam Krathai Subdistrict, Kui Buri District ', '77150', 0, '', '0860366905', '', '', '', NULL, NULL, NULL, 0, NULL, 3, '', '2018-01-17 09:33:18', '2018-01-17 09:33:18'),
+(61, 2, NULL, NULL, NULL, 'Man Farm', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 205, 'Prachuap Khiri Khan', 'Moo 1, Sam Krathai Subdistrict, Kui Buri District ', '77150', 0, '', '0951085528', '', '', '', NULL, NULL, NULL, 0, NULL, 3, '', '2018-01-17 09:34:13', '2018-01-17 09:34:13'),
+(62, 2, NULL, NULL, NULL, 'Arnon Farm', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 205, 'Prachuap Khiri Khan', 'Moo 5, Rai Mai Subdistrict, Sam Roi Yot District', '77180', 0, '', '0927010684', '', '', '', NULL, NULL, NULL, 0, NULL, 3, '', '2018-01-17 09:35:29', '2018-01-17 09:35:29'),
+(63, 2, NULL, NULL, NULL, 'Oangchan Farm', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 205, 'Prachuap Khiri Khan', 'Moo 5, Rai Mai Subdistrict, Sam Roi Yot District', '77180', 0, '', '0927010684', '', '', '', NULL, NULL, NULL, 0, NULL, 3, '', '2018-01-17 09:41:57', '2018-01-17 09:41:57'),
+(64, 2, NULL, NULL, NULL, 'Bunloed Farm', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 205, 'Prachuap Khiri Khan', 'Moo 2, Rai Kao Subdistrict, Sam Roi Yot District', '77180', 0, '', '0870722281', '', '', '', NULL, NULL, NULL, 0, NULL, 3, '', '2018-01-17 09:43:29', '2018-01-17 09:43:29'),
+(65, 2, NULL, NULL, NULL, 'Somchai Farm', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 205, 'Prachuap Khiri Khan', 'Moo 5, Rai Mai Subdistrict, Sam Roi Yot District', '77180', 0, '', '0898296805', '', '', '', NULL, NULL, NULL, 0, NULL, 3, '', '2018-01-17 09:44:16', '2018-01-17 09:44:16'),
+(66, 2, NULL, NULL, NULL, 'Phuvadon Farm', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 205, 'Prachuap Khiri Khan', 'Moo 9, Kui Nua Subdistrict, Kui Buri District', '77150', 0, '', '0843196654', '', '', '', NULL, NULL, NULL, 0, NULL, 3, '', '2018-01-17 09:45:30', '2018-01-17 09:45:30'),
+(67, 2, NULL, NULL, NULL, 'Thongdee Farm', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 205, 'Prachuap Khiri Khan', 'Moo 9, Kui Nua Subdistrict, Kui Buri District', '77150', 0, '', '0857026937', '', '', '', NULL, NULL, NULL, 0, NULL, 3, '', '2018-01-17 09:46:34', '2018-01-17 09:46:34'),
+(68, 2, NULL, NULL, NULL, 'Thongpoon Farm', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 205, 'Prachuap Khiri Khan', 'Moo 9, Kui Nua Subdistrict, Kui Buri District', '77150', 0, '', '0849715564', '', '', '', NULL, NULL, NULL, 0, NULL, 3, '', '2018-01-17 09:47:29', '2018-01-17 09:47:29'),
+(69, 2, NULL, NULL, NULL, 'Samran Farm', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 205, 'Prachuap Khiri Khan', 'Moo 5, Rai Mai Subdistrict, Sam Roi Yot District', '77180', 0, '', '0822414116', '', '', '', NULL, NULL, NULL, 0, NULL, 3, '', '2018-01-17 09:48:42', '2018-01-17 09:48:42'),
+(70, 2, NULL, NULL, NULL, 'Tongchai Farm', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 205, 'Prachuap Khiri Khan', 'Moo 9, Kui Nua Subdistrict, Kui Buri District', '77150', 0, '', '0810110371', '', '', '', NULL, NULL, NULL, 0, NULL, 3, '', '2018-01-17 09:49:51', '2018-01-17 09:49:51'),
+(71, 2, NULL, NULL, NULL, 'Prakit Farm', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 205, 'Prachuap Khiri Khan', 'Moo 1, Sam Krathai Subdistrict, Kui Buri District ', '77150', 0, '', '0910123417', '', '', '', NULL, NULL, NULL, 0, NULL, 3, '', '2018-01-17 09:50:43', '2018-01-17 09:50:43'),
+(72, 2, NULL, NULL, NULL, 'Prani Farm', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 205, 'Prachuap Khiri Khan', 'Moo 5, Rai Mai Subdistrict, Sam Roi Yot District', '77180', 0, '', '0844139444', '', '', '', NULL, NULL, NULL, 0, NULL, 3, '', '2018-01-17 09:51:33', '2018-01-17 09:51:33'),
+(73, 2, NULL, NULL, NULL, 'Chomkhan Farm', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 205, 'Prachuap Khiri Khan', 'Moo 5, Rai Mai Subdistrict, Sam Roi Yot District', '77180', 0, '', '0822408337', '', '', '', NULL, NULL, NULL, 0, NULL, 3, '', '2018-01-17 10:48:04', '2018-01-17 10:48:04'),
+(74, 2, NULL, NULL, NULL, 'Patomkan Farm', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 205, 'Prachuap Khiri Khan', 'Moo 1, Samkrat Tai, Kui Buri', '77180', 0, '', '0819952083', '', '', '', NULL, NULL, NULL, 0, NULL, 3, '', '2018-01-17 10:49:29', '2018-01-17 10:49:29'),
+(75, 2, NULL, NULL, NULL, 'Prachern Farm', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 205, 'Prachuap Khiri Khan', 'Moo 1, Sam Krathai Subdistrict, Kui Buri District ', '77150', 0, '', '0804322933', '', '', '', NULL, NULL, NULL, 0, NULL, 3, '', '2018-01-17 10:50:31', '2018-01-17 10:50:31'),
+(76, 2, NULL, NULL, NULL, 'Somkhit Farm', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 205, 'Prachuap Khiri Khan', 'Moo 5, Rai Mai Subdistrict, Sam Roi Yot District', '77180', 0, '', '0877178509', '', '', '', NULL, NULL, NULL, 0, NULL, 3, '', '2018-01-17 10:51:37', '2018-01-17 10:51:37'),
+(77, 2, NULL, NULL, NULL, 'Sayan Farm', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 205, 'Prachuap Khiri Khan', 'Moo 2, Rai Kao Subdistrict, Sam Roi Yot District', '77180', 0, '', '0891582857', '', '', '', NULL, NULL, NULL, 0, NULL, 3, '', '2018-01-17 10:52:55', '2018-01-17 10:52:55'),
+(78, 2, NULL, NULL, NULL, 'Somnuek Farm', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 205, 'Prachuap Khiri Khan', 'Moo 2, Rai Kao Subdistrict, Sam Roi Yot District', '77180', 0, '', '0897412416', '', '', '', NULL, NULL, NULL, 0, NULL, 3, '', '2018-01-17 10:54:02', '2018-01-17 10:54:02'),
+(79, 2, NULL, NULL, NULL, 'Siri Farm', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 205, 'Prachuap Khiri Khan', 'Moo 5, Rai Mai Subdistrict, Sam Roi Yot District', '77180', 0, '', '0947374352', '', '', '', NULL, NULL, NULL, 0, NULL, 3, '', '2018-01-17 10:55:22', '2018-01-17 10:55:22'),
+(80, 2, NULL, NULL, NULL, 'Saman Farm', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 205, 'Prachuap Khiri Khan', 'Moo 2, Rai Kao District, Sam Roi Yot', '77180', 0, '', '0811912347', '', '', '', NULL, NULL, NULL, 0, NULL, 3, '', '2018-01-17 10:56:40', '2018-01-17 10:56:40'),
+(81, 2, NULL, NULL, NULL, 'Woravit Farm', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 205, 'Prachuap Khiri Khan', 'Moo 5, Rai Mai Subdistrict, Sam Roi Yot District', '77180', 0, '', '0833175803', '', '', '', NULL, NULL, NULL, 0, NULL, 3, '', '2018-01-17 10:57:41', '2018-01-17 10:57:41'),
+(82, 2, NULL, NULL, NULL, 'Somsong Farm', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 205, 'Prachuap Khiri Khan', 'Moo 2, Rai Kao Subdistrict, Sam Roi Yot District', '77180', 0, '', '0890764380', '', '', '', NULL, NULL, NULL, 0, NULL, 3, '', '2018-01-17 10:58:49', '2018-01-17 10:58:49'),
+(83, 2, NULL, NULL, NULL, 'Setthakit Farm', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 205, 'Prachuap Khiri Khan', 'Moo 1, Sam Krathai Subdistrict, Kui Buri District ', '77150', 0, '', '0983705194', '', '', '', NULL, NULL, NULL, 0, NULL, 3, '', '2018-01-17 10:59:56', '2018-01-17 10:59:56'),
+(84, 2, NULL, NULL, NULL, 'Nuengruethai Farm', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 205, 'Prachuap Khiri Khan', 'Moo 1, Samkrat Tai, Kui Buri', '77150', 0, '', '0833175449', '', '', '', NULL, NULL, NULL, 0, NULL, 3, '', '2018-01-17 11:00:48', '2018-01-17 11:00:48'),
+(85, 2, NULL, NULL, NULL, 'Lamphu Farm', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 205, 'Prachuap Khiri Khan', 'Moo 5, Rai Mai Subdistrict, Sam Roi Yot District', '77180', 0, '', '0957956624', '', '', '', NULL, NULL, NULL, 0, NULL, 3, '', '2018-01-17 11:01:44', '2018-01-17 11:01:44'),
+(86, 2, NULL, NULL, NULL, 'Rawisara Farm', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 205, 'Prachuap Khiri Khan', 'Moo 1, Sam Krathai Subdistrict, Kui Buri District ', '77150', 0, '', '0874141765', '', '', '', NULL, NULL, NULL, 0, NULL, 3, '', '2018-01-17 11:02:45', '2018-01-17 11:02:45'),
+(87, 2, NULL, NULL, NULL, 'Farm Thung Ngan', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 205, 'Prachuap Khiri Khan', '111 Moo 2, Rai Kao Subdistrict, Sam Roi Yot District', '77180', 0, '', '0863264268', '', '', '', NULL, NULL, NULL, 0, NULL, 3, '', '2018-01-17 11:03:51', '2018-01-17 11:03:51'),
+(88, 2, NULL, NULL, NULL, 'Supot Farm', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 205, 'Prachuap Khiri Khan', 'Moo 2, Rai Kao Subdistrict, Sam Roi Yot District', '77180', 0, '', '0877178509', '', '', '', NULL, NULL, NULL, 0, NULL, 3, '', '2018-01-17 11:04:47', '2018-01-17 11:04:47'),
+(89, 2, NULL, NULL, NULL, 'Phanjaporn Farm', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 205, 'Prachuap Khiri Khan', 'Moo 2, Rai Kao Subdistrict, Sam Roi Yot District', '77180', 0, '', '0888498838', '', '', 'เลือกสหกรณ์', NULL, NULL, NULL, 0, NULL, 3, '', '2018-01-17 11:05:48', '2018-01-17 11:05:48'),
+(143, 1, NULL, NULL, 193, 'Pau', 'Badia', '', NULL, NULL, 'Mr.', 'M', '1990-10-12', 205, '', '', '', 0, '', '0955461566', '', '', NULL, NULL, '', NULL, 0, NULL, 4, '', '2018-02-16 01:19:47', '2018-02-16 01:19:47'),
+(144, 2, NULL, NULL, NULL, 'Happy Shrimp', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 205, 'Bangkok', '3/1 Shinawatra Bldg., Sukhumvit Soi 23, Asok', '10200', 0, '', '0955461566', '', 'pau@fairagora.com', '', NULL, NULL, NULL, 0, NULL, 4, '', '2018-02-16 01:21:23', '2018-02-16 01:21:23'),
+(145, 1, NULL, NULL, 205, 'Happy worker ', '1', '', NULL, NULL, 'Mr.', 'M', '2005-02-17', 205, '', '', '', 0, '', '0955461566', '', '', NULL, NULL, '', NULL, 0, NULL, 4, '', '2018-02-16 01:47:35', '2018-02-16 01:47:35'),
+(146, 1, NULL, NULL, 27, 'Happy worker', '2', '', NULL, NULL, 'Mr.', 'M', NULL, 205, '', '', '', 0, '', '0955461566', '', '', NULL, NULL, '', NULL, 0, NULL, 4, '', '2018-02-16 01:49:34', '2018-02-16 01:49:34');
 
 -- --------------------------------------------------------
 
@@ -2983,7 +3101,11 @@ CREATE TABLE `reg_entity_facilities` (
 --
 
 INSERT INTO `reg_entity_facilities` (`REG_ENTITY_FARM_ID`, `ACCESS_TOILETS`, `ACCESS_TOILETS_URL`, `ACCESS_SHOWER`, `ACCESS_SHOWER_URL`, `ACCESS_TO_FREE_DRINKING`, `ACCESS_TO_FREE_DRINKING_URL`, `ACCESS_REST_ROOM`, `ACCESS_REST_ROOM_URL`, `PRESENCE_FIRST_AID_KIT`, `UPDATER_ID`, `COMMENT`, `CREATED_AT`, `UPDATED_AT`) VALUES
-(142, 0, NULL, 0, NULL, 0, NULL, 0, NULL, NULL, 3, '', '2018-02-07 15:34:51', '2018-02-07 15:34:51');
+(2, 0, NULL, 0, NULL, 0, NULL, 0, NULL, NULL, 4, '', '2018-02-12 01:52:09', '2018-02-12 01:52:09'),
+(51, 0, NULL, 0, NULL, 0, NULL, 0, NULL, NULL, 4, '', '2018-02-10 02:15:20', '2018-02-10 02:15:20'),
+(58, 0, NULL, 0, NULL, 0, NULL, 0, NULL, NULL, 3, '', '2018-02-08 09:43:04', '2018-02-08 09:43:04'),
+(89, 0, NULL, 0, NULL, 0, NULL, 0, NULL, NULL, 3, '', '2018-02-08 11:42:43', '2018-02-08 11:42:43'),
+(144, 1, 'Toilet.jpg', 1, 'Shower.jpg', 1, 'free drinking.jpg', 1, 'Rest Room.jpg', 0, 4, '', '2018-02-16 01:21:33', '2018-02-16 01:21:33');
 
 -- --------------------------------------------------------
 
@@ -3022,14 +3144,6 @@ CREATE TABLE `reg_entity_farmag_plots` (
   `CREATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `UPDATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-
---
--- Contenu de la table `reg_entity_farmag_plots`
---
-
-INSERT INTO `reg_entity_farmag_plots` (`ID`, `REG_ENTITY_FARM_ID`, `PLOT_NUMBER`, `PLOT_DESCRIPTION`, `CL_COMMODITIES_ID`, `PLOT_SIZE`, `CL_PLOT_SIZE_UNIT_ID`, `IS_IRRIGATED`, `UPDATER_ID`, `COMMENT`, `CREATED_AT`, `UPDATED_AT`) VALUES
-(19, 135, '1', 'Old plot', 1, 30.00, 29, 1, 0, NULL, '2017-12-31 22:00:00', '2017-12-31 22:00:00'),
-(20, 135, '2', 'New plot', 1, 50.00, 29, 1, 0, NULL, '2017-12-31 22:00:00', '2017-12-31 22:00:00');
 
 -- --------------------------------------------------------
 
@@ -3074,7 +3188,7 @@ CREATE TABLE `reg_entity_farmaq_ponds` (
   `CL_SPECIES_ID` int(11) DEFAULT '0',
   `POND_SIZE` double(8,2) NOT NULL DEFAULT '0.00',
   `CL_POND_SIZE_UNIT_ID` int(11) DEFAULT NULL,
-  `POND_VOLUME` double(8,2) NOT NULL DEFAULT '0.00',
+  `POND_VOLUME` double(8,2) DEFAULT '0.00',
   `CL_POND_VOLUME_UNIT_ID` int(11) DEFAULT NULL,
   `UPDATER_ID` int(11) NOT NULL DEFAULT '1',
   `COMMENT` varchar(512) COLLATE utf8_bin DEFAULT NULL,
@@ -3087,12 +3201,178 @@ CREATE TABLE `reg_entity_farmaq_ponds` (
 --
 
 INSERT INTO `reg_entity_farmaq_ponds` (`ID`, `REG_ENTITY_FARM_ID`, `POND_NUMBER`, `POND_DESCRIPTION`, `CL_POND_TYPE_ID`, `CL_SPECIES_ID`, `POND_SIZE`, `CL_POND_SIZE_UNIT_ID`, `POND_VOLUME`, `CL_POND_VOLUME_UNIT_ID`, `UPDATER_ID`, `COMMENT`, `CREATED_AT`, `UPDATED_AT`) VALUES
-(1, 142, '1', 'Pond 1', 2, 2, 23.00, 29, 0.00, NULL, 1, NULL, '2017-02-12 20:49:06', '2017-02-12 20:49:06'),
-(2, 142, '2', 'pond 2', 2, 4, 34.00, 29, 0.00, NULL, 1, NULL, '2017-03-12 20:49:23', '2017-03-12 20:49:23'),
-(3, 142, '3', 'pond 3', 1, NULL, 34.00, 29, 0.00, NULL, 1, NULL, '2018-02-14 19:40:00', '2018-02-14 19:40:00'),
-(4, 144, '1', 'pond1', 2, 4, 12.00, 29, 0.00, NULL, 1, NULL, '2018-02-19 06:29:41', '2018-02-19 06:29:41'),
-(5, 144, '2', 'pond2', 3, 2, 2.00, 29, 0.00, NULL, 1, NULL, '2018-02-19 06:30:09', '2018-02-19 06:30:09'),
-(10, 144, '3', 'test1', 3, 2, 10.00, 29, 0.00, NULL, 1, NULL, '2018-02-19 07:32:14', '2018-02-19 07:32:14');
+(1, 2, '1', 'Growing-out pond', 2, 1, 5.00, 29, NULL, NULL, 2, '', '2017-01-11 08:05:28', '2017-01-11 09:44:11'),
+(2, 2, '2', 'Growing-out pond', 2, 1, 5.00, 29, NULL, NULL, 2, '', '2017-01-11 08:06:33', '2017-01-11 08:54:06'),
+(3, 2, '3', 'Growing-out pond', 2, 1, 6.00, 29, NULL, NULL, 2, '', '2017-01-11 08:08:32', '2017-01-11 08:54:10'),
+(4, 2, '4', 'Growing-out pond', 2, 1, 8.00, 29, NULL, NULL, 2, '', '2017-01-11 08:09:06', '2017-01-11 08:54:15'),
+(5, 2, '5', 'Reservoir pond', 1, NULL, 12.00, 29, NULL, NULL, 2, '', '2017-01-11 08:11:07', '2017-01-11 08:52:55'),
+(6, 2, '6', 'Reservoir pond', 1, NULL, 6.00, 29, NULL, NULL, 2, '', '2017-01-11 08:12:28', '2017-01-11 08:53:42'),
+(7, 2, '7', 'Sediment pond', 4, NULL, 5.00, 29, NULL, NULL, 2, '', '2017-01-11 08:13:52', '2017-01-11 08:13:52'),
+(8, 51, '1', 'Growing-out pond', 2, 1, 3.92, 29, NULL, NULL, 2, '', '2017-01-11 14:39:22', '2017-01-17 12:06:44'),
+(9, 51, '2', 'Growing-out pond', 2, 1, 3.06, 29, NULL, NULL, 2, '', '2017-01-11 14:39:46', '2017-01-17 12:06:53'),
+(10, 51, '3', 'Growing-out pond', 2, 1, 2.87, 29, NULL, NULL, 2, '', '2017-01-11 14:40:11', '2017-01-17 12:07:11'),
+(11, 51, '4', 'Growing fish (recycling water)', 2, 4, 4.88, 29, NULL, NULL, 2, '', '2017-01-11 14:49:40', '2017-01-17 12:07:51'),
+(12, 51, '5', 'Reservoir pond', 1, NULL, 3.68, 29, NULL, NULL, 2, '', '2017-01-11 14:50:39', '2017-01-17 12:08:58'),
+(18, 52, '1', 'Growing', 2, 1, 0.00, 29, NULL, NULL, 2, '', '2017-01-17 08:01:35', '2017-01-17 08:01:35'),
+(19, 52, '2', 'Recycling pond', 4, NULL, 0.00, 29, NULL, NULL, 2, '', '2017-01-17 08:03:10', '2017-01-17 08:03:10'),
+(20, 54, '1', 'Growing', 2, 1, 2.00, 29, NULL, NULL, 2, '', '2017-01-17 08:09:04', '2017-01-17 11:56:35'),
+(21, 54, '2', 'Recycling water pond', 4, NULL, 0.00, 29, NULL, NULL, 2, '', '2017-01-17 08:09:26', '2017-01-17 08:09:26'),
+(22, 54, '3', 'empty pond', 1, NULL, 0.00, 29, NULL, NULL, 2, '', '2017-01-17 08:10:00', '2017-01-17 08:10:00'),
+(23, 54, '4', 'Empty pond', 1, NULL, 0.00, 29, NULL, NULL, 2, '', '2017-01-17 08:10:25', '2017-01-17 08:10:25'),
+(24, 55, '1', 'Growing', 2, 1, 0.00, 29, NULL, NULL, 2, '', '2017-01-17 08:13:56', '2017-01-17 08:13:56'),
+(25, 55, '2', 'Recycling water pond', 4, NULL, 0.00, 29, NULL, NULL, 2, '', '2017-01-17 08:14:23', '2017-01-17 08:14:23'),
+(26, 55, '3', 'Empty pond', 1, NULL, 0.00, 29, NULL, NULL, 2, '', '2017-01-17 08:14:55', '2017-01-17 08:14:55'),
+(27, 56, '1', 'Growing', 2, 1, 0.00, 29, NULL, NULL, 2, '', '2017-01-17 08:17:37', '2017-01-17 08:17:37'),
+(28, 56, '2', 'Sludge +++', 4, NULL, 0.00, 29, NULL, NULL, 2, '', '2017-01-17 08:18:02', '2017-01-17 08:18:02'),
+(29, 56, '3', 'Recycling water pond', 4, NULL, 0.00, 29, NULL, NULL, 2, '', '2017-01-17 08:18:34', '2017-01-17 08:18:34'),
+(30, 57, '1', 'Growing', 2, 1, 0.00, 29, NULL, NULL, 2, '', '2017-01-17 08:22:22', '2017-01-17 08:22:22'),
+(31, 57, '2', 'Sludge +++', 4, NULL, 0.00, 29, NULL, NULL, 2, '', '2017-01-17 08:22:39', '2017-01-17 08:22:39'),
+(32, 57, '3', 'Recycling water pond', 4, NULL, 0.00, 29, NULL, NULL, 2, '', '2017-01-17 08:23:01', '2017-01-17 08:23:01'),
+(33, 57, '4', 'Empty pond', 1, NULL, 0.00, 29, NULL, NULL, 2, '', '2017-01-17 08:23:27', '2017-01-17 08:23:27'),
+(34, 58, '1', 'Growing', 2, 1, 0.00, 29, NULL, NULL, 2, '', '2017-01-17 08:26:53', '2017-01-17 08:26:53'),
+(35, 58, '2', 'Recycling water pond', 4, NULL, 0.00, 29, NULL, NULL, 2, '', '2017-01-17 08:27:19', '2017-01-17 08:27:19'),
+(36, 58, '3', 'Empty pond', 1, NULL, 0.00, 29, NULL, NULL, 2, '', '2017-01-17 08:28:03', '2017-01-17 08:28:03'),
+(37, 58, '4', 'Empty pond', 1, NULL, 0.00, 29, NULL, NULL, 2, '', '2017-01-17 08:28:25', '2017-01-17 08:28:25'),
+(38, 58, '5', 'Empty pond', 1, NULL, 0.00, 29, NULL, NULL, 2, '', '2017-01-17 08:28:47', '2017-01-17 08:28:47'),
+(39, 58, '6', 'Empty pond', 1, NULL, 0.00, 29, NULL, NULL, 2, '', '2017-01-17 08:29:16', '2017-01-17 08:29:16'),
+(40, 58, '7', 'Empty pond', 1, NULL, 0.00, 29, NULL, NULL, 2, '', '2017-01-17 08:29:49', '2017-01-17 08:29:49'),
+(41, 59, '1', 'Growing', 2, 1, 0.00, 29, NULL, NULL, 2, '', '2017-01-17 08:39:25', '2017-01-17 08:39:25'),
+(42, 59, '2', 'Sludge +++', 4, NULL, 0.00, 29, NULL, NULL, 2, '', '2017-01-17 08:40:41', '2017-01-17 08:40:41'),
+(43, 59, '3', 'Recycling water pond', 4, NULL, 0.00, 29, NULL, NULL, 2, '', '2017-01-17 08:41:07', '2017-01-17 08:41:07'),
+(44, 59, '4', 'Empty pond', 1, NULL, 0.00, 29, NULL, NULL, 2, '', '2017-01-17 08:41:27', '2017-01-17 08:41:27'),
+(45, 59, '5', 'Empty pond', 1, NULL, 0.00, 29, NULL, NULL, 2, '', '2017-01-17 08:41:46', '2017-01-17 08:41:46'),
+(46, 60, '1', 'Growing ', 2, 1, 0.00, 29, NULL, NULL, 2, '', '2017-01-17 08:56:26', '2017-01-17 08:56:26'),
+(47, 60, '2', 'Recycling water pond', 4, NULL, 0.00, 29, NULL, NULL, 2, '', '2017-01-17 08:56:43', '2017-01-17 08:56:43'),
+(48, 60, '3', 'Empty pond', 1, NULL, 0.00, 29, NULL, NULL, 2, '', '2017-01-17 08:57:23', '2017-01-17 08:57:23'),
+(49, 60, '4', 'Empty pond', 1, NULL, 0.00, 29, NULL, NULL, 2, '', '2017-01-17 08:57:49', '2017-01-17 08:57:49'),
+(50, 60, '5', 'Empty pond', 1, NULL, 0.00, 29, NULL, NULL, 2, '', '2017-01-17 08:58:10', '2017-01-17 08:58:10'),
+(51, 60, '6', 'Empty pond', 1, NULL, 0.00, 29, NULL, NULL, 2, '', '2017-01-17 08:58:30', '2017-01-17 08:58:30'),
+(52, 60, '7', 'Empty pond', 1, NULL, 0.00, 29, NULL, NULL, 2, '', '2017-01-17 08:58:53', '2017-01-17 08:58:53'),
+(53, 60, '8', 'Empty pond', 1, NULL, 0.00, 29, NULL, NULL, 2, '', '2017-01-17 08:59:16', '2017-01-17 08:59:16'),
+(54, 61, '1', 'Growing', 2, 1, 0.00, 29, NULL, NULL, 2, '', '2017-01-17 09:04:00', '2017-01-17 09:04:00'),
+(55, 61, '2', 'Sludge +++', 4, NULL, 0.00, 29, NULL, NULL, 2, '', '2017-01-17 09:04:35', '2017-01-17 09:04:35'),
+(56, 61, '3', 'Recycling water pond', 4, NULL, 0.00, 29, NULL, NULL, 2, '', '2017-01-17 09:04:59', '2017-01-17 09:04:59'),
+(57, 61, '4', 'Empty pond', 1, NULL, 0.00, 29, NULL, NULL, 2, '', '2017-01-17 09:05:26', '2017-01-17 09:05:26'),
+(58, 61, '5', 'Empty pond', 1, NULL, 0.00, 29, NULL, NULL, 2, '', '2017-01-17 09:05:57', '2017-01-17 09:05:57'),
+(59, 62, '1', 'Growing', 2, 1, 2.25, 29, NULL, NULL, 2, '', '2017-01-17 09:09:33', '2017-01-17 09:09:33'),
+(60, 62, '2', 'Sludge +++', 4, NULL, 0.00, 29, NULL, NULL, 2, '', '2017-01-17 09:09:48', '2017-01-17 09:09:48'),
+(61, 62, '3', 'Recycling water pond', 4, NULL, 0.00, 29, NULL, NULL, 2, '', '2017-01-17 09:10:20', '2017-01-17 09:12:08'),
+(62, 62, '4', 'Empty pond', 1, NULL, 0.00, 29, NULL, NULL, 2, '', '2017-01-17 09:12:23', '2017-01-17 09:12:23'),
+(63, 63, '1', 'growing', 2, 1, 2.50, 29, NULL, NULL, 2, '', '2017-01-17 09:15:26', '2017-01-17 09:15:26'),
+(64, 63, '2', 'Sludge +++', 4, NULL, 0.00, 29, NULL, NULL, 2, '', '2017-01-17 09:15:39', '2017-01-17 09:15:39'),
+(65, 63, '3', 'Recycling water pond', 4, NULL, 0.00, 29, NULL, NULL, 2, '', '2017-01-17 09:16:06', '2017-01-17 09:16:06'),
+(66, 63, '4', 'Empty pond', 1, NULL, 0.00, 29, NULL, NULL, 2, '', '2017-01-17 09:16:30', '2017-01-17 09:16:30'),
+(67, 64, '1', 'Growing', 3, 1, 0.00, 29, NULL, NULL, 2, '', '2017-01-17 10:32:46', '2017-01-17 10:32:46'),
+(68, 64, '2', 'Sludge +++', 4, NULL, 0.00, 29, NULL, NULL, 2, '', '2017-01-17 10:33:53', '2017-01-17 10:33:53'),
+(69, 64, '3', 'Recycling water pond', 4, NULL, 0.00, 29, NULL, NULL, 2, '', '2017-01-17 10:34:27', '2017-01-17 10:34:27'),
+(70, 64, '4', 'Empty pond', 1, NULL, 0.00, 29, NULL, NULL, 2, '', '2017-01-17 10:34:55', '2017-01-17 10:34:55'),
+(71, 64, '5', 'Empty pond', 1, NULL, 0.00, 29, NULL, NULL, 2, '', '2017-01-17 10:35:20', '2017-01-17 10:35:20'),
+(72, 64, '6', 'Empty pond', 1, NULL, 0.00, 29, NULL, NULL, 2, '', '2017-01-17 10:35:42', '2017-01-17 10:35:42'),
+(73, 64, '7', 'Empty pond', 1, NULL, 0.00, 29, NULL, NULL, 2, '', '2017-01-17 10:36:02', '2017-01-17 10:36:02'),
+(74, 64, '8', 'Empty pond', 1, NULL, 0.00, 29, NULL, NULL, 2, '', '2017-01-17 10:36:34', '2017-01-17 10:36:34'),
+(75, 64, '9', 'Empty pond', 1, NULL, 0.00, 29, NULL, NULL, 2, '', '2017-01-17 10:37:07', '2017-01-17 10:37:07'),
+(76, 64, '10', 'Empty pond', 1, NULL, 0.00, 29, NULL, NULL, 2, '', '2017-01-17 10:37:47', '2017-01-17 10:37:47'),
+(77, 64, '11', 'Empty pond', 1, NULL, 0.00, 29, NULL, NULL, 2, '', '2017-01-17 10:38:08', '2017-01-17 10:38:08'),
+(78, 65, '1', 'Growing', 2, 1, 2.25, 29, NULL, NULL, 2, '', '2017-01-17 10:42:04', '2017-01-17 10:42:04'),
+(79, 65, '2', 'Sludge +++', 4, NULL, 0.00, 29, NULL, NULL, 2, '', '2017-01-17 10:42:19', '2017-01-17 10:42:19'),
+(80, 65, '3', 'Recycling water pond', 4, NULL, 0.00, 29, NULL, NULL, 2, '', '2017-01-17 10:42:52', '2017-01-17 10:42:52'),
+(81, 65, '4', 'Empty pond', 1, NULL, 0.00, 29, NULL, NULL, 2, '', '2017-01-17 10:43:12', '2017-01-17 10:43:12'),
+(82, 66, '1', 'Growing', 2, 1, 2.30, 29, NULL, NULL, 2, '', '2017-01-17 10:47:22', '2017-01-17 10:47:22'),
+(83, 66, '2', 'Sludge +++', 4, NULL, 0.00, 29, NULL, NULL, 2, '', '2017-01-17 10:47:37', '2017-01-17 10:47:37'),
+(84, 66, '3', 'Recycling water pond', 4, NULL, 0.00, 29, NULL, NULL, 2, '', '2017-01-17 10:47:58', '2017-01-17 10:47:58'),
+(85, 66, '4', 'Empty pond', 1, NULL, 0.00, 29, NULL, NULL, 2, '', '2017-01-17 10:48:45', '2017-01-17 10:48:45'),
+(86, 67, '1', 'Growing', 2, 1, 1.15, 29, NULL, NULL, 2, '', '2017-01-17 10:53:09', '2017-01-17 10:53:09'),
+(87, 67, '2', 'Sludge +++', 4, NULL, 0.00, 29, NULL, NULL, 2, '', '2017-01-17 10:53:31', '2017-01-17 10:53:31'),
+(88, 67, '3', 'Recycling water pond', 4, NULL, 0.00, 29, NULL, NULL, 2, '', '2017-01-17 10:53:52', '2017-01-17 10:53:52'),
+(89, 67, '4', 'Empty pond', 1, NULL, 0.00, 29, NULL, NULL, 2, '', '2017-01-17 10:54:12', '2017-01-17 10:54:12'),
+(90, 68, '1', 'Growing', 2, 1, 2.65, 29, NULL, NULL, 2, '', '2017-01-17 10:57:26', '2017-01-17 10:57:26'),
+(91, 68, '2', 'Sludge +++', 4, NULL, 0.00, 29, NULL, NULL, 2, '', '2017-01-17 10:57:42', '2017-01-17 10:57:42'),
+(92, 68, '3', 'Recycling water pond', 4, NULL, 0.00, 29, NULL, NULL, 2, '', '2017-01-17 10:58:05', '2017-01-17 10:58:05'),
+(93, 68, '4', 'Empty pond', 1, NULL, 0.00, 29, NULL, NULL, 2, '', '2017-01-17 10:58:33', '2017-01-17 10:58:33'),
+(94, 69, '1', 'Growing', 2, 1, 2.35, 29, NULL, NULL, 2, '', '2017-01-17 11:01:52', '2017-01-17 11:01:52'),
+(95, 69, '2', 'Sludge +++', 4, NULL, 0.00, 29, NULL, NULL, 2, '', '2017-01-17 11:02:13', '2017-01-17 11:02:13'),
+(96, 69, '3', 'Recycling water pond', 4, NULL, 0.00, 29, NULL, NULL, 2, '', '2017-01-17 11:02:40', '2017-01-17 11:02:40'),
+(97, 70, '1', 'Growing', 2, 1, 2.00, 29, NULL, NULL, 2, '', '2017-01-17 11:07:15', '2017-01-17 11:07:15'),
+(98, 70, '2', 'Sludge +++', 4, NULL, 0.00, 29, NULL, NULL, 2, '', '2017-01-17 11:07:32', '2017-01-17 11:07:32'),
+(99, 70, '3', 'Recycling water pond', 4, NULL, 0.00, 29, NULL, NULL, 2, '', '2017-01-17 11:07:54', '2017-01-17 11:07:54'),
+(100, 70, '4', 'Empty pond', 1, NULL, 0.00, 29, NULL, NULL, 2, '', '2017-01-17 11:08:15', '2017-01-17 11:08:15'),
+(101, 71, '1', 'Growing ', 2, 1, 0.00, 29, NULL, NULL, 2, '', '2017-01-17 11:11:50', '2017-01-17 11:11:50'),
+(102, 71, '2', 'Recycling water pond', 4, NULL, 0.00, 29, NULL, NULL, 2, '', '2017-01-17 11:12:14', '2017-01-17 11:12:14'),
+(103, 72, '1', 'Growing', 2, 1, 4.00, 29, NULL, NULL, 2, '', '2017-01-17 11:18:37', '2017-01-17 11:18:37'),
+(104, 72, '2', 'Sludge +++', 4, NULL, 0.00, 29, NULL, NULL, 2, '', '2017-01-17 11:18:59', '2017-01-17 11:18:59'),
+(105, 72, '3', 'Recycling water pond', 4, NULL, 0.00, 29, NULL, NULL, 2, '', '2017-01-17 11:19:42', '2017-01-17 11:19:42'),
+(106, 72, '4', 'Empty pond', 1, NULL, 0.00, 29, NULL, NULL, 2, '', '2017-01-17 11:20:00', '2017-01-17 11:20:00'),
+(107, 72, '5', 'Empty pond', 1, NULL, 0.00, 29, NULL, NULL, 2, '', '2017-01-17 11:20:26', '2017-01-17 11:20:26'),
+(108, 72, '6', 'Empty pond', 1, NULL, 0.00, 29, NULL, NULL, 2, '', '2017-01-17 11:21:04', '2017-01-17 11:21:04'),
+(109, 73, '1', 'Growing', 2, 1, 2.75, 29, NULL, NULL, 2, '', '2017-01-17 11:24:49', '2017-01-17 11:24:49'),
+(110, 73, '2', 'Sludge +++', 4, NULL, 0.00, 29, NULL, NULL, 2, '', '2017-01-17 11:25:02', '2017-01-17 11:25:02'),
+(111, 73, '3', 'Recycling water pond', 4, NULL, 0.00, 29, NULL, NULL, 2, '', '2017-01-17 11:25:46', '2017-01-17 11:25:46'),
+(112, 73, '4', 'Empty pond', 1, NULL, 0.00, 29, NULL, NULL, 2, '', '2017-01-17 11:28:11', '2017-01-17 11:28:11'),
+(113, 74, '1', 'Growing ', 2, 1, 0.00, 29, NULL, NULL, 2, '', '2017-01-17 11:31:05', '2017-01-17 11:31:05'),
+(114, 74, '2', 'Recycling water pond', 4, NULL, 0.00, 29, NULL, NULL, 2, '', '2017-01-17 11:31:20', '2017-01-17 11:31:20'),
+(115, 74, '3', 'Empty pond', 1, NULL, 0.00, 29, NULL, NULL, 2, '', '2017-01-17 11:31:39', '2017-01-17 11:31:39'),
+(116, 75, '1', 'Growing', 2, 1, 0.00, 29, NULL, NULL, 2, '', '2017-01-17 11:37:33', '2017-01-17 11:37:33'),
+(117, 75, '2', 'Recycling water pond', 4, NULL, 0.00, 29, NULL, NULL, 2, '', '2017-01-17 11:56:01', '2017-01-17 11:56:01'),
+(118, 75, '3', 'Empty pond', 1, NULL, 0.00, 29, NULL, NULL, 2, '', '2017-01-17 11:57:07', '2017-01-17 11:57:07'),
+(119, 75, '4', 'Empty pond', 1, NULL, 0.00, 29, NULL, NULL, 2, '', '2017-01-17 11:58:00', '2017-01-17 11:58:00'),
+(120, 75, '5', 'Empty pond', 1, NULL, 0.00, 29, NULL, NULL, 2, '', '2017-01-17 11:58:25', '2017-01-17 11:58:25'),
+(121, 51, '6', 'Reservoir pond', 1, NULL, 2.81, 29, NULL, NULL, 2, '', '2017-01-17 12:09:19', '2017-01-17 12:09:19'),
+(122, 51, '7', 'Reservoir pond', 1, NULL, 4.33, 29, NULL, NULL, 2, '', '2017-01-17 12:10:05', '2017-01-17 12:10:05'),
+(123, 86, '1', 'Growing', 2, 1, 2.71, 29, NULL, NULL, 2, '', '2017-01-17 12:39:21', '2017-01-17 12:39:21'),
+(124, 86, '2', 'Sludge +++', 4, NULL, 0.00, 29, NULL, NULL, 2, '', '2017-01-17 12:39:35', '2017-01-17 12:39:35'),
+(125, 86, '3', 'Recycling water pond', 4, NULL, 0.00, 29, NULL, NULL, 2, '', '2017-01-17 12:40:04', '2017-01-17 12:40:04'),
+(126, 87, '1', 'Growing ', 2, 1, 3.07, 29, NULL, NULL, 2, '', '2017-01-17 12:46:50', '2017-01-17 12:46:50'),
+(127, 87, '2', 'Sludge +++', 4, NULL, 0.00, 29, NULL, NULL, 2, '', '2017-01-17 12:47:08', '2017-01-17 12:47:08'),
+(128, 87, '3', 'Sludge ++', 4, NULL, 0.00, 29, NULL, NULL, 2, '', '2017-01-17 12:47:39', '2017-01-17 12:47:39'),
+(129, 87, '4', 'Sludge +', 4, NULL, 0.00, 29, NULL, NULL, 2, '', '2017-01-17 12:48:03', '2017-01-17 12:48:03'),
+(130, 85, '1', 'Growig', 2, 1, 2.30, 29, NULL, NULL, 2, '', '2017-01-17 12:53:22', '2017-01-17 12:53:22'),
+(131, 85, '2', 'Sludge +++', 4, NULL, 0.00, 29, NULL, NULL, 2, '', '2017-01-17 12:53:41', '2017-01-17 12:53:41'),
+(132, 85, '3', 'Sludge ++', 4, NULL, 0.00, 29, NULL, NULL, 2, '', '2017-01-17 12:54:03', '2017-01-17 12:54:03'),
+(133, 85, '4', 'Sludge +', 4, NULL, 0.00, 29, NULL, NULL, 2, '', '2017-01-17 12:54:26', '2017-01-17 12:54:26'),
+(134, 77, '1', 'Growing', 2, 1, 2.00, 29, NULL, NULL, 2, '', '2017-01-17 12:58:02', '2017-01-17 12:58:02'),
+(135, 77, '2', 'Sludge +++', 4, NULL, 0.00, 29, NULL, NULL, 2, '', '2017-01-17 12:58:19', '2017-01-17 12:58:19'),
+(136, 77, '3', 'Sludge ++', 4, NULL, 0.00, 29, NULL, NULL, 2, '', '2017-01-17 12:58:44', '2017-01-17 12:58:44'),
+(137, 77, '4', 'Sludge +', 4, NULL, 0.00, 29, NULL, NULL, 2, '', '2017-01-17 12:59:09', '2017-01-17 12:59:09'),
+(138, 76, '1', 'Growing', 2, 1, 2.32, 29, NULL, NULL, 2, '', '2017-01-17 13:00:28', '2017-01-17 13:00:28'),
+(139, 76, '2', 'Sludge +++', 4, NULL, 0.00, 29, NULL, NULL, 2, '', '2017-01-17 13:00:40', '2017-01-17 13:00:40'),
+(140, 76, '3', 'Sludge ++', 4, NULL, 0.00, 29, NULL, NULL, 2, '', '2017-01-17 13:01:01', '2017-01-17 13:01:01'),
+(141, 76, '4', 'Sludge +', 4, NULL, 0.00, 29, NULL, NULL, 2, '', '2017-01-17 13:01:24', '2017-01-17 13:01:24'),
+(142, 88, '1', 'Growing', 2, 1, 2.50, 29, NULL, NULL, 2, '', '2017-01-17 13:05:02', '2017-01-17 13:05:02'),
+(143, 88, '2', 'Sludge +++', 4, NULL, 0.00, 29, NULL, NULL, 2, '', '2017-01-17 13:05:29', '2017-01-17 13:05:29'),
+(144, 88, '3', 'Sludge ++', 4, NULL, 0.00, 29, NULL, NULL, 2, '', '2017-01-17 13:05:53', '2017-01-17 13:05:53'),
+(145, 88, '4', 'Sludge +', 4, NULL, 0.00, 29, NULL, NULL, 2, '', '2017-01-17 13:06:12', '2017-01-17 13:06:12'),
+(146, 78, '1', 'Growing', 2, 1, 2.00, 29, NULL, NULL, 2, '', '2017-01-17 13:08:45', '2017-01-17 13:08:45'),
+(147, 78, '2', 'Sludge +++', 4, NULL, 0.00, 29, NULL, NULL, 2, '', '2017-01-17 13:08:58', '2017-01-17 13:08:58'),
+(148, 78, '3', 'Sludge ++', 4, NULL, 0.00, 29, NULL, NULL, 2, '', '2017-01-17 13:09:20', '2017-01-17 13:09:20'),
+(149, 78, '4', 'Sludge +', 4, NULL, 0.00, 29, NULL, NULL, 2, '', '2017-01-17 13:09:42', '2017-01-17 13:09:42'),
+(150, 79, '1', 'Growing', 2, 1, 2.75, 29, NULL, NULL, 2, '', '2017-01-17 13:12:30', '2017-01-17 13:12:30'),
+(151, 79, '2', 'Sludge +++', 4, NULL, 0.00, 29, NULL, NULL, 2, '', '2017-01-17 13:12:43', '2017-01-17 13:12:43'),
+(152, 79, '3', 'Sludge ++', 4, NULL, 0.00, 29, NULL, NULL, 2, '', '2017-01-17 13:13:12', '2017-01-17 13:13:12'),
+(153, 79, '4', 'Sludge +', 4, NULL, 0.00, 29, NULL, NULL, 2, '', '2017-01-17 13:14:10', '2017-01-17 13:14:10'),
+(154, 80, '1', 'Growing', 2, 1, 2.00, 29, NULL, NULL, 2, '', '2017-01-17 13:15:19', '2017-01-17 13:15:19'),
+(155, 80, '2', 'Sludge +++', 4, NULL, 0.00, 29, NULL, NULL, 2, '', '2017-01-17 13:15:35', '2017-01-17 13:15:35'),
+(156, 80, '3', 'Sludge ++', 4, NULL, 0.00, 29, NULL, NULL, 2, '', '2017-01-17 13:17:44', '2017-01-17 13:17:44'),
+(157, 80, '4', 'Sludge +', 4, NULL, 0.00, 29, NULL, NULL, 2, '', '2017-01-17 13:18:07', '2017-01-17 13:18:07'),
+(158, 83, '1', 'Growing', 2, 1, 2.50, 29, NULL, NULL, 2, '', '2017-01-18 06:46:44', '2017-01-18 06:46:44'),
+(161, 83, '2', 'Sludge +++', 4, NULL, 0.00, 29, NULL, NULL, 2, '', '2017-01-18 06:48:44', '2017-01-18 06:49:35'),
+(162, 83, '3', 'Recycling water pond', 4, NULL, 0.00, 29, NULL, NULL, 2, '', '2017-01-18 06:50:36', '2017-01-18 06:50:36'),
+(163, 82, '1', 'Growing', 2, 1, 2.50, 29, NULL, NULL, 2, '', '2017-01-18 07:05:55', '2017-01-18 07:05:55'),
+(164, 82, '2', 'Sludge +++', 4, NULL, 0.00, 29, NULL, NULL, 2, '', '2017-01-18 07:11:35', '2017-01-18 07:11:35'),
+(165, 82, '3', 'Sludge ++', 4, NULL, 0.00, 29, NULL, NULL, 2, '', '2017-01-18 07:12:08', '2017-01-18 07:12:08'),
+(166, 82, '4', 'Sludge +', 4, NULL, 0.00, 29, NULL, NULL, 2, '', '2017-01-18 07:13:02', '2017-01-18 07:13:02'),
+(167, 81, '1', 'Growing', 2, 1, 2.00, 29, NULL, NULL, 2, '', '2017-01-18 07:41:06', '2017-01-18 07:41:06'),
+(168, 81, '2', 'Sludge +++', 4, NULL, 0.00, 29, NULL, NULL, 2, '', '2017-01-18 07:41:29', '2017-01-18 07:41:29'),
+(169, 81, '3', 'Sludge ++', 4, NULL, 0.00, 29, NULL, NULL, 2, '', '2017-01-18 07:41:56', '2017-01-18 07:41:56'),
+(170, 81, '4', 'Sludge +', 4, NULL, 0.00, 29, NULL, NULL, 2, '', '2017-01-18 07:42:26', '2017-01-18 07:42:26'),
+(171, 89, '1', 'Growing', 2, 1, 2.30, 29, NULL, NULL, 2, '', '2017-01-18 07:45:47', '2017-01-18 07:45:47'),
+(172, 89, '2', 'Sludge +++', 4, NULL, 0.00, 29, NULL, NULL, 2, '', '2017-01-18 07:46:04', '2017-01-18 07:46:04'),
+(173, 89, '3', 'Sludge ++', 4, NULL, 0.00, 29, NULL, NULL, 2, '', '2017-01-18 07:48:13', '2017-01-18 07:48:13'),
+(174, 89, '4', 'Sludge +', 4, NULL, 0.00, 29, NULL, NULL, 2, '', '2017-01-18 07:51:35', '2017-01-18 07:51:35'),
+(175, 60, '9', 'Empty pond', 1, NULL, 0.00, 29, NULL, NULL, 2, '', '2017-01-20 07:33:49', '2017-01-20 07:33:49'),
+(178, 144, '1', '', 2, 1, 3.00, 29, 0.00, NULL, 1, NULL, '2018-02-16 02:37:56', '2018-02-16 02:37:56'),
+(179, 144, '2', '', 2, 1, 2.50, 29, 0.00, NULL, 1, NULL, '2018-02-16 02:38:23', '2018-02-16 02:38:23'),
+(180, 144, '3', '', 1, NULL, 5.00, 29, 0.00, NULL, 1, NULL, '2018-02-16 02:39:01', '2018-02-16 02:39:01'),
+(181, 144, '4', '', 4, NULL, 2.00, 29, 0.00, NULL, 1, NULL, '2018-02-16 02:41:34', '2018-02-16 02:41:34');
 
 -- --------------------------------------------------------
 
@@ -3109,6 +3389,23 @@ CREATE TABLE `reg_entity_farm_buildings` (
   `CREATED_AT` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `UPDATED_AT` timestamp NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='description of existing other building than production (plot, barn, etc..)';
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `reg_entity_farm_buyers`
+--
+
+CREATE TABLE `reg_entity_farm_buyers` (
+  `ID` int(11) NOT NULL,
+  `REG_ENTITY_FARM_ID` int(11) NOT NULL,
+  `REG_ENTITY_BUYER_ID` int(11) NOT NULL,
+  `CL_PRODUCT_TYPES_ID` int(11) DEFAULT '1',
+  `UPDATER_ID` int(11) NOT NULL DEFAULT '1',
+  `COMMENT` varchar(512) COLLATE utf8_bin DEFAULT NULL,
+  `CREATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `UPDATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- --------------------------------------------------------
 
@@ -3163,10 +3460,47 @@ CREATE TABLE `reg_entity_farm_details` (
 --
 
 INSERT INTO `reg_entity_farm_details` (`ID`, `REG_ENTITY_FARM_ID`, `REG_ENTITY_OWNER_ID`, `SYS_USER_FARMADMIN_ID`, `SIZE`, `CL_SIZE_UNIT_ID`, `LONGITUDE`, `LATITUDE`, `AERIAL_VIEW`, `QUOTA_ID`, `WATER_USE_AUTHORIZATION`, `LAND_USE_AUTHORIZATION`, `ENVIRONMENT_IMPACT_ASSESSMENT`, `ENVIRONMENT_IMPACT_ASSESSMENT_URL`, `HVH_CONSTRUCT_PERMIT`, `HVH_LAND_TITLE`, `SITING_PROTECTED_AREA`, `SITING_PROTECTED_AREA_AUTHORIZATION_URL`, `HVHE_FARM_EXPENSION`, `HVHE_YES_IN_HVH`, `CL_HVHE_EXPENSION_TYPE_ID`, `HVHE_CANAL_RESTAURATION_PLAN`, `CUMUL_IMPACTS`, `MEMBER_COOP_ID`, `HAS_A_LAB`, `HEALTH_MANAGEMENT_TRAINING`, `HEALTH_MANAGEMENT_PLAN`, `ESCAPE_PREVENTION_DEVICE_URL`, `RECORD_INSPECTION`, `STAKEHOLDER_MEETING_PARTICIPATION`, `STAKEHOLDER_MEETING_DATE`, `STAKEHOLDER_MEETING_LOCATION`, `MEMBER_OF_ASSOCIATION`, `COMMITTED_TO_SUSTAINABLE_PRACTICES`, `COMMITTED_TO_SUSTAINABLE_PRACTICES_URL`, `UPDATER_ID`, `COMMENT`, `CREATED_AT`, `UPDATED_AT`) VALUES
-(56, 135, 134, NULL, 70.00, 29, '102.0315', '15.806817', '0_Sugarcane map.jpg', '13889332', NULL, NULL, 0, NULL, NULL, NULL, 0, NULL, 0, 0, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, 0, NULL, NULL, 0, NULL, NULL, 4, '', '2017-12-06 01:00:12', '2017-12-06 01:00:12'),
-(58, 141, 134, NULL, 35.00, 29, NULL, NULL, NULL, '', NULL, NULL, 0, NULL, NULL, NULL, 0, NULL, 0, 0, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, 0, NULL, NULL, 0, NULL, NULL, 13, '', '2017-12-20 01:34:51', '2017-12-20 01:34:51'),
-(59, 142, 49, NULL, 45.00, 29, NULL, NULL, NULL, '', NULL, NULL, 0, NULL, NULL, NULL, 0, NULL, 0, 0, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, 1, '2018-02-08', 'xxxxx', 1, NULL, NULL, 3, '', '2018-01-29 19:39:28', '2018-01-29 19:39:28'),
-(60, 144, 49, NULL, 25.00, 29, NULL, NULL, NULL, '', NULL, NULL, 0, NULL, NULL, NULL, 0, NULL, 0, 0, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, 0, NULL, '', 0, NULL, NULL, 3, '', '2018-02-19 05:22:29', '2018-02-19 05:22:29');
+(59, 2, 1, NULL, 83.00, 29, NULL, NULL, NULL, '', NULL, NULL, 0, NULL, NULL, NULL, 0, NULL, 0, 0, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, 0, NULL, NULL, 0, NULL, NULL, 3, '', '2018-01-16 19:50:36', '2018-01-16 19:50:36'),
+(60, 51, 11, NULL, 34.03, 29, '99.910355', '12.227958', NULL, '', NULL, NULL, 0, NULL, NULL, NULL, 0, NULL, 0, 0, NULL, NULL, NULL, 6, 0, NULL, NULL, NULL, NULL, 0, NULL, NULL, 0, NULL, NULL, 3, '', '2018-01-17 09:22:16', '2018-01-17 09:22:16'),
+(61, 52, 14, NULL, 0.00, 29, '98.36361', '8.689209', NULL, '', NULL, NULL, 0, NULL, NULL, NULL, 0, NULL, 0, 0, NULL, NULL, NULL, 6, 0, NULL, NULL, NULL, NULL, 0, NULL, NULL, 0, NULL, NULL, 3, '', '2018-01-17 09:24:28', '2018-01-17 09:24:28'),
+(62, 53, 13, NULL, 0.00, 29, NULL, NULL, NULL, '', NULL, NULL, 0, NULL, NULL, NULL, 0, NULL, 0, 0, NULL, NULL, NULL, 6, 0, NULL, NULL, NULL, NULL, 0, NULL, NULL, 0, NULL, NULL, 3, '', '2018-01-17 09:25:44', '2018-01-17 09:25:44'),
+(63, 54, 15, NULL, 0.00, 29, NULL, NULL, NULL, '', NULL, NULL, 0, NULL, NULL, NULL, 0, NULL, 0, 0, NULL, NULL, NULL, 6, 0, NULL, NULL, NULL, NULL, 0, NULL, NULL, 0, NULL, NULL, 3, '', '2018-01-17 09:26:44', '2018-01-17 09:26:44'),
+(64, 55, 16, NULL, 0.00, 29, NULL, NULL, NULL, '', NULL, NULL, 0, NULL, NULL, NULL, 0, NULL, 0, 0, NULL, NULL, NULL, 6, 0, NULL, NULL, NULL, NULL, 0, NULL, NULL, 0, NULL, NULL, 3, '', '2018-01-17 09:27:42', '2018-01-17 09:27:42'),
+(65, 56, 17, NULL, 0.00, 29, '99.9457', '12.201573', NULL, '', NULL, NULL, 0, NULL, NULL, NULL, 0, NULL, 0, 0, NULL, NULL, NULL, 6, 0, NULL, NULL, NULL, NULL, 0, NULL, NULL, 0, NULL, NULL, 3, '', '2018-01-17 09:28:46', '2018-01-17 09:28:46'),
+(66, 57, 18, NULL, 0.00, 29, NULL, NULL, NULL, '', NULL, NULL, 0, NULL, NULL, NULL, 0, NULL, 0, 0, NULL, NULL, NULL, 6, 0, NULL, NULL, NULL, NULL, 0, NULL, NULL, 0, NULL, NULL, 3, '', '2018-01-17 09:29:42', '2018-01-17 09:29:42'),
+(67, 58, 36, NULL, 0.00, 29, NULL, NULL, NULL, '', NULL, NULL, 0, NULL, NULL, NULL, 0, NULL, 0, 0, NULL, NULL, NULL, 6, 0, NULL, NULL, NULL, NULL, 0, NULL, NULL, 0, NULL, NULL, 3, '', '2018-01-17 09:30:48', '2018-01-17 09:30:48'),
+(68, 59, 24, NULL, 0.00, 29, '99.9457', '12.201573', NULL, '', NULL, NULL, 0, NULL, NULL, NULL, 0, NULL, 0, 0, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, 0, NULL, NULL, 0, NULL, NULL, 3, '', '2018-01-17 09:32:18', '2018-01-17 09:32:18'),
+(69, 60, 20, NULL, 0.00, 29, NULL, NULL, NULL, '', NULL, NULL, 0, NULL, NULL, NULL, 0, NULL, 0, 0, NULL, NULL, NULL, 6, 0, NULL, NULL, NULL, NULL, 0, NULL, NULL, 0, NULL, NULL, 3, '', '2018-01-17 09:33:18', '2018-01-17 09:33:18'),
+(70, 61, 21, NULL, 0.00, 29, NULL, NULL, NULL, '', NULL, NULL, 0, NULL, NULL, NULL, 0, NULL, 0, 0, NULL, NULL, NULL, 6, 0, NULL, NULL, NULL, NULL, 0, NULL, NULL, 0, NULL, NULL, 3, '', '2018-01-17 09:34:13', '2018-01-17 09:34:13'),
+(71, 62, 22, NULL, 0.00, 29, NULL, NULL, NULL, '', NULL, NULL, 0, NULL, NULL, NULL, 0, NULL, 0, 0, NULL, NULL, NULL, 6, 0, NULL, NULL, NULL, NULL, 0, NULL, NULL, 0, NULL, NULL, 3, '', '2018-01-17 09:35:29', '2018-01-17 09:35:29'),
+(72, 63, 23, NULL, 0.00, 29, NULL, NULL, NULL, '', NULL, NULL, 0, NULL, NULL, NULL, 0, NULL, 0, 0, NULL, NULL, NULL, 6, 0, NULL, NULL, NULL, NULL, 0, NULL, NULL, 0, NULL, NULL, 3, '', '2018-01-17 09:41:57', '2018-01-17 09:41:57'),
+(73, 64, 19, NULL, 0.00, 29, NULL, NULL, NULL, '', NULL, NULL, 0, NULL, NULL, NULL, 0, NULL, 0, 0, NULL, NULL, NULL, 6, 0, NULL, NULL, NULL, NULL, 0, NULL, NULL, 0, NULL, NULL, 3, '', '2018-01-17 09:43:29', '2018-01-17 09:43:29'),
+(74, 65, 25, NULL, 0.00, 29, NULL, NULL, NULL, '', NULL, NULL, 0, NULL, NULL, NULL, 0, NULL, 0, 0, NULL, NULL, NULL, 6, 0, NULL, NULL, NULL, NULL, 0, NULL, NULL, 0, NULL, NULL, 3, '', '2018-01-17 09:44:16', '2018-01-17 09:44:16'),
+(75, 66, 26, NULL, 0.00, 29, '99.46396', '11.113116', NULL, '', NULL, NULL, 0, NULL, NULL, NULL, 0, NULL, 0, 0, NULL, NULL, NULL, 6, 0, NULL, NULL, NULL, NULL, 0, NULL, NULL, 0, NULL, NULL, 3, '', '2018-01-17 09:45:30', '2018-01-17 09:45:30'),
+(76, 67, 27, NULL, 0.00, 29, NULL, NULL, NULL, '', NULL, NULL, 0, NULL, NULL, NULL, 0, NULL, 0, 0, NULL, NULL, NULL, 6, 0, NULL, NULL, NULL, NULL, 0, NULL, NULL, 0, NULL, NULL, 3, '', '2018-01-17 09:46:34', '2018-01-17 09:46:34'),
+(77, 68, 28, NULL, 0.00, 29, NULL, NULL, NULL, '', NULL, NULL, 0, NULL, NULL, NULL, 0, NULL, 0, 0, NULL, NULL, NULL, 6, 0, NULL, NULL, NULL, NULL, 0, NULL, NULL, 0, NULL, NULL, 3, '', '2018-01-17 09:47:29', '2018-01-17 09:47:29'),
+(78, 69, 29, NULL, 0.00, 29, NULL, NULL, NULL, '', NULL, NULL, 0, NULL, NULL, NULL, 0, NULL, 0, 0, NULL, NULL, NULL, 6, 0, NULL, NULL, NULL, NULL, 0, NULL, NULL, 0, NULL, NULL, 3, '', '2018-01-17 09:48:42', '2018-01-17 09:48:42'),
+(79, 70, 30, NULL, 0.00, 29, NULL, NULL, NULL, '', NULL, NULL, 0, NULL, NULL, NULL, 0, NULL, 0, 0, NULL, NULL, NULL, 6, 0, NULL, NULL, NULL, NULL, 0, NULL, NULL, 0, NULL, NULL, 3, '', '2018-01-17 09:49:51', '2018-01-17 09:49:51'),
+(80, 71, 31, NULL, 0.00, 29, NULL, NULL, NULL, '', NULL, NULL, 0, NULL, NULL, NULL, 0, NULL, 0, 0, NULL, NULL, NULL, 6, 0, NULL, NULL, NULL, NULL, 0, NULL, NULL, 0, NULL, NULL, 3, '', '2018-01-17 09:50:43', '2018-01-17 09:50:43'),
+(81, 72, 32, NULL, 0.00, 29, NULL, NULL, NULL, '', NULL, NULL, 0, NULL, NULL, NULL, 0, NULL, 0, 0, NULL, NULL, NULL, 6, 0, NULL, NULL, NULL, NULL, 0, NULL, NULL, 0, NULL, NULL, 3, '', '2018-01-17 09:51:33', '2018-01-17 09:51:33'),
+(82, 73, 33, NULL, 0.00, 29, NULL, NULL, NULL, '', NULL, NULL, 0, NULL, NULL, NULL, 0, NULL, 0, 0, NULL, NULL, NULL, 6, 0, NULL, NULL, NULL, NULL, 0, NULL, NULL, 0, NULL, NULL, 3, '', '2018-01-17 10:48:05', '2018-01-17 10:48:05'),
+(83, 74, 34, NULL, 0.00, 29, NULL, NULL, NULL, '', NULL, NULL, 0, NULL, NULL, NULL, 0, NULL, 0, 0, NULL, NULL, NULL, 6, 0, NULL, NULL, NULL, NULL, 0, NULL, NULL, 0, NULL, NULL, 3, '', '2018-01-17 10:49:29', '2018-01-17 10:49:29'),
+(84, 75, 35, NULL, 0.00, 29, NULL, NULL, NULL, '', NULL, NULL, 0, NULL, NULL, NULL, 0, NULL, 0, 0, NULL, NULL, NULL, 6, 0, NULL, NULL, NULL, NULL, 0, NULL, NULL, 0, NULL, NULL, 3, '', '2018-01-17 10:50:31', '2018-01-17 10:50:31'),
+(85, 76, 37, NULL, 0.00, 29, NULL, NULL, NULL, '', NULL, NULL, 0, NULL, NULL, NULL, 0, NULL, 0, 0, NULL, NULL, NULL, 6, 0, NULL, NULL, NULL, NULL, 0, NULL, NULL, 0, NULL, NULL, 3, '', '2018-01-17 10:51:37', '2018-01-17 10:51:37'),
+(86, 77, 38, NULL, 0.00, 29, NULL, NULL, NULL, '', NULL, NULL, 0, NULL, NULL, NULL, 0, NULL, 0, 0, NULL, NULL, NULL, 6, 0, NULL, NULL, NULL, NULL, 0, NULL, NULL, 0, NULL, NULL, 3, '', '2018-01-17 10:52:55', '2018-01-17 10:52:55'),
+(87, 78, 39, NULL, 0.00, 29, NULL, NULL, NULL, '', NULL, NULL, 0, NULL, NULL, NULL, 0, NULL, 0, 0, NULL, NULL, NULL, 6, 0, NULL, NULL, NULL, NULL, 0, NULL, NULL, 0, NULL, NULL, 3, '', '2018-01-17 10:54:02', '2018-01-17 10:54:02'),
+(88, 79, 40, NULL, 0.00, 29, '100.99254', '15.870032', NULL, '', NULL, NULL, 0, NULL, NULL, NULL, 0, NULL, 0, 0, NULL, NULL, NULL, 6, 0, NULL, NULL, NULL, NULL, 0, NULL, NULL, 0, NULL, NULL, 3, '', '2018-01-17 10:55:22', '2018-01-17 10:55:22'),
+(89, 80, 41, NULL, 0.00, 29, '99.9457', '12.201573', NULL, '', NULL, NULL, 0, NULL, NULL, NULL, 0, NULL, 0, 0, NULL, NULL, NULL, 6, 0, NULL, NULL, NULL, NULL, 0, NULL, NULL, 0, NULL, NULL, 3, '', '2018-01-17 10:56:40', '2018-01-17 10:56:40'),
+(90, 81, 42, NULL, 0.00, 29, NULL, NULL, NULL, '', NULL, NULL, 0, NULL, NULL, NULL, 0, NULL, 0, 0, NULL, NULL, NULL, 6, 0, NULL, NULL, NULL, NULL, 0, NULL, NULL, 0, NULL, NULL, 3, '', '2018-01-17 10:57:41', '2018-01-17 10:57:41'),
+(91, 82, 43, NULL, 0.00, 29, '99.9457', '12.201573', NULL, '', NULL, NULL, 0, NULL, NULL, NULL, 0, NULL, 0, 0, NULL, NULL, NULL, 6, 0, NULL, NULL, NULL, NULL, 0, NULL, NULL, 0, NULL, NULL, 3, '', '2018-01-17 10:58:49', '2018-01-17 10:58:49'),
+(92, 83, 44, NULL, 0.00, 29, NULL, NULL, NULL, '', NULL, NULL, 0, NULL, NULL, NULL, 0, NULL, 0, 0, NULL, NULL, NULL, 6, 0, NULL, NULL, NULL, NULL, 0, NULL, NULL, 0, NULL, NULL, 3, '', '2018-01-17 10:59:56', '2018-01-17 10:59:56'),
+(93, 84, 45, NULL, 0.00, 29, NULL, NULL, NULL, '', NULL, NULL, 0, NULL, NULL, NULL, 0, NULL, 0, 0, NULL, NULL, NULL, 6, 0, NULL, NULL, NULL, NULL, 0, NULL, NULL, 0, NULL, NULL, 3, '', '2018-01-17 11:00:48', '2018-01-17 11:00:48'),
+(94, 85, 46, NULL, 0.00, 29, NULL, NULL, NULL, '', NULL, NULL, 0, NULL, NULL, NULL, 0, NULL, 0, 0, NULL, NULL, NULL, 6, 0, NULL, NULL, NULL, NULL, 0, NULL, NULL, 0, NULL, NULL, 3, '', '2018-01-17 11:01:44', '2018-01-17 11:01:44'),
+(95, 86, 47, NULL, 0.00, 29, NULL, NULL, NULL, '', NULL, NULL, 0, NULL, NULL, NULL, 0, NULL, 0, 0, NULL, NULL, NULL, 6, 0, NULL, NULL, NULL, NULL, 0, NULL, NULL, 0, NULL, NULL, 3, '', '2018-01-17 11:02:45', '2018-01-17 11:02:45'),
+(96, 87, 48, NULL, 0.00, 29, NULL, NULL, NULL, '', NULL, NULL, 0, NULL, NULL, NULL, 0, NULL, 0, 0, NULL, NULL, NULL, 6, 0, NULL, NULL, NULL, NULL, 0, NULL, NULL, 0, NULL, NULL, 3, '', '2018-01-17 11:03:51', '2018-01-17 11:03:51'),
+(97, 88, 49, NULL, 0.00, 29, '99.9457', '12.201573', NULL, '', NULL, NULL, 0, NULL, NULL, NULL, 0, NULL, 0, 0, NULL, NULL, NULL, 6, 0, NULL, NULL, NULL, NULL, 0, NULL, NULL, 0, NULL, NULL, 3, '', '2018-01-17 11:04:47', '2018-01-17 11:04:47'),
+(98, 89, 50, NULL, 0.00, 29, '99.9457', '12.201573', NULL, '', NULL, NULL, 0, NULL, NULL, NULL, 0, NULL, 0, 0, NULL, NULL, NULL, 6, 0, NULL, NULL, NULL, NULL, 0, NULL, NULL, 0, NULL, NULL, 3, '', '2018-01-17 11:05:48', '2018-01-17 11:05:48'),
+(99, 144, 143, NULL, 15.00, 29, '100.56526', '13.738981', NULL, '', NULL, NULL, 0, NULL, NULL, NULL, 0, NULL, 0, 0, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, 1, '2017-12-09', 'Trat', 1, NULL, NULL, 4, '', '2018-02-16 01:21:23', '2018-02-16 01:21:23');
 
 -- --------------------------------------------------------
 
@@ -3205,9 +3539,10 @@ CREATE TABLE `reg_entity_farm_providers` (
 --
 
 INSERT INTO `reg_entity_farm_providers` (`ID`, `REG_ENTITY_FARM_ID`, `REG_ENTITY_SUPPLIER_ID`, `CL_PRODUCT_TYPES_ID`, `UPDATER_ID`, `COMMENT`, `CREATED_AT`, `UPDATED_AT`) VALUES
-(17, 135, 139, 1, 1, NULL, '2017-12-06 01:13:27', '2017-12-06 01:13:27'),
-(18, 135, 138, 50, 1, NULL, '2017-12-06 01:13:49', '2017-12-06 01:13:49'),
-(19, 135, 138, 80, 1, NULL, '2017-12-20 01:17:38', '2017-12-20 01:17:38');
+(20, 2, 7, 42, 1, NULL, '2018-01-16 20:09:55', '2018-01-16 20:09:55'),
+(21, 2, 8, 4, 1, NULL, '2018-01-16 20:10:13', '2018-01-16 20:10:13'),
+(23, 144, 7, 42, 1, NULL, '2018-02-16 02:30:38', '2018-02-16 02:30:38'),
+(24, 144, 8, 4, 1, NULL, '2018-02-16 02:30:46', '2018-02-16 02:30:46');
 
 -- --------------------------------------------------------
 
@@ -3289,10 +3624,49 @@ CREATE TABLE `reg_entity_staff` (
 --
 
 INSERT INTO `reg_entity_staff` (`REG_ENTITY_ID`, `REG_ENTITY_FARM_ID`, `CL_LANGUAGE_ID`, `CL_POSITION_TYPE_ID`, `CL_LEGAL_STATUS_ID`, `CHARACTERISTICS_1`, `CHARACTERISTICS_2`, `NOT_EMPLOYED_ANYMORE`, `TELEPHONE_OFFICE`, `MOBILE_OFFICE`, `EMAIL_OFFICE`, `FROM_LOCAL_COMMUNITY`, `COMPANY_FOCAL_POINT`, `WORKING_PERMIT_URL`, `UPDATER_ID`, `COMMENT`, `CREATED_AT`, `UPDATED_AT`) VALUES
-(49, 135, 159, 5, 4, NULL, NULL, 0, '', '09888777890', '', 1, 0, NULL, 4, '', '2017-12-06 01:08:14', '2017-12-06 01:08:14'),
-(49, 142, 159, 5, NULL, NULL, NULL, 0, '', '', '', 0, 0, NULL, 3, '', '2018-02-12 20:48:08', '2018-02-12 20:48:08'),
-(136, 135, 159, 5, 1, NULL, NULL, 0, '', '0987578906', '', 1, 0, NULL, 4, '', '2017-12-06 01:04:34', '2017-12-06 01:04:34'),
-(137, 135, 159, 5, 4, NULL, NULL, 0, '', '9876545678', '', 1, 0, NULL, 4, '', '2017-12-06 01:06:46', '2017-12-06 01:06:46');
+(3, 2, 83, 5, NULL, NULL, NULL, 0, '', '', '', 0, 0, NULL, 3, '', '2018-01-16 19:52:20', '2018-01-16 19:52:20'),
+(11, 51, 159, 1, NULL, NULL, NULL, 0, '', '', '', 0, 0, NULL, 3, '', '2018-01-17 09:22:58', '2018-01-17 09:22:58'),
+(12, 51, 159, 3, NULL, NULL, NULL, 0, '', '', '', 0, 0, NULL, 3, '', '2018-01-17 09:22:41', '2018-01-17 09:22:41'),
+(13, 53, 159, 1, NULL, NULL, NULL, 0, '', '', '', 0, 0, NULL, 3, '', '2018-01-17 09:26:00', '2018-01-17 09:26:00'),
+(14, 52, 159, 1, NULL, NULL, NULL, 0, '', '', '', 0, 0, NULL, 3, '', '2018-01-17 09:24:51', '2018-01-17 09:24:51'),
+(15, 54, 159, 1, NULL, NULL, NULL, 0, '', '', '', 0, 0, NULL, 3, '', '2018-01-17 09:27:00', '2018-01-17 09:27:00'),
+(16, 55, 159, 1, NULL, NULL, NULL, 0, '', '', '', 0, 0, NULL, 3, '', '2018-01-17 09:27:54', '2018-01-17 09:27:54'),
+(17, 56, 159, 1, NULL, NULL, NULL, 0, '', '', '', 0, 0, NULL, 3, '', '2018-01-17 09:29:00', '2018-01-17 09:29:00'),
+(18, 57, 159, 1, NULL, NULL, NULL, 0, '', '', '', 0, 0, NULL, 3, '', '2018-01-17 09:29:55', '2018-01-17 09:29:55'),
+(19, 64, 159, 1, NULL, NULL, NULL, 0, '', '', '', 0, 0, NULL, 3, '', '2018-01-17 09:43:42', '2018-01-17 09:43:42'),
+(20, 60, 159, 1, NULL, NULL, NULL, 0, '', '', '', 0, 0, NULL, 3, '', '2018-01-17 09:33:34', '2018-01-17 09:33:34'),
+(21, 61, 159, 1, NULL, NULL, NULL, 0, '', '', '', 0, 0, NULL, 3, '', '2018-01-17 09:34:26', '2018-01-17 09:34:26'),
+(22, 62, 159, 1, NULL, NULL, NULL, 0, '', '', '', 0, 0, NULL, 3, '', '2018-01-17 09:35:45', '2018-01-17 09:35:45'),
+(23, 63, 159, 1, NULL, NULL, NULL, 0, '', '', '', 0, 0, NULL, 3, '', '2018-01-17 09:42:53', '2018-01-17 09:42:53'),
+(24, 59, 159, 1, NULL, NULL, NULL, 0, '', '', '', 0, 0, NULL, 3, '', '2018-01-17 09:32:30', '2018-01-17 09:32:30'),
+(25, 65, 159, 1, NULL, NULL, NULL, 0, '', '', '', 0, 0, NULL, 3, '', '2018-01-17 09:44:30', '2018-01-17 09:44:30'),
+(26, 66, 159, 1, NULL, NULL, NULL, 0, '', '', '', 0, 0, NULL, 3, '', '2018-01-17 09:45:44', '2018-01-17 09:45:44'),
+(27, 67, 159, 1, NULL, NULL, NULL, 0, '', '', '', 0, 0, NULL, 3, '', '2018-01-17 09:46:50', '2018-01-17 09:46:50'),
+(28, 68, 159, 1, NULL, NULL, NULL, 0, '', '', '', 0, 0, NULL, 3, '', '2018-01-17 09:47:51', '2018-01-17 09:47:51'),
+(29, 69, 159, 1, NULL, NULL, NULL, 0, '', '', '', 0, 0, NULL, 3, '', '2018-01-17 09:48:58', '2018-01-17 09:48:58'),
+(30, 70, 159, 1, NULL, NULL, NULL, 0, '', '', '', 0, 0, NULL, 3, '', '2018-01-17 09:50:04', '2018-01-17 09:50:04'),
+(31, 71, 159, 1, NULL, NULL, NULL, 0, '', '', '', 0, 0, NULL, 3, '', '2018-01-17 09:50:54', '2018-01-17 09:50:54'),
+(32, 72, 159, 1, NULL, NULL, NULL, 0, '', '', '', 0, 0, NULL, 3, '', '2018-01-17 09:51:52', '2018-01-17 09:51:52'),
+(33, 73, 159, 1, NULL, NULL, NULL, 0, '', '', '', 0, 0, NULL, 3, '', '2018-01-17 10:48:18', '2018-01-17 10:48:18'),
+(34, 74, 159, 1, NULL, NULL, NULL, 0, '', '', '', 0, 0, NULL, 3, '', '2018-01-17 10:49:44', '2018-01-17 10:49:44'),
+(35, 75, 159, 1, NULL, NULL, NULL, 0, '', '', '', 0, 0, NULL, 3, '', '2018-01-17 10:50:50', '2018-01-17 10:50:50'),
+(36, 58, 159, 1, NULL, NULL, NULL, 0, '', '', '', 0, 0, NULL, 3, '', '2018-01-17 09:31:24', '2018-01-17 09:31:24'),
+(37, 76, 159, 1, NULL, NULL, NULL, 0, '', '', '', 0, 0, NULL, 3, '', '2018-01-17 10:52:04', '2018-01-17 10:52:04'),
+(38, 77, 159, 1, NULL, NULL, NULL, 0, '', '', '', 0, 0, NULL, 3, '', '2018-01-17 10:53:14', '2018-01-17 10:53:14'),
+(39, 78, 159, 1, NULL, NULL, NULL, 0, '', '', '', 0, 0, NULL, 3, '', '2018-01-17 10:54:25', '2018-01-17 10:54:25'),
+(40, 79, 159, 1, NULL, NULL, NULL, 0, '', '', '', 0, 0, NULL, 3, '', '2018-01-17 10:55:35', '2018-01-17 10:55:35'),
+(41, 80, 159, 1, NULL, NULL, NULL, 0, '', '', '', 0, 0, NULL, 3, '', '2018-01-17 10:56:56', '2018-01-17 10:56:56'),
+(42, 81, 159, 1, NULL, NULL, NULL, 0, '', '', '', 0, 0, NULL, 3, '', '2018-01-17 10:57:59', '2018-01-17 10:57:59'),
+(43, 82, 159, 1, NULL, NULL, NULL, 0, '', '', '', 0, 0, NULL, 3, '', '2018-01-17 10:59:10', '2018-01-17 10:59:10'),
+(44, 83, 159, 1, NULL, NULL, NULL, 0, '', '', '', 0, 0, NULL, 3, '', '2018-01-17 11:00:10', '2018-01-17 11:00:10'),
+(45, 84, 159, 1, NULL, NULL, NULL, 0, '', '', '', 0, 0, NULL, 3, '', '2018-01-17 11:01:02', '2018-01-17 11:01:02'),
+(46, 85, 159, 1, NULL, NULL, NULL, 0, '', '', '', 0, 0, NULL, 3, '', '2018-01-17 11:02:08', '2018-01-17 11:02:08'),
+(47, 86, 159, 1, NULL, NULL, NULL, 0, '', '', '', 0, 0, NULL, 3, '', '2018-01-17 11:03:04', '2018-01-17 11:03:04'),
+(48, 87, 159, 1, NULL, NULL, NULL, 0, '', '', '', 0, 0, NULL, 3, '', '2018-01-17 11:04:03', '2018-01-17 11:04:03'),
+(49, 88, 159, 1, NULL, NULL, NULL, 0, '', '', '', 0, 0, NULL, 3, '', '2018-01-17 11:04:58', '2018-01-17 11:04:58'),
+(50, 89, 159, 1, NULL, NULL, NULL, 0, '', '', '', 0, 0, NULL, 3, '', '2018-01-17 11:06:01', '2018-01-17 11:06:01'),
+(145, 144, 159, 5, NULL, NULL, NULL, 0, '', '0955461566', '', 1, 0, NULL, 4, '', '2018-02-16 01:48:52', '2018-02-16 01:48:52'),
+(146, 144, 110, 5, NULL, NULL, NULL, 0, '', '0955461566', '', 1, 0, NULL, 4, '', '2018-02-16 01:51:08', '2018-02-16 01:51:08');
 
 -- --------------------------------------------------------
 
@@ -3329,6 +3703,13 @@ CREATE TABLE `reg_entity_staff_contract` (
   `CREATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `UPDATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Contenu de la table `reg_entity_staff_contract`
+--
+
+INSERT INTO `reg_entity_staff_contract` (`ID`, `REG_ENTITY_ID`, `REG_ENTITY_FARM_ID`, `CONTRACT_NO`, `CL_CONTRACT_TYPE_ID`, `CL_COMPANY_POSITION_TYPE_ID`, `DEPARTMENT`, `STARTING_DATE`, `AGREED_END_DATE`, `ISSUANCE_DATE`, `CONTINUING_CONTRACT`, `ACTUAL_TERMINATION_DATE`, `CONTRACT_DURATION`, `CONTRACT_REMUNERATION`, `CONTRACT_REMUNERATION_CURRENCY_ID`, `CL_PAYMENT_FREQUENCY_ID`, `MINIMUM_WAGES_APPLIED`, `NB_HOURS_PER_DAY`, `NB_DAYS_ANNUAL_LEAVE`, `PAPER_CONTRACT_COPY_URL`, `NO_ANNUAL_LEAVE_SPECIFIED`, `CONTRACT_IN_OTHER_LANGUAGE`, `CL_COUNTRY_ID`, `UPDATER_ID`, `COMMENT`, `CREATED_AT`, `UPDATED_AT`) VALUES
+(1, 145, 144, '1', 1, 5, NULL, '2016-01-04', NULL, NULL, 0, NULL, NULL, 8500, 1, 3, 0, 0, 0, NULL, 0, 0, NULL, 4, '', '2018-02-20 03:46:06', '2018-02-20 03:46:06');
 
 -- --------------------------------------------------------
 
@@ -3545,7 +3926,17 @@ CREATE TABLE `reg_entity_staff_management` (
 --
 
 INSERT INTO `reg_entity_staff_management` (`REG_ENTITY_FARM_ID`, `NUMBER_STAFF_FARM_AS_TODAY`, `REGULAR_WORK_START_HOUR`, `REGULAR_WORK_END_HOUR`, `NB_WORKERS_LIVING_IN_FARM`, `NB_WORKERS_CHILD_LIVING_IN_FARM`, `NB_WORKERS_CHILD_HELPING_IN_FARM`, `NB_WORKERS_CHILD_ENROLLED_SCHOOL`, `NB_SCHOOL_IN_AREA`, `NB_WORKERS_MIGRANTS`, `MIMINUM_WAGES_APPLIED_TO_CONTRACT`, `JOIN_WORKERS_REPRESENTATIVE_GROUP`, `WORKER_OVERTIME`, `IS_OVERTIME_VOLUNTARY`, `NB_REST_DAYS`, `EXISTENCE_HAZARDOUS_WORK`, `CL_HARZARDOUS_WORK_TYPE_ID`, `EXISTENCE_FARM_POLICIES`, `FARM_POLICIES`, `EXISTENCE_HEALTH_SAFETY_POLICIES`, `HEALTH_SAFETY_POLICIES`, `EXISTENCE_WORK_ACCIDENT_RECORD`, `WORK_ACCIDENT_RECORD`, `ACCESS_TO_PROTECTIVE_EQUIPMENT`, `EMPLOYER_ISSUE_RECORD`, `ISSUE_RECORD_URL`, `EXISTENCE_EXTRA_WORK_RECORD`, `EXTRA_WORK_RECORD_URL`, `EXISTENCE_FREEDOM_ASSOCIATION_DISCLAIMER`, `FREEDOM_ASSOCIATION_DISCLAIMER_URL`, `EXISTENCE_DISCRIMINATION_REGULATION`, `DISCRIMINATION_REGULATION_URL`, `EXISTENCE_DISCIPLINARY_POLICIES`, `DISCIPLINARY_POLICIES`, `EXISTENCE_GRIEVING_SYSTEM`, `GRIEVING_SYSTEM_URL`, `RECORD_GRIEVING_SYSTEM`, `PROTECTIVE_EQUIPMENT_AVAILABLE`, `PROTECTIVE_EQUIPMENT_URL`, `SAFETY_CONDITION`, `WORKERS_REPRESENTATIVE_GROUP`, `NB_REPRESENTATIVE_GROUPS_IN_AREA`, `WORKERS_MAKE_FINANCIAL_DEPOSIT`, `CL_GET_BACK_FINANCIAL_DEPOSIT_REASON_ID`, `CL_NO_EARLY_CONTRACT_TERMINATION_REASON_ID`, `CL_CONTRACT_TERMINATION_REASON_ID`, `CONTRACT_TERMINATION_OTHER_REASON`, `CL_DEDUCTION_SALARY_ID_1`, `CL_DEDUCTION_SALARY_ID_2`, `CL_DEDUCTION_SALARY_ID_3`, `CL_DEDUCTION_SALARY_ID_4`, `DEDUCTION_SALARY_OTHER`, `AMOUNT_SALARY_DEDUCED_MONTH`, `PAYMENT_SLIP_PROVIDED_TO_WORKER`, `WORKERS_IN_DEBT`, `CL_PAYMENT_DEBT_TYPE_ID_1`, `CL_PAYMENT_DEBT_TYPE_ID_2`, `CL_PAYMENT_DEBT_TYPE_ID_3`, `CL_PAYMENT_DEBT_TYPE_ID_4`, `WORKERS_IN_DEBT_OTHER_STAKEHOLDER`, `IN_KIND_PAYMENT`, `IN_KIND_PAYMENT_TYPE`, `CL_HIRING_RESTRICTION_ID`, `NB_MIGRANT_WORKERS`, `WORKER_HURT`, `WORKER_HURT_EXPLANATION`, `UPDATER_ID`, `COMMENT`, `CREATED_AT`, `UPDATED_AT`, `ANY_CONTRACT_SIGNED_WITH_WORKERS`, `KEEP_WORKER_DOCUMENTS_SAFEKEEPING`, `STAFF_HIRED_DIRECTY`, `STAFF_HIRED_THROUGH_AGENT`, `CL_KEPT_WORKER_ENTITY_DOCUMENT_TYPE_ID_1`, `CL_KEPT_WORKER_ENTITY_DOCUMENT_TYPE_ID_2`, `CL_KEPT_WORKER_ENTITY_DOCUMENT_TYPE_ID_3`, `CL_KEPT_WORKER_ENTITY_DOCUMENT_TYPE_ID_4`) VALUES
-(142, 0, '08:00:00', '18:00:00', 0, 0, 0, 0, 0, NULL, 0, 0, 0, 0, 0, 0, 1, 0, NULL, 0, NULL, 0, NULL, 0, 0, NULL, 0, NULL, 0, NULL, 0, NULL, 0, NULL, 0, NULL, 0, NULL, NULL, NULL, 0, 0, 1, 1, NULL, NULL, '', 1, 3, NULL, NULL, '', 52, 1, 1, 3, NULL, NULL, NULL, 1, 1, 'xxxxx', NULL, 0, 0, '', 1, NULL, '2018-02-06 21:03:21', '2018-02-06 21:03:21', b'1', b'1', b'1', b'1', 3, NULL, NULL, NULL);
+(2, 0, '08:00:00', '18:00:00', 0, 0, 0, 0, NULL, 0, 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0, NULL, 0, NULL, 0, 0, NULL, 0, NULL, 0, NULL, 0, NULL, 0, NULL, 0, NULL, 0, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, 1, NULL, '2018-01-16 19:50:43', '2018-01-16 19:50:43', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(51, 0, '08:00:00', '18:00:00', 0, 0, 0, 0, NULL, NULL, 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0, NULL, 0, NULL, 0, 0, NULL, 0, NULL, 0, NULL, 0, NULL, 0, NULL, 0, NULL, 0, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, 1, NULL, '2018-02-10 02:14:24', '2018-02-10 02:14:24', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(58, 0, '08:00:00', '18:00:00', 0, 0, 0, 0, NULL, NULL, 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0, NULL, 0, NULL, 0, 0, NULL, 0, NULL, 0, NULL, 0, NULL, 0, NULL, 0, NULL, 0, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, 1, NULL, '2018-02-08 09:42:59', '2018-02-08 09:42:59', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(62, 0, '08:00:00', '18:00:00', 0, 0, 0, 0, NULL, 0, 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0, NULL, 0, NULL, 0, 0, NULL, 0, NULL, 0, NULL, 0, NULL, 0, NULL, 0, NULL, 0, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, 1, NULL, '2018-01-17 12:00:44', '2018-01-17 12:00:44', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(72, 0, '08:00:00', '18:00:00', 0, 0, 0, 0, NULL, 0, 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0, NULL, 0, NULL, 0, 0, NULL, 0, NULL, 0, NULL, 0, NULL, 0, NULL, 0, NULL, 0, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, 1, NULL, '2018-01-17 09:51:33', '2018-01-17 09:51:33', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(73, 0, '08:00:00', '18:00:00', 0, 0, 0, 0, NULL, 0, 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0, NULL, 0, NULL, 0, 0, NULL, 0, NULL, 0, NULL, 0, NULL, 0, NULL, 0, NULL, 0, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, 1, NULL, '2018-01-17 10:48:06', '2018-01-17 10:48:06', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(82, 10, '08:00:00', '18:00:00', 0, 0, 0, 0, 0, NULL, 0, 0, 0, 0, 0, 0, 1, 0, NULL, 0, NULL, 0, NULL, 0, 0, NULL, 0, NULL, 0, NULL, 0, NULL, 0, NULL, 0, NULL, 0, NULL, NULL, NULL, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, '', 1, NULL, '2018-02-16 12:46:30', '2018-02-16 12:46:30', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(83, 0, '08:00:00', '18:00:00', 0, 0, 0, 0, NULL, 0, 0, 0, 0, 0, 0, 0, NULL, 0, NULL, 0, NULL, 0, NULL, 0, 0, NULL, 0, NULL, 0, NULL, 0, NULL, 0, NULL, 0, NULL, 0, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, 1, NULL, '2018-01-17 10:59:57', '2018-01-17 10:59:57', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(84, 0, '08:00:00', '18:00:00', 0, 0, 0, 0, 0, NULL, 0, 0, 0, 0, 0, 0, 1, 0, NULL, 0, NULL, 0, NULL, 0, 0, NULL, 0, NULL, 0, NULL, 0, NULL, 0, NULL, 0, NULL, 0, NULL, NULL, NULL, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, '', 1, NULL, '2018-02-16 12:46:07', '2018-02-16 12:46:07', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(89, 0, '08:00:00', '18:00:00', 0, 0, 0, 0, 0, NULL, 0, 1, 0, 0, 0, 0, 1, 0, NULL, 0, NULL, 0, NULL, 0, 0, NULL, 0, NULL, 0, NULL, 0, NULL, 0, NULL, 0, NULL, 1, NULL, NULL, NULL, 0, 0, 1, 1, 1, 99, 'another reason', NULL, NULL, NULL, NULL, '', NULL, 0, 0, NULL, NULL, NULL, NULL, 0, 0, '', NULL, 0, 0, '', 1, NULL, '2018-02-06 03:32:07', '2018-02-06 03:32:07', b'0', b'0', b'0', b'0', NULL, NULL, NULL, NULL),
+(144, 2, '08:00:00', '18:00:00', 0, 0, 0, 0, 2, NULL, 0, 1, 0, 0, 6, 0, 1, 0, NULL, 0, NULL, 0, NULL, 0, 0, NULL, 0, NULL, 0, NULL, 0, NULL, 0, NULL, 1, NULL, 1, NULL, NULL, NULL, 1, 0, 0, NULL, 1, NULL, '', NULL, NULL, NULL, NULL, '', NULL, 0, 0, NULL, NULL, NULL, NULL, 0, 0, '', 2, 15, 0, '', 1, NULL, '2018-02-16 01:21:46', '2018-02-16 01:21:46', b'1', b'0', b'1', b'0', NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -3616,7 +4007,11 @@ CREATE TABLE `reg_entity_staff_safety` (
 --
 
 INSERT INTO `reg_entity_staff_safety` (`REG_ENTITY_FARM_ID`, `SAFETY_EQUIPMENT_IN_FARM`, `WORKERS_USE_SAFETY_EQUIPMENT`, `FREE_SAFETY_EQUIPMENT`, `NUMBER_TRAINED_STAFF`, `PREVENTION_ACCIDENT_MEASURES`, `UPDATER_ID`, `COMMENT`, `CREATED_AT`, `UPDATED_AT`) VALUES
-(142, 0, 1, 0, 0, 0, 3, '', '2018-02-07 15:34:59', '2018-02-07 15:34:59');
+(2, NULL, NULL, NULL, 0, NULL, 4, '', '2018-02-12 01:54:20', '2018-02-12 01:54:20'),
+(51, NULL, NULL, NULL, 0, NULL, 4, '', '2018-02-10 02:16:43', '2018-02-10 02:16:43'),
+(58, NULL, NULL, NULL, 0, NULL, 3, '', '2018-02-08 09:43:09', '2018-02-08 09:43:09'),
+(89, NULL, NULL, NULL, 0, NULL, 3, '', '2018-02-08 11:44:04', '2018-02-08 11:44:04'),
+(144, 1, 0, 1, 1, 0, 4, '', '2018-02-16 02:00:31', '2018-02-16 02:00:31');
 
 -- --------------------------------------------------------
 
@@ -3642,7 +4037,9 @@ CREATE TABLE `reg_entity_staff_training` (
 --
 
 INSERT INTO `reg_entity_staff_training` (`REG_ENTITY_FARM_ID`, `FIRST_AID_TRAINING`, `HAZARDOUS_ACTIVITIES_TRAINING`, `CL_HAZARDOUS_ACTIVITIES_TRAINING_TYPE_ID`, `HAZARDOUS_ACTIVITIES_TRAINING_DATE`, `HAZARDOUS_ACTIVITIES_NUMBER_TRAINED_STAFF`, `UPDATER_ID`, `COMMENT`, `CREATED_AT`, `UPDATED_AT`) VALUES
-(142, 1, 1, NULL, '2018-02-07', 0, 3, '', '2018-02-11 07:15:29', '2018-02-11 07:15:29');
+(2, NULL, NULL, NULL, NULL, 0, 4, '', '2018-02-12 01:54:57', '2018-02-12 01:54:57'),
+(89, NULL, NULL, NULL, NULL, 0, 3, '', '2018-02-11 07:07:23', '2018-02-11 07:07:23'),
+(144, 0, 1, NULL, NULL, 0, 4, '', '2018-02-16 02:02:52', '2018-02-16 02:02:52');
 
 -- --------------------------------------------------------
 
@@ -4142,11 +4539,7 @@ INSERT INTO `sys_users` (`ID`, `name`, `email`, `password`, `remember_token`, `S
 (10, 'Flavie Denelle', 'flavie.denelle@gmail.com', 'a', NULL, 1, NULL, NULL, NULL, NULL, NULL, 0, 1, 0, NULL, '2017-07-20 20:44:30', '2017-07-20 20:44:30'),
 (11, 'pu', 'amornratn@mitrphol.com', 'pu', NULL, 1, NULL, NULL, NULL, NULL, NULL, 0, 1, 0, NULL, '2017-11-24 21:40:24', '2017-11-24 21:40:24'),
 (12, 'Jamnan', 'jamnank@mitrphol.com', 'jamnan', NULL, 1, NULL, NULL, NULL, NULL, NULL, 0, 1, 0, NULL, '2017-11-24 21:41:13', '2017-11-24 21:41:13'),
-(13, 'Somchai Sawaengha', 'pau__badia@hotmail.com', 'a', NULL, 4, NULL, NULL, NULL, NULL, NULL, 0, 1, 0, NULL, '2017-12-11 03:25:01', '2017-12-11 03:25:01'),
-(15, 'test-farm', 'farm@yahoo.fr', 'a', NULL, 4, NULL, 142, NULL, NULL, NULL, 0, 1, 0, NULL, '2018-02-14 06:48:12', '2018-02-14 06:48:12'),
-(16, 'test-coop', 'coop@yahoo.fr', 'a', NULL, 3, NULL, NULL, 143, NULL, NULL, 0, 1, 0, NULL, '2018-02-14 06:49:29', '2018-02-14 06:49:29'),
-(17, 'test', 'y_laurent@yahoo.fr', 'a', NULL, 3, NULL, NULL, 143, NULL, NULL, 0, 1, 0, NULL, '2018-02-17 05:28:05', '2018-02-17 05:28:05'),
-(18, 'test2', 'y@test.test', 'a', NULL, 3, NULL, NULL, 143, NULL, NULL, 0, 1, 0, NULL, '2018-02-17 06:01:05', '2018-02-17 06:01:05');
+(13, 'Somchai Sawaengha', 'pau__badia@hotmail.com', 'a', NULL, 4, NULL, NULL, NULL, NULL, NULL, 0, 1, 0, NULL, '2017-12-11 03:25:01', '2017-12-11 03:25:01');
 
 -- --------------------------------------------------------
 
@@ -4989,9 +5382,10 @@ ALTER TABLE `jt_plot_activity_product_types`
 -- Index pour la table `jt_pond_activity_product_types`
 --
 ALTER TABLE `jt_pond_activity_product_types`
-  ADD UNIQUE KEY `CL_PRODUCT_TYPE_ID_UNIQUE` (`CL_PRODUCT_TYPE_ID`),
-  ADD UNIQUE KEY `CL_FARM_POND_ACTIVITY_ID_UNIQUE` (`CL_FARM_POND_ACTIVITY_ID`),
-  ADD KEY `FK_POND_ACTIVITY_PRODUCT_TYPE_UPDATER_ID` (`UPDATER_ID`);
+  ADD UNIQUE KEY `FK_JT_POND_ACTIVITY_PRODUCT_TYPE_UNIQUE` (`CL_FARM_POND_ACTIVITY_ID`,`CL_PRODUCT_TYPE_ID`),
+  ADD KEY `FK_POND_ACTIVITY_PRODUCT_TYPE_UPDATER_ID` (`UPDATER_ID`),
+  ADD KEY `FK_FARM_POND_ACTIVITY_ACTIVITY_TYPE_idx` (`CL_FARM_POND_ACTIVITY_ID`),
+  ADD KEY `FK_FARM_POND_ACTIVITY_PRODUCT_TYPE_idx` (`CL_PRODUCT_TYPE_ID`);
 
 --
 -- Index pour la table `reg_entities`
@@ -5056,6 +5450,16 @@ ALTER TABLE `reg_entity_farm_buildings`
   ADD PRIMARY KEY (`REG_ENTITY_FARM_ID`),
   ADD KEY `FK_REG_ENTITY_FARM_BUILDING_UPDATER_ID` (`UPDATER_ID`),
   ADD KEY `FK_REG_ENTITY_FARM_BUILDING_CL_BUILDING_TYPE_ID_idx` (`CL_FARM_BUILDING_TYPE_ID`);
+
+--
+-- Index pour la table `reg_entity_farm_buyers`
+--
+ALTER TABLE `reg_entity_farm_buyers`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `REG_ENTITY_FARM_ID` (`REG_ENTITY_FARM_ID`),
+  ADD KEY `REG_ENTITY_BUYER_ID` (`REG_ENTITY_BUYER_ID`),
+  ADD KEY `FK_CL_BUYER_PRODUCTTYPE` (`CL_PRODUCT_TYPES_ID`),
+  ADD KEY `FK_REG_ENTITY_ENTITY_BUYER_UPDATER_ID` (`UPDATER_ID`);
 
 --
 -- Index pour la table `reg_entity_farm_details`
@@ -5566,7 +5970,7 @@ ALTER TABLE `cl_farm_plot_activity_types`
 -- AUTO_INCREMENT pour la table `cl_farm_pond_activity_types`
 --
 ALTER TABLE `cl_farm_pond_activity_types`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT pour la table `cl_farm_pond_types`
 --
@@ -5631,7 +6035,7 @@ ALTER TABLE `cl_ref_languages`
 -- AUTO_INCREMENT pour la table `cl_ref_product_types`
 --
 ALTER TABLE `cl_ref_product_types`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=81;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=101;
 --
 -- AUTO_INCREMENT pour la table `cl_ref_regions`
 --
@@ -5666,17 +6070,17 @@ ALTER TABLE `dt_farmaq_plot_measurements`
 -- AUTO_INCREMENT pour la table `dt_farmaq_pond_management`
 --
 ALTER TABLE `dt_farmaq_pond_management`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 --
 -- AUTO_INCREMENT pour la table `dt_farmaq_pond_measurements`
 --
 ALTER TABLE `dt_farmaq_pond_measurements`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 --
 -- AUTO_INCREMENT pour la table `dt_farmaq_production`
 --
 ALTER TABLE `dt_farmaq_production`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 --
 -- AUTO_INCREMENT pour la table `dt_soil_analysis`
 --
@@ -5691,7 +6095,7 @@ ALTER TABLE `dt_water_analysis`
 -- AUTO_INCREMENT pour la table `reg_entities`
 --
 ALTER TABLE `reg_entities`
-  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=145;
+  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=147;
 --
 -- AUTO_INCREMENT pour la table `reg_entity_farmag_details`
 --
@@ -5711,17 +6115,22 @@ ALTER TABLE `reg_entity_farmaq_details`
 -- AUTO_INCREMENT pour la table `reg_entity_farmaq_ponds`
 --
 ALTER TABLE `reg_entity_farmaq_ponds`
-  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=182;
+--
+-- AUTO_INCREMENT pour la table `reg_entity_farm_buyers`
+--
+ALTER TABLE `reg_entity_farm_buyers`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT pour la table `reg_entity_farm_details`
 --
 ALTER TABLE `reg_entity_farm_details`
-  MODIFY `ID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
+  MODIFY `ID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100;
 --
 -- AUTO_INCREMENT pour la table `reg_entity_farm_providers`
 --
 ALTER TABLE `reg_entity_farm_providers`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 --
 -- AUTO_INCREMENT pour la table `reg_entity_product_suppliers`
 --
@@ -5731,7 +6140,7 @@ ALTER TABLE `reg_entity_product_suppliers`
 -- AUTO_INCREMENT pour la table `reg_entity_staff_contract`
 --
 ALTER TABLE `reg_entity_staff_contract`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT pour la table `reg_entity_staff_declaration`
 --
@@ -6243,9 +6652,9 @@ ALTER TABLE `jt_plot_activity_product_types`
 -- Contraintes pour la table `jt_pond_activity_product_types`
 --
 ALTER TABLE `jt_pond_activity_product_types`
-  ADD CONSTRAINT `FK_FARM_POND_ACTIVITY_PRODUCT_TYPE_UPDATER_ID` FOREIGN KEY (`UPDATER_ID`) REFERENCES `sys_users` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `FK_POND_ACTIVITY_TYPE_PRODUCT_TYPE_UNIK_FARM` FOREIGN KEY (`CL_FARM_POND_ACTIVITY_ID`) REFERENCES `cl_farm_pond_activity_types` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `FK_POND_ACTIVITY_TYPE_PRODUCT_TYPE_UNIK_PRODUCT_TYPE` FOREIGN KEY (`CL_PRODUCT_TYPE_ID`) REFERENCES `cl_ref_product_types` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `FK_FARM_POND_ACTIVITY_ACTIVITY_TYPE` FOREIGN KEY (`CL_FARM_POND_ACTIVITY_ID`) REFERENCES `cl_farm_pond_activity_types` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `FK_FARM_POND_ACTIVITY_PRODUCT_TYPE` FOREIGN KEY (`CL_PRODUCT_TYPE_ID`) REFERENCES `cl_ref_product_types` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `FK_FARM_POND_ACTIVITY_PRODUCT_TYPE_UPDATER_ID` FOREIGN KEY (`UPDATER_ID`) REFERENCES `sys_users` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Contraintes pour la table `reg_entities`
@@ -6304,6 +6713,15 @@ ALTER TABLE `reg_entity_farm_buildings`
   ADD CONSTRAINT `FK_REG_ENTITY_FARM_BUILDING_CL_BUILDING_TYPE_ID` FOREIGN KEY (`CL_FARM_BUILDING_TYPE_ID`) REFERENCES `cl_farm_building_types` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `FK_REG_ENTITY_FARM_BUILDING_FARM_ID` FOREIGN KEY (`REG_ENTITY_FARM_ID`) REFERENCES `reg_entities` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `FK_REG_ENTITY_FARM_BUILDING_UPDATER_ID` FOREIGN KEY (`UPDATER_ID`) REFERENCES `sys_users` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Contraintes pour la table `reg_entity_farm_buyers`
+--
+ALTER TABLE `reg_entity_farm_buyers`
+  ADD CONSTRAINT `FK_CL_BUYER_PRODUCTTYPE` FOREIGN KEY (`CL_PRODUCT_TYPES_ID`) REFERENCES `cl_ref_product_types` (`ID`),
+  ADD CONSTRAINT `FK_REG_ENTITY_ENTITY_BUYER_BUYER_ID` FOREIGN KEY (`REG_ENTITY_BUYER_ID`) REFERENCES `reg_entities` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `FK_REG_ENTITY_ENTITY_BUYER_FARM_ID` FOREIGN KEY (`REG_ENTITY_FARM_ID`) REFERENCES `reg_entities` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `FK_REG_ENTITY_ENTITY_BUYER_UPDATER_ID` FOREIGN KEY (`UPDATER_ID`) REFERENCES `sys_users` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Contraintes pour la table `reg_entity_farm_details`
