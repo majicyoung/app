@@ -66,7 +66,7 @@
 								<hr/>
 								<div class="row">
 								<div class="col-xs-12">
-									<form th:action="@{'/farm/'+${farmId}+'/entity/'+${entityId}+'/staff-working-agreement.html'}" th:object="${wagDto}" method="post" enctype="multipart/form-data" onsubmit="return !hasEmptyFields('.form-control[required]');">
+									<form class="mainForm" th:action="@{'/farm/'+${farmId}+'/entity/'+${entityId}+'/staff-working-agreement.html'}" th:object="${wagDto}" method="post" enctype="multipart/form-data" onsubmit="return !hasEmptyFields('.form-control[required]');">
 									<div class="col-xs-12">
 										<h4 class="form-staff-title" th:text="#{staff-working-agreement.title}">staff-working-agreement.title</h4>
 										<input type="hidden" th:field="*{id}"  />

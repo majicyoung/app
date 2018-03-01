@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -15,27 +16,20 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.fairagora.verifik8.v8web.data.application.V8Page;
 import com.fairagora.verifik8.v8web.data.domain.dt.DTFarmPondActivity;
 import com.fairagora.verifik8.v8web.data.domain.reg.RegEntity;
-import com.fairagora.verifik8.v8web.data.domain.reg.farm.RegEntityFarmPond;
-import com.fairagora.verifik8.v8web.data.repo.reg.RegEntityFarmPondRepository;
 import com.fairagora.verifik8.v8web.data.repo.dt.DTFarmPondActivityRepository;
+import com.fairagora.verifik8.v8web.data.repo.reg.RegEntityFarmPondRepository;
 import com.fairagora.verifik8.v8web.mvc.AbstractV8Controller;
-import com.fairagora.verifik8.v8web.mvc.farms.RegFarmDTOMapper;
 import com.fairagora.verifik8.v8web.mvc.ponds.dto.PondActivityDto;
 
 @Controller
 public class FarmPondActivityController extends AbstractV8Controller {
 
-	
-	@Autowired
-	private RegFarmDTOMapper regFarmDtoMapper;
-
 	@Autowired
 	private RegEntityFarmPondRepository regEntityFarmPondRepository;
 
 	@Autowired
-	 protected JdbcTemplate jdbc;
-	
-	
+	protected JdbcTemplate jdbc;
+
 	@Autowired
 	private DTFarmPondActivityRepository pondActivityRepository;
 
@@ -52,27 +46,30 @@ public class FarmPondActivityController extends AbstractV8Controller {
 	 * @param mv
 	 * @return
 	 */
+	@PreAuthorize("hasAuthority('R_PONDACTIVTY')")
 	@RequestMapping(value = "/farm/{farmId}/pond/{pondId}/activities/browser.html", method = RequestMethod.GET)
 	public String showPlotActivities(@PathVariable("farmId") Long farmId, @PathVariable("pondId") Long pondId, Model mv) {
-		
+
 		RegEntity farm = regEntityRepository.findOne(farmId);
-		
+
 		List<DTFarmPondActivity> activities = pondActivityRepository.findByPondId(pondId);
 		mv.addAttribute("activities", activities);
 		mv.addAttribute("farmId", farmId);
-		mv.addAttribute("farmName", jdbc.queryForObject("SELECT name FROM reg_entities WHERE id="+farmId, String.class));
+		mv.addAttribute("farmName", jdbc.queryForObject("SELECT name FROM reg_entities WHERE id=" + farmId, String.class));
 		mv.addAttribute("pondId", pondId);
 
 		preparePage(farm, pondId, mv);
 
+		setToReadOnly(mv, "W_PONDACTIVTY");
 		return "farms/pond-activities/browser";
 	}
 
+	@PreAuthorize("hasAuthority('W_PONDACTIVTY')")
 	@RequestMapping(value = "/farm/{farmId}/pond/{pondId}/activities/create.html", method = RequestMethod.GET)
-	public String createPlotActivities(@PathVariable("farmId") Long farmId,@PathVariable("pondId") Long pondId, Model mv) {
+	public String createPlotActivities(@PathVariable("farmId") Long farmId, @PathVariable("pondId") Long pondId, Model mv) {
 
 		RegEntity farm = regEntityRepository.findOne(farmId);
-		
+
 		PondActivityDto dto = new PondActivityDto();
 		dto.setPond(pondId);
 
@@ -80,22 +77,22 @@ public class FarmPondActivityController extends AbstractV8Controller {
 		mv.addAttribute("pondId", pondId);
 		mv.addAttribute("activityId", 0l);
 		mv.addAttribute("farmId", farmId);
-		mv.addAttribute("farmName", jdbc.queryForObject("SELECT name FROM reg_entities WHERE id="+farmId, String.class));
+		mv.addAttribute("farmName", jdbc.queryForObject("SELECT name FROM reg_entities WHERE id=" + farmId, String.class));
 		mv.addAttribute("allPondActivityTypes", codeListservice.listActivePondActivityTypes());
 		mv.addAttribute("allProducts", codeListservice.listActiveProducts());
 		mv.addAttribute("allQuantityUnits", codeListservice.listActiveQuantityUnit());
 
-		preparePage(farm,pondId, mv);
+		preparePage(farm, pondId, mv);
 
 		return "farms/pond-activities/editor";
 	}
 
+	@PreAuthorize("hasAuthority('R_PONDMEASURE')")
 	@RequestMapping(value = "/farm/{farmId}/pond/{pondId}/activities/{activityId}/edit.html", method = RequestMethod.GET)
-	public String showPondActivities(@PathVariable("farmId") Long farmId,@PathVariable("pondId") Long pondId, @PathVariable("activityId") Long activityId,
-			Model mv) {
+	public String showPondActivities(@PathVariable("farmId") Long farmId, @PathVariable("pondId") Long pondId, @PathVariable("activityId") Long activityId, Model mv) {
 
 		RegEntity farm = regEntityRepository.findOne(farmId);
-		
+
 		DTFarmPondActivity act = pondActivityRepository.findOne(activityId);
 
 		PondActivityDto dto = new PondActivityDto();
@@ -104,13 +101,13 @@ public class FarmPondActivityController extends AbstractV8Controller {
 		mv.addAttribute("activityDto", dto);
 		mv.addAttribute("activityId", act.getId());
 		mv.addAttribute("farmId", farmId);
-		mv.addAttribute("farmName", jdbc.queryForObject("SELECT name FROM reg_entities WHERE id="+farmId, String.class));
+		mv.addAttribute("farmName", jdbc.queryForObject("SELECT name FROM reg_entities WHERE id=" + farmId, String.class));
 		mv.addAttribute("allPondActivityTypes", codeListservice.listActivePondActivityTypes());
 		mv.addAttribute("allProducts", codeListservice.listActiveProducts());
 		mv.addAttribute("allQuantityUnits", codeListservice.listActiveQuantityUnit());
 
-		preparePage(farm,pondId, mv);
-
+		preparePage(farm, pondId, mv);
+		setToReadOnly(mv, "W_PONDMEASURE");
 		return "farms/pond-activities/editor";
 	}
 
@@ -121,12 +118,12 @@ public class FarmPondActivityController extends AbstractV8Controller {
 	 * @param mv
 	 * @return
 	 */
+	@PreAuthorize("hasAuthority('W_PONDMEASURE')")
 	@RequestMapping(value = "/farm/{farmId}/pond/{pondId}/activities/update.html", method = RequestMethod.POST)
-	public String showPlotActivities(@PathVariable("farmId") Long farmId, @PathVariable("pondId") Long pondId, PondActivityDto dto, BindingResult result,
-			Model mv) {
+	public String showPlotActivities(@PathVariable("farmId") Long farmId, @PathVariable("pondId") Long pondId, PondActivityDto dto, BindingResult result, Model mv) {
 
 		RegEntity farm = regEntityRepository.findOne(farmId);
-		
+
 		DTFarmPondActivity act = null;
 
 		if (result.hasErrors()) {
@@ -144,9 +141,9 @@ public class FarmPondActivityController extends AbstractV8Controller {
 
 		pondActivityRepository.save(act);
 
-		preparePage(farm,pondId, mv);
+		preparePage(farm, pondId, mv);
 
-		return "redirect:/farm/"+farmId +"/ponds.html";
+		return "redirect:/farm/" + farmId + "/ponds.html";
 	}
 
 	/**
@@ -156,17 +153,17 @@ public class FarmPondActivityController extends AbstractV8Controller {
 	 * @param mv
 	 * @return
 	 */
+	@PreAuthorize("hasAuthority('W_PONDMEASURE')")
 	@RequestMapping(value = "/farm/{farmId}/pond/{pondId}/activities/delete.html", method = RequestMethod.POST)
-	public String deletePlotActivities(@PathVariable("farmId") Long farmId, @PathVariable("pondId") Long pondId, @RequestParam("activityId") Long activityId,
-			Model mv) {
+	public String deletePlotActivities(@PathVariable("farmId") Long farmId, @PathVariable("pondId") Long pondId, @RequestParam("activityId") Long activityId, Model mv) {
 
 		RegEntity farm = regEntityRepository.findOne(farmId);
-		
+
 		pondActivityRepository.delete(activityId);
 
-		preparePage(farm,pondId, mv);
+		preparePage(farm, pondId, mv);
 
-		return "redirect:/farm/"+farmId +"/ponds.html";
+		return "redirect:/farm/" + farmId + "/ponds.html";
 	}
 
 	/**
@@ -174,7 +171,7 @@ public class FarmPondActivityController extends AbstractV8Controller {
 	 * @param farm
 	 * @param mv
 	 */
-	protected void preparePage(RegEntity farm,Long pondId, Model mv) {
+	protected void preparePage(RegEntity farm, Long pondId, Model mv) {
 
 		V8Page p = new V8Page();
 		p.setTitle("default.farms");

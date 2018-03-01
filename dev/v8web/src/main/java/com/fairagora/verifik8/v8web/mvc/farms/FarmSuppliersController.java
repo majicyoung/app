@@ -6,6 +6,7 @@ import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,18 +28,20 @@ public class FarmSuppliersController extends AbstractV8Controller {
 	protected RegEntityFarmSupplierAssignmentRepository regEntityFarmSupplierAssignmentRepository;
 
 	@Autowired
-	 protected JdbcTemplate jdbc;
-	
+	protected JdbcTemplate jdbc;
+
+	@PreAuthorize("hasAuthority('R_FARMSUPPLIER')")
 	@RequestMapping(value = "/farm/{id}/suppliers.html", method = RequestMethod.GET)
 	public String showEditStaff(@PathVariable("id") Long id, Model mv) {
 
 		RegEntity farm = regEntityRepository.findOne(id);
-
+		setToReadOnly(mv, "W_FARMSUPPLIER");
 		preparePage(farm, mv);
-		mv.addAttribute("farmName", jdbc.queryForObject("SELECT name FROM reg_entities WHERE id="+id, String.class));
+		mv.addAttribute("farmName", jdbc.queryForObject("SELECT name FROM reg_entities WHERE id=" + id, String.class));
 		return "farms/suppliers";
 	}
 
+	@PreAuthorize("hasAuthority('W_FARMSUPPLIER')")
 	@Transactional
 	@RequestMapping(value = "/farm/{id}/supplier-for-producttype.html", method = RequestMethod.POST)
 	public String addSupplierForProductType(@PathVariable("id") Long id, @RequestParam("productType") Long productType,
@@ -54,6 +57,7 @@ public class FarmSuppliersController extends AbstractV8Controller {
 		return "redirect:/farm/" + id + "/suppliers.html";
 	}
 
+	@PreAuthorize("hasAuthority('W_FARMSUPPLIER')")
 	@Transactional
 	@RequestMapping(value = "/farm/{id}/delete-supplier-for-producttype.html", method = RequestMethod.POST)
 	public String deleteSupplierForProductType(@PathVariable("id") Long id,

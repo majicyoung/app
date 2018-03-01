@@ -4,24 +4,21 @@ import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.MapsId;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import com.fairagora.verifik8.v8web.data.domain.cl.CLAppCompanyPositionType;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLAppContractType;
+import com.fairagora.verifik8.v8web.data.domain.cl.CLAppPaymentFrequency;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLRefCountry;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLRefCurrency;
-import com.fairagora.verifik8.v8web.data.domain.cl.CLAppPaymentFrequency;
 import com.fairagora.verifik8.v8web.data.domain.reg.RegEntity;
 import com.fairagora.verifik8.v8web.data.domain.reg.V8Base;
 

@@ -53,7 +53,7 @@
                     	</div>
                     </div>
                     <div class="col-xs-12">
-                        <form th:action="@{'/farm/'+${farmId}+'/staff.html'}" th:object="${staffDto}" id="staffEditorForm" method="post" enctype="multipart/form-data">
+                        <form class="mainForm" th:action="@{'/farm/'+${farmId}+'/staff.html'}" th:object="${staffDto}" id="staffEditorForm" method="post" enctype="multipart/form-data">
 	                        <div class="col-xs-6">
 	                            <h4 class="form-staff-title" th:text="#{farm.staff_information}">farm.staff_information</h4>
 	                            <input type="hidden" id="form-staff-id"  />

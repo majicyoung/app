@@ -49,7 +49,7 @@
                     	<div class="col-xs-12">
 	                        <div class="col-xs-6">
 	                            <h4 class="form-supplier-title" th:text="#{suppliers.add_supplier}">suppliers.add_supplier</h4>
-	                            <form th:action="@{'/farm/'+${farmId}+'/supplier-for-producttype.html'}" method="post">
+	                            <form class="mainForm" th:action="@{'/farm/'+${farmId}+'/supplier-for-producttype.html'}" method="post">
 		                            <div class="form-group row">
 		                                <label for="inputFarmSupplierProducts" class="col-xs-3 control-label" th:text="|#{default.select_product}*|">default.select_product*</label>
 		                                <div class="col-xs-9">

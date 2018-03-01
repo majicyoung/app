@@ -183,6 +183,15 @@
 			langURL = "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/English.jsonn";
 		break;
 		}
+		
+		/** setup readonly when needed **/
+		$( document ).ready(function() {
+		    var mainFormToReadOnly = [[${mainFormToReadOnly}]];
+		    if(mainFormToReadOnly){
+		    	$('.mainForm :input').attr("disabled", true);
+		    }
+		});
+		
 		/*]]>*/
 		</script>	
 	</th:block>

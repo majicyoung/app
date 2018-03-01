@@ -11,7 +11,7 @@
 						<a th:href="@{'/farm/'+${farmId}+'/ponds.html'}" class="btn btn-sm btn-flat btn-warning"><i class="fa fa-backward"></i> <span th:text="#{default.back}"></span></a>
 					</div>
 				</div>
-				<form th:action="@{'/farm/'+${farmId}+'/pond/'+${pondId}+'/activities/update.html'}" th:object="${activityDto}" id="pondEditorForm" method="post">
+				<form class="mainForm" th:action="@{'/farm/'+${farmId}+'/pond/'+${pondId}+'/activities/update.html'}" th:object="${activityDto}" id="pondEditorForm" method="post">
 					<input type="hidden" id="pondId" th:field="*{pond}" />
 					<input type="hidden" id="activityId" th:field="*{id}" />
 					<div class="box-body">

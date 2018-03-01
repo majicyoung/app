@@ -5,6 +5,7 @@ import java.sql.Time;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -19,7 +20,6 @@ import com.fairagora.verifik8.v8web.data.domain.reg.farm.RegEntityStaffManagemen
 import com.fairagora.verifik8.v8web.data.repo.reg.RegEntityStaffManagementRepository;
 import com.fairagora.verifik8.v8web.mvc.AbstractV8Controller;
 import com.fairagora.verifik8.v8web.mvc.farms.dto.FarmHiringRecruitmentDto;
-import com.fairagora.verifik8.v8web.mvc.farms.dto.StaffGeneralInfoSto;
 
 @Controller
 public class FarmHiringController extends AbstractV8Controller {
@@ -30,13 +30,13 @@ public class FarmHiringController extends AbstractV8Controller {
 	@Autowired
 	private RegFarmDTOMapper regFarmDtoMapper;
 
-	
 	/**
 	 * 
 	 * @param id
 	 * @param mv
 	 * @return
 	 */
+	@PreAuthorize("hasAuthority('R_FARMHIRING')")
 	@Transactional
 	@RequestMapping(value = "/farm/{id}/hiring-recruitment.html", method = RequestMethod.GET)
 	public String showEnvironmental(@PathVariable("id") Long id, Model mv) {
@@ -52,10 +52,11 @@ public class FarmHiringController extends AbstractV8Controller {
 		});
 
 		regFarmDtoMapper.toDto(staffMgmt, dto);
-
+		setToReadOnly(mv, "W_FARMHIRING");
 		prepareForFarmEdition(id, dto, mv);
 		return "farms/hiring-recruitment";
 	}
+
 	/**
 	 * 
 	 * @param farmDto
@@ -64,9 +65,9 @@ public class FarmHiringController extends AbstractV8Controller {
 	 * @param mv
 	 * @return
 	 */
+	@PreAuthorize("hasAuthority('W_FARMHIRING')")
 	@RequestMapping(value = "/farm/{id}/hiring-recruitment.html", method = RequestMethod.POST)
-	public String saveEnvironmental(@Validated @ModelAttribute("farmDto") FarmHiringRecruitmentDto farmDto,
-			@PathVariable("id") Long farmId, BindingResult bindResults, Model mv) {
+	public String saveEnvironmental(@Validated @ModelAttribute("farmDto") FarmHiringRecruitmentDto farmDto, @PathVariable("id") Long farmId, BindingResult bindResults, Model mv) {
 
 		RegEntityStaffManagement ent = regEntityStaffManagementRepository.findByFarmId(farmId).orElseGet(() -> {
 			RegEntityStaffManagement e = new RegEntityStaffManagement();
@@ -81,7 +82,6 @@ public class FarmHiringController extends AbstractV8Controller {
 
 		return "redirect:/farm/" + farmId + "/hiring-recruitment.html";
 	}
-	
 
 	private void prepareForFarmEdition(Long id, FarmHiringRecruitmentDto dto, Model mv) {
 		V8Page p = new V8Page();
@@ -99,7 +99,7 @@ public class FarmHiringController extends AbstractV8Controller {
 		mv.addAttribute("allSalaryDeductionTypes", codeListservice.listActiveSalaryDeductionType());
 		mv.addAttribute("allPaymentDebtTypes", codeListservice.listActivePaymentDebtType());
 		mv.addAttribute("allHiringRestrictionsTypes", codeListservice.listActiveHiringRestrictionTypeRepository());
-		
+
 		mv.addAttribute("farmDto", dto);
 		mv.addAttribute("farmId", dto.getFarmId());
 

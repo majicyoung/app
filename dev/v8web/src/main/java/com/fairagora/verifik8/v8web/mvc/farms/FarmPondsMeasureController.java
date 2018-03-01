@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -18,7 +19,6 @@ import com.fairagora.verifik8.v8web.data.domain.reg.RegEntity;
 import com.fairagora.verifik8.v8web.data.repo.dt.DTFarmPondMeasurementRepository;
 import com.fairagora.verifik8.v8web.data.repo.reg.RegEntityFarmPondRepository;
 import com.fairagora.verifik8.v8web.mvc.AbstractV8Controller;
-import com.fairagora.verifik8.v8web.mvc.farms.RegFarmDTOMapper;
 import com.fairagora.verifik8.v8web.mvc.ponds.dto.PondMeasurementDto;
 
 @Controller
@@ -40,6 +40,7 @@ public class FarmPondsMeasureController extends AbstractV8Controller {
 	 * @param mv
 	 * @return
 	 */
+	@PreAuthorize("hasAuthority('R_PONDMEASURE')")
 	@RequestMapping(value = "/farm/{farmId}/pond/{pondId}/measures/browser.html", method = RequestMethod.GET)
 	public String showPondMeasure(@PathVariable("farmId") Long farmId, @PathVariable("pondId") Long pondId, Model mv) {
 

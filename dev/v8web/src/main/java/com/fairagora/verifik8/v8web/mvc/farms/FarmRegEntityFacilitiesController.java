@@ -3,6 +3,7 @@ package com.fairagora.verifik8.v8web.mvc.farms;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -13,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.fairagora.verifik8.v8web.data.application.V8Page;
-import com.fairagora.verifik8.v8web.data.domain.reg.farm.RegEntityFacilities;
 import com.fairagora.verifik8.v8web.data.domain.reg.farm.RegEntityFacilities;
 import com.fairagora.verifik8.v8web.data.repo.reg.RegEntityFacilitiesRepository;
 import com.fairagora.verifik8.v8web.mvc.AbstractV8Controller;
@@ -36,6 +36,7 @@ public class FarmRegEntityFacilitiesController extends AbstractV8Controller {
 	 */
 	@Transactional
 	@RequestMapping(value = "/farm/{id}/facilities.html", method = RequestMethod.GET)
+	@PreAuthorize("hasAuthority('R_FARMFACILITY')")
 	public String showEnvironmental(@PathVariable("id") Long id, Model mv) {
 		RegEntityFacilitiesDto dto = new RegEntityFacilitiesDto();
 
@@ -49,6 +50,8 @@ public class FarmRegEntityFacilitiesController extends AbstractV8Controller {
 			repository.save(r);
 			return r;
 		});
+		
+		setToReadOnly(mv, "W_FARMFACILITY");
 
 		regFarmDtoMapper.toDto(staffMgmt, dto);
 
@@ -64,6 +67,7 @@ public class FarmRegEntityFacilitiesController extends AbstractV8Controller {
 	 * @param mv
 	 * @return
 	 */
+	@PreAuthorize("hasAuthority('W_FARMFACILITY')")
 	@RequestMapping(value = "/farm/{id}/facilities.html", method = RequestMethod.POST)
 	public String saveEnvironmental(@Validated @ModelAttribute("farmDto") RegEntityFacilitiesDto farmDto,
 			@PathVariable("id") Long farmId, BindingResult bindResults, Model mv) {

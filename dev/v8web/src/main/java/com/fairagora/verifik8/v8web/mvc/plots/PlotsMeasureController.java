@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -39,20 +40,21 @@ public class PlotsMeasureController extends AbstractV8Controller {
 	 * @param mv
 	 * @return
 	 */
+	@PreAuthorize("hasAuthority('R_PLOTMEASURE')")
 	@RequestMapping(value = "/plots/{plotId}/measures/browser.html", method = RequestMethod.GET)
 	public String showPlotMeasure(@PathVariable("plotId") Long plotId, Model mv) {
 
 		List<DTFarmPlotMeasurement> measures = plotMeasuresRepository.findByPlotId(plotId);
 		mv.addAttribute("measures", measures);
 		mv.addAttribute("plotId", plotId);
-		mv.addAttribute("measureTypes",
-				measures.stream().map(m -> m.getMeasureType()).distinct().collect(Collectors.toList()));
+		mv.addAttribute("measureTypes", measures.stream().map(m -> m.getMeasureType()).distinct().collect(Collectors.toList()));
 
 		preparePage(plotId, mv);
-
+		setToReadOnly(mv, "W_PLOTMEASURE");
 		return "plots/measures/browser";
 	}
 
+	@PreAuthorize("hasAuthority('W_PLOTMEASURE')")
 	@RequestMapping(value = "/plots/{plotId}/measures/create.html", method = RequestMethod.GET)
 	public String createPlotMeasure(@PathVariable("plotId") Long plotId, Model mv) {
 
@@ -62,15 +64,14 @@ public class PlotsMeasureController extends AbstractV8Controller {
 		mv.addAttribute("measureDto", dto);
 		mv.addAttribute("measureId", 0l);
 
-
 		preparePage(plotId, mv);
 
 		return "plots/measures/editor";
 	}
 
+	@PreAuthorize("hasAuthority('R_PLOTMEASURE')")
 	@RequestMapping(value = "/plots/{plotId}/measures/{activityId}/edit.html", method = RequestMethod.GET)
-	public String showPlotMeasures(@PathVariable("plotId") Long plotId, @PathVariable("activityId") Long activityId,
-			Model mv) {
+	public String showPlotMeasures(@PathVariable("plotId") Long plotId, @PathVariable("activityId") Long activityId, Model mv) {
 
 		DTFarmPlotMeasurement act = plotMeasuresRepository.findOne(activityId);
 
@@ -81,7 +82,7 @@ public class PlotsMeasureController extends AbstractV8Controller {
 		mv.addAttribute("measureDto", dto);
 		mv.addAttribute("plotId", plotId);
 		mv.addAttribute("measureId", 0l);
-
+		setToReadOnly(mv, "W_PLOTMEASURE");
 		preparePage(plotId, mv);
 
 		return "plots/measures/editor";
@@ -94,9 +95,9 @@ public class PlotsMeasureController extends AbstractV8Controller {
 	 * @param mv
 	 * @return
 	 */
+	@PreAuthorize("hasAuthority('W_PLOTMEASURE')")
 	@RequestMapping(value = "/plots/{plotId}/measures/update.html", method = RequestMethod.POST)
-	public String updatePlotMeasures(@PathVariable("plotId") Long plotId, PlotMeasurementDto dto, BindingResult result,
-			Model mv) {
+	public String updatePlotMeasures(@PathVariable("plotId") Long plotId, PlotMeasurementDto dto, BindingResult result, Model mv) {
 
 		DTFarmPlotMeasurement measure = null;
 
@@ -123,9 +124,9 @@ public class PlotsMeasureController extends AbstractV8Controller {
 	 * @param mv
 	 * @return
 	 */
+	@PreAuthorize("hasAuthority('W_PLOTMEASURE')")
 	@RequestMapping(value = "/plots/{plotId}/measures/delete.html", method = RequestMethod.POST)
-	public String deletePlotMeasure(@PathVariable("plotId") Long plotId, @RequestParam("activityId") Long activityId,
-			Model mv) {
+	public String deletePlotMeasure(@PathVariable("plotId") Long plotId, @RequestParam("activityId") Long activityId, Model mv) {
 
 		plotMeasuresRepository.delete(activityId);
 

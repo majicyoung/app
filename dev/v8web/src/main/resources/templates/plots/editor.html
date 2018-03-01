@@ -9,7 +9,7 @@
 					<h3 class="box-title" th:text="#{farm.create_plot}"></h3>
 					
 				</div>
-				<form th:action="@{'/plots/'+${plotId}+'/update.html'}" th:object="${plotDto}" id="plotEditorForm" method="post">
+				<form class="mainForm" th:action="@{'/plots/'+${plotId}+'/update.html'}" th:object="${plotDto}" id="plotEditorForm" method="post">
 					<input type="hidden" id="plotId" th:field="*{id}" />
 					<div class="box-body">
 						<div class="row">

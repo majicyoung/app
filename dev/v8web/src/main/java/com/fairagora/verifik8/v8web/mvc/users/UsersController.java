@@ -6,8 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -21,7 +20,6 @@ import com.fairagora.verifik8.v8web.data.application.V8Page;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLAppEntityType;
 import com.fairagora.verifik8.v8web.data.domain.sys.SYSUser;
 import com.fairagora.verifik8.v8web.mvc.AbstractV8Controller;
-import com.fairagora.verifik8.v8web.mvc.farms.dto.FarmFormDto;
 import com.fairagora.verifik8.v8web.mvc.infra.dtomapping.SysUserDTOMapper;
 import com.fairagora.verifik8.v8web.mvc.users.dto.UserFormDto;
 
@@ -31,6 +29,7 @@ public class UsersController extends AbstractV8Controller {
 	@Autowired
 	private SysUserDTOMapper sysUserDTOMapper;
 
+	@PreAuthorize("hasAuthority('R_USERBROWSER')")
 	@RequestMapping(value = "/users.html", method = RequestMethod.GET)
 	public String showUsersList(Model mv, HttpServletRequest req) {
 
@@ -47,29 +46,31 @@ public class UsersController extends AbstractV8Controller {
 
 	}
 
+	@PreAuthorize("hasAuthority('W_USEREDITOR')")
 	@RequestMapping(value = "/user/{id}/delete.html", method = RequestMethod.POST)
 	public String deleteUser(@PathVariable("id") Long id, Model mv) {
 		userRepository.delete(id);
 		return "redirect:/users.html";
 	}
 
+	@PreAuthorize("hasAuthority('R_USEREDITOR')")
 	@RequestMapping(value = "/user/{id}/edit.html", method = RequestMethod.GET)
 	public String showEditUser(@PathVariable("id") Long id, Model mv) {
 		UserFormDto dto = new UserFormDto();
 
 		sysUserDTOMapper.toDto(userRepository.findOne(id), dto);
-
+		setToReadOnly(mv, "W_USEREDITOR");
 		prepareForUserEdition(dto, mv);
 		return "users/create";
 	}
 
+	@PreAuthorize("hasAuthority('W_USEREDITOR')")
 	@RequestMapping(value = "/users/create.html", method = RequestMethod.GET)
 	public String showCreateUserForm(Model mv) {
 
-
 		UserFormDto dto = new UserFormDto();
 
-		prepareForUserEdition (dto, mv);
+		prepareForUserEdition(dto, mv);
 
 		return "users/create";
 
@@ -90,9 +91,9 @@ public class UsersController extends AbstractV8Controller {
 		mv.addAttribute("allFarms", regEntityRepository.findByEntityTypeCode(CLAppEntityType.CODE_FARM));
 	}
 
+	@PreAuthorize("hasAuthority('W_USEREDITOR')")
 	@RequestMapping(value = "/users/create.html", method = RequestMethod.POST)
-	public String createUser(@Validated @ModelAttribute("userDto") UserFormDto createUserDto, BindingResult bindResults,
-			Model mv) {
+	public String createUser(@Validated @ModelAttribute("userDto") UserFormDto createUserDto, BindingResult bindResults, Model mv) {
 
 		SYSUser newUser = new SYSUser();
 
@@ -104,9 +105,9 @@ public class UsersController extends AbstractV8Controller {
 		return "redirect:/users.html";
 	}
 
+	@PreAuthorize("hasAuthority('W_USEREDITOR')")
 	@RequestMapping(value = "/user/{id}/update.html", method = RequestMethod.POST)
-	public String createUser(@Validated @ModelAttribute("userDto") UserFormDto createUserDto,
-			@PathVariable("id") Long userId, BindingResult bindResults, Model mv) {
+	public String createUser(@Validated @ModelAttribute("userDto") UserFormDto createUserDto, @PathVariable("id") Long userId, BindingResult bindResults, Model mv) {
 
 		SYSUser newUser = userRepository.findOne(userId);
 

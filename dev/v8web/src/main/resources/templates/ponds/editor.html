@@ -8,7 +8,7 @@
 				<div class="box-header with-border">
 					<h3 class="box-title" th:text="#{farm.create_pond}"></h3>
 				</div>
-				<form th:action="@{'/ponds/'+${pondId}+'/update.html'}" th:object="${pondDto}" id="pondEditorForm" method="post">
+				<form class="mainForm" th:action="@{'/ponds/'+${pondId}+'/update.html'}" th:object="${pondDto}" id="pondEditorForm" method="post">
 					<input type="hidden" id="pondId" th:field="*{id}" />
 					<div class="box-body">
 						<div class="row">

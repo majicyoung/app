@@ -11,7 +11,7 @@
 						<a th:href="@{/suppliers/browser.html}" class="btn btn-sm btn-flat btn-warning"><i class="fa fa-backward"></i> <span th:text="#{default.back}"></span></a>
 					</div>
 				</div>
-				<form th:action="@{'/suppliers/'+${supplierId}+'/update.html'}" id="supplierEditorForm" method="post">
+				<form class="mainForm" th:action="@{'/suppliers/'+${supplierId}+'/update.html'}" id="supplierEditorForm" method="post">
 					<div class="box-body">
 						<div class="row">
 							<div class="col-xs-12">

@@ -11,7 +11,7 @@
 						<a th:href="@{/buyers/browser.html}" class="btn btn-sm btn-flat btn-warning"><i class="fa fa-backward"></i> <span th:text="#{default.back}"></span></a>
 					</div>
 				</div>
-				<form th:action="@{'/buyers/'+${buyerId}+'/update.html'}" id="buyerEditorForm" method="post">
+				<form class="mainForm" th:action="@{'/buyers/'+${buyerId}+'/update.html'}" id="buyerEditorForm" method="post">
 					<div class="box-body">
 						<div class="row">
 							<div class="col-xs-12">

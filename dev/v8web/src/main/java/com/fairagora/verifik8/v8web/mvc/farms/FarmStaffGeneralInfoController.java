@@ -6,6 +6,7 @@ import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -22,7 +23,7 @@ import com.fairagora.verifik8.v8web.mvc.AbstractV8Controller;
 import com.fairagora.verifik8.v8web.mvc.farms.dto.StaffGeneralInfoSto;
 
 @Controller
-public class FarmGeneralInfoController extends AbstractV8Controller {
+public class FarmStaffGeneralInfoController extends AbstractV8Controller {
 
 	@Autowired
 	private RegEntityStaffManagementRepository regEntityStaffManagementRepository;
@@ -38,6 +39,7 @@ public class FarmGeneralInfoController extends AbstractV8Controller {
 	 */
 	@Transactional
 	@RequestMapping(value = "/farm/{id}/staff-general-info.html", method = RequestMethod.GET)
+	@PreAuthorize("hasAuthority('R_FARMSTAFFINFO')")
 	public String showEnvironmental(@PathVariable("id") Long id, Model mv) {
 		StaffGeneralInfoSto dto = new StaffGeneralInfoSto();
 
@@ -50,6 +52,8 @@ public class FarmGeneralInfoController extends AbstractV8Controller {
 			return r;
 		});
 
+		setToReadOnly(mv, "W_FARMSTAFFINFO");
+		
 		regFarmDtoMapper.toDto(staffMgmt, dto);
 
 		prepareForFarmEdition(id, dto, mv);
@@ -65,6 +69,7 @@ public class FarmGeneralInfoController extends AbstractV8Controller {
 	 * @param mv
 	 * @return
 	 */
+	@PreAuthorize("hasAuthority('W_FARMSTAFFINFO')")
 	@RequestMapping(value = "/farm/{id}/staff-general-info.html", method = RequestMethod.POST)
 	public String saveEnvironmental(@Validated @ModelAttribute("farmDto") StaffGeneralInfoSto farmDto,
 			@PathVariable("id") Long farmId, BindingResult bindResults, Model mv) {

@@ -14,7 +14,7 @@
 						<a th:href="@{/individuals/browser.html}" class="btn btn-sm btn-flat btn-warning"><i class="fa fa-backward"></i> <span th:text="#{default.back}"></span></a>
 					</div>
 				</div>
-				<form th:action="@{'/individuals/'+${individualId}+'/update.html'}" id="individualEditorForm" method="post" th:object="${individualDto}">
+				<form class="mainForm"  th:action="@{'/individuals/'+${individualId}+'/update.html'}" id="individualEditorForm" method="post" th:object="${individualDto}">
 					<div class="box-body">
 						<div class="row">
 							<div class="col-md-6 col-sm-6 col-xs-12">

@@ -3,7 +3,9 @@ package com.fairagora.verifik8.v8web.mvc.ponds;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -38,6 +40,7 @@ public class PondActivityController extends AbstractV8Controller {
 	 * @param mv
 	 * @return
 	 */
+	@PreAuthorize("hasAuthority('R_PONDACTIVTY')")
 	@RequestMapping(value = "/ponds/{pondId}/activities/browser.html", method = RequestMethod.GET)
 	public String showPlotActivities(@PathVariable("pondId") Long pondId, Model mv) {
 
@@ -46,10 +49,18 @@ public class PondActivityController extends AbstractV8Controller {
 		mv.addAttribute("pondId", pondId);
 
 		preparePage(pondId, mv);
+		setToReadOnly(mv, "W_PONDACTIVTY");
 
 		return "ponds/activities/browser";
 	}
 
+	/**
+	 * 
+	 * @param pondId
+	 * @param mv
+	 * @return
+	 */
+	@PreAuthorize("hasAuthority('W_PONDACTIVTY')")
 	@RequestMapping(value = "/ponds/{pondId}/activities/create.html", method = RequestMethod.GET)
 	public String createPlotActivities(@PathVariable("pondId") Long pondId, Model mv) {
 
@@ -69,9 +80,9 @@ public class PondActivityController extends AbstractV8Controller {
 		return "ponds/activities/editor";
 	}
 
+	@PreAuthorize("hasAuthority('R_PONDACTIVTY')")
 	@RequestMapping(value = "/ponds/{pondId}/activities/{activityId}/edit.html", method = RequestMethod.GET)
-	public String showPondActivities(@PathVariable("pondId") Long pondId, @PathVariable("activityId") Long activityId,
-			Model mv) {
+	public String showPondActivities(@PathVariable("pondId") Long pondId, @PathVariable("activityId") Long activityId, Model mv) {
 
 		DTFarmPondActivity act = pondActivityRepository.findOne(activityId);
 
@@ -86,7 +97,7 @@ public class PondActivityController extends AbstractV8Controller {
 		mv.addAttribute("allQuantityUnits", codeListservice.listActiveQuantityUnit());
 
 		preparePage(pondId, mv);
-
+		setToReadOnly(mv, "W_PONDACTIVTY");
 		return "ponds/activities/editor";
 	}
 
@@ -97,9 +108,10 @@ public class PondActivityController extends AbstractV8Controller {
 	 * @param mv
 	 * @return
 	 */
+	@Transactional
+	@PreAuthorize("hasAuthority(W_PONDACTIVTY')")
 	@RequestMapping(value = "/ponds/{pondId}/activities/update.html", method = RequestMethod.POST)
-	public String showPlotActivities(@PathVariable("pondId") Long pondId, PondActivityDto dto, BindingResult result,
-			Model mv) {
+	public String showPlotActivities(@PathVariable("pondId") Long pondId, PondActivityDto dto, BindingResult result, Model mv) {
 
 		DTFarmPondActivity act = null;
 
@@ -130,9 +142,10 @@ public class PondActivityController extends AbstractV8Controller {
 	 * @param mv
 	 * @return
 	 */
+	@Transactional
+	@PreAuthorize("hasAuthority(W_PONDACTIVTY')")
 	@RequestMapping(value = "/ponds/{pondId}/activities/delete.html", method = RequestMethod.POST)
-	public String deletePlotActivities(@PathVariable("pondId") Long pondId, @RequestParam("activityId") Long activityId,
-			Model mv) {
+	public String deletePlotActivities(@PathVariable("pondId") Long pondId, @RequestParam("activityId") Long activityId, Model mv) {
 
 		pondActivityRepository.delete(activityId);
 

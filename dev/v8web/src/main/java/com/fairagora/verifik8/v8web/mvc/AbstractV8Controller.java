@@ -8,11 +8,12 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 import com.fairagora.verifik8.v8web.config.functional.Verifik8AppConfig;
+import com.fairagora.verifik8.v8web.config.technical.auth.V8LoggedUser;
 import com.fairagora.verifik8.v8web.data.domain.sys.SYSRole;
 import com.fairagora.verifik8.v8web.data.domain.sys.SYSUser;
 import com.fairagora.verifik8.v8web.data.repo.cl.CLRefCountryRepository;
@@ -28,6 +29,8 @@ import com.fairagora.verifik8.v8web.services.CodeListsService;
  *
  */
 public class AbstractV8Controller {
+
+	protected static final String MAIN_FORM_TO_READ_ONLY = "mainFormToReadOnly";
 
 	@Autowired
 	protected SYSUserRepository userRepository;
@@ -49,12 +52,27 @@ public class AbstractV8Controller {
 
 	@Autowired
 	protected EntityManager em;
-	
+
 	@ModelAttribute("v8App")
 	public Verifik8AppConfig appConfig() {
 		return v8App;
 	}
 
+	/**
+	 * set readonly attribute if user don't have the given role
+	 * 
+	 * @param mv
+	 * @param r
+	 */
+	protected void setToReadOnly(Model mv, String r) {
+		mv.addAttribute(MAIN_FORM_TO_READ_ONLY, !getLoggedUser().hasRole(r));
+	}
+
+	protected V8LoggedUser getLoggedUser() {
+		if (SecurityContextHolder.getContext().getAuthentication() == null)
+			return null;
+		return (V8LoggedUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+	}
 
 	@ModelAttribute("loggedUser")
 	public SYSUser loggedUser(HttpServletRequest rq) {

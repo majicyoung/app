@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,11 +34,11 @@ public class SuppliersBrowsingController extends AbstractV8Controller {
 	@Autowired
 	private FarmService farmService;
 
+	@PreAuthorize("hasAuthority('R_SUPBROWSER')")
 	@RequestMapping(value = "/suppliers/browser.html", method = RequestMethod.GET)
 	public String showSuppliersManagementPage(Model mv) {
 
-		List<SupplierListingDto> listing = regEntityFarmSupplierRepository.findAll().stream()
-				.map(p -> regFarmDtoMapper.toListing(p)).collect(Collectors.toList());
+		List<SupplierListingDto> listing = regEntityFarmSupplierRepository.findAll().stream().map(p -> regFarmDtoMapper.toListing(p)).collect(Collectors.toList());
 
 		mv.addAttribute("listing", listing);
 
@@ -53,6 +54,7 @@ public class SuppliersBrowsingController extends AbstractV8Controller {
 	 * @param mv
 	 * @return
 	 */
+	@PreAuthorize("hasAuthority('W_SUPDATA')")
 	@RequestMapping(value = "/suppliers/delete.html", method = RequestMethod.POST)
 	public String deleteSupplier(@RequestParam("supplierId") Long supplierId, Model mv) {
 		regEntityFarmSupplierRepository.delete(supplierId);
@@ -66,13 +68,11 @@ public class SuppliersBrowsingController extends AbstractV8Controller {
 	 * @param mv
 	 * @return
 	 */
+	@PreAuthorize("hasAuthority('W_SUPDATA')")
 	@RequestMapping(value = "/suppliers/{supplierId}/update.html", method = RequestMethod.POST)
-	public String updateSupplier(@PathVariable("supplierId") Long supplierAssId,
-			@RequestParam("productType") Long productType, @RequestParam("supplier") Long supplier,
-			@RequestParam("farm") Long farmId, Model mv) {
+	public String updateSupplier(@PathVariable("supplierId") Long supplierAssId, @RequestParam("productType") Long productType, @RequestParam("supplier") Long supplier, @RequestParam("farm") Long farmId, Model mv) {
 
-		RegEntityFarmSupplierAssignment supAsst = supplierAssId == 0 ? new RegEntityFarmSupplierAssignment()
-				: regEntityFarmSupplierRepository.findOne(supplierAssId);
+		RegEntityFarmSupplierAssignment supAsst = supplierAssId == 0 ? new RegEntityFarmSupplierAssignment() : regEntityFarmSupplierRepository.findOne(supplierAssId);
 
 		supAsst.setFarm(regEntityRepository.findOne(farmId));
 		supAsst.setProductType(em.find(CLRefProductType.class, productType));
@@ -90,6 +90,7 @@ public class SuppliersBrowsingController extends AbstractV8Controller {
 	 * @param mv
 	 * @return
 	 */
+	@PreAuthorize("hasAuthority('W_SUPDATA')")
 	@RequestMapping(value = "/suppliers/create.html", method = RequestMethod.GET)
 	public String createSupplier(Model mv) {
 
@@ -110,6 +111,7 @@ public class SuppliersBrowsingController extends AbstractV8Controller {
 	 * @param mv
 	 * @return
 	 */
+	@PreAuthorize("hasAuthority('R_SUPDATA')")
 	@RequestMapping(value = "/suppliers/{supplierAssId}/edit.html", method = RequestMethod.GET)
 	public String editSupplier(@PathVariable("supplierAssId") Long supplierAssId, Model mv) {
 
@@ -120,7 +122,7 @@ public class SuppliersBrowsingController extends AbstractV8Controller {
 
 		preparePage(mv);
 		mv.addAttribute("allFarmsForUser", farmService.listFarms());
-
+		setToReadOnly(mv, "W_SUPDATA");
 		return "suppliers/editor";
 	}
 

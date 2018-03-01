@@ -6,6 +6,7 @@ import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,22 +28,26 @@ public class FarmBuyersController extends AbstractV8Controller {
 	protected RegEntityFarmBuyerAssignmentRepository regEntityFarmBuyerAssignmentRepository;
 
 	@Autowired
-	 protected JdbcTemplate jdbc;
-	
+	protected JdbcTemplate jdbc;
+
+	@PreAuthorize("hasAuthority('R_FARMBUYER')")
 	@RequestMapping(value = "/farm/{id}/buyers.html", method = RequestMethod.GET)
 	public String showEditStaff(@PathVariable("id") Long id, Model mv) {
 
 		RegEntity farm = regEntityRepository.findOne(id);
 
 		preparePage(farm, mv);
-		mv.addAttribute("farmName", jdbc.queryForObject("SELECT name FROM reg_entities WHERE id="+id, String.class));
+		mv.addAttribute("farmName", jdbc.queryForObject("SELECT name FROM reg_entities WHERE id=" + id, String.class));
+
+		setToReadOnly(mv, "W_FARMBUYER");
+
 		return "farms/buyers";
 	}
 
+	@PreAuthorize("hasAuthority('W_FARMBUYER')")
 	@Transactional
 	@RequestMapping(value = "/farm/{id}/buyer-for-producttype.html", method = RequestMethod.POST)
-	public String addBuyerForProductType(@PathVariable("id") Long id, @RequestParam("productType") Long productType,
-			@RequestParam("buyer") Long buyer, Model mv) {
+	public String addBuyerForProductType(@PathVariable("id") Long id, @RequestParam("productType") Long productType, @RequestParam("buyer") Long buyer, Model mv) {
 
 		RegEntityFarmBuyerAssignment newAst = new RegEntityFarmBuyerAssignment();
 		newAst.setFarm(regEntityRepository.findOne(id));
@@ -54,13 +59,12 @@ public class FarmBuyersController extends AbstractV8Controller {
 		return "redirect:/farm/" + id + "/buyers.html";
 	}
 
+	@PreAuthorize("hasAuthority('W_FARMBUYER')")
 	@Transactional
 	@RequestMapping(value = "/farm/{id}/delete-buyer-for-producttype.html", method = RequestMethod.POST)
-	public String deleteBuyerForProductType(@PathVariable("id") Long id,
-			@RequestParam("productType") Long productType, @RequestParam("buyer") Long buyer, Model mv) {
+	public String deleteBuyerForProductType(@PathVariable("id") Long id, @RequestParam("productType") Long productType, @RequestParam("buyer") Long buyer, Model mv) {
 
-		for (RegEntityFarmBuyerAssignment ast : regEntityFarmBuyerAssignmentRepository
-				.findByFarmIdOrderByBuyerName(id)) {
+		for (RegEntityFarmBuyerAssignment ast : regEntityFarmBuyerAssignmentRepository.findByFarmIdOrderByBuyerName(id)) {
 			if (productType.equals(ast.getProductType().getId()))
 				if (buyer.equals(ast.getBuyer().getId()))
 					regEntityFarmBuyerAssignmentRepository.delete(ast);
@@ -87,8 +91,7 @@ public class FarmBuyersController extends AbstractV8Controller {
 		mv.addAttribute("farmId", farm.getId());
 		mv.addAttribute("activeTab", "buyers");
 
-		List<RegEntityFarmBuyerAssignment> buyersListing = regEntityFarmBuyerAssignmentRepository
-				.findByFarmIdOrderByBuyerName(farm.getId());
+		List<RegEntityFarmBuyerAssignment> buyersListing = regEntityFarmBuyerAssignmentRepository.findByFarmIdOrderByBuyerName(farm.getId());
 		mv.addAttribute("buyersListing", buyersListing);
 		mv.addAttribute("allProductTypes", codeListservice.listActiveProductTypes());
 		mv.addAttribute("allCompanies", regEntityRepository.findByEntityTypeCode(CLAppEntityType.CODE_COM));

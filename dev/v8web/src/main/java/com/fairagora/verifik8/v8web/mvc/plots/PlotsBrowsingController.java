@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -32,6 +33,7 @@ public class PlotsBrowsingController extends AbstractV8Controller {
 	@Autowired
 	private FarmService farmService;
 
+	@PreAuthorize("hasAuthority('R_PLOTBROWSER')")
 	@RequestMapping(value = "/plots/browser.html", method = RequestMethod.GET)
 	public String showPlotsManagementPage(Model mv) {
 
@@ -41,7 +43,7 @@ public class PlotsBrowsingController extends AbstractV8Controller {
 		mv.addAttribute("listing", listing);
 
 		preparePage(mv);
-
+setToReadOnly(mv, "W_PLOTBROWSER");
 		return "plots/browser";
 	}
 
@@ -52,6 +54,7 @@ public class PlotsBrowsingController extends AbstractV8Controller {
 	 * @param mv
 	 * @return
 	 */
+	@PreAuthorize("hasAuthority('W_PLOTBROWSER')")
 	@RequestMapping(value = "/plots/delete.html", method = RequestMethod.POST)
 	public String deletePlot(@RequestParam("plotId") Long plotId, Model mv) {
 		regEntityFarmPlotRepository.delete(plotId);
@@ -65,6 +68,7 @@ public class PlotsBrowsingController extends AbstractV8Controller {
 	 * @param mv
 	 * @return
 	 */
+	@PreAuthorize("hasAuthority('W_PLOTBROWSER')")
 	@RequestMapping(value = "/plots/{plotId}/update.html", method = RequestMethod.POST)
 	public String updatePlot(@PathVariable("plotId") Long plotId, FarmPlotDto dto, Model mv) {
 
@@ -83,6 +87,7 @@ public class PlotsBrowsingController extends AbstractV8Controller {
 	 * @param mv
 	 * @return
 	 */
+	@PreAuthorize("hasAuthority('W_PLOTBROWSER')")
 	@RequestMapping(value = "/plots/create.html", method = RequestMethod.GET)
 	public String createPlot(Model mv) {
 
@@ -108,6 +113,7 @@ public class PlotsBrowsingController extends AbstractV8Controller {
 	 * @param mv
 	 * @return
 	 */
+	@PreAuthorize("hasAuthority('R_PLOTBROWSER')")
 	@RequestMapping(value = "/plots/{plotId}/edit.html", method = RequestMethod.GET)
 	public String editPlot(@PathVariable("plotId") Long plotId, Model mv) {
 
@@ -123,6 +129,8 @@ public class PlotsBrowsingController extends AbstractV8Controller {
 		mv.addAttribute("allQuantityUnits", codeListservice.listActiveQuantityUnit());
 
 		preparePage(mv);
+		
+		setToReadOnly(mv, "W_PLOTBROWSER");
 
 		return "plots/editor";
 	}

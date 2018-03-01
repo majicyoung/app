@@ -192,7 +192,7 @@
 	        <h4 class="modal-title" th:text="#{production_profile.total_production.add}">production_profile.total_production.add</h4>
 	      </div>
  		<div class="modal-body">
-        	<form role="form" th:action="@{'/farm/'+${farmId}+'/production-profile/total-production'+ (${v8App.plotProfile == true}? 'Ag' : 'Aq') +'/update.html'}" method="post" enctype="multipart/form-data" th:id="${v8App.plotProfile == true}? 'totalProductionAgForm' : 'totalProductionAqForm' ">
+        	<form role="form" class="mainForm" th:action="@{'/farm/'+${farmId}+'/production-profile/total-production'+ (${v8App.plotProfile == true}? 'Ag' : 'Aq') +'/update.html'}" method="post" enctype="multipart/form-data" th:id="${v8App.plotProfile == true}? 'totalProductionAgForm' : 'totalProductionAqForm' ">
   
       	
         		<input type="hidden" th:name="id" id="totalProductionForm_id" />
@@ -269,7 +269,7 @@
 	        <h4 class="modal-title" th:text="#{production_profile.water_analysis.add}">#{production_profile.soil_analysis.add}</h4>
 	      </div>
  		<div class="modal-body">
-        	<form role="form" th:action="@{'/farm/'+${farmId}+'/production-profile/water-analysis/update.html'}" method="post" enctype="multipart/form-data" id="waterAnalysisForm" >
+        	<form role="form" class="mainForm" th:action="@{'/farm/'+${farmId}+'/production-profile/water-analysis/update.html'}" method="post" enctype="multipart/form-data" id="waterAnalysisForm" >
         		<input type="hidden" th:name="id" />
         		<div class="row">
 	                <div class="col-xs-12">
@@ -316,7 +316,7 @@
 	        <h4 class="modal-title" th:text="#{production_profile.soil_analysis.add}">#{production_profile.soil_analysis.add}</h4>
 	      </div>
  		<div class="modal-body">
-        	<form role="form" th:action="@{'/farm/'+${farmId}+'/production-profile/soil-analysis/update.html'}" method="post" enctype="multipart/form-data" id="soilAnalysisForm" >
+        	<form role="form" class="mainForm" th:action="@{'/farm/'+${farmId}+'/production-profile/soil-analysis/update.html'}" method="post" enctype="multipart/form-data" id="soilAnalysisForm" >
         		<input type="hidden" th:name="id" id="soilAnalysisForm_id" />
         		<div class="row">
 	                <div class="col-xs-12">

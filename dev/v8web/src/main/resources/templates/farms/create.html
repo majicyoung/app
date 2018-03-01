@@ -12,7 +12,7 @@
 	          <h3 th:case="*" class="box-title" th:text="#{farm.edit}">farm.edit</h3> - <span th:text="${farmDto.name}">farm.name</span>
 	        </div>
         </div>
-        <form role="form"  th:action="@{'/farm/'+${farmDto.id}+'/update.html'}" th:object="${farmDto}" method="post" class="form-horizontal" enctype="multipart/form-data" onsubmit="return !hasEmptyFields('#farm-box form .form-control[required]');">
+        <form role="form"  th:action="@{'/farm/'+${farmDto.id}+'/update.html'}" th:object="${farmDto}" method="post" class="mainForm form-horizontal" enctype="multipart/form-data" onsubmit="return !hasEmptyFields('#farm-box form .form-control[required]');">
         <div class="box-body" style="padding:0;">
           <div class="nav-tabs-custom">
            <ul th:include="farms/farms-includes :: farms-tabs" class="nav nav-tabs"></ul>

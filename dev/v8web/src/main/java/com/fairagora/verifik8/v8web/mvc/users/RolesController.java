@@ -3,7 +3,6 @@ package com.fairagora.verifik8.v8web.mvc.users;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -14,13 +13,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.fairagora.verifik8.v8web.data.application.V8Page;
-import com.fairagora.verifik8.v8web.data.domain.cl.CLAppEntityType;
 import com.fairagora.verifik8.v8web.data.domain.sys.SYSRole;
-import com.fairagora.verifik8.v8web.data.domain.sys.SYSUser;
 import com.fairagora.verifik8.v8web.mvc.AbstractV8Controller;
 import com.fairagora.verifik8.v8web.mvc.infra.dtomapping.SysUserDTOMapper;
 import com.fairagora.verifik8.v8web.mvc.users.dto.RoleFormDto;
-import com.fairagora.verifik8.v8web.mvc.users.dto.UserFormDto;
 
 @Controller
 public class RolesController extends AbstractV8Controller {

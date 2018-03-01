@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -39,20 +40,22 @@ public class PondsMeasureController extends AbstractV8Controller {
 	 * @param mv
 	 * @return
 	 */
+	@PreAuthorize("hasAuthority('R_PONDMEASURE')")
 	@RequestMapping(value = "/ponds/{pondId}/measures/browser.html", method = RequestMethod.GET)
 	public String showPondMeasure(@PathVariable("pondId") Long pondId, Model mv) {
 
 		List<DTFarmPondMeasurement> measures = pondMeasuresRepository.findByPondId(pondId);
 		mv.addAttribute("measures", measures);
 		mv.addAttribute("pondId", pondId);
-		mv.addAttribute("measureTypes",
-				measures.stream().map(m -> m.getMeasureType()).distinct().collect(Collectors.toList()));
+		mv.addAttribute("measureTypes", measures.stream().map(m -> m.getMeasureType()).distinct().collect(Collectors.toList()));
 
 		preparePage(pondId, mv);
 
+		setToReadOnly(mv, "W_PONDMEASURE");
 		return "ponds/measures/browser";
 	}
 
+	@PreAuthorize("hasAuthority('W_PONDMEASURE')")
 	@RequestMapping(value = "/ponds/{pondId}/measures/create.html", method = RequestMethod.GET)
 	public String createPondMeasure(@PathVariable("pondId") Long pondId, Model mv) {
 
@@ -67,9 +70,9 @@ public class PondsMeasureController extends AbstractV8Controller {
 		return "ponds/measures/editor";
 	}
 
+	@PreAuthorize("hasAuthority('R_PONDMEASURE')")
 	@RequestMapping(value = "/ponds/{pondId}/measures/{activityId}/edit.html", method = RequestMethod.GET)
-	public String showPondMeasures(@PathVariable("pondId") Long pondId, @PathVariable("activityId") Long activityId,
-			Model mv) {
+	public String showPondMeasures(@PathVariable("pondId") Long pondId, @PathVariable("activityId") Long activityId, Model mv) {
 
 		DTFarmPondMeasurement act = pondMeasuresRepository.findOne(activityId);
 
@@ -81,6 +84,7 @@ public class PondsMeasureController extends AbstractV8Controller {
 		mv.addAttribute("pondId", pondId);
 		mv.addAttribute("measureId", 0l);
 
+		setToReadOnly(mv, "W_PONDMEASURE");
 		preparePage(pondId, mv);
 
 		return "ponds/measures/editor";
@@ -93,9 +97,9 @@ public class PondsMeasureController extends AbstractV8Controller {
 	 * @param mv
 	 * @return
 	 */
+	@PreAuthorize("hasAuthority('W_PONDMEASURE')")
 	@RequestMapping(value = "/ponds/{pondId}/measures/update.html", method = RequestMethod.POST)
-	public String updatePondMeasures(@PathVariable("pondId") Long pondId, PondMeasurementDto dto, BindingResult result,
-			Model mv) {
+	public String updatePondMeasures(@PathVariable("pondId") Long pondId, PondMeasurementDto dto, BindingResult result, Model mv) {
 
 		DTFarmPondMeasurement measure = null;
 
@@ -122,9 +126,9 @@ public class PondsMeasureController extends AbstractV8Controller {
 	 * @param mv
 	 * @return
 	 */
+	@PreAuthorize("hasAuthority('W_PONDMEASURE')")
 	@RequestMapping(value = "/ponds/{pondId}/measures/delete.html", method = RequestMethod.POST)
-	public String deletePondMeasure(@PathVariable("pondId") Long pondId, @RequestParam("activityId") Long activityId,
-			Model mv) {
+	public String deletePondMeasure(@PathVariable("pondId") Long pondId, @RequestParam("activityId") Long activityId, Model mv) {
 
 		pondMeasuresRepository.delete(activityId);
 

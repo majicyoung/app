@@ -14,8 +14,8 @@ import javax.persistence.PrePersist;
 import javax.persistence.Table;
 
 import com.fairagora.verifik8.v8web.data.domain.cl.CLAppCompanyPositionType;
-import com.fairagora.verifik8.v8web.data.domain.cl.CLRefLanguage;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLAppLegalStatus;
+import com.fairagora.verifik8.v8web.data.domain.cl.CLRefLanguage;
 import com.fairagora.verifik8.v8web.data.domain.commons.Attachment;
 import com.fairagora.verifik8.v8web.data.domain.reg.RegEntity;
 import com.fairagora.verifik8.v8web.data.domain.reg.V8Base;

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,13 +31,14 @@ public class FarmStaffController extends AbstractV8Controller {
 	@Autowired
 	protected JdbcTemplate jdbc;
 
+	@PreAuthorize("hasAuthority('R_FARMSTAFF')")
 	@RequestMapping(value = "/farm/{id}/staff.html", method = RequestMethod.GET)
 	public String showEditStaff(@PathVariable("id") Long id, Model mv) {
 
 		RegEntity farm = regEntityRepository.findOne(id);
 
 		preparePage(farm, mv);
-
+		setToReadOnly(mv, "W_FARMSTAFF");
 		StaffFarmFormDto dto = new StaffFarmFormDto();
 		mv.addAttribute("staffDto", dto);
 		mv.addAttribute("farmName", jdbc.queryForObject("SELECT name FROM reg_entities WHERE id=" + id, String.class));
@@ -50,6 +52,7 @@ public class FarmStaffController extends AbstractV8Controller {
 	 * @param mv
 	 * @return
 	 */
+	@PreAuthorize("hasAuthority('W_FARMSTAFF')")
 	@RequestMapping(value = "/farm/{id}/staff/delete.html", method = RequestMethod.POST)
 	public String deleteEntityStaff(@PathVariable("id") Long id, @RequestParam("entityId") Long entityId, Model mv) {
 
@@ -66,6 +69,7 @@ public class FarmStaffController extends AbstractV8Controller {
 	 * @param mv
 	 * @return
 	 */
+	@PreAuthorize("hasAuthority('W_FARMSTAFF')")
 	@RequestMapping(value = "/farm/{id}/staff.html", method = RequestMethod.POST)
 	public String saveEntityStaff(@PathVariable("id") Long id, StaffFarmFormDto dto, Model mv) {
 

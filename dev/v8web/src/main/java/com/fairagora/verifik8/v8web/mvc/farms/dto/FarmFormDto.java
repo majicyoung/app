@@ -2,8 +2,6 @@ package com.fairagora.verifik8.v8web.mvc.farms.dto;
 
 import java.util.Date;
 
-import javax.persistence.Column;
-
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
 

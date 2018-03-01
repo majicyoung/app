@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -20,7 +21,6 @@ import com.fairagora.verifik8.v8web.mvc.AbstractV8Controller;
 import com.fairagora.verifik8.v8web.mvc.farms.RegFarmDTOMapper;
 import com.fairagora.verifik8.v8web.mvc.invididuals.dto.IndividualDto;
 import com.fairagora.verifik8.v8web.mvc.invididuals.dto.IndividualListingDto;
-import com.fairagora.verifik8.v8web.services.FarmService;
 
 @Controller
 public class IndividualsBrowsingController extends AbstractV8Controller {
@@ -28,14 +28,11 @@ public class IndividualsBrowsingController extends AbstractV8Controller {
 	@Autowired
 	private RegFarmDTOMapper regFarmDtoMapper;
 
-	@Autowired
-	private FarmService farmService;
-
+	@PreAuthorize("hasAuthority('R_INDBROWSER')")
 	@RequestMapping(value = "/individuals/browser.html", method = RequestMethod.GET)
 	public String showIndividualsManagementPage(Model mv) {
 
-		List<IndividualListingDto> listing = regEntityRepository.findByEntityTypeCode(CLAppEntityType.CODE_IND).stream()
-				.map(p -> regFarmDtoMapper.toListing(p)).collect(Collectors.toList());
+		List<IndividualListingDto> listing = regEntityRepository.findByEntityTypeCode(CLAppEntityType.CODE_IND).stream().map(p -> regFarmDtoMapper.toListing(p)).collect(Collectors.toList());
 
 		mv.addAttribute("listing", listing);
 
@@ -51,6 +48,7 @@ public class IndividualsBrowsingController extends AbstractV8Controller {
 	 * @param mv
 	 * @return
 	 */
+	@PreAuthorize("hasAuthority('W_INDBROWSER')")
 	@RequestMapping(value = "/individuals/delete.html", method = RequestMethod.POST)
 	public String deleteIndividual(@RequestParam("individualId") Long individualId, Model mv) {
 		regEntityRepository.delete(individualId);
@@ -64,13 +62,12 @@ public class IndividualsBrowsingController extends AbstractV8Controller {
 	 * @param mv
 	 * @return
 	 */
+	@PreAuthorize("hasAuthority('W_INDBROWSER')")
 	@RequestMapping(value = "/individuals/{individualId}/update.html", method = RequestMethod.POST)
 	@Transactional
-	public String updateIndividual(@PathVariable("individualId") Long individualAssId, IndividualDto dto,
-			@RequestParam(required = false, name = "fromPopup") Boolean fromPopup, Model mv) {
+	public String updateIndividual(@PathVariable("individualId") Long individualAssId, IndividualDto dto, @RequestParam(required = false, name = "fromPopup") Boolean fromPopup, Model mv) {
 
-		RegEntity ind = individualAssId.intValue() == 0 ? new RegEntity()
-				: regEntityRepository.findOne(individualAssId);
+		RegEntity ind = individualAssId.intValue() == 0 ? new RegEntity() : regEntityRepository.findOne(individualAssId);
 		ind.setEntityType(codeListservice.findEntityType(CLAppEntityType.CODE_IND));
 
 		regFarmDtoMapper.fillEntity(dto, ind);
@@ -93,6 +90,7 @@ public class IndividualsBrowsingController extends AbstractV8Controller {
 	 * @param mv
 	 * @return
 	 */
+	@PreAuthorize("hasAuthority('W_INDEDITOR')")
 	@RequestMapping(value = "/individuals/create.html", method = RequestMethod.GET)
 	public String createIndividual(Model mv) {
 
@@ -104,6 +102,7 @@ public class IndividualsBrowsingController extends AbstractV8Controller {
 		mv.addAttribute("productType", 0);
 		mv.addAttribute("individual", 0);
 
+		setToReadOnly(mv, "W_INDEDITOR");
 		return "individuals/editor";
 	}
 
@@ -114,6 +113,7 @@ public class IndividualsBrowsingController extends AbstractV8Controller {
 	 * @param mv
 	 * @return
 	 */
+	@PreAuthorize("hasAuthority('W_INDEDITOR')")
 	@RequestMapping(value = "/individuals/{individualAssId}/edit.html", method = RequestMethod.GET)
 	public String editIndividual(@PathVariable("individualAssId") Long individualAssId, Model mv) {
 		IndividualDto dto = new IndividualDto();
@@ -122,6 +122,8 @@ public class IndividualsBrowsingController extends AbstractV8Controller {
 		mv.addAttribute("individualDto", dto);
 		mv.addAttribute("individualId", dto.getId());
 		preparePage(mv);
+
+		setToReadOnly(mv, "W_INDEDITOR");
 
 		return "individuals/editor";
 	}

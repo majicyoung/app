@@ -3,6 +3,7 @@ package com.fairagora.verifik8.v8web.mvc.plots;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -38,6 +39,7 @@ public class PlotsActivityController extends AbstractV8Controller {
 	 * @param mv
 	 * @return
 	 */
+	@PreAuthorize("hasAuthority('R_PLOTACTIVITY')")
 	@RequestMapping(value = "/plots/{plotId}/activities/browser.html", method = RequestMethod.GET)
 	public String showPlotActivities(@PathVariable("plotId") Long plotId, Model mv) {
 
@@ -46,10 +48,11 @@ public class PlotsActivityController extends AbstractV8Controller {
 		mv.addAttribute("plotId", plotId);
 
 		preparePage(plotId, mv);
-
+		setToReadOnly(mv, "W_PLOTACTIVITY");
 		return "plots/activities/browser";
 	}
 
+	@PreAuthorize("hasAuthority('W_PLOTACTIVITY')")
 	@RequestMapping(value = "/plots/{plotId}/activities/create.html", method = RequestMethod.GET)
 	public String createPlotActivities(@PathVariable("plotId") Long plotId, Model mv) {
 
@@ -70,9 +73,9 @@ public class PlotsActivityController extends AbstractV8Controller {
 		return "plots/activities/editor";
 	}
 
+	@PreAuthorize("hasAuthority('R_PLOTACTIVITY')")
 	@RequestMapping(value = "/plots/{plotId}/activities/{activityId}/edit.html", method = RequestMethod.GET)
-	public String showPlotActivities(@PathVariable("plotId") Long plotId, @PathVariable("activityId") Long activityId,
-			Model mv) {
+	public String showPlotActivities(@PathVariable("plotId") Long plotId, @PathVariable("activityId") Long activityId, Model mv) {
 
 		DTFarmPlotActivity act = plotActivityRepository.findOne(activityId);
 
@@ -89,6 +92,7 @@ public class PlotsActivityController extends AbstractV8Controller {
 
 		preparePage(plotId, mv);
 
+		setToReadOnly(mv, "W_PLOTACTIVITY");
 		return "plots/activities/editor";
 	}
 
@@ -99,9 +103,9 @@ public class PlotsActivityController extends AbstractV8Controller {
 	 * @param mv
 	 * @return
 	 */
+	@PreAuthorize("hasAuthority('W_PLOTACTIVITY')")
 	@RequestMapping(value = "/plots/{plotId}/activities/update.html", method = RequestMethod.POST)
-	public String showPlotActivities(@PathVariable("plotId") Long plotId, PlotActivityDto dto, BindingResult result,
-			Model mv) {
+	public String showPlotActivities(@PathVariable("plotId") Long plotId, PlotActivityDto dto, BindingResult result, Model mv) {
 
 		DTFarmPlotActivity act = null;
 
@@ -132,9 +136,9 @@ public class PlotsActivityController extends AbstractV8Controller {
 	 * @param mv
 	 * @return
 	 */
+	@PreAuthorize("hasAuthority('W_PLOTACTIVITY')")
 	@RequestMapping(value = "/plots/{plotId}/activities/delete.html", method = RequestMethod.POST)
-	public String deletePlotActivities(@PathVariable("plotId") Long plotId, @RequestParam("activityId") Long activityId,
-			Model mv) {
+	public String deletePlotActivities(@PathVariable("plotId") Long plotId, @RequestParam("activityId") Long activityId, Model mv) {
 
 		plotActivityRepository.delete(activityId);
 

@@ -3,7 +3,6 @@ package com.fairagora.verifik8.v8web.mvc.infra.dtomapping;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import org.mapstruct.MapperConfig;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.TargetType;
 import org.springframework.beans.factory.annotation.Autowired;

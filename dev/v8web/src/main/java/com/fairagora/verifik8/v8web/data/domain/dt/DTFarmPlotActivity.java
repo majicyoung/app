@@ -17,9 +17,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.fairagora.verifik8.v8web.data.domain.V8EntitySupport;
+import com.fairagora.verifik8.v8web.data.domain.cl.CLAppTilingActivityType;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLFarmPlotActivityType;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLRefProduct;
-import com.fairagora.verifik8.v8web.data.domain.cl.CLAppTilingActivityType;
 import com.fairagora.verifik8.v8web.data.domain.commons.V8Measure;
 import com.fairagora.verifik8.v8web.data.domain.reg.farm.RegEntityFarmPlot;
 

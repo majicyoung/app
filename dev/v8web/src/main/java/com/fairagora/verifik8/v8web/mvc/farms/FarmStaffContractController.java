@@ -19,14 +19,10 @@ import com.fairagora.verifik8.v8web.data.repo.reg.RegEntityStaffContractReposito
 import com.fairagora.verifik8.v8web.data.repo.reg.RegEntityStaffRepository;
 import com.fairagora.verifik8.v8web.mvc.AbstractV8Controller;
 import com.fairagora.verifik8.v8web.mvc.farms.dto.StaffContractDto;
-import com.fairagora.verifik8.v8web.services.FarmService;
 
 @Controller
 @Transactional
 public class FarmStaffContractController extends AbstractV8Controller {
-
-	@Autowired
-	private FarmService farmService;
 
 	@Autowired
 	private RegEntityStaffRepository regEntityStaffRepository;

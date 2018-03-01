@@ -13,7 +13,7 @@
 						<ul th:include="farms/farms-includes :: farms-tabs" class="nav nav-tabs"></ul>
 						<div class="tab-content">
 							<div class="tab-pane active" id="tab_1">
-								<form th:action="@{'/farm/'+${farmId}+'/staff-general-info.html'}" th:object="${farmDto}" method="post" enctype="multipart/form-data">
+								<form class="mainForm" th:action="@{'/farm/'+${farmId}+'/staff-general-info.html'}" th:object="${farmDto}" method="post" enctype="multipart/form-data">
 									<div class="row">
 										<!-- general info -->
 										<div class="col-xs-6">

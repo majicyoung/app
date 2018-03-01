@@ -7,7 +7,7 @@
 <body class="hold-transition skin-green sidebar-mini">
 <div class="content">
 <div class="row">
-<form th:action="@{'/individuals/'+${individualId}+'/update.html'}" id="individualEditorForm" method="post" th:object="${individualDto}">
+<form class="mainForm"  th:action="@{'/individuals/'+${individualId}+'/update.html'}" id="individualEditorForm" method="post" th:object="${individualDto}">
 	<input name="fromPopup" value="true" type="hidden"/>
 					<div class="box-body">
 						<div class="row">

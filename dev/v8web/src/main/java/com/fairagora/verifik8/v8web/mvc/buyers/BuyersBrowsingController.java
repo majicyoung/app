@@ -17,8 +17,8 @@ import com.fairagora.verifik8.v8web.data.domain.cl.CLRefProductType;
 import com.fairagora.verifik8.v8web.data.domain.reg.farm.RegEntityFarmBuyerAssignment;
 import com.fairagora.verifik8.v8web.data.repo.reg.RegEntityFarmBuyerAssignmentRepository;
 import com.fairagora.verifik8.v8web.mvc.AbstractV8Controller;
-import com.fairagora.verifik8.v8web.mvc.farms.RegFarmDTOMapper;
 import com.fairagora.verifik8.v8web.mvc.buyers.dto.BuyerListingDto;
+import com.fairagora.verifik8.v8web.mvc.farms.RegFarmDTOMapper;
 import com.fairagora.verifik8.v8web.services.FarmService;
 
 @Controller

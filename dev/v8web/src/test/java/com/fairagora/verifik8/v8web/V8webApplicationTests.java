@@ -8,10 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.fairagora.verifik8.v8web.data.domain.cl.CLRefCountry;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLAppHvHeExpensionType;
-import com.fairagora.verifik8.v8web.data.domain.cl.CLRefProductType;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLAppQuantityUnit;
+import com.fairagora.verifik8.v8web.data.domain.cl.CLRefCountry;
+import com.fairagora.verifik8.v8web.data.domain.cl.CLRefProductType;
 import com.fairagora.verifik8.v8web.services.CodeListsService;
 
 @RunWith(SpringRunner.class)

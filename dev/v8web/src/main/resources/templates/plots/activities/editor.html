@@ -11,7 +11,7 @@
 						<a th:href="@{'/plots/'+${plotId}+'/activities/browser.html'}" class="btn btn-sm btn-flat btn-warning"><i class="fa fa-backward"></i> <span th:text="#{default.back}"></span></a>
 					</div>
 				</div>
-				<form th:action="@{'/plots/'+${plotId}+'/activities/update.html'}" th:object="${activityDto}" id="plotEditorForm" method="post">
+				<form class="mainForm" th:action="@{'/plots/'+${plotId}+'/activities/update.html'}" th:object="${activityDto}" id="plotEditorForm" method="post">
 					<input type="hidden" id="plotId" th:field="*{plot}" />
 					<input type="hidden" id="activityId" th:field="*{id}" />
 					<div class="box-body">

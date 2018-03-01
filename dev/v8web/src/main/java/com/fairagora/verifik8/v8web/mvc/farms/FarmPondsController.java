@@ -4,6 +4,7 @@ import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,6 +31,7 @@ public class FarmPondsController extends AbstractV8Controller {
 	@Autowired
 	 protected JdbcTemplate jdbc;
 	
+	@PreAuthorize("hasAuthority('R_PONDFARMLIST')")
 	@RequestMapping(value = "/farm/{id}/ponds.html", method = RequestMethod.GET)
 	public String showPondsManagementPage(@PathVariable("id") Long id, Model mv) {
 
@@ -44,11 +46,14 @@ public class FarmPondsController extends AbstractV8Controller {
 		mv.addAttribute("farmSize", jdbc.queryForObject("SELECT size FROM reg_entity_farm_details WHERE reg_entity_farm_id="+id, String.class));
 		mv.addAttribute("pondDto", dto);
 
+		setToReadOnly(mv, "W_PONDFARMLIST");
+		
 		return "farms/ponds";
 	}
 
 
 	
+	@PreAuthorize("hasAuthority('W_PONDFARMLIST')")
 	@Transactional
 	@RequestMapping(value = "/farm/{id}/pond.html", method = RequestMethod.POST)
 	public String addPond(@PathVariable("id") Long id, FarmPondDto dto, Model mv) {
@@ -76,6 +81,7 @@ public class FarmPondsController extends AbstractV8Controller {
 		return "redirect:/farm/" + id + "/ponds.html";
 	}
 
+	@PreAuthorize("hasAuthority('W_PONDFARMLIST')")
 	@RequestMapping(value = "/farm/{id}/pond/delete.html", method = RequestMethod.POST)
 	public String deletePond(@PathVariable("id") Long id, @RequestParam("pondId") Long pondId, Model mv) {
 		regEntityFarmPondRepository.delete(pondId);

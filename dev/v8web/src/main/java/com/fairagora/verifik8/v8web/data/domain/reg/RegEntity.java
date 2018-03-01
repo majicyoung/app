@@ -14,8 +14,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.fairagora.verifik8.v8web.data.domain.V8EntitySupport;
-import com.fairagora.verifik8.v8web.data.domain.cl.CLRefCountry;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLAppEntityType;
+import com.fairagora.verifik8.v8web.data.domain.cl.CLRefCountry;
 import com.fairagora.verifik8.v8web.data.domain.commons.Address;
 
 @Entity()

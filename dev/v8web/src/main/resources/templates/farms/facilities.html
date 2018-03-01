@@ -9,7 +9,7 @@
         <div class="box-header with-border">
 	          <h3  class="box-title" th:text="#{default.facilities}">default.facilities</h3> 
         </div>
-        <form role="form"  th:action="@{'/farm/'+${farmId}+'/facilities.html'}" th:object="${farmDto}" method="post" class="form-horizontal" enctype="multipart/form-data" onsubmit="return !hasEmptyFields('#farm-box form .form-control[required]');">
+        <form role="form"  th:action="@{'/farm/'+${farmId}+'/facilities.html'}" th:object="${farmDto}" method="post" class="mainForm form-horizontal" enctype="multipart/form-data" onsubmit="return !hasEmptyFields('#farm-box form .form-control[required]');">
         <div class="box-body" style="padding:0;">
           <div class="nav-tabs-custom">
            <ul th:include="farms/farms-includes :: farms-tabs" class="nav nav-tabs"></ul>

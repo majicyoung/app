@@ -3,6 +3,7 @@ package com.fairagora.verifik8.v8web.mvc.farms;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -34,6 +35,7 @@ public class FarmStaffTrainingController extends AbstractV8Controller {
 	 * @return
 	 */
 	@Transactional
+	@PreAuthorize("hasAuthority('R_FARMTRAIN')")
 	@RequestMapping(value = "/farm/{id}/training.html", method = RequestMethod.GET)
 	public String showTraining(@PathVariable("id") Long id, Model mv) {
 		FarmStaffTrainingDto dto = new FarmStaffTrainingDto();
@@ -44,6 +46,9 @@ public class FarmStaffTrainingController extends AbstractV8Controller {
 			repository.save(r);
 			return r;
 		});
+		
+		setToReadOnly(mv, "W_FARMTRAIN");
+		
 
 		regFarmDtoMapper.toDto(staffTraining, dto);
 
@@ -59,6 +64,7 @@ public class FarmStaffTrainingController extends AbstractV8Controller {
 	 * @param mv
 	 * @return
 	 */
+	@PreAuthorize("hasAuthority('R_FARMTRAIN')")
 	@RequestMapping(value = "/farm/{id}/training.html", method = RequestMethod.POST)
 	public String saveTraining(@Validated @ModelAttribute("farmDto") FarmStaffTrainingDto farmDto,
 			@PathVariable("id") Long farmId, BindingResult bindResults, Model mv) {

@@ -7,13 +7,13 @@ import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.fairagora.verifik8.v8web.data.application.V8Page;
 import com.fairagora.verifik8.v8web.data.domain.dt.DTFarmAgProduction;
@@ -68,6 +68,7 @@ public class FarmProductionProfileController extends AbstractV8Controller {
 	@Autowired
 	 protected JdbcTemplate jdbc;
 	
+	@PreAuthorize("hasAuthority('R_FARMPROD')")
 	@Transactional
 	@RequestMapping(value = "/farm/{id}/production-profile.html", method = RequestMethod.GET)
 	public String showFarmProductionProfile(@PathVariable(name = "id") Long id, Model mv) {
@@ -93,9 +94,12 @@ public class FarmProductionProfileController extends AbstractV8Controller {
 		mv.addAttribute("farmName", jdbc.queryForObject("SELECT name FROM reg_entities WHERE id="+id, String.class));
 		preparePage(farm, mv);
 
+		setToReadOnly(mv, "W_FARMPROD");
+		
 		return "farms/production-profile";
 	}
 
+	@PreAuthorize("hasAuthority('W_FARMPROD')")
 	@Transactional
 	@RequestMapping(value = "/farm/{farmId}/production-profile/water-analysis/delete.html", method = RequestMethod.POST)
 	public String deleteWaterAnalysis(@PathVariable(name = "farmId") Long farmid, @RequestParam("id") Long id) {
@@ -103,6 +107,7 @@ public class FarmProductionProfileController extends AbstractV8Controller {
 		return "redirect:/farm/" + farmid + "/production-profile.html";
 	}
 
+	@PreAuthorize("hasAuthority('W_FARMPROD')")
 	@Transactional
 	@RequestMapping(value = "/farm/{farmId}/production-profile/water-analysis/update.html", method = RequestMethod.POST)
 	public String updateWaterAnalysis(@PathVariable(name = "farmId") Long farmid, DTWaterAnalysisDto dto) {
@@ -120,6 +125,7 @@ public class FarmProductionProfileController extends AbstractV8Controller {
 		return "redirect:/farm/" + farmid + "/production-profile.html";
 	}
 
+	@PreAuthorize("hasAuthority('W_FARMPROD')")
 	@Transactional
 	@RequestMapping(value = "/farm/{farmId}/production-profile/soil-analysis/update.html", method = RequestMethod.POST)
 	public String updateSoilAnalysis(@PathVariable(name = "farmId") Long farmid, DTSoilAnalysisDto dto) {
@@ -137,6 +143,7 @@ public class FarmProductionProfileController extends AbstractV8Controller {
 		return "redirect:/farm/" + farmid + "/production-profile.html";
 	}
 
+	@PreAuthorize("hasAuthority('W_FARMPROD')")
 	@Transactional
 	@RequestMapping(value = "/farm/{farmId}/production-profile/soil-analysis/delete.html", method = RequestMethod.POST)
 	public String deleteSoilAnalysis(@PathVariable(name = "farmId") Long farmid, @RequestParam("id") Long id) {
@@ -144,6 +151,7 @@ public class FarmProductionProfileController extends AbstractV8Controller {
 		return "redirect:/farm/" + farmid + "/production-profile.html";
 	}
 
+	@PreAuthorize("hasAuthority('W_FARMPROD')")
 	@Transactional
 	@RequestMapping(value = "/farm/{farmId}/production-profile/total-productionAg/update.html", method = RequestMethod.POST)
 	public String updateAgProduction(@PathVariable(name = "farmId") Long farmid, DTFarmAgProductionDto dto) {
@@ -167,6 +175,7 @@ public class FarmProductionProfileController extends AbstractV8Controller {
 		return "redirect:/farm/" + farmid + "/production-profile.html";
 	}
 
+	@PreAuthorize("hasAuthority('W_FARMPROD')")
 	@Transactional
 	@RequestMapping(value = "/farm/{farmId}/production-profile/total-productionAq/update.html", method = RequestMethod.POST)
 	public String updateAqProduction(@PathVariable(name = "farmId") Long farmid, DTFarmAqProductionDto dto) {
@@ -191,6 +200,7 @@ public class FarmProductionProfileController extends AbstractV8Controller {
 	}
 	
 	
+	@PreAuthorize("hasAuthority('W_FARMPROD')")
 	@Transactional
 	@RequestMapping(value = "/farm/{farmId}/production-profile/total-productionAg/delete.html", method = RequestMethod.POST)
 	public String deleteTotalAgProduction(@PathVariable(name = "farmId") Long farmid, @RequestParam("id") Long id) {
@@ -198,6 +208,7 @@ public class FarmProductionProfileController extends AbstractV8Controller {
 		return "redirect:/farm/" + farmid + "/production-profile.html";
 	}
 
+	@PreAuthorize("hasAuthority('W_FARMPROD')")
 	@Transactional
 	@RequestMapping(value = "/farm/{farmId}/production-profile/total-productionAq/delete.html", method = RequestMethod.POST)
 	public String deleteTotalAqProduction(@PathVariable(name = "farmId") Long farmid, @RequestParam("id") Long id) {

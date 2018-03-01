@@ -13,7 +13,7 @@
 						<a th:href="@{/roles.html}" class="btn btn-sm btn-flat btn-warning"><i class="fa fa-backward"></i> <span th:text="#{default.back}"></span></a>
 					</div>
 				</div>
-				<form role="form" th:action="@{${newEntity ? '/roles/create.html' : '/role/'+roleDto.id+'/update.html'}}" th:object="${roleDto}" method="post" autocomplete="off" onsubmit="return !hasEmptyFields('#user-box form .form-control[required]');">
+				<form role="form" class="mainForm" th:action="@{${newEntity ? '/roles/create.html' : '/role/'+roleDto.id+'/update.html'}}" th:object="${roleDto}" method="post" autocomplete="off" onsubmit="return !hasEmptyFields('#user-box form .form-control[required]');">
 					<input type="hidden" th:field="*{id}"/>
 					<div class="box-body" id="bloc-user-form">
 						<div class="row">

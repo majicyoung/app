@@ -1,11 +1,5 @@
 package com.fairagora.verifik8.v8web.mvc.users.dto;
 
-import javax.persistence.Column;
-import javax.persistence.Id;
-import javax.validation.constraints.NotNull;
-
-import org.hibernate.validator.constraints.Email;
-
 public class RoleFormDto {
 
 	protected Long id;

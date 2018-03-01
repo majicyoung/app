@@ -3,6 +3,7 @@ package com.fairagora.verifik8.v8web.mvc.farms;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -34,6 +35,7 @@ public class FarmStaffSafetyController extends AbstractV8Controller {
 	 * @return
 	 */
 	@Transactional
+	@PreAuthorize("hasAuthority('R_FARMSAFETY')")
 	@RequestMapping(value = "/farm/{id}/safety.html", method = RequestMethod.GET)
 	public String showEnvironmental(@PathVariable("id") Long id, Model mv) {
 		FarmStaffSafetyDto dto = new FarmStaffSafetyDto();
@@ -44,6 +46,8 @@ public class FarmStaffSafetyController extends AbstractV8Controller {
 			repository.save(r);
 			return r;
 		});
+
+		setToReadOnly(mv, "W_FARMSAFETY");
 
 		regFarmDtoMapper.toDto(staffMgmt, dto);
 
@@ -59,6 +63,7 @@ public class FarmStaffSafetyController extends AbstractV8Controller {
 	 * @param mv
 	 * @return
 	 */
+	@PreAuthorize("hasAuthority('W_FARMSAFETY')")
 	@RequestMapping(value = "/farm/{id}/safety.html", method = RequestMethod.POST)
 	public String saveEnvironmental(@Validated @ModelAttribute("farmDto") FarmStaffSafetyDto farmDto,
 			@PathVariable("id") Long farmId, BindingResult bindResults, Model mv) {

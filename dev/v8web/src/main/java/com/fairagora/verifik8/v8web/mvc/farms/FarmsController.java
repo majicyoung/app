@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -15,8 +16,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.fairagora.verifik8.v8web.data.application.V8Page;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLAppEntityType;
@@ -52,8 +51,9 @@ public class FarmsController extends AbstractV8Controller {
 	private RegFarmDTOMapper regFarmDtoMapper;
 
 	@Autowired
-	 protected JdbcTemplate jdbc;
-	
+	protected JdbcTemplate jdbc;
+
+	@PreAuthorize("hasAuthority('R_FARMLIST')")
 	@RequestMapping(value = "/farms.html", method = RequestMethod.GET)
 	public String showFarmsList(Model mv) {
 
@@ -70,6 +70,7 @@ public class FarmsController extends AbstractV8Controller {
 
 	}
 
+	@PreAuthorize("hasAuthority('W_FARMCREATE')")
 	@RequestMapping(value = "/farm/create.html", method = RequestMethod.GET)
 	public String showCreateUserForm(Model mv) {
 
@@ -81,16 +82,20 @@ public class FarmsController extends AbstractV8Controller {
 
 	}
 
+	@PreAuthorize("hasAuthority('W_FARMCREATE')")
 	@RequestMapping(value = "/farm/{id}/delete.html", method = RequestMethod.POST)
 	public String deleteFarms(@PathVariable("id") Long id, Model mv) {
 		farmService.deleteFarm(id);
 		return "redirect:/farms.html";
 	}
 
+	@PreAuthorize("hasAuthority('R_FARMCREATE')")
 	@RequestMapping(value = "/farm/{id}/edit.html", method = RequestMethod.GET)
 	public String showEditUser(@PathVariable("id") Long id, Model mv) {
 		FarmFormDto dto = new FarmFormDto();
 
+		setToReadOnly(mv, "W_FARMCREATE");
+		
 		regFarmDtoMapper.toDto(regEntityRepository.findOne(id), dto);
 		Optional<RegEntityFarmDetails> details = regEntityFarmDetailsRepository.findByEntityId(id);
 		if (details.isPresent())
@@ -100,6 +105,7 @@ public class FarmsController extends AbstractV8Controller {
 		return "farms/create";
 	}
 
+	@PreAuthorize("hasAuthority('W_FARMCREATE')")
 	@RequestMapping(value = "/farm/{id}/update.html", method = RequestMethod.POST)
 	@Transactional
 	public String updateFarm(@Validated @ModelAttribute("farmDto") FarmFormDto farmDto,
@@ -126,7 +132,7 @@ public class FarmsController extends AbstractV8Controller {
 
 		regEntityFarmDetailsRepository.save(farmDetails);
 
-		return "redirect:/farm/"+farm.getId()+"/edit.html";
+		return "redirect:/farm/" + farm.getId() + "/edit.html";
 	}
 
 	/**
@@ -135,16 +141,22 @@ public class FarmsController extends AbstractV8Controller {
 	 * @param mv
 	 * @return
 	 */
+	@PreAuthorize("hasAuthority('R_FARMENV')")
 	@RequestMapping(value = "/farm/{id}/environmental.html", method = RequestMethod.GET)
 	public String showEnvironmental(@PathVariable("id") Long id, Model mv) {
 		FarmEnvironmentalDto dto = new FarmEnvironmentalDto();
 
 		regFarmDtoMapper.toDto(regEntityFarmDetailsRepository.findByEntityId(id).get(), dto);
 
+		setToReadOnly(mv,"W_FARMENV");
+		
+
 		prepareForFarmEdition(id, dto, mv);
-		mv.addAttribute("farmName", jdbc.queryForObject("SELECT name FROM reg_entities WHERE id="+id, String.class));
+		mv.addAttribute("farmName", jdbc.queryForObject("SELECT name FROM reg_entities WHERE id=" + id, String.class));
 		return "farms/environmental";
 	}
+
+	
 
 	/**
 	 * 
@@ -154,6 +166,7 @@ public class FarmsController extends AbstractV8Controller {
 	 * @param mv
 	 * @return
 	 */
+	@PreAuthorize("hasAuthority('W_FARMENV')")
 	@RequestMapping(value = "/farm/{id}/environmental-update.html", method = RequestMethod.POST)
 	public String saveEnvironmental(@Validated @ModelAttribute("farmDto") FarmEnvironmentalDto farmDto,
 			@PathVariable("id") Long entityId, BindingResult bindResults, Model mv) {
@@ -166,7 +179,6 @@ public class FarmsController extends AbstractV8Controller {
 		return "redirect:/farm/" + entityId + "/environmental.html";
 	}
 
-	
 	/**
 	 * 
 	 * @param id
@@ -187,10 +199,7 @@ public class FarmsController extends AbstractV8Controller {
 
 		return "farms/popups/individual-editor";
 	}
-	
-	
-	
-	
+
 	/**
 	 * 
 	 * @param farmDto
@@ -200,19 +209,19 @@ public class FarmsController extends AbstractV8Controller {
 	 */
 	@RequestMapping(value = "/farm/{id}/individual-editor.html", method = RequestMethod.POST)
 
-	public String addIndividual(@PathVariable("individualId") Long individualAssId,
-			IndividualDto dto, Model mv) {
+	public String addIndividual(@PathVariable("individualId") Long individualAssId, IndividualDto dto, Model mv) {
 
-		RegEntity ind = individualAssId.intValue()==0 ? new RegEntity(): regEntityRepository.findOne(individualAssId);
+		RegEntity ind = individualAssId.intValue() == 0 ? new RegEntity()
+				: regEntityRepository.findOne(individualAssId);
 		ind.setEntityType(codeListservice.findEntityType(CLAppEntityType.CODE_IND));
-		
+
 		regFarmDtoMapper.fillEntity(dto, ind);
 
 		regEntityRepository.save(ind);
-		
+
 		return "redirect:/farm/create";
-	}	
-	
+	}
+
 	@RequestMapping(value = "/farm/{id}/cooperative-editor.html", method = RequestMethod.GET)
 	public String createCompany(Model mv) {
 
@@ -226,10 +235,8 @@ public class FarmsController extends AbstractV8Controller {
 		mv.addAttribute("entityType", 5);
 
 		return "farms/includes/cooperative-editor";
-	}	
-	
-	
-	
+	}
+
 	/**
 	 * prepare for model for pages
 	 * 
@@ -277,7 +284,7 @@ public class FarmsController extends AbstractV8Controller {
 		mv.addAttribute("allHighValueExpensionTypes", codeListservice.listActiveHighValueExpensionTypes());
 
 	}
-	
+
 	/**
 	 * 
 	 * @param farm
@@ -294,7 +301,7 @@ public class FarmsController extends AbstractV8Controller {
 		mv.addAttribute("allCountries", countryRepository.findAll(new Sort("name")));
 
 	}
-	
+
 	/**
 	 * 
 	 * @param farm
@@ -311,7 +318,6 @@ public class FarmsController extends AbstractV8Controller {
 		mv.addAttribute("allCountries", countryRepository.findAll(new Sort("name")));
 		mv.addAttribute("allCompanyTypes", codeListservice.listActiveCompanyEntityTypes());
 
-	}	
-	
-	
+	}
+
 }

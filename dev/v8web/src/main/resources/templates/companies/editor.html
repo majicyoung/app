@@ -14,7 +14,7 @@
 						<a th:href="@{/companies/browser.html}" class="btn btn-sm btn-flat btn-warning"><i class="fa fa-backward"></i> <span th:text="#{default.back}"></span></a>
 					</div>
 				</div>
-				<form th:action="@{'/companies/'+${companyId}+'/update.html'}" id="companyEditorForm" method="post" th:object="${companyDto}">
+				<form class="mainForm" th:action="@{'/companies/'+${companyId}+'/update.html'}" id="companyEditorForm" method="post" th:object="${companyDto}">
 
 					<div class="box-body">
 						<div class="row">

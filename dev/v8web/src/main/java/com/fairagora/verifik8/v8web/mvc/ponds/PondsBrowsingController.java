@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -32,16 +33,16 @@ public class PondsBrowsingController extends AbstractV8Controller {
 	@Autowired
 	private FarmService farmService;
 
+	@PreAuthorize("hasAuthority('R_PONDBROWSER')")
 	@RequestMapping(value = "/ponds/browser.html", method = RequestMethod.GET)
 	public String showPondsManagementPage(Model mv) {
 
-		List<PondListingDto> listing = regEntityFarmPondRepository.findAll().stream()
-				.map(p -> regFarmDtoMapper.toListing(p)).collect(Collectors.toList());
+		List<PondListingDto> listing = regEntityFarmPondRepository.findAll().stream().map(p -> regFarmDtoMapper.toListing(p)).collect(Collectors.toList());
 
 		mv.addAttribute("listing", listing);
 
 		preparePage(mv);
-
+		setToReadOnly(mv, "W_PONDBROWSER");
 		return "ponds/browser";
 	}
 
@@ -52,6 +53,7 @@ public class PondsBrowsingController extends AbstractV8Controller {
 	 * @param mv
 	 * @return
 	 */
+	@PreAuthorize("hasAuthority('W_PONDBROWSER')")
 	@RequestMapping(value = "/ponds/delete.html", method = RequestMethod.POST)
 	public String deletePond(@RequestParam("pondId") Long pondId, Model mv) {
 		regEntityFarmPondRepository.delete(pondId);
@@ -65,10 +67,11 @@ public class PondsBrowsingController extends AbstractV8Controller {
 	 * @param mv
 	 * @return
 	 */
+	@PreAuthorize("hasAuthority('W_PONDBROWSER')")
 	@RequestMapping(value = "/ponds/{pondId}/update.html", method = RequestMethod.POST)
 	public String updatePond(@PathVariable("pondId") Long pondId, FarmPondDto dto, Model mv) {
 
-		 RegEntityFarmPond pond = pondId==0 ? new RegEntityFarmPond(): regEntityFarmPondRepository.findOne(pondId);
+		RegEntityFarmPond pond = pondId == 0 ? new RegEntityFarmPond() : regEntityFarmPondRepository.findOne(pondId);
 
 		regFarmDtoMapper.fillEntity(dto, pond);
 
@@ -83,9 +86,9 @@ public class PondsBrowsingController extends AbstractV8Controller {
 	 * @param mv
 	 * @return
 	 */
+	@PreAuthorize("hasAuthority('W_PONDBROWSER')")
 	@RequestMapping(value = "/ponds/create.html", method = RequestMethod.GET)
 	public String createPond(Model mv) {
-
 
 		FarmPondDto dto = new FarmPondDto();
 
@@ -100,7 +103,6 @@ public class PondsBrowsingController extends AbstractV8Controller {
 		return "ponds/editor";
 	}
 
-	
 	/**
 	 * 
 	 * @param id
@@ -108,10 +110,11 @@ public class PondsBrowsingController extends AbstractV8Controller {
 	 * @param mv
 	 * @return
 	 */
+	@PreAuthorize("hasAuthority('R_PONDBROWSER')")
 	@RequestMapping(value = "/ponds/{pondId}/edit.html", method = RequestMethod.GET)
 	public String editPond(@PathVariable("pondId") Long pondId, Model mv) {
 
-		RegEntityFarmPond pond =  regEntityFarmPondRepository.findOne(pondId);
+		RegEntityFarmPond pond = regEntityFarmPondRepository.findOne(pondId);
 
 		FarmPondDto dto = new FarmPondDto();
 		regFarmDtoMapper.toDto(pond, dto);
@@ -123,6 +126,7 @@ public class PondsBrowsingController extends AbstractV8Controller {
 		mv.addAttribute("allQuantityUnits", codeListservice.listActiveQuantityUnit());
 
 		preparePage(mv);
+		setToReadOnly(mv, "W_PONDBROWSER");
 
 		return "ponds/editor";
 	}
@@ -139,10 +143,9 @@ public class PondsBrowsingController extends AbstractV8Controller {
 		p.setDescription("default.farm_page_description");
 		p.setNavBarPrefix("/ponds");
 		mv.addAttribute("v8p", p);
-		
+
 		mv.addAttribute("allSpecies", codeListservice.listActiveSpecies());
 		mv.addAttribute("allPondTypes", codeListservice.listActivePondTypes());
-
 
 	}
 }
