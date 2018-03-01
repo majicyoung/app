@@ -109,7 +109,7 @@ public class PondActivityController extends AbstractV8Controller {
 	 * @return
 	 */
 	@Transactional
-	@PreAuthorize("hasAuthority(W_PONDACTIVTY')")
+	@PreAuthorize("hasAuthority('W_PONDACTIVTY')")
 	@RequestMapping(value = "/ponds/{pondId}/activities/update.html", method = RequestMethod.POST)
 	public String showPlotActivities(@PathVariable("pondId") Long pondId, PondActivityDto dto, BindingResult result, Model mv) {
 
@@ -143,14 +143,11 @@ public class PondActivityController extends AbstractV8Controller {
 	 * @return
 	 */
 	@Transactional
-	@PreAuthorize("hasAuthority(W_PONDACTIVTY')")
+	@PreAuthorize("hasAuthority('W_PONDACTIVTY')")
 	@RequestMapping(value = "/ponds/{pondId}/activities/delete.html", method = RequestMethod.POST)
 	public String deletePlotActivities(@PathVariable("pondId") Long pondId, @RequestParam("activityId") Long activityId, Model mv) {
-
 		pondActivityRepository.delete(activityId);
-
 		preparePage(pondId, mv);
-
 		return "redirect:/ponds/" + pondId + "/activities/browser.html";
 	}
 
