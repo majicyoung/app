@@ -929,7 +929,7 @@ CREATE TABLE `cl_app_payment_frequencies` (
 INSERT INTO `cl_app_payment_frequencies` (`ID`, `ENABLED`, `CODE`, `RANKING`, `NAME`, `DESCRIPTION`, `I18n_DEFAULT`, `I18N_EN`, `I18N_FR`, `I18N_ES`, `I18N_TH`, `I18N_VT`, `I18N_LA`, `I18N_ID`, `I18N_KH`, `UPDATER_ID`, `COMMENT`, `CREATED_AT`, `UPDATED_AT`) VALUES
 (1, 1, 'DAY', 1, 'Daily', 'Daily', 'Daily', 'Daily', 'Journalier', NULL, 'ประจำวัน', NULL, NULL, NULL, NULL, 1, NULL, '2017-11-23 19:36:53', '2017-11-23 19:36:53'),
 (2, 1, 'WEEK', 1, 'Weekly', 'Weekly', 'Weekly', 'Weekly', 'Hebdomadaire', NULL, 'รายสัปดาห์', NULL, NULL, NULL, NULL, 1, NULL, '2017-11-23 19:36:53', '2017-11-23 19:36:53'),
-(3, 1, 'MON', 1, 'Monthly', 'Monthly', 'Monthly', 'Monthly', 'Mensuel', NULL, 'Monthly', NULL, NULL, NULL, NULL, 1, NULL, '2017-11-23 19:36:53', '2017-11-23 19:36:53');
+(3, 1, 'MON', 1, 'Monthly', 'Monthly', 'Monthly', 'Monthly', 'Mensuel', NULL, 'รายเดือน', NULL, NULL, NULL, NULL, 1, NULL, '2017-11-23 19:36:53', '2017-11-23 19:36:53');
 
 -- --------------------------------------------------------
 
