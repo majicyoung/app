@@ -13,8 +13,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.fairagora.verifik8.v8web.config.technical.auth.V8LoggedUser;
+import com.fairagora.verifik8.v8web.data.domain.reg.farm.RegEntityFarmDetails;
 import com.fairagora.verifik8.v8web.data.domain.sys.SYSRole;
 import com.fairagora.verifik8.v8web.data.domain.sys.SYSUser;
+import com.fairagora.verifik8.v8web.data.repo.reg.RegEntityFarmDetailsRepository;
 import com.fairagora.verifik8.v8web.data.repo.sys.SYSUserRepository;
 
 @Service
@@ -22,6 +24,8 @@ public class UserService extends AbstractV8Service {
 
 	@Autowired
 	protected SYSUserRepository userRepository;
+	@Autowired
+	private RegEntityFarmDetailsRepository farmDetailsRepository;
 
 	@Transactional
 	public List<SYSUser> listUsers() {
@@ -43,6 +47,14 @@ public class UserService extends AbstractV8Service {
 				break;
 
 			case SYSRole.coop:
+				List<RegEntityFarmDetails> farmDetails = farmDetailsRepository.findByCooperativeId(u.getCooperative().getId());
+				for (RegEntityFarmDetails f : farmDetails) {
+					if (f.getOwner() != null) {
+						SYSUser su = userRepository.findOne(f.getOwner().getId());
+						if (su != null)
+							l.add(su);
+					}
+				}
 				break;
 
 			}
