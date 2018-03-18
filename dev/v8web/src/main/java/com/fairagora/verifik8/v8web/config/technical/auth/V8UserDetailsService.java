@@ -3,8 +3,10 @@ package com.fairagora.verifik8.v8web.config.technical.auth;
 import java.util.HashSet;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationListener;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
+import org.springframework.security.authentication.event.AuthenticationSuccessEvent;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -15,7 +17,7 @@ import com.fairagora.verifik8.v8web.data.domain.sys.SYSUser;
 import com.fairagora.verifik8.v8web.data.repo.sys.SYSUserRepository;
 
 @Service
-public class V8UserDetailsService implements UserDetailsService {
+public class V8UserDetailsService implements UserDetailsService, ApplicationListener<AuthenticationSuccessEvent> {
 
 	private static final String USERS_BY_NAME = "SELECT email,password,active FROM sys_users WHERE email=?";
 	private static final String AUTORITIES_BY_USERNAME = "SELECT CONCAT('ROLE_',sys_roles.CODE) FROM sys_users LEFT JOIN sys_roles ON sys_roles.ID=SYS_ROLE_ID WHERE email=?";
@@ -36,8 +38,7 @@ public class V8UserDetailsService implements UserDetailsService {
 
 		V8LoggedUser loggedUser = new V8LoggedUser(u);
 
-		jdbc.queryForList(AUTORITIES_BY_USERNAME, new Object[] { username }, String.class)
-				.forEach(s -> loggedUser.addAuthority(new SimpleGrantedAuthority(s.toUpperCase())));
+		jdbc.queryForList(AUTORITIES_BY_USERNAME, new Object[] { username }, String.class).forEach(s -> loggedUser.addAuthority(new SimpleGrantedAuthority(s.toUpperCase())));
 
 		String sql = "";
 		sql += "SELECT sys_rights.CODE, sys_rights.RANKING, sys_pages.CODE FROM sys_users_rights";
@@ -75,6 +76,17 @@ public class V8UserDetailsService implements UserDetailsService {
 		}
 
 		return loggedUser;
+	}
+
+	@Override
+	public void onApplicationEvent(AuthenticationSuccessEvent event) {
+		if (event.getAuthentication() != null) {
+			System.out.println("--- DEBUG -- USER LOGIN :" + event.getAuthentication().getName());
+			event.getAuthentication().getAuthorities().forEach(a -> {
+				System.out.println("\t" + a.getAuthority());
+			});
+			System.out.println("--- END USER LOGIN ------------------------------------------------------------------------");
+		}
 	}
 
 }

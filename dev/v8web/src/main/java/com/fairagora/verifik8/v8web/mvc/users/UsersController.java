@@ -22,10 +22,14 @@ import com.fairagora.verifik8.v8web.data.domain.sys.SYSUser;
 import com.fairagora.verifik8.v8web.mvc.AbstractV8Controller;
 import com.fairagora.verifik8.v8web.mvc.infra.dtomapping.SysUserDTOMapper;
 import com.fairagora.verifik8.v8web.mvc.users.dto.UserFormDto;
+import com.fairagora.verifik8.v8web.services.UserService;
 
 @Controller
 public class UsersController extends AbstractV8Controller {
 
+	@Autowired
+	private UserService userService;
+	
 	@Autowired
 	private SysUserDTOMapper sysUserDTOMapper;
 
@@ -39,7 +43,7 @@ public class UsersController extends AbstractV8Controller {
 		p.setNavBarPrefix("/users");
 		mv.addAttribute("v8p", p);
 
-		List<SYSUser> users = userRepository.findAll();
+		List<SYSUser> users = userService.listUsers();
 		mv.addAttribute("users", users);
 
 		return "users/listing";

@@ -10,5 +10,6 @@ public interface RegEntityRepository extends JpaRepository<RegEntity, Long> {
 
 	List<RegEntity> findByEntityTypeCode(String entityTypeCode);
 
+	List<RegEntity> findByEntityTypeCodeAndNationalityId(String codeFarm, Long countryId);
 
 }

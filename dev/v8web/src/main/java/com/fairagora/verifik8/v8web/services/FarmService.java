@@ -13,13 +13,16 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.fairagora.verifik8.v8web.config.technical.auth.V8LoggedUser;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLAppEntityType;
 import com.fairagora.verifik8.v8web.data.domain.commons.V8Measure;
 import com.fairagora.verifik8.v8web.data.domain.reg.RegEntity;
 import com.fairagora.verifik8.v8web.data.domain.reg.farm.RegEntityFarmDetails;
+import com.fairagora.verifik8.v8web.data.domain.reg.farm.RegEntityFarmPond;
 import com.fairagora.verifik8.v8web.data.domain.sys.SYSRole;
 import com.fairagora.verifik8.v8web.data.domain.sys.SYSUser;
 import com.fairagora.verifik8.v8web.data.repo.reg.RegEntityFarmDetailsRepository;
+import com.fairagora.verifik8.v8web.data.repo.reg.RegEntityFarmPondRepository;
 import com.fairagora.verifik8.v8web.data.repo.reg.RegEntityRepository;
 import com.fairagora.verifik8.v8web.data.repo.sys.SYSUserRepository;
 import com.fairagora.verifik8.v8web.services.enhanced.V8Farm;
@@ -34,6 +37,9 @@ public class FarmService extends AbstractV8Service {
 	@Autowired
 	private V8EnhancedDtoMapper enhancedMapper;
 
+	@Autowired
+	private RegEntityFarmPondRepository regEntityFarmPondRepository;
+
 	/**
 	 * Return a list of Model Enhanced Farms, useful for display form meta data,
 	 * in an optimized way
@@ -45,29 +51,25 @@ public class FarmService extends AbstractV8Service {
 
 		// fetch how many staff member we have per farms
 		Map<Long, Integer> staffCountPerFarms = new HashMap<>();
-		jdbc.query("select REG_ENTITY_FARM_ID, COUNT(REG_ENTITY_ID) from reg_entity_staff GROUP BY REG_ENTITY_FARM_ID ",
-				rs -> {
-					staffCountPerFarms.put(rs.getLong(1), rs.getInt(2));
-				});
+		jdbc.query("select REG_ENTITY_FARM_ID, COUNT(REG_ENTITY_ID) from reg_entity_staff GROUP BY REG_ENTITY_FARM_ID ", rs -> {
+			staffCountPerFarms.put(rs.getLong(1), rs.getInt(2));
+		});
 
 		// fetch how many ponds we have per farm
 		Map<Long, Integer> pondsCountPerFarms = new HashMap<>();
-		jdbc.query("select REG_ENTITY_FARM_ID, COUNT(ID) from reg_entity_farmaq_ponds GROUP BY REG_ENTITY_FARM_ID ",
-				rs -> {
-					pondsCountPerFarms.put(rs.getLong(1), rs.getInt(2));
-				});
+		jdbc.query("select REG_ENTITY_FARM_ID, COUNT(ID) from reg_entity_farmaq_ponds GROUP BY REG_ENTITY_FARM_ID ", rs -> {
+			pondsCountPerFarms.put(rs.getLong(1), rs.getInt(2));
+		});
 
 		// fetch how many plots we have per farm
 		Map<Long, Integer> plotsCountPerFarms = new HashMap<>();
-		jdbc.query("select REG_ENTITY_FARM_ID, COUNT(ID) from reg_entity_farmag_plots GROUP BY REG_ENTITY_FARM_ID ",
-				rs -> {
-					plotsCountPerFarms.put(rs.getLong(1), rs.getInt(2));
-				});
+		jdbc.query("select REG_ENTITY_FARM_ID, COUNT(ID) from reg_entity_farmag_plots GROUP BY REG_ENTITY_FARM_ID ", rs -> {
+			plotsCountPerFarms.put(rs.getLong(1), rs.getInt(2));
+		});
 
 		Map<Long, V8Measure> sizesPerFarms = new HashMap<>();
 		jdbc.query("select REG_ENTITY_FARM_ID, SIZE,CL_SIZE_UNIT_ID FROM reg_entity_farm_details", rs -> {
-			sizesPerFarms.put(rs.getLong(1),
-					new V8Measure().setup(rs.getFloat(2), clQtUnityRepository.findOne(rs.getLong(3))));
+			sizesPerFarms.put(rs.getLong(1), new V8Measure().setup(rs.getFloat(2), clQtUnityRepository.findOne(rs.getLong(3))));
 		});
 
 		List<RegEntity> farmsEntities = regEntityRepository.findByEntityTypeCode(CLAppEntityType.CODE_FARM);
@@ -79,8 +81,8 @@ public class FarmService extends AbstractV8Service {
 			f.setStaffCount(staffCountPerFarms.getOrDefault(e.getId(), 0));
 			f.setPondsCount(pondsCountPerFarms.getOrDefault(e.getId(), 0));
 			f.setPlotsCount(plotsCountPerFarms.getOrDefault(e.getId(), 0));
-			f.setSize(sizesPerFarms.get(e.getId())); 
-			farms.add(f); 
+			f.setSize(sizesPerFarms.get(e.getId()));
+			farms.add(f);
 		}
 
 		return farms;
@@ -113,16 +115,11 @@ public class FarmService extends AbstractV8Service {
 					// as an FARM user, I shall see only my own farm, from my
 					// user profile, if I have no farm defined, I will see no
 					// farm
-					farmsEntities.stream()
-							.filter(f -> user.getFarm() != null && f.getId().equals(user.getFarm().getId()))
-							.forEach(filtered::add);
+					farmsEntities.stream().filter(f -> user.getFarm() != null && f.getId().equals(user.getFarm().getId())).forEach(filtered::add);
 				} else if (user.getRole().getCode().equals(SYSRole.country)) {
 					// as a COUNTRY user I shall see the farms from the country
 					// defined in my user profile
-					farmsEntities.stream()
-							.filter(f -> user.getCountry() != null && f.getAddress().getCountry() != null
-									&& f.getAddress().getCountry().getId().equals(user.getCountry().getId()))
-							.forEach(filtered::add);
+					farmsEntities.stream().filter(f -> user.getCountry() != null && f.getAddress().getCountry() != null && f.getAddress().getCountry().getId().equals(user.getCountry().getId())).forEach(filtered::add);
 				}
 
 			}
@@ -142,5 +139,42 @@ public class FarmService extends AbstractV8Service {
 
 		Optional<RegEntityFarmDetails> details = farmDetailsRepository.findByEntityId(id);
 		details.ifPresent(d -> farmDetailsRepository.delete(d));
+	}
+
+	@Transactional
+	public List<RegEntityFarmPond> listVisiblePoundsForLoggedUser(V8LoggedUser loggedUser) {
+		List<RegEntityFarmPond> r = new ArrayList<>();
+
+		SYSUser u = userRepo.findByEmail(loggedUser.getUsername());
+		if (u != null) {
+			switch (u.getRole().getCode()) {
+			case SYSRole.SADMIN:
+				r.addAll(regEntityFarmPondRepository.findAll());
+				break;
+
+			case SYSRole.coop:
+				List<RegEntityFarmDetails> farmDetails = farmDetailsRepository.findByCooperativeId(u.getCooperative().getId());
+				for (RegEntityFarmDetails f : farmDetails) {
+					r.addAll(regEntityFarmPondRepository.findByFarmId(f.getId()));
+				}
+				break;
+
+			case SYSRole.farm:
+				List<RegEntityFarmDetails> farmDetails1 = farmDetailsRepository.findByOwnerId(u.getId());
+				for (RegEntityFarmDetails f : farmDetails1) {
+					r.addAll(regEntityFarmPondRepository.findByFarmId(f.getId()));
+				}
+				break;
+
+			case SYSRole.country:
+				List<RegEntity> farms = regEntityRepository.findByEntityTypeCodeAndNationalityId(CLAppEntityType.CODE_FARM, u.getCountry().getId());
+				for (RegEntity f : farms) {
+					r.addAll(regEntityFarmPondRepository.findByFarmId(f.getId()));
+				}
+				break;
+			}
+		}
+
+		return r;
 	}
 }

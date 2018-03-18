@@ -37,7 +37,7 @@ public class PondsBrowsingController extends AbstractV8Controller {
 	@RequestMapping(value = "/ponds/browser.html", method = RequestMethod.GET)
 	public String showPondsManagementPage(Model mv) {
 
-		List<PondListingDto> listing = regEntityFarmPondRepository.findAll().stream().map(p -> regFarmDtoMapper.toListing(p)).collect(Collectors.toList());
+		List<PondListingDto> listing = farmService.listVisiblePoundsForLoggedUser(getLoggedUser()).stream().map(p -> regFarmDtoMapper.toListing(p)).collect(Collectors.toList());
 
 		mv.addAttribute("listing", listing);
 
