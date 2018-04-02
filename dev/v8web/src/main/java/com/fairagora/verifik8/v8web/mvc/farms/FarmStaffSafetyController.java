@@ -89,7 +89,8 @@ public class FarmStaffSafetyController extends AbstractV8Controller {
 		p.setNavBarPrefix("/farm");
 		mv.addAttribute("v8p", p);
 
-		mv.addAttribute("activeTab", "safety");
+		mv.addAttribute("activeTabEdit", "safety");
+		mv.addAttribute("activeTab", "profile");
 
 		mv.addAttribute("farmDto", dto);
 		mv.addAttribute("farmId", dto.getFarmId());

@@ -252,6 +252,7 @@ public class FarmsController extends AbstractV8Controller {
 
 		mv.addAttribute("newEntity", dto.getId() == null);
 		mv.addAttribute("activeTab", "profile");
+		mv.addAttribute("activeTabEdit", "profile");
 
 		mv.addAttribute("farmDto", dto);
 		mv.addAttribute("farmId", dto.getId());
@@ -276,7 +277,9 @@ public class FarmsController extends AbstractV8Controller {
 		mv.addAttribute("v8p", p);
 
 		mv.addAttribute("newEntity", false);
-		mv.addAttribute("activeTab", "environmental");
+		mv.addAttribute("activeTabEdit", "environmental");
+		mv.addAttribute("activeTab", "profile");
+
 
 		mv.addAttribute("farmDto", dto);
 		mv.addAttribute("farmId", farmId);
