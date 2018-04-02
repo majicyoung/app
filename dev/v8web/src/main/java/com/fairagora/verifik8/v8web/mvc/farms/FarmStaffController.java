@@ -104,6 +104,7 @@ public class FarmStaffController extends AbstractV8Controller {
 		// operation, and page reload
 		mv.addAttribute("farmId", farm.getId());
 		mv.addAttribute("activeTab", "staff");
+		mv.addAttribute("activeTabStaff", "staff");
 
 		List<RegEntityStaff> staffListing = regEntityStaffRepository.findByFarmId(farm.getId());
 		mv.addAttribute("staffListing", staffListing);
