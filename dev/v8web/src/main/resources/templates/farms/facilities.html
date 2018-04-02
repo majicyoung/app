@@ -1,150 +1,177 @@
 <!DOCTYPE html>
-<html layout:decorator="inc/main-layout" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html layout:decorator="inc/main-layout" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
 <div layout:fragment="content">
-	<div class="row">
-		 <div class="col-xs-12">
+  <div class="row">
+    <div class="col-xs-12">
       <div class="box" id="farm-box">
         <div class="box-header with-border">
-	          <h3  class="box-title" th:text="#{default.facilities}">default.facilities</h3> 
+          <h3 class="box-title" th:text="#{default.facilities}">default.facilities</h3>
         </div>
-        <form role="form"  th:action="@{'/farm/'+${farmId}+'/facilities.html'}" th:object="${farmDto}" method="post" class="mainForm form-horizontal" enctype="multipart/form-data" onsubmit="return !hasEmptyFields('#farm-box form .form-control[required]');">
-        <div class="box-body" style="padding:0;">
-          <div class="nav-tabs-custom">
-           <ul th:include="farms/farms-includes :: farms-tabs" class="nav nav-tabs"></ul>
-            <div class="tab-content">
-              <div class="tab-pane active" id="tab_3">
-              	<div class="row">
-              		<div class="col-xs-6">
-						<div class="form-group row col-xs-12">
-							<div class="col-xs-12">
-								<input type="checkbox" th:field="*{accessToilets}" /> <span th:text="|#{facilities.accessToilets}*|"></span>
-							</div>
-						</div>
-					</div>
-              		<div class="col-xs-6">
-                         <div class="form-group">
-                             <label for="accessToiletsAttachment" class="col-xs-4 control-label" th:text="#{facilities.accessToiletsAttachment}"></label>
-                             <div class="col-xs-5">
-                                 <input type="file" class="form-control" th:field="*{accessToiletsAttachment}" th:placeholder="#{facilities.accessToiletsAttachment}" accept=".xlsx, .xls, .doc, .docx, .pdf, image/*" />
-                             </div>
-                             <div class="col-xs-2 bloc-file-uploaded" >
-                                	<a th:if="${!#strings.isEmpty(farmDto.accessToiletsAttachmentUrl)}" th:href="@{'/downloard/'+${farmDto.accessToiletsAttachmentUrl}}" target="_blank">
-                                		<i class="fa fa-download"></i>
-                                 </a>
-                             </div>
-                         </div>
-                      </div>
-                  </div>
-                  
+        <form role="form" th:action="@{'/farm/'+${farmId}+'/facilities.html'}" th:object="${farmDto}" method="post"
+              class="mainForm form-horizontal" enctype="multipart/form-data"
+              onsubmit="return !hasEmptyFields('#farm-box form .form-control[required]');">
+          <div class="box-body" style="padding:0;">
+            <div class="nav-tabs-custom">
+              <ul th:include="farms/farms-includes :: farms-tabs" class="nav nav-tabs"></ul>
+              <ul th:include="farms/farms-profile-includes :: farms-tabs" class="nav nav-tabs nav-tabs-seconds"></ul>
+
+              <div class="tab-content">
+                <div class="tab-pane active" id="tab_3">
                   <div class="row">
-              		<div class="col-xs-6">
-						<div class="form-group row col-xs-12">
-							<div class="col-xs-12">
-								<input type="checkbox" th:field="*{accessRestRoom}" /> <span th:text="|#{facilities.accessRestRoom}*|"></span>
-							</div>
-						</div>
-					</div>
-              		<div class="col-xs-6">
-                         <div class="form-group">
-                             <label for="accessRestRoomAttachment" class="col-xs-4 control-label" th:text="#{facilities.accessRestRoomAttachment}"></label>
-                             <div class="col-xs-5">
-                                 <input type="file" class="form-control" th:field="*{accessRestRoomAttachment}" th:placeholder="#{facilities.accessRestRoomAttachment}" accept=".xlsx, .xls, .doc, .docx, .pdf, image/*" />
-                             </div>
-                             <div class="col-xs-2 bloc-file-uploaded" >
-                                	<a th:if="${!#strings.isEmpty(farmDto.accessRestRoomAttachmentUrl)}" th:href="@{'/downloard/'+${farmDto.accessRestRoomAttachmentUrl}}" target="_blank">
-                                		<i class="fa fa-download"></i>
-                                 </a>
-                             </div>
-                         </div>
+                    <div class="col-xs-6">
+                      <div class="form-group row col-xs-12">
+                        <div class="col-xs-12">
+                          <input type="checkbox" th:field="*{accessToilets}"/> <span
+                            th:text="|#{facilities.accessToilets}*|"></span>
+                        </div>
                       </div>
+                    </div>
+                    <div class="col-xs-6">
+                      <div class="form-group">
+                        <label for="accessToiletsAttachment" class="col-xs-4 control-label"
+                               th:text="#{facilities.accessToiletsAttachment}"></label>
+                        <div class="col-xs-5">
+                          <input type="file" class="form-control" th:field="*{accessToiletsAttachment}"
+                                 th:placeholder="#{facilities.accessToiletsAttachment}"
+                                 accept=".xlsx, .xls, .doc, .docx, .pdf, image/*"/>
+                        </div>
+                        <div class="col-xs-2 bloc-file-uploaded">
+                          <a th:if="${!#strings.isEmpty(farmDto.accessToiletsAttachmentUrl)}"
+                             th:href="@{'/downloard/'+${farmDto.accessToiletsAttachmentUrl}}" target="_blank">
+                            <i class="fa fa-download"></i>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                  
-                 
+
                   <div class="row">
-              		<div class="col-xs-6">
-						<div class="form-group row col-xs-12">
-							<div class="col-xs-12">
-								<input type="checkbox" th:field="*{accessShower}" /> <span th:text="|#{facilities.accessShower}*|"></span>
-							</div>
-						</div>
-					</div>
-              		<div class="col-xs-6">
-                         <div class="form-group">
-                             <label for="accessShowerAttachment" class="col-xs-4 control-label" th:text="#{facilities.accessShowerAttachment}"></label>
-                             <div class="col-xs-5">
-                                 <input type="file" class="form-control" th:field="*{accessShowerAttachment}" th:placeholder="#{facilities.accessShowerAttachment}" accept=".xlsx, .xls, .doc, .docx, .pdf, image/*" />
-                             </div>
-                             <div class="col-xs-2 bloc-file-uploaded" >
-                                	<a th:if="${!#strings.isEmpty(farmDto.accessShowerAttachmentUrl)}" th:href="@{'/downloard/'+${farmDto.accessShowerAttachmentUrl}}" target="_blank">
-                                		<i class="fa fa-download"></i>
-                                 </a>
-                             </div>
-                         </div>
+                    <div class="col-xs-6">
+                      <div class="form-group row col-xs-12">
+                        <div class="col-xs-12">
+                          <input type="checkbox" th:field="*{accessRestRoom}"/> <span
+                            th:text="|#{facilities.accessRestRoom}*|"></span>
+                        </div>
                       </div>
-                  </div>
-                  
-                  
-                   <div class="row">
-              		<div class="col-xs-6">
-						<div class="form-group row col-xs-12">
-							<div class="col-xs-12">
-								<input type="checkbox" th:field="*{accessToFreeDrinking}" /> <span th:text="|#{facilities.accessToFreeDrinking}*|"></span>
-							</div>
-						</div>
-					</div>
-              		<div class="col-xs-6">
-                         <div class="form-group">
-                             <label for="accessToFreeDrinkingAttachment" class="col-xs-4 control-label" th:text="#{facilities.accessToFreeDrinkingAttachment}"></label>
-                             <div class="col-xs-5">
-                                 <input type="file" class="form-control" th:field="*{accessToFreeDrinkingAttachment}" th:placeholder="#{facilities.accessToFreeDrinkingAttachment}" accept=".xlsx, .xls, .doc, .docx, .pdf, image/*" />
-                             </div>
-                             <div class="col-xs-2 bloc-file-uploaded" >
-                                	<a th:if="${!#strings.isEmpty(farmDto.accessToFreeDrinkingAttachmentUrl)}" th:href="@{'/downloard/'+${farmDto.accessToFreeDrinkingAttachmentUrl}}" target="_blank">
-                                		<i class="fa fa-download"></i>
-                                 </a>
-                             </div>
-                         </div>
+                    </div>
+                    <div class="col-xs-6">
+                      <div class="form-group">
+                        <label for="accessRestRoomAttachment" class="col-xs-4 control-label"
+                               th:text="#{facilities.accessRestRoomAttachment}"></label>
+                        <div class="col-xs-5">
+                          <input type="file" class="form-control" th:field="*{accessRestRoomAttachment}"
+                                 th:placeholder="#{facilities.accessRestRoomAttachment}"
+                                 accept=".xlsx, .xls, .doc, .docx, .pdf, image/*"/>
+                        </div>
+                        <div class="col-xs-2 bloc-file-uploaded">
+                          <a th:if="${!#strings.isEmpty(farmDto.accessRestRoomAttachmentUrl)}"
+                             th:href="@{'/downloard/'+${farmDto.accessRestRoomAttachmentUrl}}" target="_blank">
+                            <i class="fa fa-download"></i>
+                          </a>
+                        </div>
                       </div>
+                    </div>
                   </div>
-                  
-                  
+
+
                   <div class="row">
-              		<div class="col-xs-12">
-						<div class="form-group row col-xs-12">
-							<div class="col-xs-12">
-								<input type="checkbox" th:field="*{presenceFirstAidKit}" /> <span th:text="|#{facilities.presenceFirstAidKit}*|"></span>
-							</div>
-						</div>
-					</div>
-				  </div>
+                    <div class="col-xs-6">
+                      <div class="form-group row col-xs-12">
+                        <div class="col-xs-12">
+                          <input type="checkbox" th:field="*{accessShower}"/> <span
+                            th:text="|#{facilities.accessShower}*|"></span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-xs-6">
+                      <div class="form-group">
+                        <label for="accessShowerAttachment" class="col-xs-4 control-label"
+                               th:text="#{facilities.accessShowerAttachment}"></label>
+                        <div class="col-xs-5">
+                          <input type="file" class="form-control" th:field="*{accessShowerAttachment}"
+                                 th:placeholder="#{facilities.accessShowerAttachment}"
+                                 accept=".xlsx, .xls, .doc, .docx, .pdf, image/*"/>
+                        </div>
+                        <div class="col-xs-2 bloc-file-uploaded">
+                          <a th:if="${!#strings.isEmpty(farmDto.accessShowerAttachmentUrl)}"
+                             th:href="@{'/downloard/'+${farmDto.accessShowerAttachmentUrl}}" target="_blank">
+                            <i class="fa fa-download"></i>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+
+                  <div class="row">
+                    <div class="col-xs-6">
+                      <div class="form-group row col-xs-12">
+                        <div class="col-xs-12">
+                          <input type="checkbox" th:field="*{accessToFreeDrinking}"/> <span
+                            th:text="|#{facilities.accessToFreeDrinking}*|"></span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-xs-6">
+                      <div class="form-group">
+                        <label for="accessToFreeDrinkingAttachment" class="col-xs-4 control-label"
+                               th:text="#{facilities.accessToFreeDrinkingAttachment}"></label>
+                        <div class="col-xs-5">
+                          <input type="file" class="form-control" th:field="*{accessToFreeDrinkingAttachment}"
+                                 th:placeholder="#{facilities.accessToFreeDrinkingAttachment}"
+                                 accept=".xlsx, .xls, .doc, .docx, .pdf, image/*"/>
+                        </div>
+                        <div class="col-xs-2 bloc-file-uploaded">
+                          <a th:if="${!#strings.isEmpty(farmDto.accessToFreeDrinkingAttachmentUrl)}"
+                             th:href="@{'/downloard/'+${farmDto.accessToFreeDrinkingAttachmentUrl}}" target="_blank">
+                            <i class="fa fa-download"></i>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+
+                  <div class="row">
+                    <div class="col-xs-12">
+                      <div class="form-group row col-xs-12">
+                        <div class="col-xs-12">
+                          <input type="checkbox" th:field="*{presenceFirstAidKit}"/> <span
+                            th:text="|#{facilities.presenceFirstAidKit}*|"></span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="box-footer text-center">
-        	<small>* <span th:text="#{default.mandatory_field}"></span></small>
-            <a th:href="@{/farms.html}" class="btn btn-flat btn-warning"><i class="fa fa-times"></i><span th:text="#{default.cancel}">default.cancel</span></a>
-            
+          <div class="box-footer text-center">
+            <small>* <span th:text="#{default.mandatory_field}"></span></small>
+            <a th:href="@{/farms.html}" class="btn btn-flat btn-warning"><i class="fa fa-times"></i><span
+                th:text="#{default.cancel}">default.cancel</span></a>
+
             <button type="submit" class="btn btn-success">
-				<span th:text="#{default.submit}">default.submit</span> <i class="fa fa-check"></i>
-			</button>
-        </div>
+              <span th:text="#{default.submit}">default.submit</span> <i class="fa fa-check"></i>
+            </button>
+          </div>
         </form>
       </div>
     </div>
 
-	</div>
+  </div>
 
 </div>
 
 
 <th:block layout:fragment="page-scripts">
-	<script type="text/javascript">
-		$( document ).ready(function() {
-		});
-	</script>
+  <script type="text/javascript">
+      $(document).ready(function () {
+      });
+  </script>
 </th:block>
 
 </html>

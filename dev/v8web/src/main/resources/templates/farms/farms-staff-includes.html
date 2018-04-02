@@ -1,0 +1,23 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<body>
+	<ul th:fragment="farms-tabs" class="nav nav-tabs">
+		<th:block th:if="${farmId!=null AND farmId&gt;0}">
+			<li id="farmsecondtab_staff-general-info"><a th:href="@{${'/farm/'+farmId+'/staff-general-info.html'}}" th:text="#{farm.staff_general_info}">farm.staff_general_info</a></li>
+			<li id="farmsecondtab_staff"><a th:href="@{${'/farm/'+farmId+'/staff.html'}}" th:text="#{farm.contact_staff}">farm.contact_staff</a></li>
+			<li id="farmsecondtab_hiring"><a th:href="@{${'/farm/'+farmId+'/hiring-recruitment.html'}}" th:text="#{farm.hiring_recruitment}">farm.hiring_recruitment</a></li>
+			<li id="farmsecondtab_training"><a th:href="@{${'/farm/'+farmId+'/training.html'}}" th:text="#{default.training}">default.training</a></li>
+		</th:block>
+		<th:block th:if="${farmId==null OR farmId==0}">
+			<li class="disabled"><a th:text="#{farm.staff_general_info}">farm.staff_general_info</a></li>
+			<li class="disabled"><a th:text="#{farm.contact_staff}">farm.contact_staff</a></li>
+			<li class="disabled"><a th:text="#{farm.hiring_recruitment}">farm.hiring_recruitment</a></li>
+			<li class="disabled"><a th:text="#{default.training}">default.training</a></li>
+		</th:block>
+	</ul>
+
+
+</body>
+</html>

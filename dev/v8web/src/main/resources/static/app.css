@@ -67,3 +67,7 @@ input.fake {
 	font-size:20px;
 	margin-top:8px;
 }
+
+.nav-tabs-custom > .nav-tabs-seconds > li.active {
+	border-top-color: #34bc26;
+}

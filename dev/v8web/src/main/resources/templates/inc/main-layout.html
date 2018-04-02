@@ -45,7 +45,9 @@
 	/*<![CDATA[*/
 		$(document).ready(function() {
 			var activeLi=[[${activeTab}]];
-			$('#farmtab_'+activeLi).addClass('active');			
+			var activeSecondLi=[[${activeSecondTab}]];
+			$('#farmtab_'+activeLi).addClass('active');
+			$('#farmsecondtab_'+activeSecondLi).addClass('active');
 		});
 		/*]]>*/
 	</script>

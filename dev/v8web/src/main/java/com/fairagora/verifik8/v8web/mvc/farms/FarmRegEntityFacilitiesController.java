@@ -38,6 +38,7 @@ public class FarmRegEntityFacilitiesController extends AbstractV8Controller {
 	@RequestMapping(value = "/farm/{id}/facilities.html", method = RequestMethod.GET)
 	@PreAuthorize("hasAuthority('R_FARMFACILITY')")
 	public String showEnvironmental(@PathVariable("id") Long id, Model mv) {
+
 		RegEntityFacilitiesDto dto = new RegEntityFacilitiesDto();
 
 		RegEntityFacilities staffMgmt = repository.findByFarmId(id).orElseGet(() -> {
@@ -97,7 +98,8 @@ public class FarmRegEntityFacilitiesController extends AbstractV8Controller {
 		p.setNavBarPrefix("/farm");
 		mv.addAttribute("v8p", p);
 
-		mv.addAttribute("activeTab", "facilities");
+		mv.addAttribute("activeTab", "profile");
+		mv.addAttribute("activeSecondTab", "facilities");
 
 		mv.addAttribute("farmDto", dto);
 		mv.addAttribute("farmId", dto.getFarmId());

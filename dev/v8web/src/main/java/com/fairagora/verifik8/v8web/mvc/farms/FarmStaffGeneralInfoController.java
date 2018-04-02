@@ -104,7 +104,8 @@ public class FarmStaffGeneralInfoController extends AbstractV8Controller {
 		p.setNavBarPrefix("/farm");
 		mv.addAttribute("v8p", p);
 
-		mv.addAttribute("activeTab", "staff-general-info");
+		mv.addAttribute("activeTab", "staff");
+		mv.addAttribute("activeSecondTab", "staff-general-info");
 
 		mv.addAttribute("farmDto", dto);
 		mv.addAttribute("farmName", jdbc.queryForObject("SELECT name FROM reg_entities WHERE id="+id, String.class));

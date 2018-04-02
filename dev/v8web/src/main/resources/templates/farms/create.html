@@ -1,420 +1,482 @@
 <!DOCTYPE html>
-<html layout:decorator="inc/main-layout" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html layout:decorator="inc/main-layout" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
 <div layout:fragment="content">
-	<div class="row">
-		 <div class="col-xs-12">
+  <div class="row">
+    <div class="col-xs-12">
       <div class="box" id="farm-box">
         <div class="box-header with-border">
-	        <div th:switch="${farmDto.id}">
-	          <h3 th:case="0" class="box-title" th:text="#{farm.create}">farm.create</h3> 
-	          <h3 th:case="*" class="box-title" th:text="#{farm.edit}">farm.edit</h3> - <span th:text="${farmDto.name}">farm.name</span>
-	        </div>
+          <div th:switch="${farmDto.id}">
+            <h3 th:case="0" class="box-title" th:text="#{farm.create}">farm.create</h3>
+            <h3 th:case="*" class="box-title" th:text="#{farm.edit}">farm.edit</h3> - <span th:text="${farmDto.name}">farm.name</span>
+          </div>
         </div>
-        <form role="form"  th:action="@{'/farm/'+${farmDto.id}+'/update.html'}" th:object="${farmDto}" method="post" class="mainForm form-horizontal" enctype="multipart/form-data" onsubmit="return !hasEmptyFields('#farm-box form .form-control[required]');">
-        <div class="box-body" style="padding:0;">
-          <div class="nav-tabs-custom">
-           <ul th:include="farms/farms-includes :: farms-tabs" class="nav nav-tabs"></ul>
-            <div class="tab-content">
-              <div class="tab-pane active" id="tab_1">
-                <div class="row">
-                    <div class="col-xs-12">
-                        <div class="col-xs-12">
-                        	<h4 th:text="#{farm.profile_info}">farm.profile_info</h4>
-                        </div>
-                        <div class="col-xs-6">
-                            <div class="form-group row">
-								<label for="quotaId" class="col-xs-3 control-label" th:text="#{farm.quota_id}">farm.quota_id</label>
-                                <div class="col-xs-9">
-                                    <input type="text" class="form-control" id="inputFarmPhone" th:field="*{quotaId}" th:placeholder="#{farm.quota_id}"  />
-                                </div>
-                            </div>             
-                            <div class="form-group row">
-                                <label for="inputFarmName" class="col-xs-3 control-label" th:text="#{default.name}+'*'">default.name*</label>
-                                <div class="col-xs-9">
-                                    <input type="text" class="form-control" id="inputFarmName" th:field="*{name}" th:placeholder="#{default.name}" required="required" />
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="inputFarmAddr" class="col-xs-3 control-label" th:text="#{default.address}">default.address</label>
-                                <div class="col-xs-9">
-                                    <textarea class="form-control" id="inputFarmAddr" th:field="*{address.main}" th:placeholder="#{default.address}" style="height:83px;"></textarea>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="inputFarmCity" class="col-xs-3 control-label" th:text="#{default.city}+'*'">default.city*</label>
-                                <div class="col-xs-9">
-                                    <input type="text" class="form-control" id="inputFarmCity" th:field="*{address.city}"  th:placeholder="#{default.city}" required="required" />
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="inputFarmZip" class="col-xs-3 control-label" th:text="#{default.zip_code}">default.zip_code</label>
-                                <div class="col-xs-9">
-                                    <input type="text" class="form-control" id="inputFarmZip" th:field="*{address.zip}" th:placeholder="#{default.zip_code}"  />
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="inputFarmCountry" class="col-xs-3 control-label" th:text="#{default.country}+'*'" onchange="locateAddress();">default.country*</label>
-                                <div class="col-xs-9">
-                                    <select class="form-control" id="inputFarmCountry" th:field="*{address.country}"  required="required" onchange="locateAddress();">
-                                       	<option value="" th:text="|-- #{default.select_country} --|"> #{default.select_country} </option>
-                                        <option th:each="country : ${allCountries}" th:value="${country.id}" th:text="${country.localisedName}"></option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xs-6">
-                            <div class="form-group row">
-                                <label for="inputFarmName" class="col-xs-3 control-label" th:text="#{default.owner}+'*'">default.owner*</label>
-                                <div class="col-xs-9 no-padding">
-                                    <div class="col-xs-10">
-                                        <select class="form-control" id="inputFarmOwner" th:field="*{owner}" required="required" >
-                                            <option value="" th:text="|-- #{farm.select_owner} --|">#{farm.select_owner}</option>
-                                            <option th:each="ind : ${allIndividuals}" th:value="${ind.id}" th:text="${ind.name+' '+ind.surname}"> </option>
-                                        </select>		
-                                    </div>
-                                    <div class="col-xs-2">
-                                       <a href="javascript:void(0);" class="btn btn-flat btn-primary openNewStaffBtn" title="#{default.add_owner}" ><i class="fa fa-plus"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="inputFarmPhone" class="col-xs-3 control-label" th:text="#{default.phone}">default.phone</label>
-                                <div class="col-xs-9">
-                                    <input type="text" class="form-control" id="inputFarmPhone" th:field="*{phoneNumber}" th:placeholder="#{default.phone}"  />
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="inputFarmMobile" class="col-xs-3 control-label" th:text="#{default.mobile}+'*'">default.mobile*</label>
-                                <div class="col-xs-9">
-                                    <input type="text" class="form-control" id="inputFarmMobile" th:field="*{mobileNumber}" th:placeholder="#{default.mobile}" required="required"/>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="inputFarmFax" class="col-xs-3 control-label" th:text="#{default.fax}"></label>
-                                <div class="col-xs-9">
-                                    <input type="text" class="form-control" id="inputFarmFax"  th:field="*{faxNumber}" th:placeholder="#{default.fax}" />
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="inputFarmEmail" class="col-xs-3 control-label" th:text="#{default.email}">default.email</label>
-                                <div class="col-xs-9">
-                                    <input type="email" class="form-control" id="inputFarmEmail" th:field="*{email}" th:placeholder="#{default.email}" />
-                                </div>
-                            </div>
-                          	 <div class="form-group row">
-								<label for="inputFarmIM" class="col-xs-3 control-label" th:text="#{farm.instantMessanger}">farm.instantMessanger</label>
-                                <div class="col-xs-9">
-                                    <input type="text" class="form-control" id="inputFarmIM" th:field="*{instantMessanger}" th:placeholder="#{farm.instantMessanger}"  />
-                                </div>
-                            </div>  
-                            <div class="form-group row">
-                                <label for="inputFarmCoop" class="col-xs-3 control-label" th:text="#{default.cooperative}"></label>
-                                <div class="col-xs-9 no-padding">
-                                	<div class="col-xs-10">
-                                        <select class="form-control" id="inputFarmCoop" th:field="*{cooperative}">
-                                            <option th:text="|-- #{default.select_cooperative} --|" value="">  </option>
-                                            <option th:each="coop : ${allCooperatives}" th:value="${coop.id}" th:text="${coop.name}"> </option>
-                                        </select>
-                                    </div>
-                                    <div class="col-xs-2">
-                                      <a href="javascript:void(0);" class="btn btn-flat btn-primary openNewCooperativeBtn" title="{{ trans('cooperative.add') }}" ><i class="fa fa-plus"></i></a>  
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-               <div class="row">
-                 <div class="col-xs-12">
-                     <div class="col-xs-12"><h4 th:text="#{farm.localCommunityActivity}">farm.local_community</h4></div>
-	                     <div class="col-xs-6">
-	                         <div class="form-group row">
-	                             <label for="stakeholderMeetingParticipation" class="col-xs-3 control-label" th:text="#{farm.stakeholderMeetingParticipation}" >farm.stakeholderMeetingParticipation</label>
-	                             <div class="col-xs-9 no-padding">
-	                                 <div class="col-xs-6">
-	                                     <input type="checkbox" th:field="*{stakeholderMeetingParticipation}" id="stakeholderMeetingParticipation" onChange="manageStakeholderMeeting();"/> 
-	                                 </div>
-	                             </div>
-	                         </div>
-	                         <div class="form-group row" id="divStakeHolderMeetingDate">
-	                             <label for="stakeholderMeetingDate" class="col-xs-3 control-label" th:text="#{farm.stakeholderMeetingDate}" >farm.stakeholderMeetingDate</label>
-	                             <div class="col-xs-9 no-padding">
-	                                 <div class="col-xs-6">
-	                                     <input type="text" class="form-control form-pond datefield" th:field="*{stakeholderMeetingDate}" th:placeholder="#{farm.stakeholderMeetingDate}" maxlength="10"/> 
-									</div>
-	                             </div>
-	                         </div>
-	                     </div>
-	                     <div class="col-xs-6">
-	                         <div class="form-group row">
-	                             <label for="memberAssociation" class="col-xs-3 control-label" th:text="#{farm.memberAssociation}" >farm.memberAssociation</label>
-	                             <div class="col-xs-9 no-padding">
-	                                 <div class="col-xs-6">
-	                                     <input type="checkbox" th:field="*{memberAssociation}" /> 
-	                                 </div>
-	                             </div>
-	                         </div>
-	                           <div class="form-group row" id="divStakeHolderMeetingLocation">
-	                             <label for="stakeholderMeetingLocation" class="col-xs-3 control-label" th:text="#{farm.stakeholderMeetingLocation}" >farm.stakeholderMeetingLocation</label>
-	                             <div class="col-xs-9 no-padding">
-	                                 <div class="col-xs-6">
-	                                     <input type="text" th:field="*{stakeholderMeetingLocation}" /> 
-	                                 </div>
-	                             </div>
-	                         </div>
-	                     </div>
-               		  </div>
- 				</div>
- 
-                 <div class="row">
-                    <div class="col-xs-12">
-                        <div class="col-xs-12"><h4 th:text="#{farm.env_info}">farm.env_info</h4></div>
-                        <div class="col-xs-6">
-                            <div class="form-group row">
-                                <label for="inputFarmArea" class="col-xs-3 control-label" th:text="#{default.area}+'*'" >default.area*</label>
-                                <div class="col-xs-9 no-padding">
-                                    <div class="col-xs-6">
-                                        <input type="text" class="form-control" id="inputFarmArea" th:field="*{size.quantity}" th:placeholder="#{default.area}" required="required"/>
-                                    </div>
-                                    <div class="col-xs-6">
-                                        <select class="form-control" id="areaUnit" th:field="*{size.unit}" required="required">
-                                            <option value=""> -- <span th:text="#{default.select_unit}"  th:remove="tag"></span> -- </option>
-                                            <option th:each="unit : ${allQuantityUnits}" th:value="${unit.id}" th:text="${unit.localisedName}"></option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xs-6">
-                            <div class="form-group row">
-                                <label for="inputFarmMap" class="col-xs-3 control-label" th:text="#{farm.map_drawing}">farm.map_drawing</label>
-                                <div class="col-xs-9 no-padding">
-                                    <div class="col-xs-6">
-                                        <input type="file" class="form-control" th:field="*{aerialView}" th:placeholder="#{farm.map_drawing}" accept=".xlsx, .xls, .doc, .docx, .pdf, image/*" />
-                                    </div>
-                                    <div class="col-xs-6">
-                                    	<a th:if="${farmDto.aerialViewUrl !=null}" th:href="@{'/download/'+${farmDto.aerialViewUrl}}" target="_blank">
-	                                    	<i class="fa fa-file-image-o"></i> - <i class="fa fa-download"></i>
-										</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
- 
- 
-                <div class="row">
-                    <div class="col-xs-12">
-                        <div class="col-xs-12"><h4 th:text="#{farm.localization}">farm.localization</h4></div>
-                        <div class="col-xs-12" style="margin-bottom:10px;">
-                        	<div id="map_farm" class="col-xs-12 col-sm-12 col-md-12" style="height:250px;"></div>
-                        </div>
-                        <div class="col-xs-6">
-                        	<div class="form-group row">
-                                <label for="lat" class="col-xs-3 control-label" th:text="#{default.latitude}">default.latitude</label>
-                                <div class="col-xs-9">
-                                    <input type="text" class="form-control" id="lat" th:field="*{latitude}" th:placeholder="#{default.latitude}" onchange="setCoord();" />
-                                </div>
-                            </div>
-						</div>
-                        <div class="col-xs-6">
-                            <div class="form-group row">
-                                <label for="lng" class="col-xs-3 control-label" th:text="#{default.longitude}">default.longitude</label>
-                                <div class="col-xs-9">
-                                    <input type="text" class="form-control" id="lng" th:field="*{longitude}" th:placeholder="#{default.longitude}" onchange="setCoord();" />
-                                </div>
-                            </div>
-                    	</div>
-                    </div>
-                </div>
+        <form role="form" th:action="@{'/farm/'+${farmDto.id}+'/update.html'}" th:object="${farmDto}" method="post"
+              class="mainForm form-horizontal" enctype="multipart/form-data"
+              onsubmit="return !hasEmptyFields('#farm-box form .form-control[required]');">
+          <div class="box-body" style="padding:0;">
+            <div class="nav-tabs-custom">
+              <ul th:include="farms/farms-includes :: farms-tabs" class="nav nav-tabs"></ul>
+              <ul th:include="farms/farms-profile-includes :: farms-tabs" class="nav nav-tabs nav-tabs-seconds"></ul>
 
+              <div class="tab-content">
+                <div class="tab-pane active" id="tab_1">
+                  <div class="row">
+                    <div class="col-xs-12">
+                      <div class="col-xs-12">
+                        <h4 th:text="#{farm.profile_info}">farm.profile_info</h4>
+                      </div>
+                      <div class="col-xs-6">
+                        <div class="form-group row">
+                          <label for="quotaId" class="col-xs-3 control-label"
+                                 th:text="#{farm.quota_id}">farm.quota_id</label>
+                          <div class="col-xs-9">
+                            <input type="text" class="form-control" id="inputFarmPhone" th:field="*{quotaId}"
+                                   th:placeholder="#{farm.quota_id}"/>
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label for="inputFarmName" class="col-xs-3 control-label" th:text="#{default.name}+'*'">default.name*</label>
+                          <div class="col-xs-9">
+                            <input type="text" class="form-control" id="inputFarmName" th:field="*{name}"
+                                   th:placeholder="#{default.name}" required="required"/>
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label for="inputFarmAddr" class="col-xs-3 control-label" th:text="#{default.address}">default.address</label>
+                          <div class="col-xs-9">
+                            <textarea class="form-control" id="inputFarmAddr" th:field="*{address.main}"
+                                      th:placeholder="#{default.address}" style="height:83px;"></textarea>
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label for="inputFarmCity" class="col-xs-3 control-label" th:text="#{default.city}+'*'">default.city*</label>
+                          <div class="col-xs-9">
+                            <input type="text" class="form-control" id="inputFarmCity" th:field="*{address.city}"
+                                   th:placeholder="#{default.city}" required="required"/>
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label for="inputFarmZip" class="col-xs-3 control-label" th:text="#{default.zip_code}">default.zip_code</label>
+                          <div class="col-xs-9">
+                            <input type="text" class="form-control" id="inputFarmZip" th:field="*{address.zip}"
+                                   th:placeholder="#{default.zip_code}"/>
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label for="inputFarmCountry" class="col-xs-3 control-label" th:text="#{default.country}+'*'"
+                                 onchange="locateAddress();">default.country*</label>
+                          <div class="col-xs-9">
+                            <select class="form-control" id="inputFarmCountry" th:field="*{address.country}"
+                                    required="required" onchange="locateAddress();">
+                              <option value="" th:text="|-- #{default.select_country} --|"> #{default.select_country}
+                              </option>
+                              <option th:each="country : ${allCountries}" th:value="${country.id}"
+                                      th:text="${country.localisedName}"></option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-xs-6">
+                        <div class="form-group row">
+                          <label for="inputFarmName" class="col-xs-3 control-label" th:text="#{default.owner}+'*'">default.owner*</label>
+                          <div class="col-xs-9 no-padding">
+                            <div class="col-xs-10">
+                              <select class="form-control" id="inputFarmOwner" th:field="*{owner}" required="required">
+                                <option value="" th:text="|-- #{farm.select_owner} --|">#{farm.select_owner}</option>
+                                <option th:each="ind : ${allIndividuals}" th:value="${ind.id}"
+                                        th:text="${ind.name+' '+ind.surname}"></option>
+                              </select>
+                            </div>
+                            <div class="col-xs-2">
+                              <a href="javascript:void(0);" class="btn btn-flat btn-primary openNewStaffBtn"
+                                 title="#{default.add_owner}"><i class="fa fa-plus"></i></a>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label for="inputFarmPhone" class="col-xs-3 control-label" th:text="#{default.phone}">default.phone</label>
+                          <div class="col-xs-9">
+                            <input type="text" class="form-control" id="inputFarmPhone" th:field="*{phoneNumber}"
+                                   th:placeholder="#{default.phone}"/>
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label for="inputFarmMobile" class="col-xs-3 control-label" th:text="#{default.mobile}+'*'">default.mobile*</label>
+                          <div class="col-xs-9">
+                            <input type="text" class="form-control" id="inputFarmMobile" th:field="*{mobileNumber}"
+                                   th:placeholder="#{default.mobile}" required="required"/>
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label for="inputFarmFax" class="col-xs-3 control-label" th:text="#{default.fax}"></label>
+                          <div class="col-xs-9">
+                            <input type="text" class="form-control" id="inputFarmFax" th:field="*{faxNumber}"
+                                   th:placeholder="#{default.fax}"/>
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label for="inputFarmEmail" class="col-xs-3 control-label" th:text="#{default.email}">default.email</label>
+                          <div class="col-xs-9">
+                            <input type="email" class="form-control" id="inputFarmEmail" th:field="*{email}"
+                                   th:placeholder="#{default.email}"/>
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label for="inputFarmIM" class="col-xs-3 control-label" th:text="#{farm.instantMessanger}">farm.instantMessanger</label>
+                          <div class="col-xs-9">
+                            <input type="text" class="form-control" id="inputFarmIM" th:field="*{instantMessanger}"
+                                   th:placeholder="#{farm.instantMessanger}"/>
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label for="inputFarmCoop" class="col-xs-3 control-label"
+                                 th:text="#{default.cooperative}"></label>
+                          <div class="col-xs-9 no-padding">
+                            <div class="col-xs-10">
+                              <select class="form-control" id="inputFarmCoop" th:field="*{cooperative}">
+                                <option th:text="|-- #{default.select_cooperative} --|" value=""></option>
+                                <option th:each="coop : ${allCooperatives}" th:value="${coop.id}"
+                                        th:text="${coop.name}"></option>
+                              </select>
+                            </div>
+                            <div class="col-xs-2">
+                              <a href="javascript:void(0);" class="btn btn-flat btn-primary openNewCooperativeBtn"
+                                 title="{{ trans('cooperative.add') }}"><i class="fa fa-plus"></i></a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-xs-12">
+                      <div class="col-xs-12"><h4 th:text="#{farm.localCommunityActivity}">farm.local_community</h4>
+                      </div>
+                      <div class="col-xs-6">
+                        <div class="form-group row">
+                          <label for="stakeholderMeetingParticipation" class="col-xs-3 control-label"
+                                 th:text="#{farm.stakeholderMeetingParticipation}">farm.stakeholderMeetingParticipation</label>
+                          <div class="col-xs-9 no-padding">
+                            <div class="col-xs-6">
+                              <input type="checkbox" th:field="*{stakeholderMeetingParticipation}"
+                                     id="stakeholderMeetingParticipation" onChange="manageStakeholderMeeting();"/>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="form-group row" id="divStakeHolderMeetingDate">
+                          <label for="stakeholderMeetingDate" class="col-xs-3 control-label"
+                                 th:text="#{farm.stakeholderMeetingDate}">farm.stakeholderMeetingDate</label>
+                          <div class="col-xs-9 no-padding">
+                            <div class="col-xs-6">
+                              <input type="text" class="form-control form-pond datefield"
+                                     th:field="*{stakeholderMeetingDate}"
+                                     th:placeholder="#{farm.stakeholderMeetingDate}" maxlength="10"/>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-xs-6">
+                        <div class="form-group row">
+                          <label for="memberAssociation" class="col-xs-3 control-label"
+                                 th:text="#{farm.memberAssociation}">farm.memberAssociation</label>
+                          <div class="col-xs-9 no-padding">
+                            <div class="col-xs-6">
+                              <input type="checkbox" th:field="*{memberAssociation}"/>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="form-group row" id="divStakeHolderMeetingLocation">
+                          <label for="stakeholderMeetingLocation" class="col-xs-3 control-label"
+                                 th:text="#{farm.stakeholderMeetingLocation}">farm.stakeholderMeetingLocation</label>
+                          <div class="col-xs-9 no-padding">
+                            <div class="col-xs-6">
+                              <input type="text" th:field="*{stakeholderMeetingLocation}"/>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-xs-12">
+                      <div class="col-xs-12"><h4 th:text="#{farm.env_info}">farm.env_info</h4></div>
+                      <div class="col-xs-6">
+                        <div class="form-group row">
+                          <label for="inputFarmArea" class="col-xs-3 control-label" th:text="#{default.area}+'*'">default.area*</label>
+                          <div class="col-xs-9 no-padding">
+                            <div class="col-xs-6">
+                              <input type="text" class="form-control" id="inputFarmArea" th:field="*{size.quantity}"
+                                     th:placeholder="#{default.area}" required="required"/>
+                            </div>
+                            <div class="col-xs-6">
+                              <select class="form-control" id="areaUnit" th:field="*{size.unit}" required="required">
+                                <option value=""> -- <span th:text="#{default.select_unit}" th:remove="tag"></span> --
+                                </option>
+                                <option th:each="unit : ${allQuantityUnits}" th:value="${unit.id}"
+                                        th:text="${unit.localisedName}"></option>
+                              </select>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-xs-6">
+                        <div class="form-group row">
+                          <label for="inputFarmMap" class="col-xs-3 control-label" th:text="#{farm.map_drawing}">farm.map_drawing</label>
+                          <div class="col-xs-9 no-padding">
+                            <div class="col-xs-6">
+                              <input type="file" class="form-control" th:field="*{aerialView}"
+                                     th:placeholder="#{farm.map_drawing}"
+                                     accept=".xlsx, .xls, .doc, .docx, .pdf, image/*"/>
+                            </div>
+                            <div class="col-xs-6">
+                              <a th:if="${farmDto.aerialViewUrl !=null}"
+                                 th:href="@{'/download/'+${farmDto.aerialViewUrl}}" target="_blank">
+                                <i class="fa fa-file-image-o"></i> - <i class="fa fa-download"></i>
+                              </a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+
+                  <div class="row">
+                    <div class="col-xs-12">
+                      <div class="col-xs-12"><h4 th:text="#{farm.localization}">farm.localization</h4></div>
+                      <div class="col-xs-12" style="margin-bottom:10px;">
+                        <div id="map_farm" class="col-xs-12 col-sm-12 col-md-12" style="height:250px;"></div>
+                      </div>
+                      <div class="col-xs-6">
+                        <div class="form-group row">
+                          <label for="lat" class="col-xs-3 control-label"
+                                 th:text="#{default.latitude}">default.latitude</label>
+                          <div class="col-xs-9">
+                            <input type="text" class="form-control" id="lat" th:field="*{latitude}"
+                                   th:placeholder="#{default.latitude}" onchange="setCoord();"/>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-xs-6">
+                        <div class="form-group row">
+                          <label for="lng" class="col-xs-3 control-label" th:text="#{default.longitude}">default.longitude</label>
+                          <div class="col-xs-9">
+                            <input type="text" class="form-control" id="lng" th:field="*{longitude}"
+                                   th:placeholder="#{default.longitude}" onchange="setCoord();"/>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="box-footer text-center">
-        	<small>* <span th:text="#{default.mandatory_field}"></span></small>
-            <a th:href="@{/farms.html}" class="btn btn-flat btn-warning"><i class="fa fa-times"></i><span th:text="#{default.cancel}">default.cancel</span></a>
-            
+          <div class="box-footer text-center">
+            <small>* <span th:text="#{default.mandatory_field}"></span></small>
+            <a th:href="@{/farms.html}" class="btn btn-flat btn-warning"><i class="fa fa-times"></i><span
+                th:text="#{default.cancel}">default.cancel</span></a>
+
             <button type="submit" class="btn btn-success">
-				<span th:text="#{default.submit}">default.submit</span> <i class="fa fa-check"></i>
-			</button>
-        </div>
+              <span th:text="#{default.submit}">default.submit</span> <i class="fa fa-check"></i>
+            </button>
+          </div>
         </form>
       </div>
     </div>
 
-	</div>
+  </div>
 
-	<!-- MODALS -->
-	<div class="modal fade popModal" id="modalIndividual" tabindex="-1" role="dialog">
-	  <div class="modal-dialog" role="document">
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	        <h4 class="modal-title" th:text="#{default.create_owner}"> xxx</h4>
-	      </div>
-	      <div class="modal-body" style="height: 600px;width:600px">
-			<iframe id="indFrame" th:src="@{'/farm/'+${farmId}+'/individual-editor.html'}" class="iframe" name="info" seamless="" height="100%" width="100%"></iframe>
-	      </div>
-	      <div class="modal-footer">
-	      </div>
-	    </div>
-	  </div>
-	</div>
+  <!-- MODALS -->
+  <div class="modal fade popModal" id="modalIndividual" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+              aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" th:text="#{default.create_owner}"> xxx</h4>
+        </div>
+        <div class="modal-body" style="height: 600px;width:600px">
+          <iframe id="indFrame" th:src="@{'/farm/'+${farmId}+'/individual-editor.html'}" class="iframe" name="info"
+                  seamless="" height="100%" width="100%"></iframe>
+        </div>
+        <div class="modal-footer">
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
-	
 
 <th:block layout:fragment="page-scripts">
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCOH2xiCWWRQraDjvC_BqEbr-gBlFkrEZ4"></script>
-	<script th:src="@{/static/dist/js/jquery.ui.map.js}"></script>
-	<script th:inline="javascript">
-	/*<![CDATA[*/
-		
-		$( document ).ready(function() {
-			
-			$(document).ready(function() {
-				$('.datefield').datetimepicker({
-					format: 'Y-m-d h:i:s',
-					closeOnDateSelect:true
-				});
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCOH2xiCWWRQraDjvC_BqEbr-gBlFkrEZ4"></script>
+  <script th:src="@{/static/dist/js/jquery.ui.map.js}"></script>
+  <script th:inline="javascript">
+      /*<![CDATA[*/
 
-			});
-			
-			if ([[${farmDto.id}]] ==0) {
-				document.getElementById("areaUnit").value = "29"; // only for Thailand and sugar cane - to be removed when expanding
-				document.getElementById("inputFarmCountry").value = "205";
-			}
-			var individualEditorSrc=$('#indFrame').attr('src');
-			
-			$('.openNewStaffBtn').click(function(){
-				//document.location='individual-editor.html';
-				$('#indFrame').attr('src',individualEditorSrc);
-				$('#modalIndividual').modal('show');
-			});
+      $(document).ready(function () {
 
-			$('.openNewCooperativeBtn').click(function(){
-				document.location='cooperative-editor.html';
-			});
-			
-			manageStakeholderMeeting();
-			
-		});
+          $(document).ready(function () {
+              $('.datefield').datetimepicker({
+                  format: 'Y-m-d h:i:s',
+                  closeOnDateSelect: true
+              });
 
-		function manageStakeholderMeeting(){
-			// hide the blocks for kept documents
-			$('#divStakeHolderMeetingDate').hide();
-			$('#divStakeHolderMeetingLocation').hide();
-			var fieldVal = $("#stakeholderMeetingParticipation").is(':checked');
-			if(fieldVal!=null){
-				if(fieldVal){
-					$('#divStakeHolderMeetingDate').show();
-					$('#divStakeHolderMeetingLocation').show();
-				} else {
-					$('#dstakeHolderMeetingDate').val("");
-					$('#dstakeHolderMeetingLocation').val("");	
-					$('#divStakeHolderMeetingDate').hide();
-					$('#divStakeHolderMeetingLocation').hide();	
-				}
-			}
-		}
-	
-	
-		function actionDone(item){
-			console.log(item);
-			if(item.itemType=='individual'){
-				$('#modalIndividual').modal('hide');
-				var sCoo = '<option value="'+item.itemId+'"> '+item.itemName+' </option>';
-				$('#inputFarmOwner').append(sCoo);
-				$('#inputFarmOwner').val(item.itemId);
-			}
-		}	
+          });
 
-	
-		function centerMap(address,zoom,marker){
-			var geocoder = new google.maps.Geocoder();
-		    geocoder.geocode({
-		        'address': address
-		    }, function(results, status) {
-		        if (status == google.maps.GeocoderStatus.OK) {
-					$("#map_farm").gmap("option","center",results[0].geometry.location);
-					if(zoom>0) $('#map_farm').gmap('option','zoom',zoom);
-					if(marker>0){
-						$('#map_farm').gmap('clear','markers');
-						$('#lat').val(results[0].geometry.location.lat());
-						$('#lng').val(results[0].geometry.location.lng());
-						$('#map_farm').gmap('addMarker',{position:results[0].geometry.location,bounds:false,draggable:true},function(map,marker){getCoord(marker.getPosition());}).dragend(function(event){getCoord(event.latLng);});
-					}
-		        }
-		    });
-		}
-		function locateAddress(){
-			var cty = $('#inputFarmCountry option:selected').text();
-			var sAddr = $('#inputFarmAddr').val()+" "+$('#inputFarmCity').val()+" "+$('#inputFarmZip').val()+" "+cty;
-			if(cty.length>0) centerMap(sAddr,6,1);
-		}
-		function getCoord(location){
-			$('#lat').val(location.lat());
-			$('#lng').val(location.lng());
-		}
-		function setCoord(){
-			var aLat = $('#lat').val();
-			var aLng = $('#lng').val();
-			if((aLat.length>0)&&(aLng.length>0)){
-				$('#map_farm').gmap('clear','markers');
-				$('#map_farm').gmap('addMarker',{position:''+aLat+','+aLng+'',bounds:false,draggable:true},function(map,marker){getCoord(marker.getPosition());}).dragend(function(event){getCoord(event.latLng);});
-			}
-		}
-		
-		
-		
-		$(function(){
-			var zo = 4;
-			var cnt = '13.66733825965496,100.37109375';
-			var aLat = $('#lat').val();
-			var aLng = $('#lng').val();
-			if((aLat.length>0)&&(aLng.length>0)) cnt = ''+aLat+','+aLng+'';
-			$('#map_farm').gmap({
-				'center':cnt, 
-				'zoom':zo,
-				'mapTypeId':'terrain', 
-				'disableDefaultUI':false
-			}).bind('init', function(event, map) { 
-				$(map).click( function(event) {
-					$('#map_farm').gmap('clear','markers');
-					$('#map_farm').gmap('addMarker', {
-						'id': 'marker_1', 
-						'position': event.latLng, 
-						'draggable': true, 
-						'bounds': false
-					}, function(map, marker) {
-						getCoord(marker.getPosition());
-					}).dragend( function(event) {
-						getCoord(event.latLng);
-					})
-				});
-				if((aLat.length>0)&&(aLng.length>0)){
-					$('#map_farm').gmap('clear','markers');
-					$('#map_farm').gmap('addMarker', {
-						'id': 'marker_1', 
-						'position': cnt, 
-						'draggable': true, 
-						'bounds': false
-					}, function(map, marker) {
-						getCoord(marker.getPosition());
-					}).dragend( function(event) {
-						getCoord(event.latLng);
-					});
-				}
-			});
-		});
-		
-		/*]]>*/
-	</script>
+          if ([[${farmDto.id}]] == 0) {
+              document.getElementById("areaUnit").value = "29"; // only for Thailand and sugar cane - to be removed when expanding
+              document.getElementById("inputFarmCountry").value = "205";
+          }
+          var individualEditorSrc = $('#indFrame').attr('src');
+
+          $('.openNewStaffBtn').click(function () {
+              //document.location='individual-editor.html';
+              $('#indFrame').attr('src', individualEditorSrc);
+              $('#modalIndividual').modal('show');
+          });
+
+          $('.openNewCooperativeBtn').click(function () {
+              document.location = 'cooperative-editor.html';
+          });
+
+          manageStakeholderMeeting();
+
+      });
+
+      function manageStakeholderMeeting() {
+          // hide the blocks for kept documents
+          $('#divStakeHolderMeetingDate').hide();
+          $('#divStakeHolderMeetingLocation').hide();
+          var fieldVal = $("#stakeholderMeetingParticipation").is(':checked');
+          if (fieldVal != null) {
+              if (fieldVal) {
+                  $('#divStakeHolderMeetingDate').show();
+                  $('#divStakeHolderMeetingLocation').show();
+              } else {
+                  $('#dstakeHolderMeetingDate').val("");
+                  $('#dstakeHolderMeetingLocation').val("");
+                  $('#divStakeHolderMeetingDate').hide();
+                  $('#divStakeHolderMeetingLocation').hide();
+              }
+          }
+      }
+
+
+      function actionDone(item) {
+          console.log(item);
+          if (item.itemType == 'individual') {
+              $('#modalIndividual').modal('hide');
+              var sCoo = '<option value="' + item.itemId + '"> ' + item.itemName + ' </option>';
+              $('#inputFarmOwner').append(sCoo);
+              $('#inputFarmOwner').val(item.itemId);
+          }
+      }
+
+
+      function centerMap(address, zoom, marker) {
+          var geocoder = new google.maps.Geocoder();
+          geocoder.geocode({
+              'address': address
+          }, function (results, status) {
+              if (status == google.maps.GeocoderStatus.OK) {
+                  $("#map_farm").gmap("option", "center", results[0].geometry.location);
+                  if (zoom > 0) $('#map_farm').gmap('option', 'zoom', zoom);
+                  if (marker > 0) {
+                      $('#map_farm').gmap('clear', 'markers');
+                      $('#lat').val(results[0].geometry.location.lat());
+                      $('#lng').val(results[0].geometry.location.lng());
+                      $('#map_farm').gmap('addMarker', {
+                          position: results[0].geometry.location,
+                          bounds: false,
+                          draggable: true
+                      }, function (map, marker) {
+                          getCoord(marker.getPosition());
+                      }).dragend(function (event) {
+                          getCoord(event.latLng);
+                      });
+                  }
+              }
+          });
+      }
+
+      function locateAddress() {
+          var cty = $('#inputFarmCountry option:selected').text();
+          var sAddr = $('#inputFarmAddr').val() + " " + $('#inputFarmCity').val() + " " + $('#inputFarmZip').val() + " " + cty;
+          if (cty.length > 0) centerMap(sAddr, 6, 1);
+      }
+
+      function getCoord(location) {
+          $('#lat').val(location.lat());
+          $('#lng').val(location.lng());
+      }
+
+      function setCoord() {
+          var aLat = $('#lat').val();
+          var aLng = $('#lng').val();
+          if ((aLat.length > 0) && (aLng.length > 0)) {
+              $('#map_farm').gmap('clear', 'markers');
+              $('#map_farm').gmap('addMarker', {
+                  position: '' + aLat + ',' + aLng + '',
+                  bounds: false,
+                  draggable: true
+              }, function (map, marker) {
+                  getCoord(marker.getPosition());
+              }).dragend(function (event) {
+                  getCoord(event.latLng);
+              });
+          }
+      }
+
+
+      $(function () {
+          var zo = 4;
+          var cnt = '13.66733825965496,100.37109375';
+          var aLat = $('#lat').val();
+          var aLng = $('#lng').val();
+          if ((aLat.length > 0) && (aLng.length > 0)) cnt = '' + aLat + ',' + aLng + '';
+          $('#map_farm').gmap({
+              'center': cnt,
+              'zoom': zo,
+              'mapTypeId': 'terrain',
+              'disableDefaultUI': false
+          }).bind('init', function (event, map) {
+              $(map).click(function (event) {
+                  $('#map_farm').gmap('clear', 'markers');
+                  $('#map_farm').gmap('addMarker', {
+                      'id': 'marker_1',
+                      'position': event.latLng,
+                      'draggable': true,
+                      'bounds': false
+                  }, function (map, marker) {
+                      getCoord(marker.getPosition());
+                  }).dragend(function (event) {
+                      getCoord(event.latLng);
+                  })
+              });
+              if ((aLat.length > 0) && (aLng.length > 0)) {
+                  $('#map_farm').gmap('clear', 'markers');
+                  $('#map_farm').gmap('addMarker', {
+                      'id': 'marker_1',
+                      'position': cnt,
+                      'draggable': true,
+                      'bounds': false
+                  }, function (map, marker) {
+                      getCoord(marker.getPosition());
+                  }).dragend(function (event) {
+                      getCoord(event.latLng);
+                  });
+              }
+          });
+      });
+
+      /*]]>*/
+  </script>
 </th:block>
 
 </html>

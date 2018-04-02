@@ -1,0 +1,21 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<body>
+	<ul th:fragment="farms-tabs" class="nav nav-tabs">
+		<th:block th:if="${farmId!=null AND farmId&gt;0}">
+			<li id="farmsecondtab_production-profile"><a th:href="@{${'/farm/'+farmId+'/production-profile.html'}}" th:text="#{default.production_profile}">default.ponds</a></li>
+			<li id="farmsecondtab_ponds" th:if="${v8App.pondProfile}"><a th:href="@{${'/farm/'+farmId+'/ponds.html'}}" th:text="#{default.ponds}">default.ponds</a></li>
+			<li id="farmsecondtab_plots" th:if="${v8App.plotProfile}"><a th:href="@{${'/farm/'+farmId+'/plots.html'}}" th:text="#{default.plots}">default.plots</a></li>
+		</th:block>
+		<th:block th:if="${farmId==null OR farmId==0}">
+			<li class="disabled"><a th:text="#{default.production_profile}">default.suppliers</a></li>
+			<li class="disabled" th:if="${v8App.pondProfile}"><a th:text="#{default.ponds}">default.ponds</a></li>
+			<li class="disabled" th:if="${v8App.plotProfile}"><a th:text="#{default.plots}">default.fields</a></li>
+		</th:block>
+	</ul>
+
+
+</body>
+</html>
