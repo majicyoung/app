@@ -234,8 +234,8 @@ public class FarmProductionProfileController extends AbstractV8Controller {
 		// store the farm id, obviously usefull for further CRUD staff
 		// operation, and page reload
 		mv.addAttribute("farmId", farm.getId());
-		mv.addAttribute("activeSecondTab", "production-profile");
 		mv.addAttribute("activeTab", "production");
+		mv.addAttribute("activeSecondTab", "production-profile");
 
 		mv.addAttribute("pondListing", regEntityFarmPondRepository.findByFarmId(farm.getId()));
 		mv.addAttribute("plotListing", regEntityFarmPlotRepository.findByFarmId(farm.getId()));
