@@ -8,13 +8,13 @@
 			<li id="farmtab_dashboard"><a th:href="@{${'/farm/'+farmId+'/dashboard.html'}}" th:text="#{farm.dashboard}">farm.dashboard</a></li>
 			<li id="farmtab_profile"><a th:href="@{${'/farm/'+farmId+'/edit.html'}}" th:text="#{farm.profile}">farm.profile</a></li>
 			<li id="farmtab_staff"><a th:href="@{${'/farm/'+farmId+'/staff-general-info.html'}}" th:text="#{farm.staff}">farm.staff</a></li>
-			<li id="farmtab_production-profile"><a th:href="@{${'/farm/'+farmId+'/production-profile.html'}}" th:text="#{default.production_profile}">default.ponds</a></li>
+			<li id="farmtab_production"><a th:href="@{${'/farm/'+farmId+'/production-profile.html'}}" th:text="#{default.production}">default.production</a></li>
 		</th:block>
 		<th:block th:if="${farmId==null OR farmId==0}">
 			<li class="disabled"><a data-toggle="tab" th:text="#{farm.dashboard}">farm.dashboard</a></li>
 			<li class="active"><a data-toggle="tab" th:text="#{farm.profile}">farm.profile</a></li>
 			<li class="disabled"><a th:text="#{farm.staff_general_info}">farm.staff_general_info</a></li>
-			<li class="disabled"><a th:text="#{default.production_profile}">default.suppliers</a></li>
+			<li class="disabled"><a th:text="#{default.production}">default.production</a></li>
 		</th:block>
 	</ul>
 
