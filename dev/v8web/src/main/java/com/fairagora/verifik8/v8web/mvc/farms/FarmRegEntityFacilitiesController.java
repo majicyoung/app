@@ -99,7 +99,7 @@ public class FarmRegEntityFacilitiesController extends AbstractV8Controller {
 		mv.addAttribute("v8p", p);
 
 		mv.addAttribute("activeTab", "profile");
-		mv.addAttribute("activeTabEdit", "facilities");
+		mv.addAttribute("activeSecondTab", "facilities");
 
 		mv.addAttribute("farmDto", dto);
 		mv.addAttribute("farmId", dto.getFarmId());

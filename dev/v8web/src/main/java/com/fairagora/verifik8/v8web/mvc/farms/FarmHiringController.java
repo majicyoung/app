@@ -91,7 +91,7 @@ public class FarmHiringController extends AbstractV8Controller {
 		mv.addAttribute("v8p", p);
 
 		mv.addAttribute("activeTab", "staff");
-		mv.addAttribute("activeTabStaff", "hiring");
+		mv.addAttribute("activeSecondTab", "hiring");
 
 
 		mv.addAttribute("allgetBackFinancialDepositReason", codeListservice.listActiveGetBackFinancialDepositReason());

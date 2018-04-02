@@ -91,7 +91,7 @@ public class FarmStaffTrainingController extends AbstractV8Controller {
 		mv.addAttribute("v8p", p);
 
 		mv.addAttribute("activeTab", "staff");
-		mv.addAttribute("activeTabStaff", "training");
+		mv.addAttribute("activeSecondTab", "training");
 		mv.addAttribute("allHazardousActivitiesTrainingType", codeListservice.listHazardousTrainingTypeRepository());
 		mv.addAttribute("farmDto", dto);
 		mv.addAttribute("farmId", dto.getFarmId());
