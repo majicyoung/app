@@ -8,11 +8,13 @@
 			<li id="farmtab_staff_staff-general-info"><a th:href="@{${'/farm/'+farmId+'/staff-general-info.html'}}" th:text="#{farm.staff_general_info}">farm.staff_general_info</a></li>
 			<li id="farmtab_staff_staff"><a th:href="@{${'/farm/'+farmId+'/staff.html'}}" th:text="#{farm.contact_staff}">farm.contact_staff</a></li>
 			<li id="farmtab_staff_hiring"><a th:href="@{${'/farm/'+farmId+'/hiring-recruitment.html'}}" th:text="#{farm.hiring_recruitment}">farm.hiring_recruitment</a></li>
+			<li id="farmtab_staff_training"><a th:href="@{${'/farm/'+farmId+'/training.html'}}" th:text="#{default.training}">default.training</a></li>
 		</th:block>
 		<th:block th:if="${farmId==null OR farmId==0}">
 			<li class="disabled"><a th:text="#{farm.staff_general_info}">farm.staff_general_info</a></li>
 			<li class="disabled"><a th:text="#{farm.contact_staff}">farm.contact_staff</a></li>
 			<li class="disabled"><a th:text="#{farm.hiring_recruitment}">farm.hiring_recruitment</a></li>
+			<li class="disabled"><a th:text="#{default.training}">default.training</a></li>
 		</th:block>
 	</ul>
 
