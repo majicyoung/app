@@ -1234,6 +1234,7 @@ a:focus {
   right: 0;
   left: auto;
 }
+
 @media (max-width: 991px) {
   .navbar-custom-menu > .navbar-nav {
     float: right;
@@ -2560,6 +2561,20 @@ a:focus {
 .nav-tabs-custom > .nav-tabs > li.header > .glyphicon,
 .nav-tabs-custom > .nav-tabs > li.header > .ion {
   margin-right: 5px;
+}
+.nav-tabs-custom > .nav-tabs-seconds > li.active {
+  border-top-color: #34bc26;
+}
+.nav-tabs-custom > .nav-tabs-seconds {
+  background: #efeef5;
+}
+.nav-tabs-custom > .nav-tabs-seconds > li {
+  background: #e0dfe6;
+}
+.nav-tabs-custom > .nav-tabs-seconds > li.active > a,
+.nav-tabs-custom > .nav-tabs-seconds > li.active:hover > a {
+  background-color: #e0dfe6;
+  color: #444;
 }
 .nav-tabs-custom > .tab-content {
   background: #fff;
