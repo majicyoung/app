@@ -1,9 +1,9 @@
 package com.fairagora.verifik8.v8web.data.domain.cl;
 
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import com.fairagora.verifik8.v8web.data.domain.reg.farm.RegEntityStaffManagement;
+
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "cl_app_hazardous_work_type")
@@ -33,6 +33,10 @@ public class CLAppHazardousWorkType extends CodeListSupport {
 	public void setFarmType(CLFarmType farmType) {
 		this.farmType = farmType;
 	}
+
+
+	@ManyToMany(mappedBy="hazardousWorkTypes")
+	private List<RegEntityStaffManagement> regEntityStaffManagements;
 	
 	
 	

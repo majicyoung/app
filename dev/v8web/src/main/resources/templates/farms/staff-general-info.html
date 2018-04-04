@@ -110,7 +110,7 @@
                                th:text="|#{staffgeneralinfo.existenceHazardousWork}|">default.name*</label>
                         <div class="col-xs-6">
                           <input type="checkbox" th:field="*{existenceHazardousWork}"/>
-                          <select th:field="*{hazardousWorkType}" multiple="multiple">
+                          <select th:field="*{hazardousWorkTypes}" multiple="multiple">
                             <option th:each="wtype:${allHazardousWorkType}"
                                     th:value="${wtype.id}"
                                     th:text="${wtype.localisedName}"></option>
