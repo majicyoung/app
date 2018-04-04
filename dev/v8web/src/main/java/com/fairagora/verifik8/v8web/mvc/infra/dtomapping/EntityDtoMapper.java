@@ -30,9 +30,9 @@ public class EntityDtoMapper {
 	}
 
 	/**
-	 * TODO: Add doc
-	 * @param entities
-	 * @return
+	 * Map list of entities to list of entities ID
+	 * @param entities parameters to converts
+	 * @return list of ids
 	 */
 	public <T extends V8Entity> List<Long> toReference(List<T> entities) {
 		if (entities == null) return null;
@@ -49,6 +49,13 @@ public class EntityDtoMapper {
 		return reference != null ? entityManager.find(entityClass, reference) : null;
 	}
 
+	/**
+	 * Convert list on id to V8Entity class.
+	 * @param reference List of ids
+	 * @param entityClass class to convert to
+	 * @param <T>  Type of the class
+	 * @return list of converted class
+	 */
 	public <T extends V8Entity> List<T> resolve(List<Long> reference, @TargetType Class<T> entityClass) {
 		if (reference == null) return null;
 		List<T> mReferences = new ArrayList<>();
