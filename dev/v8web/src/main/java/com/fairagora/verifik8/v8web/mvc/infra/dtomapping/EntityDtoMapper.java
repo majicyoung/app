@@ -13,6 +13,9 @@ import com.fairagora.verifik8.v8web.data.domain.V8Entity;
 import com.fairagora.verifik8.v8web.data.domain.commons.Attachment;
 import com.fairagora.verifik8.v8web.data.infra.AttachementsService;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Component
 public class EntityDtoMapper {
 
@@ -26,12 +29,38 @@ public class EntityDtoMapper {
 		return entity != null ? entity.getId() : null;
 	}
 
+	/**
+	 * Map list of entities to list of entities ID
+	 * @param entities parameters to converts
+	 * @return list of ids
+	 */
+	public <T extends V8Entity> List<Long> toReference(List<T> entities) {
+		if (entities == null) return null;
+		List<Long> mEntities = new ArrayList<>();
+		entities.forEach(v8Entity -> mEntities.add(toReference(v8Entity)));
+		return mEntities;
+	}
+
 	public String toName(V8Entity entity) {
 		return entity == null ? null : entity.getName();
 	}
 
 	public <T extends V8Entity> T resolve(Long reference, @TargetType Class<T> entityClass) {
 		return reference != null ? entityManager.find(entityClass, reference) : null;
+	}
+
+	/**
+	 * Convert list on id to V8Entity class.
+	 * @param reference List of ids
+	 * @param entityClass class to convert to
+	 * @param <T>  Type of the class
+	 * @return list of converted class
+	 */
+	public <T extends V8Entity> List<T> resolve(List<Long> reference, @TargetType Class<T> entityClass) {
+		if (reference == null) return null;
+		List<T> mReferences = new ArrayList<>();
+		reference.forEach(aLong -> mReferences.add( resolve(aLong, entityClass) ));
+		return mReferences;
 	}
 
 	public void map(MultipartFile mpf, @MappingTarget Attachment at) {

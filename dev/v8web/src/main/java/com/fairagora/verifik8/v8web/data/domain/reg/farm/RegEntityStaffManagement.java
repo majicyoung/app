@@ -1,16 +1,9 @@
 package com.fairagora.verifik8.v8web.data.domain.reg.farm;
 
 import java.sql.Time;
+import java.util.List;
 
-import javax.persistence.AttributeOverride;
-import javax.persistence.AttributeOverrides;
-import javax.persistence.Column;
-import javax.persistence.Embedded;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import com.fairagora.verifik8.v8web.data.domain.cl.CLAppGetBackFinancialDepositReason;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLAppHazardousWorkType;
@@ -81,9 +74,12 @@ public class RegEntityStaffManagement {
 	@Column(name = "EXISTENCE_HAZARDOUS_WORK")
 	protected boolean existenceHazardousWork;
 
-	@ManyToOne(optional = true)
-	@JoinColumn(name = "CL_HARZARDOUS_WORK_TYPE_ID")
-	protected CLAppHazardousWorkType hazardousWorkType;
+	@ManyToMany
+	@JoinTable(
+			name="reg_entity_staff_management_cl_app_hazardous_work_type",
+			joinColumns=@JoinColumn(name="CL_HARZARDOUS_WORK_TYPE_ID", referencedColumnName="REG_ENTITY_FARM_ID"),
+			inverseJoinColumns=@JoinColumn(name="REG_ENTITY_FARM_ID", referencedColumnName="ID"))
+	protected List<CLAppHazardousWorkType> hazardousWorkTypes;
 
 	@Column(name = "EXISTENCE_FARM_POLICIES")
 	protected boolean existenceFarmPolicies;
@@ -389,12 +385,12 @@ public class RegEntityStaffManagement {
 		this.existenceHazardousWork = existenceHazardousWork;
 	}
 
-	public CLAppHazardousWorkType getHazardousWorkType() {
-		return hazardousWorkType;
+	public List<CLAppHazardousWorkType> getHazardousWorkTypes() {
+		return hazardousWorkTypes;
 	}
 
-	public void setHazardousWorkType(CLAppHazardousWorkType hazardousWorkType) {
-		this.hazardousWorkType = hazardousWorkType;
+	public void setHazardousWorkTypes(List<CLAppHazardousWorkType> hazardousWorkTypes) {
+		this.hazardousWorkTypes = hazardousWorkTypes;
 	}
 
 	public boolean isExistenceFarmPolicies() {
