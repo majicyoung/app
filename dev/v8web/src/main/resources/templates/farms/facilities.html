@@ -10,7 +10,9 @@
         <div class="box-header with-border">
           <h3 class="box-title" th:text="#{default.facilities}">default.facilities</h3>
         </div>
-        <form role="form" th:action="@{'/farm/'+${farmId}+'/facilities.html'}" th:object="${farmDto}" method="post"
+        <form
+                id="accessForm"
+                role="form"
               class="mainForm form-horizontal" enctype="multipart/form-data"
               onsubmit="return !hasEmptyFields('#farm-box form .form-control[required]');">
           <div class="box-body" style="padding:0;">
@@ -24,8 +26,9 @@
                     <div class="col-xs-6">
                       <div class="form-group row col-xs-12">
                         <div class="col-xs-12">
-                          <input type="checkbox" th:field="*{accessToilets}"/> <span
-                            th:text="|#{facilities.accessToilets}*|"></span>
+                          <input name="accessToilets" type="hidden"/>
+                          <input id="accessToilets" name="accessToilets" type="checkbox" th:checked="${farmDto.accessToilets}"/>
+                          <span th:text="|#{facilities.accessToilets}*|"></span>
                         </div>
                       </div>
                     </div>
@@ -34,9 +37,9 @@
                         <label for="accessToiletsAttachment" class="col-xs-4 control-label"
                                th:text="#{facilities.accessToiletsAttachment}"></label>
                         <div class="col-xs-5">
-                          <input type="file" class="form-control" th:field="*{accessToiletsAttachment}"
-                                 th:placeholder="#{facilities.accessToiletsAttachment}"
-                                 accept=".xlsx, .xls, .doc, .docx, .pdf, image/*"/>
+                          <!--<input type="file" class="form-control" th:field="*{accessToiletsAttachment}"-->
+                                 <!--th:placeholder="#{facilities.accessToiletsAttachment}"-->
+                                 <!--accept=".xlsx, .xls, .doc, .docx, .pdf, image/*"/>-->
                         </div>
                         <div class="col-xs-2 bloc-file-uploaded">
                           <a th:if="${!#strings.isEmpty(farmDto.accessToiletsAttachmentUrl)}"
@@ -52,8 +55,8 @@
                     <div class="col-xs-6">
                       <div class="form-group row col-xs-12">
                         <div class="col-xs-12">
-                          <input type="checkbox" th:field="*{accessRestRoom}"/> <span
-                            th:text="|#{facilities.accessRestRoom}*|"></span>
+                          <input id="accessRestRoom" name="accessRestRoom" type="checkbox" th:checked="${farmDto.accessRestRoom}"/>
+                          <span th:text="|#{facilities.accessRestRoom}*|"></span>
                         </div>
                       </div>
                     </div>
@@ -62,9 +65,9 @@
                         <label for="accessRestRoomAttachment" class="col-xs-4 control-label"
                                th:text="#{facilities.accessRestRoomAttachment}"></label>
                         <div class="col-xs-5">
-                          <input type="file" class="form-control" th:field="*{accessRestRoomAttachment}"
-                                 th:placeholder="#{facilities.accessRestRoomAttachment}"
-                                 accept=".xlsx, .xls, .doc, .docx, .pdf, image/*"/>
+                          <!--<input type="file" class="form-control" th:field="*{accessRestRoomAttachment}"-->
+                                 <!--th:placeholder="#{facilities.accessRestRoomAttachment}"-->
+                                 <!--accept=".xlsx, .xls, .doc, .docx, .pdf, image/*"/>-->
                         </div>
                         <div class="col-xs-2 bloc-file-uploaded">
                           <a th:if="${!#strings.isEmpty(farmDto.accessRestRoomAttachmentUrl)}"
@@ -81,8 +84,8 @@
                     <div class="col-xs-6">
                       <div class="form-group row col-xs-12">
                         <div class="col-xs-12">
-                          <input type="checkbox" th:field="*{accessShower}"/> <span
-                            th:text="|#{facilities.accessShower}*|"></span>
+                          <input id="accessShower" name="accessShower" type="checkbox" th:checked="${farmDto.accessShower}"/>
+                          <span th:text="|#{facilities.accessShower}*|"></span>
                         </div>
                       </div>
                     </div>
@@ -91,9 +94,9 @@
                         <label for="accessShowerAttachment" class="col-xs-4 control-label"
                                th:text="#{facilities.accessShowerAttachment}"></label>
                         <div class="col-xs-5">
-                          <input type="file" class="form-control" th:field="*{accessShowerAttachment}"
-                                 th:placeholder="#{facilities.accessShowerAttachment}"
-                                 accept=".xlsx, .xls, .doc, .docx, .pdf, image/*"/>
+                          <!--<input type="file" class="form-control" th:field="*{accessShowerAttachment}"-->
+                                 <!--th:placeholder="#{facilities.accessShowerAttachment}"-->
+                                 <!--accept=".xlsx, .xls, .doc, .docx, .pdf, image/*"/>-->
                         </div>
                         <div class="col-xs-2 bloc-file-uploaded">
                           <a th:if="${!#strings.isEmpty(farmDto.accessShowerAttachmentUrl)}"
@@ -110,8 +113,8 @@
                     <div class="col-xs-6">
                       <div class="form-group row col-xs-12">
                         <div class="col-xs-12">
-                          <input type="checkbox" th:field="*{accessToFreeDrinking}"/> <span
-                            th:text="|#{facilities.accessToFreeDrinking}*|"></span>
+                          <input id="accessToFreeDrinking" name="accessToFreeDrinking" type="checkbox" th:checked="${farmDto.accessToFreeDrinking}"/>
+                          <span th:text="|#{facilities.accessToFreeDrinking}*|"></span>
                         </div>
                       </div>
                     </div>
@@ -120,9 +123,9 @@
                         <label for="accessToFreeDrinkingAttachment" class="col-xs-4 control-label"
                                th:text="#{facilities.accessToFreeDrinkingAttachment}"></label>
                         <div class="col-xs-5">
-                          <input type="file" class="form-control" th:field="*{accessToFreeDrinkingAttachment}"
-                                 th:placeholder="#{facilities.accessToFreeDrinkingAttachment}"
-                                 accept=".xlsx, .xls, .doc, .docx, .pdf, image/*"/>
+                          <!--<input type="file" class="form-control" th:field="*{accessToFreeDrinkingAttachment}"-->
+                                 <!--th:placeholder="#{facilities.accessToFreeDrinkingAttachment}"-->
+                                 <!--accept=".xlsx, .xls, .doc, .docx, .pdf, image/*"/>-->
                         </div>
                         <div class="col-xs-2 bloc-file-uploaded">
                           <a th:if="${!#strings.isEmpty(farmDto.accessToFreeDrinkingAttachmentUrl)}"
@@ -139,8 +142,8 @@
                     <div class="col-xs-12">
                       <div class="form-group row col-xs-12">
                         <div class="col-xs-12">
-                          <input type="checkbox" th:field="*{presenceFirstAidKit}"/> <span
-                            th:text="|#{facilities.presenceFirstAidKit}*|"></span>
+                          <!--<input type="checkbox" th:field="*{presenceFirstAidKit}"/> <span-->
+                            <!--th:text="|#{facilities.presenceFirstAidKit}*|"></span>-->
                         </div>
                       </div>
                     </div>
@@ -170,6 +173,26 @@
 <th:block layout:fragment="page-scripts">
   <script type="text/javascript">
       $(document).ready(function () {
+
+          $("#accessForm").submit(function(event) {
+              // Prevent the form from submitting via the browser.
+              event.preventDefault();
+              ajaxPost();
+          });
+
+          function ajaxPost() {
+              $.ajax({
+                  type : "POST",
+                  url : window.location,
+                  data : $("#accessForm").serialize(),
+                  success : function(result) {
+                      window.location.replace(window.location);
+                  },
+                  error : function(e) {
+                      console.log("ERROR: ", e);
+                  }
+              });
+          }
       });
   </script>
 </th:block>

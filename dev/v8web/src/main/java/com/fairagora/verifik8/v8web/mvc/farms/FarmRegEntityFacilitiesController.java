@@ -84,6 +84,11 @@ public class FarmRegEntityFacilitiesController extends AbstractV8Controller {
 			return e;
 		});
 
+		if(farmDto.getAccessToilets() == null) farmDto.setAccessToilets(false);
+		if(farmDto.getAccessRestRoom() == null) farmDto.setAccessRestRoom(false);
+		if(farmDto.getAccessShower() == null) farmDto.setAccessShower(false);
+		if(farmDto.getAccessToFreeDrinking() == null) farmDto.setAccessToFreeDrinking(false);
+
 		regFarmDtoMapper.fillEntity(farmDto, ent);
 
 		repository.save(ent);
