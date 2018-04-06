@@ -4,197 +4,204 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
 <div layout:fragment="content">
-  <div class="row">
-    <div class="col-xs-12">
-      <div class="box" id="farm-box">
-        <div class="box-header with-border">
-          <h3 class="box-title" th:text="#{default.facilities}">default.facilities</h3>
-        </div>
-        <form
-                id="accessForm"
-                role="form"
-              class="mainForm form-horizontal" enctype="multipart/form-data"
-              onsubmit="return !hasEmptyFields('#farm-box form .form-control[required]');">
-          <div class="box-body" style="padding:0;">
-            <div class="nav-tabs-custom">
-              <ul th:include="farms/farms-includes :: farms-tabs" class="nav nav-tabs"></ul>
-              <ul th:include="farms/farms-profile-includes :: farms-tabs" class="nav nav-tabs nav-tabs-seconds"></ul>
-
-              <div class="tab-content">
-                <div class="tab-pane active" id="tab_3">
-                  <div class="row">
-                    <div class="col-xs-6">
-                      <div class="form-group row col-xs-12">
-                        <div class="col-xs-12">
-                          <input name="accessToilets" type="hidden"/>
-                          <input id="accessToilets" name="accessToilets" type="checkbox" th:checked="${farmDto.accessToilets}"/>
-                          <span th:text="|#{facilities.accessToilets}*|"></span>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-xs-6">
-                      <div class="form-group">
-                        <label for="accessToiletsAttachment" class="col-xs-4 control-label"
-                               th:text="#{facilities.accessToiletsAttachment}"></label>
-                        <div class="col-xs-5">
-                          <!--<input type="file" class="form-control" th:field="*{accessToiletsAttachment}"-->
-                                 <!--th:placeholder="#{facilities.accessToiletsAttachment}"-->
-                                 <!--accept=".xlsx, .xls, .doc, .docx, .pdf, image/*"/>-->
-                        </div>
-                        <div class="col-xs-2 bloc-file-uploaded">
-                          <a th:if="${!#strings.isEmpty(farmDto.accessToiletsAttachmentUrl)}"
-                             th:href="@{'/downloard/'+${farmDto.accessToiletsAttachmentUrl}}" target="_blank">
-                            <i class="fa fa-download"></i>
-                          </a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="row">
-                    <div class="col-xs-6">
-                      <div class="form-group row col-xs-12">
-                        <div class="col-xs-12">
-                          <input id="accessRestRoom" name="accessRestRoom" type="checkbox" th:checked="${farmDto.accessRestRoom}"/>
-                          <span th:text="|#{facilities.accessRestRoom}*|"></span>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-xs-6">
-                      <div class="form-group">
-                        <label for="accessRestRoomAttachment" class="col-xs-4 control-label"
-                               th:text="#{facilities.accessRestRoomAttachment}"></label>
-                        <div class="col-xs-5">
-                          <!--<input type="file" class="form-control" th:field="*{accessRestRoomAttachment}"-->
-                                 <!--th:placeholder="#{facilities.accessRestRoomAttachment}"-->
-                                 <!--accept=".xlsx, .xls, .doc, .docx, .pdf, image/*"/>-->
-                        </div>
-                        <div class="col-xs-2 bloc-file-uploaded">
-                          <a th:if="${!#strings.isEmpty(farmDto.accessRestRoomAttachmentUrl)}"
-                             th:href="@{'/downloard/'+${farmDto.accessRestRoomAttachmentUrl}}" target="_blank">
-                            <i class="fa fa-download"></i>
-                          </a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-
-                  <div class="row">
-                    <div class="col-xs-6">
-                      <div class="form-group row col-xs-12">
-                        <div class="col-xs-12">
-                          <input id="accessShower" name="accessShower" type="checkbox" th:checked="${farmDto.accessShower}"/>
-                          <span th:text="|#{facilities.accessShower}*|"></span>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-xs-6">
-                      <div class="form-group">
-                        <label for="accessShowerAttachment" class="col-xs-4 control-label"
-                               th:text="#{facilities.accessShowerAttachment}"></label>
-                        <div class="col-xs-5">
-                          <!--<input type="file" class="form-control" th:field="*{accessShowerAttachment}"-->
-                                 <!--th:placeholder="#{facilities.accessShowerAttachment}"-->
-                                 <!--accept=".xlsx, .xls, .doc, .docx, .pdf, image/*"/>-->
-                        </div>
-                        <div class="col-xs-2 bloc-file-uploaded">
-                          <a th:if="${!#strings.isEmpty(farmDto.accessShowerAttachmentUrl)}"
-                             th:href="@{'/downloard/'+${farmDto.accessShowerAttachmentUrl}}" target="_blank">
-                            <i class="fa fa-download"></i>
-                          </a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-
-                  <div class="row">
-                    <div class="col-xs-6">
-                      <div class="form-group row col-xs-12">
-                        <div class="col-xs-12">
-                          <input id="accessToFreeDrinking" name="accessToFreeDrinking" type="checkbox" th:checked="${farmDto.accessToFreeDrinking}"/>
-                          <span th:text="|#{facilities.accessToFreeDrinking}*|"></span>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-xs-6">
-                      <div class="form-group">
-                        <label for="accessToFreeDrinkingAttachment" class="col-xs-4 control-label"
-                               th:text="#{facilities.accessToFreeDrinkingAttachment}"></label>
-                        <div class="col-xs-5">
-                          <!--<input type="file" class="form-control" th:field="*{accessToFreeDrinkingAttachment}"-->
-                                 <!--th:placeholder="#{facilities.accessToFreeDrinkingAttachment}"-->
-                                 <!--accept=".xlsx, .xls, .doc, .docx, .pdf, image/*"/>-->
-                        </div>
-                        <div class="col-xs-2 bloc-file-uploaded">
-                          <a th:if="${!#strings.isEmpty(farmDto.accessToFreeDrinkingAttachmentUrl)}"
-                             th:href="@{'/downloard/'+${farmDto.accessToFreeDrinkingAttachmentUrl}}" target="_blank">
-                            <i class="fa fa-download"></i>
-                          </a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-
-                  <div class="row">
-                    <div class="col-xs-12">
-                      <div class="form-group row col-xs-12">
-                        <div class="col-xs-12">
-                          <!--<input type="checkbox" th:field="*{presenceFirstAidKit}"/> <span-->
-                            <!--th:text="|#{facilities.presenceFirstAidKit}*|"></span>-->
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box" id="farm-box">
+                <div class="box-header with-border">
+                    <h3 class="box-title" th:text="#{default.facilities}">default.facilities</h3>
                 </div>
-              </div>
+                <form role="form" th:action="@{'/farm/'+${farmId}+'/facilities.html'}" th:object="${farmDto}"
+                      method="post"
+                      class="mainForm form-horizontal" enctype="multipart/form-data"
+                      onsubmit="return !hasEmptyFields('#farm-box form .form-control[required]');">
+                    <div class="box-body" style="padding:0;">
+                        <div class="nav-tabs-custom">
+                            <ul th:include="farms/farms-includes :: farms-tabs" class="nav nav-tabs"></ul>
+                            <ul th:include="farms/farms-profile-includes :: farms-tabs"
+                                class="nav nav-tabs nav-tabs-seconds"></ul>
+
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="tab_3">
+                                    <div class="row">
+                                        <div class="col-xs-6">
+                                            <div class="form-group row col-xs-12">
+                                                <div class="col-xs-12">
+                                                    <input type="checkbox" th:field="*{accessToilets}"/> <span
+                                                        th:text="|#{facilities.accessToilets}*|"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <div class="form-group">
+                                                <div class="col-xs-5">
+                                                    <div id="toiletsDz" class="dropzone"
+                                                         th:attr="data-pictures=${farmDto.getAccessToiletsAttachmentUrl()}"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-xs-6">
+                                            <div class="form-group row col-xs-12">
+                                                <div class="col-xs-12">
+                                                    <input type="checkbox" th:field="*{accessRestRoom}"/> <span
+                                                        th:text="|#{facilities.accessRestRoom}*|"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <div class="form-group">
+                                                <div class="col-xs-5">
+                                                    <div id="restRoomDz" class="dropzone"
+                                                         th:attr="data-pictures=${farmDto.getAccessRestRoomAttachmentUrl()}"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="row">
+                                        <div class="col-xs-6">
+                                            <div class="form-group row col-xs-12">
+                                                <div class="col-xs-12">
+                                                    <input type="checkbox" th:field="*{accessShower}"/> <span
+                                                        th:text="|#{facilities.accessShower}*|"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <div class="form-group">
+                                                <div class="col-xs-5">
+                                                    <div id="showerDz" class="dropzone"
+                                                         th:attr="data-pictures=${farmDto.getAccessShowerAttachmentUrl()}"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="row">
+                                        <div class="col-xs-6">
+                                            <div class="form-group row col-xs-12">
+                                                <div class="col-xs-12">
+                                                    <input type="checkbox" th:field="*{accessToFreeDrinking}"/> <span
+                                                        th:text="|#{facilities.accessToFreeDrinking}*|"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <div class="form-group">
+                                                <div class="col-xs-5">
+                                                    <div id="freeDrinkingDz" class="dropzone"
+                                                         th:attr="data-pictures=${farmDto.getAccessToFreeDrinkingAttachmentUrl()}"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="row">
+                                        <div class="col-xs-12">
+                                            <div class="form-group row col-xs-12">
+                                                <div class="col-xs-12">
+                                                    <input type="checkbox" th:field="*{presenceFirstAidKit}"/> <span
+                                                        th:text="|#{facilities.presenceFirstAidKit}*|"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box-footer text-center">
+                        <small>* <span th:text="#{default.mandatory_field}"></span></small>
+                        <a th:href="@{/farms.html}" class="btn btn-flat btn-warning"><i class="fa fa-times"></i><span
+                                th:text="#{default.cancel}">default.cancel</span></a>
+
+                        <button type="submit" class="btn btn-success">
+                            <span th:text="#{default.submit}">default.submit</span> <i class="fa fa-check"></i>
+                        </button>
+                    </div>
+                </form>
             </div>
-          </div>
-          <div class="box-footer text-center">
-            <small>* <span th:text="#{default.mandatory_field}"></span></small>
-            <a th:href="@{/farms.html}" class="btn btn-flat btn-warning"><i class="fa fa-times"></i><span
-                th:text="#{default.cancel}">default.cancel</span></a>
+        </div>
 
-            <button type="submit" class="btn btn-success">
-              <span th:text="#{default.submit}">default.submit</span> <i class="fa fa-check"></i>
-            </button>
-          </div>
-        </form>
-      </div>
     </div>
-
-  </div>
 
 </div>
 
 
 <th:block layout:fragment="page-scripts">
-  <script type="text/javascript">
-      $(document).ready(function () {
+    <script th:inline="javascript">
 
-          $("#accessForm").submit(function(event) {
-              // Prevent the form from submitting via the browser.
-              event.preventDefault();
-              ajaxPost();
-          });
+        $(document).ready(function () {
+        });
 
-          function ajaxPost() {
-              $.ajax({
-                  type : "POST",
-                  url : window.location,
-                  data : $("#accessForm").serialize(),
-                  success : function(result) {
-                      window.location.replace(window.location);
-                  },
-                  error : function(e) {
-                      console.log("ERROR: ", e);
-                  }
-              });
-          }
-      });
-  </script>
+        Dropzone.autoDiscover = false;
+
+        $("div#toiletsDz").dropzone(initDropzone("toilets", $("div#toiletsDz").data('pictures')));
+        $("div#restRoomDz").dropzone(initDropzone("restroom", $("div#restRoomDz").data('pictures')));
+        $("div#showerDz").dropzone(initDropzone("shower", $("div#showerDz").data('pictures')));
+        $("div#freeDrinkingDz").dropzone(initDropzone("freedrinking", $("div#freeDrinkingDz").data('pictures')));
+
+        function initDropzone(type, picture) {
+
+            return {
+                init: function () {
+                    this.options.previewTemplate = '\
+					<div class="dz-preview dz-file-preview">\
+					  <div class="dz-image"><img data-dz-thumbnail="data-dz-thumbnail" /></div>\
+					  <div class="dz-details">\
+					    <div class="dz-size"><span data-dz-size="data-dz-size"></span></div>\
+					    <div class="dz-filename"><span data-dz-name="data-dz-name"></span></div>\
+					  </div>\
+					  <div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress="data-dz-uploadprogress"></span></div>\
+					  <div class="dz-error-message"><span data-dz-errormessage="data-dz-errormessage"></span></div>\
+					  <div class="dz-success-mark">\
+					    <svg width="54px" height="54px" viewBox="0 0 54 54" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">\
+					      <title>Check</title>\
+					      <defs></defs>\
+					      <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">\
+					        <path d="M23.5,31.8431458 L17.5852419,25.9283877 C16.0248253,24.3679711 13.4910294,24.366835 11.9289322,25.9289322 C10.3700136,27.4878508 10.3665912,30.0234455 11.9283877,31.5852419 L20.4147581,40.0716123 C20.5133999,40.1702541 20.6159315,40.2626649 20.7218615,40.3488435 C22.2835669,41.8725651 24.794234,41.8626202 26.3461564,40.3106978 L43.3106978,23.3461564 C44.8771021,21.7797521 44.8758057,19.2483887 43.3137085,17.6862915 C41.7547899,16.1273729 39.2176035,16.1255422 37.6538436,17.6893022 L23.5,31.8431458 Z M27,53 C41.3594035,53 53,41.3594035 53,27 C53,12.6405965 41.3594035,1 27,1 C12.6405965,1 1,12.6405965 1,27 C1,41.3594035 12.6405965,53 27,53 Z" id="Oval-2" stroke-opacity="0.198794158" stroke="#747474" fill-opacity="0.816519475" fill="#FFFFFF" sketch:type="MSShapeGroup"></path>\
+					      </g>\
+					    </svg>\
+					  </div>\
+					  <div class="dz-error-mark">\
+					    <svg width="54px" height="54px" viewBox="0 0 54 54" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">\
+					      <title>Error</title>\
+					      <defs></defs>\
+					      <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">\
+					        <g id="Check-+-Oval-2" sketch:type="MSLayerGroup" stroke="#747474" stroke-opacity="0.198794158" fill="#FFFFFF" fill-opacity="0.816519475">\
+					          <path d="M32.6568542,29 L38.3106978,23.3461564 C39.8771021,21.7797521 39.8758057,19.2483887 38.3137085,17.6862915 C36.7547899,16.1273729 34.2176035,16.1255422 32.6538436,17.6893022 L27,23.3431458 L21.3461564,17.6893022 C19.7823965,16.1255422 17.2452101,16.1273729 15.6862915,17.6862915 C14.1241943,19.2483887 14.1228979,21.7797521 15.6893022,23.3461564 L21.3431458,29 L15.6893022,34.6538436 C14.1228979,36.2202479 14.1241943,38.7516113 15.6862915,40.3137085 C17.2452101,41.8726271 19.7823965,41.8744578 21.3461564,40.3106978 L27,34.6568542 L32.6538436,40.3106978 C34.2176035,41.8744578 36.7547899,41.8726271 38.3137085,40.3137085 C39.8758057,38.7516113 39.8771021,36.2202479 38.3106978,34.6538436 L32.6568542,29 Z M27,53 C41.3594035,53 53,41.3594035 53,27 C53,12.6405965 41.3594035,1 27,1 C12.6405965,1 1,12.6405965 1,27 C1,41.3594035 12.6405965,53 27,53 Z" id="Oval-2" sketch:type="MSShapeGroup"></path>\
+					        </g>\
+					      </g>\
+					    </svg>\
+					  </div>\
+					  <a class="dz-remove" href="javascript:void(0);" data-dz-remove="" data-url="">Remove file</a>\
+					</div>\
+				';
+
+                    console.info("test : " + picture);
+
+                    if (undefined !== picture) {
+                        picture = "http://localhost:8080/download/" + picture;
+                        var test = {"name": picture};
+                        this.emit("addedfile", test);
+                        this.emit("thumbnail", test, picture);
+                        $(test.previewElement).find('.dz-progress').hide()
+                    }
+                },
+                maxFiles: 1,
+                url: "/upload",
+                params: {
+                    type: type
+                }
+            }
+        }
+
+    </script>
 </th:block>
 
 </html>
