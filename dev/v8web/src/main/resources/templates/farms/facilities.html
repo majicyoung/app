@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html layout:decorator="inc/main-layout" xmlns:th="http://www.thymeleaf.org"
-	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
-	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+			xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+			xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
 <div layout:fragment="content">
 	<div class="row">
@@ -11,14 +11,14 @@
 					<h3 class="box-title" th:text="#{default.facilities}">default.facilities</h3>
 				</div>
 				<form role="form" th:action="@{'/farm/'+${farmId}+'/facilities.html'}" th:object="${farmDto}"
-					  method="post"
-					  class="mainForm form-horizontal" enctype="multipart/form-data"
-					  onsubmit="return !hasEmptyFields('#farm-box form .form-control[required]');">
+							method="post"
+							class="mainForm form-horizontal" enctype="multipart/form-data"
+							onsubmit="return !hasEmptyFields('#farm-box form .form-control[required]');">
 					<div class="box-body" style="padding:0;">
 						<div class="nav-tabs-custom">
 							<ul th:include="farms/farms-includes :: farms-tabs" class="nav nav-tabs"></ul>
 							<ul th:include="farms/farms-profile-includes :: farms-tabs"
-								class="nav nav-tabs nav-tabs-seconds"></ul>
+									class="nav nav-tabs nav-tabs-seconds"></ul>
 
 							<div class="tab-content">
 								<div class="tab-pane active" id="tab_3">
@@ -35,7 +35,7 @@
 											<div class="form-group">
 												<div class="col-xs-5">
 													<div id="toiletsDz" class="dropzone"
-														 th:attr="data-pictures=${farmDto.getAccessToiletsAttachmentUrl()}"/>
+															 th:attr="data-pictures=${farmDto.getAccessToiletsAttachmentUrl()}"/>
 												</div>
 											</div>
 										</div>
@@ -54,7 +54,7 @@
 											<div class="form-group">
 												<div class="col-xs-5">
 													<div id="restRoomDz" class="dropzone"
-														 th:attr="data-pictures=${farmDto.getAccessRestRoomAttachmentUrl()}"/>
+															 th:attr="data-pictures=${farmDto.getAccessRestRoomAttachmentUrl()}"/>
 												</div>
 											</div>
 										</div>
@@ -74,7 +74,7 @@
 											<div class="form-group">
 												<div class="col-xs-5">
 													<div id="showerDz" class="dropzone"
-														 th:attr="data-pictures=${farmDto.getAccessShowerAttachmentUrl()}"/>
+															 th:attr="data-pictures=${farmDto.getAccessShowerAttachmentUrl()}"/>
 												</div>
 											</div>
 										</div>
@@ -94,7 +94,7 @@
 											<div class="form-group">
 												<div class="col-xs-5">
 													<div id="freeDrinkingDz" class="dropzone"
-														 th:attr="data-pictures=${farmDto.getAccessToFreeDrinkingAttachmentUrl()}"/>
+															 th:attr="data-pictures=${farmDto.getAccessToFreeDrinkingAttachmentUrl()}"/>
 												</div>
 											</div>
 										</div>
@@ -135,29 +135,29 @@
 <th:block layout:fragment="page-scripts">
 	<script th:inline="javascript">
 
-        $(document).ready(function () {
-        });
+      $(document).ready(function () {
+      });
 
-        Dropzone.autoDiscover = false;
+      Dropzone.autoDiscover = false;
 
-        $("div#toiletsDz").dropzone(initDropzone("toilets", $("div#toiletsDz").data('pictures')));
-        $("div#restRoomDz").dropzone(initDropzone("restroom", $("div#restRoomDz").data('pictures')));
-        $("div#showerDz").dropzone(initDropzone("shower", $("div#showerDz").data('pictures')));
-        $("div#freeDrinkingDz").dropzone(initDropzone("freedrinking", $("div#freeDrinkingDz").data('pictures')));
+      $("div#toiletsDz").dropzone(initDropzone("toilets", $("div#toiletsDz").data('pictures')));
+      $("div#restRoomDz").dropzone(initDropzone("restroom", $("div#restRoomDz").data('pictures')));
+      $("div#showerDz").dropzone(initDropzone("shower", $("div#showerDz").data('pictures')));
+      $("div#freeDrinkingDz").dropzone(initDropzone("freedrinking", $("div#freeDrinkingDz").data('pictures')));
 
-        function initDropzone(type, picture) {
+      function initDropzone(type, picture) {
 
-            return {
-                maxFiles: 1,
-                url: "/upload",
-                resizeWidth: 300,
-                resizeHeight: 300,
-                resizeQuality: 80,
-                params: {
-                    type: type
-                },
-                init: function () {
-                    this.options.previewTemplate = '\
+          return {
+              maxFiles: 1,
+              url: "/upload",
+              resizeWidth: 300,
+              resizeHeight: 300,
+              resizeQuality: 80,
+              params: {
+                  type: type
+              },
+              init: function () {
+                  this.options.previewTemplate = '\
 					<div class="dz-preview dz-file-preview">\
 					  <div class="dz-image"><img data-dz-thumbnail="data-dz-thumbnail" /></div>\
 					  <div class="dz-details">\
@@ -190,30 +190,30 @@
 					</div>\
 				';
 
-                    console.info("test : " + picture);
+                  console.info("test : " + picture);
 
-                    if (undefined !== picture) {
-                        picture = "http://localhost:8080/download/" + picture;
-                        var test = {"name": picture};
-                        this.emit("addedfile", test);
-                        this.emit("thumbnail", test, picture);
-                        $(test.previewElement).find('.dz-progress').hide()
-                    }
+                  if (undefined !== picture) {
+                      picture = "http://localhost:8080/download/" + picture;
+                      var test = {"name": picture};
+                      this.emit("addedfile", test);
+                      this.emit("thumbnail", test, picture);
+                      $(test.previewElement).find('.dz-progress').hide()
+                  }
 
-                    this.on("addedfile", function (file) {
-                        console.info("addedfile : " + JSON.stringify(file))
-                    });
-                },
-                maxFiles: 1,
-                url: "/upload",
-                params: {
-                    type: type
-                },
-                resizeWidth: 300,
-                resizeHeight: 300,
-                resizeQuality: 80
-            }
-        }
+                  this.on("addedfile", function (file) {
+                      console.info("addedfile : " + JSON.stringify(file))
+                  });
+              },
+              maxFiles: 1,
+              url: "/upload",
+              params: {
+                  type: type
+              },
+              resizeWidth: 300,
+              resizeHeight: 300,
+              resizeQuality: 80
+          }
+      }
 
 	</script>
 </th:block>

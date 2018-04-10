@@ -72,7 +72,8 @@
 				</ul>
 			</li>
 			<li class="treeview {{ (Request::is('companies*')||Request::is('individuals*'))?'active':'' }}">
-				<a href="#"><i class="fa fa-map-marker"></i> <span th:text="#{default.entities}">{{ trans('default.entities') }}</span>
+				<a href="#"><i class="fa fa-map-marker"></i> <span
+						th:text="#{default.entities}">{{ trans('default.entities') }}</span>
 					<span class="pull-right-container">
 	              <i class="fa fa-angle-left pull-right"></i>
 	            </span>
@@ -156,7 +157,7 @@
 				<!-- /.messages-menu -->
 				<li>
 					<a th:href="@{/logout}"
-					   onclick="event.preventDefault();document.getElementById('logout-form').submit();"><span
+						 onclick="event.preventDefault();document.getElementById('logout-form').submit();"><span
 							th:text="#{default.signout}">{{ trans('default.signout') }}</span> <i
 							class="fa fa-sign-out"></i></a>
 					<form id="logout-form" th:action="@{/logout}" method="POST" style="display: none;">
@@ -174,49 +175,49 @@
 	<script type="text/javascript" th:src="@{/webjars/datatables/1.10.15/js/jquery.dataTables.min.js}"></script>
 	<script type="text/javascript" th:src="@{/webjars/datatables/1.10.15/js/dataTables.bootstrap.min.js}"></script>
 	<script type="text/javascript"
-			th:src="@{/webjars/datetimepicker/2.5.11/build/jquery.datetimepicker.full.js}"></script>
+					th:src="@{/webjars/datetimepicker/2.5.11/build/jquery.datetimepicker.full.js}"></script>
 	<script th:src="@{/static/dist/js/app.min.js}"></script>
 	<script th:src="@{/static/dist/js/multiple-select.js}"></script>
 	<script th:src="@{/static/dist/js/dropzone.js}"></script>
 	<script th:inline="javascript"> <!-- Loading langauge for dataTable-->
-    /*<![CDATA[*/
+  /*<![CDATA[*/
 
-    var lang = [[${v8App.currentLanguage.i18n}]];
-    jQuery.datetimepicker.setLocale(lang);
-    var langURL = "";
-    switch (lang) {
-        case 'en':
-            langURL = "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/English.json";
-            break;
-        case 'fr':
-            langURL = "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/French.json";
-            break;
-        case 'es':
-            langURL = "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json";
-            break;
-        case 'th':
-            langURL = "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Thai.json";
-            break;
-        case 'vt':
-            langURL = "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Vietnamese.json";
-            break;
-        case 'id':
-            langURL = "//cdn.datatables.net/plug-ins/1.10.16/i18n/Indonesian.json";
-            break;
-        default:
-            langURL = "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/English.jsonn";
-            break;
-    }
+  var lang = [[${v8App.currentLanguage.i18n}]];
+  jQuery.datetimepicker.setLocale(lang);
+  var langURL = "";
+  switch (lang) {
+      case 'en':
+          langURL = "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/English.json";
+          break;
+      case 'fr':
+          langURL = "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/French.json";
+          break;
+      case 'es':
+          langURL = "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json";
+          break;
+      case 'th':
+          langURL = "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Thai.json";
+          break;
+      case 'vt':
+          langURL = "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Vietnamese.json";
+          break;
+      case 'id':
+          langURL = "//cdn.datatables.net/plug-ins/1.10.16/i18n/Indonesian.json";
+          break;
+      default:
+          langURL = "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/English.jsonn";
+          break;
+  }
 
-    /** setup readonly when needed **/
-    $(document).ready(function () {
-        var mainFormToReadOnly = [[${mainFormToReadOnly}]];
-        if (mainFormToReadOnly) {
-            $('.mainForm :input').attr("disabled", true);
-        }
-    });
+  /** setup readonly when needed **/
+  $(document).ready(function () {
+      var mainFormToReadOnly = [[${mainFormToReadOnly}]];
+      if (mainFormToReadOnly) {
+          $('.mainForm :input').attr("disabled", true);
+      }
+  });
 
-    /*]]>*/
+  /*]]>*/
 	</script>
 </th:block>
 
