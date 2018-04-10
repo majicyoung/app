@@ -189,9 +189,6 @@
 					  <a class="dz-remove" href="javascript:void(0);" data-dz-remove="" data-url="">Remove file</a>\
 					</div>\
 				';
-
-                  console.info("test : " + picture);
-
                   if (undefined !== picture) {
                       picture = "http://localhost:8080/download/" + picture;
                       var test = {"name": picture};
@@ -199,10 +196,6 @@
                       this.emit("thumbnail", test, picture);
                       $(test.previewElement).find('.dz-progress').hide()
                   }
-
-                  this.on("addedfile", function (file) {
-                      console.info("addedfile : " + JSON.stringify(file))
-                  });
               },
               maxFiles: 1,
               url: "/upload",
