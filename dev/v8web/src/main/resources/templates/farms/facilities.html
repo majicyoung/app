@@ -196,6 +196,11 @@
                       this.emit("thumbnail", test, picture);
                       $(test.previewElement).find('.dz-progress').hide()
                   }
+
+                  this.on("error", function (file, errorMessage) {
+                      alert("Error uploading file : " + errorMessage);
+                  })
+
               },
               maxFiles: 1,
               url: "/upload",
