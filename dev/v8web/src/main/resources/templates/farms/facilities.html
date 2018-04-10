@@ -191,26 +191,34 @@
 				';
                   if (undefined !== picture) {
                       picture = "http://localhost:8080/download/" + picture;
-                      var test = {"name": picture};
-                      this.emit("addedfile", test);
-                      this.emit("thumbnail", test, picture);
-                      $(test.previewElement).find('.dz-progress').hide()
+
+                      var fileName = "";
+                      if (isImageExisted(picture)) {
+                          fileName = picture;
+                      }
+                      else {
+                          fileName = "\nFile not found\nPlease upload new one";
+                      }
+
+                      var image = {"name": fileName};
+                      this.emit("addedfile", image);
+                      this.emit("thumbnail", image, picture);
+                      $(image.previewElement).find('.dz-progress').hide()
                   }
 
-                  this.on("error", function (file, errorMessage) {
-                      alert("Error uploading file : " + errorMessage);
-                  })
-
-              },
-              maxFiles: 1,
-              url: "/upload",
-              params: {
-                  type: type
-              },
-              resizeWidth: 300,
-              resizeHeight: 300,
-              resizeQuality: 80
+                  this.on("maxfilesexceeded", function (file) {
+                      this.removeAllFiles();
+                      this.addFile(file);
+                  });
+              }
           }
+      }
+
+      function isImageExisted(url) {
+          var http = new XMLHttpRequest();
+          http.open('HEAD', url, false);
+          http.send();
+          return http.status !== 500;
       }
 
 	</script>
