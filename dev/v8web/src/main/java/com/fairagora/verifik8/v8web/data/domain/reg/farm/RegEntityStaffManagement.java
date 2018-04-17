@@ -191,21 +191,12 @@ public class RegEntityStaffManagement {
 	@Column(name = "KEEP_WORKER_DOCUMENTS_SAFEKEEPING")
 	protected Boolean keepWorkerDocumentSafeKeeping;
 
-	@ManyToOne(optional = true)
-	@JoinColumn(name = "CL_KEPT_WORKER_ENTITY_DOCUMENT_TYPE_ID_1")
-	protected CLAppWorkerEntityDocumentTypes keptWorkerEntityDocumentType1;
-
-	@ManyToOne(optional = true)
-	@JoinColumn(name = "CL_KEPT_WORKER_ENTITY_DOCUMENT_TYPE_ID_2")
-	protected CLAppWorkerEntityDocumentTypes keptWorkerEntityDocumentType2;
-
-	@ManyToOne(optional = true)
-	@JoinColumn(name = "CL_KEPT_WORKER_ENTITY_DOCUMENT_TYPE_ID_3")
-	protected CLAppWorkerEntityDocumentTypes keptWorkerEntityDocumentType3;
-
-	@ManyToOne(optional = true)
-	@JoinColumn(name = "CL_KEPT_WORKER_ENTITY_DOCUMENT_TYPE_ID_4")
-	protected CLAppWorkerEntityDocumentTypes keptWorkerEntityDocumentType4;
+	@ManyToMany
+	@JoinTable(
+			name="reg_entity_staff_management_cl_app_entity_document_types",
+			joinColumns=@JoinColumn(name="CL_KEPT_WORKER_ENTITY_DOCUMENT_TYPE_ID", referencedColumnName="REG_ENTITY_FARM_ID"),
+			inverseJoinColumns=@JoinColumn(name="REG_ENTITY_FARM_ID", referencedColumnName="ID"))
+	protected List<CLAppWorkerEntityDocumentTypes> keptWorkerEntityDocumentTypes;
 
 	@Column(name = "ANY_CONTRACT_SIGNED_WITH_WORKERS")
 	protected Boolean anyContractSignedWithWorkers;
@@ -216,21 +207,12 @@ public class RegEntityStaffManagement {
 	@Column(name = "STAFF_HIRED_THROUGH_AGENT")
 	protected Boolean staffHiredThroughAgent;
 
-	@ManyToOne(optional = true)
-	@JoinColumn(name = "CL_DEDUCTION_SALARY_ID_1")
-	protected CLAppSalaryDeductionType salaryDeductionType1;
-
-	@ManyToOne(optional = true)
-	@JoinColumn(name = "CL_DEDUCTION_SALARY_ID_2")
-	protected CLAppSalaryDeductionType salaryDeductionType2;
-
-	@ManyToOne(optional = true)
-	@JoinColumn(name = "CL_DEDUCTION_SALARY_ID_3")
-	protected CLAppSalaryDeductionType salaryDeductionType3;
-
-	@ManyToOne(optional = true)
-	@JoinColumn(name = "CL_DEDUCTION_SALARY_ID_4")
-	protected CLAppSalaryDeductionType salaryDeductionType4;
+	@ManyToMany
+	@JoinTable(
+			name="reg_entity_staff_management_cl_app_deduction_salary_types",
+			joinColumns=@JoinColumn(name="CL_APP_DEDUCTION_SALARY_TYPE_ID", referencedColumnName="REG_ENTITY_FARM_ID"),
+			inverseJoinColumns=@JoinColumn(name="REG_ENTITY_FARM_ID", referencedColumnName="ID"))
+	protected List<CLAppSalaryDeductionType> salaryDeductionTypes;
 
 	@Column(name = "DEDUCTION_SALARY_OTHER")
 	protected String salaryDeductionOther;
@@ -244,21 +226,12 @@ public class RegEntityStaffManagement {
 	@Column(name = "WORKERS_IN_DEBT")
 	protected Boolean workerInDebt;
 
-	@ManyToOne(optional = true)
-	@JoinColumn(name = "CL_PAYMENT_DEBT_TYPE_ID_1")
-	protected CLAppPaymentDebtType paymentDebtType1;
-
-	@ManyToOne(optional = true)
-	@JoinColumn(name = "CL_PAYMENT_DEBT_TYPE_ID_2")
-	protected CLAppPaymentDebtType paymentDebtType2;
-
-	@ManyToOne(optional = true)
-	@JoinColumn(name = "CL_PAYMENT_DEBT_TYPE_ID_3")
-	protected CLAppPaymentDebtType paymentDebtType3;
-
-	@ManyToOne(optional = true)
-	@JoinColumn(name = "CL_PAYMENT_DEBT_TYPE_ID_4")
-	protected CLAppPaymentDebtType paymentDebtType4;
+	@ManyToMany
+	@JoinTable(
+			name="reg_entity_staff_management_cl_app_payment_debt_types",
+			joinColumns=@JoinColumn(name="CL_PAYMENT_DEBT_TYPE_ID", referencedColumnName="REG_ENTITY_FARM_ID"),
+			inverseJoinColumns=@JoinColumn(name="REG_ENTITY_FARM_ID", referencedColumnName="ID"))
+	protected List<CLAppPaymentDebtType> paymentDebtTypes;
 
 	@Column(name = "WORKERS_IN_DEBT_OTHER_STAKEHOLDER")
 	protected Boolean workersInDebtOtherStakeHolder;
@@ -678,36 +651,28 @@ public class RegEntityStaffManagement {
 		this.keepWorkerDocumentSafeKeeping = keepWorkerDocumentSafeKeeping;
 	}
 
-	public CLAppWorkerEntityDocumentTypes getKeptWorkerEntityDocumentType1() {
-		return keptWorkerEntityDocumentType1;
+	public List<CLAppWorkerEntityDocumentTypes> getKeptWorkerEntityDocumentTypes() {
+		return keptWorkerEntityDocumentTypes;
 	}
 
-	public void setKeptWorkerEntityDocumentType1(CLAppWorkerEntityDocumentTypes keptWorkerEntityDocumentType1) {
-		this.keptWorkerEntityDocumentType1 = keptWorkerEntityDocumentType1;
+	public void setKeptWorkerEntityDocumentTypes(List<CLAppWorkerEntityDocumentTypes> keptWorkerEntityDocumentTypes) {
+		this.keptWorkerEntityDocumentTypes = keptWorkerEntityDocumentTypes;
 	}
 
-	public CLAppWorkerEntityDocumentTypes getKeptWorkerEntityDocumentType2() {
-		return keptWorkerEntityDocumentType2;
+	public List<CLAppSalaryDeductionType> getSalaryDeductionTypes() {
+		return salaryDeductionTypes;
 	}
 
-	public void setKeptWorkerEntityDocumentType2(CLAppWorkerEntityDocumentTypes keptWorkerEntityDocumentType2) {
-		this.keptWorkerEntityDocumentType2 = keptWorkerEntityDocumentType2;
+	public void setSalaryDeductionTypes(List<CLAppSalaryDeductionType> salaryDeductionTypes) {
+		this.salaryDeductionTypes = salaryDeductionTypes;
 	}
 
-	public CLAppWorkerEntityDocumentTypes getKeptWorkerEntityDocumentType3() {
-		return keptWorkerEntityDocumentType3;
+	public List<CLAppPaymentDebtType> getPaymentDebtTypes() {
+		return paymentDebtTypes;
 	}
 
-	public void setKeptWorkerEntityDocumentType3(CLAppWorkerEntityDocumentTypes keptWorkerEntityDocumentType3) {
-		this.keptWorkerEntityDocumentType3 = keptWorkerEntityDocumentType3;
-	}
-
-	public CLAppWorkerEntityDocumentTypes getKeptWorkerEntityDocumentType4() {
-		return keptWorkerEntityDocumentType4;
-	}
-
-	public void setKeptWorkerEntityDocumentType4(CLAppWorkerEntityDocumentTypes keptWorkerEntityDocumentType4) {
-		this.keptWorkerEntityDocumentType4 = keptWorkerEntityDocumentType4;
+	public void setPaymentDebtTypes(List<CLAppPaymentDebtType> paymentDebtTypes) {
+		this.paymentDebtTypes = paymentDebtTypes;
 	}
 
 	public Boolean getAnyContractSignedWithWorkers() {
@@ -732,38 +697,6 @@ public class RegEntityStaffManagement {
 
 	public void setStaffHiredThroughAgent(Boolean staffHiredThroughAgent) {
 		this.staffHiredThroughAgent = staffHiredThroughAgent;
-	}
-
-	public CLAppSalaryDeductionType getSalaryDeductionType1() {
-		return salaryDeductionType1;
-	}
-
-	public void setSalaryDeductionType1(CLAppSalaryDeductionType salaryDeductionType1) {
-		this.salaryDeductionType1 = salaryDeductionType1;
-	}
-
-	public CLAppSalaryDeductionType getSalaryDeductionType2() {
-		return salaryDeductionType2;
-	}
-
-	public void setSalaryDeductionType2(CLAppSalaryDeductionType salaryDeductionType2) {
-		this.salaryDeductionType2 = salaryDeductionType2;
-	}
-
-	public CLAppSalaryDeductionType getSalaryDeductionType3() {
-		return salaryDeductionType3;
-	}
-
-	public void setSalaryDeductionType3(CLAppSalaryDeductionType salaryDeductionType3) {
-		this.salaryDeductionType3 = salaryDeductionType3;
-	}
-
-	public CLAppSalaryDeductionType getSalaryDeductionType4() {
-		return salaryDeductionType4;
-	}
-
-	public void setSalaryDeductionType4(CLAppSalaryDeductionType salaryDeductionType4) {
-		this.salaryDeductionType4 = salaryDeductionType4;
 	}
 
 	public String getSalaryDeductionOther() {
@@ -796,38 +729,6 @@ public class RegEntityStaffManagement {
 
 	public void setWorkerInDebt(Boolean workerInDebt) {
 		this.workerInDebt = workerInDebt;
-	}
-
-	public CLAppPaymentDebtType getPaymentDebtType1() {
-		return paymentDebtType1;
-	}
-
-	public void setPaymentDebtType1(CLAppPaymentDebtType paymentDebtType1) {
-		this.paymentDebtType1 = paymentDebtType1;
-	}
-
-	public CLAppPaymentDebtType getPaymentDebtType2() {
-		return paymentDebtType2;
-	}
-
-	public void setPaymentDebtType2(CLAppPaymentDebtType paymentDebtType2) {
-		this.paymentDebtType2 = paymentDebtType2;
-	}
-
-	public CLAppPaymentDebtType getPaymentDebtType3() {
-		return paymentDebtType3;
-	}
-
-	public void setPaymentDebtType3(CLAppPaymentDebtType paymentDebtType3) {
-		this.paymentDebtType3 = paymentDebtType3;
-	}
-
-	public CLAppPaymentDebtType getPaymentDebtType4() {
-		return paymentDebtType4;
-	}
-
-	public void setPaymentDebtType4(CLAppPaymentDebtType paymentDebtType4) {
-		this.paymentDebtType4 = paymentDebtType4;
 	}
 
 	public Boolean getWorkersInDebtOtherStakeHolder() {
