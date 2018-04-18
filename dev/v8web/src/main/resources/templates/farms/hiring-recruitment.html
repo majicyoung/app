@@ -103,48 +103,9 @@
                         <label for="keptWorkerEntityDocumentType1" class="col-xs-2 control-label"
                                th:text="|#{hiring_recruitment.keptWorkerEntityDocumentType1}|"></label>
                         <div class="col-xs-6">
-                          <select class="form-control" th:field="*{keptWorkerEntityDocumentType1}"
-                                  id="keptWorkerEntityDocumentType1" onChange="manageKeptWorker()">
-                            <option value=""></option>
-                            <option th:each="wtype:${allWorkerEntrityDocumentTypes}" th:value="${wtype.id}"
-                                    th:text="${wtype.localisedName}"></option>
-                          </select>
-                        </div>
-                        <div class="col-xs-4"></div>
-                      </div>
-                      <div class="form-group row col-xs-12" id="divkeptWorkerEntityDocumentType2">
-                        <label for="keptWorkerEntityDocumentType2" class="col-xs-2 control-label"
-                               th:text="|#{hiring_recruitment.keptWorkerEntityDocumentType2}|"></label>
-                        <div class="col-xs-6">
-                          <select class="form-control" th:field="*{keptWorkerEntityDocumentType2}"
-                                  onChange="manageKeptWorker()">
-                            <option value=""></option>
-                            <option th:each="wtype:${allWorkerEntrityDocumentTypes}" th:value="${wtype.id}"
-                                    th:text="${wtype.localisedName}"></option>
-                          </select>
-                        </div>
-                        <div class="col-xs-4"></div>
-                      </div>
-                      <div class="form-group row col-xs-12" id="divkeptWorkerEntityDocumentType3">
-                        <label for="keptWorkerEntityDocumentType3" class="col-xs-2 control-label"
-                               th:text="|#{hiring_recruitment.keptWorkerEntityDocumentType3}|"></label>
-                        <div class="col-xs-6">
-                          <select class="form-control" th:field="*{keptWorkerEntityDocumentType3}"
-                                  onChange="manageKeptWorker()">
-                            <option value=""></option>
-                            <option th:each="wtype:${allWorkerEntrityDocumentTypes}" th:value="${wtype.id}"
-                                    th:text="${wtype.localisedName}"></option>
-                          </select>
-                        </div>
-                        <div class="col-xs-4"></div>
-                      </div>
-                      <div class="form-group row col-xs-12" id="divkeptWorkerEntityDocumentType4">
-                        <label for="keptWorkerEntityDocumentType4" class="col-xs-2 control-label"
-                               th:text="|#{hiring_recruitment.keptWorkerEntityDocumentType4}|"></label>
-                        <div class="col-xs-6">
-                          <select class="form-control" th:field="*{keptWorkerEntityDocumentType4}">
-                            <option value=""></option>
-                            <option th:each="wtype:${allWorkerEntrityDocumentTypes}" th:value="${wtype.id}"
+                          <select class="select-multiple form-control" th:field="*{keptWorkerEntityDocumentTypes}" multiple="multiple">
+                            <option th:each="wtype:${allWorkerEntrityDocumentTypes}"
+                                    th:value="${wtype.id}"
                                     th:text="${wtype.localisedName}"></option>
                           </select>
                         </div>
@@ -199,48 +160,10 @@
                         <label for="salaryDeductionType1" class="col-xs-2 control-label"
                                th:text="|#{hiring_recruitment.salaryDeductionType1}|"></label>
                         <div class="col-xs-6">
-                          <select class="form-control" th:field="*{salaryDeductionType1}"
-                                  onChange="manageSalaryDeduction()">
-                            <option value=""></option>
-                            <option th:each="wtype:${allSalaryDeductionTypes}" th:value="${wtype.id}"
-                                    th:text="${wtype.localisedName}"></option>
-                          </select>
-                        </div>
-                        <div class="col-xs-4"></div>
-                      </div>
-                      <div class="form-group row col-xs-12" id="divsalaryDeductionType2">
-                        <label for="salaryDeductionType2" class="col-xs-2 control-label"
-                               th:text="|#{hiring_recruitment.salaryDeductionType2}|"></label>
-                        <div class="col-xs-6">
-                          <select class="form-control" th:field="*{salaryDeductionType2}"
-                                  onChange="manageSalaryDeduction()">
-                            <option value=""></option>
-                            <option th:each="wtype:${allSalaryDeductionTypes}" th:value="${wtype.id}"
-                                    th:text="${wtype.localisedName}"></option>
-                          </select>
-                        </div>
-                        <div class="col-xs-4"></div>
-                      </div>
-                      <div class="form-group row col-xs-12" id="divsalaryDeductionType3">
-                        <label for="salaryDeductionType3" class="col-xs-2 control-label"
-                               th:text="|#{hiring_recruitment.salaryDeductionType3}|"></label>
-                        <div class="col-xs-6">
-                          <select class="form-control" th:field="*{salaryDeductionType3}"
-                                  onChange="manageSalaryDeduction()">
-                            <option value=""></option>
-                            <option th:each="wtype:${allSalaryDeductionTypes}" th:value="${wtype.id}"
-                                    th:text="${wtype.localisedName}"></option>
-                          </select>
-                        </div>
-                        <div class="col-xs-4"></div>
-                      </div>
-                      <div class="form-group row col-xs-12" id="divsalaryDeductionType4">
-                        <label for="salaryDeductionType4" class="col-xs-2 control-label"
-                               th:text="|#{hiring_recruitment.salaryDeductionType4}|"></label>
-                        <div class="col-xs-6">
-                          <select class="form-control" th:field="*{salaryDeductionType4}">
-                            <option value=""></option>
-                            <option th:each="wtype:${allSalaryDeductionTypes}" th:value="${wtype.id}"
+
+                          <select class="select-multiple form-control" th:field="*{salaryDeductionTypes}" multiple="multiple">
+                            <option th:each="wtype:${allSalaryDeductionTypes}"
+                                    th:value="${wtype.id}"
                                     th:text="${wtype.localisedName}"></option>
                           </select>
                         </div>
@@ -283,45 +206,9 @@
                         <label for="paymentDebtType1" class="col-xs-2 control-label"
                                th:text="|#{hiring_recruitment.paymentDebtType1}|"></label>
                         <div class="col-xs-6">
-                          <select class="form-control" th:field="*{paymentDebtType1}" onChange="managePaymentDebt()">
-                            <option value=""></option>
-                            <option th:each="wtype:${allPaymentDebtTypes}" th:value="${wtype.id}"
-                                    th:text="${wtype.localisedName}"></option>
-                          </select>
-                        </div>
-                        <div class="col-xs-4"></div>
-                      </div>
-                      <div class="form-group row col-xs-12" id="divpaymentDebtType2">
-                        <label for="paymentDebtType1" class="col-xs-2 control-label"
-                               th:text="|#{hiring_recruitment.paymentDebtType2}|"></label>
-                        <div class="col-xs-6">
-                          <select class="form-control" th:field="*{paymentDebtType2}" onChange="managePaymentDebt()">
-                            <option value=""></option>
-                            <option th:each="wtype:${allPaymentDebtTypes}" th:value="${wtype.id}"
-                                    th:text="${wtype.localisedName}"></option>
-                          </select>
-                        </div>
-                        <div class="col-xs-4"></div>
-                      </div>
-                      <div class="form-group row col-xs-12" id="divpaymentDebtType3">
-                        <label for="paymentDebtType1" class="col-xs-2 control-label"
-                               th:text="|#{hiring_recruitment.paymentDebtType3}|"></label>
-                        <div class="col-xs-6">
-                          <select class="form-control" th:field="*{paymentDebtType3}" onChange="managePaymentDebt()">
-                            <option value=""></option>
-                            <option th:each="wtype:${allPaymentDebtTypes}" th:value="${wtype.id}"
-                                    th:text="${wtype.localisedName}"></option>
-                          </select>
-                        </div>
-                        <div class="col-xs-4"></div>
-                      </div>
-                      <div class="form-group row col-xs-12" id="divpaymentDebtType4">
-                        <label for="paymentDebtType1" class="col-xs-2 control-label"
-                               th:text="|#{hiring_recruitment.paymentDebtType4}|"></label>
-                        <div class="col-xs-6">
-                          <select class="form-control" th:field="*{paymentDebtType4}">
-                            <option value=""></option>
-                            <option th:each="wtype:${allPaymentDebtTypes}" th:value="${wtype.id}"
+                           <select class="select-multiple form-control" th:field="*{paymentDebtTypes}" multiple="multiple">
+                            <option th:each="wtype:${allPaymentDebtTypes}"
+                                    th:value="${wtype.id}"
                                     th:text="${wtype.localisedName}"></option>
                           </select>
                         </div>
@@ -627,6 +514,9 @@
           }
       }
 
+      $(document).ready(function () {
+      });
+      $('.select-multiple').multipleSelect();
 
       /*]]>*/
   </script>

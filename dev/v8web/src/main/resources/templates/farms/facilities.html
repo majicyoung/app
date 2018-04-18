@@ -231,7 +231,7 @@
 					</div>\
 				';
                   if (undefined !== picture) {
-                      picture = "http://localhost:8080/download/" + picture;
+                      picture = "http://" + location.host + "/download/" + picture;
 
                       var fileName = "";
                       if (isImageExisted(picture)) {
@@ -261,6 +261,10 @@
           http.send();
           return http.status !== 500;
       }
+
+      $(document).ready(function () {
+      });
+      $('select').multipleSelect();
 
 	</script>
 </th:block>
