@@ -37,6 +37,12 @@
 													<div id="toiletsDz" class="dropzone"
 															 th:attr="data-pictures=${farmDto.getAccessToiletsAttachmentUrl()}"/>
 												</div>
+												<div id="toiletsButton" class="col-xs-2 bloc-file-uploaded">
+													<a th:if="${!#strings.isEmpty(farmDto.accessToiletsAttachmentUrl)}"
+														 th:href="@{'/download/'+${farmDto.accessToiletsAttachmentUrl}}" target="_blank">
+														<i class="fa fa-download"></i>
+													</a>
+												</div>
 											</div>
 										</div>
 									</div>
@@ -55,6 +61,12 @@
 												<div class="col-xs-5">
 													<div id="restRoomDz" class="dropzone"
 															 th:attr="data-pictures=${farmDto.getAccessRestRoomAttachmentUrl()}"/>
+												</div>
+												<div id="restRoomButton" class="col-xs-2 bloc-file-uploaded">
+													<a th:if="${!#strings.isEmpty(farmDto.accessRestRoomAttachmentUrl)}"
+														 th:href="@{'/download/'+${farmDto.accessRestRoomAttachmentUrl}}" target="_blank">
+														<i class="fa fa-download"></i>
+													</a>
 												</div>
 											</div>
 										</div>
@@ -76,6 +88,12 @@
 													<div id="showerDz" class="dropzone"
 															 th:attr="data-pictures=${farmDto.getAccessShowerAttachmentUrl()}"/>
 												</div>
+												<div id="showerButton" class="col-xs-2 bloc-file-uploaded">
+													<a th:if="${!#strings.isEmpty(farmDto.accessShowerAttachmentUrl)}"
+														 th:href="@{'/download/'+${farmDto.accessShowerAttachmentUrl}}" target="_blank">
+														<i class="fa fa-download"></i>
+													</a>
+												</div>
 											</div>
 										</div>
 									</div>
@@ -95,6 +113,12 @@
 												<div class="col-xs-5">
 													<div id="freeDrinkingDz" class="dropzone"
 															 th:attr="data-pictures=${farmDto.getAccessToFreeDrinkingAttachmentUrl()}"/>
+												</div>
+												<div id="freeDrinkingButton" class="col-xs-2 bloc-file-uploaded">
+													<a th:if="${!#strings.isEmpty(farmDto.accessToFreeDrinkingAttachmentUrl)}"
+														 th:href="@{'/download/'+${farmDto.accessToFreeDrinkingAttachmentUrl}}" target="_blank">
+														<i class="fa fa-download"></i>
+													</a>
 												</div>
 											</div>
 										</div>
@@ -138,12 +162,29 @@
       $(document).ready(function () {
       });
 
+      if (!isImageExisted('http://localhost:8080/download/' + [[${farmDto.accessToiletsAttachmentUrl}]])) {
+          $("div#toiletsButton").css("visibility", "hidden");
+      }
+
+      if (!isImageExisted('http://localhost:8080/download/' + [[${farmDto.accessRestRoomAttachmentUrl}]])) {
+          $("div#restRoomButton").css("visibility", "hidden");
+      }
+
+      if (!isImageExisted('http://localhost:8080/download/' + [[${farmDto.accessShowerAttachmentUrl}]])) {
+          $("div#restRoomButton").css("visibility", "hidden");
+      }
+
+      if (!isImageExisted('http://localhost:8080/download/' + [[${farmDto.accessToFreeDrinkingAttachmentUrl}]])) {
+          $("div#freeDrinkingButton").css("visibility", "hidden");
+      }
+
       Dropzone.autoDiscover = false;
 
       $("div#toiletsDz").dropzone(initDropzone("toilets", $("div#toiletsDz").data('pictures')));
       $("div#restRoomDz").dropzone(initDropzone("restroom", $("div#restRoomDz").data('pictures')));
       $("div#showerDz").dropzone(initDropzone("shower", $("div#showerDz").data('pictures')));
       $("div#freeDrinkingDz").dropzone(initDropzone("freedrinking", $("div#freeDrinkingDz").data('pictures')));
+
 
       function initDropzone(type, picture) {
 
