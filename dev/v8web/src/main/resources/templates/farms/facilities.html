@@ -23,7 +23,7 @@
 							<div class="tab-content">
 								<div class="tab-pane active" id="tab_3">
 									<div class="row">
-										<div class="col-xs-6">
+										<div class="col-xs-4">
 											<div class="form-group row col-xs-12">
 												<div class="col-xs-12">
 													<input type="checkbox" th:field="*{accessToilets}"/> <span
@@ -31,24 +31,24 @@
 												</div>
 											</div>
 										</div>
-										<div class="col-xs-6">
+										<div class="col-xs-8">
 											<div class="form-group">
-												<div class="col-xs-5">
-													<div id="toiletsDz" class="dropzone"
+												<div class="list-style-none">
+													<div id="toiletsDz" class="dropzone float-left"
 															 th:attr="data-pictures=${farmDto.getAccessToiletsAttachmentUrl()}"/>
-												</div>
-												<div id="toiletsButton" class="col-xs-2 bloc-file-uploaded">
-													<a th:if="${!#strings.isEmpty(farmDto.accessToiletsAttachmentUrl)}"
-														 th:href="@{'/download/'+${farmDto.accessToiletsAttachmentUrl}}" target="_blank">
-														<i class="fa fa-download"></i>
-													</a>
+													<div id="toiletsButton" class="col-xs-2 bloc-file-uploaded float-left">
+														<a th:if="${!#strings.isEmpty(farmDto.accessToiletsAttachmentUrl)}"
+															 th:href="@{'/download/'+${farmDto.accessToiletsAttachmentUrl}}" target="_blank">
+															<i class="fa fa-download"></i>
+														</a>
+													</div>
 												</div>
 											</div>
 										</div>
 									</div>
 
 									<div class="row">
-										<div class="col-xs-6">
+										<div class="col-xs-4">
 											<div class="form-group row col-xs-12">
 												<div class="col-xs-12">
 													<input type="checkbox" th:field="*{accessRestRoom}"/> <span
@@ -56,17 +56,18 @@
 												</div>
 											</div>
 										</div>
-										<div class="col-xs-6">
+										<div class="col-xs-8">
 											<div class="form-group">
-												<div class="col-xs-5">
-													<div id="restRoomDz" class="dropzone"
+												<div class="list-style-none">
+
+													<div id="restRoomDz" class="dropzone float-left"
 															 th:attr="data-pictures=${farmDto.getAccessRestRoomAttachmentUrl()}"/>
-												</div>
-												<div id="restRoomButton" class="col-xs-2 bloc-file-uploaded">
-													<a th:if="${!#strings.isEmpty(farmDto.accessRestRoomAttachmentUrl)}"
-														 th:href="@{'/download/'+${farmDto.accessRestRoomAttachmentUrl}}" target="_blank">
-														<i class="fa fa-download"></i>
-													</a>
+													<div id="restRoomButton" class="col-xs-2 bloc-file-uploaded float-left">
+														<a th:if="${!#strings.isEmpty(farmDto.accessRestRoomAttachmentUrl)}"
+															 th:href="@{'/download/'+${farmDto.accessRestRoomAttachmentUrl}}" target="_blank">
+															<i class="fa fa-download"></i>
+														</a>
+													</div>
 												</div>
 											</div>
 										</div>
@@ -74,7 +75,7 @@
 
 
 									<div class="row">
-										<div class="col-xs-6">
+										<div class="col-xs-4">
 											<div class="form-group row col-xs-12">
 												<div class="col-xs-12">
 													<input type="checkbox" th:field="*{accessShower}"/> <span
@@ -82,17 +83,18 @@
 												</div>
 											</div>
 										</div>
-										<div class="col-xs-6">
+										<div class="col-xs-8">
 											<div class="form-group">
-												<div class="col-xs-5">
-													<div id="showerDz" class="dropzone"
+												<div class="list-style-none">
+
+													<div id="showerDz" class="dropzone float-left"
 															 th:attr="data-pictures=${farmDto.getAccessShowerAttachmentUrl()}"/>
-												</div>
-												<div id="showerButton" class="col-xs-2 bloc-file-uploaded">
-													<a th:if="${!#strings.isEmpty(farmDto.accessShowerAttachmentUrl)}"
-														 th:href="@{'/download/'+${farmDto.accessShowerAttachmentUrl}}" target="_blank">
-														<i class="fa fa-download"></i>
-													</a>
+													<div id="showerButton" class="col-xs-2 bloc-file-uploaded float-left">
+														<a th:if="${!#strings.isEmpty(farmDto.accessShowerAttachmentUrl)}"
+															 th:href="@{'/download/'+${farmDto.accessShowerAttachmentUrl}}" target="_blank">
+															<i class="fa fa-download"></i>
+														</a>
+													</div>
 												</div>
 											</div>
 										</div>
@@ -100,7 +102,7 @@
 
 
 									<div class="row">
-										<div class="col-xs-6">
+										<div class="col-xs-4">
 											<div class="form-group row col-xs-12">
 												<div class="col-xs-12">
 													<input type="checkbox" th:field="*{accessToFreeDrinking}"/> <span
@@ -108,17 +110,18 @@
 												</div>
 											</div>
 										</div>
-										<div class="col-xs-6">
+										<div class="col-xs-8">
 											<div class="form-group">
-												<div class="col-xs-5">
-													<div id="freeDrinkingDz" class="dropzone"
+												<div class="list-style-none">
+
+													<div id="freeDrinkingDz" class="dropzone float-left"
 															 th:attr="data-pictures=${farmDto.getAccessToFreeDrinkingAttachmentUrl()}"/>
-												</div>
-												<div id="freeDrinkingButton" class="col-xs-2 bloc-file-uploaded">
-													<a th:if="${!#strings.isEmpty(farmDto.accessToFreeDrinkingAttachmentUrl)}"
-														 th:href="@{'/download/'+${farmDto.accessToFreeDrinkingAttachmentUrl}}" target="_blank">
-														<i class="fa fa-download"></i>
-													</a>
+													<div id="freeDrinkingButton" class="col-xs-2 bloc-file-uploaded float-left">
+														<a th:if="${!#strings.isEmpty(farmDto.accessToFreeDrinkingAttachmentUrl)}"
+															 th:href="@{'/download/'+${farmDto.accessToFreeDrinkingAttachmentUrl}}" target="_blank">
+															<i class="fa fa-download"></i>
+														</a>
+													</div>
 												</div>
 											</div>
 										</div>
@@ -155,8 +158,8 @@
 
 </div>
 
-
 <th:block layout:fragment="page-scripts">
+
 	<script th:inline="javascript">
 
       $(document).ready(function () {
@@ -249,6 +252,10 @@
                   this.on("maxfilesexceeded", function (file) {
                       this.removeAllFiles();
                       this.addFile(file);
+                  });
+
+                  this.on("removedfile", function () {
+                      $.post( "http://"+ location.host + "/deleteimage?type="+type);
                   });
               }
           }
