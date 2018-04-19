@@ -108,7 +108,7 @@ public class FarmRegEntityFacilitiesController extends AbstractV8Controller {
 	}
 
 
-	@RequestMapping(value = "/deleteimage", method = RequestMethod.POST)
+	@RequestMapping(value = "/farm/{id}/facilities.html/deleteimage", method = RequestMethod.POST)
 	public String handleFileDelete(@RequestParam("type") String type) {
 
 		switch (type) {
@@ -129,7 +129,7 @@ public class FarmRegEntityFacilitiesController extends AbstractV8Controller {
 		return "redirect:/";
 	}
 
-	@RequestMapping(value = "/upload", method = RequestMethod.POST)
+	@RequestMapping(value = "/farm/{id}/facilities.html/upload", method = RequestMethod.POST)
 	public String handleFileUpload(@RequestParam("file") MultipartFile file, @RequestParam("type") String type) {
 
 		Attachment attachment = new Attachment();
