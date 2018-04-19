@@ -3,6 +3,8 @@ package com.fairagora.verifik8.v8web.mvc.farms;
 import java.util.List;
 import java.util.Optional;
 
+import com.fairagora.verifik8.v8web.data.domain.commons.Attachment;
+import com.fairagora.verifik8.v8web.data.infra.AttachementsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -12,10 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import com.fairagora.verifik8.v8web.data.application.V8Page;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLAppEntityType;
@@ -31,9 +30,12 @@ import com.fairagora.verifik8.v8web.mvc.farms.dto.FarmFormDto;
 import com.fairagora.verifik8.v8web.mvc.invididuals.dto.IndividualDto;
 import com.fairagora.verifik8.v8web.services.FarmService;
 import com.fairagora.verifik8.v8web.services.enhanced.V8Farm;
+import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 public class FarmsController extends AbstractV8Controller {
+
+	private static final String TYPE_AERAIL = "aerail";
 
 	@Autowired
 	private CLAppQuantityUnitRepository quantityUnitRepository;
@@ -52,6 +54,11 @@ public class FarmsController extends AbstractV8Controller {
 
 	@Autowired
 	protected JdbcTemplate jdbc;
+
+	@Autowired
+	private AttachementsService attachementsService;
+
+	private Attachment aerailAttachment;
 
 	@PreAuthorize("hasAuthority('R_FARMLIST')")
 	@RequestMapping(value = "/farms.html", method = RequestMethod.GET)
@@ -95,11 +102,13 @@ public class FarmsController extends AbstractV8Controller {
 		FarmFormDto dto = new FarmFormDto();
 
 		setToReadOnly(mv, "W_FARMCREATE");
-		
+
 		regFarmDtoMapper.toDto(regEntityRepository.findOne(id), dto);
 		Optional<RegEntityFarmDetails> details = regEntityFarmDetailsRepository.findByEntityId(id);
-		if (details.isPresent())
+		if (details.isPresent()) {
 			regFarmDtoMapper.toDto(details.get(), dto);
+			aerailAttachment = details.get().getAerialView();
+		}
 
 		prepareForFarmEdition(dto, mv);
 		return "farms/create";
@@ -109,7 +118,7 @@ public class FarmsController extends AbstractV8Controller {
 	@RequestMapping(value = "/farm/{id}/update.html", method = RequestMethod.POST)
 	@Transactional
 	public String updateFarm(@Validated @ModelAttribute("farmDto") FarmFormDto farmDto,
-			@PathVariable("id") Long entityId, BindingResult bindResults, Model mv) {
+							 @PathVariable("id") Long entityId, BindingResult bindResults, Model mv) {
 
 		RegEntity farm = regEntityRepository.findOne(entityId);
 		RegEntityFarmDetails farmDetails = entityId == null || entityId.intValue() == 0 ? null
@@ -130,13 +139,14 @@ public class FarmsController extends AbstractV8Controller {
 		regFarmDtoMapper.fillEntity(farmDto, farmDetails);
 		farmDetails.setEntity(farm);
 
+		if (aerailAttachment != null) farmDetails.setAerialView(aerailAttachment);
+
 		regEntityFarmDetailsRepository.save(farmDetails);
 
 		return "redirect:/farm/" + farm.getId() + "/edit.html";
 	}
 
 	/**
-	 * 
 	 * @param id
 	 * @param mv
 	 * @return
@@ -148,18 +158,16 @@ public class FarmsController extends AbstractV8Controller {
 
 		regFarmDtoMapper.toDto(regEntityFarmDetailsRepository.findByEntityId(id).get(), dto);
 
-		setToReadOnly(mv,"W_FARMENV");
-		
+		setToReadOnly(mv, "W_FARMENV");
+
 
 		prepareForFarmEdition(id, dto, mv);
 		mv.addAttribute("farmName", jdbc.queryForObject("SELECT name FROM reg_entities WHERE id=" + id, String.class));
 		return "farms/environmental";
 	}
 
-	
 
 	/**
-	 * 
 	 * @param farmDto
 	 * @param entityId
 	 * @param bindResults
@@ -169,7 +177,7 @@ public class FarmsController extends AbstractV8Controller {
 	@PreAuthorize("hasAuthority('W_FARMENV')")
 	@RequestMapping(value = "/farm/{id}/environmental-update.html", method = RequestMethod.POST)
 	public String saveEnvironmental(@Validated @ModelAttribute("farmDto") FarmEnvironmentalDto farmDto,
-			@PathVariable("id") Long entityId, BindingResult bindResults, Model mv) {
+									@PathVariable("id") Long entityId, BindingResult bindResults, Model mv) {
 
 		RegEntityFarmDetails farmDetails = regEntityFarmDetailsRepository.findByEntityId(entityId).get();
 		regFarmDtoMapper.fillEntity(farmDto, farmDetails);
@@ -180,7 +188,6 @@ public class FarmsController extends AbstractV8Controller {
 	}
 
 	/**
-	 * 
 	 * @param id
 	 * @param individualId
 	 * @param mv
@@ -201,7 +208,6 @@ public class FarmsController extends AbstractV8Controller {
 	}
 
 	/**
-	 * 
 	 * @param farmDto
 	 * @param entityId
 	 * @param mv
@@ -239,7 +245,7 @@ public class FarmsController extends AbstractV8Controller {
 
 	/**
 	 * prepare for model for pages
-	 * 
+	 *
 	 * @param dto
 	 * @param mv
 	 */
@@ -265,7 +271,7 @@ public class FarmsController extends AbstractV8Controller {
 
 	/**
 	 * prepare for model for pages
-	 * 
+	 *
 	 * @param dto
 	 * @param mv
 	 */
@@ -289,7 +295,6 @@ public class FarmsController extends AbstractV8Controller {
 	}
 
 	/**
-	 * 
 	 * @param farm
 	 * @param mv
 	 */
@@ -306,7 +311,6 @@ public class FarmsController extends AbstractV8Controller {
 	}
 
 	/**
-	 * 
 	 * @param farm
 	 * @param mv
 	 */
@@ -321,6 +325,35 @@ public class FarmsController extends AbstractV8Controller {
 		mv.addAttribute("allCountries", countryRepository.findAll(new Sort("name")));
 		mv.addAttribute("allCompanyTypes", codeListservice.listActiveCompanyEntityTypes());
 
+	}
+
+	@RequestMapping(value = "/farm/{id}/edit.html/deleteimage", method = RequestMethod.POST)
+	public String handleFileDelete(@RequestParam("type") String type) {
+		switch (type) {
+			case TYPE_AERAIL:
+				this.aerailAttachment = null;
+				break;
+		}
+
+		return "redirect:/";
+	}
+
+	@RequestMapping(value = "/farm/{id}/edit.html/upload", method = RequestMethod.POST)
+	public String handleFileUpload(@RequestParam("file") MultipartFile file, @RequestParam("type") String type) {
+
+		Attachment attachment = new Attachment();
+		attachment.setResourcePath(file.getOriginalFilename());
+
+		// Save file
+		attachementsService.store(attachment, file);
+
+		switch (type) {
+			case TYPE_AERAIL:
+				this.aerailAttachment = attachment;
+				break;
+		}
+
+		return "redirect:/";
 	}
 
 }
