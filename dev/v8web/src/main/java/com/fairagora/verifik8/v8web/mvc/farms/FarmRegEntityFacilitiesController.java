@@ -4,6 +4,7 @@ import javax.transaction.Transactional;
 
 import com.fairagora.verifik8.v8web.data.domain.commons.Attachment;
 import com.fairagora.verifik8.v8web.data.infra.AttachementsService;
+import com.fairagora.verifik8.v8web.mvc.farms.dto.FarmRegEntityFacilitiesAttachementSto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -31,10 +32,8 @@ public class FarmRegEntityFacilitiesController extends AbstractV8Controller {
 	@Autowired
 	private AttachementsService attachementsService;
 
-	private Attachment toiletsAttachment;
-	private Attachment restRoomAttachment;
-	private Attachment showerAttachment;
-	private Attachment freeDrinkingAttachment;
+	@Autowired
+	private FarmRegEntityFacilitiesAttachementSto farmRegEntityFacilitiesAttachementSto;
 
 	/**
 	 * @param id
@@ -61,10 +60,7 @@ public class FarmRegEntityFacilitiesController extends AbstractV8Controller {
 
 		setToReadOnly(mv, "W_FARMFACILITY");
 
-		toiletsAttachment = staffMgmt.getAccessToiletsAttachment();
-		restRoomAttachment = staffMgmt.getAccessRestRoomAttachment();
-		showerAttachment = staffMgmt.getAccessShowerAttachment();
-		freeDrinkingAttachment = staffMgmt.getAccessToFreeDrinkingAttachment();
+		farmRegEntityFacilitiesAttachementSto.init(staffMgmt);
 
 		regFarmDtoMapper.toDto(staffMgmt, dto);
 
@@ -97,14 +93,40 @@ public class FarmRegEntityFacilitiesController extends AbstractV8Controller {
 
 		regFarmDtoMapper.fillEntity(farmDto, ent);
 
-		if (toiletsAttachment != null) ent.setAccessToiletsAttachment(toiletsAttachment);
-		if (restRoomAttachment != null) ent.setAccessRestRoomAttachment(restRoomAttachment);
-		if (showerAttachment != null) ent.setAccessShowerAttachment(showerAttachment);
-		if (freeDrinkingAttachment != null) ent.setAccessToFreeDrinkingAttachment(freeDrinkingAttachment);
+		if (farmRegEntityFacilitiesAttachementSto.getToiletsAttachment() != null)
+			ent.setAccessToiletsAttachment(farmRegEntityFacilitiesAttachementSto.getToiletsAttachment());
+		if (farmRegEntityFacilitiesAttachementSto.getRestRoomAttachment() != null)
+			ent.setAccessRestRoomAttachment(farmRegEntityFacilitiesAttachementSto.getRestRoomAttachment());
+		if (farmRegEntityFacilitiesAttachementSto.getShowerAttachment() != null)
+			ent.setAccessShowerAttachment(farmRegEntityFacilitiesAttachementSto.getShowerAttachment());
+		if (farmRegEntityFacilitiesAttachementSto.getFreeDrinkingAttachment() != null)
+			ent.setAccessToFreeDrinkingAttachment(farmRegEntityFacilitiesAttachementSto.getFreeDrinkingAttachment());
 
 		repository.save(ent);
 
 		return "redirect:/farm/" + farmId + "/facilities.html";
+	}
+
+
+	@RequestMapping(value = "/deleteimage", method = RequestMethod.POST)
+	public String handleFileDelete(@RequestParam("type") String type) {
+
+		switch (type) {
+			case "toilets":
+				this.farmRegEntityFacilitiesAttachementSto.setToiletsAttachment(null);
+				break;
+			case "restroom":
+				this.farmRegEntityFacilitiesAttachementSto.setRestRoomAttachment(null);
+				break;
+			case "shower":
+				this.farmRegEntityFacilitiesAttachementSto.setShowerAttachment(null);
+				break;
+			case "freedrinking":
+				this.farmRegEntityFacilitiesAttachementSto.setFreeDrinkingAttachment(null);
+				break;
+		}
+
+		return "redirect:/";
 	}
 
 	@RequestMapping(value = "/upload", method = RequestMethod.POST)
@@ -118,16 +140,16 @@ public class FarmRegEntityFacilitiesController extends AbstractV8Controller {
 
 		switch (type) {
 			case "toilets":
-				this.toiletsAttachment = attachment;
+				this.farmRegEntityFacilitiesAttachementSto.setToiletsAttachment(attachment);
 				break;
 			case "restroom":
-				this.restRoomAttachment = attachment;
+				this.farmRegEntityFacilitiesAttachementSto.setRestRoomAttachment(attachment);
 				break;
 			case "shower":
-				this.showerAttachment = attachment;
+				this.farmRegEntityFacilitiesAttachementSto.setShowerAttachment(attachment);
 				break;
 			case "freedrinking":
-				this.freeDrinkingAttachment = attachment;
+				this.farmRegEntityFacilitiesAttachementSto.setFreeDrinkingAttachment(attachment);
 				break;
 		}
 
