@@ -253,6 +253,10 @@
                       this.removeAllFiles();
                       this.addFile(file);
                   });
+
+                  this.on("removedfile", function () {
+                      $.post( "http://"+ location.host + "/deleteimage?type="+type);
+                  });
               }
           }
       }

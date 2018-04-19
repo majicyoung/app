@@ -107,6 +107,29 @@ public class FarmRegEntityFacilitiesController extends AbstractV8Controller {
 		return "redirect:/farm/" + farmId + "/facilities.html";
 	}
 
+
+
+	@RequestMapping(value = "/deleteimage", method = RequestMethod.POST)
+	public String handleFileDelete(@RequestParam("type") String type) {
+
+		switch (type) {
+			case "toilets":
+				this.toiletsAttachment = null;
+				break;
+			case "restroom":
+				this.restRoomAttachment = null;
+				break;
+			case "shower":
+				this.showerAttachment = null;
+				break;
+			case "freedrinking":
+				this.freeDrinkingAttachment = null;
+				break;
+		}
+
+		return "redirect:/";
+	}
+
 	@RequestMapping(value = "/upload", method = RequestMethod.POST)
 	public String handleFileUpload(@RequestParam("file") MultipartFile file, @RequestParam("type") String type) {
 
