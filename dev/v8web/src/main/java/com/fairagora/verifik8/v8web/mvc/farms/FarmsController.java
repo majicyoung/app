@@ -36,6 +36,12 @@ import org.springframework.web.multipart.MultipartFile;
 public class FarmsController extends AbstractV8Controller {
 
 	private static final String TYPE_AERAIL = "aerail";
+	private static final String TYPE_ENVIRONMENTAL_EIA_DOC = "environment_impact_assessment_doc";
+	private static final String TYPE_ENVIRONMENTAL_CONTRUCTION_PERMIT = "contruction_permit";
+	private static final String TYPE_ENVIRONMENTAL_LAND_TITLE = "land_title";
+	private static final String TYPE_ENVIRONMENTAL_SITTING_PROTECTED_AREA = "setting_protected_area";
+	private static final String TYPE_ENVIRONMENTAL_CANAL_RESTORATION_PLAN = "canal_restoration_plan";
+	private static final String TYPE_ENVIRONMENTAL_CUMULATIVE_IMPACE_STUDY = "cumulative_impace_study";
 
 	@Autowired
 	private CLAppQuantityUnitRepository quantityUnitRepository;
@@ -59,6 +65,14 @@ public class FarmsController extends AbstractV8Controller {
 	private AttachementsService attachementsService;
 
 	private Attachment aerailAttachment;
+
+	private Attachment eiaDocAttachment;
+	private Attachment contructionPermitAttachment;
+	private Attachment landTitleAttachment;
+	private Attachment sittingProtectedAreaAttachment;
+	private Attachment canalRestorationPlanAttachment;
+	private Attachment cumulativeImpaceStudyAttachment;
+
 
 	@PreAuthorize("hasAuthority('R_FARMLIST')")
 	@RequestMapping(value = "/farms.html", method = RequestMethod.GET)
@@ -156,10 +170,18 @@ public class FarmsController extends AbstractV8Controller {
 	public String showEnvironmental(@PathVariable("id") Long id, Model mv) {
 		FarmEnvironmentalDto dto = new FarmEnvironmentalDto();
 
-		regFarmDtoMapper.toDto(regEntityFarmDetailsRepository.findByEntityId(id).get(), dto);
+		RegEntityFarmDetails regEntityFarmDetails = regEntityFarmDetailsRepository.findByEntityId(id).get();
+
+		regFarmDtoMapper.toDto(regEntityFarmDetails, dto);
 
 		setToReadOnly(mv, "W_FARMENV");
 
+		eiaDocAttachment = regEntityFarmDetails.getEnvironmentImpactAssessmentDoc();
+		contructionPermitAttachment = regEntityFarmDetails.getContructionPermit();
+		landTitleAttachment = regEntityFarmDetails.getLandTitle();
+		sittingProtectedAreaAttachment = regEntityFarmDetails.getSittingProtectedAreaDoc();
+		canalRestorationPlanAttachment = regEntityFarmDetails.getCanalRestorationPlan();
+		cumulativeImpaceStudyAttachment = regEntityFarmDetails.getCumulativeImpactStudy();
 
 		prepareForFarmEdition(id, dto, mv);
 		mv.addAttribute("farmName", jdbc.queryForObject("SELECT name FROM reg_entities WHERE id=" + id, String.class));
@@ -181,6 +203,16 @@ public class FarmsController extends AbstractV8Controller {
 
 		RegEntityFarmDetails farmDetails = regEntityFarmDetailsRepository.findByEntityId(entityId).get();
 		regFarmDtoMapper.fillEntity(farmDto, farmDetails);
+
+		if (eiaDocAttachment != null) farmDetails.setEnvironmentImpactAssessmentDoc(eiaDocAttachment);
+		if (contructionPermitAttachment != null) farmDetails.setContructionPermit(contructionPermitAttachment);
+		if (landTitleAttachment != null) farmDetails.setLandTitle(landTitleAttachment);
+		if (sittingProtectedAreaAttachment != null)
+			farmDetails.setSittingProtectedAreaDoc(sittingProtectedAreaAttachment);
+		if (canalRestorationPlanAttachment != null) farmDetails.setCanalRestorationPlan(canalRestorationPlanAttachment);
+		if (cumulativeImpaceStudyAttachment != null)
+			farmDetails.setCumulativeImpactStudy(cumulativeImpaceStudyAttachment);
+
 		regEntityFarmDetailsRepository.save(farmDetails);
 		// TODO: save files !
 
@@ -350,6 +382,65 @@ public class FarmsController extends AbstractV8Controller {
 		switch (type) {
 			case TYPE_AERAIL:
 				this.aerailAttachment = attachment;
+				break;
+		}
+
+		return "redirect:/";
+	}
+
+	@RequestMapping(value = "/farm/{id}/environmental.html/deleteimage", method = RequestMethod.POST)
+	public String handleEnvironmentalFileDelete(@RequestParam("type") String type) {
+		switch (type) {
+			case TYPE_ENVIRONMENTAL_EIA_DOC:
+				this.eiaDocAttachment = null;
+				break;
+			case TYPE_ENVIRONMENTAL_CONTRUCTION_PERMIT:
+				this.contructionPermitAttachment = null;
+				break;
+			case TYPE_ENVIRONMENTAL_LAND_TITLE:
+				this.landTitleAttachment = null;
+				break;
+			case TYPE_ENVIRONMENTAL_SITTING_PROTECTED_AREA:
+				this.sittingProtectedAreaAttachment = null;
+				break;
+			case TYPE_ENVIRONMENTAL_CANAL_RESTORATION_PLAN:
+				this.canalRestorationPlanAttachment = null;
+				break;
+			case TYPE_ENVIRONMENTAL_CUMULATIVE_IMPACE_STUDY:
+				this.cumulativeImpaceStudyAttachment = null;
+				break;
+		}
+
+		return "redirect:/";
+	}
+
+	@RequestMapping(value = "/farm/{id}/environmental.html/upload", method = RequestMethod.POST)
+	public String handleEnvironmentalFileUpload(@RequestParam("file") MultipartFile file, @RequestParam("type") String type) {
+
+		Attachment attachment = new Attachment();
+		attachment.setResourcePath(file.getOriginalFilename());
+
+		// Save file
+		attachementsService.store(attachment, file);
+
+		switch (type) {
+			case TYPE_ENVIRONMENTAL_EIA_DOC:
+				this.eiaDocAttachment = attachment;
+				break;
+			case TYPE_ENVIRONMENTAL_CONTRUCTION_PERMIT:
+				this.contructionPermitAttachment = attachment;
+				break;
+			case TYPE_ENVIRONMENTAL_LAND_TITLE:
+				this.landTitleAttachment = attachment;
+				break;
+			case TYPE_ENVIRONMENTAL_SITTING_PROTECTED_AREA:
+				this.sittingProtectedAreaAttachment = attachment;
+				break;
+			case TYPE_ENVIRONMENTAL_CANAL_RESTORATION_PLAN:
+				this.canalRestorationPlanAttachment = attachment;
+				break;
+			case TYPE_ENVIRONMENTAL_CUMULATIVE_IMPACE_STUDY:
+				this.cumulativeImpaceStudyAttachment = attachment;
 				break;
 		}
 
