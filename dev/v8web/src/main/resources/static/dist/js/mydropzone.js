@@ -50,7 +50,7 @@ function initDropzone(urlUpload, urlDelete, type, picture) {
         url: URL_CURRENT + urlUpload,
 
         init: function () {
-
+            mdz = this;
             this.options.previewTemplate = PREVIEW_TEMPLATE;
 
             if (undefined !== picture) {
@@ -64,11 +64,11 @@ function initDropzone(urlUpload, urlDelete, type, picture) {
                     fileName = "\nFile not found\nPlease upload new one";
                 }
 
-                var image = {"name": fileName};
-                this.emit("addedfile", image);
-                this.emit("thumbnail", image, picture);
+                image1 = {"name": fileName};
+                this.emit("addedfile", image1);
+                this.emit("thumbnail", image1, picture);
 
-                $(image.previewElement).find('.dz-progress').hide()
+                $(image1.previewElement).find('.dz-progress').hide()
             }
 
             this.on("maxfilesexceeded", function (file) {
@@ -88,4 +88,38 @@ function isImageExisted(url) {
     http.open('HEAD', url, false);
     http.send();
     return http.status !== 500;
+}
+
+function changePreview(picture) {
+    console.info("changePreview");
+
+    mdz.removeAllFiles()
+    if (typeof image1 !== 'undefined') {
+        mdz.removeFile(image1);
+
+    }
+
+    if (picture.workingPermit !== null) {
+
+        var picture = picture.workingPermit.resourcePath;
+
+        if (undefined !== picture) {
+            picture = URL + "/download/" + picture;
+
+            var fileName = "";
+            if (isImageExisted(picture)) {
+                fileName = picture;
+            }
+            else {
+                fileName = "\nFile not found\nPlease upload new one";
+            }
+            image1 = {"name": fileName};
+
+
+            mdz.emit("addedfile", image1);
+            mdz.emit("thumbnail", image1, picture);
+            $(image1.previewElement).find('.dz-progress').hide()
+
+        }
+    }
 }
