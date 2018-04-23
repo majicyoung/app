@@ -90,7 +90,8 @@ public class FarmStaffTrainingController extends AbstractV8Controller {
 		p.setNavBarPrefix("/farm");
 		mv.addAttribute("v8p", p);
 
-		mv.addAttribute("activeTab", "training");
+		mv.addAttribute("activeTab", "staff");
+		mv.addAttribute("activeSecondTab", "training");
 		mv.addAttribute("allHazardousActivitiesTrainingType", codeListservice.listHazardousTrainingTypeRepository());
 		mv.addAttribute("farmDto", dto);
 		mv.addAttribute("farmId", dto.getFarmId());

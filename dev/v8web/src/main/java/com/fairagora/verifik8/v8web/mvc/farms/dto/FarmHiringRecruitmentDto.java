@@ -1,5 +1,7 @@
 package com.fairagora.verifik8.v8web.mvc.farms.dto;
 
+import java.util.List;
+
 public class FarmHiringRecruitmentDto {
 
 	protected Long farmId;
@@ -16,13 +18,7 @@ public class FarmHiringRecruitmentDto {
 
 	protected Boolean keepWorkerDocumentSafeKeeping;
 
-	protected Long keptWorkerEntityDocumentType1;
-
-	protected Long keptWorkerEntityDocumentType2;
-
-	protected Long keptWorkerEntityDocumentType3;
-
-	protected Long keptWorkerEntityDocumentType4;
+	protected List<Long> keptWorkerEntityDocumentTypes;
 
 	protected Boolean anyContractSignedWithWorkers;
 
@@ -30,13 +26,7 @@ public class FarmHiringRecruitmentDto {
 
 	protected Boolean staffHiredThroughAgent;
 
-	protected Long salaryDeductionType1;
-
-	protected Long salaryDeductionType2;
-
-	protected Long salaryDeductionType3;
-
-	protected Long salaryDeductionType4;
+	protected List<Long> salaryDeductionTypes;
 
 	protected String salaryDeductionOther;
 
@@ -46,13 +36,7 @@ public class FarmHiringRecruitmentDto {
 
 	protected Boolean workerInDebt;
 
-	protected Long paymentDebtType1;
-
-	protected Long paymentDebtType2;
-
-	protected Long paymentDebtType3;
-
-	protected Long paymentDebtType4;
+	protected List<Long> paymentDebtTypes;
 
 	protected Boolean workersInDebtOtherStakeHolder;
 
@@ -118,36 +102,30 @@ public class FarmHiringRecruitmentDto {
 		this.keepWorkerDocumentSafeKeeping = keepWorkerDocumentSafeKeeping;
 	}
 
-	public Long getKeptWorkerEntityDocumentType1() {
-		return keptWorkerEntityDocumentType1;
+
+
+	public List<Long> getKeptWorkerEntityDocumentTypes() {
+		return keptWorkerEntityDocumentTypes;
 	}
 
-	public void setKeptWorkerEntityDocumentType1(Long keptWorkerEntityDocumentType1) {
-		this.keptWorkerEntityDocumentType1 = keptWorkerEntityDocumentType1;
+	public void setKeptWorkerEntityDocumentTypes(List<Long> keptWorkerEntityDocumentTypes) {
+		this.keptWorkerEntityDocumentTypes = keptWorkerEntityDocumentTypes;
 	}
 
-	public Long getKeptWorkerEntityDocumentType2() {
-		return keptWorkerEntityDocumentType2;
+	public List<Long> getSalaryDeductionTypes() {
+		return salaryDeductionTypes;
 	}
 
-	public void setKeptWorkerEntityDocumentType2(Long keptWorkerEntityDocumentType2) {
-		this.keptWorkerEntityDocumentType2 = keptWorkerEntityDocumentType2;
+	public void setSalaryDeductionTypes(List<Long> salaryDeductionTypes) {
+		this.salaryDeductionTypes = salaryDeductionTypes;
 	}
 
-	public Long getKeptWorkerEntityDocumentType3() {
-		return keptWorkerEntityDocumentType3;
+	public List<Long> getPaymentDebtTypes() {
+		return paymentDebtTypes;
 	}
 
-	public void setKeptWorkerEntityDocumentType3(Long keptWorkerEntityDocumentType3) {
-		this.keptWorkerEntityDocumentType3 = keptWorkerEntityDocumentType3;
-	}
-
-	public Long getKeptWorkerEntityDocumentType4() {
-		return keptWorkerEntityDocumentType4;
-	}
-
-	public void setKeptWorkerEntityDocumentType4(Long keptWorkerEntityDocumentType4) {
-		this.keptWorkerEntityDocumentType4 = keptWorkerEntityDocumentType4;
+	public void setPaymentDebtTypes(List<Long> paymentDebtTypes) {
+		this.paymentDebtTypes = paymentDebtTypes;
 	}
 
 	public Boolean getAnyContractSignedWithWorkers() {
@@ -172,38 +150,6 @@ public class FarmHiringRecruitmentDto {
 
 	public void setStaffHiredThroughAgent(Boolean staffHiredThroughAgent) {
 		this.staffHiredThroughAgent = staffHiredThroughAgent;
-	}
-
-	public Long getSalaryDeductionType1() {
-		return salaryDeductionType1;
-	}
-
-	public void setSalaryDeductionType1(Long salaryDeductionType1) {
-		this.salaryDeductionType1 = salaryDeductionType1;
-	}
-
-	public Long getSalaryDeductionType2() {
-		return salaryDeductionType2;
-	}
-
-	public void setSalaryDeductionType2(Long salaryDeductionType2) {
-		this.salaryDeductionType2 = salaryDeductionType2;
-	}
-
-	public Long getSalaryDeductionType3() {
-		return salaryDeductionType3;
-	}
-
-	public void setSalaryDeductionType3(Long salaryDeductionType3) {
-		this.salaryDeductionType3 = salaryDeductionType3;
-	}
-
-	public Long getSalaryDeductionType4() {
-		return salaryDeductionType4;
-	}
-
-	public void setSalaryDeductionType4(Long salaryDeductionType4) {
-		this.salaryDeductionType4 = salaryDeductionType4;
 	}
 
 	public String getSalaryDeductionOther() {
@@ -236,38 +182,6 @@ public class FarmHiringRecruitmentDto {
 
 	public void setWorkerInDebt(Boolean workerInDebt) {
 		this.workerInDebt = workerInDebt;
-	}
-
-	public Long getPaymentDebtType1() {
-		return paymentDebtType1;
-	}
-
-	public void setPaymentDebtType1(Long paymentDebtType1) {
-		this.paymentDebtType1 = paymentDebtType1;
-	}
-
-	public Long getPaymentDebtType2() {
-		return paymentDebtType2;
-	}
-
-	public void setPaymentDebtType2(Long paymentDebtType2) {
-		this.paymentDebtType2 = paymentDebtType2;
-	}
-
-	public Long getPaymentDebtType3() {
-		return paymentDebtType3;
-	}
-
-	public void setPaymentDebtType3(Long paymentDebtType3) {
-		this.paymentDebtType3 = paymentDebtType3;
-	}
-
-	public Long getPaymentDebtType4() {
-		return paymentDebtType4;
-	}
-
-	public void setPaymentDebtType4(Long paymentDebtType4) {
-		this.paymentDebtType4 = paymentDebtType4;
 	}
 
 	public Boolean getWorkersInDebtOtherStakeHolder() {

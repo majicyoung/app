@@ -2,6 +2,8 @@ package com.fairagora.verifik8.v8web.mvc.farms.dto;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
+
 public class StaffGeneralInfoSto {
 
 	protected Long farmId;
@@ -16,7 +18,7 @@ public class StaffGeneralInfoSto {
 	protected int nbWorkersChildEnrolledSchool;
 
 	protected boolean existenceHazardousWork;
-	protected Long hazardousWorkType;
+	protected List<Long> hazardousWorkTypes;
 
 	protected boolean accessToProtectiveEquipment;
 	protected MultipartFile protectiveEquipment;
@@ -82,12 +84,12 @@ public class StaffGeneralInfoSto {
 		this.existenceHazardousWork = existenceHazardousWork;
 	}
 
-	public Long getHazardousWorkType() {
-		return hazardousWorkType;
+	public List<Long> getHazardousWorkTypes() {
+		return hazardousWorkTypes;
 	}
 
-	public void setHazardousWorkType(Long hazardousWorkType) {
-		this.hazardousWorkType = hazardousWorkType;
+	public void setHazardousWorkTypes(List<Long> hazardousWorkTypes) {
+		this.hazardousWorkTypes = hazardousWorkTypes;
 	}
 
 	public int getNbWorkersChildLivingInFarm() {

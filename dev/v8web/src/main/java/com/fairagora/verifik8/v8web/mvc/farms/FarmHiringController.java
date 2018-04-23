@@ -90,7 +90,9 @@ public class FarmHiringController extends AbstractV8Controller {
 		p.setNavBarPrefix("/farm");
 		mv.addAttribute("v8p", p);
 
-		mv.addAttribute("activeTab", "hiring");
+		mv.addAttribute("activeTab", "staff");
+		mv.addAttribute("activeSecondTab", "hiring");
+
 
 		mv.addAttribute("allgetBackFinancialDepositReason", codeListservice.listActiveGetBackFinancialDepositReason());
 		mv.addAttribute("allnoEarlyTerminationContractReason", codeListservice.listActiveNoEarlyTerminationContractReason());

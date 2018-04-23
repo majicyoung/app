@@ -4,6 +4,8 @@ import java.sql.Time;
 
 import javax.transaction.Transactional;
 
+import com.fairagora.verifik8.v8web.data.domain.commons.Attachment;
+import com.fairagora.verifik8.v8web.data.infra.AttachementsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -11,19 +13,21 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import com.fairagora.verifik8.v8web.data.application.V8Page;
 import com.fairagora.verifik8.v8web.data.domain.reg.farm.RegEntityStaffManagement;
 import com.fairagora.verifik8.v8web.data.repo.reg.RegEntityStaffManagementRepository;
 import com.fairagora.verifik8.v8web.mvc.AbstractV8Controller;
 import com.fairagora.verifik8.v8web.mvc.farms.dto.StaffGeneralInfoSto;
+import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 public class FarmStaffGeneralInfoController extends AbstractV8Controller {
+
+	private static final String TYPE_PROTECTIVE_EQUIPMENT = "protective_equipment";
+	private static final String TYPE_WORK_ACCIDENT_RECORD = "work_accident_record";
+	private static final String TYPE_FARM_POLICIES = "farm_policies";
 
 	@Autowired
 	private RegEntityStaffManagementRepository regEntityStaffManagementRepository;
@@ -31,8 +35,14 @@ public class FarmStaffGeneralInfoController extends AbstractV8Controller {
 	@Autowired
 	private RegFarmDTOMapper regFarmDtoMapper;
 
+	@Autowired
+	private AttachementsService attachementsService;
+
+	private Attachment protectiveEquipmentAttachment;
+	private Attachment workAccidentRecordAttachment;
+	private Attachment farmPoliciesAttachment;
+
 	/**
-	 * 
 	 * @param id
 	 * @param mv
 	 * @return
@@ -53,16 +63,19 @@ public class FarmStaffGeneralInfoController extends AbstractV8Controller {
 		});
 
 		setToReadOnly(mv, "W_FARMSTAFFINFO");
-		
+
+		protectiveEquipmentAttachment = staffMgmt.getProtectiveEquipment();
+		workAccidentRecordAttachment = staffMgmt.getWorkAccidentRecord();
+		farmPoliciesAttachment = staffMgmt.getFarmPolicies();
+
 		regFarmDtoMapper.toDto(staffMgmt, dto);
 
 		prepareForFarmEdition(id, dto, mv);
 		return "farms/staff-general-info";
 	}
 
-	
+
 	/**
-	 * 
 	 * @param farmDto
 	 * @param farmId
 	 * @param bindResults
@@ -72,7 +85,7 @@ public class FarmStaffGeneralInfoController extends AbstractV8Controller {
 	@PreAuthorize("hasAuthority('W_FARMSTAFFINFO')")
 	@RequestMapping(value = "/farm/{id}/staff-general-info.html", method = RequestMethod.POST)
 	public String saveEnvironmental(@Validated @ModelAttribute("farmDto") StaffGeneralInfoSto farmDto,
-			@PathVariable("id") Long farmId, BindingResult bindResults, Model mv) {
+									@PathVariable("id") Long farmId, BindingResult bindResults, Model mv) {
 
 		RegEntityStaffManagement ent = regEntityStaffManagementRepository.findByFarmId(farmId).orElseGet(() -> {
 			RegEntityStaffManagement e = new RegEntityStaffManagement();
@@ -83,16 +96,19 @@ public class FarmStaffGeneralInfoController extends AbstractV8Controller {
 
 		regFarmDtoMapper.fillEntity(farmDto, ent);
 
+		if (protectiveEquipmentAttachment != null) ent.setProtectiveEquipment(protectiveEquipmentAttachment);
+		if (workAccidentRecordAttachment != null) ent.setWorkAccidentRecord(workAccidentRecordAttachment);
+		if (farmPoliciesAttachment != null) ent.setFarmPolicies(farmPoliciesAttachment);
+
 		regEntityStaffManagementRepository.save(ent);
 
 		return "redirect:/farm/" + farmId + "/staff-general-info.html";
 	}
 
 	@Autowired
-	 protected JdbcTemplate jdbc;
-	
+	protected JdbcTemplate jdbc;
+
 	/**
-	 * 
 	 * @param id
 	 * @param dto
 	 * @param mv
@@ -104,13 +120,55 @@ public class FarmStaffGeneralInfoController extends AbstractV8Controller {
 		p.setNavBarPrefix("/farm");
 		mv.addAttribute("v8p", p);
 
-		mv.addAttribute("activeTab", "staff-general-info");
+		mv.addAttribute("activeTab", "staff");
+		mv.addAttribute("activeSecondTab", "staff-general-info");
 
 		mv.addAttribute("farmDto", dto);
-		mv.addAttribute("farmName", jdbc.queryForObject("SELECT name FROM reg_entities WHERE id="+id, String.class));
+		mv.addAttribute("farmName", jdbc.queryForObject("SELECT name FROM reg_entities WHERE id=" + id, String.class));
 		mv.addAttribute("farmId", dto.getFarmId());
 
 		mv.addAttribute("allHazardousWorkType", codeListservice.listActiveHazardousWorkType());
 
+	}
+
+	@RequestMapping(value = "/farm/{id}/staff-general-info.html/deleteimage", method = RequestMethod.POST)
+	public String handleFileDelete(@RequestParam("type") String type) {
+		switch (type) {
+			case TYPE_PROTECTIVE_EQUIPMENT:
+				this.protectiveEquipmentAttachment = null;
+				break;
+			case TYPE_WORK_ACCIDENT_RECORD:
+				this.workAccidentRecordAttachment = null;
+				break;
+			case TYPE_FARM_POLICIES:
+				this.farmPoliciesAttachment = null;
+				break;
+		}
+
+		return "redirect:/";
+	}
+
+	@RequestMapping(value = "/farm/{id}/staff-general-info.html/upload", method = RequestMethod.POST)
+	public String handleFileUpload(@RequestParam("file") MultipartFile file, @RequestParam("type") String type) {
+
+		Attachment attachment = new Attachment();
+		attachment.setResourcePath(file.getOriginalFilename());
+
+		// Save file
+		attachementsService.store(attachment, file);
+
+		switch (type) {
+			case TYPE_PROTECTIVE_EQUIPMENT:
+				this.protectiveEquipmentAttachment = attachment;
+				break;
+			case TYPE_WORK_ACCIDENT_RECORD:
+				this.workAccidentRecordAttachment = attachment;
+				break;
+			case TYPE_FARM_POLICIES:
+				this.farmPoliciesAttachment = attachment;
+				break;
+		}
+
+		return "redirect:/";
 	}
 }

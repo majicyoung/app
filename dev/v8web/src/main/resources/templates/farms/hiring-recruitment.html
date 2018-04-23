@@ -1,328 +1,297 @@
 <!DOCTYPE html>
-<html layout:decorator="inc/main-layout" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html layout:decorator="inc/main-layout" xmlns:th="http://www.thymeleaf.org"
+			xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+			xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
 <div layout:fragment="content">
 	<div class="row">
-		 <div class="col-xs-12">
-      <div class="box" id="farm-box">
-        <div class="box-header with-border">
-	          <h3  class="box-title" th:text="#{farm.edit}">farm.hiring_recruitment</h3> - <span th:text="${farmName}">farmname</span>
-        </div>
-        <form role="form" th:action="@{'/farm/'+${farmId}+'/hiring-recruitment.html'}" th:object="${farmDto}" method="post" class="mainForm form-horizontal" enctype="multipart/form-data" onsubmit="return !hasEmptyFields('#farm-box form .form-control[required]');">
-        <div class="box-body" style="padding:0;">
-          <div class="nav-tabs-custom">
-           <ul th:include="farms/farms-includes :: farms-tabs" class="nav nav-tabs"></ul>
-          </div>
-            <div class="tab-content">
-              <div class="tab-pane active" id="tab_3">
-				<div class="row">
-					<div class="col-xs-12">
-					<h4 th:text="#{hiring_recruitment.fair-recruitment}"></h4>
-					<div class="col-xs-12">
-						<div class="form-group row col-xs-12">
-							<div class="col-xs-12">
-								<input type="checkbox" th:field="*{workersMakeFinancialDeposit}" id="workersMakeFinancialDeposit" onChange="manageFinancialDeposit()" /> <span th:text="|#{hiring_recruitment.workersMakeFinancialDeposit}*|"></span>
-							</div>
-						</div>
-					</div>
-					<div class="col-xs-12 bg-warning" id="divgetBackFinancialDepositReason">
-						<div class="form-group row col-xs-12 ">
-							<label for="getBackFinancialDepositReason" class="col-xs-2 " th:text="|#{hiring_recruitment.getBackFinancialDepositReason}|"></label>
-							<div class="col-xs-6">
-								<select class="form-control" th:field="*{getBackFinancialDepositReason}">
-									<option value="" ></option>
-									<option th:each="wtype:${allgetBackFinancialDepositReason}" th:value="${wtype.id}" th:text="${wtype.localisedName}"></option>
-								</select>
-							</div>
-							<div class="col-xs-4"> </div>
-							
-						</div>
-					</div>
-					<div class="form-group row col-xs-12">
-						<label for="noEarlyTerminationContractReason" class="col-xs-4 " th:text="|#{hiring_recruitment.noEarlyTerminationContractReason}|"></label>
-						<div class="col-xs-4">
-							<select class="form-control" th:field="*{noEarlyTerminationContractReason}">
-								<option value="" ></option>
-								<option th:each="wtype:${allnoEarlyTerminationContractReason}" th:value="${wtype.id}" th:text="${wtype.localisedName}"></option>
-							</select>
-						</div>
-						<div class="col-xs-4"> </div>
-					</div>
-					<div class="form-group row col-xs-12">
-						<label for="contractTerminationReason" class="col-xs-4 " th:text="|#{hiring_recruitment.contractTerminationReason}|"></label>
-						<div class="col-xs-4">
-							<select class="form-control" th:field="*{contractTerminationReason}" onChange="managecontractTerminationReason()">
-								<option value="" ></option>
-								<option th:each="wtype:${allcontractTerminationReason}" th:value="${wtype.id}" th:text="${wtype.localisedName}"></option>
-							</select>
-						</div>
-						<div class="col-xs-4"> </div>
-					</div>
-			
-					
-					<div class="col-xs-12 bg-warning" id="divcontractTerminationOther" >
-						<div class="form-group row col-xs-12 ">
-							<label for="contractTerminationOtherReason" class="col-xs-4 " th:text="|#{hiring_recruitment.contractTerminationOtherReason}|"></label>
-							<div class="col-xs-4">
-								<input type="text" class="form-control" th:field="*{contractTerminationOtherReason}"></input>
-							</div>
-							<div class="col-xs-4"> </div>
-							
-						</div>
-					</div>
-					
-					
-					<!--  -->
-					<div class="col-xs-12">
-						<div class="form-group row col-xs-12">
-							<div class="col-xs-12">
-								<input type="checkbox" th:field="*{keepWorkerDocumentSafeKeeping}" id="keepWorkerDocumentSafeKeeping" onChange="manageKeptWorker()"/> <span th:text="|#{hiring_recruitment.keepWorkerDocumentSafeKeeping}*|"></span>
-							</div>
-						</div>
-					</div>
-					<div class="col-xs-12 bg-warning" id="divkeptWorkerEntity">
-						<div class="form-group row col-xs-12" id="divkeptWorkerEntityDocumentType1">
-							<label for="keptWorkerEntityDocumentType1" class="col-xs-2 control-label" th:text="|#{hiring_recruitment.keptWorkerEntityDocumentType1}|"></label>
-							<div class="col-xs-6">
-								<select class="form-control" th:field="*{keptWorkerEntityDocumentType1}" id="keptWorkerEntityDocumentType1" onChange="manageKeptWorker()">
-									<option value="" ></option>
-									<option th:each="wtype:${allWorkerEntrityDocumentTypes}" th:value="${wtype.id}" th:text="${wtype.localisedName}"></option>
-								</select>
-							</div>
-							<div class="col-xs-4"> </div>
-						</div>
-						<div class="form-group row col-xs-12" id="divkeptWorkerEntityDocumentType2">
-							<label for="keptWorkerEntityDocumentType2" class="col-xs-2 control-label" th:text="|#{hiring_recruitment.keptWorkerEntityDocumentType2}|"></label>
-							<div class="col-xs-6">
-								<select class="form-control" th:field="*{keptWorkerEntityDocumentType2}" onChange="manageKeptWorker()">
-									<option value="" ></option>
-									<option th:each="wtype:${allWorkerEntrityDocumentTypes}" th:value="${wtype.id}" th:text="${wtype.localisedName}"></option>
-								</select>
-							</div>
-							<div class="col-xs-4"> </div>
-						</div>
-						<div class="form-group row col-xs-12" id="divkeptWorkerEntityDocumentType3">
-							<label for="keptWorkerEntityDocumentType3" class="col-xs-2 control-label" th:text="|#{hiring_recruitment.keptWorkerEntityDocumentType3}|"></label>
-							<div class="col-xs-6">
-								<select class="form-control" th:field="*{keptWorkerEntityDocumentType3}" onChange="manageKeptWorker()">
-									<option value="" ></option>
-									<option th:each="wtype:${allWorkerEntrityDocumentTypes}" th:value="${wtype.id}" th:text="${wtype.localisedName}"></option>
-								</select>
-							</div>
-							<div class="col-xs-4"> </div>
-						</div>
-						<div class="form-group row col-xs-12" id="divkeptWorkerEntityDocumentType4">
-							<label for="keptWorkerEntityDocumentType4" class="col-xs-2 control-label" th:text="|#{hiring_recruitment.keptWorkerEntityDocumentType4}|"></label>
-							<div class="col-xs-6">
-								<select class="form-control" th:field="*{keptWorkerEntityDocumentType4}" >
-									<option value="" ></option>
-									<option th:each="wtype:${allWorkerEntrityDocumentTypes}" th:value="${wtype.id}" th:text="${wtype.localisedName}"></option>
-								</select>
-							</div>
-							<div class="col-xs-4"> </div>
-						</div>
-					</div>
-					<!--  -->
-					<div class="col-xs-12">
-						<div class="form-group row col-xs-12">
-							<div class="col-xs-12">
-								<input type="checkbox" th:field="*{anyContractSignedWithWorkers}" /> <span th:text="|#{hiring_recruitment.anyContractSignedWithWorkers}|"></span>
-							</div>
-						</div>
-					</div>
-					<div class="col-xs-12">
-						<div class="form-group row col-xs-12">
-							<div class="col-xs-12">
-								<input type="checkbox" th:field="*{staffHiredDirectly}" /> <span th:text="|#{hiring_recruitment.staffHiredDirectly}|"></span>
-							</div>
-						</div>
-					</div>
-					<div class="col-xs-12">
-						<div class="form-group row col-xs-12">
-							<div class="col-xs-12">
-								<input type="checkbox" th:field="*{staffHiredThroughAgent}" /> <span th:text="|#{hiring_recruitment.staffHiredThroughAgent}|"></span>
-							</div>
-						</div>
-					</div>
-				
+		<div class="col-xs-12">
+			<div class="box" id="farm-box">
+				<div class="box-header with-border">
+					<h3 class="box-title" th:text="#{farm.edit}">farm.hiring_recruitment</h3> - <span
+						th:text="${farmName}">farmname</span>
 				</div>
+				<form role="form" th:action="@{'/farm/'+${farmId}+'/hiring-recruitment.html'}" th:object="${farmDto}"
+							method="post" class="mainForm form-horizontal" enctype="multipart/form-data"
+							onsubmit="return !hasEmptyFields('#farm-box form .form-control[required]');">
+					<div class="box-body" style="padding:0;">
+						<div class="nav-tabs-custom">
+							<ul th:include="farms/farms-includes :: farms-tabs" class="nav nav-tabs"></ul>
+							<ul th:include="farms/farms-staff-includes :: farms-tabs"
+									class="nav nav-tabs nav-tabs-seconds"></ul>
+
+						</div>
+						<div class="tab-content">
+							<div class="tab-pane active" id="tab_3">
+								<div class="row">
+									<div class="col-xs-12">
+										<h4 th:text="#{hiring_recruitment.fair-recruitment}"></h4>
+										<div class="col-xs-12">
+											<div class="form-group row col-xs-12">
+												<div class="col-xs-12">
+													<input type="checkbox" th:field="*{workersMakeFinancialDeposit}"
+																 id="workersMakeFinancialDeposit"
+																 onChange="manageFinancialDeposit()"/> <span
+														th:text="|#{hiring_recruitment.workersMakeFinancialDeposit}*|"></span>
+												</div>
+											</div>
+										</div>
+										<div class="bg-warning" id="divgetBackFinancialDepositReason">
+											<div class="form-group row col-xs-12 ">
+												<label for="getBackFinancialDepositReason" class="col-xs-2 "
+															 th:text="|#{hiring_recruitment.getBackFinancialDepositReason}|"></label>
+												<div class="col-xs-6">
+													<select class="form-control"
+																	th:field="*{getBackFinancialDepositReason}">
+														<option value=""></option>
+														<option th:each="wtype:${allgetBackFinancialDepositReason}"
+																		th:value="${wtype.id}"
+																		th:text="${wtype.localisedName}"></option>
+													</select>
+												</div>
+												<div class="col-xs-4"></div>
+
+											</div>
+										</div>
+										<div class="form-group row col-xs-12">
+											<label for="noEarlyTerminationContractReason" class="col-xs-4 "
+														 th:text="|#{hiring_recruitment.noEarlyTerminationContractReason}|"></label>
+											<div class="col-xs-4">
+												<select class="form-control"
+																th:field="*{noEarlyTerminationContractReason}">
+													<option value=""></option>
+													<option th:each="wtype:${allnoEarlyTerminationContractReason}"
+																	th:value="${wtype.id}"
+																	th:text="${wtype.localisedName}"></option>
+												</select>
+											</div>
+											<div class="col-xs-4"></div>
+										</div>
+										<div class="form-group row col-xs-12">
+											<label for="contractTerminationReason" class="col-xs-4 "
+														 th:text="|#{hiring_recruitment.contractTerminationReason}|"></label>
+											<div class="col-xs-4">
+												<select class="form-control" th:field="*{contractTerminationReason}"
+																onChange="managecontractTerminationReason()">
+													<option value=""></option>
+													<option th:each="wtype:${allcontractTerminationReason}"
+																	th:value="${wtype.id}"
+																	th:text="${wtype.localisedName}"></option>
+												</select>
+											</div>
+											<div class="col-xs-4"></div>
+										</div>
+
+
+										<div class="col-xs-12 bg-warning" id="divcontractTerminationOther">
+											<div class="form-group row col-xs-12 ">
+												<label for="contractTerminationOtherReason" class="col-xs-4 "
+															 th:text="|#{hiring_recruitment.contractTerminationOtherReason}|"></label>
+												<div class="col-xs-4">
+													<input type="text" class="form-control"
+																 th:field="*{contractTerminationOtherReason}"></input>
+												</div>
+												<div class="col-xs-4"></div>
+
+											</div>
+										</div>
+
+
+										<!--  -->
+										<div class="col-xs-12">
+											<div class="form-group row col-xs-12">
+												<div class="col-xs-12">
+													<input type="checkbox" th:field="*{keepWorkerDocumentSafeKeeping}"
+																 id="keepWorkerDocumentSafeKeeping"
+																 onChange="manageKeptWorker()"/> <span
+														th:text="|#{hiring_recruitment.keepWorkerDocumentSafeKeeping}*|"></span>
+												</div>
+											</div>
+										</div>
+										<div class="col-xs-12 bg-warning" id="divkeptWorkerEntity">
+											<div class="form-group row col-xs-12" id="divkeptWorkerEntityDocumentType">
+												<label for="keptWorkerEntityDocumentType1"
+															 class="col-xs-2 control-label"
+															 th:text="|#{hiring_recruitment.keptWorkerEntityDocumentType1}|"></label>
+												<div class="col-xs-6">
+													<select class="select-multiple"
+																	th:field="*{keptWorkerEntityDocumentTypes}"
+																	multiple="multiple">
+														<option th:each="wtype:${allWorkerEntrityDocumentTypes}"
+																		th:value="${wtype.id}"
+																		th:text="${wtype.localisedName}"></option>
+													</select>
+												</div>
+												<div class="col-xs-4"></div>
+											</div>
+										</div>
+										<!--  -->
+										<div class="col-xs-12">
+											<div class="form-group row col-xs-12">
+												<div class="col-xs-12">
+													<input type="checkbox" th:field="*{anyContractSignedWithWorkers}"/>
+													<span
+															th:text="|#{hiring_recruitment.anyContractSignedWithWorkers}|"></span>
+												</div>
+											</div>
+										</div>
+										<div class="col-xs-12">
+											<div class="form-group row col-xs-12">
+												<div class="col-xs-12">
+													<input type="checkbox" th:field="*{staffHiredDirectly}"/> <span
+														th:text="|#{hiring_recruitment.staffHiredDirectly}|"></span>
+												</div>
+											</div>
+										</div>
+										<div class="col-xs-12">
+											<div class="form-group row col-xs-12">
+												<div class="col-xs-12">
+													<input type="checkbox" th:field="*{staffHiredThroughAgent}"/> <span
+														th:text="|#{hiring_recruitment.staffHiredThroughAgent}|"></span>
+												</div>
+											</div>
+										</div>
+
+									</div>
+								</div>
+
+								<div class="row">
+									<div class="col-xs-12">
+										<h4 th:text="#{hiring_recruitment.fair-remuneration}"></h4>
+
+										<div class="col-xs-12 bg-warning">
+
+											<div class="form-group row col-xs-12" id="divamountSalaryDeducedMonth">
+												<label for="amountSalaryDeducedMonth" class="col-xs-4 "
+															 th:text="|#{hiring_recruitment.amountSalaryDeducedMonth}|"></label>
+												<div class="col-xs-4">
+													<input class="form-control" type="text"
+																 th:field="*{amountSalaryDeducedMonth}"
+																 th:placeholder="|#{hiring_recruitment.amountSalaryDeducedMonth}|"
+																 onChange="manageSalaryDeduction()"/>
+												</div>
+												<div class="col-xs-4"></div>
+											</div>
+										</div>
+										<div class="col-xs-12 bg-warning" id="divsalaryDeduction">
+											<div class="form-group row col-xs-12" id="divsalaryDeductionType">
+												<label for="salaryDeductionType1" class="col-xs-2 control-label"
+															 th:text="|#{hiring_recruitment.salaryDeductionType1}|"></label>
+												<div class="col-xs-6">
+
+													<select class="select-multiple" th:field="*{salaryDeductionTypes}"
+																	multiple="multiple">
+														<option th:each="wtype:${allSalaryDeductionTypes}"
+																		th:value="${wtype.id}"
+																		th:text="${wtype.localisedName}"></option>
+													</select>
+												</div>
+												<div class="col-xs-4"></div>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<div class="row">
+									<div class="col-xs-12">
+										<!--  -->
+
+										<div class="col-xs-12">
+											<div class="form-group row col-xs-12">
+												<div class="col-xs-12">
+													<input type="checkbox" th:field="*{paymentSlipProvidedToWorker}"/>
+													<span
+															th:text="|#{hiring_recruitment.paymentSlipProvidedToWorker}|"></span>
+												</div>
+											</div>
+										</div>
+										<div class="col-xs-12">
+											<div class="form-group row col-xs-12">
+												<div class="col-xs-12">
+													<input type="checkbox" th:field="*{workerInDebt}" id="workerInDebt"
+																 onChange="managePaymentDebt()"/> <span
+														th:text="|#{hiring_recruitment.workerInDebt}|"></span>
+												</div>
+											</div>
+										</div>
+										<div class="col-xs-12 bg-warning" id="divpaymentDebt">
+											<div class="form-group row col-xs-12" id="divpaymentDebtType1">
+												<label for="paymentDebtType1" class="col-xs-2 control-label"
+															 th:text="|#{hiring_recruitment.paymentDebtType1}|"></label>
+												<div class="col-xs-6">
+													<select class="select-multiple" th:field="*{paymentDebtTypes}"
+																	multiple="multiple">
+														<option th:each="wtype:${allPaymentDebtTypes}"
+																		th:value="${wtype.id}"
+																		th:text="${wtype.localisedName}"></option>
+													</select>
+												</div>
+												<div class="col-xs-4"></div>
+											</div>
+										</div>
+										<div class="col-xs-12">
+											<div class="form-group row col-xs-12">
+												<div class="col-xs-12">
+													<input type="checkbox" th:field="*{workersInDebtOtherStakeHolder}"/>
+													<span
+															th:text="|#{hiring_recruitment.workersInDebtOtherStakeHolder}|"></span>
+												</div>
+											</div>
+										</div>
+										<div class="col-xs-12">
+											<div class="form-group row col-xs-12">
+												<div class="col-xs-12">
+													<input type="checkbox" th:field="*{inKindPayment}"
+																 id="inKindPayment"
+																 onChange="manageInKindPayement()"/> <span
+														th:text="|#{hiring_recruitment.inKindPayment}|"></span>
+												</div>
+											</div>
+										</div>
+										<div class="col-xs-12 bg-warning" id="divInKindPaymentType">
+											<div class="form-group row col-xs-12">
+												<label for="inKindPaymentType" class="col-xs-2 control-label"
+															 th:text="|#{hiring_recruitment.inKindPaymentType}|"></label>
+												<div class="col-xs-6">
+													<input class="form-control" type="text"
+																 th:field="*{inKindPaymentType}"/>
+												</div>
+												<div class="col-xs-4"></div>
+											</div>
+										</div>
+
+										<div class="form-group row col-xs-12">
+											<label for="paymentDebtType1" class="col-xs-4 "
+														 th:text="|#{hiring_recruitment.hiringRestriction}|"></label>
+											<div class="col-xs-4">
+												<select class="form-control" th:field="*{hiringRestriction}">
+													<option value=""></option>
+													<option th:each="wtype:${allHiringRestrictionsTypes}"
+																	th:value="${wtype.id}"
+																	th:text="${wtype.localisedName}"></option>
+												</select>
+											</div>
+											<div class="col-xs-4"></div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+
+					<div class="box-footer text-center">
+						<small>* <span th:text="#{default.mandatory_field}"></span></small>
+						<a th:href="@{/farms.html}" class="btn btn-flat btn-warning"><i class="fa fa-times"></i><span
+								th:text="#{default.cancel}">default.cancel</span></a>
+
+						<button type="submit" class="btn btn-success">
+							<span th:text="#{default.submit}">default.submit</span> <i class="fa fa-check"></i>
+						</button>
+					</div>
+				</form>
 			</div>
-
-			<div class="row">
-				<div class="col-xs-12">					
-					<h4 th:text="#{hiring_recruitment.fair-remuneration}"></h4>
-
-					<div class="form-group row col-xs-12" id="divamountSalaryDeducedMonth">
-						<label for="amountSalaryDeducedMonth" class="col-xs-4 " th:text="|#{hiring_recruitment.amountSalaryDeducedMonth}|"></label>
-						<div class="col-xs-4">
-							<input class="form-control" type="text" th:field="*{amountSalaryDeducedMonth}" th:placeholder="|#{hiring_recruitment.amountSalaryDeducedMonth}|" onChange="manageSalaryDeduction()"/>
-						</div>
-						<div class="col-xs-4"> </div>
-					</div>
-					<div class="col-xs-12 bg-warning" id="divsalaryDeduction">
-						<div class="form-group row col-xs-12" id="divsalaryDeductionType1">
-							<label for="salaryDeductionType1" class="col-xs-2 control-label" th:text="|#{hiring_recruitment.salaryDeductionType1}|"></label>
-							<div class="col-xs-6">
-								<select class="form-control" th:field="*{salaryDeductionType1}" onChange="manageSalaryDeduction()">
-									<option value="" ></option>
-									<option th:each="wtype:${allSalaryDeductionTypes}" th:value="${wtype.id}" th:text="${wtype.localisedName}"></option>
-								</select>
-							</div>
-							<div class="col-xs-4"> </div>
-						</div>
-						<div class="form-group row col-xs-12" id="divsalaryDeductionType2">
-							<label for="salaryDeductionType2" class="col-xs-2 control-label" th:text="|#{hiring_recruitment.salaryDeductionType2}|"></label>
-							<div class="col-xs-6">
-								<select class="form-control" th:field="*{salaryDeductionType2}" onChange="manageSalaryDeduction()">
-									<option value="" ></option>
-									<option th:each="wtype:${allSalaryDeductionTypes}" th:value="${wtype.id}" th:text="${wtype.localisedName}"></option>
-								</select>
-							</div>
-							<div class="col-xs-4"> </div>
-						</div>
-						<div class="form-group row col-xs-12" id="divsalaryDeductionType3">
-							<label for="salaryDeductionType3" class="col-xs-2 control-label" th:text="|#{hiring_recruitment.salaryDeductionType3}|"></label>
-							<div class="col-xs-6">
-								<select class="form-control" th:field="*{salaryDeductionType3}" onChange="manageSalaryDeduction()">
-									<option value="" ></option>
-									<option th:each="wtype:${allSalaryDeductionTypes}" th:value="${wtype.id}" th:text="${wtype.localisedName}"></option>
-								</select>
-							</div>
-							<div class="col-xs-4"> </div>
-						</div>
-						<div class="form-group row col-xs-12" id="divsalaryDeductionType4">
-							<label for="salaryDeductionType4" class="col-xs-2 control-label" th:text="|#{hiring_recruitment.salaryDeductionType4}|"></label>
-							<div class="col-xs-6">
-								<select class="form-control" th:field="*{salaryDeductionType4}">
-									<option value="" ></option>
-									<option th:each="wtype:${allSalaryDeductionTypes}" th:value="${wtype.id}" th:text="${wtype.localisedName}"></option>
-								</select>
-							</div>
-							<div class="col-xs-4"> </div>
-						</div>
-					</div>
-					<div class="form-group row col-xs-12" id="divssalaryDeductionOther">
-						<label for="salaryDeductionOther" class="col-xs-6 control-label" th:text="|#{hiring_recruitment.salaryDeductionOther}|"></label>
-						<div class="col-xs-6">
-							<input type="text" class="form-control" th:field="*{salaryDeductionOther}"></input>
-						</div>
-					</div>		
-				</div>
-			</div>
-
-			<div class="row">
-				<div class="col-xs-12">							
-					<!--  -->			
-
-					<div class="col-xs-12">
-						<div class="form-group row col-xs-12">
-							<div class="col-xs-12">
-								<input type="checkbox" th:field="*{paymentSlipProvidedToWorker}" /> <span th:text="|#{hiring_recruitment.paymentSlipProvidedToWorker}|"></span>
-							</div>
-						</div>
-					</div>
-					<div class="col-xs-12">
-						<div class="form-group row col-xs-12">
-							<div class="col-xs-12">
-								<input type="checkbox" th:field="*{workerInDebt}" id="workerInDebt" onChange="managePaymentDebt()"/> <span th:text="|#{hiring_recruitment.workerInDebt}|"></span>
-							</div>
-						</div>
-					</div>
-					<div class="col-xs-12 bg-warning" id="divpaymentDebt">	
-						<div class="form-group row col-xs-12" id="divpaymentDebtType1">
-							<label for="paymentDebtType1" class="col-xs-2 control-label" th:text="|#{hiring_recruitment.paymentDebtType1}|"></label>
-							<div class="col-xs-6">
-								<select class="form-control" th:field="*{paymentDebtType1}" onChange="managePaymentDebt()">
-									<option value="" ></option>
-									<option th:each="wtype:${allPaymentDebtTypes}" th:value="${wtype.id}" th:text="${wtype.localisedName}"></option>
-								</select>
-							</div>
-							<div class="col-xs-4"> </div>
-						</div>
-						<div class="form-group row col-xs-12" id="divpaymentDebtType2">
-							<label for="paymentDebtType1" class="col-xs-2 control-label" th:text="|#{hiring_recruitment.paymentDebtType2}|"></label>
-							<div class="col-xs-6">
-								<select class="form-control" th:field="*{paymentDebtType2}" onChange="managePaymentDebt()">
-									<option value="" ></option>
-									<option th:each="wtype:${allPaymentDebtTypes}" th:value="${wtype.id}" th:text="${wtype.localisedName}"></option>
-								</select>
-							</div>
-							<div class="col-xs-4"> </div>
-						</div>
-						<div class="form-group row col-xs-12" id="divpaymentDebtType3">
-							<label for="paymentDebtType1" class="col-xs-2 control-label" th:text="|#{hiring_recruitment.paymentDebtType3}|"></label>
-							<div class="col-xs-6">
-								<select class="form-control" th:field="*{paymentDebtType3}" onChange="managePaymentDebt()">
-									<option value="" ></option>
-									<option th:each="wtype:${allPaymentDebtTypes}" th:value="${wtype.id}" th:text="${wtype.localisedName}"></option>
-								</select>
-							</div>
-							<div class="col-xs-4"> </div>
-						</div>
-						<div class="form-group row col-xs-12" id="divpaymentDebtType4">
-							<label for="paymentDebtType1" class="col-xs-2 control-label" th:text="|#{hiring_recruitment.paymentDebtType4}|"></label>
-							<div class="col-xs-6">
-								<select class="form-control" th:field="*{paymentDebtType4}">
-									<option value="" ></option>
-									<option th:each="wtype:${allPaymentDebtTypes}" th:value="${wtype.id}" th:text="${wtype.localisedName}"></option>
-								</select>
-							</div>
-							<div class="col-xs-4"> </div>
-						</div>
-					</div>
-					<div class="col-xs-12">
-						<div class="form-group row col-xs-12">
-							<div class="col-xs-12">
-								<input type="checkbox" th:field="*{workersInDebtOtherStakeHolder}" /> <span th:text="|#{hiring_recruitment.workersInDebtOtherStakeHolder}|"></span>
-							</div>
-						</div>
-					</div>
-					<div class="col-xs-12">
-						<div class="form-group row col-xs-12">
-							<div class="col-xs-12">
-								<input type="checkbox" th:field="*{inKindPayment}" id="inKindPayment" onChange="manageInKindPayement()"/> <span th:text="|#{hiring_recruitment.inKindPayment}|"></span>
-							</div>
-						</div>
-					</div>
-					<div class="col-xs-12 bg-warning" id="divInKindPaymentType">
-						<div class="form-group row col-xs-12">
-							<label for="inKindPaymentType" class="col-xs-2 control-label" th:text="|#{hiring_recruitment.inKindPaymentType}|"></label>
-							<div class="col-xs-6">
-								<input class="form-control" type="text" th:field="*{inKindPaymentType}" />
-							</div>
-							<div class="col-xs-4"> </div>
-						</div>
-					</div>
-					
-					<div class="form-group row col-xs-12">
-						<label for="paymentDebtType1" class="col-xs-4 " th:text="|#{hiring_recruitment.hiringRestriction}|"></label>
-						<div class="col-xs-4">
-							<select class="form-control" th:field="*{hiringRestriction}">
-								<option value="" ></option>
-								<option th:each="wtype:${allHiringRestrictionsTypes}" th:value="${wtype.id}" th:text="${wtype.localisedName}"></option>
-							</select>
-						</div>
-						<div class="col-xs-4"> </div>
-					</div>
-				</div>
-				</div>
-            </div>
-          </div>
-          </div>
-          
-          
-	        <div class="box-footer text-center">
-	        	<small>* <span th:text="#{default.mandatory_field}"></span></small>
-	            <a th:href="@{/farms.html}" class="btn btn-flat btn-warning"><i class="fa fa-times"></i><span th:text="#{default.cancel}">default.cancel</span></a>
-	            
-	            <button type="submit" class="btn btn-success">
-					<span th:text="#{default.submit}">default.submit</span> <i class="fa fa-check"></i>
-				</button>
-	        </div>
-        </form>
-      </div>
-    </div>
+		</div>
 
 	</div>
 
@@ -331,240 +300,127 @@
 
 <th:block layout:fragment="page-scripts">
 	<script th:inline="javascript">
-	/*<![CDATA[*/
-		$( document ).ready(function() {
-			// initialize display	
-			manageFinancialDeposit();
-			managecontractTerminationReason();
-			manageKeptWorker();
-			manageSalaryDeduction();
-			managePaymentDebt();
-			manageInKindPayement();
+      /*<![CDATA[*/
+      $(document).ready(function () {
+          // initialize display
+          manageFinancialDeposit();
+          managecontractTerminationReason();
+          manageKeptWorker();
+          manageSalaryDeduction();
+          managePaymentDebt();
+          manageInKindPayement();
 
-		});
+      });
+      $('.select-multiple').multipleSelect();
 
-		function manageFinancialDeposit(){
-			// hide the blocks for kept documents
-			$('#divgetBackFinancialDepositReason').hide();
-			var fieldVal = $("#workersMakeFinancialDeposit").is(':checked');
-			if(fieldVal!=null){
-				if(fieldVal){
-					$('#divgetBackFinancialDepositReason').show();
-				} else {
-					$('#getBackFinancialDepositReason').val("");
-					$('#divgetBackFinancialDepositReason').hide();
-		
-				}
-			}
-		}
-	
-		function managecontractTerminationReason(){
-			// hide the blocks for kept documents
-			$('#divcontractTerminationOther').hide();
-			var fieldVal = $("#contractTerminationReason").val();
-			if(fieldVal!=null){
-				if(fieldVal == 99){
-					$('#divcontractTerminationOther').show();
-				} else {
-					$('#contractTerminationOther').val("");
-					$('#divcontractTerminationOther').hide();
-		
-				}
-			}
-		}
-		
-		function manageKeptWorker(){
-			// hide the blocks for kept documents
-			$('#divkeptWorkerEntity').hide();
-			$('#divkeptWorkerEntityDocumentType1').hide();
-			$('#divkeptWorkerEntityDocumentType2').hide();
-			$('#divkeptWorkerEntityDocumentType3').hide();
-			$('#divkeptWorkerEntityDocumentType4').hide();	
-			var fieldVal = $("#keepWorkerDocumentSafeKeeping").is(':checked');
-			if(fieldVal!=null){
-				if(fieldVal){
-					$('#divkeptWorkerEntity').show();
-					$('#divkeptWorkerEntityDocumentType1').show();
-				} else {
-					$('#keptWorkerEntityDocumentType1').val("");
-					$('#keptWorkerEntityDocumentType2').val("");
-					$('#keptWorkerEntityDocumentType3').val("");
-					$('#keptWorkerEntityDocumentType4').val("");
-					$('#divkeptWorkerEntity').hide();
-					$('#divkeptWorkerEntityDocumentType1').hide();
-					$('#divkeptWorkerEntityDocumentType2').hide();
-					$('#divkeptWorkerEntityDocumentType3').hide();
-					$('#divkeptWorkerEntityDocumentType4').hide();				
-				}
+      function manageFinancialDeposit() {
+          // hide the blocks for kept documents
+          $('#divgetBackFinancialDepositReason').hide();
+          var fieldVal = $("#workersMakeFinancialDeposit").is(':checked');
+          if (fieldVal != null) {
+              if (fieldVal) {
+                  $('#divgetBackFinancialDepositReason').show();
+              } else {
+                  $('#getBackFinancialDepositReason').val("");
+                  $('#divgetBackFinancialDepositReason').hide();
 
-			}
-			var fieldVal2 = $("#keptWorkerEntityDocumentType1").val();
-			if(fieldVal2!=null){
-				fieldVal2=parseInt(fieldVal2);
-				if(fieldVal2!=null){
-					if(fieldVal2>0){	
-						$('#divkeptWorkerEntityDocumentType2').show();	
-					}
-				}
-			}
-			var fieldVal3 = $("#keptWorkerEntityDocumentType2").val();
-			if(fieldVal3!=null){
-				fieldVal3=parseInt(fieldVal3);
-				if(fieldVal3!=null){
-					if(fieldVal3>0){	
-						$('#divkeptWorkerEntityDocumentType3').show();	
-					}
-				}
-			}
-			var fieldVal4 = $("#keptWorkerEntityDocumentType3").val();
-			if(fieldVal4!=null){
-				fieldVal4=parseInt(fieldVal4);
-				if(fieldVal4!=null){
-					if(fieldVal4>0){	
-						$('#divkeptWorkerEntityDocumentType4').show();	
-					}
-				}
-			}			
-			
-		}
-		function manageSalaryDeduction(){
-			// hide the blocks for salary deduction
-			$('#divsalaryDeduction').hide();
-			$('#divsalaryDeductionType1').hide();
-			$('#divsalaryDeductionType2').hide();
-			$('#divsalaryDeductionType3').hide();
-			$('#divsalaryDeductionType4').hide();
-			$('#divssalaryDeductionOther').hide();
-			var fieldVal = $("#amountSalaryDeducedMonth").val();
-		    if(fieldVal!=null){
-		    	fieldVal=parseInt(fieldVal);
-				if(fieldVal!=null){
-					if(fieldVal>0){	
-						$('#divsalaryDeduction').show();
-						$('#divsalaryDeductionType1').show();	
-					} else {
-						$('#salaryDeductionType1').val("");
-						$('#salaryDeductionType2').val("");
-						$('#salaryDeductionType3').val("");
-						$('#salaryDeductionType4').val("");
-						$('#divsalaryDeduction').hide();
-						$('#divsalaryDeductionType1').hide();
-						$('#divsalaryDeductionType2').hide();
-						$('#divsalaryDeductionType3').hide();
-						$('#divsalaryDeductionType4').hide();
-						$('#divssalaryDeductionOther').hide();						
-						
-					}
-				}
-			}
-		    var fieldVal2 = $("#salaryDeductionType1").val();
-		    if(fieldVal2!=null){
-		    	fieldVal2=parseInt(fieldVal2);
-				if(fieldVal2!=null){
-					if(fieldVal2>0){	
-						$('#divsalaryDeductionType2').show();	
-					}
-				}
-			}
-		    var fieldVal3 = $("#salaryDeductionType2").val();
-		    if(fieldVal3!=null){
-		    	fieldVal3=parseInt(fieldVal3);
-				if(fieldVal3!=null){
-					if(fieldVal3>0){	
-						$('#divsalaryDeductionType3').show();	
-					}
-				}
-			}		    
-		    var fieldVal4 = $("#salaryDeductionType3").val();
-		    if(fieldVal4!=null){
-		    	fieldVal4=parseInt(fieldVal4);
-				if(fieldVal4!=null){
-					if(fieldVal4>0){	
-						$('#divsalaryDeductionType4').show();	
-						if(fieldVal4==4){	
-							$('#divssalaryDeductionOther').show();	
+              }
+          }
+      }
 
-						}
-					}
-				}
-			}	    
-		    
-		}
-	
-		function managePaymentDebt(){
+      function managecontractTerminationReason() {
+          // hide the blocks for kept documents
+          $('#divcontractTerminationOther').hide();
+          var fieldVal = $("#contractTerminationReason").val();
+          if (fieldVal != null) {
+              if (fieldVal == 99) {
+                  $('#divcontractTerminationOther').show();
+              } else {
+                  $('#contractTerminationOther').val("");
+                  $('#divcontractTerminationOther').hide();
 
-			// hide the blocks for salary deduction
-			$('#divpaymentDebt').hide();
-			$('#divpaymentDebtType1').hide();
-			$('#divpaymentDebtType2').hide();
-			$('#divpaymentDebtType3').hide();
-			$('#divpaymentDebtType4').hide();
-			var fieldVal = $("#workerInDebt").is(':checked');
-			if(fieldVal!=null){
-				if(fieldVal){
-					$('#divpaymentDebt').show();
-					$('#divpaymentDebtType1').show();	
-				} else {
-					$('#paymentDebtType1').val("");
-					$('#paymentDebtType2').val("");
-					$('#paymentDebtType3').val("");
-					$('#paymentDebtType4').val("");
-					$('#ddivpaymentDebt').hide();
-					$('#divpaymentDebtType1').hide();
-					$('#divpaymentDebtType2').hide();
-					$('#divpaymentDebtType3').hide();
-					$('#divpaymentDebtType4').hide();
-				}
-			}
-			var fieldVal2 = $("#divpaymentDebtType1").val();
-		    if(fieldVal2!=null){
-		    	fieldVal2=parseInt(fieldVal);
-				if(fieldVal2!=null){
-					if(fieldVal2>0){	
-						$('#divpaymentDebtType2').show();	
-					}
-				}
-			}
-			var fieldVal3 = $("#divpaymentDebtType2").val();
-		    if(fieldVal3!=null){
-		    	fieldVal3=parseInt(fieldVal3);
-				if(fieldVal3!=null){
-					if(fieldVal3>0){	
-						$('#divpaymentDebtType3').show();	
-					}
-				}
-			}
-			var fieldVal4 = $("#divpaymentDebtType3").val();
-		    if(fieldVal4!=null){
-		    	fieldVal4=parseInt(fieldVal4);
-				if(fieldVal4!=null){
-					if(fieldVal4>0){	
-						$('#divpaymentDebtType4').show();	
-					}
-				}
-			}
-		}
-	
-		function manageInKindPayement(){
-			// hide the blocks for kept documents
-			$('#divInKindPaymentType').hide();
-			var fieldVal = $("#inKindPayment").is(':checked');
-			if(fieldVal!=null){
-				if(fieldVal!=null){
-					if(fieldVal){
-						$('#divInKindPaymentType').show();
-					} else {
-						$('#inKindPaymentType').val("");
-						$('#divInKindPaymentType').hide();
-			
-					}
-				}
-			}
-		}
+              }
+          }
+      }
 
-	
-		/*]]>*/
-		</script>
+      function manageKeptWorker() {
+          // hide the blocks for kept documents
+          $('#divkeptWorkerEntity').hide();
+          $('#divkeptWorkerEntityDocumentType').hide();
+          var fieldVal = $("#keepWorkerDocumentSafeKeeping").is(':checked');
+          if (fieldVal != null) {
+              if (fieldVal) {
+                  $('#divkeptWorkerEntity').show();
+                  $('#divkeptWorkerEntityDocumentType').show();
+              } else {
+                  $('#keptWorkerEntityDocumentType').val("");
+                  $('#divkeptWorkerEntity').hide();
+                  $('#divkeptWorkerEntityDocumentType').hide();
+              }
+
+          }
+
+      }
+
+      function manageSalaryDeduction() {
+          // hide the blocks for salary deduction
+          $('#divsalaryDeduction').hide();
+          $('#divsalaryDeductionType').hide();
+          var fieldVal = $("#amountSalaryDeducedMonth").val();
+          if (fieldVal != null) {
+              fieldVal = parseInt(fieldVal);
+              if (fieldVal != null) {
+                  if (fieldVal > 0) {
+                      $('#divsalaryDeduction').show();
+                      $('#divsalaryDeductionType').show();
+                  } else {
+                      $('#salaryDeductionType').val("");
+                      $('#divsalaryDeduction').hide();
+                      $('#divsalaryDeductionType').hide();
+
+                  }
+              }
+          }
+
+      }
+
+      function managePaymentDebt() {
+
+          // hide the blocks for salary deduction
+          $('#divpaymentDebt').hide();
+          $('#divpaymentDebtType').hide();
+          var fieldVal = $("#workerInDebt").is(':checked');
+          if (fieldVal != null) {
+              if (fieldVal) {
+                  $('#divpaymentDebt').show();
+                  $('#divpaymentDebtType').show();
+              } else {
+                  $('#paymentDebtType1').val("");
+                  $('#ddivpaymentDebt').hide();
+                  $('#divpaymentDebtType').hide();
+              }
+          }
+      }
+
+      function manageInKindPayement() {
+          // hide the blocks for kept documents
+          $('#divInKindPaymentType').hide();
+          var fieldVal = $("#inKindPayment").is(':checked');
+          if (fieldVal != null) {
+              if (fieldVal != null) {
+                  if (fieldVal) {
+                      $('#divInKindPaymentType').show();
+                  } else {
+                      $('#inKindPaymentType').val("");
+                      $('#divInKindPaymentType').hide();
+
+                  }
+              }
+          }
+      }
+
+      /*]]>*/
+	</script>
 </th:block>
 
 </html>
