@@ -45,14 +45,17 @@
                           <td th:text="${plot.commodities.localisedName}"></td>
                           <td align="center">
                             <a href="javascript:void(0);" th:attr="data-id=${plot.id}"
+                               class="btn btn-xs btn-flat btn-primary editPlotBtn" th:title="#{tooltip.edit_plot}"><i
+                                class="fa fa-edit"></i></a>&nbsp;
+                            <a href="javascript:void(0);" th:attr="data-id=${plot.id}"
                                class="btn btn-xs btn-flat btn-info addActivitiesPlotDataBtn"
-                               th:title="#{tooltip.add_plot_activity}"><i class="fa fa-plus"></i></a>
+                               th:title="#{tooltip.add_plot_activity}"><i class="fa fa-plus"></i></a>&nbsp;
                             <a href="javascript:void(0);" th:attr="data-id=${plot.id}"
                                class="btn btn-xs btn-flat btn-info viewActivitiesPlotDataBtn"
-                               th:title="#{tooltip.view_plot_activity}"><i class="fa fa-eye"></i></a>
+                               th:title="#{tooltip.view_plot_activity}"><i class="fa fa-eye"></i></a>&nbsp;
                             <a href="javascript:void(0);" th:attr="data-id=${plot.id}"
                                class="btn btn-xs btn-flat btn-primary editPlotBtn" th:title="#{tooltip.edit_plot}"><i
-                                class="fa fa-edit"></i></a>
+                                class="fa fa-edit"></i></a>&nbsp;
                             <form th:action="@{'/farm/'+${farmId}+'/plot/delete.html'}" method="post"
                                   style="display: inline;">
                               <input type="hidden" th:value="${plot.id}" th:name="plotId"/>

@@ -47,23 +47,24 @@
                           <td><span th:text="${pond.species.localisedName}" th:if="${pond.species != null}">   </span>
                           </td>
                           <td align="center">
+                             <a href="javascript:void(0);" th:attr="data-id=${pond.id}"
+                               class="btn btn-xs btn-flat btn-primary editPondBtn" th:title="#{tooltip.edit_pond}"><i
+                                class="fa fa-edit"></i></a>&nbsp;
                             <a href="javascript:void(0);" th:attr="data-id=${pond.id}"
                                class="btn btn-xs btn-flat btn-info addActivitiesPondDataBtn"
-                               th:title="#{tooltip.add_pond_activity}"><i class="fa fa-plus"></i></a>
+                               th:title="#{tooltip.add_pond_activity}"><i class="fa fa-plus"></i></a>&nbsp;
                             <a href="javascript:void(0);" th:attr="data-id=${pond.id}"
                                class="btn btn-xs btn-flat btn-info viewActivitiesPondDataBtn"
-                               th:title="#{tooltip.view_pond_activity}"><i class="fa fa-eye"></i></a>
+                               th:title="#{tooltip.view_pond_activity}"><i class="fa fa-eye"></i></a>&nbsp;
                             <!--  <a href="javascript:void(0);" th:attr="data-id=${plot.id}" class="btn btn-xs btn-flat btn-info viewDataPlotDataBtn" th:title="#{tooltip.view_plot_data}"><i class="fa fa-bar-chart"></i></a>-->
 
                             <a href="javascript:void(0);" th:attr="data-id=${pond.id}"
                                class="btn btn-xs btn-flat btn-warning addPondDataBtn"
-                               th:title="#{tooltip.add_pond_data}"><i class="fa fa-plus-square"></i></a>
+                               th:title="#{tooltip.add_pond_data}"><i class="fa fa-plus-square"></i></a>&nbsp;
                             <a href="javascript:void(0);" th:attr="data-id=${pond.id}"
                                class="btn btn-xs btn-flat btn-warning viewDataPondDataBtn"
-                               th:title="#{tooltip.view_pond_data}"><i class="fa fa-bar-chart"></i></a>
-                            <a href="javascript:void(0);" th:attr="data-id=${pond.id}"
-                               class="btn btn-xs btn-flat btn-primary editPondBtn" th:title="#{tooltip.edit_pond}"><i
-                                class="fa fa-edit"></i></a>
+                               th:title="#{tooltip.view_pond_data}"><i class="fa fa-bar-chart"></i></a>&nbsp;
+
                             <form th:action="@{'/farm/'+${farmId}+'/pond/delete.html'}" method="post"
                                   style="display: inline;">
                               <input type="hidden" th:value="${pond.id}" th:name="pondId"/>
