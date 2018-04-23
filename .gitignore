@@ -3,3 +3,8 @@ dev/v8web/src/main/generated/
 dev/v8web/target/
 dev/v8web/v8web.iml
 
+dev/v8web/.classpath
+dev/v8web/.project
+dev/v8web/.settings/org.eclipse.jdt.core.prefs
+dev/v8web/.settings/org.eclipse.wst.common.component
+dev/v8web/.settings/org.eclipse.wst.common.project.facet.core.xml
