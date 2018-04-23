@@ -47,6 +47,10 @@
 										<option th:each="unit : ${allQuantityUnits}" th:value="${unit.id}" th:text="${unit.localisedName}"></option>
 									</select>
 								</div>
+						 		<div class="form-group " id="feedLotNumber">
+									<label for="number" class="control-label" th:text="|#{farm.pond_activity_feed_lot_number}|">farm.pond_activity_feed_lot_number</label>
+									<input type="text" class="form-control form-pond " th:field="*{feedLotNumber}" th:placeholder="#{farm.pond_activity_feed_lot_number}" maxlength="20" />
+								</div>
 								<div class="form-group ">
 									<label th:text="|#{farm.pond_activity_comment}|"></label>
 									<input class="form-control" type="text" th:field="*{comment}"/>
@@ -85,12 +89,18 @@
 		function activityTypeChanged(){
 			
 			$('#actiProductGroup').show();
-
+			$('#feedLotNumber').hide();
+			
 			var actVal = $("#activityType").val();
 			if(actVal!=null){
 				actVal=parseInt(actVal);			
 				if($.inArray(actVal,noProduct)>=0){
 					$('#actiProductGroup').hide();
+				}  else {
+					if (actVal == 3){
+						$('#feedLotNumber').show();
+						
+					}				
 				}
 			}
 		}

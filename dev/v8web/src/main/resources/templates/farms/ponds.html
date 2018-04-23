@@ -246,9 +246,9 @@
                   $('#pondId').val(p.id);
                   $('#number').val(p.number);
                   $('#inputFarmPondDesc').val(p.description);
-                  if (p.volume != null) {
-                      $('#inputFarmPondArea').val(p.volume.quantity);
-                      $('#inputFarmPondAreaUnit').val(p.volume.unit.id);
+                  if (p.size != null) {
+                      $('#inputFarmPondArea').val(p.size.quantity);
+                      $('#inputFarmPondAreaUnit').val(p.size.unit.id);
                   }
                   if (p.type != null) {
                       $('#inputFarmPondType').val(p.type.id);
