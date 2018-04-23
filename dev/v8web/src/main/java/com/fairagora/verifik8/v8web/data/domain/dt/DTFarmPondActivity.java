@@ -62,6 +62,9 @@ public class DTFarmPondActivity extends V8EntitySupport {
 			@AssociationOverride(name = "unit", joinColumns = @JoinColumn(name = "CL_ADDITIONNAL_MEASURE_VALUE_UNIT_ID")) })
 	protected V8Measure additionalMeasure;
 
+	
+	@Column(name = "FEED_LOT_NUMBER", length = 216)
+	protected String feedLotNumber;
 
 	public Long getId() {
 		return id;
@@ -127,6 +130,13 @@ public class DTFarmPondActivity extends V8EntitySupport {
 		this.additionalMeasure = additionalMeasure;
 	}
 
+	public String getFeedLotNumber() {
+		return feedLotNumber;
+	}
+
+	public void setFeedLotNumber(String feedLotNumber) {
+		this.feedLotNumber = feedLotNumber;
+	}
 
 	@Override
 	public String getName() {

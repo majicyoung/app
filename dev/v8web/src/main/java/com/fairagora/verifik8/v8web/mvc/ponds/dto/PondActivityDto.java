@@ -27,6 +27,7 @@ public class PondActivityDto {
 
 	protected V8MeasureDto additionalMeasure;
 
+	protected String feedLotNumber;
 
 	protected String comment;
 
@@ -94,13 +95,20 @@ public class PondActivityDto {
 		this.additionalMeasure = additionalMeasure;
 	}
 
-
 	public String getComment() {
 		return comment;
 	}
 
 	public void setComment(String comment) {
 		this.comment = comment;
+	}
+
+	public String getFeedLotNumber() {
+		return feedLotNumber;
+	}
+
+	public void setFeedLotNumber(String feedLotNumber) {
+		this.feedLotNumber = feedLotNumber;
 	}
 
 	public String getActivityName() {
