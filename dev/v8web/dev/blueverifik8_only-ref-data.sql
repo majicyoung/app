@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  localhost
--- Généré le :  Sam 17 Mars 2018 à 06:29
+-- Généré le :  Lun 23 Avril 2018 à 14:53
 -- Version du serveur :  5.7.21-0ubuntu0.16.04.1
--- Version de PHP :  7.0.22-0ubuntu0.16.04.1
+-- Version de PHP :  7.0.28-0ubuntu0.16.04.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -2762,6 +2762,7 @@ CREATE TABLE `dt_farmaq_pond_management` (
   `CL_MEASURE_VALUE_UNIT_ID` int(11) DEFAULT NULL,
   `ADDITIONNAL_MEASURE_VALUE` float DEFAULT NULL,
   `CL_ADDITIONNAL_MEASURE_VALUE_UNIT_ID` int(11) DEFAULT NULL,
+  `FEED_LOT_NUMBER` varchar(216) COLLATE utf8_bin DEFAULT NULL,
   `UPDATER_ID` int(11) NOT NULL DEFAULT '1',
   `COMMENT` varchar(512) CHARACTER SET utf8 DEFAULT NULL,
   `CREATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -2874,19 +2875,6 @@ CREATE TABLE `jt_pond_activity_product_types` (
   `CREATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `UPDATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='type of contracts';
-
---
--- Contenu de la table `jt_pond_activity_product_types`
---
-
-INSERT INTO `jt_pond_activity_product_types` (`CL_FARM_POND_ACTIVITY_ID`, `CL_PRODUCT_TYPE_ID`, `DESCRIPTION`, `UPDATER_ID`, `COMMENT`, `CREATED_AT`, `UPDATED_AT`) VALUES
-(1, 4, 'Seed for pond stocking', 3, NULL, '2018-02-21 17:50:59', '2018-02-21 17:50:59'),
-(3, 40, 'Feeding fish / shrimp', 3, NULL, '2018-02-21 17:54:41', '2018-02-21 17:54:41'),
-(3, 41, 'Feeding shrimp', 3, NULL, '2018-02-22 13:30:19', '2018-02-22 13:30:19'),
-(3, 42, 'Feeding fish', 3, NULL, '2018-02-22 13:30:19', '2018-02-22 13:30:19'),
-(4, 20, 'Addiditive use', 3, NULL, '2018-02-22 13:40:11', '2018-02-22 13:40:11'),
-(5, 3, 'Antibiotics use', 3, NULL, '2018-02-22 13:40:57', '2018-02-22 13:40:57'),
-(9, 50, 'Fertilizer use', 3, NULL, '2018-02-22 13:41:38', '2018-02-22 13:41:38');
 
 -- --------------------------------------------------------
 
@@ -3478,6 +3466,50 @@ CREATE TABLE `reg_entity_staff_management` (
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `reg_entity_staff_management_cl_app_deduction_salary_types`
+--
+
+CREATE TABLE `reg_entity_staff_management_cl_app_deduction_salary_types` (
+  `CL_APP_DEDUCTION_SALARY_TYPE_ID` int(11) NOT NULL,
+  `REG_ENTITY_FARM_ID` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `reg_entity_staff_management_cl_app_entity_document_types`
+--
+
+CREATE TABLE `reg_entity_staff_management_cl_app_entity_document_types` (
+  `CL_KEPT_WORKER_ENTITY_DOCUMENT_TYPE_ID` int(11) NOT NULL,
+  `REG_ENTITY_FARM_ID` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `reg_entity_staff_management_cl_app_hazardous_work_type`
+--
+
+CREATE TABLE `reg_entity_staff_management_cl_app_hazardous_work_type` (
+  `CL_HARZARDOUS_WORK_TYPE_ID` int(11) NOT NULL,
+  `REG_ENTITY_FARM_ID` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `reg_entity_staff_management_cl_app_payment_debt_types`
+--
+
+CREATE TABLE `reg_entity_staff_management_cl_app_payment_debt_types` (
+  `CL_PAYMENT_DEBT_TYPE_ID` int(11) NOT NULL,
+  `REG_ENTITY_FARM_ID` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `reg_entity_staff_other_attribute`
 --
 
@@ -3853,7 +3885,7 @@ CREATE TABLE `sys_pages` (
 INSERT INTO `sys_pages` (`ID`, `ENABLED`, `CODE`, `RANKING`, `NAME`, `SYS_PAGE_DOMAIN_ID`, `DESCRIPTION`, `I18n_DEFAULT`, `I18N_EN`, `I18N_FR`, `I18N_ES`, `I18N_TH`, `I18N_VT`, `I18N_LA`, `I18N_ID`, `I18N_KH`, `UPDATER_ID`, `COMMENT`, `CREATED_AT`, `UPDATED_AT`) VALUES
 (1, 1, 'COMPEDITOR', 1, 'Company editor', 1, 'Company editor', 'Company editor', 'Company editor', 'Company editor', 'Company editor', 'Company editor', 'Company editor', 'Company editor', 'Company editor', 'Company editor', 3, NULL, '2018-02-18 07:16:55', '2018-02-18 07:16:55'),
 (2, 1, 'COMPBROWSER', 2, 'Company browser', 1, 'Company browser', 'Company browser', 'Company browser', 'Company browser', 'Company browser', 'Company browser', 'Company browser', 'Company browser', 'Company browser', 'Company browser', 3, NULL, '2018-02-18 07:16:55', '2018-02-18 07:16:55'),
-(3, 1, '', 3, 'Farm listing', 2, 'Farm listing', 'Farm listing', 'Farm listing', 'Farm listing', 'Farm listing', 'Farm listing', 'Farm listing', 'Farm listing', 'Farm listing', 'Farm listing', 3, NULL, '2018-02-18 07:16:55', '2018-02-18 07:16:55'),
+(3, 1, 'FARMLIST', 3, 'Farm listing', 2, 'Farm listing', 'Farm listing', 'Farm listing', 'Farm listing', 'Farm listing', 'Farm listing', 'Farm listing', 'Farm listing', 'Farm listing', 'Farm listing', 3, NULL, '2018-02-18 07:16:55', '2018-02-18 07:16:55'),
 (4, 1, 'FARMDASH', 4, 'Farm dashboard', 2, 'Farm dashboard', 'Farm dashboard', 'Farm dashboard', 'Farm dashboard', 'Farm dashboard', 'Farm dashboard', 'Farm dashboard', 'Farm dashboard', 'Farm dashboard', 'Farm dashboard', 3, NULL, '2018-02-18 07:16:55', '2018-02-18 07:16:55'),
 (5, 1, 'FARMCREATE', 5, 'Farm create', 2, 'Farm create', 'Farm create', 'Farm create', 'Farm create', 'Farm create', 'Farm create', 'Farm create', 'Farm create', 'Farm create', 'Farm create', 3, NULL, '2018-02-18 07:16:55', '2018-02-18 07:16:55'),
 (6, 1, 'FARMFACILITY', 6, 'Farm facility', 2, 'Farm facility', 'Farm facility', 'Farm facility', 'Farm facility', 'Farm facility', 'Farm facility', 'Farm facility', 'Farm facility', 'Farm facility', 'Farm facility', 3, NULL, '2018-02-18 07:16:55', '2018-02-18 07:16:55'),
@@ -4050,14 +4082,17 @@ INSERT INTO `sys_users` (`ID`, `name`, `email`, `password`, `remember_token`, `S
 (3, 'Yann', 'yann.laurent@pagre-it.com', 'a', 'bYKYqJbPQyaBXur7vBYDe4Fca0U4yP0BTgK9N0BT4iGpN0lYyWkKeIIV8ZLw', 1, NULL, NULL, NULL, NULL, NULL, 0, 1, 0, NULL, '2016-12-31 13:20:49', '2017-09-12 06:47:48'),
 (4, 'Pau Badia', 'contact@fairagora.com', 'a', 'CU2fh81hE2CZUUDWCqirG6m8FBhSLh6iANYqxADTafKFrMBiqzbOiUroHsgo', 1, NULL, NULL, NULL, NULL, NULL, 0, 1, 0, NULL, '2017-04-03 21:04:33', '2017-07-26 18:25:05'),
 (5, 'pitch', 'ema@gmail.com', 'a', 'GFfwcVbQ31BU7mLbMwU65DiLLb9zjM7aIZ8WaDpXA62iLNDqm66ZAsPljbRY', 3, NULL, NULL, NULL, NULL, NULL, 12, 1, 0, NULL, '2017-04-26 21:58:09', '2017-04-26 22:01:31'),
-(7, 'Decha Farm', 'paubadiagrimalt@gmail.com', 'a', 'Y6FRqc11PMunhPEoT9w6oTrkezUucCzkscbPZZiQdFsrcseMr4QpS5MHFqA0', 4, NULL, NULL, NULL, NULL, NULL, 3, 1, 0, NULL, '2017-05-01 17:52:49', '2017-05-04 18:27:55'),
+(7, 'Decha Farm', 'paubadiagrimalt@gmail.com', 'a', 'Y6FRqc11PMunhPEoT9w6oTrkezUucCzkscbPZZiQdFsrcseMr4QpS5MHFqA0', 4, NULL, 51, NULL, NULL, NULL, 3, 1, 0, NULL, '2017-05-01 17:52:49', '2017-05-04 18:27:55'),
 (8, 'Tongpoon Thorasap', 'nudeerdk@gmail.com', 'a', NULL, 4, NULL, NULL, NULL, NULL, NULL, 21, 1, 0, NULL, '2017-05-04 18:08:30', '2017-05-04 18:12:53'),
 (9, 'Sam Roi Yod Shrimp Farm Cooperative', 'samroiyod_coop@hotmail.com', 'a', NULL, 3, NULL, NULL, NULL, NULL, NULL, 12, 1, 0, NULL, '2017-05-04 18:31:08', '2017-05-04 18:31:08'),
 (10, 'Flavie Denelle', 'flavie.denelle@gmail.com', 'a', NULL, 1, NULL, NULL, NULL, NULL, NULL, 0, 1, 0, NULL, '2017-07-20 20:44:30', '2017-07-20 20:44:30'),
 (11, 'pu', 'amornratn@mitrphol.com', 'pu', NULL, 1, NULL, NULL, NULL, NULL, NULL, 0, 1, 0, NULL, '2017-11-24 21:40:24', '2017-11-24 21:40:24'),
 (12, 'Jamnan', 'jamnank@mitrphol.com', 'jamnan', NULL, 1, NULL, NULL, NULL, NULL, NULL, 0, 1, 0, NULL, '2017-11-24 21:41:13', '2017-11-24 21:41:13'),
 (13, 'Somchai Sawaengha', 'pau__badia@hotmail.com', 'a', NULL, 4, NULL, 151, NULL, NULL, NULL, 0, 1, 0, NULL, '2017-12-11 03:25:01', '2017-12-11 03:25:01'),
-(19, 'TSM', 'pau@fairagora.com', 'a', NULL, 3, NULL, NULL, 150, NULL, NULL, 0, 1, 0, NULL, '2018-03-15 07:08:15', '2018-03-15 07:08:15');
+(19, 'TSM19', 'cmuangkote@gmail.com', '1411', NULL, 4, NULL, 154, NULL, NULL, NULL, 0, 1, 0, NULL, '2018-03-15 07:08:15', '2018-03-15 07:08:15'),
+(20, 'Cooperative Test', 'pau@fairagora.com', 'a', NULL, 3, NULL, NULL, 150, NULL, NULL, 0, 1, 0, NULL, '2018-03-20 10:36:50', '2018-03-20 10:36:50'),
+(21, 'จารึก ประพรม', 'phuphamaya@hotmail.com', '123', NULL, 4, NULL, 2, NULL, NULL, NULL, 0, 1, 0, NULL, '2018-04-03 05:21:14', '2018-04-03 05:21:14'),
+(23, 'TSM8', 'puk@tsm.com', 'abc', NULL, 4, NULL, 153, NULL, NULL, NULL, 0, 1, 0, NULL, '2018-04-17 07:00:19', '2018-04-17 07:00:19');
 
 -- --------------------------------------------------------
 
@@ -4156,6 +4191,7 @@ INSERT INTO `sys_users_rights` (`ID`, `ENABLED`, `SYS_ROLE_ID`, `SYS_PAGE_ID`, `
 (70, 1, 4, 32, 4, 'Farm Owner - Buyer data', 'Management of Buyer data by Farm Owner', 3, NULL, '2018-02-18 08:09:56', '2018-02-18 08:09:56'),
 (71, 1, 4, 33, 4, 'Farm Owner - Buyer dashboard', 'Management of Buyer dashboard by Farm Owner', 3, NULL, '2018-02-18 08:09:56', '2018-02-18 08:09:56'),
 (72, 1, 4, 34, 3, 'Farm Owner - User editor', 'Management of User editor by Farm Owner', 3, NULL, '2018-02-18 08:09:56', '2018-02-18 08:09:56'),
+(73, 1, 4, 35, 3, 'Farm Owner - User browser', 'Management of User browser by Farm Owner', 3, NULL, '2018-03-18 19:51:04', '2018-03-18 19:51:04'),
 (74, 1, 4, 36, 2, 'Farm Owner - Cooperative data for cooperative', 'Management of Cooperative data for cooperative by Farm Owner', 3, NULL, '2018-02-18 08:09:56', '2018-02-18 08:09:56'),
 (75, 1, 4, 37, 2, 'Farm Owner - Cooperative dashboard for cooperative', 'Management of Cooperative dashboard for cooperative by Farm Owner', 3, NULL, '2018-02-18 08:09:56', '2018-02-18 08:09:56'),
 (77, 1, 6, 1, 5, 'Farm Manager - Company editor', 'Management of Company editor by Farm Manager', 3, NULL, '2018-02-18 08:12:06', '2018-02-18 08:12:06'),
@@ -4304,8 +4340,8 @@ INSERT INTO `sys_users_rights` (`ID`, `ENABLED`, `SYS_ROLE_ID`, `SYS_PAGE_ID`, `
 (221, 1, 7, 31, 4, 'Supplier  - Buyer browser', 'Management of Buyer browser by Supplier ', 3, NULL, '2018-02-18 08:16:42', '2018-02-18 08:16:42'),
 (222, 1, 7, 32, 4, 'Supplier  - Buyer data', 'Management of Buyer data by Supplier ', 3, NULL, '2018-02-18 08:16:42', '2018-02-18 08:16:42'),
 (223, 1, 7, 33, 5, 'Supplier  - Buyer dashboard', 'Management of Buyer dashboard by Supplier ', 3, NULL, '2018-02-18 08:16:42', '2018-02-18 08:16:42'),
-(224, 1, 7, 34, 5, 'Supplier  - User editor', 'Management of User editor by Supplier ', 3, NULL, '2018-02-18 08:16:42', '2018-02-18 08:16:42'),
-(225, 1, 7, 35, 5, 'Supplier  - User browser', 'Management of User browser by Supplier ', 3, NULL, '2018-02-18 08:16:42', '2018-02-18 08:16:42'),
+(224, 1, 7, 34, 3, 'Supplier  - User editor', 'Management of User editor by Supplier ', 3, NULL, '2018-02-18 08:16:42', '2018-02-18 08:16:42'),
+(225, 1, 7, 35, 3, 'Supplier  - User browser', 'Management of User browser by Supplier ', 3, NULL, '2018-02-18 08:16:42', '2018-02-18 08:16:42'),
 (226, 1, 7, 36, 4, 'Supplier  - Cooperative data for cooperative', 'Management of Cooperative data for cooperative by Supplier ', 3, NULL, '2018-02-18 08:16:42', '2018-02-18 08:16:42'),
 (227, 1, 7, 37, 4, 'Supplier  - Cooperative dashboard for cooperative', 'Management of Cooperative dashboard for cooperative by Supplier ', 3, NULL, '2018-02-18 08:16:42', '2018-02-18 08:16:42');
 
@@ -5588,7 +5624,7 @@ ALTER TABLE `dt_farmaq_plot_measurements`
 -- AUTO_INCREMENT pour la table `dt_farmaq_pond_management`
 --
 ALTER TABLE `dt_farmaq_pond_management`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 --
 -- AUTO_INCREMENT pour la table `dt_farmaq_pond_measurements`
 --
@@ -5598,7 +5634,7 @@ ALTER TABLE `dt_farmaq_pond_measurements`
 -- AUTO_INCREMENT pour la table `dt_farmaq_production`
 --
 ALTER TABLE `dt_farmaq_production`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 --
 -- AUTO_INCREMENT pour la table `dt_soil_analysis`
 --
@@ -5613,7 +5649,7 @@ ALTER TABLE `dt_water_analysis`
 -- AUTO_INCREMENT pour la table `reg_entities`
 --
 ALTER TABLE `reg_entities`
-  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=153;
+  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=159;
 --
 -- AUTO_INCREMENT pour la table `reg_entity_farmag_details`
 --
@@ -5633,7 +5669,7 @@ ALTER TABLE `reg_entity_farmaq_details`
 -- AUTO_INCREMENT pour la table `reg_entity_farmaq_ponds`
 --
 ALTER TABLE `reg_entity_farmaq_ponds`
-  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=183;
+  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=185;
 --
 -- AUTO_INCREMENT pour la table `reg_entity_farm_buyers`
 --
@@ -5643,7 +5679,7 @@ ALTER TABLE `reg_entity_farm_buyers`
 -- AUTO_INCREMENT pour la table `reg_entity_farm_details`
 --
 ALTER TABLE `reg_entity_farm_details`
-  MODIFY `ID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=103;
+  MODIFY `ID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=106;
 --
 -- AUTO_INCREMENT pour la table `reg_entity_farm_providers`
 --
@@ -5698,7 +5734,7 @@ ALTER TABLE `sys_roles`
 -- AUTO_INCREMENT pour la table `sys_users`
 --
 ALTER TABLE `sys_users`
-  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 --
 -- AUTO_INCREMENT pour la table `sys_users_rights`
 --
