@@ -251,7 +251,8 @@
 
 
 <th:block layout:fragment="page-scripts">
-	<script type="text/javascript">
+	<script th:inline="javascript">
+      /*<![CDATA[*/
       $(document).ready(function () {
       });
       $('select').multipleSelect();
@@ -260,7 +261,7 @@
       $("div#protectiveEquipmentDz").dropzone(initDropzone("/upload", "/deleteimage", "protective_equipment", $("div#protectiveEquipmentDz").data('pictures')));
       $("div#workAccidentRecordDz").dropzone(initDropzone("/upload", "/deleteimage", "work_accident_record", $("div#workAccidentRecordDz").data('pictures')));
       $("div#farmPoliciesDz").dropzone(initDropzone("/upload", "/deleteimage", "farm_policies", $("div#farmPoliciesDz").data('pictures')));
-
+      /*]]>*/
 	</script>
 </th:block>
 

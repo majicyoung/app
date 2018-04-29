@@ -64,7 +64,8 @@
 </div>
 
 <th:block layout:fragment="page-scripts">
-	<script type="text/javascript">
+	<script th:inline="javascript">
+      /*<![CDATA[*/
 		$(document).ready(function() {
 
 		});
@@ -80,6 +81,7 @@
 			});
 			return hasError;
 		}
+	 /*]]>*/
 	</script>
 </th:block>
 </html>
