@@ -21,22 +21,7 @@
 								<div class="tab-pane active" id="tab_3">
 									<div class="col-xs-12">
 										<div class="col-xs-12">
-											<h4 th:text="#{farm.siting_hvh}">farm.siting_hvh</h4>
-
-											<div class="form-group row">
-												<label for="inputFarmImpactAssesment" class="col-xs-4 control-label"
-															 th:text="#{farm.envi_impact_assessment}">farm.envi_impact_assessment</label>
-												<div class="col-xs-5">
-													<div id="environmentImpactAssessmentDocDz" class="dropzone float-left"
-															 th:attr="data-pictures=${farmDto.getEnvironmentImpactAssessmentDocUrl()}"/>
-												</div>
-												<div class="col-xs-2 bloc-file-uploaded">
-													<a th:if="${!#strings.isEmpty(farmDto.environmentImpactAssessmentDocUrl)}"
-														 th:href="@{'/download/'+${farmDto.environmentImpactAssessmentDocUrl}}" target="_blank">
-														<i class="fa fa-download"></i>
-													</a>
-												</div>
-											</div>
+											<h4 th:text="#{farm.property_title}">farm.property_title</h4>
 											<div class="form-group row">
 												<label for="inputFarmConstructionPermit" class="col-xs-4 control-label"
 															 th:text="#{default.construction_permit}"></label>
@@ -64,6 +49,25 @@
 													</a>
 												</div>
 											</div>
+										</div>
+										<div class="col-xs-12">
+											<h4 th:text="#{farm.siting_hvh}">farm.siting_hvh</h4>
+
+											<div class="form-group row">
+												<label for="inputFarmImpactAssesment" class="col-xs-4 control-label"
+															 th:text="#{farm.envi_impact_assessment}">farm.envi_impact_assessment</label>
+												<div class="col-xs-5">
+													<div id="environmentImpactAssessmentDocDz" class="dropzone float-left"
+															 th:attr="data-pictures=${farmDto.getEnvironmentImpactAssessmentDocUrl()}"/>
+												</div>
+												<div class="col-xs-2 bloc-file-uploaded">
+													<a th:if="${!#strings.isEmpty(farmDto.environmentImpactAssessmentDocUrl)}"
+														 th:href="@{'/download/'+${farmDto.environmentImpactAssessmentDocUrl}}" target="_blank">
+														<i class="fa fa-download"></i>
+													</a>
+												</div>
+											</div>
+
 										</div>
 										<div class="col-xs-12" th:if="${v8App.pondProfile}">
 											<h4 th:text="#{farm.siting_protected_area}">farm.siting_protected_area</h4>
