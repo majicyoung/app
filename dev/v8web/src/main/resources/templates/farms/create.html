@@ -231,12 +231,6 @@
 															<div id="aerailDz" class="dropzone float-left"
 																	 th:attr="data-pictures=${farmDto.getAerialViewUrl()}"/>
 														</div>
-														<div class="col-xs-6">
-															<a th:if="${farmDto.aerialViewUrl !=null}"
-																 th:href="@{'/download/'+${farmDto.aerialViewUrl}}" target="_blank">
-																<i class="fa fa-file-image-o"></i> - <i class="fa fa-download"></i>
-															</a>
-														</div>
 													</div>
 												</div>
 											</div>
@@ -368,6 +362,15 @@
               }
           }
       }
+      $('#dz-details').on('click', function()
+      {
+          console.log("filename :",$('#dz-filename').value());
+      });
+
+      $('#dz-size').on('click', function()
+      {
+          console.log("size :",$('#dz-size').value());
+      });
 
 
       function actionDone(item) {

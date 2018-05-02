@@ -33,7 +33,7 @@ var PREVIEW_TEMPLATE = '\
                                 </g>\
                             </svg>\
                         </div>\
-                        <a class="dz-remove" href="javascript:void(0);" data-dz-remove="" data-url="">Remove file</a>\
+                        <button class="dz-remove btn btn-xs btn-flat btn-danger" href="javascript:void(0);" data-dz-remove="" data-url="" title="Delete image"><i class="fa fa-trash"></i></button>\
 					</div>\
 				';
 
@@ -69,6 +69,9 @@ function initDropzone(urlUpload, urlDelete, type, picture) {
                 this.emit("thumbnail", image1, picture);
 
                 $(image1.previewElement).find('.dz-progress').hide()
+                $(".btn-primary").attr("href", function(i, origValue){
+                    return "/download/" + picture;
+                });
             }
 
             this.on("maxfilesexceeded", function (file) {
@@ -78,6 +81,13 @@ function initDropzone(urlUpload, urlDelete, type, picture) {
 
             this.on("removedfile", function () {
                 $.post(URL_CURRENT + urlDelete + "?type=" + type);
+            });
+            this.on("thumbnail", function(file) {
+                console.log(file); // will send to console all available props
+                file.previewElement.addEventListener("click", function() {
+                    var win = window.open(picture, '_blank');
+                    win.focus();
+                });
             });
         }
     }
