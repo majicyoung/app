@@ -1,15 +1,16 @@
 package com.fairagora.verifik8.v8web.data.domain.reg;
-
-import com.fairagora.verifik8.v8web.data.domain.V8Entity;
-import com.fairagora.verifik8.v8web.data.domain.V8EntitySupport;
 import com.fairagora.verifik8.v8web.data.domain.commons.AttachmentInterface;
+import com.fairagora.verifik8.v8web.data.domain.sys.SYSUser;
+import com.fairagora.verifik8.v8web.data.infra.ApplicationContextProvider;
+import com.fairagora.verifik8.v8web.data.repo.sys.SYSUserRepository;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 import javax.persistence.*;
-import java.io.Serializable;
+import java.util.Date;
 
 @Entity()
 @Table(name = "reg_pictures")
-public class RegPicture implements AttachmentInterface {
+public class RegPicture  implements AttachmentInterface {
 
 	private static final long serialVersionUID = 1L;
 
@@ -24,14 +25,46 @@ public class RegPicture implements AttachmentInterface {
 	@Column(name = "RESOURCE_PATH")
 	protected String resourcePath;
 
-	@Column(name = "X_CLASS")
-	protected String classType;
+	@Column(name = "CREATED_AT")
+	protected Date createdAt;
 
-	@Column(name = "X_ID")
-	protected Long xID;
+	@Column(name = "UPDATED_AT")
+	protected Date updatedAt;
 
-	@Column(name = "POSITION")
-	protected String position;
+	@Column(name = "COMMENT")
+	protected String comment = "";
+
+	@PrePersist
+	protected void prePersist() {
+		if (this.createdAt == null)
+			this.createdAt = new Date();
+		this.updatedAt = new Date();
+	}
+
+	public Date getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(Date createdAt) {
+		this.createdAt = createdAt;
+	}
+
+	public Date getUpdatedAt() {
+		return updatedAt;
+	}
+
+	public void setUpdatedAt(Date updatedAt) {
+		this.updatedAt = updatedAt;
+	}
+
+	public String getComment() {
+		return comment;
+	}
+
+	public void setComment(String comment) {
+		this.comment = comment;
+	}
+
 
 	public Long getPictureId() {
 		return pictureId;
@@ -47,30 +80,6 @@ public class RegPicture implements AttachmentInterface {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public Long getxID() {
-		return xID;
-	}
-
-	public void setxID(Long xID) {
-		this.xID = xID;
-	}
-
-	public String getClassType() {
-		return classType;
-	}
-
-	public void setClassType(String classType) {
-		this.classType = classType;
-	}
-
-	public String getPosition() {
-		return position;
-	}
-
-	public void setPosition(String position) {
-		this.position = position;
 	}
 
 	@Override
