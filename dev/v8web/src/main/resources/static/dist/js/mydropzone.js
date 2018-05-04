@@ -1,4 +1,4 @@
-var MAX_FILES = 1;
+var MAX_FILES = 10;
 var RESIZE_WIDTH = 300;
 var RESIZE_HEIGHT = 300;
 var RESIZE_QUANLITY = 80;
@@ -37,7 +37,7 @@ var PREVIEW_TEMPLATE = '\
 					</div>\
 				';
 
-function initDropzone(urlUpload, urlDelete, type, picture) {
+function initDropzone(urlUpload, urlDelete, type, pictureNames) {
 
     return {
         maxFiles: MAX_FILES,
@@ -50,28 +50,35 @@ function initDropzone(urlUpload, urlDelete, type, picture) {
         url: URL_CURRENT + urlUpload,
 
         init: function () {
+
             mdz = this;
             this.options.previewTemplate = PREVIEW_TEMPLATE;
 
-            if (undefined !== picture) {
-                picture = URL + "/download/" + picture;
+            if (undefined !== pictureNames) {
+                let pictureNamesArray = pictureNames.replace("[","").replace("]","").split(',');
+                pictureNamesArray.forEach(function(element) {
+                    let pictureName = element.trim()
+                    pictureUrl = URL + "/download/" + pictureName;
 
-                var fileName = "";
-                if (isImageExisted(picture)) {
-                    fileName = picture;
-                }
-                else {
-                    fileName = "\nFile not found\nPlease upload new one";
-                }
+                    let fileName = "";
+                    if (isImageExisted(pictureName)) {
+                        fileName = pictureName;
+                    }
+                    else {
+                        fileName = "\nFile not found\nPlease upload new one";
+                    }
 
-                image1 = {"name": fileName};
-                this.emit("addedfile", image1);
-                this.emit("thumbnail", image1, picture);
+                    image = {"name": fileName};
+                    mdz.emit("addedfile", image);
+                    mdz.emit("thumbnail", image, pictureUrl);
 
-                $(image1.previewElement).find('.dz-progress').hide()
-                $(".btn-primary").attr("href", function(i, origValue){
-                    return "/download/" + picture;
+                    $(image.previewElement).find('.dz-progress').hide()
+                    $(image.previewElement).addEventListener("click", {url: pictureUrl}, function(event) {
+                        let win = window.open(event.data.url, '_blank');
+                        win.focus();
+                    });
                 });
+
             }
 
             this.on("maxfilesexceeded", function (file) {
@@ -79,15 +86,21 @@ function initDropzone(urlUpload, urlDelete, type, picture) {
                 this.addFile(file);
             });
 
-            this.on("removedfile", function () {
-                $.post(URL_CURRENT + urlDelete + "?type=" + type);
+            this.on("removedfile", function (file) {
+                console.log(file);
+                $.post(URL_CURRENT + urlDelete + "?type=" + type + "&filename=" + file.name);
             });
             this.on("thumbnail", function(file) {
                 console.log(file); // will send to console all available props
                 file.previewElement.addEventListener("click", function() {
-                    var win = window.open(picture, '_blank');
+                    let win = window.open(URL + "/download/" + file.name, '_blank');
                     win.focus();
                 });
+            });
+            this.on("addedfile", function (file) {
+                console.log(file); // will send to console all available props
+
+
             });
         }
     }

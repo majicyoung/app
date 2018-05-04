@@ -1,6 +1,7 @@
 package com.fairagora.verifik8.v8web.mvc.farms.dto;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
@@ -39,7 +40,7 @@ public class FarmFormDto {
 	protected V8MeasureDto size;
 
 	protected MultipartFile aerialView;
-	protected String aerialViewUrl;
+	protected List<String> aerialViewUrl;
 
 	protected boolean stakeholderMeetingParticipation;
 	
@@ -170,11 +171,11 @@ public class FarmFormDto {
 		this.aerialView = aerialView;
 	}
 
-	public String getAerialViewUrl() {
+	public List<String> getAerialViewUrl() {
 		return aerialViewUrl;
 	}
 
-	public void setAerialViewUrl(String aerialViewUrl) {
+	public void setAerialViewUrl(List<String> aerialViewUrl) {
 		this.aerialViewUrl = aerialViewUrl;
 	}
 

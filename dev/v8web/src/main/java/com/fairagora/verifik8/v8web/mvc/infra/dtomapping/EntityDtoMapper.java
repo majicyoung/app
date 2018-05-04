@@ -3,6 +3,7 @@ package com.fairagora.verifik8.v8web.mvc.infra.dtomapping;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import com.fairagora.verifik8.v8web.data.domain.reg.RegPicture;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.TargetType;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,10 +64,10 @@ public class EntityDtoMapper {
 		return mReferences;
 	}
 
-	public void map(MultipartFile mpf, @MappingTarget Attachment at) {
-		if (at == null)
-			at = new Attachment();
-		attachementService.store(at, mpf);
+	public void map(MultipartFile mpf, @MappingTarget RegPicture regPicture) {
+		if (regPicture == null)
+			regPicture = new RegPicture();
+		attachementService.store(regPicture, mpf);
 	}
 
 }

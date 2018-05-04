@@ -1,22 +1,11 @@
 package com.fairagora.verifik8.v8web.data.domain.reg.farm;
 
 import java.util.Date;
+import java.util.List;
 
-import javax.persistence.AssociationOverride;
-import javax.persistence.AssociationOverrides;
-import javax.persistence.AttributeOverride;
-import javax.persistence.AttributeOverrides;
-import javax.persistence.Column;
-import javax.persistence.Embedded;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
+import com.fairagora.verifik8.v8web.data.domain.reg.RegPicture;
 import org.hibernate.annotations.NotFound;
 import org.hibernate.annotations.NotFoundAction;
 
@@ -25,6 +14,7 @@ import com.fairagora.verifik8.v8web.data.domain.cl.CLAppHvHeExpensionType;
 import com.fairagora.verifik8.v8web.data.domain.commons.Attachment;
 import com.fairagora.verifik8.v8web.data.domain.commons.V8Measure;
 import com.fairagora.verifik8.v8web.data.domain.reg.RegEntity;
+import org.hibernate.annotations.Where;
 
 @Entity
 @Table(name = "reg_entity_farm_details")
@@ -66,7 +56,7 @@ public class RegEntityFarmDetails extends V8EntitySupport {
 
 	@Embedded
 	@AttributeOverrides({
-			@AttributeOverride(name = "resourcePath", column = @Column(name = "ENVIRONMENT_IMPACT_ASSESSMENT_URL")) })
+				@AttributeOverride(name = "resourcePath", column = @Column(name = "ENVIRONMENT_IMPACT_ASSESSMENT_URL")) })
 	protected Attachment environmentImpactAssessmentDoc;
 
 	@Embedded
@@ -77,9 +67,14 @@ public class RegEntityFarmDetails extends V8EntitySupport {
 	@AttributeOverrides({ @AttributeOverride(name = "resourcePath", column = @Column(name = "HVH_LAND_TITLE")) })
 	protected Attachment landTitle;
 
-	@Embedded
-	@AttributeOverrides({ @AttributeOverride(name = "resourcePath", column = @Column(name = "AERIAL_VIEW")) })
-	protected Attachment aerialView;
+	@OneToMany(cascade=CascadeType.ALL,
+				fetch = FetchType.EAGER)
+	@JoinTable(
+			name = "joint_entity_picture",
+			joinColumns = @JoinColumn(name = "ENTITY_ID"),
+			inverseJoinColumns = @JoinColumn(name = "PICTURE_ID")
+	)
+	protected List<RegPicture> aerialViews;
 
 	@Column(name = "SITING_PROTECTED_AREA")
 	protected boolean sittingProtectedArea;
@@ -258,12 +253,12 @@ public class RegEntityFarmDetails extends V8EntitySupport {
 		this.sittingProtectedAreaDoc = sittingProtectedAreaDoc;
 	}
 
-	public Attachment getAerialView() {
-		return aerialView;
+	public List<RegPicture> getAerialView() {
+		return aerialViews;
 	}
 
-	public void setAerialView(Attachment aerialView) {
-		this.aerialView = aerialView;
+	public void setAerialView(List<RegPicture> aerialView) {
+		this.aerialViews = aerialView;
 	}
 
 	public boolean isHasALab() {

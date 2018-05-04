@@ -1,9 +1,9 @@
 package com.fairagora.verifik8.v8web.mvc.farms;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 import com.fairagora.verifik8.v8web.data.domain.commons.Attachment;
+import com.fairagora.verifik8.v8web.data.domain.reg.RegPicture;
 import com.fairagora.verifik8.v8web.data.infra.AttachementsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -64,7 +64,7 @@ public class FarmsController extends AbstractV8Controller {
 	@Autowired
 	private AttachementsService attachementsService;
 
-	private Attachment aerailAttachment;
+	private Map<String, RegPicture> aerailAttachments;
 
 	private Attachment eiaDocAttachment;
 	private Attachment contructionPermitAttachment;
@@ -121,7 +121,10 @@ public class FarmsController extends AbstractV8Controller {
 		Optional<RegEntityFarmDetails> details = regEntityFarmDetailsRepository.findByEntityId(id);
 		if (details.isPresent()) {
 			regFarmDtoMapper.toDto(details.get(), dto);
-			aerailAttachment = details.get().getAerialView();
+			aerailAttachments = new HashMap<>();
+			for (RegPicture regPicture : details.get().getAerialView()) {
+				aerailAttachments.put(regPicture.getResourcePath(), regPicture);
+			}
 		}
 
 		prepareForFarmEdition(dto, mv);
@@ -153,7 +156,7 @@ public class FarmsController extends AbstractV8Controller {
 		regFarmDtoMapper.fillEntity(farmDto, farmDetails);
 		farmDetails.setEntity(farm);
 
-		if (aerailAttachment != null) farmDetails.setAerialView(aerailAttachment);
+		if (aerailAttachments != null) farmDetails.setAerialView(new ArrayList<>(aerailAttachments.values()));
 
 		regEntityFarmDetailsRepository.save(farmDetails);
 
@@ -360,10 +363,10 @@ public class FarmsController extends AbstractV8Controller {
 	}
 
 	@RequestMapping(value = "/farm/{id}/edit.html/deleteimage", method = RequestMethod.POST)
-	public String handleFileDelete(@RequestParam("type") String type) {
+	public String handleFileDelete(@RequestParam("type") String type, @RequestParam("filename") String filename) {
 		switch (type) {
 			case TYPE_AERAIL:
-				this.aerailAttachment = null;
+				this.aerailAttachments.remove(filename);
 				break;
 		}
 
@@ -373,15 +376,15 @@ public class FarmsController extends AbstractV8Controller {
 	@RequestMapping(value = "/farm/{id}/edit.html/upload", method = RequestMethod.POST)
 	public String handleFileUpload(@RequestParam("file") MultipartFile file, @RequestParam("type") String type) {
 
-		Attachment attachment = new Attachment();
-		attachment.setResourcePath(file.getOriginalFilename());
+		RegPicture regPicture = new RegPicture();
+		regPicture.setResourcePath(file.getOriginalFilename());
 
 		// Save file
-		attachementsService.store(attachment, file);
+		attachementsService.store(regPicture, file);
 
 		switch (type) {
 			case TYPE_AERAIL:
-				this.aerailAttachment = attachment;
+				this.aerailAttachments.put(file.getOriginalFilename(), regPicture);
 				break;
 		}
 
@@ -389,7 +392,7 @@ public class FarmsController extends AbstractV8Controller {
 	}
 
 	@RequestMapping(value = "/farm/{id}/environmental.html/deleteimage", method = RequestMethod.POST)
-	public String handleEnvironmentalFileDelete(@RequestParam("type") String type) {
+	public String handleEnvironmentalFileDelete(@RequestParam("type") String type, @RequestParam("filename") String filename) {
 		switch (type) {
 			case TYPE_ENVIRONMENTAL_EIA_DOC:
 				this.eiaDocAttachment = null;
