@@ -14,6 +14,9 @@ import com.fairagora.verifik8.v8web.data.domain.cl.CLAppSalaryDeductionType;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLAppWorkerEntityDocumentTypes;
 import com.fairagora.verifik8.v8web.data.domain.cl.ClAppTerminationContractReason;
 import com.fairagora.verifik8.v8web.data.domain.commons.Attachment;
+import com.fairagora.verifik8.v8web.data.domain.reg.RegPicture;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 @Entity
 @Table(name = "reg_entity_staff_management")
@@ -84,9 +87,15 @@ public class RegEntityStaffManagement {
 	@Column(name = "EXISTENCE_FARM_POLICIES")
 	protected boolean existenceFarmPolicies;
 
-	@Embedded
-	@AttributeOverrides({ @AttributeOverride(name = "resourcePath", column = @Column(name = "FARM_POLICIES")) })
-	protected Attachment farmPolicies;
+	@OneToMany(cascade=CascadeType.ALL,
+			fetch = FetchType.EAGER)
+	@JoinTable(
+			name = "jt_reg_staff_management_farm_policies_reg_picture",
+			joinColumns = @JoinColumn(name = "ENTITY_ID"),
+			inverseJoinColumns = @JoinColumn(name = "PICTURE_ID")
+	)
+	@Fetch(value = FetchMode.SUBSELECT)
+	protected List<RegPicture> farmPolicies;
 
 	@Column(name = "EXISTENCE_HEALTH_SAFETY_POLICIES")
 	protected boolean existenceHealthSafetyPolicies;
@@ -97,17 +106,28 @@ public class RegEntityStaffManagement {
 	@Column(name = "EXISTENCE_WORK_ACCIDENT_RECORD")
 	protected boolean existenceWorkAccidentRecord;
 
-	@Embedded
-	@AttributeOverrides({ @AttributeOverride(name = "resourcePath", column = @Column(name = "WORK_ACCIDENT_RECORD")) })
-	protected Attachment workAccidentRecord;
+	@OneToMany(cascade=CascadeType.ALL,
+			fetch = FetchType.EAGER)
+	@JoinTable(
+			name = "jt_reg_staff_management_work_accident_reg_picture",
+			joinColumns = @JoinColumn(name = "ENTITY_ID"),
+			inverseJoinColumns = @JoinColumn(name = "PICTURE_ID")
+	)
+	@Fetch(value = FetchMode.SUBSELECT)
+	protected List<RegPicture> workAccidentRecord;
 
 	@Column(name = "ACCESS_TO_PROTECTIVE_EQUIPMENT")
 	protected boolean accessToProtectiveEquipment;
 
-	@Embedded
-	@AttributeOverrides({
-			@AttributeOverride(name = "resourcePath", column = @Column(name = "PROTECTIVE_EQUIPMENT_URL")) })
-	protected Attachment protectiveEquipment;
+	@OneToMany(cascade=CascadeType.ALL,
+			fetch = FetchType.EAGER)
+	@JoinTable(
+			name = "jt_reg_staff_management_protective_equipment_reg_picture",
+			joinColumns = @JoinColumn(name = "ENTITY_ID"),
+			inverseJoinColumns = @JoinColumn(name = "PICTURE_ID")
+	)
+	@Fetch(value = FetchMode.SUBSELECT)
+	protected List<RegPicture> protectiveEquipment;
 
 	@Column(name = "EMPLOYER_ISSUE_RECORD")
 	protected boolean empolyerIssueRecord;
@@ -374,11 +394,11 @@ public class RegEntityStaffManagement {
 		this.existenceFarmPolicies = existenceFarmPolicies;
 	}
 
-	public Attachment getFarmPolicies() {
+	public List<RegPicture> getFarmPolicies() {
 		return farmPolicies;
 	}
 
-	public void setFarmPolicies(Attachment farmPolicies) {
+	public void setFarmPolicies(List<RegPicture> farmPolicies) {
 		this.farmPolicies = farmPolicies;
 	}
 
@@ -406,11 +426,11 @@ public class RegEntityStaffManagement {
 		this.existenceWorkAccidentRecord = existenceWorkAccidentRecord;
 	}
 
-	public Attachment getWorkAccidentRecord() {
+	public List<RegPicture> getWorkAccidentRecord() {
 		return workAccidentRecord;
 	}
 
-	public void setWorkAccidentRecord(Attachment workAccidentRecord) {
+	public void setWorkAccidentRecord(List<RegPicture> workAccidentRecord) {
 		this.workAccidentRecord = workAccidentRecord;
 	}
 
@@ -518,11 +538,11 @@ public class RegEntityStaffManagement {
 		this.grievingSystemUrl = grievingSystemUrl;
 	}
 
-	public Attachment getProtectiveEquipment() {
+	public List<RegPicture> getProtectiveEquipment() {
 		return protectiveEquipment;
 	}
 
-	public void setProtectiveEquipment(Attachment protectiveEquipmentUrl) {
+	public void setProtectiveEquipment(List<RegPicture> protectiveEquipmentUrl) {
 		this.protectiveEquipment = protectiveEquipmentUrl;
 	}
 

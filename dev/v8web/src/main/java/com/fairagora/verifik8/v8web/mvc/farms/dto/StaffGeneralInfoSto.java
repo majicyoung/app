@@ -22,16 +22,16 @@ public class StaffGeneralInfoSto {
 
 	protected boolean accessToProtectiveEquipment;
 	protected MultipartFile protectiveEquipment;
-	protected String protectiveEquipmentUrl;
+	protected List<String> protectiveEquipmentUrl;
 
 	protected boolean existenceWorkAccidentRecord;
 
 	protected MultipartFile workAccidentRecord;
-	protected String workAccidentRecordUrl;
+	protected List<String> workAccidentRecordUrl;
 
 	protected boolean existenceFarmPolicies;
 	protected MultipartFile farmPolicies;
-	protected String farmPoliciesUrl;
+	protected List<String> farmPoliciesUrl;
 
 	protected int nbOfSchoolInArea;
 
@@ -148,11 +148,11 @@ public class StaffGeneralInfoSto {
 		this.workAccidentRecord = workAccidentRecord;
 	}
 
-	public String getWorkAccidentRecordUrl() {
+	public List<String> getWorkAccidentRecordUrl() {
 		return workAccidentRecordUrl;
 	}
 
-	public void setWorkAccidentRecordUrl(String workAccidentRecordUrl) {
+	public void setWorkAccidentRecordUrl(List<String> workAccidentRecordUrl) {
 		this.workAccidentRecordUrl = workAccidentRecordUrl;
 	}
 
@@ -164,11 +164,11 @@ public class StaffGeneralInfoSto {
 		this.farmPolicies = farmPolicies;
 	}
 
-	public String getFarmPoliciesUrl() {
+	public List<String> getFarmPoliciesUrl() {
 		return farmPoliciesUrl;
 	}
 
-	public void setFarmPoliciesUrl(String farmPoliciesUrl) {
+	public void setFarmPoliciesUrl(List<String> farmPoliciesUrl) {
 		this.farmPoliciesUrl = farmPoliciesUrl;
 	}
 
@@ -180,11 +180,11 @@ public class StaffGeneralInfoSto {
 		this.protectiveEquipment = protectiveEquipment;
 	}
 
-	public String getProtectiveEquipmentUrl() {
+	public List<String> getProtectiveEquipmentUrl() {
 		return protectiveEquipmentUrl;
 	}
 
-	public void setProtectiveEquipmentUrl(String protectiveEquipmentUrl) {
+	public void setProtectiveEquipmentUrl(List<String> protectiveEquipmentUrl) {
 		this.protectiveEquipmentUrl = protectiveEquipmentUrl;
 	}
 

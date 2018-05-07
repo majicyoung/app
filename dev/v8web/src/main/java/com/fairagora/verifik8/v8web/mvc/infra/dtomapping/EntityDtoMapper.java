@@ -70,4 +70,10 @@ public class EntityDtoMapper {
 		attachementService.store(regPicture, mpf);
 	}
 
+	public void map(MultipartFile mpf, @MappingTarget Attachment at) {
+		if (at == null)
+			at = new Attachment();
+		attachementService.store(at, mpf);
+	}
+
 }

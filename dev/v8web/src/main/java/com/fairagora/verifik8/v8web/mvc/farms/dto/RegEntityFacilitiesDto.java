@@ -2,25 +2,27 @@ package com.fairagora.verifik8.v8web.mvc.farms.dto;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
+
 public class RegEntityFacilitiesDto {
 
 	protected Long farmId;
 
 	protected Boolean accessToilets;
 	protected MultipartFile accessToiletsAttachment;
-	protected String accessToiletsAttachmentUrl;
+	protected List<String> accessToiletsAttachmentUrl;
 
 	protected Boolean accessRestRoom;
 	protected MultipartFile accessRestRoomAttachment;
-	protected String accessRestRoomAttachmentUrl;
+	protected List<String> accessRestRoomAttachmentUrl;
 
 	protected Boolean accessShower;
 	protected MultipartFile accessShowerAttachment;
-	protected String accessShowerAttachmentUrl;
+	protected List<String> accessShowerAttachmentUrl;
 
 	protected Boolean accessToFreeDrinking;
 	protected MultipartFile accessToFreeDrinkingAttachment;
-	protected String accessToFreeDrinkingAttachmentUrl;
+	protected List<String> accessToFreeDrinkingAttachmentUrl;
 
 	protected Boolean presenceFirstAidKit;
 
@@ -48,11 +50,11 @@ public class RegEntityFacilitiesDto {
 		this.accessToiletsAttachment = accessToiletsAttachment;
 	}
 
-	public String getAccessToiletsAttachmentUrl() {
+	public List<String> getAccessToiletsAttachmentUrl() {
 		return accessToiletsAttachmentUrl;
 	}
 
-	public void setAccessToiletsAttachmentUrl(String accessToiletsAttachmentUrl) {
+	public void setAccessToiletsAttachmentUrl(List<String> accessToiletsAttachmentUrl) {
 		this.accessToiletsAttachmentUrl = accessToiletsAttachmentUrl;
 	}
 
@@ -72,11 +74,11 @@ public class RegEntityFacilitiesDto {
 		this.accessRestRoomAttachment = accessRestRoomAttachment;
 	}
 
-	public String getAccessRestRoomAttachmentUrl() {
+	public List<String> getAccessRestRoomAttachmentUrl() {
 		return accessRestRoomAttachmentUrl;
 	}
 
-	public void setAccessRestRoomAttachmentUrl(String accessRestRoomAttachmentUrl) {
+	public void setAccessRestRoomAttachmentUrl(List<String> accessRestRoomAttachmentUrl) {
 		this.accessRestRoomAttachmentUrl = accessRestRoomAttachmentUrl;
 	}
 
@@ -96,11 +98,11 @@ public class RegEntityFacilitiesDto {
 		this.accessShowerAttachment = accessShowerAttachment;
 	}
 
-	public String getAccessShowerAttachmentUrl() {
+	public List<String> getAccessShowerAttachmentUrl() {
 		return accessShowerAttachmentUrl;
 	}
 
-	public void setAccessShowerAttachmentUrl(String accessShowerAttachmentUrl) {
+	public void setAccessShowerAttachmentUrl(List<String> accessShowerAttachmentUrl) {
 		this.accessShowerAttachmentUrl = accessShowerAttachmentUrl;
 	}
 
@@ -112,11 +114,11 @@ public class RegEntityFacilitiesDto {
 		this.accessToFreeDrinking = accessToFreeDrinking;
 	}
 
-	public String getAccessToFreeDrinkingAttachmentUrl() {
+	public List<String> getAccessToFreeDrinkingAttachmentUrl() {
 		return accessToFreeDrinkingAttachmentUrl;
 	}
 
-	public void setAccessToFreeDrinkingAttachmentUrl(String accessToFreeDrinkingAttachmentUrl) {
+	public void setAccessToFreeDrinkingAttachmentUrl(List<String> accessToFreeDrinkingAttachmentUrl) {
 		this.accessToFreeDrinkingAttachmentUrl = accessToFreeDrinkingAttachmentUrl;
 	}
 

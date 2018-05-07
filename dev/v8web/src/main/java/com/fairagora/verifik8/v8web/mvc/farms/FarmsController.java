@@ -412,22 +412,22 @@ public class FarmsController extends AbstractV8Controller {
 	public String handleEnvironmentalFileDelete(@RequestParam("type") String type, @RequestParam("filename") String filename) {
 		switch (type) {
 			case TYPE_ENVIRONMENTAL_EIA_DOC:
-				this.eiaDocAttachments = null;
+				this.eiaDocAttachments.remove(filename);
 				break;
 			case TYPE_ENVIRONMENTAL_CONTRUCTION_PERMIT:
-				this.contructionPermitAttachments = null;
+				this.contructionPermitAttachments.remove(filename);
 				break;
 			case TYPE_ENVIRONMENTAL_LAND_TITLE:
-				this.landTitleAttachments = null;
+				this.landTitleAttachments.remove(filename);
 				break;
 			case TYPE_ENVIRONMENTAL_SITTING_PROTECTED_AREA:
-				this.sittingProtectedAreaAttachments = null;
+				this.sittingProtectedAreaAttachments.remove(filename);
 				break;
 			case TYPE_ENVIRONMENTAL_CANAL_RESTORATION_PLAN:
-				this.canalRestorationPlanAttachments = null;
+				this.canalRestorationPlanAttachments.remove(filename);
 				break;
 			case TYPE_ENVIRONMENTAL_CUMULATIVE_IMPACE_STUDY:
-				this.cumulativeImpaceStudyAttachments = null;
+				this.cumulativeImpaceStudyAttachments.remove(filename);
 				break;
 		}
 

@@ -1,15 +1,14 @@
 package com.fairagora.verifik8.v8web.data.domain.reg.farm;
 
-import javax.persistence.AttributeOverride;
-import javax.persistence.AttributeOverrides;
-import javax.persistence.Column;
-import javax.persistence.Embedded;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import com.fairagora.verifik8.v8web.data.domain.commons.Attachment;
+import com.fairagora.verifik8.v8web.data.domain.reg.RegPicture;
 import com.fairagora.verifik8.v8web.data.domain.reg.V8Base;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
+import java.util.List;
 
 @Entity
 @Table(name = "reg_entity_facilities")
@@ -22,31 +21,54 @@ public class RegEntityFacilities extends V8Base {
 	@Column(name = "ACCESS_TOILETS")
 	protected Boolean accessToilets;
 
-	@Embedded
-	@AttributeOverrides({ @AttributeOverride(name = "resourcePath", column = @Column(name = "ACCESS_TOILETS_URL")) })
-	protected Attachment accessToiletsAttachment;
+	@OneToMany(cascade=CascadeType.ALL,
+			fetch = FetchType.EAGER)
+	@JoinTable(
+			name = "jt_reg_facilities_access_toilets_reg_picture",
+			joinColumns = @JoinColumn(name = "ENTITY_ID"),
+			inverseJoinColumns = @JoinColumn(name = "PICTURE_ID")
+	)
+	@Fetch(value = FetchMode.SUBSELECT)
+	protected List<RegPicture> accessToiletsAttachment;
 
 	@Column(name = "ACCESS_REST_ROOM")
 	protected Boolean accessRestRoom;
 
-	@Embedded
-	@AttributeOverrides({ @AttributeOverride(name = "resourcePath", column = @Column(name = "ACCESS_REST_ROOM_URL")) })
-	protected Attachment accessRestRoomAttachment;
+	@OneToMany(cascade=CascadeType.ALL,
+			fetch = FetchType.EAGER)
+	@JoinTable(
+			name = "jt_reg_facilities_access_restroom_reg_picture",
+			joinColumns = @JoinColumn(name = "ENTITY_ID"),
+			inverseJoinColumns = @JoinColumn(name = "PICTURE_ID")
+	)
+	@Fetch(value = FetchMode.SUBSELECT)
+	protected List<RegPicture> accessRestRoomAttachment;
 
 	@Column(name = "ACCESS_SHOWER")
 	protected Boolean accessShower;
 
-	@Embedded
-	@AttributeOverrides({ @AttributeOverride(name = "resourcePath", column = @Column(name = "ACCESS_SHOWER_URL")) })
-	protected Attachment accessShowerAttachment;
+	@OneToMany(cascade=CascadeType.ALL,
+			fetch = FetchType.EAGER)
+	@JoinTable(
+			name = "jt_reg_facilities_access_shower_reg_picture",
+			joinColumns = @JoinColumn(name = "ENTITY_ID"),
+			inverseJoinColumns = @JoinColumn(name = "PICTURE_ID")
+	)
+	@Fetch(value = FetchMode.SUBSELECT)
+	protected List<RegPicture> accessShowerAttachment;
 
 	@Column(name = "ACCESS_TO_FREE_DRINKING")
 	protected Boolean accessToFreeDrinking;
 
-	@Embedded
-	@AttributeOverrides({
-			@AttributeOverride(name = "resourcePath", column = @Column(name = "ACCESS_TO_FREE_DRINKING_URL")) })
-	protected Attachment accessToFreeDrinkingAttachment;
+	@OneToMany(cascade=CascadeType.ALL,
+			fetch = FetchType.EAGER)
+	@JoinTable(
+			name = "jt_reg_facilities_access_drinking_reg_picture",
+			joinColumns = @JoinColumn(name = "ENTITY_ID"),
+			inverseJoinColumns = @JoinColumn(name = "PICTURE_ID")
+	)
+	@Fetch(value = FetchMode.SUBSELECT)
+	protected List<RegPicture> accessToFreeDrinkingAttachment;
 
 	@Column(name = "PRESENCE_FIRST_AID_KIT")
 	protected Boolean presenceFirstAidKit;
@@ -67,11 +89,11 @@ public class RegEntityFacilities extends V8Base {
 		this.accessToilets = accessToilets;
 	}
 
-	public Attachment getAccessToiletsAttachment() {
+	public List<RegPicture> getAccessToiletsAttachment() {
 		return accessToiletsAttachment;
 	}
 
-	public void setAccessToiletsAttachment(Attachment accessToiletsAttachment) {
+	public void setAccessToiletsAttachment(List<RegPicture> accessToiletsAttachment) {
 		this.accessToiletsAttachment = accessToiletsAttachment;
 	}
 
@@ -83,11 +105,11 @@ public class RegEntityFacilities extends V8Base {
 		this.accessRestRoom = accessRestRoom;
 	}
 
-	public Attachment getAccessRestRoomAttachment() {
+	public List<RegPicture> getAccessRestRoomAttachment() {
 		return accessRestRoomAttachment;
 	}
 
-	public void setAccessRestRoomAttachment(Attachment accessRestRoomAttachment) {
+	public void setAccessRestRoomAttachment(List<RegPicture> accessRestRoomAttachment) {
 		this.accessRestRoomAttachment = accessRestRoomAttachment;
 	}
 
@@ -99,11 +121,11 @@ public class RegEntityFacilities extends V8Base {
 		this.accessShower = accessShower;
 	}
 
-	public Attachment getAccessShowerAttachment() {
+	public List<RegPicture> getAccessShowerAttachment() {
 		return accessShowerAttachment;
 	}
 
-	public void setAccessShowerAttachment(Attachment accessShowerAttachment) {
+	public void setAccessShowerAttachment(List<RegPicture> accessShowerAttachment) {
 		this.accessShowerAttachment = accessShowerAttachment;
 	}
 
@@ -115,11 +137,11 @@ public class RegEntityFacilities extends V8Base {
 		this.accessToFreeDrinking = accessToFreeDrinking;
 	}
 
-	public Attachment getAccessToFreeDrinkingAttachment() {
+	public List<RegPicture> getAccessToFreeDrinkingAttachment() {
 		return accessToFreeDrinkingAttachment;
 	}
 
-	public void setAccessToFreeDrinkingAttachment(Attachment accessToFreeDrinkingAttachment) {
+	public void setAccessToFreeDrinkingAttachment(List<RegPicture> accessToFreeDrinkingAttachment) {
 		this.accessToFreeDrinkingAttachment = accessToFreeDrinkingAttachment;
 	}
 
