@@ -2,6 +2,8 @@ package com.fairagora.verifik8.v8web.mvc.farms.dto;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
+
 public class StaffFarmFormDto {
 
 	protected Long entity;
@@ -22,7 +24,7 @@ public class StaffFarmFormDto {
 	
 	// att
 	protected MultipartFile workingPermit;
-	protected String workingPermitUrl;
+	protected List<String> workingPermitUrl;
 
 	
 	public Long getEntity() {
@@ -121,11 +123,11 @@ public class StaffFarmFormDto {
 		this.workingPermit = workingPermit;
 	}
 
-	public String getWorkingPermitUrl() {
+	public List<String> getWorkingPermitUrl() {
 		return workingPermitUrl;
 	}
 
-	public void setWorkingPermitUrl(String workingPermitUrl) {
+	public void setWorkingPermitUrl(List<String> workingPermitUrl) {
 		this.workingPermitUrl = workingPermitUrl;
 	}
 

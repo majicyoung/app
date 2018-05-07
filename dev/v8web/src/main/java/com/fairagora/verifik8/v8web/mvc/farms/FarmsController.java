@@ -437,7 +437,6 @@ public class FarmsController extends AbstractV8Controller {
 	@RequestMapping(value = "/farm/{id}/environmental.html/upload", method = RequestMethod.POST)
 	public String handleEnvironmentalFileUpload(@RequestParam("file") MultipartFile file, @RequestParam("type") String type) {
 
-
 		RegPicture regPicture = new RegPicture();
 		regPicture.setResourcePath(file.getOriginalFilename());
 

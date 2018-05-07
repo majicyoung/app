@@ -1,24 +1,18 @@
 package com.fairagora.verifik8.v8web.data.domain.reg.staff;
 
-import javax.persistence.AttributeOverride;
-import javax.persistence.AttributeOverrides;
-import javax.persistence.Column;
-import javax.persistence.Embedded;
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.MapsId;
-import javax.persistence.OneToOne;
-import javax.persistence.PrePersist;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import com.fairagora.verifik8.v8web.data.domain.cl.CLAppCompanyPositionType;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLAppLegalStatus;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLRefLanguage;
 import com.fairagora.verifik8.v8web.data.domain.commons.Attachment;
 import com.fairagora.verifik8.v8web.data.domain.reg.RegEntity;
+import com.fairagora.verifik8.v8web.data.domain.reg.RegPicture;
 import com.fairagora.verifik8.v8web.data.domain.reg.V8Base;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
+import java.util.List;
 
 @Entity
 @Table(name = "reg_entity_staff")
@@ -73,10 +67,18 @@ public class RegEntityStaff extends V8Base {
 		key.entityId=getEntity().getId();
 		key.farmId=getFarm().getId();
 	}
-	
-	@Embedded
-	@AttributeOverrides({ @AttributeOverride(name = "resourcePath", column = @Column(name = "WORKING_PERMIT_URL")) })
-	protected Attachment workingPermit;
+
+	@OneToMany(cascade=CascadeType.ALL,
+			fetch = FetchType.EAGER)
+	@JoinTable(
+			name = "jt_reg_staff_work_permit_reg_picture",
+			joinColumns = {@JoinColumn(name = "REG_ENTITY_ID"), @JoinColumn(name = "REG_ENTITY_FARM_ID")},
+			inverseJoinColumns = @JoinColumn(name = "PICTURE_ID")
+	)
+	@Fetch(value = FetchMode.SUBSELECT)
+	protected List<RegPicture> workingPermit;
+
+
 
 	public RegEntity getFarm() {
 		return farm;
@@ -110,11 +112,11 @@ public class RegEntityStaff extends V8Base {
 		this.noEmployedAnymore = noEmployedAnymore;
 	}
 
-	public Attachment getWorkingPermit() {
+	public List<RegPicture> getWorkingPermit() {
 		return workingPermit;
 	}
 
-	public void setWorkingPermit(Attachment workingPermit) {
+	public void setWorkingPermit(List<RegPicture> workingPermit) {
 		this.workingPermit = workingPermit;
 	}
 

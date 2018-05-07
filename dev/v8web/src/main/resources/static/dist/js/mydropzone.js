@@ -2,6 +2,7 @@ var MAX_FILES = 10;
 var RESIZE_WIDTH = 300;
 var RESIZE_HEIGHT = 300;
 var RESIZE_QUANLITY = 80;
+var images = [];
 var URL = "http://" + location.host;
 var URL_CURRENT = $(location).attr("href");
 var PREVIEW_TEMPLATE = '\
@@ -117,33 +118,65 @@ function isImageExisted(url) {
 function changePreview(picture) {
     console.info("changePreview");
 
-    mdz.removeAllFiles()
-    if (typeof image1 !== 'undefined') {
-        mdz.removeFile(image1);
+    mdz.removeAllFiles(true);
+    if (typeof images !== 'undefined') {
+        images.forEach(function (element) {
 
+            mdz.removeFile(element);
+        });
+        images = [];
     }
+    //
+    // if (picture.workingPermit !== null) {
+    //
+    //     var picture = picture.workingPermit.resourcePath;
+    //
+    //     if (undefined !== picture) {
+    //         picture = URL + "/download/" + picture;
+    //
+    //         var fileName = "";
+    //         if (isImageExisted(picture)) {
+    //             fileName = picture;
+    //         }
+    //         else {
+    //             fileName = "\nFile not found\nPlease upload new one";
+    //         }
+    //         image1 = {"name": fileName};
+    //
+    //
+    //         mdz.emit("addedfile", image1);
+    //         mdz.emit("thumbnail", image1, picture);
+    //         $(image1.previewElement).find('.dz-progress').hide()
+    //
+    //     }
 
-    if (picture.workingPermit !== null) {
 
-        var picture = picture.workingPermit.resourcePath;
+        if (undefined !== picture.workingPermit && !jQuery.isEmptyObject(picture.workingPermit)) {
 
-        if (undefined !== picture) {
-            picture = URL + "/download/" + picture;
+            picture.workingPermit.forEach(function(element) {
 
-            var fileName = "";
-            if (isImageExisted(picture)) {
-                fileName = picture;
-            }
-            else {
-                fileName = "\nFile not found\nPlease upload new one";
-            }
-            image1 = {"name": fileName};
+                let pictureName = element.resourcePath.trim();
+                pictureUrl = URL + "/download/" + pictureName;
 
+                let fileName = "";
+                if (isImageExisted(pictureName)) {
+                    fileName = pictureName;
+                }
+                else {
+                    fileName = "\nFile not found\nPlease upload new one";
+                }
 
-            mdz.emit("addedfile", image1);
-            mdz.emit("thumbnail", image1, picture);
-            $(image1.previewElement).find('.dz-progress').hide()
+                image = {"name": fileName};
+                images.push(image);
+                mdz.emit("addedfile", image);
+                mdz.emit("thumbnail", image, pictureUrl);
 
-        }
+                $(image.previewElement).find('.dz-progress').hide();
+                // $(image.previewElement).addEventListener("click", {url: pictureUrl}, function(event) {
+                //     let win = window.open(event.data.url, '_blank');
+                //     win.focus();
+                // });
+            });
+
     }
 }
