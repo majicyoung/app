@@ -66,12 +66,12 @@ public class FarmsController extends AbstractV8Controller {
 
 	private Map<String, RegPicture> aerailAttachments;
 
-	private Attachment eiaDocAttachment;
-	private Attachment contructionPermitAttachment;
-	private Attachment landTitleAttachment;
-	private Attachment sittingProtectedAreaAttachment;
-	private Attachment canalRestorationPlanAttachment;
-	private Attachment cumulativeImpaceStudyAttachment;
+	private Map<String, RegPicture> eiaDocAttachments;
+	private Map<String, RegPicture> contructionPermitAttachments;
+	private Map<String, RegPicture> landTitleAttachments;
+	private Map<String, RegPicture> sittingProtectedAreaAttachments;
+	private Map<String, RegPicture> canalRestorationPlanAttachments;
+	private Map<String, RegPicture> cumulativeImpaceStudyAttachments;
 
 
 	@PreAuthorize("hasAuthority('R_FARMLIST')")
@@ -179,12 +179,30 @@ public class FarmsController extends AbstractV8Controller {
 
 		setToReadOnly(mv, "W_FARMENV");
 
-		eiaDocAttachment = regEntityFarmDetails.getEnvironmentImpactAssessmentDoc();
-		contructionPermitAttachment = regEntityFarmDetails.getContructionPermit();
-		landTitleAttachment = regEntityFarmDetails.getLandTitle();
-		sittingProtectedAreaAttachment = regEntityFarmDetails.getSittingProtectedAreaDoc();
-		canalRestorationPlanAttachment = regEntityFarmDetails.getCanalRestorationPlan();
-		cumulativeImpaceStudyAttachment = regEntityFarmDetails.getCumulativeImpactStudy();
+		eiaDocAttachments = new HashMap<>();
+		for (RegPicture regPicture : regEntityFarmDetails.getEnvironmentImpactAssessmentDoc()) {
+			eiaDocAttachments.put(regPicture.getResourcePath(), regPicture);
+		}
+		contructionPermitAttachments = new HashMap<>();
+		for (RegPicture regPicture : regEntityFarmDetails.getContructionPermit()) {
+			contructionPermitAttachments.put(regPicture.getResourcePath(), regPicture);
+		}
+		landTitleAttachments = new HashMap<>();
+		for (RegPicture regPicture : regEntityFarmDetails.getLandTitle()) {
+			landTitleAttachments.put(regPicture.getResourcePath(), regPicture);
+		}
+		sittingProtectedAreaAttachments = new HashMap<>();
+		for (RegPicture regPicture : regEntityFarmDetails.getSittingProtectedAreaDoc()) {
+			sittingProtectedAreaAttachments.put(regPicture.getResourcePath(), regPicture);
+		}
+		canalRestorationPlanAttachments = new HashMap<>();
+		for (RegPicture regPicture : regEntityFarmDetails.getCanalRestorationPlan()) {
+			canalRestorationPlanAttachments.put(regPicture.getResourcePath(), regPicture);
+		}
+		cumulativeImpaceStudyAttachments = new HashMap<>();
+		for (RegPicture regPicture : regEntityFarmDetails.getCumulativeImpactStudy()) {
+			cumulativeImpaceStudyAttachments.put(regPicture.getResourcePath(), regPicture);
+		}
 
 		prepareForFarmEdition(id, dto, mv);
 		mv.addAttribute("farmName", jdbc.queryForObject("SELECT name FROM reg_entities WHERE id=" + id, String.class));
@@ -207,14 +225,13 @@ public class FarmsController extends AbstractV8Controller {
 		RegEntityFarmDetails farmDetails = regEntityFarmDetailsRepository.findByEntityId(entityId).get();
 		regFarmDtoMapper.fillEntity(farmDto, farmDetails);
 
-		if (eiaDocAttachment != null) farmDetails.setEnvironmentImpactAssessmentDoc(eiaDocAttachment);
-		if (contructionPermitAttachment != null) farmDetails.setContructionPermit(contructionPermitAttachment);
-		if (landTitleAttachment != null) farmDetails.setLandTitle(landTitleAttachment);
-		if (sittingProtectedAreaAttachment != null)
-			farmDetails.setSittingProtectedAreaDoc(sittingProtectedAreaAttachment);
-		if (canalRestorationPlanAttachment != null) farmDetails.setCanalRestorationPlan(canalRestorationPlanAttachment);
-		if (cumulativeImpaceStudyAttachment != null)
-			farmDetails.setCumulativeImpactStudy(cumulativeImpaceStudyAttachment);
+
+		if (eiaDocAttachments != null) farmDetails.setEnvironmentImpactAssessmentDoc(new ArrayList<>(eiaDocAttachments.values()));
+		if (contructionPermitAttachments != null) farmDetails.setContructionPermit(new ArrayList<>(contructionPermitAttachments.values()));
+		if (landTitleAttachments != null) farmDetails.setLandTitle(new ArrayList<>(landTitleAttachments.values()));
+		if (sittingProtectedAreaAttachments != null) farmDetails.setSittingProtectedAreaDoc(new ArrayList<>(sittingProtectedAreaAttachments.values()));
+		if (canalRestorationPlanAttachments != null) farmDetails.setCanalRestorationPlan(new ArrayList<>(canalRestorationPlanAttachments.values()));
+		if (cumulativeImpaceStudyAttachments != null) farmDetails.setCumulativeImpactStudy(new ArrayList<>(cumulativeImpaceStudyAttachments.values()));
 
 		regEntityFarmDetailsRepository.save(farmDetails);
 		// TODO: save files !
@@ -395,22 +412,22 @@ public class FarmsController extends AbstractV8Controller {
 	public String handleEnvironmentalFileDelete(@RequestParam("type") String type, @RequestParam("filename") String filename) {
 		switch (type) {
 			case TYPE_ENVIRONMENTAL_EIA_DOC:
-				this.eiaDocAttachment = null;
+				this.eiaDocAttachments = null;
 				break;
 			case TYPE_ENVIRONMENTAL_CONTRUCTION_PERMIT:
-				this.contructionPermitAttachment = null;
+				this.contructionPermitAttachments = null;
 				break;
 			case TYPE_ENVIRONMENTAL_LAND_TITLE:
-				this.landTitleAttachment = null;
+				this.landTitleAttachments = null;
 				break;
 			case TYPE_ENVIRONMENTAL_SITTING_PROTECTED_AREA:
-				this.sittingProtectedAreaAttachment = null;
+				this.sittingProtectedAreaAttachments = null;
 				break;
 			case TYPE_ENVIRONMENTAL_CANAL_RESTORATION_PLAN:
-				this.canalRestorationPlanAttachment = null;
+				this.canalRestorationPlanAttachments = null;
 				break;
 			case TYPE_ENVIRONMENTAL_CUMULATIVE_IMPACE_STUDY:
-				this.cumulativeImpaceStudyAttachment = null;
+				this.cumulativeImpaceStudyAttachments = null;
 				break;
 		}
 
@@ -420,30 +437,31 @@ public class FarmsController extends AbstractV8Controller {
 	@RequestMapping(value = "/farm/{id}/environmental.html/upload", method = RequestMethod.POST)
 	public String handleEnvironmentalFileUpload(@RequestParam("file") MultipartFile file, @RequestParam("type") String type) {
 
-		Attachment attachment = new Attachment();
-		attachment.setResourcePath(file.getOriginalFilename());
+
+		RegPicture regPicture = new RegPicture();
+		regPicture.setResourcePath(file.getOriginalFilename());
 
 		// Save file
-		attachementsService.store(attachment, file);
+		attachementsService.store(regPicture, file);
 
 		switch (type) {
 			case TYPE_ENVIRONMENTAL_EIA_DOC:
-				this.eiaDocAttachment = attachment;
+				this.eiaDocAttachments.put(file.getOriginalFilename(), regPicture);
 				break;
 			case TYPE_ENVIRONMENTAL_CONTRUCTION_PERMIT:
-				this.contructionPermitAttachment = attachment;
+				this.contructionPermitAttachments.put(file.getOriginalFilename(), regPicture);
 				break;
 			case TYPE_ENVIRONMENTAL_LAND_TITLE:
-				this.landTitleAttachment = attachment;
+				this.landTitleAttachments.put(file.getOriginalFilename(), regPicture);
 				break;
 			case TYPE_ENVIRONMENTAL_SITTING_PROTECTED_AREA:
-				this.sittingProtectedAreaAttachment = attachment;
+				this.sittingProtectedAreaAttachments.put(file.getOriginalFilename(), regPicture);
 				break;
 			case TYPE_ENVIRONMENTAL_CANAL_RESTORATION_PLAN:
-				this.canalRestorationPlanAttachment = attachment;
+				this.canalRestorationPlanAttachments.put(file.getOriginalFilename(), regPicture);
 				break;
 			case TYPE_ENVIRONMENTAL_CUMULATIVE_IMPACE_STUDY:
-				this.cumulativeImpaceStudyAttachment = attachment;
+				this.cumulativeImpaceStudyAttachments.put(file.getOriginalFilename(), regPicture);
 				break;
 		}
 

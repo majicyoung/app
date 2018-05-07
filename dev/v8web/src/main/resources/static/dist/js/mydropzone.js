@@ -54,7 +54,8 @@ function initDropzone(urlUpload, urlDelete, type, pictureNames) {
             mdz = this;
             this.options.previewTemplate = PREVIEW_TEMPLATE;
 
-            if (undefined !== pictureNames) {
+            if (undefined !== pictureNames && !jQuery.isEmptyObject(pictureNames)) {
+                console.log(pictureNames);
                 let pictureNamesArray = pictureNames.replace("[","").replace("]","").split(',');
                 pictureNamesArray.forEach(function(element) {
                     let pictureName = element.trim()
@@ -72,11 +73,11 @@ function initDropzone(urlUpload, urlDelete, type, pictureNames) {
                     mdz.emit("addedfile", image);
                     mdz.emit("thumbnail", image, pictureUrl);
 
-                    $(image.previewElement).find('.dz-progress').hide()
-                    $(image.previewElement).addEventListener("click", {url: pictureUrl}, function(event) {
-                        let win = window.open(event.data.url, '_blank');
-                        win.focus();
-                    });
+                    $(image.previewElement).find('.dz-progress').hide();
+                    // $(image.previewElement).addEventListener("click", {url: pictureUrl}, function(event) {
+                    //     let win = window.open(event.data.url, '_blank');
+                    //     win.focus();
+                    // });
                 });
 
             }

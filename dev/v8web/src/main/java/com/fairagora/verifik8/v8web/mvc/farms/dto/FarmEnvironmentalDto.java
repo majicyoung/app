@@ -2,27 +2,29 @@ package com.fairagora.verifik8.v8web.mvc.farms.dto;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
+
 public class FarmEnvironmentalDto {
 
 	protected boolean environmentImpactAssessment;
 
 	// att
 	protected MultipartFile environmentImpactAssessmentDoc;
-	protected String environmentImpactAssessmentDocUrl;
+	protected List<String>  environmentImpactAssessmentDocUrl;
 
 	// att
 	protected MultipartFile contructionPermit;
-	protected String contructionPermitUrl;
+	protected List<String>  contructionPermitUrl;
 
 	// att
 	protected MultipartFile landTitle;
-	protected String landTitleUrl;
+	protected List<String>  landTitleUrl;
 
 	protected boolean sittingProtectedArea;
 
 	// att
 	protected MultipartFile sittingProtectedAreaDoc;
-	protected String sittingProtectedAreaUrl;
+	protected List<String>  sittingProtectedAreaUrl;
 
 	protected boolean farmExpension;
 
@@ -30,11 +32,11 @@ public class FarmEnvironmentalDto {
 
 	// att
 	protected MultipartFile canalRestorationPlan;
-	protected String canalRestorationPlanUrl;
+	protected List<String>  canalRestorationPlanUrl;
 
 	// att
 	protected MultipartFile cumulativeImpactStudy;
-	protected String cumulativeImpactStudyUrl;
+	protected List<String>  cumulativeImpactStudyUrl;
 
 	public boolean isEnvironmentImpactAssessment() {
 		return environmentImpactAssessment;
@@ -60,11 +62,11 @@ public class FarmEnvironmentalDto {
 		this.farmExpensionType = farmExpensionType;
 	}
 
-	public String getSittingProtectedAreaUrl() {
+	public List<String>  getSittingProtectedAreaUrl() {
 		return sittingProtectedAreaUrl;
 	}
 
-	public void setSittingProtectedAreaUrl(String sittingProtectedAreaUrl) {
+	public void setSittingProtectedAreaUrl(List<String> sittingProtectedAreaUrl) {
 		this.sittingProtectedAreaUrl = sittingProtectedAreaUrl;
 	}
 
@@ -84,11 +86,11 @@ public class FarmEnvironmentalDto {
 		this.contructionPermit = contructionPermit;
 	}
 
-	public String getContructionPermitUrl() {
+	public List<String>  getContructionPermitUrl() {
 		return contructionPermitUrl;
 	}
 
-	public void setContructionPermitUrl(String contructionPermitUrl) {
+	public void setContructionPermitUrl(List<String>  contructionPermitUrl) {
 		this.contructionPermitUrl = contructionPermitUrl;
 	}
 
@@ -100,11 +102,11 @@ public class FarmEnvironmentalDto {
 		this.landTitle = landTitle;
 	}
 
-	public String getLandTitleUrl() {
+	public List<String>  getLandTitleUrl() {
 		return landTitleUrl;
 	}
 
-	public void setLandTitleUrl(String landTitleUrl) {
+	public void setLandTitleUrl(List<String>  landTitleUrl) {
 		this.landTitleUrl = landTitleUrl;
 	}
 
@@ -116,11 +118,11 @@ public class FarmEnvironmentalDto {
 		this.canalRestorationPlan = canalRestorationPlan;
 	}
 
-	public String getCanalRestorationPlanUrl() {
+	public List<String>  getCanalRestorationPlanUrl() {
 		return canalRestorationPlanUrl;
 	}
 
-	public void setCanalRestorationPlanUrl(String canalRestorationPlanUrl) {
+	public void setCanalRestorationPlanUrl(List<String>  canalRestorationPlanUrl) {
 		this.canalRestorationPlanUrl = canalRestorationPlanUrl;
 	}
 
@@ -132,11 +134,11 @@ public class FarmEnvironmentalDto {
 		this.cumulativeImpactStudy = cumulativeImpactStudy;
 	}
 
-	public String getCumulativeImpactStudyUrl() {
+	public List<String>  getCumulativeImpactStudyUrl() {
 		return cumulativeImpactStudyUrl;
 	}
 
-	public void setCumulativeImpactStudyUrl(String cumulativeImpactStudyUrl) {
+	public void setCumulativeImpactStudyUrl(List<String>  cumulativeImpactStudyUrl) {
 		this.cumulativeImpactStudyUrl = cumulativeImpactStudyUrl;
 	}
 
@@ -148,11 +150,11 @@ public class FarmEnvironmentalDto {
 		this.environmentImpactAssessmentDoc = environmentImpactAssessmentDoc;
 	}
 
-	public String getEnvironmentImpactAssessmentDocUrl() {
+	public List<String>  getEnvironmentImpactAssessmentDocUrl() {
 		return environmentImpactAssessmentDocUrl;
 	}
 
-	public void setEnvironmentImpactAssessmentDocUrl(String environmentImpactAssessmentDocUrl) {
+	public void setEnvironmentImpactAssessmentDocUrl(List<String>  environmentImpactAssessmentDocUrl) {
 		this.environmentImpactAssessmentDocUrl = environmentImpactAssessmentDocUrl;
 	}
 
