@@ -70,15 +70,15 @@ function initDropzone(urlUpload, urlDelete, type, pictureNames) {
                         fileName = "\nFile not found\nPlease upload new one";
                     }
 
-                    image = {"name": fileName};
+                    let image = {"name": fileName};
                     mdz.emit("addedfile", image);
                     mdz.emit("thumbnail", image, pictureUrl);
-
+                    console.log(image.previewElement);
                     $(image.previewElement).find('.dz-progress').hide();
-                    // $(image.previewElement).addEventListener("click", {url: pictureUrl}, function(event) {
-                    //     let win = window.open(event.data.url, '_blank');
-                    //     win.focus();
-                    // });
+                    $(image.previewElement).bind('click', {url: pictureUrl}, function(event) {
+                        let win = window.open(event.data.url, '_blank');
+                        win.focus();
+                    });
                 });
 
             }
@@ -126,31 +126,6 @@ function changePreview(picture) {
         });
         images = [];
     }
-    //
-    // if (picture.workingPermit !== null) {
-    //
-    //     var picture = picture.workingPermit.resourcePath;
-    //
-    //     if (undefined !== picture) {
-    //         picture = URL + "/download/" + picture;
-    //
-    //         var fileName = "";
-    //         if (isImageExisted(picture)) {
-    //             fileName = picture;
-    //         }
-    //         else {
-    //             fileName = "\nFile not found\nPlease upload new one";
-    //         }
-    //         image1 = {"name": fileName};
-    //
-    //
-    //         mdz.emit("addedfile", image1);
-    //         mdz.emit("thumbnail", image1, picture);
-    //         $(image1.previewElement).find('.dz-progress').hide()
-    //
-    //     }
-
-
         if (undefined !== picture.workingPermit && !jQuery.isEmptyObject(picture.workingPermit)) {
 
             picture.workingPermit.forEach(function(element) {
@@ -172,7 +147,7 @@ function changePreview(picture) {
                 mdz.emit("thumbnail", image, pictureUrl);
 
                 $(image.previewElement).find('.dz-progress').hide();
-                // $(image.previewElement).addEventListener("click", {url: pictureUrl}, function(event) {
+                // $(image.previewElement).bind("click", {url: pictureUrl}, function(event) {
                 //     let win = window.open(event.data.url, '_blank');
                 //     win.focus();
                 // });
