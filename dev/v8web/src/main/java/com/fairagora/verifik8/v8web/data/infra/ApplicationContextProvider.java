@@ -18,21 +18,4 @@ public class ApplicationContextProvider implements ApplicationContextAware {
 	public void setApplicationContext(ApplicationContext ctx) throws BeansException {
 		ApplicationContextProvider.ctx = ctx;
 	}
-
-
-	private static SYSUser updaterName = null;
-
-	public static SYSUser getUpdaterName() {
-
-		if (updaterName == null){
-			if (SecurityContextHolder.getContext().getAuthentication() == null)
-				updaterName = ApplicationContextProvider.getApplicationContext().getBean(SYSUserRepository.class)
-						.findOne(1l);
-			else
-				updaterName = ApplicationContextProvider.getApplicationContext().getBean(SYSUserRepository.class)
-						.findByEmail(SecurityContextHolder.getContext().getAuthentication().getName());
-		}
-		return updaterName;
-	}
-
 }

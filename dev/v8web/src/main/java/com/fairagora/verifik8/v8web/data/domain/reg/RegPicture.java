@@ -10,7 +10,7 @@ import java.util.Date;
 
 @Entity()
 @Table(name = "reg_pictures")
-public class RegPicture  implements AttachmentInterface {
+public class RegPicture implements AttachmentInterface {
 
 	private static final long serialVersionUID = 1L;
 
