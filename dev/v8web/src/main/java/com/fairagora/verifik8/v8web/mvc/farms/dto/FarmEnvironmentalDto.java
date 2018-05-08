@@ -9,21 +9,21 @@ public class FarmEnvironmentalDto {
 	protected boolean environmentImpactAssessment;
 
 	// att
-	protected MultipartFile environmentImpactAssessmentDoc;
+	protected MultipartFile environmentImpactAssessmentDocMultipart;
 	protected List<String>  environmentImpactAssessmentDocUrl;
 
 	// att
-	protected MultipartFile contructionPermit;
+	protected MultipartFile contructionPermitMultipart;
 	protected List<String>  contructionPermitUrl;
 
 	// att
-	protected MultipartFile landTitle;
+	protected MultipartFile landTitleMultipart;
 	protected List<String>  landTitleUrl;
 
 	protected boolean sittingProtectedArea;
 
 	// att
-	protected MultipartFile sittingProtectedAreaDoc;
+	protected MultipartFile sittingProtectedAreaDocMultipart;
 	protected List<String>  sittingProtectedAreaUrl;
 
 	protected boolean farmExpension;
@@ -31,11 +31,11 @@ public class FarmEnvironmentalDto {
 	protected Long farmExpensionType;
 
 	// att
-	protected MultipartFile canalRestorationPlan;
+	protected MultipartFile canalRestorationPlanMultipart;
 	protected List<String>  canalRestorationPlanUrl;
 
 	// att
-	protected MultipartFile cumulativeImpactStudy;
+	protected MultipartFile cumulativeImpactStudyMultipart;
 	protected List<String>  cumulativeImpactStudyUrl;
 
 	public boolean isEnvironmentImpactAssessment() {
@@ -78,12 +78,12 @@ public class FarmEnvironmentalDto {
 		this.sittingProtectedArea = sittingProtectedArea;
 	}
 
-	public MultipartFile getContructionPermit() {
-		return contructionPermit;
+	public MultipartFile getContructionPermitMultipart() {
+		return contructionPermitMultipart;
 	}
 
-	public void setContructionPermit(MultipartFile contructionPermit) {
-		this.contructionPermit = contructionPermit;
+	public void setContructionPermitMultipart(MultipartFile contructionPermitMultipart) {
+		this.contructionPermitMultipart = contructionPermitMultipart;
 	}
 
 	public List<String>  getContructionPermitUrl() {
@@ -94,12 +94,12 @@ public class FarmEnvironmentalDto {
 		this.contructionPermitUrl = contructionPermitUrl;
 	}
 
-	public MultipartFile getLandTitle() {
-		return landTitle;
+	public MultipartFile getLandTitleMultipart() {
+		return landTitleMultipart;
 	}
 
-	public void setLandTitle(MultipartFile landTitle) {
-		this.landTitle = landTitle;
+	public void setLandTitleMultipart(MultipartFile landTitleMultipart) {
+		this.landTitleMultipart = landTitleMultipart;
 	}
 
 	public List<String>  getLandTitleUrl() {
@@ -110,12 +110,12 @@ public class FarmEnvironmentalDto {
 		this.landTitleUrl = landTitleUrl;
 	}
 
-	public MultipartFile getCanalRestorationPlan() {
-		return canalRestorationPlan;
+	public MultipartFile getCanalRestorationPlanMultipart() {
+		return canalRestorationPlanMultipart;
 	}
 
-	public void setCanalRestorationPlan(MultipartFile canalRestorationPlan) {
-		this.canalRestorationPlan = canalRestorationPlan;
+	public void setCanalRestorationPlanMultipart(MultipartFile canalRestorationPlanMultipart) {
+		this.canalRestorationPlanMultipart = canalRestorationPlanMultipart;
 	}
 
 	public List<String>  getCanalRestorationPlanUrl() {
@@ -126,12 +126,12 @@ public class FarmEnvironmentalDto {
 		this.canalRestorationPlanUrl = canalRestorationPlanUrl;
 	}
 
-	public MultipartFile getCumulativeImpactStudy() {
-		return cumulativeImpactStudy;
+	public MultipartFile getCumulativeImpactStudyMultipart() {
+		return cumulativeImpactStudyMultipart;
 	}
 
-	public void setCumulativeImpactStudy(MultipartFile cumulativeImpactStudy) {
-		this.cumulativeImpactStudy = cumulativeImpactStudy;
+	public void setCumulativeImpactStudyMultipart(MultipartFile cumulativeImpactStudyMultipart) {
+		this.cumulativeImpactStudyMultipart = cumulativeImpactStudyMultipart;
 	}
 
 	public List<String>  getCumulativeImpactStudyUrl() {
@@ -142,12 +142,12 @@ public class FarmEnvironmentalDto {
 		this.cumulativeImpactStudyUrl = cumulativeImpactStudyUrl;
 	}
 
-	public MultipartFile getEnvironmentImpactAssessmentDoc() {
-		return environmentImpactAssessmentDoc;
+	public MultipartFile getEnvironmentImpactAssessmentDocMultipart() {
+		return environmentImpactAssessmentDocMultipart;
 	}
 
-	public void setEnvironmentImpactAssessmentDoc(MultipartFile environmentImpactAssessmentDoc) {
-		this.environmentImpactAssessmentDoc = environmentImpactAssessmentDoc;
+	public void setEnvironmentImpactAssessmentDocMultipart(MultipartFile environmentImpactAssessmentDocMultipart) {
+		this.environmentImpactAssessmentDocMultipart = environmentImpactAssessmentDocMultipart;
 	}
 
 	public List<String>  getEnvironmentImpactAssessmentDocUrl() {
@@ -158,12 +158,12 @@ public class FarmEnvironmentalDto {
 		this.environmentImpactAssessmentDocUrl = environmentImpactAssessmentDocUrl;
 	}
 
-	public MultipartFile getSittingProtectedAreaDoc() {
-		return sittingProtectedAreaDoc;
+	public MultipartFile getSittingProtectedAreaDocMultipart() {
+		return sittingProtectedAreaDocMultipart;
 	}
 
-	public void setSittingProtectedAreaDoc(MultipartFile sittingProtectedAreaDoc) {
-		this.sittingProtectedAreaDoc = sittingProtectedAreaDoc;
+	public void setSittingProtectedAreaDocMultipart(MultipartFile sittingProtectedAreaDocMultipart) {
+		this.sittingProtectedAreaDocMultipart = sittingProtectedAreaDocMultipart;
 	}
 
 }

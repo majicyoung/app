@@ -158,7 +158,7 @@ CREATE TABLE `jt_reg_staff_management_work_accident_reg_picture` (
     `CREATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
     `UPDATED_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   CONSTRAINT `PRIMARY` PRIMARY KEY (ENTITY_ID,PICTURE_ID))
-  ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;  ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+  ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 CREATE TABLE `jt_reg_staff_management_protective_equipment_reg_picture` (
   `ENTITY_ID` int(11) NOT NULL,

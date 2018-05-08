@@ -63,7 +63,7 @@ public class RegEntityFarmDetails extends V8EntitySupport {
 			inverseJoinColumns = @JoinColumn(name = "PICTURE_ID")
 	)
 	@Fetch(value = FetchMode.SUBSELECT)
-	protected List<RegPicture> environmentImpactAssessmentDoc;
+	protected List<RegPicture> environmentImpactAssessmentDocs;
 
 	@OneToMany(cascade=CascadeType.ALL,
 			fetch = FetchType.EAGER)
@@ -73,7 +73,7 @@ public class RegEntityFarmDetails extends V8EntitySupport {
 			inverseJoinColumns = @JoinColumn(name = "PICTURE_ID")
 	)
 	@Fetch(value = FetchMode.SUBSELECT)
-	protected List<RegPicture> contructionPermit;
+	protected List<RegPicture> contructionPermits;
 
 	@OneToMany(cascade=CascadeType.ALL,
 			fetch = FetchType.EAGER)
@@ -83,7 +83,7 @@ public class RegEntityFarmDetails extends V8EntitySupport {
 			inverseJoinColumns = @JoinColumn(name = "PICTURE_ID")
 	)
 	@Fetch(value = FetchMode.SUBSELECT)
-	protected List<RegPicture> landTitle;
+	protected List<RegPicture> landTitles;
 
 	@OneToMany(cascade=CascadeType.ALL,
 				fetch = FetchType.EAGER)
@@ -106,7 +106,7 @@ public class RegEntityFarmDetails extends V8EntitySupport {
 			inverseJoinColumns = @JoinColumn(name = "PICTURE_ID")
 	)
 	@Fetch(value = FetchMode.SUBSELECT)
-	protected List<RegPicture> sittingProtectedAreaDoc;
+	protected List<RegPicture> sittingProtectedAreaDocs;
 
 	@Column(name = "HVHE_FARM_EXPENSION")
 	protected boolean farmExpension;
@@ -124,7 +124,7 @@ public class RegEntityFarmDetails extends V8EntitySupport {
 			inverseJoinColumns = @JoinColumn(name = "PICTURE_ID")
 	)
 	@Fetch(value = FetchMode.SUBSELECT)
-	protected List<RegPicture> canalRestorationPlan;
+	protected List<RegPicture> canalRestorationPlans;
 
 	@OneToMany(cascade=CascadeType.ALL,
 			fetch = FetchType.EAGER)
@@ -134,7 +134,7 @@ public class RegEntityFarmDetails extends V8EntitySupport {
 			inverseJoinColumns = @JoinColumn(name = "PICTURE_ID")
 	)
 	@Fetch(value = FetchMode.SUBSELECT)
-	protected List<RegPicture> cumulativeImpactStudy;
+	protected List<RegPicture> cumulativeImpactStudies;
 
 	@Column(name = "HAS_A_LAB")
 	protected boolean hasALab;
@@ -216,30 +216,6 @@ public class RegEntityFarmDetails extends V8EntitySupport {
 		this.environmentImpactAssessment = environmentImpactAssessment;
 	}
 
-	public List<RegPicture> getEnvironmentImpactAssessmentDoc() {
-		return environmentImpactAssessmentDoc;
-	}
-
-	public void setEnvironmentImpactAssessmentDoc(List<RegPicture> environmentImpactAssessmentDoc) {
-		this.environmentImpactAssessmentDoc = environmentImpactAssessmentDoc;
-	}
-
-	public List<RegPicture> getContructionPermit() {
-		return contructionPermit;
-	}
-
-	public void setContructionPermit(List<RegPicture> contructionPermit) {
-		this.contructionPermit = contructionPermit;
-	}
-
-	public List<RegPicture> getLandTitle() {
-		return landTitle;
-	}
-
-	public void setLandTitle(List<RegPicture> landTitle) {
-		this.landTitle = landTitle;
-	}
-
 	public boolean isFarmExpension() {
 		return farmExpension;
 	}
@@ -256,22 +232,6 @@ public class RegEntityFarmDetails extends V8EntitySupport {
 		this.farmExpensionType = farmExpensionType;
 	}
 
-	public List<RegPicture> getCanalRestorationPlan() {
-		return canalRestorationPlan;
-	}
-
-	public void setCanalRestorationPlan(List<RegPicture> canalRestorationPlan) {
-		this.canalRestorationPlan = canalRestorationPlan;
-	}
-
-	public List<RegPicture> getCumulativeImpactStudy() {
-		return cumulativeImpactStudy;
-	}
-
-	public void setCumulativeImpactStudy(List<RegPicture> cumulativeImpactStudy) {
-		this.cumulativeImpactStudy = cumulativeImpactStudy;
-	}
-
 	public boolean isSittingProtectedArea() {
 		return sittingProtectedArea;
 	}
@@ -280,19 +240,11 @@ public class RegEntityFarmDetails extends V8EntitySupport {
 		this.sittingProtectedArea = sittingProtectedArea;
 	}
 
-	public List<RegPicture> getSittingProtectedAreaDoc() {
-		return sittingProtectedAreaDoc;
-	}
-
-	public void setSittingProtectedAreaDoc(List<RegPicture> sittingProtectedAreaDoc) {
-		this.sittingProtectedAreaDoc = sittingProtectedAreaDoc;
-	}
-
-	public List<RegPicture> getAerialView() {
+	public List<RegPicture> getAerialViews() {
 		return aerialViews;
 	}
 
-	public void setAerialView(List<RegPicture> aerialView) {
+	public void setAerialViews(List<RegPicture> aerialView) {
 		this.aerialViews = aerialView;
 	}
 
@@ -352,6 +304,52 @@ public class RegEntityFarmDetails extends V8EntitySupport {
 	public void setStakeholderMeetingLocation(String stakeholderMeetingLocation) {
 		this.stakeholderMeetingLocation = stakeholderMeetingLocation;
 	}
-	
-	
+
+	public List<RegPicture> getEnvironmentImpactAssessmentDocs() {
+		return environmentImpactAssessmentDocs;
+	}
+
+	public void setEnvironmentImpactAssessmentDocs(List<RegPicture> environmentImpactAssessmentDocs) {
+		this.environmentImpactAssessmentDocs = environmentImpactAssessmentDocs;
+	}
+
+	public List<RegPicture> getContructionPermits() {
+		return contructionPermits;
+	}
+
+	public void setContructionPermits(List<RegPicture> contructionPermits) {
+		this.contructionPermits = contructionPermits;
+	}
+
+	public List<RegPicture> getLandTitles() {
+		return landTitles;
+	}
+
+	public void setLandTitles(List<RegPicture> landTitles) {
+		this.landTitles = landTitles;
+	}
+
+	public List<RegPicture> getSittingProtectedAreaDocs() {
+		return sittingProtectedAreaDocs;
+	}
+
+	public void setSittingProtectedAreaDocs(List<RegPicture> sittingProtectedAreaDocs) {
+		this.sittingProtectedAreaDocs = sittingProtectedAreaDocs;
+	}
+
+	public List<RegPicture> getCanalRestorationPlans() {
+		return canalRestorationPlans;
+	}
+
+	public void setCanalRestorationPlans(List<RegPicture> canalRestorationPlans) {
+		this.canalRestorationPlans = canalRestorationPlans;
+	}
+
+	public List<RegPicture> getCumulativeImpactStudies() {
+		return cumulativeImpactStudies;
+	}
+
+	public void setCumulativeImpactStudies(List<RegPicture> cumulativeImpactStudies) {
+		this.cumulativeImpactStudies = cumulativeImpactStudies;
+	}
 }

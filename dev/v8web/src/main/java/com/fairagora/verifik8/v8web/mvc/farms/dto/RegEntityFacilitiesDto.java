@@ -9,19 +9,19 @@ public class RegEntityFacilitiesDto {
 	protected Long farmId;
 
 	protected Boolean accessToilets;
-	protected MultipartFile accessToiletsAttachment;
+	protected MultipartFile accessToiletsAttachmentMultipart;
 	protected List<String> accessToiletsAttachmentUrl;
 
 	protected Boolean accessRestRoom;
-	protected MultipartFile accessRestRoomAttachment;
+	protected MultipartFile accessRestRoomAttachmentMultipart;
 	protected List<String> accessRestRoomAttachmentUrl;
 
 	protected Boolean accessShower;
-	protected MultipartFile accessShowerAttachment;
+	protected MultipartFile accessShowerAttachmentMultipart;
 	protected List<String> accessShowerAttachmentUrl;
 
 	protected Boolean accessToFreeDrinking;
-	protected MultipartFile accessToFreeDrinkingAttachment;
+	protected MultipartFile accessToFreeDrinkingAttachmentMultipart;
 	protected List<String> accessToFreeDrinkingAttachmentUrl;
 
 	protected Boolean presenceFirstAidKit;
@@ -42,12 +42,12 @@ public class RegEntityFacilitiesDto {
 		this.accessToilets = accessToilets;
 	}
 
-	public MultipartFile getAccessToiletsAttachment() {
-		return accessToiletsAttachment;
+	public MultipartFile getAccessToiletsAttachmentMultipart() {
+		return accessToiletsAttachmentMultipart;
 	}
 
-	public void setAccessToiletsAttachment(MultipartFile accessToiletsAttachment) {
-		this.accessToiletsAttachment = accessToiletsAttachment;
+	public void setAccessToiletsAttachmentMultipart(MultipartFile accessToiletsAttachmentMultipart) {
+		this.accessToiletsAttachmentMultipart = accessToiletsAttachmentMultipart;
 	}
 
 	public List<String> getAccessToiletsAttachmentUrl() {
@@ -66,12 +66,12 @@ public class RegEntityFacilitiesDto {
 		this.accessRestRoom = accessRestRoom;
 	}
 
-	public MultipartFile getAccessRestRoomAttachment() {
-		return accessRestRoomAttachment;
+	public MultipartFile getAccessRestRoomAttachmentMultipart() {
+		return accessRestRoomAttachmentMultipart;
 	}
 
-	public void setAccessRestRoomAttachment(MultipartFile accessRestRoomAttachment) {
-		this.accessRestRoomAttachment = accessRestRoomAttachment;
+	public void setAccessRestRoomAttachmentMultipart(MultipartFile accessRestRoomAttachmentMultipart) {
+		this.accessRestRoomAttachmentMultipart = accessRestRoomAttachmentMultipart;
 	}
 
 	public List<String> getAccessRestRoomAttachmentUrl() {
@@ -90,12 +90,12 @@ public class RegEntityFacilitiesDto {
 		this.accessShower = accessShower;
 	}
 
-	public MultipartFile getAccessShowerAttachment() {
-		return accessShowerAttachment;
+	public MultipartFile getAccessShowerAttachmentMultipart() {
+		return accessShowerAttachmentMultipart;
 	}
 
-	public void setAccessShowerAttachment(MultipartFile accessShowerAttachment) {
-		this.accessShowerAttachment = accessShowerAttachment;
+	public void setAccessShowerAttachmentMultipart(MultipartFile accessShowerAttachmentMultipart) {
+		this.accessShowerAttachmentMultipart = accessShowerAttachmentMultipart;
 	}
 
 	public List<String> getAccessShowerAttachmentUrl() {
@@ -130,12 +130,12 @@ public class RegEntityFacilitiesDto {
 		this.presenceFirstAidKit = presenceFirstAidKit;
 	}
 
-	public MultipartFile getAccessToFreeDrinkingAttachment() {
-		return accessToFreeDrinkingAttachment;
+	public MultipartFile getAccessToFreeDrinkingAttachmentMultipart() {
+		return accessToFreeDrinkingAttachmentMultipart;
 	}
 
-	public void setAccessToFreeDrinkingAttachment(MultipartFile accessToFreeDrinkingAttachment) {
-		this.accessToFreeDrinkingAttachment = accessToFreeDrinkingAttachment;
+	public void setAccessToFreeDrinkingAttachmentMultipart(MultipartFile accessToFreeDrinkingAttachmentMultipart) {
+		this.accessToFreeDrinkingAttachmentMultipart = accessToFreeDrinkingAttachmentMultipart;
 	}
 
 }

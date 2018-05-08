@@ -39,7 +39,7 @@ public class FarmFormDto {
 
 	protected V8MeasureDto size;
 
-	protected MultipartFile aerialView;
+	protected MultipartFile aerialViewMultipart;
 	protected List<String> aerialViewUrl;
 
 	protected boolean stakeholderMeetingParticipation;
@@ -163,12 +163,12 @@ public class FarmFormDto {
 		this.cooperative = cooperative;
 	}
 
-	public MultipartFile getAerialView() {
-		return aerialView;
+	public MultipartFile getAerialViewMultipart() {
+		return aerialViewMultipart;
 	}
 
-	public void setAerialView(MultipartFile aerialView) {
-		this.aerialView = aerialView;
+	public void setAerialViewMultipart(MultipartFile aerialViewMultipart) {
+		this.aerialViewMultipart = aerialViewMultipart;
 	}
 
 	public List<String> getAerialViewUrl() {

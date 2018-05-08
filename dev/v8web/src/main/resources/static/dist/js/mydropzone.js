@@ -51,7 +51,7 @@ function initDropzone(urlUpload, urlDelete, type, pictureNames) {
         url: URL_CURRENT + urlUpload,
 
         init: function () {
-
+            console.log(pictureNames);
             mdz = this;
             this.options.previewTemplate = PREVIEW_TEMPLATE;
 
@@ -117,6 +117,7 @@ function isImageExisted(url) {
 
 function changePreview(picture) {
     console.info("changePreview");
+    console.info(picture    );
 
     mdz.removeAllFiles(true);
     if (typeof images !== 'undefined') {
@@ -126,9 +127,9 @@ function changePreview(picture) {
         });
         images = [];
     }
-        if (undefined !== picture.workingPermit && !jQuery.isEmptyObject(picture.workingPermit)) {
+        if (undefined !== picture.workingPermits && !jQuery.isEmptyObject(picture.workingPermits)) {
 
-            picture.workingPermit.forEach(function(element) {
+            picture.workingPermits.forEach(function(element) {
 
                 let pictureName = element.resourcePath.trim();
                 pictureUrl = URL + "/download/" + pictureName;

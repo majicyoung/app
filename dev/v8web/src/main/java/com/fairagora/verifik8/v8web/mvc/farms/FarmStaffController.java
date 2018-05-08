@@ -96,7 +96,7 @@ public class FarmStaffController extends AbstractV8Controller {
 
 		regFarmDtoMapper.fillEntity(dto, staff);
 
-		if (workingPermitAttachment != null) staff.setWorkingPermit(new ArrayList<>(workingPermitAttachment.values()));
+		if (workingPermitAttachment != null) staff.setWorkingPermits(new ArrayList<>(workingPermitAttachment.values()));
 
 		regEntityStaffRepository.save(staff);
 
@@ -113,7 +113,7 @@ public class FarmStaffController extends AbstractV8Controller {
 
 			if (staffListing.get(i).getEntity().getId().equals(sid)) {
 				this.workingPermitAttachment = new HashMap<>();
-				for (RegPicture regPicture : staffListing.get(i).getWorkingPermit()) {
+				for (RegPicture regPicture : staffListing.get(i).getWorkingPermits()) {
 					workingPermitAttachment.put(regPicture.getResourcePath(), regPicture);
 				}
 				found = true;

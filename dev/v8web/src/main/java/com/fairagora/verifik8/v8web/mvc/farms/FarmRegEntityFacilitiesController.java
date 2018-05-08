@@ -97,13 +97,13 @@ public class FarmRegEntityFacilitiesController extends AbstractV8Controller {
 		regFarmDtoMapper.fillEntity(farmDto, ent);
 
 		if (farmRegEntityFacilitiesAttachementSto.getToiletsAttachment() != null)
-			ent.setAccessToiletsAttachment(new ArrayList<>(farmRegEntityFacilitiesAttachementSto.getToiletsAttachment().values()));
+			ent.setAccessToiletsAttachments(new ArrayList<>(farmRegEntityFacilitiesAttachementSto.getToiletsAttachment().values()));
 		if (farmRegEntityFacilitiesAttachementSto.getRestRoomAttachment() != null)
-			ent.setAccessRestRoomAttachment(new ArrayList<>(farmRegEntityFacilitiesAttachementSto.getRestRoomAttachment().values()));
+			ent.setAccessRestRoomAttachments(new ArrayList<>(farmRegEntityFacilitiesAttachementSto.getRestRoomAttachment().values()));
 		if (farmRegEntityFacilitiesAttachementSto.getShowerAttachment() != null)
-			ent.setAccessShowerAttachment(new ArrayList<>(farmRegEntityFacilitiesAttachementSto.getShowerAttachment().values()));
+			ent.setAccessShowerAttachments(new ArrayList<>(farmRegEntityFacilitiesAttachementSto.getShowerAttachment().values()));
 		if (farmRegEntityFacilitiesAttachementSto.getFreeDrinkingAttachment() != null)
-			ent.setAccessToFreeDrinkingAttachment(new ArrayList<>(farmRegEntityFacilitiesAttachementSto.getFreeDrinkingAttachment().values()));
+			ent.setAccessToFreeDrinkingAttachments(new ArrayList<>(farmRegEntityFacilitiesAttachementSto.getFreeDrinkingAttachment().values()));
 
 		repository.save(ent);
 

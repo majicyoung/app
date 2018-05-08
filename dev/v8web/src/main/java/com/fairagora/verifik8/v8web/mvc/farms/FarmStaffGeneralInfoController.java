@@ -69,11 +69,11 @@ public class FarmStaffGeneralInfoController extends AbstractV8Controller {
 		setToReadOnly(mv, "W_FARMSTAFFINFO");
 
 		protectiveEquipmentAttachment = new HashMap<>();
-		for (RegPicture regPicture : staffMgmt.getProtectiveEquipment()) {
+		for (RegPicture regPicture : staffMgmt.getProtectiveEquipments()) {
 			protectiveEquipmentAttachment.put(regPicture.getResourcePath(), regPicture);
 		}
 		workAccidentRecordAttachment = new HashMap<>();
-		for (RegPicture regPicture : staffMgmt.getWorkAccidentRecord()) {
+		for (RegPicture regPicture : staffMgmt.getWorkAccidentRecords()) {
 			workAccidentRecordAttachment.put(regPicture.getResourcePath(), regPicture);
 		}
 		farmPoliciesAttachment = new HashMap<>();
@@ -109,8 +109,8 @@ public class FarmStaffGeneralInfoController extends AbstractV8Controller {
 
 		regFarmDtoMapper.fillEntity(farmDto, ent);
 
-		if (protectiveEquipmentAttachment != null) ent.setProtectiveEquipment(new ArrayList<>(protectiveEquipmentAttachment.values()));
-		if (workAccidentRecordAttachment != null) ent.setWorkAccidentRecord(new ArrayList<>(workAccidentRecordAttachment.values()));
+		if (protectiveEquipmentAttachment != null) ent.setProtectiveEquipments(new ArrayList<>(protectiveEquipmentAttachment.values()));
+		if (workAccidentRecordAttachment != null) ent.setWorkAccidentRecords(new ArrayList<>(workAccidentRecordAttachment.values()));
 		if (farmPoliciesAttachment != null) ent.setFarmPolicies(new ArrayList<>(farmPoliciesAttachment.values()));
 
 		regEntityStaffManagementRepository.save(ent);

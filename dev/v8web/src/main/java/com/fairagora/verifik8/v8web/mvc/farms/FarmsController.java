@@ -122,7 +122,7 @@ public class FarmsController extends AbstractV8Controller {
 		if (details.isPresent()) {
 			regFarmDtoMapper.toDto(details.get(), dto);
 			aerailAttachments = new HashMap<>();
-			for (RegPicture regPicture : details.get().getAerialView()) {
+			for (RegPicture regPicture : details.get().getAerialViews()) {
 				aerailAttachments.put(regPicture.getResourcePath(), regPicture);
 			}
 		}
@@ -156,7 +156,7 @@ public class FarmsController extends AbstractV8Controller {
 		regFarmDtoMapper.fillEntity(farmDto, farmDetails);
 		farmDetails.setEntity(farm);
 
-		if (aerailAttachments != null) farmDetails.setAerialView(new ArrayList<>(aerailAttachments.values()));
+		if (aerailAttachments != null) farmDetails.setAerialViews(new ArrayList<>(aerailAttachments.values()));
 
 		regEntityFarmDetailsRepository.save(farmDetails);
 
@@ -180,27 +180,27 @@ public class FarmsController extends AbstractV8Controller {
 		setToReadOnly(mv, "W_FARMENV");
 
 		eiaDocAttachments = new HashMap<>();
-		for (RegPicture regPicture : regEntityFarmDetails.getEnvironmentImpactAssessmentDoc()) {
+		for (RegPicture regPicture : regEntityFarmDetails.getEnvironmentImpactAssessmentDocs()) {
 			eiaDocAttachments.put(regPicture.getResourcePath(), regPicture);
 		}
 		contructionPermitAttachments = new HashMap<>();
-		for (RegPicture regPicture : regEntityFarmDetails.getContructionPermit()) {
+		for (RegPicture regPicture : regEntityFarmDetails.getContructionPermits()) {
 			contructionPermitAttachments.put(regPicture.getResourcePath(), regPicture);
 		}
 		landTitleAttachments = new HashMap<>();
-		for (RegPicture regPicture : regEntityFarmDetails.getLandTitle()) {
+		for (RegPicture regPicture : regEntityFarmDetails.getLandTitles()) {
 			landTitleAttachments.put(regPicture.getResourcePath(), regPicture);
 		}
 		sittingProtectedAreaAttachments = new HashMap<>();
-		for (RegPicture regPicture : regEntityFarmDetails.getSittingProtectedAreaDoc()) {
+		for (RegPicture regPicture : regEntityFarmDetails.getSittingProtectedAreaDocs()) {
 			sittingProtectedAreaAttachments.put(regPicture.getResourcePath(), regPicture);
 		}
 		canalRestorationPlanAttachments = new HashMap<>();
-		for (RegPicture regPicture : regEntityFarmDetails.getCanalRestorationPlan()) {
+		for (RegPicture regPicture : regEntityFarmDetails.getCanalRestorationPlans()) {
 			canalRestorationPlanAttachments.put(regPicture.getResourcePath(), regPicture);
 		}
 		cumulativeImpaceStudyAttachments = new HashMap<>();
-		for (RegPicture regPicture : regEntityFarmDetails.getCumulativeImpactStudy()) {
+		for (RegPicture regPicture : regEntityFarmDetails.getCumulativeImpactStudies()) {
 			cumulativeImpaceStudyAttachments.put(regPicture.getResourcePath(), regPicture);
 		}
 
@@ -226,12 +226,12 @@ public class FarmsController extends AbstractV8Controller {
 		regFarmDtoMapper.fillEntity(farmDto, farmDetails);
 
 
-		if (eiaDocAttachments != null) farmDetails.setEnvironmentImpactAssessmentDoc(new ArrayList<>(eiaDocAttachments.values()));
-		if (contructionPermitAttachments != null) farmDetails.setContructionPermit(new ArrayList<>(contructionPermitAttachments.values()));
-		if (landTitleAttachments != null) farmDetails.setLandTitle(new ArrayList<>(landTitleAttachments.values()));
-		if (sittingProtectedAreaAttachments != null) farmDetails.setSittingProtectedAreaDoc(new ArrayList<>(sittingProtectedAreaAttachments.values()));
-		if (canalRestorationPlanAttachments != null) farmDetails.setCanalRestorationPlan(new ArrayList<>(canalRestorationPlanAttachments.values()));
-		if (cumulativeImpaceStudyAttachments != null) farmDetails.setCumulativeImpactStudy(new ArrayList<>(cumulativeImpaceStudyAttachments.values()));
+		if (eiaDocAttachments != null) farmDetails.setEnvironmentImpactAssessmentDocs(new ArrayList<>(eiaDocAttachments.values()));
+		if (contructionPermitAttachments != null) farmDetails.setContructionPermits(new ArrayList<>(contructionPermitAttachments.values()));
+		if (landTitleAttachments != null) farmDetails.setLandTitles(new ArrayList<>(landTitleAttachments.values()));
+		if (sittingProtectedAreaAttachments != null) farmDetails.setSittingProtectedAreaDocs(new ArrayList<>(sittingProtectedAreaAttachments.values()));
+		if (canalRestorationPlanAttachments != null) farmDetails.setCanalRestorationPlans(new ArrayList<>(canalRestorationPlanAttachments.values()));
+		if (cumulativeImpaceStudyAttachments != null) farmDetails.setCumulativeImpactStudies(new ArrayList<>(cumulativeImpaceStudyAttachments.values()));
 
 		regEntityFarmDetailsRepository.save(farmDetails);
 		// TODO: save files !

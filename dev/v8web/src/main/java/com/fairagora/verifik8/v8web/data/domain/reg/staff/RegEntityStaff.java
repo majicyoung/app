@@ -76,7 +76,7 @@ public class RegEntityStaff extends V8Base {
 			inverseJoinColumns = @JoinColumn(name = "PICTURE_ID")
 	)
 	@Fetch(value = FetchMode.SUBSELECT)
-	protected List<RegPicture> workingPermit;
+	protected List<RegPicture> workingPermits;
 
 
 
@@ -112,12 +112,12 @@ public class RegEntityStaff extends V8Base {
 		this.noEmployedAnymore = noEmployedAnymore;
 	}
 
-	public List<RegPicture> getWorkingPermit() {
-		return workingPermit;
+	public List<RegPicture> getWorkingPermits() {
+		return workingPermits;
 	}
 
-	public void setWorkingPermit(List<RegPicture> workingPermit) {
-		this.workingPermit = workingPermit;
+	public void setWorkingPermits(List<RegPicture> workingPermits) {
+		this.workingPermits = workingPermits;
 	}
 
 	public StaffCompKey getKey() {

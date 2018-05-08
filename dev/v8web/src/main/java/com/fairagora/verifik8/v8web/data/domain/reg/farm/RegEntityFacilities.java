@@ -29,7 +29,7 @@ public class RegEntityFacilities extends V8Base {
 			inverseJoinColumns = @JoinColumn(name = "PICTURE_ID")
 	)
 	@Fetch(value = FetchMode.SUBSELECT)
-	protected List<RegPicture> accessToiletsAttachment;
+	protected List<RegPicture> accessToiletsAttachments;
 
 	@Column(name = "ACCESS_REST_ROOM")
 	protected Boolean accessRestRoom;
@@ -42,7 +42,7 @@ public class RegEntityFacilities extends V8Base {
 			inverseJoinColumns = @JoinColumn(name = "PICTURE_ID")
 	)
 	@Fetch(value = FetchMode.SUBSELECT)
-	protected List<RegPicture> accessRestRoomAttachment;
+	protected List<RegPicture> accessRestRoomAttachments;
 
 	@Column(name = "ACCESS_SHOWER")
 	protected Boolean accessShower;
@@ -55,7 +55,7 @@ public class RegEntityFacilities extends V8Base {
 			inverseJoinColumns = @JoinColumn(name = "PICTURE_ID")
 	)
 	@Fetch(value = FetchMode.SUBSELECT)
-	protected List<RegPicture> accessShowerAttachment;
+	protected List<RegPicture> accessShowerAttachments;
 
 	@Column(name = "ACCESS_TO_FREE_DRINKING")
 	protected Boolean accessToFreeDrinking;
@@ -68,7 +68,7 @@ public class RegEntityFacilities extends V8Base {
 			inverseJoinColumns = @JoinColumn(name = "PICTURE_ID")
 	)
 	@Fetch(value = FetchMode.SUBSELECT)
-	protected List<RegPicture> accessToFreeDrinkingAttachment;
+	protected List<RegPicture> accessToFreeDrinkingAttachments;
 
 	@Column(name = "PRESENCE_FIRST_AID_KIT")
 	protected Boolean presenceFirstAidKit;
@@ -89,12 +89,12 @@ public class RegEntityFacilities extends V8Base {
 		this.accessToilets = accessToilets;
 	}
 
-	public List<RegPicture> getAccessToiletsAttachment() {
-		return accessToiletsAttachment;
+	public List<RegPicture> getAccessToiletsAttachments() {
+		return accessToiletsAttachments;
 	}
 
-	public void setAccessToiletsAttachment(List<RegPicture> accessToiletsAttachment) {
-		this.accessToiletsAttachment = accessToiletsAttachment;
+	public void setAccessToiletsAttachments(List<RegPicture> accessToiletsAttachments) {
+		this.accessToiletsAttachments = accessToiletsAttachments;
 	}
 
 	public Boolean getAccessRestRoom() {
@@ -105,12 +105,12 @@ public class RegEntityFacilities extends V8Base {
 		this.accessRestRoom = accessRestRoom;
 	}
 
-	public List<RegPicture> getAccessRestRoomAttachment() {
-		return accessRestRoomAttachment;
+	public List<RegPicture> getAccessRestRoomAttachments() {
+		return accessRestRoomAttachments;
 	}
 
-	public void setAccessRestRoomAttachment(List<RegPicture> accessRestRoomAttachment) {
-		this.accessRestRoomAttachment = accessRestRoomAttachment;
+	public void setAccessRestRoomAttachments(List<RegPicture> accessRestRoomAttachments) {
+		this.accessRestRoomAttachments = accessRestRoomAttachments;
 	}
 
 	public Boolean getAccessShower() {
@@ -121,12 +121,12 @@ public class RegEntityFacilities extends V8Base {
 		this.accessShower = accessShower;
 	}
 
-	public List<RegPicture> getAccessShowerAttachment() {
-		return accessShowerAttachment;
+	public List<RegPicture> getAccessShowerAttachments() {
+		return accessShowerAttachments;
 	}
 
-	public void setAccessShowerAttachment(List<RegPicture> accessShowerAttachment) {
-		this.accessShowerAttachment = accessShowerAttachment;
+	public void setAccessShowerAttachments(List<RegPicture> accessShowerAttachments) {
+		this.accessShowerAttachments = accessShowerAttachments;
 	}
 
 	public Boolean getAccessToFreeDrinking() {
@@ -137,12 +137,12 @@ public class RegEntityFacilities extends V8Base {
 		this.accessToFreeDrinking = accessToFreeDrinking;
 	}
 
-	public List<RegPicture> getAccessToFreeDrinkingAttachment() {
-		return accessToFreeDrinkingAttachment;
+	public List<RegPicture> getAccessToFreeDrinkingAttachments() {
+		return accessToFreeDrinkingAttachments;
 	}
 
-	public void setAccessToFreeDrinkingAttachment(List<RegPicture> accessToFreeDrinkingAttachment) {
-		this.accessToFreeDrinkingAttachment = accessToFreeDrinkingAttachment;
+	public void setAccessToFreeDrinkingAttachments(List<RegPicture> accessToFreeDrinkingAttachments) {
+		this.accessToFreeDrinkingAttachments = accessToFreeDrinkingAttachments;
 	}
 
 	public Boolean getPresenceFirstAidKit() {

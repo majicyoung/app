@@ -114,7 +114,7 @@ public class RegEntityStaffManagement {
 			inverseJoinColumns = @JoinColumn(name = "PICTURE_ID")
 	)
 	@Fetch(value = FetchMode.SUBSELECT)
-	protected List<RegPicture> workAccidentRecord;
+	protected List<RegPicture> workAccidentRecords;
 
 	@Column(name = "ACCESS_TO_PROTECTIVE_EQUIPMENT")
 	protected boolean accessToProtectiveEquipment;
@@ -127,7 +127,7 @@ public class RegEntityStaffManagement {
 			inverseJoinColumns = @JoinColumn(name = "PICTURE_ID")
 	)
 	@Fetch(value = FetchMode.SUBSELECT)
-	protected List<RegPicture> protectiveEquipment;
+	protected List<RegPicture> protectiveEquipments;
 
 	@Column(name = "EMPLOYER_ISSUE_RECORD")
 	protected boolean empolyerIssueRecord;
@@ -426,12 +426,12 @@ public class RegEntityStaffManagement {
 		this.existenceWorkAccidentRecord = existenceWorkAccidentRecord;
 	}
 
-	public List<RegPicture> getWorkAccidentRecord() {
-		return workAccidentRecord;
+	public List<RegPicture> getWorkAccidentRecords() {
+		return workAccidentRecords;
 	}
 
-	public void setWorkAccidentRecord(List<RegPicture> workAccidentRecord) {
-		this.workAccidentRecord = workAccidentRecord;
+	public void setWorkAccidentRecords(List<RegPicture> workAccidentRecords) {
+		this.workAccidentRecords = workAccidentRecords;
 	}
 
 	public boolean isAccessToProtectiveEquipment() {
@@ -538,12 +538,12 @@ public class RegEntityStaffManagement {
 		this.grievingSystemUrl = grievingSystemUrl;
 	}
 
-	public List<RegPicture> getProtectiveEquipment() {
-		return protectiveEquipment;
+	public List<RegPicture> getProtectiveEquipments() {
+		return protectiveEquipments;
 	}
 
-	public void setProtectiveEquipment(List<RegPicture> protectiveEquipmentUrl) {
-		this.protectiveEquipment = protectiveEquipmentUrl;
+	public void setProtectiveEquipments(List<RegPicture> protectiveEquipmentUrl) {
+		this.protectiveEquipments = protectiveEquipmentUrl;
 	}
 
 	public String getSafetyCondition() {

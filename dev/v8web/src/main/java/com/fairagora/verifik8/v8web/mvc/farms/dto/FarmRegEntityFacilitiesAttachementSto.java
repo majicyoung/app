@@ -56,22 +56,22 @@ public class FarmRegEntityFacilitiesAttachementSto {
 
 	public void init(RegEntityFacilities staffMgmt){
 		this.toiletsAttachment = new HashMap<>();
-		for (RegPicture regPicture : staffMgmt.getAccessToiletsAttachment()) {
+		for (RegPicture regPicture : staffMgmt.getAccessToiletsAttachments()) {
 			this.toiletsAttachment.put(regPicture.getResourcePath(), regPicture);
 		}
 
 		this.restRoomAttachment = new HashMap<>();
-		for (RegPicture regPicture : staffMgmt.getAccessRestRoomAttachment()) {
+		for (RegPicture regPicture : staffMgmt.getAccessRestRoomAttachments()) {
 			this.restRoomAttachment.put(regPicture.getResourcePath(), regPicture);
 		}
 
 		this.showerAttachment = new HashMap<>();
-		for (RegPicture regPicture : staffMgmt.getAccessShowerAttachment()) {
+		for (RegPicture regPicture : staffMgmt.getAccessShowerAttachments()) {
 			this.showerAttachment.put(regPicture.getResourcePath(), regPicture);
 		}
 
 		this.freeDrinkingAttachment = new HashMap<>();
-		for (RegPicture regPicture : staffMgmt.getAccessToFreeDrinkingAttachment()) {
+		for (RegPicture regPicture : staffMgmt.getAccessToFreeDrinkingAttachments()) {
 			this.freeDrinkingAttachment.put(regPicture.getResourcePath(), regPicture);
 		}
 	}

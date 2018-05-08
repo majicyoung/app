@@ -23,7 +23,7 @@ public class StaffFarmFormDto {
 	protected boolean noEmployedAnymore;
 	
 	// att
-	protected MultipartFile workingPermit;
+	protected MultipartFile workingPermitMultipart;
 	protected List<String> workingPermitUrl;
 
 	
@@ -115,12 +115,12 @@ public class StaffFarmFormDto {
 		this.language = language;
 	}
 
-	public MultipartFile getWorkingPermit() {
-		return workingPermit;
+	public MultipartFile getWorkingPermitMultipart() {
+		return workingPermitMultipart;
 	}
 
-	public void setWorkingPermit(MultipartFile workingPermit) {
-		this.workingPermit = workingPermit;
+	public void setWorkingPermitMultipart(MultipartFile workingPermitMultipart) {
+		this.workingPermitMultipart = workingPermitMultipart;
 	}
 
 	public List<String> getWorkingPermitUrl() {
