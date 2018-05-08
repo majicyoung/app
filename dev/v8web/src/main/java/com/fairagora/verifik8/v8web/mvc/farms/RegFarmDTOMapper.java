@@ -246,8 +246,9 @@ public interface RegFarmDTOMapper {
 
 	@Named("regPictureDto")
 	default List<String> listRegPictureToListString(List<RegPicture> regPictures) {
-		List<String> pictureUrl = new ArrayList<>();
+		List<String> pictureUrl = null;
 		if (regPictures != null){
+			pictureUrl = new ArrayList<>();
 			for (RegPicture regPicture : regPictures) {
 				pictureUrl.add(regPicture.getResourcePath());
 			}

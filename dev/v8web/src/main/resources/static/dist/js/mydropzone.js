@@ -117,7 +117,7 @@ function isImageExisted(url) {
 
 function changePreview(picture) {
     console.info("changePreview");
-    console.info(picture    );
+    console.info(picture);
 
     mdz.removeAllFiles(true);
     if (typeof images !== 'undefined') {

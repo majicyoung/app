@@ -68,17 +68,24 @@ public class FarmStaffGeneralInfoController extends AbstractV8Controller {
 
 		setToReadOnly(mv, "W_FARMSTAFFINFO");
 
-		protectiveEquipmentAttachment = new HashMap<>();
-		for (RegPicture regPicture : staffMgmt.getProtectiveEquipments()) {
-			protectiveEquipmentAttachment.put(regPicture.getResourcePath(), regPicture);
+		if (staffMgmt.getProtectiveEquipments() != null){
+			protectiveEquipmentAttachment = new HashMap<>();
+			for (RegPicture regPicture : staffMgmt.getProtectiveEquipments()) {
+				protectiveEquipmentAttachment.put(regPicture.getResourcePath(), regPicture);
+			}
 		}
-		workAccidentRecordAttachment = new HashMap<>();
-		for (RegPicture regPicture : staffMgmt.getWorkAccidentRecords()) {
-			workAccidentRecordAttachment.put(regPicture.getResourcePath(), regPicture);
+		if (staffMgmt.getWorkAccidentRecords() != null){
+			workAccidentRecordAttachment = new HashMap<>();
+			for (RegPicture regPicture : staffMgmt.getWorkAccidentRecords()) {
+				workAccidentRecordAttachment.put(regPicture.getResourcePath(), regPicture);
+			}
+
 		}
-		farmPoliciesAttachment = new HashMap<>();
-		for (RegPicture regPicture : staffMgmt.getFarmPolicies()) {
-			farmPoliciesAttachment.put(regPicture.getResourcePath(), regPicture);
+		if (staffMgmt.getFarmPolicies() != null){
+			farmPoliciesAttachment = new HashMap<>();
+			for (RegPicture regPicture : staffMgmt.getFarmPolicies()) {
+				farmPoliciesAttachment.put(regPicture.getResourcePath(), regPicture);
+			}
 		}
 
 		regFarmDtoMapper.toDto(staffMgmt, dto);

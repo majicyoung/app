@@ -180,7 +180,7 @@
     padding: 4px 4px; }
 .dropzone.dz-clickable {
     cursor: pointer;
-    max-width: 140px;}
+    width: 80%;}
 .dropzone.dz-clickable * {
     cursor: default; }
 .dropzone.dz-clickable .dz-message, .dropzone.dz-clickable .dz-message * {
@@ -197,6 +197,7 @@
 .dropzone .dz-preview {
     position: relative;
     vertical-align: top;
+    display: inline-block;
     margin: 4px;
     min-height: 100px; }
 .dropzone .dz-preview:hover {
