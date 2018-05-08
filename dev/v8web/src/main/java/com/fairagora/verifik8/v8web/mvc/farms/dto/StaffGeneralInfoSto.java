@@ -21,17 +21,17 @@ public class StaffGeneralInfoSto {
 	protected List<Long> hazardousWorkTypes;
 
 	protected boolean accessToProtectiveEquipment;
-	protected MultipartFile protectiveEquipment;
-	protected String protectiveEquipmentUrl;
+	protected MultipartFile protectiveEquipmentMultipart;
+	protected List<String> protectiveEquipmentUrl;
 
 	protected boolean existenceWorkAccidentRecord;
 
-	protected MultipartFile workAccidentRecord;
-	protected String workAccidentRecordUrl;
+	protected MultipartFile workAccidentRecordMultipart;
+	protected List<String> workAccidentRecordUrl;
 
 	protected boolean existenceFarmPolicies;
-	protected MultipartFile farmPolicies;
-	protected String farmPoliciesUrl;
+	protected MultipartFile farmPoliciesMultipart;
+	protected List<String> farmPoliciesUrl;
 
 	protected int nbOfSchoolInArea;
 
@@ -140,51 +140,51 @@ public class StaffGeneralInfoSto {
 		this.existenceFarmPolicies = existenceFarmPolicies;
 	}
 
-	public MultipartFile getWorkAccidentRecord() {
-		return workAccidentRecord;
+	public MultipartFile getWorkAccidentRecordMultipart() {
+		return workAccidentRecordMultipart;
 	}
 
-	public void setWorkAccidentRecord(MultipartFile workAccidentRecord) {
-		this.workAccidentRecord = workAccidentRecord;
+	public void setWorkAccidentRecordMultipart(MultipartFile workAccidentRecordMultipart) {
+		this.workAccidentRecordMultipart = workAccidentRecordMultipart;
 	}
 
-	public String getWorkAccidentRecordUrl() {
+	public List<String> getWorkAccidentRecordUrl() {
 		return workAccidentRecordUrl;
 	}
 
-	public void setWorkAccidentRecordUrl(String workAccidentRecordUrl) {
+	public void setWorkAccidentRecordUrl(List<String> workAccidentRecordUrl) {
 		this.workAccidentRecordUrl = workAccidentRecordUrl;
 	}
 
-	public MultipartFile getFarmPolicies() {
-		return farmPolicies;
+	public MultipartFile getFarmPoliciesMultipart() {
+		return farmPoliciesMultipart;
 	}
 
-	public void setFarmPolicies(MultipartFile farmPolicies) {
-		this.farmPolicies = farmPolicies;
+	public void setFarmPoliciesMultipart(MultipartFile farmPoliciesMultipart) {
+		this.farmPoliciesMultipart = farmPoliciesMultipart;
 	}
 
-	public String getFarmPoliciesUrl() {
+	public List<String> getFarmPoliciesUrl() {
 		return farmPoliciesUrl;
 	}
 
-	public void setFarmPoliciesUrl(String farmPoliciesUrl) {
+	public void setFarmPoliciesUrl(List<String> farmPoliciesUrl) {
 		this.farmPoliciesUrl = farmPoliciesUrl;
 	}
 
-	public MultipartFile getProtectiveEquipment() {
-		return protectiveEquipment;
+	public MultipartFile getProtectiveEquipmentMultipart() {
+		return protectiveEquipmentMultipart;
 	}
 
-	public void setProtectiveEquipment(MultipartFile protectiveEquipment) {
-		this.protectiveEquipment = protectiveEquipment;
+	public void setProtectiveEquipmentMultipart(MultipartFile protectiveEquipmentMultipart) {
+		this.protectiveEquipmentMultipart = protectiveEquipmentMultipart;
 	}
 
-	public String getProtectiveEquipmentUrl() {
+	public List<String> getProtectiveEquipmentUrl() {
 		return protectiveEquipmentUrl;
 	}
 
-	public void setProtectiveEquipmentUrl(String protectiveEquipmentUrl) {
+	public void setProtectiveEquipmentUrl(List<String> protectiveEquipmentUrl) {
 		this.protectiveEquipmentUrl = protectiveEquipmentUrl;
 	}
 

@@ -5,6 +5,7 @@ import java.io.IOException;
 
 import javax.annotation.PostConstruct;
 
+import com.fairagora.verifik8.v8web.data.domain.commons.AttachmentInterface;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.logging.Log;
@@ -52,7 +53,7 @@ public class AttachementsService {
 	 * @param mpf
 	 * @return
 	 */
-	public boolean store(Attachment at, MultipartFile mpf) {
+	public boolean store(AttachmentInterface at, MultipartFile mpf) {
 
 		if (mpf.getSize() == 0) {
 			return true;

@@ -1,7 +1,8 @@
-var MAX_FILES = 1;
+var MAX_FILES = 10;
 var RESIZE_WIDTH = 300;
 var RESIZE_HEIGHT = 300;
 var RESIZE_QUANLITY = 80;
+var images = [];
 var URL = "http://" + location.host;
 var URL_CURRENT = $(location).attr("href");
 var PREVIEW_TEMPLATE = '\
@@ -33,11 +34,11 @@ var PREVIEW_TEMPLATE = '\
                                 </g>\
                             </svg>\
                         </div>\
-                        <a class="dz-remove" href="javascript:void(0);" data-dz-remove="" data-url="">Remove file</a>\
+                        <button class="dz-remove btn btn-xs btn-flat btn-danger" href="javascript:void(0);" data-dz-remove="" data-url="" title="Delete image"><i class="fa fa-trash"></i></button>\
 					</div>\
 				';
 
-function initDropzone(urlUpload, urlDelete, type, picture) {
+function initDropzone(urlUpload, urlDelete, type, pictureNames) {
 
     return {
         maxFiles: MAX_FILES,
@@ -50,25 +51,36 @@ function initDropzone(urlUpload, urlDelete, type, picture) {
         url: URL_CURRENT + urlUpload,
 
         init: function () {
+            console.log(pictureNames);
             mdz = this;
             this.options.previewTemplate = PREVIEW_TEMPLATE;
 
-            if (undefined !== picture) {
-                picture = URL + "/download/" + picture;
+            if (undefined !== pictureNames && !jQuery.isEmptyObject(pictureNames)) {
+                console.log(pictureNames);
+                let pictureNamesArray = pictureNames.replace("[","").replace("]","").split(',');
+                pictureNamesArray.forEach(function(element) {
+                    let pictureName = element.trim()
+                    pictureUrl = URL + "/download/" + pictureName;
 
-                var fileName = "";
-                if (isImageExisted(picture)) {
-                    fileName = picture;
-                }
-                else {
-                    fileName = "\nFile not found\nPlease upload new one";
-                }
+                    let fileName = "";
+                    if (isImageExisted(pictureName)) {
+                        fileName = pictureName;
+                    }
+                    else {
+                        fileName = "\nFile not found\nPlease upload new one";
+                    }
 
-                image1 = {"name": fileName};
-                this.emit("addedfile", image1);
-                this.emit("thumbnail", image1, picture);
+                    let image = {"name": fileName};
+                    mdz.emit("addedfile", image);
+                    mdz.emit("thumbnail", image, pictureUrl);
+                    console.log(image.previewElement);
+                    $(image.previewElement).find('.dz-progress').hide();
+                    $(image.previewElement).bind('click', {url: pictureUrl}, function(event) {
+                        let win = window.open(event.data.url, '_blank');
+                        win.focus();
+                    });
+                });
 
-                $(image1.previewElement).find('.dz-progress').hide()
             }
 
             this.on("maxfilesexceeded", function (file) {
@@ -76,8 +88,21 @@ function initDropzone(urlUpload, urlDelete, type, picture) {
                 this.addFile(file);
             });
 
-            this.on("removedfile", function () {
-                $.post(URL_CURRENT + urlDelete + "?type=" + type);
+            this.on("removedfile", function (file) {
+                console.log(file);
+                $.post(URL_CURRENT + urlDelete + "?type=" + type + "&filename=" + file.name);
+            });
+            this.on("thumbnail", function(file) {
+                console.log(file); // will send to console all available props
+                file.previewElement.addEventListener("click", function() {
+                    let win = window.open(URL + "/download/" + file.name, '_blank');
+                    win.focus();
+                });
+            });
+            this.on("addedfile", function (file) {
+                console.log(file); // will send to console all available props
+
+
             });
         }
     }
@@ -92,34 +117,42 @@ function isImageExisted(url) {
 
 function changePreview(picture) {
     console.info("changePreview");
+    console.info(picture);
 
-    mdz.removeAllFiles()
-    if (typeof image1 !== 'undefined') {
-        mdz.removeFile(image1);
+    mdz.removeAllFiles(true);
+    if (typeof images !== 'undefined') {
+        images.forEach(function (element) {
 
+            mdz.removeFile(element);
+        });
+        images = [];
     }
+        if (undefined !== picture.workingPermits && !jQuery.isEmptyObject(picture.workingPermits)) {
 
-    if (picture.workingPermit !== null) {
+            picture.workingPermits.forEach(function(element) {
 
-        var picture = picture.workingPermit.resourcePath;
+                let pictureName = element.resourcePath.trim();
+                pictureUrl = URL + "/download/" + pictureName;
 
-        if (undefined !== picture) {
-            picture = URL + "/download/" + picture;
+                let fileName = "";
+                if (isImageExisted(pictureName)) {
+                    fileName = pictureName;
+                }
+                else {
+                    fileName = "\nFile not found\nPlease upload new one";
+                }
 
-            var fileName = "";
-            if (isImageExisted(picture)) {
-                fileName = picture;
-            }
-            else {
-                fileName = "\nFile not found\nPlease upload new one";
-            }
-            image1 = {"name": fileName};
+                image = {"name": fileName};
+                images.push(image);
+                mdz.emit("addedfile", image);
+                mdz.emit("thumbnail", image, pictureUrl);
 
+                $(image.previewElement).find('.dz-progress').hide();
+                // $(image.previewElement).bind("click", {url: pictureUrl}, function(event) {
+                //     let win = window.open(event.data.url, '_blank');
+                //     win.focus();
+                // });
+            });
 
-            mdz.emit("addedfile", image1);
-            mdz.emit("thumbnail", image1, picture);
-            $(image1.previewElement).find('.dz-progress').hide()
-
-        }
     }
 }

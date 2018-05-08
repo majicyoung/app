@@ -3,6 +3,7 @@ package com.fairagora.verifik8.v8web.mvc.farms;
 import javax.transaction.Transactional;
 
 import com.fairagora.verifik8.v8web.data.domain.commons.Attachment;
+import com.fairagora.verifik8.v8web.data.domain.reg.RegPicture;
 import com.fairagora.verifik8.v8web.data.infra.AttachementsService;
 import com.fairagora.verifik8.v8web.mvc.farms.dto.FarmRegEntityFacilitiesAttachementSto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,8 @@ import com.fairagora.verifik8.v8web.data.repo.reg.RegEntityFacilitiesRepository;
 import com.fairagora.verifik8.v8web.mvc.AbstractV8Controller;
 import com.fairagora.verifik8.v8web.mvc.farms.dto.RegEntityFacilitiesDto;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.util.ArrayList;
 
 @Controller
 public class FarmRegEntityFacilitiesController extends AbstractV8Controller {
@@ -94,13 +97,13 @@ public class FarmRegEntityFacilitiesController extends AbstractV8Controller {
 		regFarmDtoMapper.fillEntity(farmDto, ent);
 
 		if (farmRegEntityFacilitiesAttachementSto.getToiletsAttachment() != null)
-			ent.setAccessToiletsAttachment(farmRegEntityFacilitiesAttachementSto.getToiletsAttachment());
+			ent.setAccessToiletsAttachments(new ArrayList<>(farmRegEntityFacilitiesAttachementSto.getToiletsAttachment().values()));
 		if (farmRegEntityFacilitiesAttachementSto.getRestRoomAttachment() != null)
-			ent.setAccessRestRoomAttachment(farmRegEntityFacilitiesAttachementSto.getRestRoomAttachment());
+			ent.setAccessRestRoomAttachments(new ArrayList<>(farmRegEntityFacilitiesAttachementSto.getRestRoomAttachment().values()));
 		if (farmRegEntityFacilitiesAttachementSto.getShowerAttachment() != null)
-			ent.setAccessShowerAttachment(farmRegEntityFacilitiesAttachementSto.getShowerAttachment());
+			ent.setAccessShowerAttachments(new ArrayList<>(farmRegEntityFacilitiesAttachementSto.getShowerAttachment().values()));
 		if (farmRegEntityFacilitiesAttachementSto.getFreeDrinkingAttachment() != null)
-			ent.setAccessToFreeDrinkingAttachment(farmRegEntityFacilitiesAttachementSto.getFreeDrinkingAttachment());
+			ent.setAccessToFreeDrinkingAttachments(new ArrayList<>(farmRegEntityFacilitiesAttachementSto.getFreeDrinkingAttachment().values()));
 
 		repository.save(ent);
 
@@ -109,20 +112,20 @@ public class FarmRegEntityFacilitiesController extends AbstractV8Controller {
 
 
 	@RequestMapping(value = "/farm/{id}/facilities.html/deleteimage", method = RequestMethod.POST)
-	public String handleFileDelete(@RequestParam("type") String type) {
+	public String handleFileDelete(@RequestParam("type") String type, @RequestParam("filename") String filename) {
 
 		switch (type) {
 			case "toilets":
-				this.farmRegEntityFacilitiesAttachementSto.setToiletsAttachment(null);
+				this.farmRegEntityFacilitiesAttachementSto.getToiletsAttachment().remove(filename);
 				break;
 			case "restroom":
-				this.farmRegEntityFacilitiesAttachementSto.setRestRoomAttachment(null);
+				this.farmRegEntityFacilitiesAttachementSto.getRestRoomAttachment().remove(filename);
 				break;
 			case "shower":
-				this.farmRegEntityFacilitiesAttachementSto.setShowerAttachment(null);
+				this.farmRegEntityFacilitiesAttachementSto.getShowerAttachment().remove(filename);
 				break;
 			case "freedrinking":
-				this.farmRegEntityFacilitiesAttachementSto.setFreeDrinkingAttachment(null);
+				this.farmRegEntityFacilitiesAttachementSto.getFreeDrinkingAttachment().remove(filename);
 				break;
 		}
 
@@ -132,24 +135,24 @@ public class FarmRegEntityFacilitiesController extends AbstractV8Controller {
 	@RequestMapping(value = "/farm/{id}/facilities.html/upload", method = RequestMethod.POST)
 	public String handleFileUpload(@RequestParam("file") MultipartFile file, @RequestParam("type") String type) {
 
-		Attachment attachment = new Attachment();
-		attachment.setResourcePath(file.getOriginalFilename());
+		RegPicture regPicture = new RegPicture();
+		regPicture.setResourcePath(file.getOriginalFilename());
 
 		// Save file
-		attachementsService.store(attachment, file);
+		attachementsService.store(regPicture, file);
 
 		switch (type) {
 			case "toilets":
-				this.farmRegEntityFacilitiesAttachementSto.setToiletsAttachment(attachment);
+				this.farmRegEntityFacilitiesAttachementSto.getToiletsAttachment().put(file.getOriginalFilename(), regPicture);
 				break;
 			case "restroom":
-				this.farmRegEntityFacilitiesAttachementSto.setRestRoomAttachment(attachment);
+				this.farmRegEntityFacilitiesAttachementSto.getRestRoomAttachment().put(file.getOriginalFilename(), regPicture);
 				break;
 			case "shower":
-				this.farmRegEntityFacilitiesAttachementSto.setShowerAttachment(attachment);
+				this.farmRegEntityFacilitiesAttachementSto.getShowerAttachment().put(file.getOriginalFilename(), regPicture);
 				break;
 			case "freedrinking":
-				this.farmRegEntityFacilitiesAttachementSto.setFreeDrinkingAttachment(attachment);
+				this.farmRegEntityFacilitiesAttachementSto.getFreeDrinkingAttachment().put(file.getOriginalFilename(), regPicture);
 				break;
 		}
 
