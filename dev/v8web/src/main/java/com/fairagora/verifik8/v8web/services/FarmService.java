@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import com.fairagora.verifik8.v8web.data.domain.reg.farm.RegEntityFarmSupplierAssignment;
+import com.fairagora.verifik8.v8web.data.repo.reg.RegEntityFarmSupplierAssignmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -40,13 +42,18 @@ public class FarmService extends AbstractV8Service {
 	@Autowired
 	private RegEntityFarmPondRepository regEntityFarmPondRepository;
 
+	@Autowired
+	protected RegEntityFarmSupplierAssignmentRepository regEntityFarmSupplierRepository;
+
+
 	/**
 	 * Return a list of Model Enhanced Farms, useful for display form meta data,
 	 * in an optimized way
 	 * 
 	 * @return
 	 */
-	public List<V8Farm> listFarms() {
+	public List<V8Farm>
+	listFarms() {
 		List<V8Farm> farms = new ArrayList<>();
 
 		// fetch how many staff member we have per farms
@@ -172,6 +179,45 @@ public class FarmService extends AbstractV8Service {
 					r.addAll(regEntityFarmPondRepository.findByFarmId(f.getId()));
 				}
 				break;
+			}
+		}
+
+		return r;
+	}
+
+
+	@Transactional
+	public List<RegEntityFarmSupplierAssignment> listVisibleSuppliersForLoggedUser(V8LoggedUser loggedUser) {
+		List<RegEntityFarmSupplierAssignment> r = new ArrayList<>();
+
+		SYSUser u = userRepo.findByEmail(loggedUser.getUsername());
+		if (u != null) {
+			switch (u.getRole().getCode()) {
+				case SYSRole.SADMIN:
+					r.addAll(regEntityFarmSupplierRepository.findAll());
+					break;
+
+				case SYSRole.coop:
+					List<RegEntityFarmDetails> farmDetails = farmDetailsRepository.findByCooperativeId(u.getCooperative().getId());
+					for (RegEntityFarmDetails f : farmDetails) {
+						r.addAll(regEntityFarmSupplierRepository.findByFarmIdOrderBySupplierName(f.getEntity().getId()));
+					}
+					break;
+
+				case SYSRole.farm:
+					List<RegEntityFarmDetails> farmDetails1 = farmDetailsRepository.findByOwnerId(u.getId());
+					for (RegEntityFarmDetails f : farmDetails1) {
+						r.addAll(regEntityFarmSupplierRepository.findByFarmIdOrderBySupplierName(f.getId()));
+					}
+					break;
+
+				case SYSRole.country:
+					List<RegEntity> farms = regEntityRepository.findByEntityTypeCodeAndNationalityId(CLAppEntityType.CODE_FARM, u.getCountry().getId());
+					for (RegEntity f : farms) {
+						r.addAll(regEntityFarmSupplierRepository.findByFarmIdOrderBySupplierName(f.getId()));
+					}
+					break;
+
 			}
 		}
 
