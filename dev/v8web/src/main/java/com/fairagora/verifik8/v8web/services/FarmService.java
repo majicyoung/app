@@ -81,7 +81,6 @@ public class FarmService extends AbstractV8Service {
 
 		List<RegEntity> farmsEntities = regEntityRepository.findByEntityTypeCode(CLAppEntityType.CODE_FARM);
 		farmsEntities = filterForCurrentUser(farmsEntities);
-
 		for (RegEntity e : farmsEntities) {
 			V8Farm f = new V8Farm();
 			enhancedMapper.enhance(e, f);
@@ -115,18 +114,27 @@ public class FarmService extends AbstractV8Service {
 			SYSUser user = userRepo.findByEmail(authentication.getName());
 
 			if (user.getRole() != null) {
-				if (user.getRole().getCode().equals(SYSRole.SADMIN)) {
-					// as an admin, I have no restriction
-					return farmsEntities;
-				} else if (user.getRole().getCode().equals(SYSRole.farm)) {
-					// as an FARM user, I shall see only my own farm, from my
-					// user profile, if I have no farm defined, I will see no
-					// farm
-					farmsEntities.stream().filter(f -> user.getFarm() != null && f.getId().equals(user.getFarm().getId())).forEach(filtered::add);
-				} else if (user.getRole().getCode().equals(SYSRole.country)) {
-					// as a COUNTRY user I shall see the farms from the country
-					// defined in my user profile
-					farmsEntities.stream().filter(f -> user.getCountry() != null && f.getAddress().getCountry() != null && f.getAddress().getCountry().getId().equals(user.getCountry().getId())).forEach(filtered::add);
+
+				switch (user.getRole().getCode()) {
+					case SYSRole.SADMIN:
+						// as an admin, I have no restriction
+						return farmsEntities;
+					case SYSRole.coop:
+						// Get farm own by the cooperative.
+						List<RegEntityFarmDetails> farmDetails = farmDetailsRepository.findByCooperativeId(user.getCooperative().getId());
+						farmDetails.stream().map(RegEntityFarmDetails::getEntity).forEach(filtered::add);
+						return filtered;
+					case SYSRole.farm:
+						// as an FARM user, I shall see only my own farm, from my
+						// user profile, if I have no farm defined, I will see no
+						// farm
+						farmsEntities.stream().filter(f -> user.getFarm() != null && f.getId().equals(user.getFarm().getId())).forEach(filtered::add);
+						break;
+					case SYSRole.country:
+						// as a COUNTRY user I shall see the farms from the country
+						// defined in my user profile
+						farmsEntities.stream().filter(f -> user.getCountry() != null && f.getAddress().getCountry() != null && f.getAddress().getCountry().getId().equals(user.getCountry().getId())).forEach(filtered::add);
+						break;
 				}
 
 			}
@@ -162,7 +170,7 @@ public class FarmService extends AbstractV8Service {
 			case SYSRole.coop:
 				List<RegEntityFarmDetails> farmDetails = farmDetailsRepository.findByCooperativeId(u.getCooperative().getId());
 				for (RegEntityFarmDetails f : farmDetails) {
-					r.addAll(regEntityFarmPondRepository.findByFarmId(f.getId()));
+					r.addAll(regEntityFarmPondRepository.findByFarmId(f.getEntity().getId()));
 				}
 				break;
 
