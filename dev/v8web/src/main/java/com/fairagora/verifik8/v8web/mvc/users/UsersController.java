@@ -93,6 +93,8 @@ public class UsersController extends AbstractV8Controller {
 		mv.addAttribute("allCountries", countryRepository.findAll(new Sort("name")));
 		mv.addAttribute("allCooperatives", regEntityRepository.findByEntityTypeCode(CLAppEntityType.CODE_COOP));
 		mv.addAttribute("allFarms", regEntityRepository.findByEntityTypeCode(CLAppEntityType.CODE_FARM));
+		mv.addAttribute("allSuppliers", regEntityRepository.findByEntityTypeCode(CLAppEntityType.CODE_COM));
+		mv.addAttribute("allBuyers", regEntityRepository.findByEntityTypeCode(CLAppEntityType.CODE_COM));
 	}
 
 	@PreAuthorize("hasAuthority('W_USEREDITOR')")
