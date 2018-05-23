@@ -34,6 +34,18 @@ public class UserFormDto {
 	 */
 	protected Long farm;
 
+	/**
+	 * id of the supplier we want this user to be linked to, this is not mandatory,
+	 * and rather exclusive with farm
+	 */
+	protected Long supplier;
+
+	/**
+	 * id of the buyer we want this user to be linked to, this is not mandatory,
+	 * and rather exclusive with farm
+	 */
+	protected Long buyer;
+
 	public Long getRole() {
 		return role;
 	}
@@ -98,4 +110,19 @@ public class UserFormDto {
 		this.id = id;
 	}
 
+	public Long getSupplier() {
+		return supplier;
+	}
+
+	public void setSupplier(Long supplier) {
+		this.supplier = supplier;
+	}
+
+	public Long getBuyer() {
+		return buyer;
+	}
+
+	public void setBuyer(Long buyer) {
+		this.buyer = buyer;
+	}
 }

@@ -38,7 +38,7 @@ public class SuppliersBrowsingController extends AbstractV8Controller {
 	@RequestMapping(value = "/suppliers/browser.html", method = RequestMethod.GET)
 	public String showSuppliersManagementPage(Model mv) {
 
-		List<SupplierListingDto> listing = regEntityFarmSupplierRepository.findAll().stream().map(p -> regFarmDtoMapper.toListing(p)).collect(Collectors.toList());
+		List<SupplierListingDto> listing = farmService.listVisibleSuppliersForLoggedUser(getLoggedUser()).stream().map(p -> regFarmDtoMapper.toListing(p)).collect(Collectors.toList());
 
 		mv.addAttribute("listing", listing);
 
