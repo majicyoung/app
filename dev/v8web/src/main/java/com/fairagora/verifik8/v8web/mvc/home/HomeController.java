@@ -1,5 +1,6 @@
 package com.fairagora.verifik8.v8web.mvc.home;
 
+import com.fairagora.verifik8.v8web.services.ComplianceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -18,6 +19,9 @@ public class HomeController extends AbstractV8Controller {
 	@Autowired
 	private DashboardDataBuilder dashboardDataBuilder;
 
+	@Autowired
+	private ComplianceService compilenceService;
+
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String index(Model mv) {
 		return "redirect:/home.html";
@@ -35,6 +39,8 @@ public class HomeController extends AbstractV8Controller {
 	 */
 	@RequestMapping(value = "/home.html", method = RequestMethod.GET)
 	public String hello(Model mv) {
+
+		compilenceService.init();
 
 		V8Page p = new V8Page();
 		p.setTitle("default.dashboard");
