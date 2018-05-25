@@ -67,7 +67,7 @@ public class FarmDashboardController extends AbstractV8Controller {
 	@PreAuthorize("hasAuthority('R_FARMDASH')")
 	public ResponseEntity<Resource>  getCompliance(@PathVariable("id") Long id, Model mv, HttpServletRequest request) throws IOException {
 		compilanceService.init();
-		Workbook workbook = compilanceService.createCompliance();
+		Workbook workbook = compilanceService.createCompliance(id);
 
 		HttpHeaders headers = new HttpHeaders();
 		headers.set("Content-Type", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");

@@ -9,12 +9,12 @@ public class ComplianceResult {
 	private String farmName;
 	private String dateOfCompliance;
 	private String indicator;
-	private List<RowResult> rowResults;
+	private List<ComplianceResultRow> rowResults;
 
 	public ComplianceResult() {
 	}
 
-	public ComplianceResult(String standard, String farmId, String farmName, String dateOfCompliance, String indicator, List<RowResult> rowResults) {
+	public ComplianceResult(String standard, String farmId, String farmName, String dateOfCompliance, String indicator, List<ComplianceResultRow> rowResults) {
 		this.standard = standard;
 		this.farmId = farmId;
 		this.farmName = farmName;
@@ -63,20 +63,20 @@ public class ComplianceResult {
 		this.indicator = indicator;
 	}
 
-	public List<RowResult> getRowResults() {
+	public List<ComplianceResultRow> getRowResults() {
 		return rowResults;
 	}
 
-	public void setRowResults(List<RowResult> rowResults) {
+	public void setRowResults(List<ComplianceResultRow> rowResults) {
 		this.rowResults = rowResults;
 	}
 
 
-	public RowResult getRowResult(int index) {
+	public ComplianceResultRow getRowResult(int index) {
 		return rowResults.get(index);
 	}
 
-	public void setRowResult(RowResult rowResults) {
+	public void setRowResult(ComplianceResultRow rowResults) {
 		this.rowResults.add(rowResults);
 	}
 }

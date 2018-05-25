@@ -1,6 +1,6 @@
 package com.fairagora.verifik8.v8web.data.domain.commons.compliance;
 
-public class Row {
+public class ComplianceDocumentRow {
 	private String name;
 	private String indicator;
 	private String sql;
@@ -9,7 +9,7 @@ public class Row {
 	private String comparator;
 	private String comment;
 
-	public Row() {
+	public ComplianceDocumentRow() {
 	}
 
 

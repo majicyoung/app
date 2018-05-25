@@ -1,14 +1,14 @@
 package com.fairagora.verifik8.v8web.data.domain.commons.compliance;
 
-public class RowResult {
+public class ComplianceResultRow {
 
 	private String name;
 	private String result;
 
-	public RowResult() {
+	public ComplianceResultRow() {
 	}
 
-	public RowResult(String name, String result) {
+	public ComplianceResultRow(String name, String result) {
 		this.name = name;
 		this.result = result;
 	}

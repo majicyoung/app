@@ -1,8 +1,9 @@
 package com.fairagora.verifik8.v8web.data.interactor;
 
 import com.fairagora.verifik8.v8web.data.domain.commons.compliance.ComplianceResult;
-import com.fairagora.verifik8.v8web.data.domain.commons.compliance.Document;
-import com.fairagora.verifik8.v8web.data.domain.commons.compliance.Row;
+import com.fairagora.verifik8.v8web.data.domain.commons.compliance.ComplianceDocument;
+import com.fairagora.verifik8.v8web.data.domain.commons.compliance.ComplianceDocumentRow;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -10,13 +11,23 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Iterator;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class ExcelReader {
 
-	public static Document read(InputStream inputStream) throws IOException, InvalidFormatException {
+	public static ComplianceDocument read(InputStream inputStream) throws IOException, InvalidFormatException {
 
-		Document document = new Document();
+		final int STANDARD_NAME = 0;
+		final int INDICATOR_NAME = 1;
+		final int SQL = 2;
+		final int TEST = 3;
+		final int THRESHOLD = 4;
+		final int COMPARATOR = 5;
+		final int COMMENT = 6;
+
+
+		ComplianceDocument document = new ComplianceDocument();
 
 		// Creating a Workbook from an Excel file (.xls or .xlsx)
 		Workbook workbook = WorkbookFactory.create(inputStream);
@@ -28,20 +39,27 @@ public class ExcelReader {
 		DataFormatter dataFormatter = new DataFormatter();
 
 		//Read row and set it on document.
-	//	sheet.removeRow(sheet.getRow(0));
-		sheet.forEach(row -> {
-			if (dataFormatter.formatCellValue(row.getCell(0)) != null && !dataFormatter.formatCellValue(row.getCell(0)).trim().equals("")){
-				Row documentRow = new Row();
-				documentRow.setName( dataFormatter.formatCellValue(row.getCell(0)));
-				documentRow.setIndicator( dataFormatter.formatCellValue(row.getCell(1)));
-				documentRow.setSql( dataFormatter.formatCellValue(row.getCell(2)));
-				documentRow.setTestType( dataFormatter.formatCellValue(row.getCell(3)));
-				documentRow.setThreshold( dataFormatter.formatCellValue(row.getCell(4)));
-				documentRow.setComparator( dataFormatter.formatCellValue(row.getCell(5)));
-				documentRow.setComment( dataFormatter.formatCellValue(row.getCell(6)));
+
+		Iterator<org.apache.poi.ss.usermodel.Row> rowIterator = sheet.rowIterator();
+		//Remove header
+		rowIterator.next();
+		//Loop on row
+		while (rowIterator.hasNext()) {
+			org.apache.poi.ss.usermodel.Row row = rowIterator.next();
+
+			if (StringUtils.isNotEmpty(dataFormatter.formatCellValue(row.getCell(STANDARD_NAME)))) {
+				ComplianceDocumentRow documentRow = new ComplianceDocumentRow();
+				documentRow.setName(dataFormatter.formatCellValue(row.getCell(STANDARD_NAME)));
+				documentRow.setIndicator(dataFormatter.formatCellValue(row.getCell(INDICATOR_NAME)));
+				documentRow.setSql(dataFormatter.formatCellValue(row.getCell(SQL)));
+				documentRow.setTestType(dataFormatter.formatCellValue(row.getCell(TEST)));
+				documentRow.setThreshold(dataFormatter.formatCellValue(row.getCell(THRESHOLD)));
+				documentRow.setComparator(dataFormatter.formatCellValue(row.getCell(COMPARATOR)));
+				documentRow.setComment(dataFormatter.formatCellValue(row.getCell(COMMENT)));
 				document.setRow(documentRow);
 			}
-		});
+			System.out.println();
+		}
 
 		// Closing the workbook
 		workbook.close();
@@ -72,35 +90,31 @@ public class ExcelReader {
 		// Create a Row
 		org.apache.poi.ss.usermodel.Row headerRow = sheet.createRow(0);
 
-		// Create cells
-//		for(int i = 0; i < columns.length; i++) {
-//			Cell cell = headerRow.createCell(i);
-//			cell.setCellValue(columns[i]);
-//			cell.setCellStyle(headerCellStyle);
-//		}
-
 		// Create Cell Style for formatting Date
 		CellStyle dateCellStyle = workbook.createCellStyle();
 		dateCellStyle.setDataFormat(createHelper.createDataFormat().getFormat("dd-MM-yyyy"));
 
 		// Create Other rows and cells with employees data
 		AtomicInteger rowNum = new AtomicInteger(1);
-//		for(Employee employee: employees) {
-//			Row row = sheet.createRow(rowNum++);
-//
-//			row.createCell(0)
-//					.setCellValue(employee.getName());
-//
-//			row.createCell(1)
-//					.setCellValue(employee.getEmail());
-//
-//			Cell dateOfBirthCell = row.createCell(2);
-//			dateOfBirthCell.setCellValue(employee.getDateOfBirth());
-//			dateOfBirthCell.setCellStyle(dateCellStyle);
-//
-//			row.createCell(3)
-//					.setCellValue(employee.getSalary());
-//		}
+
+		org.apache.poi.ss.usermodel.Row rowStandard= sheet.createRow(rowNum.getAndIncrement());
+		rowStandard.createCell(0).setCellValue("Standard");
+		rowStandard.createCell(1).setCellValue(complianceResult.getStandard());
+		org.apache.poi.ss.usermodel.Row rowFarmID= sheet.createRow(rowNum.getAndIncrement());
+		rowFarmID.createCell(0).setCellValue("Farm ID");
+		rowFarmID.createCell(1).setCellValue(complianceResult.getFarmId());
+		org.apache.poi.ss.usermodel.Row rowFarmName= sheet.createRow(rowNum.getAndIncrement());
+		rowFarmName.createCell(0).setCellValue("Farm Name");
+		rowFarmName.createCell(1).setCellValue(complianceResult.getFarmName());
+		org.apache.poi.ss.usermodel.Row rowDate= sheet.createRow(rowNum.getAndIncrement());
+		rowDate.createCell(0).setCellValue("Date");
+		rowDate.createCell(1).setCellValue(complianceResult.getDateOfCompliance());
+		org.apache.poi.ss.usermodel.Row rowIndicator= sheet.createRow(rowNum.getAndIncrement());
+		rowIndicator.createCell(0).setCellValue("Indicator");
+		rowIndicator.createCell(1).setCellValue(complianceResult.getIndicator());
+
+
+
 		complianceResult.getRowResults().forEach(rowResult -> {
 			org.apache.poi.ss.usermodel.Row row = sheet.createRow(rowNum.getAndIncrement());
 
@@ -111,11 +125,6 @@ public class ExcelReader {
 					.setCellValue(rowResult.getResult());
 		});
 
-//		// Resize all columns to fit the content size
-//		for(int i = 0; i < columns.length; i++) {
-//			sheet.autoSizeColumn(i);
-//		}
-
 		// Write the output to a file
 		FileOutputStream fileOut = new FileOutputStream("poi-generated-file.xlsx");
 		workbook.write(fileOut);
@@ -125,9 +134,6 @@ public class ExcelReader {
 		workbook.close();
 		return workbook;
 	}
-
-
-
 
 
 }

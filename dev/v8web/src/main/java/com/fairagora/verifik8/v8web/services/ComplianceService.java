@@ -1,9 +1,11 @@
 package com.fairagora.verifik8.v8web.services;
 
 import com.fairagora.verifik8.v8web.data.domain.commons.compliance.ComplianceResult;
-import com.fairagora.verifik8.v8web.data.domain.commons.compliance.Document;
-import com.fairagora.verifik8.v8web.data.domain.commons.compliance.RowResult;
+import com.fairagora.verifik8.v8web.data.domain.commons.compliance.ComplianceDocument;
+import com.fairagora.verifik8.v8web.data.domain.commons.compliance.ComplianceResultRow;
+import com.fairagora.verifik8.v8web.data.domain.commons.compliance.TestingCompliance;
 import com.fairagora.verifik8.v8web.data.interactor.ExcelReader;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.slf4j.Logger;
@@ -16,6 +18,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 
 @Service
 public class ComplianceService extends AbstractV8Service {
@@ -28,35 +31,42 @@ public class ComplianceService extends AbstractV8Service {
 	@Autowired
 	private ResourceLoader resourceLoader;
 
-	private Document document;
+	private ComplianceDocument document;
+
+	private TestingCompliance testingCompliance;
+
+	public ComplianceService() {
+		testingCompliance = new TestingCompliance();
+	}
 
 	public void init() {
 		try {
 			Resource resource = resourceLoader.getResource("classpath:" + XLS_FILE);
-
 			document = ExcelReader.read(resource.getInputStream());
-
 		} catch (IOException | NullPointerException | InvalidFormatException e) {
-			LOGGER.error("Database reader cound not be initialized. ", e);
+			LOGGER.error("Database reader couldn't not be initialized. ", e);
 		}
 	}
 
 
-	public Workbook createCompliance() {
+	public Workbook createCompliance(Long farmId) {
 
 		ComplianceResult complianceResult = new ComplianceResult();
+		complianceResult.setFarmId(String.valueOf(farmId));
+		complianceResult.setDateOfCompliance(String.valueOf(new Date()));
+		complianceResult.setIndicator("");
+		complianceResult.setFarmName("");
 		complianceResult.setRowResults(new ArrayList<>());
 
 
 		document.getRows().forEach(row -> {
 
-			RowResult rowResult = new RowResult();
+			ComplianceResultRow rowResult = new ComplianceResultRow();
 			try {
-				jdbc.query(row.getSql(), rs -> {
+				jdbc.query(formatQueryString(row.getSql(), String.valueOf(farmId)), rs -> {
 					rowResult.setName(row.getName());
-					rowResult.setResult(rs.getString(1));
+					rowResult.setResult(testingCompliance.TestSqlResult(row, rs.getString(1)));
 					complianceResult.setRowResult(rowResult);
-					System.out.println(rs.toString());
 				});
 			} catch (DataAccessException e) {
 				rowResult.setName("ERROR");
@@ -73,6 +83,10 @@ public class ComplianceService extends AbstractV8Service {
 			e.printStackTrace();
 		}
 		return workbook;
+	}
+
+	private String formatQueryString(String query, String farmId){
+		return StringUtils.replace(query, "{ID}", farmId);
 	}
 
 
