@@ -5,6 +5,8 @@ import java.util.List;
 
 public class ComplianceDocument {
 
+	private String standars;
+
 	private List<ComplianceDocumentRow> rows;
 
 	public ComplianceDocument() {
@@ -29,5 +31,13 @@ public class ComplianceDocument {
 
 	public ComplianceDocumentRow getRow(int index){
 		return this.rows.get(index);
+	}
+
+	public String getStandars() {
+		return standars;
+	}
+
+	public void setStandars(String standars) {
+		this.standars = standars;
 	}
 }

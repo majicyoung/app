@@ -11,6 +11,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -18,13 +19,12 @@ public class ExcelReader {
 
 	public static ComplianceDocument read(InputStream inputStream) throws IOException, InvalidFormatException {
 
-		final int STANDARD_NAME = 0;
-		final int INDICATOR_NAME = 1;
-		final int SQL = 2;
-		final int TEST = 3;
-		final int THRESHOLD = 4;
-		final int COMPARATOR = 5;
-		final int COMMENT = 6;
+		final int INDICATOR_NAME = 0;
+		final int SQL = 1;
+		final int TEST = 2;
+		final int THRESHOLD = 3;
+		final int COMPARATOR = 4;
+		final int COMMENT = 5;
 
 
 		ComplianceDocument document = new ComplianceDocument();
@@ -42,14 +42,15 @@ public class ExcelReader {
 
 		Iterator<org.apache.poi.ss.usermodel.Row> rowIterator = sheet.rowIterator();
 		//Remove header
+		org.apache.poi.ss.usermodel.Row rowStandard = rowIterator.next();
+		document.setStandars(dataFormatter.formatCellValue(rowStandard.getCell(1)));
 		rowIterator.next();
 		//Loop on row
 		while (rowIterator.hasNext()) {
 			org.apache.poi.ss.usermodel.Row row = rowIterator.next();
 
-			if (StringUtils.isNotEmpty(dataFormatter.formatCellValue(row.getCell(STANDARD_NAME)))) {
+			if (StringUtils.isNotEmpty(dataFormatter.formatCellValue(row.getCell(INDICATOR_NAME)))) {
 				ComplianceDocumentRow documentRow = new ComplianceDocumentRow();
-				documentRow.setName(dataFormatter.formatCellValue(row.getCell(STANDARD_NAME)));
 				documentRow.setIndicator(dataFormatter.formatCellValue(row.getCell(INDICATOR_NAME)));
 				documentRow.setSql(dataFormatter.formatCellValue(row.getCell(SQL)));
 				documentRow.setTestType(dataFormatter.formatCellValue(row.getCell(TEST)));
@@ -66,7 +67,15 @@ public class ExcelReader {
 		return document;
 	}
 
-	public static Workbook write(ComplianceResult complianceResult) throws IOException {
+	public static String write(ComplianceResult complianceResult) throws IOException {
+
+		final String SHEET_NAME = "Employee";
+		final String STANDARD = "Standard";
+		final String FARM_ID = "Farm ID";
+		final String FARM_NAME = "Farm Name";
+		final String DATE = "Date";
+		final String INDICATOR = "Indicator";
+
 		// Create a Workbook
 		Workbook workbook = new XSSFWorkbook(); // new HSSFWorkbook() for generating `.xls` file
 
@@ -75,7 +84,7 @@ public class ExcelReader {
 		CreationHelper createHelper = workbook.getCreationHelper();
 
 		// Create a Sheet
-		Sheet sheet = workbook.createSheet("Employee");
+		Sheet sheet = workbook.createSheet(SHEET_NAME);
 
 		// Create a Font for styling header cells
 		Font headerFont = workbook.createFont();
@@ -90,49 +99,45 @@ public class ExcelReader {
 		// Create a Row
 		org.apache.poi.ss.usermodel.Row headerRow = sheet.createRow(0);
 
-		// Create Cell Style for formatting Date
-		CellStyle dateCellStyle = workbook.createCellStyle();
-		dateCellStyle.setDataFormat(createHelper.createDataFormat().getFormat("dd-MM-yyyy"));
-
 		// Create Other rows and cells with employees data
 		AtomicInteger rowNum = new AtomicInteger(1);
 
-		org.apache.poi.ss.usermodel.Row rowStandard= sheet.createRow(rowNum.getAndIncrement());
-		rowStandard.createCell(0).setCellValue("Standard");
+		org.apache.poi.ss.usermodel.Row rowStandard = sheet.createRow(rowNum.getAndIncrement());
+		rowStandard.createCell(0).setCellValue(STANDARD);
 		rowStandard.createCell(1).setCellValue(complianceResult.getStandard());
-		org.apache.poi.ss.usermodel.Row rowFarmID= sheet.createRow(rowNum.getAndIncrement());
-		rowFarmID.createCell(0).setCellValue("Farm ID");
-		rowFarmID.createCell(1).setCellValue(complianceResult.getFarmId());
-		org.apache.poi.ss.usermodel.Row rowFarmName= sheet.createRow(rowNum.getAndIncrement());
-		rowFarmName.createCell(0).setCellValue("Farm Name");
-		rowFarmName.createCell(1).setCellValue(complianceResult.getFarmName());
-		org.apache.poi.ss.usermodel.Row rowDate= sheet.createRow(rowNum.getAndIncrement());
-		rowDate.createCell(0).setCellValue("Date");
-		rowDate.createCell(1).setCellValue(complianceResult.getDateOfCompliance());
-		org.apache.poi.ss.usermodel.Row rowIndicator= sheet.createRow(rowNum.getAndIncrement());
-		rowIndicator.createCell(0).setCellValue("Indicator");
-		rowIndicator.createCell(1).setCellValue(complianceResult.getIndicator());
 
+		org.apache.poi.ss.usermodel.Row rowFarmID = sheet.createRow(rowNum.getAndIncrement());
+		rowFarmID.createCell(0).setCellValue(FARM_ID);
+		rowFarmID.createCell(1).setCellValue(complianceResult.getFarmId());
+
+		org.apache.poi.ss.usermodel.Row rowFarmName = sheet.createRow(rowNum.getAndIncrement());
+		rowFarmName.createCell(0).setCellValue(FARM_NAME);
+		rowFarmName.createCell(1).setCellValue(complianceResult.getFarmName());
+
+		org.apache.poi.ss.usermodel.Row rowDate = sheet.createRow(rowNum.getAndIncrement());
+		rowDate.createCell(0).setCellValue(DATE);
+		rowDate.createCell(1).setCellValue(complianceResult.getDateOfCompliance());
+
+		org.apache.poi.ss.usermodel.Row rowIndicator = sheet.createRow(rowNum.getAndIncrement());
+		rowIndicator.createCell(0).setCellValue(INDICATOR);
+		rowIndicator.createCell(1).setCellValue(complianceResult.getCompliance());
 
 
 		complianceResult.getRowResults().forEach(rowResult -> {
 			org.apache.poi.ss.usermodel.Row row = sheet.createRow(rowNum.getAndIncrement());
-
-			row.createCell(0)
-					.setCellValue(rowResult.getName());
-
-			row.createCell(1)
-					.setCellValue(rowResult.getResult());
+			row.createCell(0).setCellValue(rowResult.getName());
+			row.createCell(1).setCellValue(rowResult.getResult());
 		});
 
+		String filename = complianceResult.getStandard() + new Date().toString();
 		// Write the output to a file
-		FileOutputStream fileOut = new FileOutputStream("poi-generated-file.xlsx");
+		FileOutputStream fileOut = new FileOutputStream(filename);
 		workbook.write(fileOut);
 		fileOut.close();
 
 		// Closing the workbook
 		workbook.close();
-		return workbook;
+		return filename;
 	}
 
 

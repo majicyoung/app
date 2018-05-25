@@ -23,9 +23,9 @@ public class TestingCompliance {
 			case NUMERIC:
 				return complianceComparator.numericTestResult(sqlResult, row.getThreshold(), row.getComparator()).toString();
 			case BOOLEAN:
-				return sqlResult;
+				return complianceComparator.booleanTestResult(sqlResult).toString();
 			default:
-				return "0";
+				return Boolean.FALSE.toString();
 		}
 	}
 

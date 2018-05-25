@@ -1,7 +1,6 @@
 package com.fairagora.verifik8.v8web.data.domain.commons.compliance;
 
 public class ComplianceDocumentRow {
-	private String name;
 	private String indicator;
 	private String sql;
 	private String testType;
@@ -10,15 +9,6 @@ public class ComplianceDocumentRow {
 	private String comment;
 
 	public ComplianceDocumentRow() {
-	}
-
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
 	}
 
 	public String getIndicator() {

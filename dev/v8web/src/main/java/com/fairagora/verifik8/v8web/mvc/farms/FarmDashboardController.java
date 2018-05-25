@@ -67,12 +67,12 @@ public class FarmDashboardController extends AbstractV8Controller {
 	@PreAuthorize("hasAuthority('R_FARMDASH')")
 	public ResponseEntity<Resource>  getCompliance(@PathVariable("id") Long id, Model mv, HttpServletRequest request) throws IOException {
 		compilanceService.init();
-		Workbook workbook = compilanceService.createCompliance(id);
+		String filename = compilanceService.createCompliance(id);
 
 		HttpHeaders headers = new HttpHeaders();
 		headers.set("Content-Type", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
 
-		File file = FileUtils.getFile("poi-generated-file.xlsx");
+		File file = FileUtils.getFile(filename);
 
 		FileSystemResource fileSystemResource = new FileSystemResource(file);
 

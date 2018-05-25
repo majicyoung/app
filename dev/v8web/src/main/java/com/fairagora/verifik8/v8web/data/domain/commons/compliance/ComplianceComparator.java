@@ -32,4 +32,8 @@ public class ComplianceComparator {
 				return false;
 		}
 	}
+
+	public Boolean booleanTestResult(String sqlResult){
+		return Integer.valueOf(sqlResult) != 0;
+	}
 }

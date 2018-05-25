@@ -4,7 +4,9 @@ import com.fairagora.verifik8.v8web.data.domain.commons.compliance.ComplianceRes
 import com.fairagora.verifik8.v8web.data.domain.commons.compliance.ComplianceDocument;
 import com.fairagora.verifik8.v8web.data.domain.commons.compliance.ComplianceResultRow;
 import com.fairagora.verifik8.v8web.data.domain.commons.compliance.TestingCompliance;
+import com.fairagora.verifik8.v8web.data.domain.reg.RegEntity;
 import com.fairagora.verifik8.v8web.data.interactor.ExcelReader;
+import com.fairagora.verifik8.v8web.data.repo.reg.RegEntityRepository;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -31,6 +33,9 @@ public class ComplianceService extends AbstractV8Service {
 	@Autowired
 	private ResourceLoader resourceLoader;
 
+	@Autowired
+	private RegEntityRepository regEntityRepository;
+
 	private ComplianceDocument document;
 
 	private TestingCompliance testingCompliance;
@@ -49,13 +54,14 @@ public class ComplianceService extends AbstractV8Service {
 	}
 
 
-	public Workbook createCompliance(Long farmId) {
+	public String createCompliance(Long farmId) {
 
+		RegEntity farm = regEntityRepository.findOne(farmId);
 		ComplianceResult complianceResult = new ComplianceResult();
+		complianceResult.setStandard(document.getStandars());
 		complianceResult.setFarmId(String.valueOf(farmId));
+		complianceResult.setFarmName(farm.getName());
 		complianceResult.setDateOfCompliance(String.valueOf(new Date()));
-		complianceResult.setIndicator("");
-		complianceResult.setFarmName("");
 		complianceResult.setRowResults(new ArrayList<>());
 
 
@@ -64,25 +70,27 @@ public class ComplianceService extends AbstractV8Service {
 			ComplianceResultRow rowResult = new ComplianceResultRow();
 			try {
 				jdbc.query(formatQueryString(row.getSql(), String.valueOf(farmId)), rs -> {
-					rowResult.setName(row.getName());
+					rowResult.setName(row.getIndicator());
 					rowResult.setResult(testingCompliance.TestSqlResult(row, rs.getString(1)));
 					complianceResult.setRowResult(rowResult);
 				});
 			} catch (DataAccessException e) {
 				rowResult.setName("ERROR");
 				rowResult.setResult(e.toString());
+				complianceResult.setRowResult(rowResult);
+
 			}
 
 
 		});
 
-		Workbook workbook = null;
+		String filename = null;
 		try {
-			workbook = ExcelReader.write(complianceResult);
+			filename = ExcelReader.write(complianceResult);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return workbook;
+		return filename;
 	}
 
 	private String formatQueryString(String query, String farmId){

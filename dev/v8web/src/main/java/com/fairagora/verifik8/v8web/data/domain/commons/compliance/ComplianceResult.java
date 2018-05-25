@@ -8,18 +8,16 @@ public class ComplianceResult {
 	private String farmId;
 	private String farmName;
 	private String dateOfCompliance;
-	private String indicator;
 	private List<ComplianceResultRow> rowResults;
 
 	public ComplianceResult() {
 	}
 
-	public ComplianceResult(String standard, String farmId, String farmName, String dateOfCompliance, String indicator, List<ComplianceResultRow> rowResults) {
+	public ComplianceResult(String standard, String farmId, String farmName, String dateOfCompliance, List<ComplianceResultRow> rowResults) {
 		this.standard = standard;
 		this.farmId = farmId;
 		this.farmName = farmName;
 		this.dateOfCompliance = dateOfCompliance;
-		this.indicator = indicator;
 		this.rowResults = rowResults;
 	}
 
@@ -55,14 +53,6 @@ public class ComplianceResult {
 		this.dateOfCompliance = dateOfCompliance;
 	}
 
-	public String getIndicator() {
-		return indicator;
-	}
-
-	public void setIndicator(String indicator) {
-		this.indicator = indicator;
-	}
-
 	public List<ComplianceResultRow> getRowResults() {
 		return rowResults;
 	}
@@ -78,5 +68,12 @@ public class ComplianceResult {
 
 	public void setRowResult(ComplianceResultRow rowResults) {
 		this.rowResults.add(rowResults);
+	}
+
+	public String getCompliance() {
+		for (ComplianceResultRow complianceResultRow : getRowResults()) {
+			if (!Boolean.valueOf(complianceResultRow.getResult())) return "Uncompilable";
+		}
+		return "Compliance";
 	}
 }
