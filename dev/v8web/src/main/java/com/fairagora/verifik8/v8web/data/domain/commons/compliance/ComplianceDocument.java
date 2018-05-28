@@ -5,7 +5,7 @@ import java.util.List;
 
 public class ComplianceDocument {
 
-	private String standars;
+	private String standard;
 
 	private List<ComplianceDocumentRow> rows;
 
@@ -33,11 +33,11 @@ public class ComplianceDocument {
 		return this.rows.get(index);
 	}
 
-	public String getStandars() {
-		return standars;
+	public String getStandard() {
+		return standard;
 	}
 
-	public void setStandars(String standars) {
-		this.standars = standars;
+	public void setStandard(String standard) {
+		this.standard = standard;
 	}
 }

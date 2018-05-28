@@ -1,4 +1,4 @@
-package com.fairagora.verifik8.v8web.data.domain.commons.compliance;
+package com.fairagora.verifik8.v8web.data.interactor;
 
 public class ComplianceComparator {
 

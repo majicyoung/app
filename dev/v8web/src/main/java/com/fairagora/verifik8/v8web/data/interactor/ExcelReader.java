@@ -8,6 +8,7 @@ import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -43,7 +44,7 @@ public class ExcelReader {
 		Iterator<org.apache.poi.ss.usermodel.Row> rowIterator = sheet.rowIterator();
 		//Remove header
 		org.apache.poi.ss.usermodel.Row rowStandard = rowIterator.next();
-		document.setStandars(dataFormatter.formatCellValue(rowStandard.getCell(1)));
+		document.setStandard(dataFormatter.formatCellValue(rowStandard.getCell(1)));
 		rowIterator.next();
 		//Loop on row
 		while (rowIterator.hasNext()) {
@@ -131,13 +132,14 @@ public class ExcelReader {
 
 		String filename = complianceResult.getStandard() + new Date().toString();
 		// Write the output to a file
-		FileOutputStream fileOut = new FileOutputStream(filename);
+		File tmpFile = File.createTempFile(filename, ".xls");
+		FileOutputStream fileOut = new FileOutputStream(tmpFile);
 		workbook.write(fileOut);
 		fileOut.close();
 
 		// Closing the workbook
 		workbook.close();
-		return filename;
+		return tmpFile.getAbsolutePath();
 	}
 
 

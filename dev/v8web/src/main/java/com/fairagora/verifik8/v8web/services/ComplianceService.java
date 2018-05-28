@@ -3,13 +3,12 @@ package com.fairagora.verifik8.v8web.services;
 import com.fairagora.verifik8.v8web.data.domain.commons.compliance.ComplianceResult;
 import com.fairagora.verifik8.v8web.data.domain.commons.compliance.ComplianceDocument;
 import com.fairagora.verifik8.v8web.data.domain.commons.compliance.ComplianceResultRow;
-import com.fairagora.verifik8.v8web.data.domain.commons.compliance.TestingCompliance;
+import com.fairagora.verifik8.v8web.data.interactor.ComplianceQueryResultTestingProvider;
 import com.fairagora.verifik8.v8web.data.domain.reg.RegEntity;
 import com.fairagora.verifik8.v8web.data.interactor.ExcelReader;
 import com.fairagora.verifik8.v8web.data.repo.reg.RegEntityRepository;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
-import org.apache.poi.ss.usermodel.Workbook;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,10 +37,10 @@ public class ComplianceService extends AbstractV8Service {
 
 	private ComplianceDocument document;
 
-	private TestingCompliance testingCompliance;
+	private ComplianceQueryResultTestingProvider testingCompliance;
 
 	public ComplianceService() {
-		testingCompliance = new TestingCompliance();
+		testingCompliance = new ComplianceQueryResultTestingProvider();
 	}
 
 	public void init() {
@@ -58,7 +57,7 @@ public class ComplianceService extends AbstractV8Service {
 
 		RegEntity farm = regEntityRepository.findOne(farmId);
 		ComplianceResult complianceResult = new ComplianceResult();
-		complianceResult.setStandard(document.getStandars());
+		complianceResult.setStandard(document.getStandard());
 		complianceResult.setFarmId(String.valueOf(farmId));
 		complianceResult.setFarmName(farm.getName());
 		complianceResult.setDateOfCompliance(String.valueOf(new Date()));
