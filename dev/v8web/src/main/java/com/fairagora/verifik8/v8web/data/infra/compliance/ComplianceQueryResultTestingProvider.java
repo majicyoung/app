@@ -1,4 +1,4 @@
-package com.fairagora.verifik8.v8web.data.interactor;
+package com.fairagora.verifik8.v8web.data.infra.compliance;
 
 import com.fairagora.verifik8.v8web.data.domain.commons.compliance.ComplianceDocumentRow;
 
