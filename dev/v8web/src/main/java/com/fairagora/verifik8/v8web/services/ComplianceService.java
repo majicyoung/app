@@ -74,7 +74,7 @@ public class ComplianceService extends AbstractV8Service {
 					complianceResult.setRowResult(rowResult);
 				});
 			} catch (DataAccessException e) {
-				rowResult.setName("ERROR");
+				rowResult.setName(row.getIndicator());
 				rowResult.setResult(e.toString());
 				complianceResult.setRowResult(rowResult);
 
