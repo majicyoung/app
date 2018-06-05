@@ -1,5 +1,7 @@
 package com.fairagora.verifik8.v8web.data.domain.commons.compliance;
 
+import com.fairagora.verifik8.v8web.config.helper.BooleanHelper;
+
 import java.util.List;
 
 public class ComplianceResult {
@@ -72,7 +74,7 @@ public class ComplianceResult {
 
 	public String getCompliance() {
 		for (ComplianceResultRow complianceResultRow : getRowResults()) {
-			if (!Boolean.valueOf(complianceResultRow.getResult())) return "Uncompilable";
+			if (!BooleanHelper.valueOf(complianceResultRow.getResult())) return "Uncompilable";
 		}
 		return "Compliance";
 	}
