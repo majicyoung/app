@@ -28,55 +28,33 @@
 										</div>
 										<div class="row">
 
-											<div class="col-md-4 col-sm-6 col-xs-12" th:if="${v8App.pondProfile}">
-												<div class="info-box">
-													<span class="info-box-icon bg-red"><i class="fa fa-bar-chart"></i></span>
-													<div class="info-box-content">
-														<span class="info-box-text" th:text="#{farm.pond_count}"></span>
-														<span class="info-box-number" th:text="${dashboard.topKpisMap['nbPonds'].value}"></span>
-													</div>
+
+											<div class="col-sm-3 col-xs-12 border-right" th:if="${v8App.pondProfile}">
+												<div class="description-block">
+													<h5 class="description-header" th:text="#{farm.area_total}"></h5>
+													<span class="description-text" th:text="${dashboard.topKpisMap['totArea'].value}"></span>
 												</div>
 											</div>
-											<div class="col-md-4 col-sm-6 col-xs-12" th:if="${v8App.plotProfile}">
-												<div class="info-box">
-													<span class="info-box-icon bg-red"><i class="fa fa-line-chart"></i></span>
-													<div class="info-box-content">
-														<span class="info-box-text" th:text="#{farm.plot_count}"></span>
-														<span class="info-box-number" th:text="${dashboard.topKpisMap['nbPlots'].value}"></span>
+
+											<div class="col-sm-3 col-xs-12 border-right" th:if="${v8App.pondProfile}">
+													<div class="description-block">
+														<h5 class="description-header" th:text="#{farm.pond_count}"></h5>
+														<span class="description-text" th:text="${dashboard.topKpisMap['nbPonds'].value}"></span>
 													</div>
+											</div>
+											<div class="clearfix visible-sm-block"></div>
+											<div class="col-sm-3 col-xs-12 border-right" th:if="${v8App.pondProfile}">
+												<div class="description-block">
+													<h5 class="description-header" th:text="#{farm.pond_active_count}"></h5>
+													<span class="description-text" th:text="${dashboard.topKpisMap['nbActivePonds'].value}"></span>
 												</div>
 											</div>
 											<div class="clearfix visible-sm-block"></div>
-											<div class="col-md-4 col-sm-6 col-xs-12" th:if="${v8App.pondProfile}">
-												<div class="info-box">
-													<span class="info-box-icon bg-green"><i class="fa fa-truck"></i></span>
-													<div class="info-box-content">
-														<span class="info-box-text" th:text="#{production_profile.total_production}"></span>
-														<span class="info-box-number"
-																	th:text="${dashboard.topKpisMap['totalProductionAq'].value}"> </span><span>MT</span>
-
+											<div class="col-sm-3 col-xs-12 border-right">
+													<div class="description-block">
+														<h5 class="description-header" th:text="#{farm.staff_count}"></h5>
+														<span class="description-text" th:text="${dashboard.topKpisMap['nbEmployees'].value}"></span>
 													</div>
-												</div>
-											</div>
-											<div class="col-md-4 col-sm-6 col-xs-12" th:if="${v8App.plotProfile}">
-												<div class="info-box">
-													<span class="info-box-icon bg-green"><i class="fa fa-money"></i></span>
-													<div class="info-box-content">
-														<span class="info-box-text" th:text="#{production_profile.total_production}"></span>
-														<span class="info-box-number"
-																	th:text="${dashboard.topKpisMap['totalProductionAg'].value}"> </span><span>MT</span>
-
-													</div>
-												</div>
-											</div>
-											<div class="col-md-4 col-sm-6 col-xs-12">
-												<div class="info-box">
-													<span class="info-box-icon bg-yellow"><i class="fa fa-users"></i></span>
-													<div class="info-box-content">
-														<span class="info-box-text" th:text="#{farm.staff_count}"></span>
-														<span class="info-box-number" th:text="${dashboard.topKpisMap['nbEmployees'].value}"></span>
-													</div>
-												</div>
 											</div>
 										</div>
 
