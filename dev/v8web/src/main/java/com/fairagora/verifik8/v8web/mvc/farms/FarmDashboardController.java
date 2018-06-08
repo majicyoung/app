@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.transaction.Transactional;
 
+import com.fairagora.verifik8.v8web.data.repo.reg.RegEntityFarmPondRepository;
 import com.fairagora.verifik8.v8web.services.ComplianceService;
 import org.apache.commons.io.FileUtils;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -43,6 +44,10 @@ public class FarmDashboardController extends AbstractV8Controller {
 
 	@Autowired
 	private ComplianceService compilanceService;
+
+
+	@Autowired
+	private RegEntityFarmPondRepository regEntityFarmPondRepository;
 
 	
 	/**
