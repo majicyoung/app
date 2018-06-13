@@ -148,13 +148,13 @@ public class FarmDashboardDataBuilder {
 			farmDashboardPond.setPoundId(regEntityFarmPond.getId().toString());
 			farmDashboardPond.setArea(regEntityFarmPond.getSize().toString());
 			try {
-				farmDashboardPond.setStockingDate(jdbc.queryForObject("SELECT dt_farmaq_pond_management.ACTIVITY_START_DATE FROM reg_entity_farmaq_ponds LEFT JOIN dt_farmaq_pond_management ON reg_entity_farmaq_ponds.ID = dt_farmaq_pond_management.REG_ENTITY_FARM_POND_ID WHERE REG_ENTITY_FARM_ID=" + farmId + " AND dt_farmaq_pond_management.ACTIVITY_START_DATE >= ( SELECT max(dt_farmaq_pond_management.ACTIVITY_START_DATE) FROM dt_farmaq_pond_management where  dt_farmaq_pond_management.CL_POND_ACTIVITY_TYPE_ID = 1 ) AND dt_farmaq_pond_management.CL_POND_ACTIVITY_TYPE_ID = 1", String.class));
+				farmDashboardPond.setStockingDate(jdbc.queryForObject("SELECT dt_farmaq_pond_management.ACTIVITY_START_DATE FROM reg_entity_farmaq_ponds LEFT JOIN dt_farmaq_pond_management ON reg_entity_farmaq_ponds.ID = dt_farmaq_pond_management.REG_ENTITY_FARM_POND_ID WHERE dt_farmaq_pond_management.REG_ENTITY_FARM_POND_ID=" + regEntityFarmPond.getId() + " AND dt_farmaq_pond_management.ACTIVITY_START_DATE >= ( SELECT max(dt_farmaq_pond_management.ACTIVITY_START_DATE) FROM dt_farmaq_pond_management where  dt_farmaq_pond_management.CL_POND_ACTIVITY_TYPE_ID = 1 ) AND dt_farmaq_pond_management.CL_POND_ACTIVITY_TYPE_ID = 1", String.class));
 			} catch (DataAccessException e) {
 				farmDashboardPond.setStockingDate("");
 			}
 
 			try {
-				farmDashboardPond.setStockingQuantity(jdbc.queryForObject("SELECT dt_farmaq_pond_management.MEASURE_VALUE FROM reg_entity_farmaq_ponds LEFT JOIN dt_farmaq_pond_management ON reg_entity_farmaq_ponds.ID = dt_farmaq_pond_management.REG_ENTITY_FARM_POND_ID WHERE REG_ENTITY_FARM_ID=" + farmId + " AND dt_farmaq_pond_management.ACTIVITY_START_DATE >= ( SELECT max(dt_farmaq_pond_management.ACTIVITY_START_DATE) FROM dt_farmaq_pond_management where  dt_farmaq_pond_management.CL_POND_ACTIVITY_TYPE_ID = 1 ) AND dt_farmaq_pond_management.CL_POND_ACTIVITY_TYPE_ID = 1", String.class));
+				farmDashboardPond.setStockingQuantity(jdbc.queryForObject("SELECT dt_farmaq_pond_management.MEASURE_VALUE FROM reg_entity_farmaq_ponds LEFT JOIN dt_farmaq_pond_management ON reg_entity_farmaq_ponds.ID = dt_farmaq_pond_management.REG_ENTITY_FARM_POND_ID WHERE dt_farmaq_pond_management.REG_ENTITY_FARM_POND_ID=" + regEntityFarmPond.getId()  + " AND dt_farmaq_pond_management.ACTIVITY_START_DATE >= ( SELECT max(dt_farmaq_pond_management.ACTIVITY_START_DATE) FROM dt_farmaq_pond_management where  dt_farmaq_pond_management.CL_POND_ACTIVITY_TYPE_ID = 1 ) AND dt_farmaq_pond_management.CL_POND_ACTIVITY_TYPE_ID = 1", String.class));
 			} catch (DataAccessException e) {
 				farmDashboardPond.setStockingQuantity("");
 			}
@@ -166,7 +166,7 @@ public class FarmDashboardDataBuilder {
 			}
 
 			try {
-				farmDashboardPond.setFeedQuantity(jdbc.queryForObject("SELECT \tSUM(dt_farmaq_pond_management.MEASURE_VALUE) FROM reg_entity_farmaq_ponds LEFT JOIN dt_farmaq_pond_management ON reg_entity_farmaq_ponds.ID = dt_farmaq_pond_management.REG_ENTITY_FARM_POND_ID WHERE REG_ENTITY_FARM_ID=" + farmId + " AND dt_farmaq_pond_management.ACTIVITY_START_DATE >= ( SELECT max(dt_farmaq_pond_management.ACTIVITY_START_DATE) FROM dt_farmaq_pond_management where  dt_farmaq_pond_management.CL_POND_ACTIVITY_TYPE_ID = 1 ) AND dt_farmaq_pond_management.CL_POND_ACTIVITY_TYPE_ID = 3", String.class));
+				farmDashboardPond.setFeedQuantity(jdbc.queryForObject("SELECT SUM(dt_farmaq_pond_management.MEASURE_VALUE) FROM reg_entity_farmaq_ponds LEFT JOIN dt_farmaq_pond_management ON reg_entity_farmaq_ponds.ID = dt_farmaq_pond_management.REG_ENTITY_FARM_POND_ID WHERE dt_farmaq_pond_management.REG_ENTITY_FARM_POND_ID=" + regEntityFarmPond.getId()  + " AND dt_farmaq_pond_management.ACTIVITY_START_DATE >= ( SELECT max(dt_farmaq_pond_management.ACTIVITY_START_DATE) FROM dt_farmaq_pond_management where  dt_farmaq_pond_management.CL_POND_ACTIVITY_TYPE_ID = 1 ) AND dt_farmaq_pond_management.CL_POND_ACTIVITY_TYPE_ID = 3", String.class));
 			} catch (DataAccessException e) {
 				farmDashboardPond.setInProduction("");
 			}
@@ -175,7 +175,7 @@ public class FarmDashboardDataBuilder {
 			farmDashboardPond.setDisease("");
 
 			try {
-				farmDashboardPond.setAntibioticsUse(jdbc.queryForObject("SELECT count(*) FROM reg_entity_farmaq_ponds LEFT JOIN dt_farmaq_pond_management ON reg_entity_farmaq_ponds.ID = dt_farmaq_pond_management.REG_ENTITY_FARM_POND_ID WHERE REG_ENTITY_FARM_ID=" + farmId + " AND dt_farmaq_pond_management.ACTIVITY_START_DATE >= ( SELECT max(dt_farmaq_pond_management.ACTIVITY_START_DATE) FROM dt_farmaq_pond_management where  dt_farmaq_pond_management.CL_POND_ACTIVITY_TYPE_ID = 1 ) AND dt_farmaq_pond_management.CL_POND_ACTIVITY_TYPE_ID = 5", String.class));
+				farmDashboardPond.setAntibioticsUse(jdbc.queryForObject("SELECT count(*) FROM reg_entity_farmaq_ponds LEFT JOIN dt_farmaq_pond_management ON reg_entity_farmaq_ponds.ID = dt_farmaq_pond_management.REG_ENTITY_FARM_POND_ID WHERE dt_farmaq_pond_management.REG_ENTITY_FARM_POND_ID=" + regEntityFarmPond.getId()  + " AND dt_farmaq_pond_management.ACTIVITY_START_DATE >= ( SELECT max(dt_farmaq_pond_management.ACTIVITY_START_DATE) FROM dt_farmaq_pond_management where  dt_farmaq_pond_management.CL_POND_ACTIVITY_TYPE_ID = 1 ) AND dt_farmaq_pond_management.CL_POND_ACTIVITY_TYPE_ID = 5", String.class));
 			} catch (DataAccessException e) {
 				farmDashboardPond.setAntibioticsUse("");
 			}
