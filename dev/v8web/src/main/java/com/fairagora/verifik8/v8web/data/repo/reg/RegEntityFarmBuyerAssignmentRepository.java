@@ -10,5 +10,7 @@ public interface RegEntityFarmBuyerAssignmentRepository extends JpaRepository<Re
 
 
 	public List<RegEntityFarmBuyerAssignment> findByFarmIdOrderByBuyerName(Long farmId);
-	
+
+	public List<RegEntityFarmBuyerAssignment> findByBuyerId(Long BuyerId);
+
 }
