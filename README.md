@@ -2,22 +2,41 @@
 
 This README would normally document whatever steps are necessary to get your application up and running.
 
-### What is this repository for? ###
+### Verifik8 api ###
 
-Verifik8 upgrade to bonsucro standard
+An api for the development of Verifik8 app.
 
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+### Software ###
+    - Java
+	- Maven
 
-### How do I get set up? ###
+### Installation ###
 
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
+First clone the repository
+
+```bash
+git@gitlab.united-asian.com:verifik8/backend.git
+```
+Database configuration
+
+```bash
+MySQL
+	root	verifik8-isA-Go0dSoftWAr3
+```
+
+Install dependencies and build project
+
+```bash
+mvn install
+```
+
+Serve your API
+
+```bash
+ java -jar target/v8web-*.jar
+ ```
+Now, request # http://localhost:8080 from browser.
+
 
 ### Contribution guidelines ###
 
