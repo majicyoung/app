@@ -63,31 +63,37 @@
 									</div>
 									<div class="box-body">
 										<table class="table">
-											<tbody>
-											<tr>
-												<th th:text="#{dashboard.pound.pond_id}"/>
-												<th th:text="#{dashboard.pound.area}"/>
-												<th th:text="#{dashboard.pound.stocking_date}"/>
-												<th th:text="#{dashboard.pound.stocking_quantity}"/>
-												<th th:text="#{dashboard.pound.in_production}"/>
-												<th th:text="#{dashboard.pound.feed_quantity}"/>
-												<th th:text="#{dashboard.pound.mortality_rate}"/>
-												<th th:text="#{dashboard.pound.disease}"/>
-												<th th:text="#{dashboard.pound.antibiotic_use}"/>
-											</tr>
-											<th:block th:each="pond : ${dashboard.getPondSeries()}">
-												<tr th:classappend="${pond.getInProduction()} ? bg-success : bg-danger">
-													<td th:text="${pond.getPoundId()}"></td>
-													<td th:text="${pond.getArea()}"></td>
-													<td th:text="${pond.getStockingDate()}"></td>
-													<td th:text="${pond.getStockingQuantity()}"></td>
-													<td th:text="${pond.getInProduction()}"></td>
-													<td th:text="${pond.getFeedQuantity()}"></td>
-													<td th:text="${pond.getMortalityRate()}"></td>
-													<td th:text="${pond.getDisease()}"></td>
-													<td th:text="${pond.getAntibioticsUse()}"></td>
+										    <thead class="thead-dark">
+												<tr >
+													<th th:text="#{dashboard.pound.pond_id}"/>
+													<th th:text="#{dashboard.pound.area}"/>
+													<th th:text="#{dashboard.pound.stocking_date}"/>
+													<th th:text="#{dashboard.pound.stocking_quantity}"/>
+													<th th:text="#{dashboard.pound.in_production}"/>
+													<th th:text="#{dashboard.pound.feed_quantity}"/>
+													<th th:text="#{dashboard.pound.mortality_rate}"/>
+													<th th:text="#{dashboard.pound.disease}"/>
+													<th th:text="#{dashboard.pound.antibiotic_use}"/>
 												</tr>
-											</th:block>
+											</thead>
+											<tbody>
+												<th:block th:each="pond : ${dashboard.getPondSeries()}">
+													<tr th:classappend="${pond.getInProduction()} ? bg-success : bg-danger">
+														<td th:text="${pond.getPoundId()}"></td>
+														<td th:text="${pond.getArea()}"></td>
+														<td th:text="${pond.getStockingDate()}"></td>
+														<td th:text="${pond.getStockingQuantity()}"></td>
+														<td th:if="${pond.getInProduction()}"><span class="fa fa-check" style="color:green"></span></td>
+														<td th:if="${not pond.getInProduction()}"><span class="fa fa-close" style="color:red"></span></td>													
+														<td th:text="${pond.getFeedQuantity()}"></td>
+														<td th:text="${pond.getMortalityRate()}"></td>
+														<td th:if="${pond.getDisease()}"><span class="fa fa-check" style="color:green"></span></td>
+														<td th:if="${not pond.getDisease()}"><span class="fa fa-close" style="color:red"></span></td>
+														<td th:if="${pond.getAntibioticsUse()}"><span class="fa fa-check" style="color:green"></span></td>
+														<td th:if="${not pond.getAntibioticsUse()}"><span class="fa fa-close" style="color:red"></span></td>
+
+													</tr>
+												</th:block>
 											</tbody>
 										</table>
 									</div>
