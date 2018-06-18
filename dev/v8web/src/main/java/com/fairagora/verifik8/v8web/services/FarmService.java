@@ -6,8 +6,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import com.fairagora.verifik8.v8web.data.domain.reg.farm.RegEntityFarmBuyerAssignment;
 import com.fairagora.verifik8.v8web.data.domain.reg.farm.RegEntityFarmSupplierAssignment;
-import com.fairagora.verifik8.v8web.data.repo.reg.RegEntityFarmSupplierAssignmentRepository;
+import com.fairagora.verifik8.v8web.data.repo.reg.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -23,9 +24,6 @@ import com.fairagora.verifik8.v8web.data.domain.reg.farm.RegEntityFarmDetails;
 import com.fairagora.verifik8.v8web.data.domain.reg.farm.RegEntityFarmPond;
 import com.fairagora.verifik8.v8web.data.domain.sys.SYSRole;
 import com.fairagora.verifik8.v8web.data.domain.sys.SYSUser;
-import com.fairagora.verifik8.v8web.data.repo.reg.RegEntityFarmDetailsRepository;
-import com.fairagora.verifik8.v8web.data.repo.reg.RegEntityFarmPondRepository;
-import com.fairagora.verifik8.v8web.data.repo.reg.RegEntityRepository;
 import com.fairagora.verifik8.v8web.data.repo.sys.SYSUserRepository;
 import com.fairagora.verifik8.v8web.services.enhanced.V8Farm;
 import com.fairagora.verifik8.v8web.services.enhanced.dtomapping.V8EnhancedDtoMapper;
@@ -44,6 +42,9 @@ public class FarmService extends AbstractV8Service {
 
 	@Autowired
 	protected RegEntityFarmSupplierAssignmentRepository regEntityFarmSupplierRepository;
+
+	@Autowired
+	protected RegEntityFarmBuyerAssignmentRepository regEntityFarmBuyerAssignmentRepository;
 
 
 	/**
@@ -135,6 +136,16 @@ public class FarmService extends AbstractV8Service {
 						// defined in my user profile
 						farmsEntities.stream().filter(f -> user.getCountry() != null && f.getAddress().getCountry() != null && f.getAddress().getCountry().getId().equals(user.getCountry().getId())).forEach(filtered::add);
 						break;
+					case SYSRole.supplier:
+						//Has supplier I should see the farm i get assign too
+						List<RegEntityFarmSupplierAssignment> regEntityFarmSupplierAssignments = regEntityFarmSupplierRepository.findBySupplierId(user.getSupplier().getId());
+						regEntityFarmSupplierAssignments.stream().map(RegEntityFarmSupplierAssignment::getFarm).forEach(filtered::add);
+						return filtered;
+					case SYSRole.buyer:
+						//Has buyer I should see the farm i get assign too
+						List<RegEntityFarmBuyerAssignment> regEntityFarmBuyerAssignments  = regEntityFarmBuyerAssignmentRepository.findByBuyerId(user.getBuyer().getId());
+						regEntityFarmBuyerAssignments.stream().map(RegEntityFarmBuyerAssignment::getFarm).forEach(filtered::add);
+						return filtered;
 				}
 
 			}

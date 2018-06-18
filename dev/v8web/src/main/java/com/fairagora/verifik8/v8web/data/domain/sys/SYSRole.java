@@ -19,7 +19,7 @@ public class SYSRole implements V8Entity {
 	public static final String farm = "farm";
 	public static final String buyer = "buyer";
 	public static final String supplier = "supplier";	
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID")

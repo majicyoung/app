@@ -12,4 +12,6 @@ public interface RegEntityFarmSupplierAssignmentRepository extends JpaRepository
 
 	public List<RegEntityFarmSupplierAssignment> findByFarmIdOrderBySupplierName(Long farmId);
 
+	public List<RegEntityFarmSupplierAssignment> findBySupplierId(Long supplierId);
+
 }
