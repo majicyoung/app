@@ -7,8 +7,9 @@ This README would normally document whatever steps are necessary to get your app
 An api for the development of Verifik8 app.
 
 ### Software ###
-    - Java
-	- Maven
+
+- Java
+- Maven
 
 ### Installation ###
 
@@ -21,7 +22,7 @@ Database configuration
 
 ```bash
 MySQL
-	root	verifik8-isA-Go0dSoftWAr3
+root  verifik8-isA-Go0dSoftWAr3
 ```
 
 Install dependencies and build project
@@ -33,18 +34,6 @@ mvn install
 Serve your API
 
 ```bash
- java -jar target/v8web-*.jar
+java -jar target/v8web-*.jar
  ```
-Now, request # http://localhost:8080 from browser.
-
-
-### Contribution guidelines ###
-
-* Writing tests
-* Code review
-* Other guidelines
-
-### Who do I talk to? ###
-
-* Repo owner or admin
-* Other community or team contact
+Now, request http://localhost:8080 from browser.
