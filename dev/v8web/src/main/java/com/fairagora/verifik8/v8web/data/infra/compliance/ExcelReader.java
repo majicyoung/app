@@ -12,6 +12,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -130,7 +131,9 @@ public class ExcelReader {
 			row.createCell(1).setCellValue(rowResult.getResult());
 		});
 
-		String filename = complianceResult.getStandard() + new Date().toString();
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yy-HH-mm-ss");
+		String filename = complianceResult.getStandard() + dateFormat.format(new Date());
+
 		// Write the output to a file
 		File tmpFile = File.createTempFile(filename, ".xls");
 		FileOutputStream fileOut = new FileOutputStream(tmpFile);
