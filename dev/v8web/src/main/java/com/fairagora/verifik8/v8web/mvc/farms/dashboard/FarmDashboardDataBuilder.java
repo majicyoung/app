@@ -5,7 +5,14 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fairagora.verifik8.v8web.config.helper.BooleanHelper;
+import com.fairagora.verifik8.v8web.data.domain.dt.DTFarmPondActivity;
+import com.fairagora.verifik8.v8web.data.domain.reg.farm.RegEntityFarmPond;
+import com.fairagora.verifik8.v8web.data.repo.dt.DTFarmPondActivityRepository;
+import com.fairagora.verifik8.v8web.data.repo.reg.RegEntityFarmPondRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
@@ -15,20 +22,28 @@ public class FarmDashboardDataBuilder {
 	@Autowired
 	private JdbcTemplate jdbc;
 
+	@Autowired
+	private RegEntityFarmPondRepository regEntityFarmPondRepository;
+	@Autowired
+	private DTFarmPondActivityRepository dtFarmPondActivityRepository;
+
+
 	public FarmDashboardDto get(Long farmId) {
 		FarmDashboardDto dash = new FarmDashboardDto();
 
 		// build top KPIs
-		buildTopKpis(dash,farmId);
+		buildTopKpis(dash, farmId);
 
-		buildTimeSeries(dash,farmId);
-		
-		AqProdCurrentYear(dash,farmId);
+		buildTimeSeries(dash, farmId);
+
+		AqProdCurrentYear(dash, farmId);
+
+		buildPoundTable(dash, farmId);
 
 		return dash;
 	}
 
-	
+
 	private void buildTimeSeries(FarmDashboardDto dash, Long farmId) {
 		FarmDashboardTimeSeries ts = new FarmDashboardTimeSeries<>();
 		ts.setKey("kpi1");
@@ -61,7 +76,7 @@ public class FarmDashboardDataBuilder {
 
 	}
 
-	
+
 	private void AqProdCurrentYear(FarmDashboardDto dash, Long farmId) {
 		FarmDashboardTimeSeries ts = new FarmDashboardTimeSeries<>();
 		ts.setKey("AqProd");
@@ -85,33 +100,127 @@ public class FarmDashboardDataBuilder {
 		}
 
 	}
-	
-	
-	
-	
+
+
 	private void buildTopKpis(FarmDashboardDto dash, Long farmId) {
 		LocalDate d = LocalDate.now();
 		String y = d.format(DateTimeFormatter.ofPattern("yyyy"));
-		
+
 		dash.getTopKpis().add(new FarmDashboardTopKpi<Integer>().setup("Number of Farms", "nbfarms", jdbc
 				.queryForObject("SELECT count(ID) FROM reg_entities WHERE CL_ENTITY_UID_TYPE_ID=2 AND ID=" + farmId, Integer.class)));
+
+		dash.getTopKpis().add(new FarmDashboardTopKpi<Integer>().setup("Total Area", "totArea", jdbc
+				.queryForObject("SELECT SUM(POND_SIZE) FROM reg_entity_farmaq_ponds WHERE REG_ENTITY_FARM_ID=" + farmId, Integer.class)));
 
 		dash.getTopKpis().add(new FarmDashboardTopKpi<Integer>().setup("Number of Ponds", "nbPonds",
 				jdbc.queryForObject("SELECT count(ID) FROM reg_entity_farmaq_ponds WHERE REG_ENTITY_FARM_ID= " + farmId, Integer.class)));
 
+		dash.getTopKpis().add(new FarmDashboardTopKpi<Integer>().setup("Number Active of Ponds", "nbActivePonds",
+				getNumberOfActivePound(farmId)));
+
 		dash.getTopKpis().add(new FarmDashboardTopKpi<Integer>().setup("Number of Plots", "nbPlots",
 				jdbc.queryForObject("SELECT count(ID) FROM reg_entity_farmag_plots WHERE REG_ENTITY_FARM_ID= " + farmId, Integer.class)));
-		
+
 		dash.getTopKpis().add(new FarmDashboardTopKpi<Integer>().setup("Total Production in " + y, "totalProductionAq",
 				jdbc.queryForObject("SELECT SUM(CONVERT(PRODUCTION_QUANTITY, SIGNED INTEGER)) FROM `dt_farmaq_production` WHERE YEAR(DATE_FROM) >= " + y + "  AND REG_ENTITY_FARM_ID=" + farmId, Integer.class)));
-	
+
 		dash.getTopKpis().add(new FarmDashboardTopKpi<Integer>().setup("Total Production in " + y, "totalProductionAg",
 				jdbc.queryForObject("SELECT SUM(CONVERT(PRODUCTION_QUANTITY, SIGNED INTEGER)) FROM `dt_farmag_production` WHERE YEAR(DATE_FROM) >= " + y + " AND REG_ENTITY_FARM_ID=" + farmId, Integer.class)));
-		
-		
+
 		dash.getTopKpis().add(new FarmDashboardTopKpi<Integer>().setup("Employees", "nbEmployees",
 				jdbc.queryForObject("SELECT count(*) FROM reg_entity_staff WHERE REG_ENTITY_FARM_ID=" + farmId, Integer.class)));
 
+	}
+
+	private Integer getNumberOfActivePound(Long farmId) {
+		int activeCount = 0;
+		for (RegEntityFarmPond regEntityFarmPond : regEntityFarmPondRepository.findByFarmId(farmId)) {
+			if (jdbc.queryForObject(getPoundActivity(farmId, regEntityFarmPond.getId()), Boolean.class)) {
+				activeCount++;
+			}
+		}
+		return activeCount;
+	}
+
+	private void buildPoundTable(FarmDashboardDto dash, Long farmId) {
+		for (RegEntityFarmPond regEntityFarmPond : regEntityFarmPondRepository.findByFarmId(farmId)) {
+			FarmDashboardPond farmDashboardPond = new FarmDashboardPond();
+			farmDashboardPond.setPoundId(regEntityFarmPond.getNumber());
+			farmDashboardPond.setArea(regEntityFarmPond.getSize().toString());
+			try {
+				farmDashboardPond.setStockingDate(jdbc.queryForObject("SELECT max(dt_farmaq_pond_management.ACTIVITY_START_DATE) FROM dt_farmaq_pond_management where dt_farmaq_pond_management.REG_ENTITY_FARM_POND_ID = "+ regEntityFarmPond.getId() +" AND dt_farmaq_pond_management.CL_POND_ACTIVITY_TYPE_ID = 1", String.class));
+			} catch (DataAccessException e) {
+				farmDashboardPond.setStockingDate("n/a");
+			}
+
+			try {
+				farmDashboardPond.setStockingQuantity(jdbc.queryForObject("SELECT a.MEASURE_VALUE FROM (SELECT dt_farmaq_pond_management.MEASURE_VALUE, max(dt_farmaq_pond_management.ACTIVITY_START_DATE) FROM dt_farmaq_pond_management where dt_farmaq_pond_management.REG_ENTITY_FARM_POND_ID = "+ regEntityFarmPond.getId() +" AND dt_farmaq_pond_management.CL_POND_ACTIVITY_TYPE_ID = 1) AS a", String.class));
+			} catch (DataAccessException e) {
+				farmDashboardPond.setStockingQuantity("n/a");
+			}
+
+			try {
+				farmDashboardPond.setInProduction(jdbc.queryForObject(getPoundActivity(farmId, regEntityFarmPond.getId()), String.class));
+			} catch (DataAccessException e) {
+				farmDashboardPond.setInProduction("n/a");
+			}
+
+			try {
+				farmDashboardPond.setFeedQuantity(jdbc.queryForObject("SELECT ROUND(SUM(dt_farmaq_pond_management.MEASURE_VALUE), 2) FROM dt_farmaq_pond_management where dt_farmaq_pond_management.REG_ENTITY_FARM_POND_ID = "+ regEntityFarmPond.getId() +" AND dt_farmaq_pond_management.CL_POND_ACTIVITY_TYPE_ID = 3", String.class));
+			} catch (DataAccessException e) {
+				farmDashboardPond.setInProduction("n/a");
+			}
+
+			farmDashboardPond.setMortalityRate("n/a");
+			farmDashboardPond.setDisease("n/a");
+
+			try {
+				farmDashboardPond.setAntibioticsUse(jdbc.queryForObject("SELECT count(*) FROM dt_farmaq_pond_management where dt_farmaq_pond_management.REG_ENTITY_FARM_POND_ID = "+ regEntityFarmPond.getId() +" AND dt_farmaq_pond_management.CL_POND_ACTIVITY_TYPE_ID = 5", String.class));
+			} catch (DataAccessException e) {
+				farmDashboardPond.setAntibioticsUse("n/a");
+			}
+			dash.getPondSeries().add(farmDashboardPond);
+
+		}
+
+	}
+
+	private static String getPoundActivity(Long farmID, Long poundId) {
+		return "SELECT \n" +
+				"    CASE\n" +
+				"\tWHEN (SELECT count(activity.CL_POND_ACTIVITY_TYPE_ID) from (SELECT dt_farmaq_pond_management.CL_POND_ACTIVITY_TYPE_ID\n" +
+				"    FROM reg_entity_farmaq_ponds \n" +
+				"    LEFT JOIN dt_farmaq_pond_management ON reg_entity_farmaq_ponds.ID = dt_farmaq_pond_management.REG_ENTITY_FARM_POND_ID\n" +
+				"\tWHERE REG_ENTITY_FARM_ID=" + farmID + "\n" +
+				"\tAND reg_entity_farmaq_ponds.ID = " + poundId + "\n" +
+				"\tAND dt_farmaq_pond_management.CL_POND_ACTIVITY_TYPE_ID = 1) as activity) = 0\n" +
+				"\tTHEN FALSE\n" +
+				"    WHEN COUNT(tb.CL_POND_ACTIVITY_TYPE_ID) > 0\n" +
+				"    THEN FALSE\n" +
+				"    ELSE TRUE\n" +
+				"    END AS 'result'\n" +
+				"FROM\n" +
+				"(\n" +
+				"SELECT tbl.CL_POND_ACTIVITY_TYPE_ID FROM\n" +
+				"(SELECT\n" +
+				"dt_farmaq_pond_management.CL_POND_ACTIVITY_TYPE_ID\n" +
+				"FROM reg_entity_farmaq_ponds \n" +
+				"LEFT JOIN dt_farmaq_pond_management ON reg_entity_farmaq_ponds.ID = dt_farmaq_pond_management.REG_ENTITY_FARM_POND_ID\n" +
+				"WHERE REG_ENTITY_FARM_ID=" + farmID + "\n" +
+				"AND reg_entity_farmaq_ponds.ID = " + poundId + "\n" +
+				"AND dt_farmaq_pond_management.ACTIVITY_START_DATE >= (\n" +
+				"SELECT max(dt_farmaq_pond_management.ACTIVITY_START_DATE)\n" +
+				"FROM reg_entity_farmaq_ponds \n" +
+				"LEFT JOIN dt_farmaq_pond_management ON reg_entity_farmaq_ponds.ID = dt_farmaq_pond_management.REG_ENTITY_FARM_POND_ID \n" +
+				"WHERE REG_ENTITY_FARM_ID=" + farmID + "\n" +
+				"AND reg_entity_farmaq_ponds.ID = " + poundId + "\n" +
+				"AND dt_farmaq_pond_management.CL_POND_ACTIVITY_TYPE_ID = 1 \n" +
+				")\n" +
+				"ORDER BY dt_farmaq_pond_management.ACTIVITY_START_DATE DESC\n" +
+				") AS tbl\n" +
+				"WHERE tbl.CL_POND_ACTIVITY_TYPE_ID = 2\n" +
+				"AND tbl.CL_POND_ACTIVITY_TYPE_ID IS NOT NULL\n" +
+				") as tb";
 	}
 
 }
