@@ -18,6 +18,12 @@ First clone the repository
 ```bash
 git@gitlab.united-asian.com:verifik8/backend.git
 ```
+Change the directory into your project folder
+
+```bash
+cd cd backend/dev/v8web/
+```
+
 Database configuration
 
 ```bash
