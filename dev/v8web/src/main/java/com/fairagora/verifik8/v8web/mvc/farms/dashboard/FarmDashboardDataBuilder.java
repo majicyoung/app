@@ -43,6 +43,14 @@ public class FarmDashboardDataBuilder {
 		return dash;
 	}
 
+	public List<FarmDashboardPoundSelector> getPoundList(Long farmId){
+		List<FarmDashboardPoundSelector> farmDashboardPoundSelectors = new ArrayList<>();
+		for (RegEntityFarmPond regEntityFarmPond : regEntityFarmPondRepository.findByFarmId(farmId)) {
+			farmDashboardPoundSelectors.add(new FarmDashboardPoundSelector(regEntityFarmPond.getId(), regEntityFarmPond.getDescription()));
+		}
+		return farmDashboardPoundSelectors;
+	}
+
 
 	private void buildTimeSeries(FarmDashboardDto dash, Long farmId) {
 		FarmDashboardTimeSeries ts = new FarmDashboardTimeSeries<>();

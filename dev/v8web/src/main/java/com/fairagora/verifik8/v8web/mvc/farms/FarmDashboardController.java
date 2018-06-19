@@ -4,7 +4,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
 
 import com.fairagora.verifik8.v8web.data.repo.reg.RegEntityFarmPondRepository;
+import com.fairagora.verifik8.v8web.mvc.farms.dashboard.FarmDashboardPoundSelector;
+import com.fairagora.verifik8.v8web.mvc.farms.dashboard.FarmDashboardSelectorResult;
 import com.fairagora.verifik8.v8web.services.ComplianceService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
@@ -76,12 +80,18 @@ public class FarmDashboardController extends AbstractV8Controller {
 		return new ResponseEntity<>(fileSystemResource, headers, HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/productions", method = RequestMethod.GET)
+	@RequestMapping(value = "/farm/{id}/poundslist", method = RequestMethod.GET)
 	@ResponseBody
-	public String getProductions(Model mv) {
-		// Todo
-		// Integrate with SQL query feature
-		return "{\"results\":[{\"id\":1,\"text\":\"Option 1\"},{\"id\":2,\"text\":\"Option 2\"}]}";
+	public String getPoundList(@PathVariable("id") Long id, Model mv) {
+		List<FarmDashboardPoundSelector> farmDashboardPoundSelectors =farmDashboardDataBuilder.getPoundList(id);
+		ObjectMapper mapper = new ObjectMapper();
+		String result = "";
+		try {
+			result = mapper.writeValueAsString(new FarmDashboardSelectorResult<>(farmDashboardPoundSelectors));
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
+		return result;
 	}
 
 	@RequestMapping(value = "/waters", method = RequestMethod.GET)
