@@ -2,7 +2,6 @@
 <html layout:decorator="inc/main-layout" xmlns:th="http://www.thymeleaf.org"
 			xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
 			xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-
 <div layout:fragment="content">
 	<div class="row">
 		<div class="col-xs-12">
@@ -63,37 +62,41 @@
 									</div>
 									<div class="box-body">
 										<table class="table">
-										    <thead class="thead-dark">
-												<tr >
-													<th th:text="#{dashboard.pound.pond_id}"/>
-													<th th:text="#{dashboard.pound.area}"/>
-													<th th:text="#{dashboard.pound.stocking_date}"/>
-													<th th:text="#{dashboard.pound.stocking_quantity}"/>
-													<th th:text="#{dashboard.pound.in_production}"/>
-													<th th:text="#{dashboard.pound.feed_quantity}"/>
-													<th th:text="#{dashboard.pound.mortality_rate}"/>
-													<th th:text="#{dashboard.pound.disease}"/>
-													<th th:text="#{dashboard.pound.antibiotic_use}"/>
-												</tr>
+											<thead class="thead-dark">
+											<tr>
+												<th th:text="#{dashboard.pound.pond_id}"/>
+												<th th:text="#{dashboard.pound.area}"/>
+												<th th:text="#{dashboard.pound.stocking_date}"/>
+												<th th:text="#{dashboard.pound.stocking_quantity}"/>
+												<th th:text="#{dashboard.pound.in_production}"/>
+												<th th:text="#{dashboard.pound.feed_quantity}"/>
+												<th th:text="#{dashboard.pound.mortality_rate}"/>
+												<th th:text="#{dashboard.pound.disease}"/>
+												<th th:text="#{dashboard.pound.antibiotic_use}"/>
+											</tr>
 											</thead>
 											<tbody>
-												<th:block th:each="pond : ${dashboard.getPondSeries()}">
-													<tr th:classappend="${pond.getInProduction()} ? bg-success : bg-danger">
-														<td th:text="${pond.getPoundId()}"></td>
-														<td th:text="${pond.getArea()}"></td>
-														<td th:text="${pond.getStockingDate()}"></td>
-														<td th:text="${pond.getStockingQuantity()}"></td>
-														<td th:if="${pond.getInProduction()}"><span class="fa fa-check" style="color:green"></span></td>
-														<td th:if="${not pond.getInProduction()}"><span class="fa fa-close" style="color:red"></span></td>													
-														<td th:text="${pond.getFeedQuantity()}"></td>
-														<td th:text="${pond.getMortalityRate()}"></td>
-														<td th:if="${pond.getDisease()}"><span class="fa fa-check" style="color:green"></span></td>
-														<td th:if="${not pond.getDisease()}"><span class="fa fa-close" style="color:red"></span></td>
-														<td th:if="${pond.getAntibioticsUse()}"><span class="fa fa-check" style="color:green"></span></td>
-														<td th:if="${not pond.getAntibioticsUse()}"><span class="fa fa-close" style="color:red"></span></td>
+											<th:block th:each="pond : ${dashboard.getPondSeries()}">
+												<tr th:classappend="${pond.getInProduction()} ? bg-success : bg-danger">
+													<td th:text="${pond.getPoundId()}"></td>
+													<td th:text="${pond.getArea()}"></td>
+													<td th:text="${pond.getStockingDate()}"></td>
+													<td th:text="${pond.getStockingQuantity()}"></td>
+													<td th:if="${pond.getInProduction()}"><span class="fa fa-check" style="color:green"></span>
+													</td>
+													<td th:if="${not pond.getInProduction()}"><span class="fa fa-close" style="color:red"></span>
+													</td>
+													<td th:text="${pond.getFeedQuantity()}"></td>
+													<td th:text="${pond.getMortalityRate()}"></td>
+													<td th:if="${pond.getDisease()}"><span class="fa fa-check" style="color:green"></span></td>
+													<td th:if="${not pond.getDisease()}"><span class="fa fa-close" style="color:red"></span></td>
+													<td th:if="${pond.getAntibioticsUse()}"><span class="fa fa-check" style="color:green"></span>
+													</td>
+													<td th:if="${not pond.getAntibioticsUse()}"><span class="fa fa-close"
+																																						style="color:red"></span></td>
 
-													</tr>
-												</th:block>
+												</tr>
+											</th:block>
 											</tbody>
 										</table>
 									</div>
@@ -112,27 +115,59 @@
 								</div>
 							</div>
 							<div class="row">
-								<div class="form-group">
-									<label>Date range button:</label>
-
-									<div class="input-group">
-										<button type="button" class="btn btn-default pull-right" id="daterange-btn">
-											<span>June 1, 2018 - June 30, 2018</span>
-											<i class="fa fa-caret-down"></i>
+								<div class="box-header">
+									<h3 class="box-title">Production</h3>
+								</div>
+								<div class="box-body">
+									<div class="form-group">
+										<div class="input-group">
+											<button type="button" class="btn btn-default pull-right" id="production_datepicker">
+                    <span>
+                      <i class="fa fa-calendar"></i> Date range picker
+                    </span>
+												<i class="fa fa-caret-down"></i>
+											</button>
+										</div>
+										<select class="form-control production_select2_multiple" multiple="multiple"
+														data-placeholder="Select productions"></select>
+										<button type="button" class="btn btn-block btn-primary" onclick="onProductionSubmitButtonClick()">
+											Submit
 										</button>
 									</div>
+									<div id="production_line_chart" style="width: 100%; height: 500px"></div>
 								</div>
-								<div id="curve_chart" style="width: 900px; height: 500px"></div>
+							</div>
+							<div class="row">
+								<div class="box-header">
+									<h3 class="box-title">Water</h3>
+								</div>
+								<div class="box-body">
+									<div class="form-group">
+										<div class="input-group">
+											<button type="button" class="btn btn-default pull-right" id="water_datepicker">
+                    <span>
+                      <i class="fa fa-calendar"></i> Date range picker
+                    </span>
+												<i class="fa fa-caret-down"></i>
+											</button>
+										</div>
+										<select class="form-control water_select2_multiple" multiple="multiple"
+														data-placeholder="Select waters"></select>
+										<select class="form-control water_select2" data-placeholder="Select a temperature"></select>
+										<button type="button" class="btn btn-block btn-primary" onclick="onWaterSubmitButtonClick()">
+											Submit
+										</button>
+									</div>
+									<div id="water_line_chart" style="width: 100%; height: 500px"></div>
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-
 		</div>
 	</div>
 </div>
-
 
 <th:block layout:fragment="page-scripts">
 	<script src="http://fairagorav8.pagre-it.com/bower_components/admin-lte/plugins/chartjs/Chart.min.js"></script>
@@ -229,32 +264,90 @@
               responsive: true
           };
 
-          //Create the line chart
+          // Create the line chart
           salesChart.Line(salesChartData, salesChartOptions);
 
+          // Create chart for production
+          initDatePicker('#production_datepicker');
+          initSelect2Multiple('.production_select2_multiple', '/productions');
+
+          initDatePicker('#water_datepicker');
+          initSelect2Multiple('.water_select2_multiple', '/waters');
+          initSelect2Multiple('.water_select2', '/waters');
 
       });
+
+      function initDatePicker(id) {
+          $(id).daterangepicker(
+              {
+                  ranges: {
+                      'Today': [moment(), moment()],
+                      'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                      'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+                      'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                      'This Month': [moment().startOf('month'), moment().endOf('month')],
+                      'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+                  },
+                  startDate: moment().subtract(29, 'days'),
+                  endDate: moment()
+              },
+              function (start, end) {
+                  $(id).html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'))
+              }
+          )
+      }
+
+      function initSelect2Multiple(id, urlPath) {
+          $(id).select2({
+              ajax: {
+                  url: urlPath,
+                  dataType: 'json'
+              }
+          });
+      }
+
+      function onProductionSubmitButtonClick() {
+          var startDate = $('#production_datepicker').data('daterangepicker').startDate.format('YYYY-MM-DD');
+          var endDate = $('#production_datepicker').data('daterangepicker').endDate.format('YYYY-MM-DD');
+          var selectProductions = $('.production_select2_multiple').val();
+
+          $.get("/productions/query?start=" + startDate + "&end=" + endDate + "&id=" + selectProductions, function (data) {
+              $(".result").html(data);
+              drawChart('production_line_chart', 'XXXXXe', data);
+          });
+      }
+
+      function onWaterSubmitButtonClick() {
+          var startDate = $('#water_datepicker').data('daterangepicker').startDate.format('YYYY-MM-DD');
+          var endDate = $('#water_datepicker').data('daterangepicker').endDate.format('YYYY-MM-DD');
+          var selectWaters = $('.water_select2_multiple').val();
+          var selectTemp = $('.water_select2').val();
+
+          $.get("/waters/query?start=" + startDate + "&end=" + endDate + "&id=" + selectWaters + "&temp=" + selectTemp, function (data) {
+              $(".result").html(data);
+              drawChart('water_line_chart', 'XXXXXe', data);
+          });
+      }
+
       /*]]>*/
 
-      google.charts.load('current', {'packages':['corechart']});
-      google.charts.setOnLoadCallback(drawChart);
+      google.charts.load('current', {'packages': ['corechart']});
+      google.charts.setOnLoadCallback(function () {
+          var data = [['Date', ''], ['', 0]];
+          drawChart('production_line_chart', 'Production', data);
+          drawChart('water_line_chart', 'Water', data);
+      });
 
-      function drawChart() {
-          var data = google.visualization.arrayToDataTable([
-              ['Year', 'Sales', 'Expenses'],
-              ['2004',  1000,      400],
-              ['2005',  1170,      460],
-              ['2006',  660,       1120],
-              ['2007',  1030,      540]
-          ]);
+      function drawChart(id, title, data) {
+          var data = google.visualization.arrayToDataTable(data);
 
           var options = {
-              title: 'Company Performance',
+              title: title,
               curveType: 'function',
-              legend: { position: 'bottom' }
+              legend: {position: 'bottom'}
           };
 
-          var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+          var chart = new google.visualization.LineChart(document.getElementById(id));
 
           chart.draw(data, options);
       }
