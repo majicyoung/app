@@ -19,6 +19,7 @@
 	</parent>
 
 	<properties>
+	    <docker.image.prefix>verifik8</docker.image.prefix>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
@@ -152,11 +153,11 @@
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/org.webjars.bower/datetimepicker -->
-<dependency>
-    <groupId>org.webjars.bower</groupId>
-    <artifactId>datetimepicker</artifactId>
-    <version>2.5.11</version>
-</dependency>
+		<dependency>
+		    <groupId>org.webjars.bower</groupId>
+		    <artifactId>datetimepicker</artifactId>
+		    <version>2.5.11</version>
+		</dependency>
 
 
 
@@ -174,6 +175,16 @@
                 <groupId>com.spotify</groupId>
                 <artifactId>dockerfile-maven-plugin</artifactId>
                 <version>1.3.6</version>
+                <executions>
+					<execution>
+						<id>default</id>
+						<phase>install</phase>
+						<goals>
+							<goal>build</goal>
+							<goal>push</goal>
+						</goals>
+					</execution>
+				</executions>
                 <configuration>
                     <repository>${docker.image.prefix}/${project.artifactId}</repository>
                     <buildArgs>
@@ -182,7 +193,6 @@
                 </configuration>
             </plugin>
             <!-- end::plugin[] -->
-
 
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
