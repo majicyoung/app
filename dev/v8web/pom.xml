@@ -170,9 +170,9 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 			
-			 <!-- tag::plugin[] -->
-            <plugin>
-                <groupId>com.spotify</groupId>
+			<!-- tag::plugin[] -->
+			<plugin>
+            	<groupId>com.spotify</groupId>
                 <artifactId>dockerfile-maven-plugin</artifactId>
                 <version>1.3.6</version>
                 <executions>
@@ -191,7 +191,7 @@
                         <JAR_FILE>target/${project.build.finalName}.jar</JAR_FILE>
                     </buildArgs>
                 </configuration>
-            </plugin>
+            </plugin>           
             <!-- end::plugin[] -->
 
 			<plugin>
