@@ -4,7 +4,7 @@ This README would normally document whatever steps are necessary to get your app
 
 ### Verifik8 api ###
 
-An api for the development of Verifik8 app.
+Verifik8 upgrade to bonsucro standard
 
 ### Software ###
 
@@ -35,6 +35,12 @@ Install dependencies and build project
 
 ```bash
 mvn install
+```
+
+Development run
+
+```bash
+mvn spring-boot:run
 ```
 
 Serve your API
