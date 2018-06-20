@@ -1,15 +1,18 @@
 package com.fairagora.verifik8.v8web.mvc.farms.dashboard;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 import com.fairagora.verifik8.v8web.config.helper.BooleanHelper;
 import com.fairagora.verifik8.v8web.data.domain.dt.DTFarmPondActivity;
 import com.fairagora.verifik8.v8web.data.domain.reg.farm.RegEntityFarmPond;
 import com.fairagora.verifik8.v8web.data.repo.dt.DTFarmPondActivityRepository;
 import com.fairagora.verifik8.v8web.data.repo.reg.RegEntityFarmPondRepository;
+import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -43,7 +46,7 @@ public class FarmDashboardDataBuilder {
 		return dash;
 	}
 
-	public List<FarmDashboardPoundSelector> getPoundList(Long farmId){
+	public List<FarmDashboardPoundSelector> getPoundList(Long farmId) {
 		List<FarmDashboardPoundSelector> farmDashboardPoundSelectors = new ArrayList<>();
 		for (RegEntityFarmPond regEntityFarmPond : regEntityFarmPondRepository.findByFarmId(farmId)) {
 			farmDashboardPoundSelectors.add(new FarmDashboardPoundSelector(regEntityFarmPond.getId(), regEntityFarmPond.getDescription()));
@@ -156,13 +159,13 @@ public class FarmDashboardDataBuilder {
 			farmDashboardPond.setPoundId(regEntityFarmPond.getNumber());
 			farmDashboardPond.setArea(regEntityFarmPond.getSize().toString());
 			try {
-				farmDashboardPond.setStockingDate(jdbc.queryForObject("SELECT max(dt_farmaq_pond_management.ACTIVITY_START_DATE) FROM dt_farmaq_pond_management where dt_farmaq_pond_management.REG_ENTITY_FARM_POND_ID = "+ regEntityFarmPond.getId() +" AND dt_farmaq_pond_management.CL_POND_ACTIVITY_TYPE_ID = 1", String.class));
+				farmDashboardPond.setStockingDate(jdbc.queryForObject("SELECT max(dt_farmaq_pond_management.ACTIVITY_START_DATE) FROM dt_farmaq_pond_management where dt_farmaq_pond_management.REG_ENTITY_FARM_POND_ID = " + regEntityFarmPond.getId() + " AND dt_farmaq_pond_management.CL_POND_ACTIVITY_TYPE_ID = 1", String.class));
 			} catch (DataAccessException e) {
 				farmDashboardPond.setStockingDate("n/a");
 			}
 
 			try {
-				farmDashboardPond.setStockingQuantity(jdbc.queryForObject("SELECT a.MEASURE_VALUE FROM (SELECT dt_farmaq_pond_management.MEASURE_VALUE, max(dt_farmaq_pond_management.ACTIVITY_START_DATE) FROM dt_farmaq_pond_management where dt_farmaq_pond_management.REG_ENTITY_FARM_POND_ID = "+ regEntityFarmPond.getId() +" AND dt_farmaq_pond_management.CL_POND_ACTIVITY_TYPE_ID = 1) AS a", String.class));
+				farmDashboardPond.setStockingQuantity(jdbc.queryForObject("SELECT a.MEASURE_VALUE FROM (SELECT dt_farmaq_pond_management.MEASURE_VALUE, max(dt_farmaq_pond_management.ACTIVITY_START_DATE) FROM dt_farmaq_pond_management where dt_farmaq_pond_management.REG_ENTITY_FARM_POND_ID = " + regEntityFarmPond.getId() + " AND dt_farmaq_pond_management.CL_POND_ACTIVITY_TYPE_ID = 1) AS a", String.class));
 			} catch (DataAccessException e) {
 				farmDashboardPond.setStockingQuantity("n/a");
 			}
@@ -174,7 +177,7 @@ public class FarmDashboardDataBuilder {
 			}
 
 			try {
-				farmDashboardPond.setFeedQuantity(jdbc.queryForObject("SELECT ROUND(SUM(dt_farmaq_pond_management.MEASURE_VALUE), 2) FROM dt_farmaq_pond_management where dt_farmaq_pond_management.REG_ENTITY_FARM_POND_ID = "+ regEntityFarmPond.getId() +" AND dt_farmaq_pond_management.CL_POND_ACTIVITY_TYPE_ID = 3", String.class));
+				farmDashboardPond.setFeedQuantity(jdbc.queryForObject("SELECT ROUND(SUM(dt_farmaq_pond_management.MEASURE_VALUE), 2) FROM dt_farmaq_pond_management where dt_farmaq_pond_management.REG_ENTITY_FARM_POND_ID = " + regEntityFarmPond.getId() + " AND dt_farmaq_pond_management.CL_POND_ACTIVITY_TYPE_ID = 3", String.class));
 			} catch (DataAccessException e) {
 				farmDashboardPond.setInProduction("n/a");
 			}
@@ -183,7 +186,7 @@ public class FarmDashboardDataBuilder {
 			farmDashboardPond.setDisease("n/a");
 
 			try {
-				farmDashboardPond.setAntibioticsUse(jdbc.queryForObject("SELECT count(*) FROM dt_farmaq_pond_management where dt_farmaq_pond_management.REG_ENTITY_FARM_POND_ID = "+ regEntityFarmPond.getId() +" AND dt_farmaq_pond_management.CL_POND_ACTIVITY_TYPE_ID = 5", String.class));
+				farmDashboardPond.setAntibioticsUse(jdbc.queryForObject("SELECT count(*) FROM dt_farmaq_pond_management where dt_farmaq_pond_management.REG_ENTITY_FARM_POND_ID = " + regEntityFarmPond.getId() + " AND dt_farmaq_pond_management.CL_POND_ACTIVITY_TYPE_ID = 5", String.class));
 			} catch (DataAccessException e) {
 				farmDashboardPond.setAntibioticsUse("n/a");
 			}
@@ -192,6 +195,26 @@ public class FarmDashboardDataBuilder {
 		}
 
 	}
+
+	public List<Map<Date, String>> getPoundProduction(Long farmId, String startDate, String endDate, String[] poundIds) {
+
+		List<Map<Date, String>> farmDashboardProductions = new ArrayList<>();
+		DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		for (String poundId : poundIds) {
+			Map<Date, String> stringHashMap = new HashMap<>();
+			List<Map<String, Object>> mapList = jdbc.queryForList("SELECT MEASURE_VALUE, ACTIVITY_START_DATE FROM dt_farmaq_pond_management WHERE CL_POND_ACTIVITY_TYPE_ID=2 AND REG_ENTITY_FARM_POND_ID=" + poundId + " AND ACTIVITY_START_DATE >= STR_TO_DATE('" + startDate + "', '%Y-%m-%d') AND ACTIVITY_END_DATE <= STR_TO_DATE('" + endDate + "', '%Y-%m-%d')");
+			for (Map<String, Object> stringObjectMap : mapList) {
+				try {
+					stringHashMap.put(DateUtils.round(format.parse(stringObjectMap.get("ACTIVITY_START_DATE").toString()), Calendar.DAY_OF_MONTH), stringObjectMap.get("MEASURE_VALUE").toString());
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
+			}
+			farmDashboardProductions.add(stringHashMap);
+		}
+		return farmDashboardProductions;
+	}
+
 
 	private static String getPoundActivity(Long farmID, Long poundId) {
 		return "SELECT \n" +

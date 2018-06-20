@@ -148,7 +148,7 @@
 											<select class="form-control water_select2_multiple" multiple="multiple"
 															th:attr="data-placeholder=#{farm.ponds}"></select>
 											<br/><br/>
-											<select class="form-control water_select2" th:data="data-placeholder=#{farm.water_params}"></select>
+											<select class="form-control water_select2" th:attr="data-placeholder=#{farm.water_params}"></select>
 											<br/><br/>
 											<button type="button" class="btn btn-block btn-primary" onclick="onWaterSubmitButtonClick()">
 												Submit
@@ -179,11 +179,11 @@
       $(document).ready(function () {
           // Create chart for production
           initDatePicker('#production_datepicker');
-          initSelect2Multiple('.production_select2_multiple', '/farm/'+farmId+'/poundslist');
+          initSelect2Multiple('.production_select2_multiple', '/farm/'+farmId+'/dashboard/poundslist');
 
           initDatePicker('#water_datepicker');
-          initSelect2Multiple('.water_select2_multiple', '/farm/'+farmId+'/poundslist');
-          initSelect2Multiple('.water_select2', '/waters');
+          initSelect2Multiple('.water_select2_multiple', '/farm/'+farmId+'/dashboard/poundslist');
+          initSelect2Multiple('.water_select2', '/farm/'+farmId+'/dashboard/waterscontrollist');
       });
 
       function initDatePicker(id) {
@@ -224,7 +224,7 @@
           var endDate = $('#production_datepicker').data('daterangepicker').endDate.format('YYYY-MM-DD');
           var selectProductions = $('.production_select2_multiple').val();
 
-          $.get("/productions/query?start=" + startDate + "&end=" + endDate + "&id=" + selectProductions, function (data) {
+          $.post('/farm/'+farmId+'/dashboard/productions', {start: startDate, end: endDate, 'poundIds[]': selectProductions}, function (data) {
               $(".result").html(data);
               drawChart('production_line_chart', 'Production', data);
           });
@@ -233,10 +233,10 @@
       function onWaterSubmitButtonClick() {
           var startDate = $('#water_datepicker').data('daterangepicker').startDate.format('YYYY-MM-DD');
           var endDate = $('#water_datepicker').data('daterangepicker').endDate.format('YYYY-MM-DD');
-          var selectWaters = $('.water_select2_multiple').val();
+          var selectProductions = $('.water_select2_multiple').val();
           var selectTemp = $('.water_select2').val();
 
-          $.get("/waters/query?start=" + startDate + "&end=" + endDate + "&id=" + selectWaters + "&temp=" + selectTemp, function (data) {
+          $.get('/farm/'+farmId+ '/dashboard/waters' , {start: startDate, end: endDate, 'poundIds[]': selectProductions}, function (data) {
               $(".result").html(data);
               drawChart('water_line_chart', 'Water', data);
           });
@@ -257,6 +257,7 @@
           var options = {
               title: title,
               curveType: 'function',
+              interpolateNulls: true,
               legend: {position: 'bottom'}
           };
 

@@ -5,6 +5,7 @@ import javax.transaction.Transactional;
 
 import com.fairagora.verifik8.v8web.data.repo.reg.RegEntityFarmPondRepository;
 import com.fairagora.verifik8.v8web.mvc.farms.dashboard.FarmDashboardPoundSelector;
+import com.fairagora.verifik8.v8web.mvc.farms.dashboard.FarmDashboardProduction;
 import com.fairagora.verifik8.v8web.mvc.farms.dashboard.FarmDashboardSelectorResult;
 import com.fairagora.verifik8.v8web.services.ComplianceService;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -29,8 +30,9 @@ import com.fairagora.verifik8.v8web.mvc.farms.dto.FarmFormDto;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 @Controller
 public class FarmDashboardController extends AbstractV8Controller {
@@ -80,7 +82,7 @@ public class FarmDashboardController extends AbstractV8Controller {
 		return new ResponseEntity<>(fileSystemResource, headers, HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/farm/{id}/poundslist", method = RequestMethod.GET)
+	@RequestMapping(value = "/farm/{id}/dashboard/poundslist", method = RequestMethod.GET)
 	@ResponseBody
 	public String getPoundList(@PathVariable("id") Long id, Model mv) {
 		List<FarmDashboardPoundSelector> farmDashboardPoundSelectors =farmDashboardDataBuilder.getPoundList(id);
@@ -94,7 +96,7 @@ public class FarmDashboardController extends AbstractV8Controller {
 		return result;
 	}
 
-	@RequestMapping(value = "/waters", method = RequestMethod.GET)
+	@RequestMapping(value = "/farm/{id}/dashboard/waterscontrollist", method = RequestMethod.GET)
 	@ResponseBody
 	public String getWaters(Model mv) {
 		// Todo
@@ -102,37 +104,37 @@ public class FarmDashboardController extends AbstractV8Controller {
 		return "{\"results\":[{\"id\":1,\"text\":\"Option 1\"},{\"id\":2,\"text\":\"Option 2\"}]}";
 	}
 
-	@RequestMapping(value = "/productions/query", method = RequestMethod.GET)
+	@RequestMapping(value = "/farm/{id}/dashboard/productions", method = RequestMethod.POST)
 	@ResponseBody
-	public List<Object> queryProductions(@RequestParam("start") String startDate, @RequestParam("end") String endDate, @RequestParam("id") String id, Model mv) {
-		// Todo
-		// Integrate with SQL query feature
-		List<Object> columns = new ArrayList<>();
-		columns.add("Date");
-		columns.add("Line#1");
-		columns.add("Line#2");
+	public List<Object> queryProductions(@PathVariable("id") Long id, @RequestParam("start") String startDate, @RequestParam("end") String endDate, @RequestParam(value="poundIds[]") String[] ids, Model mv) {
 
-		List<Object> data1 = new ArrayList<>();
-		data1.add("1");
-		data1.add(122);
-		data1.add(333);
-
-		List<Object> data2 = new ArrayList<>();
-		data2.add("1");
-		data2.add(144);
-		data2.add(356);
-
+		List<Map<Date, String>> farmDashboardProductions = farmDashboardDataBuilder.getPoundProduction(id, startDate, endDate, ids);
+		DateFormat format = new SimpleDateFormat("yyyy MM dd");
 		List<Object> query = new ArrayList<>();
-		query.add(columns);
-		query.add(data1);
-		query.add(data2);
+		List<Date> keyrow = new ArrayList<>();
+		List<String> head = new ArrayList<>();
+		farmDashboardProductions.forEach(stringStringMap -> stringStringMap.forEach((s, s2) -> keyrow.add(s)));
+		head.add("Date");
+		farmDashboardProductions.forEach(stringStringMap -> head.add(stringStringMap.toString()));
+		List<Date> key = new ArrayList<>(new HashSet<>(keyrow));
+		key.sort(Date::compareTo);
+		for (Date s : key) {
+			List<Object> value = new ArrayList<>();
+			value.add(format.format(s));
+			for (Map<Date, String> farmDashboardProduction : farmDashboardProductions) {
+				value.add(farmDashboardProduction.containsKey(s) ? Double.valueOf(farmDashboardProduction.get(s)) : null);
+			}
+			query.add(value);
+		}
+		query.add(0, head);
+
 
 		return query;
 	}
 
-	@RequestMapping(value = "/waters/query", method = RequestMethod.GET)
+	@RequestMapping(value = "/farm/{id}/dashboard/waters", method = RequestMethod.GET)
 	@ResponseBody
-	public List<Object> queryWaters(@RequestParam("start") String startDate, @RequestParam("end") String endDate, @RequestParam("id") String id, @RequestParam("temp") String temperature,Model mv) {
+	public List<Object> queryWaters(@PathVariable("id") Long id, @RequestParam("start") String startDate, @RequestParam("end") String endDate, @RequestParam(value="ids[]") String[] ids,Model mv) {
 		// Todo
 		// Integrate with SQL query feature
 		List<Object> columns = new ArrayList<>();
@@ -143,17 +145,23 @@ public class FarmDashboardController extends AbstractV8Controller {
 		List<Object> data1 = new ArrayList<>();
 		data1.add("1");
 		data1.add(122);
-		data1.add(333);
+		data1.add(432);
 
 		List<Object> data2 = new ArrayList<>();
-		data2.add("1");
-		data2.add(144);
+		data2.add("2");
+		data2.add(null);
 		data2.add(356);
+
+		List<Object> data3 = new ArrayList<>();
+		data3.add("3");
+		data3.add(144);
+		data3.add(356);
 
 		List<Object> query = new ArrayList<>();
 		query.add(columns);
 		query.add(data1);
 		query.add(data2);
+		query.add(data3);
 
 		return query;
 	}
