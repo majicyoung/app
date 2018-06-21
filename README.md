@@ -21,14 +21,15 @@ git@gitlab.united-asian.com:verifik8/backend.git
 Change the directory into your project folder
 
 ```bash
-cd cd backend/dev/v8web/
+cd backend/dev/v8web/
 ```
 
 Database configuration
 
-```bash
 MySQL
-root  verifik8-isA-Go0dSoftWAr3
+
+```bash
+root:<see this in DEMO_SERVERS.txt file>
 ```
 
 Install dependencies and build project
