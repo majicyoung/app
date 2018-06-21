@@ -85,7 +85,7 @@ public class FarmDashboardController extends AbstractV8Controller {
 	@RequestMapping(value = "/farm/{id}/dashboard/poundslist", method = RequestMethod.GET)
 	@ResponseBody
 	public String getPoundList(@PathVariable("id") Long id, Model mv) {
-		List<FarmDashboardPoundSelector> farmDashboardPoundSelectors =farmDashboardDataBuilder.getPoundList(id);
+		List<FarmDashboardPoundSelector> farmDashboardPoundSelectors = farmDashboardDataBuilder.getPoundList(id);
 		ObjectMapper mapper = new ObjectMapper();
 		String result = "";
 		try {
@@ -106,35 +106,45 @@ public class FarmDashboardController extends AbstractV8Controller {
 
 	@RequestMapping(value = "/farm/{id}/dashboard/productions", method = RequestMethod.POST)
 	@ResponseBody
-	public List<Object> queryProductions(@PathVariable("id") Long id, @RequestParam("start") String startDate, @RequestParam("end") String endDate, @RequestParam(value="poundIds[]") String[] ids, Model mv) {
+	public List<Object> queryProductions(@PathVariable("id") Long id, @RequestParam("start") String startDate, @RequestParam("end") String endDate, @RequestParam(value = "poundIds[]") String[] poundIds, Model mv) {
 
-		List<Map<Date, String>> farmDashboardProductions = farmDashboardDataBuilder.getPoundProduction(id, startDate, endDate, ids);
-		DateFormat format = new SimpleDateFormat("yyyy MM dd");
-		List<Object> query = new ArrayList<>();
-		List<Date> keyrow = new ArrayList<>();
-		List<String> head = new ArrayList<>();
-		farmDashboardProductions.forEach(stringStringMap -> stringStringMap.forEach((s, s2) -> keyrow.add(s)));
-		head.add("Date");
-		farmDashboardProductions.forEach(stringStringMap -> head.add(stringStringMap.toString()));
-		List<Date> key = new ArrayList<>(new HashSet<>(keyrow));
-		key.sort(Date::compareTo);
-		for (Date s : key) {
-			List<Object> value = new ArrayList<>();
-			value.add(format.format(s));
-			for (Map<Date, String> farmDashboardProduction : farmDashboardProductions) {
-				value.add(farmDashboardProduction.containsKey(s) ? Double.valueOf(farmDashboardProduction.get(s)) : null);
+		Map<String, Map<String, Double>> productionArray = farmDashboardDataBuilder.getPoundProduction(id, startDate, endDate, poundIds);
+		List<String> farmDashboardProductionsDate = farmDashboardDataBuilder.getPoundProductionDate(id, startDate, endDate, poundIds);
+		List<Object> graphData = new ArrayList<>();
+
+		List<Object> leftColumns = new ArrayList<>();
+		leftColumns.add("Date");
+		leftColumns.addAll(Arrays.asList(poundIds));
+
+		for (String date : farmDashboardProductionsDate) {
+			List<Object> colums = new ArrayList<>();
+			colums.add(date);
+			for (String poundId : poundIds) {
+				colums.add(productionArray.get(date).getOrDefault(poundId, 0d));
 			}
-			query.add(value);
+			graphData.add(colums);
 		}
-		query.add(0, head);
+
+		//Initialization in case of empty data
+		if (graphData.size() <= 0) {
+			List<Object> colums = new ArrayList<>();
+			colums.add("0");
+			for (String poundId : poundIds) {
+				colums.add(0);
+			}
+			graphData.add(colums);
+		}
 
 
-		return query;
+		graphData.add(0, leftColumns);
+
+
+		return graphData;
 	}
 
 	@RequestMapping(value = "/farm/{id}/dashboard/waters", method = RequestMethod.GET)
 	@ResponseBody
-	public List<Object> queryWaters(@PathVariable("id") Long id, @RequestParam("start") String startDate, @RequestParam("end") String endDate, @RequestParam(value="ids[]") String[] ids,Model mv) {
+	public List<Object> queryWaters(@PathVariable("id") Long id, @RequestParam("start") String startDate, @RequestParam("end") String endDate, @RequestParam(value = "ids[]") String[] ids, Model mv) {
 		// Todo
 		// Integrate with SQL query feature
 		List<Object> columns = new ArrayList<>();
