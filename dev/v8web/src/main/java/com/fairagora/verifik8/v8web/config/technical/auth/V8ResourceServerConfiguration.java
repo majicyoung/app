@@ -9,10 +9,10 @@ import org.springframework.security.oauth2.provider.error.OAuth2AccessDeniedHand
 
 @Configuration
 @EnableResourceServer
-public class V8ResourceServerConfiguration extends ResourceServerConfigurerAdapter{
+public class V8ResourceServerConfiguration extends ResourceServerConfigurerAdapter {
 
 	private static final String RESOURCE_ID = "resource_id";
-	
+
 	@Override
 	public void configure(ResourceServerSecurityConfigurer resources) {
 		resources.resourceId(RESOURCE_ID).stateless(false);
@@ -20,10 +20,7 @@ public class V8ResourceServerConfiguration extends ResourceServerConfigurerAdapt
 
 	@Override
 	public void configure(HttpSecurity http) throws Exception {
-        http.
-                anonymous().disable()
-                .authorizeRequests()
-                .antMatchers("/**").access("hasRole('ADMIN')")
-                .and().exceptionHandling().accessDeniedHandler(new OAuth2AccessDeniedHandler());
+		http.anonymous().disable().authorizeRequests().antMatchers("/**").access("hasRole('ADMIN')").and()
+				.exceptionHandling().accessDeniedHandler(new OAuth2AccessDeniedHandler());
 	}
 }
