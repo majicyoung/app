@@ -236,7 +236,7 @@
           var selectProductions = $('.water_select2_multiple').val();
           var selectTemp = $('.water_select2').val();
 
-          $.get('/farm/'+farmId+ '/dashboard/waters' , {start: startDate, end: endDate, 'poundIds[]': selectProductions}, function (data) {
+          $.get('/farm/'+farmId+ '/dashboard/waters' , {start: startDate, end: endDate, 'poundIds[]': selectProductions, measureId: selectTemp}, function (data) {
               $(".result").html(data);
               drawChart('water_line_chart', 'Water', data);
           });

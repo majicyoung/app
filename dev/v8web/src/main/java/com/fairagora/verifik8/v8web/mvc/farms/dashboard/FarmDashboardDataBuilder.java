@@ -1,21 +1,16 @@
 package com.fairagora.verifik8.v8web.mvc.farms.dashboard;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
-import com.fairagora.verifik8.v8web.config.helper.BooleanHelper;
-import com.fairagora.verifik8.v8web.data.domain.dt.DTFarmPondActivity;
+import com.fairagora.verifik8.v8web.data.domain.cl.CLAppMeasureType;
 import com.fairagora.verifik8.v8web.data.domain.reg.farm.RegEntityFarmPond;
+import com.fairagora.verifik8.v8web.data.repo.cl.CLAppMeasureTypeRepository;
 import com.fairagora.verifik8.v8web.data.repo.dt.DTFarmPondActivityRepository;
 import com.fairagora.verifik8.v8web.data.repo.reg.RegEntityFarmPondRepository;
-import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
@@ -27,8 +22,12 @@ public class FarmDashboardDataBuilder {
 
 	@Autowired
 	private RegEntityFarmPondRepository regEntityFarmPondRepository;
+
 	@Autowired
 	private DTFarmPondActivityRepository dtFarmPondActivityRepository;
+
+	@Autowired
+	private CLAppMeasureTypeRepository clAppMeasureTypeRepository;
 
 
 	public FarmDashboardDto get(Long farmId) {
@@ -46,12 +45,12 @@ public class FarmDashboardDataBuilder {
 		return dash;
 	}
 
-	public List<FarmDashboardPoundSelector> getPoundList(Long farmId) {
-		List<FarmDashboardPoundSelector> farmDashboardPoundSelectors = new ArrayList<>();
+	public List<FarmDashboardChartSelector> getPoundList(Long farmId) {
+		List<FarmDashboardChartSelector> farmDashboardChartSelectors = new ArrayList<>();
 		for (RegEntityFarmPond regEntityFarmPond : regEntityFarmPondRepository.findByFarmId(farmId)) {
-			farmDashboardPoundSelectors.add(new FarmDashboardPoundSelector(regEntityFarmPond.getId(), regEntityFarmPond.getDescription()));
+			farmDashboardChartSelectors.add(new FarmDashboardChartSelector(regEntityFarmPond.getId(), regEntityFarmPond.getDescription()));
 		}
-		return farmDashboardPoundSelectors;
+		return farmDashboardChartSelectors;
 	}
 
 
@@ -196,10 +195,17 @@ public class FarmDashboardDataBuilder {
 
 	}
 
+	/**
+	 * Get the productions array by pound and date selected.
+	 * @param startDate start date of query.
+	 * @param endDate end date of query.
+	 * @param poundIds ponds we want to query.
+	 * @return query result.
+	 */
 	public Map<String, Map<String, Double>> getPoundProduction(Long farmId, String startDate, String endDate, String[] poundIds) {
 		Map<String, Map<String, Double>> productionsArray = new HashMap<>(new HashMap<>());
 		String poundIdsString = String.join(" or ", poundIds);
-		List<Map<String, Object>> queryList = jdbc.queryForList("SELECT REG_ENTITY_FARM_POND_ID, SUM(MEASURE_VALUE), DATE(ACTIVITY_START_DATE) FROM dt_farmaq_pond_management WHERE CL_POND_ACTIVITY_TYPE_ID=2  AND (REG_ENTITY_FARM_POND_ID= "+poundIdsString+" ) AND ACTIVITY_START_DATE >= STR_TO_DATE('" + startDate + "', '%Y-%m-%d') AND ACTIVITY_END_DATE <= STR_TO_DATE('" + endDate + "', '%Y-%m-%d') GROUP BY REG_ENTITY_FARM_POND_ID , DATE(ACTIVITY_START_DATE)");
+		List<Map<String, Object>> queryList = jdbc.queryForList("SELECT REG_ENTITY_FARM_POND_ID, SUM(MEASURE_VALUE), DATE(ACTIVITY_START_DATE) FROM dt_farmaq_pond_management WHERE CL_POND_ACTIVITY_TYPE_ID=2  AND (REG_ENTITY_FARM_POND_ID= "+poundIdsString+" ) AND ACTIVITY_START_DATE >= STR_TO_DATE('" + startDate + "', '%Y-%m-%d') AND ACTIVITY_START_DATE <= STR_TO_DATE('" + endDate + "', '%Y-%m-%d') GROUP BY REG_ENTITY_FARM_POND_ID , DATE(ACTIVITY_START_DATE)");
 		for (Map<String, Object> stringObjectMap : queryList) {
 			String activityDate = stringObjectMap.get("DATE(ACTIVITY_START_DATE)").toString();
 			Double measureValue = (Double) stringObjectMap.get("SUM(MEASURE_VALUE)") ;
@@ -213,13 +219,65 @@ public class FarmDashboardDataBuilder {
 	}
 
 
+	/**
+	 * Get Date list of the productions we are looking for.
+	 * @param startDate start date of query.
+	 * @param endDate end date of query.
+	 * @param poundIds ponds we want to query.
+	 * @return list of dates.
+	 */
 	public List<String> getPoundProductionDate(Long farmId, String startDate, String endDate, String[] poundIds) {
-
 		String poundIdsString = String.join(" or ", poundIds);
-		List<String> queryList = jdbc.queryForList("SELECT DATE(ACTIVITY_START_DATE) FROM dt_farmaq_pond_management WHERE CL_POND_ACTIVITY_TYPE_ID=2  AND (REG_ENTITY_FARM_POND_ID= "+poundIdsString+" ) AND ACTIVITY_START_DATE >= STR_TO_DATE('" + startDate + "', '%Y-%m-%d') AND ACTIVITY_END_DATE <= STR_TO_DATE('" + endDate + "', '%Y-%m-%d') GROUP BY REG_ENTITY_FARM_POND_ID , DATE(ACTIVITY_START_DATE)", String.class);
+		return jdbc.queryForList("SELECT DATE(ACTIVITY_START_DATE) FROM dt_farmaq_pond_management WHERE CL_POND_ACTIVITY_TYPE_ID=2  AND (REG_ENTITY_FARM_POND_ID= "+poundIdsString+" ) AND ACTIVITY_START_DATE >= STR_TO_DATE('" + startDate + "', '%Y-%m-%d') AND ACTIVITY_START_DATE <= STR_TO_DATE('" + endDate + "', '%Y-%m-%d') GROUP BY DATE(ACTIVITY_START_DATE)", String.class);
+	}
 
-		//stringHashMap.put(DateUtils.round(format.parse(stringObjectMap.get("ACTIVITY_START_DATE").toString()), Calendar.DAY_OF_MONTH), stringObjectMap.get("MEASURE_VALUE").toString());
-		return queryList;
+	/**
+	 * Query the List of measurement type the graph can query.
+	 * @return list of water type selector.
+	 */
+	public List<FarmDashboardChartSelector> getPoundWaterMeasureType(){
+		List<FarmDashboardChartSelector> farmDashboardChartSelectors = new ArrayList<>();
+		for (CLAppMeasureType clAppMeasureType : clAppMeasureTypeRepository.findAll()) {
+			farmDashboardChartSelectors.add(new FarmDashboardChartSelector(clAppMeasureType.getId(), clAppMeasureType.getDescription()));
+		}
+		return farmDashboardChartSelectors;
+	}
+
+	/**
+	 * Get Date list of the measure we are looking for.
+	 * @param startDate start date of query.
+	 * @param endDate end date of query.
+	 * @param poundIds ponds we want to query.
+	 * @param measureId measure type we want to query.
+	 * @return list of dates.
+	 */
+	public List<String> getPoundWaterMeasureDate(String startDate, String endDate, String[] poundIds, String measureId) {
+		String poundIdsString = String.join(" or ", poundIds);
+		return jdbc.queryForList("SELECT DATE(MEASURE_DATE) FROM dt_farmaq_pond_measurements WHERE CL_MEASURE_TYPE_ID="+measureId+"  AND (REG_ENTITY_FARM_POND_ID= "+poundIdsString+" ) AND MEASURE_DATE >= STR_TO_DATE('" + startDate + "', '%Y-%m-%d') AND MEASURE_DATE <= STR_TO_DATE('" + endDate + "', '%Y-%m-%d') GROUP BY DATE(MEASURE_DATE)", String.class);
+	}
+
+	/**
+	 * Get list of measure for water quality.
+	 * @param startDate start date of query.
+	 * @param endDate end date of query.
+	 * @param poundIds ponds we want to query.
+	 * @param measureId measure type we want to query.
+	 * @return query result.
+	 */
+	public Map<String, Map<String, Double>> getPoundWaterMeasures(String startDate, String endDate, String[] poundIds, String measureId) {
+		Map<String, Map<String, Double>> productionsArray = new HashMap<>(new HashMap<>());
+		String poundIdsString = String.join(" or ", poundIds);
+		List<Map<String, Object>> queryList = jdbc.queryForList("SELECT REG_ENTITY_FARM_POND_ID, SUM(MEASURE_VALUE), DATE(MEASURE_DATE) FROM dt_farmaq_pond_measurements WHERE CL_MEASURE_TYPE_ID="+measureId+"  AND (REG_ENTITY_FARM_POND_ID= "+poundIdsString+" ) AND MEASURE_DATE >= STR_TO_DATE('" + startDate + "', '%Y-%m-%d') AND MEASURE_DATE <= STR_TO_DATE('" + endDate + "', '%Y-%m-%d') GROUP BY REG_ENTITY_FARM_POND_ID , DATE(MEASURE_DATE)");
+		for (Map<String, Object> stringObjectMap : queryList) {
+			String activityDate = stringObjectMap.get("DATE(MEASURE_DATE)").toString();
+			Double measureValue = (Double) stringObjectMap.get("SUM(MEASURE_VALUE)") ;
+			String farmPoundId = stringObjectMap.get("REG_ENTITY_FARM_POND_ID").toString();
+			if (!productionsArray.containsKey(activityDate)){
+				productionsArray.put(activityDate, new HashMap<>());
+			}
+			productionsArray.get(activityDate).put(farmPoundId, measureValue);
+		}
+		return productionsArray;
 	}
 
 	private static String getPoundActivity(Long farmID, Long poundId) {

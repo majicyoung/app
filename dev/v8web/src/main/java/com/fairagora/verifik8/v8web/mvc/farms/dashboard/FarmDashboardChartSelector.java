@@ -1,11 +1,11 @@
 package com.fairagora.verifik8.v8web.mvc.farms.dashboard;
 
-public class FarmDashboardPoundSelector {
+public class FarmDashboardChartSelector {
 
 	private Long id;
 	private String text;
 
-	public FarmDashboardPoundSelector(Long id, String text) {
+	public FarmDashboardChartSelector(Long id, String text) {
 		this.id = id;
 		this.text = text;
 	}
