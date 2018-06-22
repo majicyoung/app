@@ -30,7 +30,7 @@ build:
     - docker build -t $IMAGE_LOCAL
       --build-arg build=$CI_PIPELINE_ID
       --build-arg version=$TAG
-      -f Dockerfile ./dev/v8web
+      -f $DOCKERFILE_PATH/Dockerfile $DOCKERFILE_PATH
     - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN registry.united-asian.com
   stage: build
   tags:
@@ -50,7 +50,7 @@ master_build:
     - docker build -t $IMAGE_LOCAL
       --build-arg build=$CI_PIPELINE_ID
       --build-arg version=$TAG
-      -f Dockerfile ./dev/v8web
+      -f $DOCKERFILE_PATH/Dockerfile $DOCKERFILE_PATH
     - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN registry.united-asian.com
     - docker commit $CONTAINER $IMAGE_LOCAL
     - docker tag $IMAGE_LOCAL $IMAGE_DEVELOP
