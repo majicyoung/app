@@ -5,7 +5,7 @@ stages:
 variables:
   CONTAINER: verifik8_api_$CI_PIPELINE_ID
   DOCKERFILE_PATH: ./dev/v8web
-  IMAGE: registry.united-asian.com/verifik8/api
+  IMAGE: registry.united-asian.com/verifik8/backend
   IMAGE_DEVELOP: $IMAGE:$CI_BUILD_REF_NAME.develop
   IMAGE_LATEST: $IMAGE:$VERSION
   IMAGE_LOCAL: verifiki8/v8web-1.0.0-snapshot:$CI_PIPELINE_ID
@@ -52,7 +52,6 @@ master_build:
       --build-arg version=$TAG
       -f $DOCKERFILE_PATH/Dockerfile $DOCKERFILE_PATH
     - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN registry.united-asian.com
-    - docker commit $CONTAINER $IMAGE_LOCAL
     - docker tag $IMAGE_LOCAL $IMAGE_DEVELOP
     - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN registry.united-asian.com
     - docker push $IMAGE_DEVELOP
