@@ -118,6 +118,17 @@ public class FarmDashboardController extends AbstractV8Controller {
 		return formatGraphArray(poundIds, dataArray, dataDate);
 	}
 
+
+	@Transactional
+	@RequestMapping(value = "/farm/{id}/dashboard/productions/initialize", method = RequestMethod.POST)
+	@ResponseBody
+	public List<Object> initProductionGraph(@PathVariable("id") Long id, @RequestParam("start") String startDate, @RequestParam("end") String endDate, Model mv){
+		List<FarmDashboardChartSelector> farmDashboardChartSelectors =  farmDashboardDataBuilder.getPoundInitilizeChartList(id);
+		String[] poundIds = farmDashboardChartSelectors.stream().map(FarmDashboardChartSelector::getId).map(String::valueOf).toArray(String[]::new);
+		return queryProductions(id, startDate, endDate, poundIds,mv);
+	}
+
+
 	@RequestMapping(value = "/farm/{id}/dashboard/waters", method = RequestMethod.GET)
 	@ResponseBody
 	public List<Object> queryWaters(@PathVariable("id") Long id, @RequestParam("start") String startDate, @RequestParam("end") String endDate, @RequestParam(value = "poundIds[]") String[] poundIds, @RequestParam("measureId") String measureId, Model mv) {
@@ -127,13 +138,13 @@ public class FarmDashboardController extends AbstractV8Controller {
 		return formatGraphArray(poundIds, dataArray, dataDate);
 	}
 
-	@Transactional
-	@RequestMapping(value = "/farm/{id}/dashboard/productions/initialize", method = RequestMethod.POST)
+
+	@RequestMapping(value = "/farm/{id}/dashboard/waters/initialize", method = RequestMethod.POST)
 	@ResponseBody
-	public List<Object> initProductionGraph(@PathVariable("id") Long id, @RequestParam("start") String startDate, @RequestParam("end") String endDate, Model mv){
+	public List<Object> initWaterGraph(@PathVariable("id") Long id, @RequestParam("start") String startDate, @RequestParam("end") String endDate, Model mv){
 		List<FarmDashboardChartSelector> farmDashboardChartSelectors =  farmDashboardDataBuilder.getPoundInitilizeChartList(id);
 		String[] poundIds = farmDashboardChartSelectors.stream().map(FarmDashboardChartSelector::getId).map(String::valueOf).toArray(String[]::new);
-		return queryProductions(id, startDate, endDate, poundIds,mv);
+		return queryWaters(id, startDate, endDate, poundIds, "2",mv);
 	}
 
 

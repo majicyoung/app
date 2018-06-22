@@ -185,11 +185,17 @@
           initSelect2Multiple('.water_select2_multiple', '/farm/'+farmId+'/dashboard/poundslist');
           initSelect2Multiple('.water_select2', '/farm/'+farmId+'/dashboard/waterscontrollist');
 
-          var startDate = $('#production_datepicker').data('daterangepicker').startDate.format('YYYY-MM-DD');
-          var endDate = $('#production_datepicker').data('daterangepicker').endDate.format('YYYY-MM-DD');
-          $.post('/farm/'+farmId+'/dashboard/productions/initialize', {start: startDate, end: endDate}, function (data) {
+          var startDateProduction = $('#production_datepicker').data('daterangepicker').startDate.format('YYYY-MM-DD');
+          var endDateProduction = $('#production_datepicker').data('daterangepicker').endDate.format('YYYY-MM-DD');
+          $.post('/farm/'+farmId+'/dashboard/productions/initialize', {start: startDateProduction, end: endDateProduction}, function (data) {
               $(".result").html(data);
               drawChart('production_line_chart', 'Production', data);
+          });
+          var startDateWater = $('#water_datepicker').data('daterangepicker').startDate.format('YYYY-MM-DD');
+          var endDateWater = $('#water_datepicker').data('daterangepicker').endDate.format('YYYY-MM-DD');
+          $.post('/farm/'+farmId+'/dashboard/waters/initialize', {start: startDateWater, end: endDateWater}, function (data) {
+              $(".result").html(data);
+              drawChart('water_line_chart', 'Water', data);
           });
 
 
