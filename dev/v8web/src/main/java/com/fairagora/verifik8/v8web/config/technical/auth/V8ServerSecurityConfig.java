@@ -1,7 +1,5 @@
 package com.fairagora.verifik8.v8web.config.technical.auth;
 
-import javax.sql.DataSource;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.context.annotation.Bean;
@@ -44,12 +42,23 @@ public class V8ServerSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().antMatchers("/webjars/**", "/static/**").permitAll().anyRequest().anonymous().and()
-				.authorizeRequests().antMatchers("/").permitAll().anyRequest().authenticated().and().formLogin()
-				.loginPage("/login").permitAll().and().logout()
-				.logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login").permitAll();
+		http
+		.authorizeRequests().antMatchers("/webjars/**", "/static/**").permitAll().anyRequest().anonymous()
+		.and()
+        .authorizeRequests()
+            .antMatchers("/").permitAll()
+            .anyRequest().authenticated()
+            .and()
+        .formLogin()
+            .loginPage("/login")
+            .permitAll()
+            .and()
+        .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login")
+            .permitAll();
 		http.csrf().disable();
-		http.headers().frameOptions().sameOrigin();
+		http.headers()
+	      .frameOptions()
+	      .sameOrigin();
 	}
 
 	@Bean
