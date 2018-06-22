@@ -4,6 +4,7 @@ public class FarmDashboardChartSelector {
 
 	private Long id;
 	private String text;
+	private Boolean selected;
 
 	public FarmDashboardChartSelector(Long id, String text) {
 		this.id = id;
@@ -24,5 +25,13 @@ public class FarmDashboardChartSelector {
 
 	public void setText(String text) {
 		this.text = text;
+	}
+
+	public Boolean getSelected() {
+		return true;
+	}
+
+	public void setSelected(Boolean selected) {
+		this.selected = selected;
 	}
 }

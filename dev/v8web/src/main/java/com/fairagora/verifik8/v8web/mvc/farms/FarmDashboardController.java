@@ -85,7 +85,7 @@ public class FarmDashboardController extends AbstractV8Controller {
 	@RequestMapping(value = "/farm/{id}/dashboard/poundslist", method = RequestMethod.GET)
 	@ResponseBody
 	public String getPoundList(@PathVariable("id") Long id, Model mv) {
-		List<FarmDashboardChartSelector> farmDashboardChartSelectors = farmDashboardDataBuilder.getPoundList(id);
+		List<FarmDashboardChartSelector> farmDashboardChartSelectors = farmDashboardDataBuilder.getPoundChartList(id);
 		ObjectMapper mapper = new ObjectMapper();
 		String result = "";
 		try {
@@ -127,6 +127,14 @@ public class FarmDashboardController extends AbstractV8Controller {
 		return formatGraphArray(poundIds, dataArray, dataDate);
 	}
 
+	@Transactional
+	@RequestMapping(value = "/farm/{id}/dashboard/productions/initialize", method = RequestMethod.POST)
+	@ResponseBody
+	public List<Object> initProductionGraph(@PathVariable("id") Long id, @RequestParam("start") String startDate, @RequestParam("end") String endDate, Model mv){
+		List<FarmDashboardChartSelector> farmDashboardChartSelectors =  farmDashboardDataBuilder.getPoundInitilizeChartList(id);
+		String[] poundIds = farmDashboardChartSelectors.stream().map(FarmDashboardChartSelector::getId).map(String::valueOf).toArray(String[]::new);
+		return queryProductions(id, startDate, endDate, poundIds,mv);
+	}
 
 
 
@@ -146,12 +154,15 @@ public class FarmDashboardController extends AbstractV8Controller {
 
 	}
 
-	private static List<Object> formatGraphArray(String[] poundIds, Map<String, Map<String, Double>> dataArray, List<String> dataDate){
+	private List<Object> formatGraphArray(String[] poundIds, Map<String, Map<String, Double>> dataArray, List<String> dataDate){
 		List<Object> graphData = new ArrayList<>();
 
 		List<Object> leftColumns = new ArrayList<>();
 		leftColumns.add("Date");
-		leftColumns.addAll(Arrays.asList(poundIds));
+		Arrays.stream(poundIds)
+				.map(Long::valueOf)
+				.map(s -> regEntityFarmPondRepository.findOne(s))
+				.forEach(regEntityFarmPond -> leftColumns.add(regEntityFarmPond.getName()));
 
 		for (String date : dataDate) {
 			List<Object> colums = new ArrayList<>();
@@ -166,9 +177,7 @@ public class FarmDashboardController extends AbstractV8Controller {
 		if (graphData.size() <= 0) {
 			List<Object> colums = new ArrayList<>();
 			colums.add("0");
-			for (String poundId : poundIds) {
-				colums.add(0);
-			}
+			Arrays.stream(poundIds).forEach(s -> colums.add(0));
 			graphData.add(colums);
 		}
 
