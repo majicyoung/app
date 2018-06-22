@@ -10,13 +10,13 @@ docker.run:
 
 install:
 	@printf "\033[0;32m>>> installing packages \033[0m\n"
-	mvn clean install
+	./mvnw clean install
 
 run:
 	@printf "\033[0;32m>>> Running in developement environment \033[0m\n"
-	mvn spring-boot:run
+	./mvnw spring-boot:run
 
 test:
 	@printf "\033[0;32m>>> Running tests \033[0m\n"
-	mvn test
+	./mvnw test
 
