@@ -41,7 +41,6 @@ public class V8AuthServerOAuth2Config extends AuthorizationServerConfigurerAdapt
 				.refreshTokenValiditySeconds(FREFRESH_TOKEN_VALIDITY_SECONDS);
 	}
 	
-
 	@Override
 	public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
 		endpoints.tokenStore(tokenStore).authenticationManager(authenticationManager);
@@ -49,4 +48,3 @@ public class V8AuthServerOAuth2Config extends AuthorizationServerConfigurerAdapt
 		endpoints.pathMapping("/oauth/token", "/api/oauth/token");
 	}
 }
-
