@@ -22,6 +22,7 @@ build:
     - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN registry.united-asian.com
   environment: build
   except:
+    - api
     - development
     - master
     - staging
@@ -37,7 +38,7 @@ build:
     - builder
     - verifik8
 
-master_build:
+api_build:
   after_script:
     - docker rmi -f $IMAGE_LOCAL
     - docker rmi -f $IMAGE_DEVELOP
@@ -45,7 +46,7 @@ master_build:
     - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN registry.united-asian.com
   environment: build
   only:
-    - "master"
+    - "api"
   script:
     - docker build -t $IMAGE_LOCAL
       --build-arg build=$CI_PIPELINE_ID
@@ -60,7 +61,7 @@ master_build:
     - builder
     - verifik8
 
-master_deploy:
+api_deploy:
 #  after_script:
 #    - docker rm verifik8_deployment_tester_$CI_PIPELINE_ID
   before_script:
@@ -68,7 +69,7 @@ master_deploy:
   environment:
     name: develop
   only:
-    - "master"
+    - "api"
   script:
     - cd ~/verifik8
     - docker-compose pull api2
