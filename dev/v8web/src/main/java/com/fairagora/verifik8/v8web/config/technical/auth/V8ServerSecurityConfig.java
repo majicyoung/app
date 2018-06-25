@@ -60,11 +60,11 @@ public class V8ServerSecurityConfig extends WebSecurityConfigurerAdapter {
 	      .frameOptions()
 	      .sameOrigin();
 	}
-	
+
 	@Override
-    public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers(HttpMethod.OPTIONS, "/**");
-    }
+	public void configure(WebSecurity web) throws Exception {
+		web.ignoring().antMatchers(HttpMethod.OPTIONS, "/**");
+	}
 
 	@Bean
 	public TokenStore tokenStore() {
