@@ -50,3 +50,24 @@ Serve your API
 java -jar target/v8web-*.jar
  ```
 Now, request http://localhost:8080 from browser.
+
+### RUN API in postman ###
+
+Api login endpoint
+
+```bash
+https://api2.vfk8.united-asian.net/api/oauth/token
+```
+step1: 
+On Authorization(Basic Auth) enter ->
+username: verifik8-client
+password: verifik8-secret
+
+step2: 
+- on body click x-www-form-urlencoded and enter value ->
+username: [any username from database]
+password: []
+grant_type: password
+
+step3:
+click on send to get refresh and access token
