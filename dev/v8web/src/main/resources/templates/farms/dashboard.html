@@ -148,7 +148,8 @@
 											<select class="form-control water_select2_multiple" multiple="multiple"
 															th:attr="data-placeholder=#{farm.ponds}"></select>
 											<br/><br/>
-											<select class="form-control water_select2" th:attr="data-placeholder=#{farm.water_params}"></select>
+											<select class="form-control water_select2"
+															th:attr="data-placeholder=#{farm.water_params}"></select>
 											<br/><br/>
 											<button type="button" class="btn btn-block btn-primary" onclick="onWaterSubmitButtonClick()">
 												Submit
@@ -170,30 +171,47 @@
 
 <th:block layout:fragment="page-scripts">
 	<script src="http://fairagorav8.pagre-it.com/bower_components/admin-lte/plugins/chartjs/Chart.min.js"></script>
-
+	<!--<script type="text/javascript" src="https://www.google.com/jsapi?autoload={'modules':[{'name':'visualization', '1', 	'packages':['corechart','bar']}]}"></script>-->
 	<script type="text/javascript" th:inline="javascript">
       /*<![CDATA[*/
       var farmId =/*[[${farmId}]]*/;
 
 
+      // google.charts.load('current', {'packages': ['corechart', 'bar']});
+      // google.charts.setOnLoadCallback(function () {
+      //     var data = [['Date', ''], ['', 0]];
+      //     drawChart('production_line_chart', 'Production', data);
+      //     drawChart('water_line_chart', 'Water', data);
+      // });
+
       $(document).ready(function () {
+
+          google.charts.load('current', {'packages': ['corechart', 'bar']});
+
+
           // Create chart for production
           initDatePicker('#production_datepicker');
-          initSelect2Multiple('.production_select2_multiple', '/farm/'+farmId+'/dashboard/poundslist');
+          initSelect2Multiple('.production_select2_multiple', '/farm/' + farmId + '/dashboard/poundslist');
 
           initDatePicker('#water_datepicker');
-          initSelect2Multiple('.water_select2_multiple', '/farm/'+farmId+'/dashboard/poundslist');
-          initSelect2Multiple('.water_select2', '/farm/'+farmId+'/dashboard/waterscontrollist');
+          initSelect2Multiple('.water_select2_multiple', '/farm/' + farmId + '/dashboard/poundslist');
+          initSelect2Multiple('.water_select2', '/farm/' + farmId + '/dashboard/waterscontrollist');
 
           var startDateProduction = $('#production_datepicker').data('daterangepicker').startDate.format('YYYY-MM-DD');
           var endDateProduction = $('#production_datepicker').data('daterangepicker').endDate.format('YYYY-MM-DD');
-          $.post('/farm/'+farmId+'/dashboard/productions/initialize', {start: startDateProduction, end: endDateProduction}, function (data) {
+          $.post('/farm/' + farmId + '/dashboard/productions/initialize', {
+              start: startDateProduction,
+              end: endDateProduction
+          }, function (data) {
               $(".result").html(data);
               drawChart('production_line_chart', 'Production', data);
           });
           var startDateWater = $('#water_datepicker').data('daterangepicker').startDate.format('YYYY-MM-DD');
           var endDateWater = $('#water_datepicker').data('daterangepicker').endDate.format('YYYY-MM-DD');
-          $.post('/farm/'+farmId+'/dashboard/waters/initialize', {start: startDateWater, end: endDateWater}, function (data) {
+          $.post('/farm/' + farmId + '/dashboard/waters/initialize', {
+              start: startDateWater,
+              end: endDateWater
+          }, function (data) {
               $(".result").html(data);
               drawChart('water_line_chart', 'Water', data);
           });
@@ -241,7 +259,11 @@
           var endDate = $('#production_datepicker').data('daterangepicker').endDate.format('YYYY-MM-DD');
           var selectProductions = $('.production_select2_multiple').val();
 
-          $.post('/farm/'+farmId+'/dashboard/productions', {start: startDate, end: endDate, 'poundIds[]': selectProductions}, function (data) {
+          $.post('/farm/' + farmId + '/dashboard/productions', {
+              start: startDate,
+              end: endDate,
+              'poundIds[]': selectProductions
+          }, function (data) {
               $(".result").html(data);
               drawChart('production_line_chart', 'Production', data);
           });
@@ -253,21 +275,16 @@
           var selectProductions = $('.water_select2_multiple').val();
           var selectTemp = $('.water_select2').val();
 
-          $.get('/farm/'+farmId+ '/dashboard/waters' , {start: startDate, end: endDate, 'poundIds[]': selectProductions, measureId: selectTemp}, function (data) {
+          $.get('/farm/' + farmId + '/dashboard/waters', {
+              start: startDate,
+              end: endDate,
+              'poundIds[]': selectProductions,
+              measureId: selectTemp
+          }, function (data) {
               $(".result").html(data);
               drawChart('water_line_chart', 'Water', data);
           });
       }
-
-      /*]]>*/
-
-      google.charts.load('current', {'packages': ['corechart']});
-      google.charts.setOnLoadCallback(function () {
-          var data = [['Date', ''], ['', 0]];
-          drawChart('production_line_chart', 'Production', data);
-          drawChart('water_line_chart', 'Water', data);
-      });
-
 
 
       function drawChart(id, title, data) {
@@ -275,15 +292,19 @@
 
           var options = {
               title: title,
-              curveType: 'function',
-              interpolateNulls: true,
-              legend: {position: 'bottom'}
+              subtitle: 'Sales, Expenses, and Profit: 2014-2017',
+
           };
 
-          var chart = new google.visualization.LineChart(document.getElementById(id));
+          var chart = new google.charts.Bar(document.getElementById(id));
 
-          chart.draw(data, options);
+          chart.draw(data, google.charts.Bar.convertOptions(options));
+
+
       }
+
+      /*]]>*/
+
 
 	</script>
 </th:block>
