@@ -13,11 +13,13 @@ import org.springframework.security.oauth2.provider.token.TokenStore;
 @EnableAuthorizationServer
 public class V8AuthServerOAuth2Config extends AuthorizationServerConfigurerAdapter {
 
+	// TODO [UKS 2018-06-25] hardcoded for quick setup only
 	static final String CLIENT_ID = "verifik8-client";
 	static final String CLIENT_SECRET = "verifik8-secret";
 	static final String GRANT_TYPE_PASSWORD = "password";
 	static final String AUTHORIZATION_CODE = "authorization_code";
 	static final String REFRESH_TOKEN = "refresh_token";
+
 	static final String IMPLICIT = "implicit";
 	static final String SCOPE_READ = "read";
 	static final String SCOPE_WRITE = "write";
