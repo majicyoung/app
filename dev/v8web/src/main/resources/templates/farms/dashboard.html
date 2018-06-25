@@ -177,16 +177,17 @@
       var farmId =/*[[${farmId}]]*/;
 
 
-      // google.charts.load('current', {'packages': ['corechart', 'bar']});
-      // google.charts.setOnLoadCallback(function () {
-      //     var data = [['Date', ''], ['', 0]];
-      //     drawChart('production_line_chart', 'Production', data);
-      //     drawChart('water_line_chart', 'Water', data);
-      // });
+      google.charts.load("current", {packages:['corechart']});
+      google.charts.setOnLoadCallback(function () {
+          var data = [['Date', ''], ['', 0]];
+          drawChart('production_line_chart', 'Production', data);
+          drawChart('water_line_chart', 'Water', data);
+      });
+
 
       $(document).ready(function () {
 
-          google.charts.load('current', {'packages': ['corechart', 'bar']});
+      //    google.charts.load('visualization', '1', {'packages': ['corechart', 'bar']});
 
 
           // Create chart for production
@@ -288,6 +289,8 @@
 
 
       function drawChart(id, title, data) {
+      //    google.charts.load('visualization', '1', {'packages': ['corechart', 'bar']});
+
           var data = google.visualization.arrayToDataTable(data);
 
           var options = {
@@ -296,9 +299,9 @@
 
           };
 
-          var chart = new google.charts.Bar(document.getElementById(id));
+          var chart = new google.visualization.ColumnChart(document.getElementById(id));
 
-          chart.draw(data, google.charts.Bar.convertOptions(options));
+          chart.draw(new google.visualization.DataView(data), options);
 
 
       }
