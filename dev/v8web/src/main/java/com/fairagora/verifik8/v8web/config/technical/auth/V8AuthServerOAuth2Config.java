@@ -13,7 +13,7 @@ import org.springframework.security.oauth2.provider.token.TokenStore;
 @EnableAuthorizationServer
 public class V8AuthServerOAuth2Config extends AuthorizationServerConfigurerAdapter {
 
-	static final String CLIEN_ID = "verifik8-client";
+	static final String CLIENT_ID = "verifik8-client";
 	static final String CLIENT_SECRET = "verifik8-secret";
 	static final String GRANT_TYPE_PASSWORD = "password";
 	static final String AUTHORIZATION_CODE = "authorization_code";
@@ -33,14 +33,18 @@ public class V8AuthServerOAuth2Config extends AuthorizationServerConfigurerAdapt
 
 	@Override
 	public void configure(ClientDetailsServiceConfigurer configurer) throws Exception {
-		configurer.inMemory().withClient(CLIEN_ID).secret(CLIENT_SECRET)
+		configurer.inMemory().withClient(CLIENT_ID).secret(CLIENT_SECRET)
 				.authorizedGrantTypes(GRANT_TYPE_PASSWORD, AUTHORIZATION_CODE, REFRESH_TOKEN, IMPLICIT)
 				.scopes(SCOPE_READ, SCOPE_WRITE, TRUST).accessTokenValiditySeconds(ACCESS_TOKEN_VALIDITY_SECONDS)
 				.refreshTokenValiditySeconds(FREFRESH_TOKEN_VALIDITY_SECONDS);
 	}
+	
 
 	@Override
 	public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
 		endpoints.tokenStore(tokenStore).authenticationManager(authenticationManager);
+		
+		endpoints.pathMapping("/oauth/token", "/api/oauth/token");
 	}
 }
+

@@ -29,3 +29,4 @@ public class V8ResourceServerConfiguration extends ResourceServerConfigurerAdapt
 		.exceptionHandling().accessDeniedHandler(new OAuth2AccessDeniedHandler());
 	}
 }
+
