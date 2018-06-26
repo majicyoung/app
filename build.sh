@@ -14,7 +14,7 @@ scp dev/v8web/target/v8web-1.0.0-SNAPSHOT.jar debian_ssa:artifact/
 echo "------------------------------------"
 echo "Kill old server"
 echo "------------------------------------\n"
-ssh debian_ssa kill -9 \$"pid\$(ps aux | grep 'v8web' | awk '{print \$2}' | head -1); echo \$pid"
+    ssh debian_ssa kill -9 \$"pid\$(ps aux | grep 'v8web' | awk '{print \$2}' | head -1); echo \$pid"
 
 
 echo "------------------------------------"

@@ -1,8 +1,12 @@
 package com.fairagora.verifik8.v8web.mvc.farms;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.fairagora.verifik8.v8web.data.domain.commons.Attachment;
+import com.fairagora.verifik8.v8web.data.domain.reg.RegPicture;
 import com.fairagora.verifik8.v8web.data.infra.AttachementsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -39,7 +43,7 @@ public class FarmStaffController extends AbstractV8Controller {
 	@Autowired
 	private AttachementsService attachementsService;
 
-	private Attachment workingPermitAttachment;
+	private Map<String, RegPicture> workingPermitAttachment;
 
 	@PreAuthorize("hasAuthority('R_FARMSTAFF')")
 	@RequestMapping(value = "/farm/{id}/staff.html", method = RequestMethod.GET)
@@ -92,7 +96,7 @@ public class FarmStaffController extends AbstractV8Controller {
 
 		regFarmDtoMapper.fillEntity(dto, staff);
 
-		if (workingPermitAttachment != null) staff.setWorkingPermit(workingPermitAttachment);
+		if (workingPermitAttachment != null) staff.setWorkingPermits(new ArrayList<>(workingPermitAttachment.values()));
 
 		regEntityStaffRepository.save(staff);
 
@@ -108,7 +112,10 @@ public class FarmStaffController extends AbstractV8Controller {
 		for (int i = 0; i < staffListing.size() && !found; i++) {
 
 			if (staffListing.get(i).getEntity().getId().equals(sid)) {
-				this.workingPermitAttachment = staffListing.get(i).getWorkingPermit();
+				this.workingPermitAttachment = new HashMap<>();
+				for (RegPicture regPicture : staffListing.get(i).getWorkingPermits()) {
+					workingPermitAttachment.put(regPicture.getResourcePath(), regPicture);
+				}
 				found = true;
 			}
 
@@ -150,10 +157,10 @@ public class FarmStaffController extends AbstractV8Controller {
 	}
 
 	@RequestMapping(value = "/farm/{id}/staff.html/deleteimage", method = RequestMethod.POST)
-	public String handleFileDelete(@RequestParam("type") String type) {
+	public String handleFileDelete(@RequestParam("type") String type, @RequestParam("filename") String filename) {
 		switch (type) {
 			case TYPE_WORKING_PERMIT:
-				this.workingPermitAttachment = null;
+				this.workingPermitAttachment.remove(filename);
 				break;
 		}
 
@@ -163,15 +170,15 @@ public class FarmStaffController extends AbstractV8Controller {
 	@RequestMapping(value = "/farm/{id}/staff.html/upload", method = RequestMethod.POST)
 	public String handleFileUpload(@RequestParam("file") MultipartFile file, @RequestParam("type") String type) {
 
-		Attachment attachment = new Attachment();
-		attachment.setResourcePath(file.getOriginalFilename());
+		RegPicture regPicture = new RegPicture();
+		regPicture.setResourcePath(file.getOriginalFilename());
 
 		// Save file
-		attachementsService.store(attachment, file);
+		attachementsService.store(regPicture, file);
 
 		switch (type) {
 			case TYPE_WORKING_PERMIT:
-				this.workingPermitAttachment = attachment;
+				this.workingPermitAttachment.put(file.getOriginalFilename(), regPicture);
 				break;
 		}
 

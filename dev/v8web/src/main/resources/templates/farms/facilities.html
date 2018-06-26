@@ -36,12 +36,6 @@
 												<div class="list-style-none">
 													<div id="toiletsDz" class="dropzone float-left"
 															 th:attr="data-pictures=${farmDto.getAccessToiletsAttachmentUrl()}"/>
-													<div id="toiletsButton" class="col-xs-2 bloc-file-uploaded float-left">
-														<a th:if="${!#strings.isEmpty(farmDto.accessToiletsAttachmentUrl)}"
-															 th:href="@{'/download/'+${farmDto.accessToiletsAttachmentUrl}}" target="_blank">
-															<i class="fa fa-download"></i>
-														</a>
-													</div>
 												</div>
 											</div>
 										</div>
@@ -62,12 +56,6 @@
 
 													<div id="restRoomDz" class="dropzone float-left"
 															 th:attr="data-pictures=${farmDto.getAccessRestRoomAttachmentUrl()}"/>
-													<div id="restRoomButton" class="col-xs-2 bloc-file-uploaded float-left">
-														<a th:if="${!#strings.isEmpty(farmDto.accessRestRoomAttachmentUrl)}"
-															 th:href="@{'/download/'+${farmDto.accessRestRoomAttachmentUrl}}" target="_blank">
-															<i class="fa fa-download"></i>
-														</a>
-													</div>
 												</div>
 											</div>
 										</div>
@@ -89,12 +77,6 @@
 
 													<div id="showerDz" class="dropzone float-left"
 															 th:attr="data-pictures=${farmDto.getAccessShowerAttachmentUrl()}"/>
-													<div id="showerButton" class="col-xs-2 bloc-file-uploaded float-left">
-														<a th:if="${!#strings.isEmpty(farmDto.accessShowerAttachmentUrl)}"
-															 th:href="@{'/download/'+${farmDto.accessShowerAttachmentUrl}}" target="_blank">
-															<i class="fa fa-download"></i>
-														</a>
-													</div>
 												</div>
 											</div>
 										</div>
@@ -116,12 +98,6 @@
 
 													<div id="freeDrinkingDz" class="dropzone float-left"
 															 th:attr="data-pictures=${farmDto.getAccessToFreeDrinkingAttachmentUrl()}"/>
-													<div id="freeDrinkingButton" class="col-xs-2 bloc-file-uploaded float-left">
-														<a th:if="${!#strings.isEmpty(farmDto.accessToFreeDrinkingAttachmentUrl)}"
-															 th:href="@{'/download/'+${farmDto.accessToFreeDrinkingAttachmentUrl}}" target="_blank">
-															<i class="fa fa-download"></i>
-														</a>
-													</div>
 												</div>
 											</div>
 										</div>

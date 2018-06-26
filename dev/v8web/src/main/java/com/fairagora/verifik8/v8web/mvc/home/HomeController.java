@@ -1,5 +1,6 @@
 package com.fairagora.verifik8.v8web.mvc.home;
 
+import com.fairagora.verifik8.v8web.services.ComplianceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;

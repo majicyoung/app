@@ -1,9 +1,7 @@
 package com.fairagora.verifik8.v8web.mvc.farms;
 
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.MappingTarget;
-import org.mapstruct.ReportingPolicy;
+import com.fairagora.verifik8.v8web.data.domain.reg.RegPicture;
+import org.mapstruct.*;
 
 import com.fairagora.verifik8.v8web.data.domain.commons.Address;
 import com.fairagora.verifik8.v8web.data.domain.commons.Attachment;
@@ -59,14 +57,16 @@ import com.fairagora.verifik8.v8web.mvc.ponds.dto.PondListingDto;
 import com.fairagora.verifik8.v8web.mvc.ponds.dto.PondMeasurementDto;
 import com.fairagora.verifik8.v8web.mvc.suppliers.dto.SupplierListingDto;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Mapper(componentModel = "spring", uses = EntityDtoMapper.class, unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface RegFarmDTOMapper {
 
 	void toDto(RegEntity farm, @MappingTarget FarmFormDto dto);
 
 	@Mapping(target = "id", ignore = true)
-	@Mapping(target = "aerialView", ignore = true)
-	@Mapping(target = "aerialViewUrl", source = "aerialView.resourcePath")
+	@Mapping(target = "aerialViewUrl", source = "aerialViews", qualifiedByName = "regPictureDto")
 	void toDto(RegEntityFarmDetails farm, @MappingTarget FarmFormDto dto);
 
 	@Mapping(target = "id", ignore = true)
@@ -77,28 +77,20 @@ public interface RegFarmDTOMapper {
 
 	void fillEntity(AddressDto dto, @MappingTarget Address adr);
 
-	@Mapping(target = "environmentImpactAssessmentDoc", ignore = true)
-	@Mapping(target = "environmentImpactAssessmentDocUrl", source = "environmentImpactAssessmentDoc.resourcePath")
-	@Mapping(target = "contructionPermit", ignore = true)
-	@Mapping(target = "contructionPermitUrl", source = "contructionPermit.resourcePath")
-	@Mapping(target = "landTitle", ignore = true)
-	@Mapping(target = "landTitleUrl", source = "landTitle.resourcePath")
-	@Mapping(target = "sittingProtectedAreaDoc", ignore = true)
-	@Mapping(target = "sittingProtectedAreaUrl", source = "sittingProtectedAreaDoc.resourcePath")
-	@Mapping(target = "canalRestorationPlan", ignore = true)
-	@Mapping(target = "canalRestorationPlanUrl", source = "canalRestorationPlan.resourcePath")
-	@Mapping(target = "cumulativeImpactStudy", ignore = true)
-	@Mapping(target = "cumulativeImpactStudyUrl", source = "cumulativeImpactStudy.resourcePath")
+	@Mapping(target = "environmentImpactAssessmentDocUrl", source = "environmentImpactAssessmentDocs", qualifiedByName = "regPictureDto")
+	@Mapping(target = "contructionPermitUrl", source = "contructionPermits", qualifiedByName = "regPictureDto")
+	@Mapping(target = "landTitleUrl", source = "landTitles", qualifiedByName = "regPictureDto")
+	@Mapping(target = "sittingProtectedAreaUrl", source = "sittingProtectedAreaDocs", qualifiedByName = "regPictureDto")
+	@Mapping(target = "canalRestorationPlanUrl", source = "canalRestorationPlans", qualifiedByName = "regPictureDto")
+	@Mapping(target = "cumulativeImpactStudyUrl", source = "cumulativeImpactStudies", qualifiedByName = "regPictureDto")
 	void toDto(RegEntityFarmDetails farm, @MappingTarget FarmEnvironmentalDto dto);
 
 	void toDto(Address adr, @MappingTarget AddressDto dto);
 
-	@Mapping(target = "workAccidentRecord", ignore = true)
-	@Mapping(target = "workAccidentRecordUrl", source = "workAccidentRecord.resourcePath")
-	@Mapping(target = "farmPolicies", ignore = true)
-	@Mapping(target = "farmPoliciesUrl", source = "farmPolicies.resourcePath")
-	@Mapping(target = "protectiveEquipment", ignore = true)
-	@Mapping(target = "protectiveEquipmentUrl", source = "protectiveEquipment.resourcePath")
+
+	@Mapping(target = "workAccidentRecordUrl", source = "workAccidentRecords", qualifiedByName = "regPictureDto")
+	@Mapping(target = "farmPoliciesUrl", source = "farmPolicies", qualifiedByName = "regPictureDto")
+	@Mapping(target = "protectiveEquipmentUrl", source = "protectiveEquipments", qualifiedByName = "regPictureDto")
 	void toDto(RegEntityStaffManagement findByFarmId, @MappingTarget StaffGeneralInfoSto dto);
 
 	void toDto(RegEntityStaffManagement farmStafMgmt, @MappingTarget FarmHiringRecruitmentDto dto);
@@ -220,8 +212,7 @@ public interface RegFarmDTOMapper {
 	void fillEntity(DTSoilAnalysisDto dto, @MappingTarget DTSoilAnalysis analysis);
 
 	// -- STAFF
-	@Mapping(target = "workingPermit", ignore = true)
-	@Mapping(target = "workingPermitUrl", source = "workingPermit.resourcePath")
+	@Mapping(target = "workingPermitUrl", source = "workingPermits", qualifiedByName = "regPictureDto")
 	StaffFarmFormDto toDto(RegEntityStaff e);
 
 	void fillEntity(StaffFarmFormDto dto, @MappingTarget RegEntityStaff e);
@@ -242,20 +233,27 @@ public interface RegFarmDTOMapper {
 
 	@Mapping(target = "farmId", ignore = true)
 	void fillEntity(FarmStaffTrainingDto farmDto, @MappingTarget RegEntityStaffTraining ent);
-	
-	
-	
-	@Mapping(target = "accessToiletsAttachment", ignore = true)
-	@Mapping(target = "accessToiletsAttachmentUrl", source = "accessToiletsAttachment.resourcePath")
-	@Mapping(target = "accessRestRoomAttachment", ignore = true)
-	@Mapping(target = "accessRestRoomAttachmentUrl", source = "accessRestRoomAttachment.resourcePath")
-	@Mapping(target = "accessShowerAttachment", ignore = true)
-	@Mapping(target = "accessShowerAttachmentUrl", source = "accessShowerAttachment.resourcePath")
-	@Mapping(target = "accessToFreeDrinkingAttachment", ignore = true)
-	@Mapping(target = "accessToFreeDrinkingAttachmentUrl", source = "accessToFreeDrinkingAttachment.resourcePath")
+
+
+	@Mapping(target = "accessToiletsAttachmentUrl", source = "accessToiletsAttachments", qualifiedByName = "regPictureDto")
+	@Mapping(target = "accessRestRoomAttachmentUrl", source = "accessRestRoomAttachments", qualifiedByName = "regPictureDto")
+	@Mapping(target = "accessShowerAttachmentUrl", source = "accessShowerAttachments", qualifiedByName = "regPictureDto")
+	@Mapping(target = "accessToFreeDrinkingAttachmentUrl", source = "accessToFreeDrinkingAttachments", qualifiedByName = "regPictureDto")
 	void toDto(RegEntityFacilities entity, @MappingTarget RegEntityFacilitiesDto dto);
 
 	@Mapping(target = "farmId", ignore = true)
 	void fillEntity(RegEntityFacilitiesDto farmDto, @MappingTarget RegEntityFacilities ent);
+
+	@Named("regPictureDto")
+	default List<String> listRegPictureToListString(List<RegPicture> regPictures) {
+		List<String> pictureUrl = null;
+		if (regPictures != null){
+			pictureUrl = new ArrayList<>();
+			for (RegPicture regPicture : regPictures) {
+				pictureUrl.add(regPicture.getResourcePath());
+			}
+		}
+		return pictureUrl;
+	}
 
 }

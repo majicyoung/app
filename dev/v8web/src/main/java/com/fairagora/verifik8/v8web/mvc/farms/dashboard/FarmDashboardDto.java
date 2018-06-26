@@ -1,5 +1,7 @@
 package com.fairagora.verifik8.v8web.mvc.farms.dashboard;
 
+import com.fairagora.verifik8.v8web.data.domain.reg.farm.RegEntityFarmPond;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -11,6 +13,8 @@ public class FarmDashboardDto {
 
 	protected List<FarmDashboardTopKpi<?>> topKpis = new ArrayList<>();
 
+	protected List<FarmDashboardPond>  pondsSeries = new ArrayList<>();
+
 	public List<FarmDashboardTopKpi<?>> getTopKpis() {
 		return topKpis;
 	}
@@ -18,6 +22,9 @@ public class FarmDashboardDto {
 	public List<FarmDashboardTimeSeries<?>> getTimeSeries() {
 		return timeSeries;
 	}
+
+	public List<FarmDashboardPond> getPondSeries() { return pondsSeries;}
+
 
 	/**
 	 * just group by key for better usage in thymeleaf
@@ -40,5 +47,6 @@ public class FarmDashboardDto {
 		getTopKpis().forEach(k -> kpis.put(k.getKey(), k));
 		return kpis;
 	}
+
 
 }

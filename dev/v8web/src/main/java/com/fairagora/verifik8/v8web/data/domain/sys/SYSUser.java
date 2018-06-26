@@ -46,6 +46,14 @@ public class SYSUser {
 	@JoinColumn(name = "REG_ENTITY_COOP_ID")
 	protected RegEntity cooperative;
 
+	@ManyToOne
+	@JoinColumn(name = "REG_ENTITY_SUPPLIER_ID")
+	protected RegEntity supplier;
+
+	@ManyToOne
+	@JoinColumn(name = "REG_ENTITY_BUYER_ID")
+	protected RegEntity buyer;
+
 	public Long getId() {
 		return id;
 	}
@@ -118,4 +126,19 @@ public class SYSUser {
 		this.cooperative = cooperative;
 	}
 
+	public RegEntity getSupplier() {
+		return supplier;
+	}
+
+	public void setSupplier(RegEntity supplier) {
+		this.supplier = supplier;
+	}
+
+	public RegEntity getBuyer() {
+		return buyer;
+	}
+
+	public void setBuyer(RegEntity buyer) {
+		this.buyer = buyer;
+	}
 }

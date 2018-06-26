@@ -1,10 +1,14 @@
 package com.fairagora.verifik8.v8web.mvc.farms;
 
 import java.sql.Time;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.transaction.Transactional;
 
 import com.fairagora.verifik8.v8web.data.domain.commons.Attachment;
+import com.fairagora.verifik8.v8web.data.domain.reg.RegPicture;
 import com.fairagora.verifik8.v8web.data.infra.AttachementsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -38,9 +42,9 @@ public class FarmStaffGeneralInfoController extends AbstractV8Controller {
 	@Autowired
 	private AttachementsService attachementsService;
 
-	private Attachment protectiveEquipmentAttachment;
-	private Attachment workAccidentRecordAttachment;
-	private Attachment farmPoliciesAttachment;
+	private Map<String, RegPicture> protectiveEquipmentAttachment;
+	private Map<String, RegPicture> workAccidentRecordAttachment;
+	private Map<String, RegPicture> farmPoliciesAttachment;
 
 	/**
 	 * @param id
@@ -64,9 +68,25 @@ public class FarmStaffGeneralInfoController extends AbstractV8Controller {
 
 		setToReadOnly(mv, "W_FARMSTAFFINFO");
 
-		protectiveEquipmentAttachment = staffMgmt.getProtectiveEquipment();
-		workAccidentRecordAttachment = staffMgmt.getWorkAccidentRecord();
-		farmPoliciesAttachment = staffMgmt.getFarmPolicies();
+		if (staffMgmt.getProtectiveEquipments() != null){
+			protectiveEquipmentAttachment = new HashMap<>();
+			for (RegPicture regPicture : staffMgmt.getProtectiveEquipments()) {
+				protectiveEquipmentAttachment.put(regPicture.getResourcePath(), regPicture);
+			}
+		}
+		if (staffMgmt.getWorkAccidentRecords() != null){
+			workAccidentRecordAttachment = new HashMap<>();
+			for (RegPicture regPicture : staffMgmt.getWorkAccidentRecords()) {
+				workAccidentRecordAttachment.put(regPicture.getResourcePath(), regPicture);
+			}
+
+		}
+		if (staffMgmt.getFarmPolicies() != null){
+			farmPoliciesAttachment = new HashMap<>();
+			for (RegPicture regPicture : staffMgmt.getFarmPolicies()) {
+				farmPoliciesAttachment.put(regPicture.getResourcePath(), regPicture);
+			}
+		}
 
 		regFarmDtoMapper.toDto(staffMgmt, dto);
 
@@ -96,9 +116,9 @@ public class FarmStaffGeneralInfoController extends AbstractV8Controller {
 
 		regFarmDtoMapper.fillEntity(farmDto, ent);
 
-		if (protectiveEquipmentAttachment != null) ent.setProtectiveEquipment(protectiveEquipmentAttachment);
-		if (workAccidentRecordAttachment != null) ent.setWorkAccidentRecord(workAccidentRecordAttachment);
-		if (farmPoliciesAttachment != null) ent.setFarmPolicies(farmPoliciesAttachment);
+		if (protectiveEquipmentAttachment != null) ent.setProtectiveEquipments(new ArrayList<>(protectiveEquipmentAttachment.values()));
+		if (workAccidentRecordAttachment != null) ent.setWorkAccidentRecords(new ArrayList<>(workAccidentRecordAttachment.values()));
+		if (farmPoliciesAttachment != null) ent.setFarmPolicies(new ArrayList<>(farmPoliciesAttachment.values()));
 
 		regEntityStaffManagementRepository.save(ent);
 
@@ -132,16 +152,16 @@ public class FarmStaffGeneralInfoController extends AbstractV8Controller {
 	}
 
 	@RequestMapping(value = "/farm/{id}/staff-general-info.html/deleteimage", method = RequestMethod.POST)
-	public String handleFileDelete(@RequestParam("type") String type) {
+	public String handleFileDelete(@RequestParam("type") String type, @RequestParam("filename") String filename) {
 		switch (type) {
 			case TYPE_PROTECTIVE_EQUIPMENT:
-				this.protectiveEquipmentAttachment = null;
+				this.protectiveEquipmentAttachment.remove(filename);
 				break;
 			case TYPE_WORK_ACCIDENT_RECORD:
-				this.workAccidentRecordAttachment = null;
+				this.workAccidentRecordAttachment.remove(filename);
 				break;
 			case TYPE_FARM_POLICIES:
-				this.farmPoliciesAttachment = null;
+				this.farmPoliciesAttachment.remove(filename);
 				break;
 		}
 
@@ -151,21 +171,21 @@ public class FarmStaffGeneralInfoController extends AbstractV8Controller {
 	@RequestMapping(value = "/farm/{id}/staff-general-info.html/upload", method = RequestMethod.POST)
 	public String handleFileUpload(@RequestParam("file") MultipartFile file, @RequestParam("type") String type) {
 
-		Attachment attachment = new Attachment();
-		attachment.setResourcePath(file.getOriginalFilename());
+		RegPicture regPicture = new RegPicture();
+		regPicture.setResourcePath(file.getOriginalFilename());
 
 		// Save file
-		attachementsService.store(attachment, file);
+		attachementsService.store(regPicture, file);
 
 		switch (type) {
 			case TYPE_PROTECTIVE_EQUIPMENT:
-				this.protectiveEquipmentAttachment = attachment;
+				this.protectiveEquipmentAttachment.put(file.getOriginalFilename(), regPicture);
 				break;
 			case TYPE_WORK_ACCIDENT_RECORD:
-				this.workAccidentRecordAttachment = attachment;
+				this.workAccidentRecordAttachment.put(file.getOriginalFilename(), regPicture);
 				break;
 			case TYPE_FARM_POLICIES:
-				this.farmPoliciesAttachment = attachment;
+				this.farmPoliciesAttachment.put(file.getOriginalFilename(), regPicture);
 				break;
 		}
 

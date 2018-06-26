@@ -2,25 +2,27 @@ package com.fairagora.verifik8.v8web.mvc.farms.dto;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
+
 public class RegEntityFacilitiesDto {
 
 	protected Long farmId;
 
 	protected Boolean accessToilets;
-	protected MultipartFile accessToiletsAttachment;
-	protected String accessToiletsAttachmentUrl;
+	protected MultipartFile accessToiletsAttachmentMultipart;
+	protected List<String> accessToiletsAttachmentUrl;
 
 	protected Boolean accessRestRoom;
-	protected MultipartFile accessRestRoomAttachment;
-	protected String accessRestRoomAttachmentUrl;
+	protected MultipartFile accessRestRoomAttachmentMultipart;
+	protected List<String> accessRestRoomAttachmentUrl;
 
 	protected Boolean accessShower;
-	protected MultipartFile accessShowerAttachment;
-	protected String accessShowerAttachmentUrl;
+	protected MultipartFile accessShowerAttachmentMultipart;
+	protected List<String> accessShowerAttachmentUrl;
 
 	protected Boolean accessToFreeDrinking;
-	protected MultipartFile accessToFreeDrinkingAttachment;
-	protected String accessToFreeDrinkingAttachmentUrl;
+	protected MultipartFile accessToFreeDrinkingAttachmentMultipart;
+	protected List<String> accessToFreeDrinkingAttachmentUrl;
 
 	protected Boolean presenceFirstAidKit;
 
@@ -40,19 +42,19 @@ public class RegEntityFacilitiesDto {
 		this.accessToilets = accessToilets;
 	}
 
-	public MultipartFile getAccessToiletsAttachment() {
-		return accessToiletsAttachment;
+	public MultipartFile getAccessToiletsAttachmentMultipart() {
+		return accessToiletsAttachmentMultipart;
 	}
 
-	public void setAccessToiletsAttachment(MultipartFile accessToiletsAttachment) {
-		this.accessToiletsAttachment = accessToiletsAttachment;
+	public void setAccessToiletsAttachmentMultipart(MultipartFile accessToiletsAttachmentMultipart) {
+		this.accessToiletsAttachmentMultipart = accessToiletsAttachmentMultipart;
 	}
 
-	public String getAccessToiletsAttachmentUrl() {
+	public List<String> getAccessToiletsAttachmentUrl() {
 		return accessToiletsAttachmentUrl;
 	}
 
-	public void setAccessToiletsAttachmentUrl(String accessToiletsAttachmentUrl) {
+	public void setAccessToiletsAttachmentUrl(List<String> accessToiletsAttachmentUrl) {
 		this.accessToiletsAttachmentUrl = accessToiletsAttachmentUrl;
 	}
 
@@ -64,19 +66,19 @@ public class RegEntityFacilitiesDto {
 		this.accessRestRoom = accessRestRoom;
 	}
 
-	public MultipartFile getAccessRestRoomAttachment() {
-		return accessRestRoomAttachment;
+	public MultipartFile getAccessRestRoomAttachmentMultipart() {
+		return accessRestRoomAttachmentMultipart;
 	}
 
-	public void setAccessRestRoomAttachment(MultipartFile accessRestRoomAttachment) {
-		this.accessRestRoomAttachment = accessRestRoomAttachment;
+	public void setAccessRestRoomAttachmentMultipart(MultipartFile accessRestRoomAttachmentMultipart) {
+		this.accessRestRoomAttachmentMultipart = accessRestRoomAttachmentMultipart;
 	}
 
-	public String getAccessRestRoomAttachmentUrl() {
+	public List<String> getAccessRestRoomAttachmentUrl() {
 		return accessRestRoomAttachmentUrl;
 	}
 
-	public void setAccessRestRoomAttachmentUrl(String accessRestRoomAttachmentUrl) {
+	public void setAccessRestRoomAttachmentUrl(List<String> accessRestRoomAttachmentUrl) {
 		this.accessRestRoomAttachmentUrl = accessRestRoomAttachmentUrl;
 	}
 
@@ -88,19 +90,19 @@ public class RegEntityFacilitiesDto {
 		this.accessShower = accessShower;
 	}
 
-	public MultipartFile getAccessShowerAttachment() {
-		return accessShowerAttachment;
+	public MultipartFile getAccessShowerAttachmentMultipart() {
+		return accessShowerAttachmentMultipart;
 	}
 
-	public void setAccessShowerAttachment(MultipartFile accessShowerAttachment) {
-		this.accessShowerAttachment = accessShowerAttachment;
+	public void setAccessShowerAttachmentMultipart(MultipartFile accessShowerAttachmentMultipart) {
+		this.accessShowerAttachmentMultipart = accessShowerAttachmentMultipart;
 	}
 
-	public String getAccessShowerAttachmentUrl() {
+	public List<String> getAccessShowerAttachmentUrl() {
 		return accessShowerAttachmentUrl;
 	}
 
-	public void setAccessShowerAttachmentUrl(String accessShowerAttachmentUrl) {
+	public void setAccessShowerAttachmentUrl(List<String> accessShowerAttachmentUrl) {
 		this.accessShowerAttachmentUrl = accessShowerAttachmentUrl;
 	}
 
@@ -112,11 +114,11 @@ public class RegEntityFacilitiesDto {
 		this.accessToFreeDrinking = accessToFreeDrinking;
 	}
 
-	public String getAccessToFreeDrinkingAttachmentUrl() {
+	public List<String> getAccessToFreeDrinkingAttachmentUrl() {
 		return accessToFreeDrinkingAttachmentUrl;
 	}
 
-	public void setAccessToFreeDrinkingAttachmentUrl(String accessToFreeDrinkingAttachmentUrl) {
+	public void setAccessToFreeDrinkingAttachmentUrl(List<String> accessToFreeDrinkingAttachmentUrl) {
 		this.accessToFreeDrinkingAttachmentUrl = accessToFreeDrinkingAttachmentUrl;
 	}
 
@@ -128,12 +130,12 @@ public class RegEntityFacilitiesDto {
 		this.presenceFirstAidKit = presenceFirstAidKit;
 	}
 
-	public MultipartFile getAccessToFreeDrinkingAttachment() {
-		return accessToFreeDrinkingAttachment;
+	public MultipartFile getAccessToFreeDrinkingAttachmentMultipart() {
+		return accessToFreeDrinkingAttachmentMultipart;
 	}
 
-	public void setAccessToFreeDrinkingAttachment(MultipartFile accessToFreeDrinkingAttachment) {
-		this.accessToFreeDrinkingAttachment = accessToFreeDrinkingAttachment;
+	public void setAccessToFreeDrinkingAttachmentMultipart(MultipartFile accessToFreeDrinkingAttachmentMultipart) {
+		this.accessToFreeDrinkingAttachmentMultipart = accessToFreeDrinkingAttachmentMultipart;
 	}
 
 }

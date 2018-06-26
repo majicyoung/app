@@ -1,24 +1,15 @@
 package com.fairagora.verifik8.v8web.data.domain.reg.farm;
 
 import java.util.Date;
+import java.util.List;
 
-import javax.persistence.AssociationOverride;
-import javax.persistence.AssociationOverrides;
-import javax.persistence.AttributeOverride;
-import javax.persistence.AttributeOverrides;
-import javax.persistence.Column;
-import javax.persistence.Embedded;
+import javax.persistence.*;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.NotFound;
-import org.hibernate.annotations.NotFoundAction;
+import com.fairagora.verifik8.v8web.data.domain.reg.RegPicture;
+import org.hibernate.annotations.*;
 
 import com.fairagora.verifik8.v8web.data.domain.V8EntitySupport;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLAppHvHeExpensionType;
@@ -64,30 +55,58 @@ public class RegEntityFarmDetails extends V8EntitySupport {
 	@Column(name = "ENVIRONMENT_IMPACT_ASSESSMENT")
 	protected boolean environmentImpactAssessment;
 
-	@Embedded
-	@AttributeOverrides({
-			@AttributeOverride(name = "resourcePath", column = @Column(name = "ENVIRONMENT_IMPACT_ASSESSMENT_URL")) })
-	protected Attachment environmentImpactAssessmentDoc;
+	@OneToMany(cascade=CascadeType.ALL,
+			fetch = FetchType.EAGER)
+	@JoinTable(
+			name = "jt_reg_farm_details_environment_impact_reg_picture",
+			joinColumns = @JoinColumn(name = "ENTITY_ID"),
+			inverseJoinColumns = @JoinColumn(name = "PICTURE_ID")
+	)
+	@Fetch(value = FetchMode.SUBSELECT)
+	protected List<RegPicture> environmentImpactAssessmentDocs;
 
-	@Embedded
-	@AttributeOverrides({ @AttributeOverride(name = "resourcePath", column = @Column(name = "HVH_CONSTRUCT_PERMIT")) })
-	protected Attachment contructionPermit;
+	@OneToMany(cascade=CascadeType.ALL,
+			fetch = FetchType.EAGER)
+	@JoinTable(
+			name = "jt_reg_farm_details_construction_permit_reg_picture",
+			joinColumns = @JoinColumn(name = "ENTITY_ID"),
+			inverseJoinColumns = @JoinColumn(name = "PICTURE_ID")
+	)
+	@Fetch(value = FetchMode.SUBSELECT)
+	protected List<RegPicture> contructionPermits;
 
-	@Embedded
-	@AttributeOverrides({ @AttributeOverride(name = "resourcePath", column = @Column(name = "HVH_LAND_TITLE")) })
-	protected Attachment landTitle;
+	@OneToMany(cascade=CascadeType.ALL,
+			fetch = FetchType.EAGER)
+	@JoinTable(
+			name = "jt_reg_farm_details_land_title_reg_picture",
+			joinColumns = @JoinColumn(name = "ENTITY_ID"),
+			inverseJoinColumns = @JoinColumn(name = "PICTURE_ID")
+	)
+	@Fetch(value = FetchMode.SUBSELECT)
+	protected List<RegPicture> landTitles;
 
-	@Embedded
-	@AttributeOverrides({ @AttributeOverride(name = "resourcePath", column = @Column(name = "AERIAL_VIEW")) })
-	protected Attachment aerialView;
+	@OneToMany(cascade=CascadeType.ALL,
+				fetch = FetchType.EAGER)
+	@JoinTable(
+			name = "jt_reg_farm_details_aerial_views_reg_picture",
+			joinColumns = @JoinColumn(name = "ENTITY_ID"),
+			inverseJoinColumns = @JoinColumn(name = "PICTURE_ID")
+	)
+	@Fetch(value = FetchMode.SUBSELECT)
+	protected List<RegPicture> aerialViews;
 
 	@Column(name = "SITING_PROTECTED_AREA")
 	protected boolean sittingProtectedArea;
 
-	@Embedded
-	@AttributeOverrides({
-			@AttributeOverride(name = "resourcePath", column = @Column(name = "SITING_PROTECTED_AREA_AUTHORIZATION_URL")) })
-	protected Attachment sittingProtectedAreaDoc;
+	@OneToMany(cascade=CascadeType.ALL,
+			fetch = FetchType.EAGER)
+	@JoinTable(
+			name = "jt_reg_farm_details_sitting_protected_area_reg_picture",
+			joinColumns = @JoinColumn(name = "ENTITY_ID"),
+			inverseJoinColumns = @JoinColumn(name = "PICTURE_ID")
+	)
+	@Fetch(value = FetchMode.SUBSELECT)
+	protected List<RegPicture> sittingProtectedAreaDocs;
 
 	@Column(name = "HVHE_FARM_EXPENSION")
 	protected boolean farmExpension;
@@ -97,14 +116,25 @@ public class RegEntityFarmDetails extends V8EntitySupport {
 	@JoinColumn(name = "CL_HVHE_EXPENSION_TYPE_ID")
 	protected CLAppHvHeExpensionType farmExpensionType;
 
-	@Embedded
-	@AttributeOverrides({
-			@AttributeOverride(name = "resourcePath", column = @Column(name = "HVHE_CANAL_RESTAURATION_PLAN")) })
-	protected Attachment canalRestorationPlan;
+	@OneToMany(cascade=CascadeType.ALL,
+			fetch = FetchType.EAGER)
+	@JoinTable(
+			name = "jt_reg_farm_details_canal_restoration_reg_picture",
+			joinColumns = @JoinColumn(name = "ENTITY_ID"),
+			inverseJoinColumns = @JoinColumn(name = "PICTURE_ID")
+	)
+	@Fetch(value = FetchMode.SUBSELECT)
+	protected List<RegPicture> canalRestorationPlans;
 
-	@Embedded
-	@AttributeOverrides({ @AttributeOverride(name = "resourcePath", column = @Column(name = "CUMUL_IMPACTS")) })
-	protected Attachment cumulativeImpactStudy;
+	@OneToMany(cascade=CascadeType.ALL,
+			fetch = FetchType.EAGER)
+	@JoinTable(
+			name = "jt_reg_farm_details_cumulative_impact_reg_picture",
+			joinColumns = @JoinColumn(name = "ENTITY_ID"),
+			inverseJoinColumns = @JoinColumn(name = "PICTURE_ID")
+	)
+	@Fetch(value = FetchMode.SUBSELECT)
+	protected List<RegPicture> cumulativeImpactStudies;
 
 	@Column(name = "HAS_A_LAB")
 	protected boolean hasALab;
@@ -186,30 +216,6 @@ public class RegEntityFarmDetails extends V8EntitySupport {
 		this.environmentImpactAssessment = environmentImpactAssessment;
 	}
 
-	public Attachment getEnvironmentImpactAssessmentDoc() {
-		return environmentImpactAssessmentDoc;
-	}
-
-	public void setEnvironmentImpactAssessmentDoc(Attachment environmentImpactAssessmentDoc) {
-		this.environmentImpactAssessmentDoc = environmentImpactAssessmentDoc;
-	}
-
-	public Attachment getContructionPermit() {
-		return contructionPermit;
-	}
-
-	public void setContructionPermit(Attachment contructionPermit) {
-		this.contructionPermit = contructionPermit;
-	}
-
-	public Attachment getLandTitle() {
-		return landTitle;
-	}
-
-	public void setLandTitle(Attachment landTitle) {
-		this.landTitle = landTitle;
-	}
-
 	public boolean isFarmExpension() {
 		return farmExpension;
 	}
@@ -226,22 +232,6 @@ public class RegEntityFarmDetails extends V8EntitySupport {
 		this.farmExpensionType = farmExpensionType;
 	}
 
-	public Attachment getCanalRestorationPlan() {
-		return canalRestorationPlan;
-	}
-
-	public void setCanalRestorationPlan(Attachment canalRestorationPlan) {
-		this.canalRestorationPlan = canalRestorationPlan;
-	}
-
-	public Attachment getCumulativeImpactStudy() {
-		return cumulativeImpactStudy;
-	}
-
-	public void setCumulativeImpactStudy(Attachment cumulativeImpactStudy) {
-		this.cumulativeImpactStudy = cumulativeImpactStudy;
-	}
-
 	public boolean isSittingProtectedArea() {
 		return sittingProtectedArea;
 	}
@@ -250,20 +240,12 @@ public class RegEntityFarmDetails extends V8EntitySupport {
 		this.sittingProtectedArea = sittingProtectedArea;
 	}
 
-	public Attachment getSittingProtectedAreaDoc() {
-		return sittingProtectedAreaDoc;
+	public List<RegPicture> getAerialViews() {
+		return aerialViews;
 	}
 
-	public void setSittingProtectedAreaDoc(Attachment sittingProtectedAreaDoc) {
-		this.sittingProtectedAreaDoc = sittingProtectedAreaDoc;
-	}
-
-	public Attachment getAerialView() {
-		return aerialView;
-	}
-
-	public void setAerialView(Attachment aerialView) {
-		this.aerialView = aerialView;
+	public void setAerialViews(List<RegPicture> aerialView) {
+		this.aerialViews = aerialView;
 	}
 
 	public boolean isHasALab() {
@@ -322,6 +304,52 @@ public class RegEntityFarmDetails extends V8EntitySupport {
 	public void setStakeholderMeetingLocation(String stakeholderMeetingLocation) {
 		this.stakeholderMeetingLocation = stakeholderMeetingLocation;
 	}
-	
-	
+
+	public List<RegPicture> getEnvironmentImpactAssessmentDocs() {
+		return environmentImpactAssessmentDocs;
+	}
+
+	public void setEnvironmentImpactAssessmentDocs(List<RegPicture> environmentImpactAssessmentDocs) {
+		this.environmentImpactAssessmentDocs = environmentImpactAssessmentDocs;
+	}
+
+	public List<RegPicture> getContructionPermits() {
+		return contructionPermits;
+	}
+
+	public void setContructionPermits(List<RegPicture> contructionPermits) {
+		this.contructionPermits = contructionPermits;
+	}
+
+	public List<RegPicture> getLandTitles() {
+		return landTitles;
+	}
+
+	public void setLandTitles(List<RegPicture> landTitles) {
+		this.landTitles = landTitles;
+	}
+
+	public List<RegPicture> getSittingProtectedAreaDocs() {
+		return sittingProtectedAreaDocs;
+	}
+
+	public void setSittingProtectedAreaDocs(List<RegPicture> sittingProtectedAreaDocs) {
+		this.sittingProtectedAreaDocs = sittingProtectedAreaDocs;
+	}
+
+	public List<RegPicture> getCanalRestorationPlans() {
+		return canalRestorationPlans;
+	}
+
+	public void setCanalRestorationPlans(List<RegPicture> canalRestorationPlans) {
+		this.canalRestorationPlans = canalRestorationPlans;
+	}
+
+	public List<RegPicture> getCumulativeImpactStudies() {
+		return cumulativeImpactStudies;
+	}
+
+	public void setCumulativeImpactStudies(List<RegPicture> cumulativeImpactStudies) {
+		this.cumulativeImpactStudies = cumulativeImpactStudies;
+	}
 }
