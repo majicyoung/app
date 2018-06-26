@@ -26,7 +26,7 @@ public class CacheController {
 		List<CLAppMeasureType> clAppMeasureType = codeListsService.listActiveMeasureTypes();
 		
 		Map<String, Object> cacheMap = new HashMap<String, Object>();
-		cacheMap.put("measuretype", clAppMeasureType);
+		cacheMap.put("measureTypes", clAppMeasureType);
 		
 		return new ResponseEntity<Object>(cacheMap, HttpStatus.OK);
 	}
