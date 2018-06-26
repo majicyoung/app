@@ -20,10 +20,10 @@ public class V8ResourceServerConfiguration extends ResourceServerConfigurerAdapt
 
 	@Override
 	public void configure(HttpSecurity http) throws Exception {
-	    http
-	    .anonymous().disable()
-        .authorizeRequests()
-        .antMatchers("/api/**").authenticated()
-        .and().exceptionHandling().accessDeniedHandler(new OAuth2AccessDeniedHandler());
+		http
+		.anonymous().disable()
+		.authorizeRequests()
+		.antMatchers("/api/**").authenticated()
+		.and().exceptionHandling().accessDeniedHandler(new OAuth2AccessDeniedHandler());
 	}
 }

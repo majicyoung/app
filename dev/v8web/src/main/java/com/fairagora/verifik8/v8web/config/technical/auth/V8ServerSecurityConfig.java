@@ -47,9 +47,9 @@ public class V8ServerSecurityConfig extends WebSecurityConfigurerAdapter {
 		http
 		.cors()
 		.and()
-         .anonymous().disable()
-         .authorizeRequests()
-         .antMatchers("/api/**").permitAll();
+		  .anonymous().disable()
+          .authorizeRequests()
+          .antMatchers("/api/**").permitAll();
 		http.csrf().disable();
 		http.headers()
 	      .frameOptions()
