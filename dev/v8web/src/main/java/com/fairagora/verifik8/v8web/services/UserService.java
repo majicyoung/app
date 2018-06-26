@@ -64,5 +64,13 @@ public class UserService extends AbstractV8Service {
 		Collections.sort(sysUsers, Comparator.comparing(SYSUser::getName));
 		return sysUsers;
 	}
+	
+	@Transactional
+	public SYSUser getUserByEmail() {
+		V8LoggedUser loggedUser = getLoggedUser();
+		SYSUser user = userRepository.findByEmail(loggedUser.getUsername());
+		
+		return user;
+	}
 
 }

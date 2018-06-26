@@ -29,7 +29,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 public class V8ServerSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
-	private UserDetailsService userDetailsService;
+	private V8UserDetailsService userDetailsService;
 
 	@Override
 	@Bean
@@ -47,18 +47,13 @@ public class V8ServerSecurityConfig extends WebSecurityConfigurerAdapter {
 		http
 		.cors()
 		.and()
-		.authorizeRequests().antMatchers("/webjars/**", "/static/**").permitAll().anyRequest().anonymous()
-		.and()
-        .authorizeRequests()
-            .antMatchers("/").permitAll()
-            .anyRequest().authenticated()
-            .and()
-        .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login")
-            .permitAll();
+			.anonymous().disable()
+			.authorizeRequests()
+			.antMatchers("/api/**").permitAll();
 		http.csrf().disable();
 		http.headers()
-	      .frameOptions()
-	      .sameOrigin();
+			.frameOptions()
+			.sameOrigin();
 	}
 
 	@Override

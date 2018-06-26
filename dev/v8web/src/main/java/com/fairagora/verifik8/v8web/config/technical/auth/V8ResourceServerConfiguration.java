@@ -23,9 +23,7 @@ public class V8ResourceServerConfiguration extends ResourceServerConfigurerAdapt
 		http
 		.anonymous().disable()
 		.authorizeRequests()
-		    .antMatchers("/**")
-		    .access("hasRole('ADMIN')")
-		.and()
-		.exceptionHandling().accessDeniedHandler(new OAuth2AccessDeniedHandler());
+		.antMatchers("/api/**").authenticated()
+		.and().exceptionHandling().accessDeniedHandler(new OAuth2AccessDeniedHandler());
 	}
 }
