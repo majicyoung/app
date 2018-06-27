@@ -12,10 +12,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fairagora.verifik8.v8web.data.domain.sys.SYSUser;
 import com.fairagora.verifik8.v8web.mvc.AbstractV8Controller;
 import com.fairagora.verifik8.v8web.mvc.farms.RegFarmDTOMapper;
 import com.fairagora.verifik8.v8web.mvc.ponds.dto.PondListingDto;
 import com.fairagora.verifik8.v8web.services.FarmService;
+import com.fairagora.verifik8.v8web.services.UserService;
 import com.fairagora.verifik8.v8web.services.enhanced.V8Farm;
 
 @RequestMapping("api")
@@ -27,6 +29,9 @@ public class ProfileController extends AbstractV8Controller{
 
 	@Autowired
 	private FarmService farmService;
+	
+	@Autowired
+	private UserService userService;
 
 	@RequestMapping(path = "/profile", method = RequestMethod.GET)
 	public ResponseEntity<Object> getFarmByUser() {
@@ -34,9 +39,12 @@ public class ProfileController extends AbstractV8Controller{
 		
 		List<PondListingDto> ponds = farmService.listVisiblePoundsForLoggedUser(getLoggedUser()).stream().map(p -> regFarmDtoMapper.toListing(p)).collect(Collectors.toList());
 
+		SYSUser user = userService.getUserByEmail();
+		
 		Map<String, Object> profileMap = new HashMap<>();
 		profileMap.put("farms", farms);
 		profileMap.put("ponds", ponds);
+		profileMap.put("user", user);
 
 		return new ResponseEntity<>(profileMap, HttpStatus.OK);
 	}
