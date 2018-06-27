@@ -52,14 +52,14 @@ public class PondsApiMeasureController extends AbstractV8Controller{
 		return new ResponseEntity<>(measure, HttpStatus.CREATED);
 	}
 	
-	@GetMapping(path="/measures")
+	@GetMapping(path = "/measures")
 	public ResponseEntity<List<DTFarmPondMeasurement>> getAllPondMeasure() {
 		List<DTFarmPondMeasurement> measures = pondMeasuresRepository.findAll();
 		
-		 if (measures.isEmpty()) {
-			 return new ResponseEntity<List<DTFarmPondMeasurement>>(HttpStatus.NO_CONTENT); 
-		 }
-		
+		if (measures.isEmpty()) {
+			return new ResponseEntity<List<DTFarmPondMeasurement>>(HttpStatus.NO_CONTENT);
+		}
+
 		return new ResponseEntity<List<DTFarmPondMeasurement>>(measures, HttpStatus.OK);
 	}
 
