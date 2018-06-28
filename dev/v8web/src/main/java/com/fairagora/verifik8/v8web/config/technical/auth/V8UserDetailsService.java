@@ -31,14 +31,14 @@ public class V8UserDetailsService implements UserDetailsService, ApplicationList
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-		SYSUser u = userRepository.findByEmail(username);
+		SYSUser u = userRepository.findByEmail(username.toLowerCase());
 		if (u == null) {
 			throw new UsernameNotFoundException(username);
 		}
 
 		V8LoggedUser loggedUser = new V8LoggedUser(u);
 
-		jdbc.queryForList(AUTORITIES_BY_USERNAME, new Object[] { username }, String.class)
+		jdbc.queryForList(AUTORITIES_BY_USERNAME, new Object[] { username.toLowerCase() }, String.class)
 				.forEach(s -> loggedUser.addAuthority(new SimpleGrantedAuthority(s.toUpperCase())));
 
 		String sql = "";
