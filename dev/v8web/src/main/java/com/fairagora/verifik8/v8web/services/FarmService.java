@@ -169,41 +169,41 @@ public class FarmService extends AbstractV8Service {
 
 	@Transactional
 	public List<RegEntityFarmPond> listAllPondsForLoggedUser(V8LoggedUser loggedUser) {
-		List<RegEntityFarmPond> r = new ArrayList<>();
+		List<RegEntityFarmPond> regEntityPonds = new ArrayList<>();
 
-		SYSUser u = userRepo.findByEmail(loggedUser.getUsername());
-		if (u != null) {
-			switch (u.getRole().getCode()) {
+		SYSUser user = userRepo.findByEmail(loggedUser.getUsername());
+		if (user != null) {
+			switch (user.getRole().getCode()) {
 			case SYSRole.SADMIN:
-				r.addAll(regEntityFarmPondRepository.findAll());
+				regEntityPonds.addAll(regEntityFarmPondRepository.findAll());
 				break;
 
 			case SYSRole.coop:
 				List<RegEntityFarmDetails> farmDetails = farmDetailsRepository
-						.findByCooperativeId(u.getCooperative().getId());
+						.findByCooperativeId(user.getCooperative().getId());
 				for (RegEntityFarmDetails f : farmDetails) {
-					r.addAll(regEntityFarmPondRepository.findByFarmId(f.getEntity().getId()));
+					regEntityPonds.addAll(regEntityFarmPondRepository.findByFarmId(f.getEntity().getId()));
 				}
 				break;
 
 			case SYSRole.farm:
 				List<V8Farm> farmDetails1 = listFarms();
 				for (V8Farm f : farmDetails1) {
-					r.addAll(regEntityFarmPondRepository.findByFarmId(f.getId()));
+					regEntityPonds.addAll(regEntityFarmPondRepository.findByFarmId(f.getId()));
 				}
 				break;
 
 			case SYSRole.country:
 				List<RegEntity> farms = regEntityRepository
-						.findByEntityTypeCodeAndNationalityId(CLAppEntityType.CODE_FARM, u.getCountry().getId());
+						.findByEntityTypeCodeAndNationalityId(CLAppEntityType.CODE_FARM, user.getCountry().getId());
 				for (RegEntity f : farms) {
-					r.addAll(regEntityFarmPondRepository.findByFarmId(f.getId()));
+					regEntityPonds.addAll(regEntityFarmPondRepository.findByFarmId(f.getId()));
 				}
 				break;
 			}
 		}
 
-		return r;
+		return regEntityPonds;
 	}
 
 	@Transactional
