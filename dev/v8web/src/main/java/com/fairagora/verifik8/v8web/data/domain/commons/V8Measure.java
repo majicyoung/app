@@ -33,9 +33,15 @@ public class V8Measure {
 		this.unit = unit;
 	}
 
+
+	public String getUnitCode(){
+		return unit == null ? "?" : unit.getCode();
+	}
+
+
 	@Override
 	public String toString() {
-		return unit == null ? "" : quantity + " " + (unit == null ? "?" : unit.getCode());
+		return unit == null ? "" : quantity + " " + getUnitCode();
 	}
 
 	public V8Measure setup(float qt, CLAppQuantityUnit unit) {
