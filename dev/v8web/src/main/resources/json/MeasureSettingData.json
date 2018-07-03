@@ -1,0 +1,25 @@
+{
+	"pH": {
+		"accept": {
+			"max": 7.4,
+			"min": 6.5
+		},
+		"danger": {
+			"max": {
+				"maxLower": 8,
+				"maxUpper": 14
+			},
+			"min": {
+				"minLower": 0,
+				"minUpper": 6
+			}
+		},
+		"max": 14,
+		"min": 0,
+		"step": 0.1,
+		"warning": {
+			"max": 8,
+			"min": 6
+		}
+	}
+}
