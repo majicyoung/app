@@ -39,7 +39,7 @@
 								<td th:text="${act.getMeasure().getQuantity()}"></td>
 								<td align="center">
 									<a href="javascript:void(0);" th:attr="data-id=${act.id}" class="btn btn-xs btn-flat btn-primary editActBtn"><i class="fa fa-edit"></i></a>
-									<form th:action="@{'/farm/'+${farmId}+'/pond/'+${pondId}+'/activities/delete.html'}" method="post" style="display: inline;">
+									<form th:action="@{'/fa	rm/'+${farmId}+'/pond/'+${pondId}+'/activities/delete.html'}" method="post" style="display: inline;">
 										<input type="hidden" th:value="${act.id}" th:name="activityId" />
 										<button type="submit" class="btn btn-xs btn-flat btn-danger">
 											<i class="fa fa-remove"></i>
