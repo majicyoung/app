@@ -12,24 +12,24 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 @RequestMapping("api")
 @RestController
-public class PondsApiMeasureSetting extends AbstractV8Controller {
+public class PondsApiMeasureSettings extends AbstractV8Controller {
 
 	@RequestMapping("/custom/measure")
 	public ResponseEntity<?> showPondCustomMeasurement() {
-		return new ResponseEntity<>(new PondsApiMeasureSetting().listAllMeasureSetting(), HttpStatus.OK);
+		return new ResponseEntity<>(new PondsApiMeasureSettings().listAllMeasureSettings(), HttpStatus.OK);
 	}
-	
-	private Map<?,?> listAllMeasureSetting() {
-		 ObjectMapper objectMapper = new ObjectMapper();
-		 Map<?,?> empMap = null;
-		 
+
+	private Map<?, ?> listAllMeasureSettings() {
+		ObjectMapper objectMapper = new ObjectMapper();
+		Map<?, ?> empMap = null;
+
 		try {
-			empMap = objectMapper.readValue(getClass().getResource("/json/MeasureSettingData.json"),Map.class);
-		} catch(Exception ex) {
+			empMap = objectMapper.readValue(getClass().getResource("/json/MeasureSettingData.json"), Map.class);
+		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
-		
+
 		return empMap;
 	}
-		
+
 }
