@@ -14,7 +14,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @RestController
 public class PondsApiMeasureSettings extends AbstractV8Controller {
 
-	@RequestMapping("/custom/measure")
+	@RequestMapping("/measure-settings")
 	public ResponseEntity<?> showPondCustomMeasurement() {
 		return new ResponseEntity<>(new PondsApiMeasureSettings().listAllMeasureSettings(), HttpStatus.OK);
 	}
