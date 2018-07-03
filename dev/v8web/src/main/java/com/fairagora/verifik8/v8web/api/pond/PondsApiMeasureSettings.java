@@ -21,15 +21,15 @@ public class PondsApiMeasureSettings extends AbstractV8Controller {
 
 	private Map<?, ?> listAllMeasureSettings() {
 		ObjectMapper objectMapper = new ObjectMapper();
-		Map<?, ?> empMap = null;
+		Map<?, ?> measureSettingsMap = null;
 
 		try {
-			empMap = objectMapper.readValue(getClass().getResource("/json/MeasureSettingData.json"), Map.class);
+			measureSettingsMap = objectMapper.readValue(getClass().getResource("/json/MeasureSettingData.json"), Map.class);
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
 
-		return empMap;
+		return measureSettingsMap;
 	}
 
 }
