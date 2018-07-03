@@ -168,6 +168,45 @@ public class FarmService extends AbstractV8Service {
 	}
 
 	@Transactional
+	public List<RegEntityFarmPond> listAllPondsForLoggedUser(V8LoggedUser loggedUser) {
+		List<RegEntityFarmPond> regEntityPonds = new ArrayList<>();
+
+		SYSUser user = userRepo.findByEmail(loggedUser.getUsername());
+		if (user != null) {
+			switch (user.getRole().getCode()) {
+			case SYSRole.SADMIN:
+				regEntityPonds.addAll(regEntityFarmPondRepository.findAll());
+				break;
+
+			case SYSRole.coop:
+				List<RegEntityFarmDetails> farmDetails = farmDetailsRepository
+						.findByCooperativeId(user.getCooperative().getId());
+				for (RegEntityFarmDetails f : farmDetails) {
+					regEntityPonds.addAll(regEntityFarmPondRepository.findByFarmId(f.getEntity().getId()));
+				}
+				break;
+
+			case SYSRole.farm:
+				List<V8Farm> farmDetails1 = listFarms();
+				for (V8Farm f : farmDetails1) {
+					regEntityPonds.addAll(regEntityFarmPondRepository.findByFarmId(f.getId()));
+				}
+				break;
+
+			case SYSRole.country:
+				List<RegEntity> farms = regEntityRepository
+						.findByEntityTypeCodeAndNationalityId(CLAppEntityType.CODE_FARM, user.getCountry().getId());
+				for (RegEntity f : farms) {
+					regEntityPonds.addAll(regEntityFarmPondRepository.findByFarmId(f.getId()));
+				}
+				break;
+			}
+		}
+
+		return regEntityPonds;
+	}
+
+	@Transactional
 	public List<RegEntityFarmPond> listVisiblePoundsForLoggedUser(V8LoggedUser loggedUser) {
 		List<RegEntityFarmPond> r = new ArrayList<>();
 

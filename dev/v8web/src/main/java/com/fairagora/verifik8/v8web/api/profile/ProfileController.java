@@ -37,7 +37,7 @@ public class ProfileController extends AbstractV8Controller{
 	public ResponseEntity<Object> getFarmByUser() {
 		List<V8Farm> farms = farmService.listFarms();
 		
-		List<PondListingDto> ponds = farmService.listVisiblePoundsForLoggedUser(getLoggedUser()).stream().map(p -> regFarmDtoMapper.toListing(p)).collect(Collectors.toList());
+		List<PondListingDto> ponds = farmService.listAllPondsForLoggedUser(getLoggedUser()).stream().map(p -> regFarmDtoMapper.toListing(p)).collect(Collectors.toList());
 
 		SYSUser user = userService.getUserByEmail();
 		
