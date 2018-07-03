@@ -13,7 +13,7 @@ variables:
   IMAGE_TAGGED: $IMAGE:$CI_BUILD_REF_NAME
   SERVICE: api2
   TAG: "$VERSION.0"
-  VERSION: "0.1"
+  VERSION: "0.2"
 
 build:
   after_script:
