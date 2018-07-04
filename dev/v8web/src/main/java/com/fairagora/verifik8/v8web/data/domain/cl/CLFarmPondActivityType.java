@@ -1,5 +1,7 @@
 package com.fairagora.verifik8.v8web.data.domain.cl;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -13,6 +15,7 @@ public class CLFarmPondActivityType extends CodeListSupport {
 			name="jt_pond_activity_product_types",
 			joinColumns=@JoinColumn(name="CL_FARM_POND_ACTIVITY_ID", referencedColumnName="ID"),
 			inverseJoinColumns=@JoinColumn(name="CL_PRODUCT_TYPE_ID", referencedColumnName="ID"))
+	@JsonBackReference
 	protected List<CLRefProductType> clRefProductTypes;
 
 	public List<CLRefProductType> getClRefProductTypes() {

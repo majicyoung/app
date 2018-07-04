@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.fairagora.verifik8.v8web.data.domain.cl.CLFarmPondActivityType;
+import com.fairagora.verifik8.v8web.data.domain.cl.CLRefProduct;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLRefProductType;
 import com.fairagora.verifik8.v8web.data.repo.cl.CLFarmPondActivityTypeRepository;
 import com.fairagora.verifik8.v8web.data.repo.cl.CLRefProductTypesRepository;
@@ -44,9 +45,6 @@ public class FarmPondActivityController extends AbstractV8Controller {
 
 	@Autowired
 	private RegFarmDTOMapper dtoMapper;
-
-	@Autowired
-	private CLFarmPondActivityTypeRepository pondActivityTypesRepository;
 
 
 	/**
@@ -113,7 +111,7 @@ public class FarmPondActivityController extends AbstractV8Controller {
 		mv.addAttribute("farmId", farmId);
 		mv.addAttribute("farmName", jdbc.queryForObject("SELECT name FROM reg_entities WHERE id=" + farmId, String.class));
 		mv.addAttribute("allPondActivityTypes", codeListservice.listActivePondActivityTypes());
-		mv.addAttribute("allProducts", codeListservice.listActiveProducts());
+		mv.addAttribute("allProducts", codeListservice.listActiveProductsByActivity(dto.getActivityType()));
 		mv.addAttribute("allQuantityUnits", codeListservice.listActiveQuantityUnit());
 
 		preparePage(farm, pondId, mv);
@@ -180,13 +178,8 @@ public class FarmPondActivityController extends AbstractV8Controller {
 	@PreAuthorize("hasAuthority('W_PONDMEASURE')")
 	@RequestMapping(value = "/farm/{farmId}/pond/{pondId}/products", method = RequestMethod.GET)
 	@ResponseBody
-	public List<FarmPondActivityDto> getProducts(@PathVariable("farmId") Long farmId, @PathVariable("pondId") Long pondId, @RequestParam("activityId") Long activityId, Model mv) {
-		List<FarmPondActivityDto> farmPondDtos = new ArrayList<>();
-		CLFarmPondActivityType clFarmPondActivityType = pondActivityTypesRepository.findOne(activityId);
-		for (CLRefProductType clRefProductType : clFarmPondActivityType.getClRefProductTypes()) {
-			farmPondDtos.add(new FarmPondActivityDto(clRefProductType.getId(), clRefProductType.getLocalisedName()));
-		}
-		return farmPondDtos;
+	public List<CLRefProduct> getProducts(@PathVariable("farmId") Long farmId, @PathVariable("pondId") Long pondId, @RequestParam("activityId") Long activityId, Model mv) {
+		return codeListservice.listActiveProductsByActivity(activityId);
 	}
 
 

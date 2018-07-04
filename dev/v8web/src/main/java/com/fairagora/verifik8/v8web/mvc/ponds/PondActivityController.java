@@ -1,17 +1,20 @@
 package com.fairagora.verifik8.v8web.mvc.ponds;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import com.fairagora.verifik8.v8web.data.domain.cl.CLFarmPondActivityType;
+import com.fairagora.verifik8.v8web.data.domain.cl.CLRefProduct;
+import com.fairagora.verifik8.v8web.data.domain.cl.CLRefProductType;
+import com.fairagora.verifik8.v8web.data.repo.cl.CLFarmPondActivityTypeRepository;
+import com.fairagora.verifik8.v8web.mvc.farms.dto.FarmPondActivityDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import com.fairagora.verifik8.v8web.data.application.V8Page;
 import com.fairagora.verifik8.v8web.data.domain.dt.DTFarmPondActivity;
@@ -93,7 +96,7 @@ public class PondActivityController extends AbstractV8Controller {
 		mv.addAttribute("activityId", act.getId());
 
 		mv.addAttribute("allPondActivityTypes", codeListservice.listActivePondActivityTypes());
-		mv.addAttribute("allProducts", codeListservice.listActiveProducts());
+		mv.addAttribute("allProducts", codeListservice.listActiveProductsByActivity(dto.getActivityType()));
 		mv.addAttribute("allQuantityUnits", codeListservice.listActiveQuantityUnit());
 
 		preparePage(pondId, mv);
@@ -150,6 +153,17 @@ public class PondActivityController extends AbstractV8Controller {
 		preparePage(pondId, mv);
 		return "redirect:/ponds/" + pondId + "/activities/browser.html";
 	}
+
+
+
+	@PreAuthorize("hasAuthority('W_PONDMEASURE')")
+	@RequestMapping(value = "/ponds/{pondId}/products", method = RequestMethod.GET)
+	@ResponseBody
+	public List<CLRefProduct> getProducts(@PathVariable("pondId") Long pondId, @RequestParam("activityId") Long activityId, Model mv) {
+		return codeListservice.listActiveProductsByActivity(activityId);
+	}
+
+
 
 	/**
 	 * 
