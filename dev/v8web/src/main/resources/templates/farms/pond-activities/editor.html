@@ -47,12 +47,12 @@
 								</div>
 								<div class="form-group" id="actiProductGroup">
 									<label th:text="|#{farm.pond_activity_product}|"></label>
-									<select class="form-control" th:field="*{product}">
+									<select id="selectActiProductGroup" class="form-control" th:field="*{product}">
 										<option value="" th:text="|-- #{farm.pond_activity_select_product} --|">-- default.select_product
 											--
 										</option>
-										<option th:each="actType:${allProducts}" th:value="${actType.id}"
-														th:text="${actType.localisedName}"></option>
+										<!--<option th:each="actType:${allProducts}" th:value="${actType.id}"-->
+														<!--th:text="${actType.localisedName}"></option>-->
 									</select>
 								</div>
 								<div class="form-group">
@@ -95,13 +95,16 @@
 	<script th:inline="javascript">
       /*<![CDATA[*/
 
+      var farmId =/*[[${farmId}]]*/;
+      var pondId =/*[[${pondId}]]*/;
+
+
       $(document).ready(function () {
           $('.datefield').datetimepicker({
               format: 'Y-m-d h:i:s',
               closeOnDateSelect: true
           });
       });
-
 
       var noProduct = [2, 6, 7, 8, 10];
 
@@ -123,6 +126,27 @@
                   }
               }
           }
+
+          $.get('/farm/'+farmId+'/pond/'+pondId+'/products', {
+              activityId: actVal
+          }, function (datas) {
+
+              var pond_activity_select_product = /*[[#{farm.pond_activity_select_product}]]*/ 'Select Product';
+              $('#selectActiProductGroup')
+                  .find('option')
+                  .remove()
+                  .end()
+                  .append('<option value="">-- '+pond_activity_select_product+' --</option>')
+                  .val('');
+
+
+              $.each(datas, function (index, value) {
+                  $('#selectActiProductGroup').append($('<option>', {
+                      value: value.id,
+                      text : value.name
+                  }));
+              });
+          });
       }
 
       function hasEmptyFields(selector) {

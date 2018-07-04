@@ -1,9 +1,7 @@
 package com.fairagora.verifik8.v8web.data.domain.cl;
 
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "cl_ref_product_types")
@@ -21,4 +19,14 @@ public class CLRefProductType extends CodeListSupport {
 		this.parent = parent;
 	}
 
+	@ManyToMany(mappedBy="clRefProductTypes")
+	private List<CLFarmPondActivityType> clFarmPondActivityTypes;
+
+	public List<CLFarmPondActivityType> getClFarmPondActivityTypes() {
+		return clFarmPondActivityTypes;
+	}
+
+	public void setClFarmPondActivityTypes(List<CLFarmPondActivityType> clFarmPondActivityTypes) {
+		this.clFarmPondActivityTypes = clFarmPondActivityTypes;
+	}
 }

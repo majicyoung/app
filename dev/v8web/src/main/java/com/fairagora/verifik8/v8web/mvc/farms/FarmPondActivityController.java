@@ -1,17 +1,21 @@
 package com.fairagora.verifik8.v8web.mvc.farms;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import com.fairagora.verifik8.v8web.data.domain.cl.CLFarmPondActivityType;
+import com.fairagora.verifik8.v8web.data.domain.cl.CLRefProductType;
+import com.fairagora.verifik8.v8web.data.repo.cl.CLFarmPondActivityTypeRepository;
+import com.fairagora.verifik8.v8web.data.repo.cl.CLRefProductTypesRepository;
+import com.fairagora.verifik8.v8web.mvc.farms.dto.FarmPondActivityDto;
+import com.fairagora.verifik8.v8web.mvc.farms.dto.FarmPondDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import com.fairagora.verifik8.v8web.data.application.V8Page;
 import com.fairagora.verifik8.v8web.data.domain.dt.DTFarmPondActivity;
@@ -20,6 +24,8 @@ import com.fairagora.verifik8.v8web.data.repo.dt.DTFarmPondActivityRepository;
 import com.fairagora.verifik8.v8web.data.repo.reg.RegEntityFarmPondRepository;
 import com.fairagora.verifik8.v8web.mvc.AbstractV8Controller;
 import com.fairagora.verifik8.v8web.mvc.ponds.dto.PondActivityDto;
+
+import javax.websocket.server.PathParam;
 
 @Controller
 public class FarmPondActivityController extends AbstractV8Controller {
@@ -38,6 +44,10 @@ public class FarmPondActivityController extends AbstractV8Controller {
 
 	@Autowired
 	private RegFarmDTOMapper dtoMapper;
+
+	@Autowired
+	private CLFarmPondActivityTypeRepository pondActivityTypesRepository;
+
 
 	/**
 	 * 
@@ -155,7 +165,7 @@ public class FarmPondActivityController extends AbstractV8Controller {
 	 */
 	@PreAuthorize("hasAuthority('W_PONDMEASURE')")
 	@RequestMapping(value = "/farm/{farmId}/pond/{pondId}/activities/delete.html", method = RequestMethod.POST)
-	public String deletePlotActivities(@PathVariable("farmId") Long farmId, @PathVariable("pondId") Long pondId, @RequestParam("activityId") Long activityId, Model mv) {
+	public String deletePlotActivities(@PathVariable("farmId") Long farmId, @PathVariable("pondId") Long pondId, @PathParam("activityId") Long activityId, Model mv) {
 
 		RegEntity farm = regEntityRepository.findOne(farmId);
 
@@ -165,6 +175,20 @@ public class FarmPondActivityController extends AbstractV8Controller {
 
 		return "redirect:/farm/" + farmId + "/ponds.html";
 	}
+
+
+	@PreAuthorize("hasAuthority('W_PONDMEASURE')")
+	@RequestMapping(value = "/farm/{farmId}/pond/{pondId}/products", method = RequestMethod.GET)
+	@ResponseBody
+	public List<FarmPondActivityDto> getProducts(@PathVariable("farmId") Long farmId, @PathVariable("pondId") Long pondId, @RequestParam("activityId") Long activityId, Model mv) {
+		List<FarmPondActivityDto> farmPondDtos = new ArrayList<>();
+		CLFarmPondActivityType clFarmPondActivityType = pondActivityTypesRepository.findOne(activityId);
+		for (CLRefProductType clRefProductType : clFarmPondActivityType.getClRefProductTypes()) {
+			farmPondDtos.add(new FarmPondActivityDto(clRefProductType.getId(), clRefProductType.getLocalisedName()));
+		}
+		return farmPondDtos;
+	}
+
 
 	/**
 	 * 
