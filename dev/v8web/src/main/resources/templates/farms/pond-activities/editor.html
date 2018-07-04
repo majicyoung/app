@@ -47,7 +47,8 @@
 								</div>
 								<div class="form-group" id="actiProductGroup">
 									<label th:text="|#{farm.pond_activity_product}|"></label>
-									<select id="selectActiProductGroup" class="form-control" th:field="*{product}">
+									<select id="selectProductGroup" class="form-control" th:field="*{product}"
+													onchange="productChanged()">
 										<option value="" th:text="|-- #{farm.pond_activity_select_product} --|">-- default.select_product
 											--
 										</option>
@@ -58,7 +59,7 @@
 								<div class="form-group">
 									<label th:text="|#{farm.pond_activity_measure}|"></label>
 									<input type="text" class="form-control form-pond form-pond-required" th:field="*{measure.quantity}"/>
-									<select class="form-control" th:field="*{measure.unit}">
+									<select id="selectMeasureUnit" class="form-control" th:field="*{measure.unit}">
 										<option value="" th:text="|-- #{default.select_unit} --|"></option>
 										<option th:each="unit : ${allQuantityUnits}" th:value="${unit.id}"
 														th:text="${unit.localisedName}"></option>
@@ -130,9 +131,9 @@
           $.get('/farm/'+farmId+'/pond/'+pondId+'/products', {
               activityId: actVal
           }, function (datas) {
-
               var pond_activity_select_product = /*[[#{farm.pond_activity_select_product}]]*/ 'Select Product';
-              $('#selectActiProductGroup')
+              $("#selectMeasureUnit").val("").change();
+              $('#selectProductGroup')
                   .find('option')
                   .remove()
                   .end()
@@ -141,13 +142,23 @@
 
 
               $.each(datas, function (index, value) {
-                  $('#selectActiProductGroup').append($('<option>', {
+                  $('#selectProductGroup').append($('<option>', {
                       value: value.id,
                       text : value.name
                   }));
               });
           });
       }
+
+      function productChanged(){
+          var productId = $("#selectProductGroup").val();
+
+          $.get('/farm/'+farmId+'/pond/'+pondId+'/products/'+productId+'/unit', function (data) {
+              $("#selectMeasureUnit").val(data).change();
+          }).fail(function(){
+              $("#selectMeasureUnit").val("").change();
+          });
+			}
 
       function hasEmptyFields(selector) {
           var hasError = false;

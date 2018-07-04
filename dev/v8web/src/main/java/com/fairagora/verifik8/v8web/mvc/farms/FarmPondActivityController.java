@@ -1,15 +1,9 @@
 package com.fairagora.verifik8.v8web.mvc.farms;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import com.fairagora.verifik8.v8web.data.domain.cl.CLFarmPondActivityType;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLRefProduct;
-import com.fairagora.verifik8.v8web.data.domain.cl.CLRefProductType;
-import com.fairagora.verifik8.v8web.data.repo.cl.CLFarmPondActivityTypeRepository;
-import com.fairagora.verifik8.v8web.data.repo.cl.CLRefProductTypesRepository;
-import com.fairagora.verifik8.v8web.mvc.farms.dto.FarmPondActivityDto;
-import com.fairagora.verifik8.v8web.mvc.farms.dto.FarmPondDto;
+import com.fairagora.verifik8.v8web.data.repo.cl.CLRefProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -45,6 +39,9 @@ public class FarmPondActivityController extends AbstractV8Controller {
 
 	@Autowired
 	private RegFarmDTOMapper dtoMapper;
+
+	@Autowired
+	private CLRefProductRepository clRefProductRepository;
 
 
 	/**
@@ -180,6 +177,14 @@ public class FarmPondActivityController extends AbstractV8Controller {
 	@ResponseBody
 	public List<CLRefProduct> getProducts(@PathVariable("farmId") Long farmId, @PathVariable("pondId") Long pondId, @RequestParam("activityId") Long activityId, Model mv) {
 		return codeListservice.listActiveProductsByActivity(activityId);
+	}
+
+
+	@PreAuthorize("hasAuthority('W_PONDMEASURE')")
+	@RequestMapping(value = "/farm/{farmId}/pond/{pondId}/products/{productId}/unit", method = RequestMethod.GET)
+	@ResponseBody
+	public Long getProductRecommendedUnit(@PathVariable("farmId") Long farmId, @PathVariable("pondId") Long pondId, @PathVariable("productId") Long productId, Model mv) {
+		return clRefProductRepository.findOne(productId).getClAppQuantityUnit().getId();
 	}
 
 

@@ -17,11 +17,26 @@ public class CLRefProduct extends CodeListSupport {
 	@JsonBackReference
 	protected CLRefProductType clRefProductType;
 
+
+	@ManyToOne
+	@JoinColumn(name = "CL_RECOMMAND_UNIT_ID", nullable = true)
+	@JsonBackReference
+	protected CLAppQuantityUnit clAppQuantityUnit;
+
+
 	public CLRefProductType getClRefProductType() {
 		return clRefProductType;
 	}
 
 	public void setClRefProductType(CLRefProductType clRefProductType) {
 		this.clRefProductType = clRefProductType;
+	}
+
+	public CLAppQuantityUnit getClAppQuantityUnit() {
+		return clAppQuantityUnit;
+	}
+
+	public void setClAppQuantityUnit(CLAppQuantityUnit clAppQuantityUnit) {
+		this.clAppQuantityUnit = clAppQuantityUnit;
 	}
 }
