@@ -44,6 +44,12 @@ public class FarmPondActivityController extends AbstractV8Controller {
 	private CLRefProductRepository clRefProductRepository;
 
 
+
+	@PreAuthorize("hasAuthority('R_PONDACTIVTY')")
+	public String getActivityFeedingTotal(Long pondId, Long activityId) {
+		return jdbc.queryForObject("SELECT SUM(MEASURE_VALUE) FROM dt_farmaq_pond_management WHERE ACTIVITY_START_DATE <= (SELECT ACTIVITY_START_DATE FROM dt_farmaq_pond_management WHERE id = "+activityId+") AND CL_POND_ACTIVITY_TYPE_ID = 3 and REG_ENTITY_FARM_POND_ID = "+pondId+";", String.class);
+	}
+
 	/**
 	 * 
 	 * @param id
