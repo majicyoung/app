@@ -22,7 +22,7 @@
 						<div class="row">
 							<div class="col-md-6 col-sm-6 col-xs-12">
 								<div class="form-group ">
-									<label th:text="|#{farm.pond_activity_typepond_activity_type}#|">default.farm*</label>
+									<label th:text="|#{farm.pond_activity_type}|">default.farm*</label>
 									<select class="form-control" th:field="*{activityType}" required="required"
 													onchange="activityTypeChanged()">
 										<option value="" th:text="|-- #{farm.pond_activity_select_type} --|">-- default.select_farm --
@@ -101,9 +101,19 @@
 
 
       $(document).ready(function () {
-          $('.datefield').datetimepicker({
+          $('#datetime-starttime').datetimepicker({
+              onChangeDateTime: function (e) {
+                  $('#datetime-endtime').val($('#datetime-starttime').val())
+              },
               format: 'Y-m-d h:i:s',
               closeOnDateSelect: true
+
+          });
+
+          $('#datetime-endtime').datetimepicker({
+              format: 'Y-m-d h:i:s',
+              closeOnDateSelect: true
+
           });
       });
 
