@@ -1,5 +1,6 @@
 package com.fairagora.verifik8.v8web.services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -246,6 +247,10 @@ public class CodeListsService {
 
 	public List<CLRefProduct> listActiveProducts() {
 		return productRepository.findByEnabledTrueOrderByName();
+	}
+
+	public List<CLRefProduct> listActiveProductsByActivity(Long activityId) {
+		return productRepository.getFindByEnabledTrueAndFActivityIdOrderByName(activityId);
 	}
 
 	public List<CLAppTilingActivityType> listActiveTilingActivityTypes() {
