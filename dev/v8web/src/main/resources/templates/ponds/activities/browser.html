@@ -21,18 +21,20 @@
 						<thead>
 							<tr>
 								<th th:text="#{farm.pond_activity_start}">farm.pond_activity_start</th>
-								<th th:text="#{farm.pond_activity_end}">farm.pond_activity_end</th>
 								<th th:text="#{farm.pond_activity_name}">farm.pond_activity_name</th>
-								<th th:text="#{farm.pond_activity_comment}">farm.pond_activity_name</th>
+								<th th:text="#{farm.pond_activity_value}">farm.pond_activity_value</th>
+								<th th:text="#{farm.pond_activity_unit}">farm.pond_activity_unit</th>
+								<th th:text="#{farm.pond_activity_total}">farm.pond_activity_total</th>
 								<th width="120"></th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr th:each="act:${activities}">
 								<td th:text="${#dates.format(act.activityStartDate,'yyyy-MM-dd HH:mm:ss')}"></td>
-								<td th:text="${#dates.format(act.activityEndDate,'yyyy-MM-dd HH:mm:ss')}"></td>
 								<td th:text="${act.activityType.localisedName}"></td>
-								<td th:text="${act.comment}"></td>
+								<td th:text="${act.measure.quantity}"></td>
+								<td th:text="${act.measure.unitCode}"></td>
+								<td th:text="${act.activityType.id == 3 ? @farmPondActivityController.getActivityFeedingTotal(pondId, act.id) : '-'}"></td>
 								<td align="center">
 									<a href="javascript:void(0);" th:attr="data-id=${act.id}" class="btn btn-xs btn-flat btn-primary editActBtn"><i class="fa fa-edit"></i></a>
 									<form th:action="@{'/ponds/'+${pondId}+'/activities/delete.html'}" method="post" style="display: inline;">
