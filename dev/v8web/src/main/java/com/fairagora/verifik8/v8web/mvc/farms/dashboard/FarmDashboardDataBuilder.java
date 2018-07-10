@@ -4,10 +4,12 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
+import com.fairagora.verifik8.v8web.config.helper.BooleanHelper;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLAppMeasureType;
 import com.fairagora.verifik8.v8web.data.domain.reg.farm.RegEntityFarmPond;
 import com.fairagora.verifik8.v8web.data.repo.cl.CLAppMeasureTypeRepository;
 import com.fairagora.verifik8.v8web.data.repo.dt.DTFarmPondActivityRepository;
+import com.fairagora.verifik8.v8web.data.repo.dt.DTFarmPondProductionCycleRepository;
 import com.fairagora.verifik8.v8web.data.repo.reg.RegEntityFarmPondRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -29,6 +31,8 @@ public class FarmDashboardDataBuilder {
 	@Autowired
 	private CLAppMeasureTypeRepository clAppMeasureTypeRepository;
 
+	@Autowired
+	private DTFarmPondProductionCycleRepository dtFarmPondProductionCycleRepository;
 
 	public FarmDashboardDto get(Long farmId) {
 		FarmDashboardDto dash = new FarmDashboardDto();
@@ -145,7 +149,7 @@ public class FarmDashboardDataBuilder {
 	private Integer getNumberOfActivePound(Long farmId) {
 		int activeCount = 0;
 		for (RegEntityFarmPond regEntityFarmPond : regEntityFarmPondRepository.findByFarmId(farmId)) {
-			if (jdbc.queryForObject(getPoundActivity(farmId, regEntityFarmPond.getId()), Boolean.class)) {
+			if (BooleanHelper.parseBoolean(getPondActive(regEntityFarmPond.getId()))) {
 				activeCount++;
 			}
 		}
@@ -170,13 +174,13 @@ public class FarmDashboardDataBuilder {
 			}
 
 			try {
-				farmDashboardPond.setInProduction(jdbc.queryForObject(getPoundActivity(farmId, regEntityFarmPond.getId()), String.class));
+				farmDashboardPond.setInProduction(getPondActive(regEntityFarmPond.getId()));
 			} catch (DataAccessException e) {
 				farmDashboardPond.setInProduction("n/a");
 			}
 
 			try {
-				farmDashboardPond.setFeedQuantity(jdbc.queryForObject("SELECT ROUND(SUM(dt_farmaq_pond_management.MEASURE_VALUE), 2) FROM dt_farmaq_pond_management where dt_farmaq_pond_management.REG_ENTITY_FARM_POND_ID = " + regEntityFarmPond.getId() + " AND dt_farmaq_pond_management.CL_POND_ACTIVITY_TYPE_ID = 3", String.class));
+				farmDashboardPond.setFeedQuantity(dtFarmPondProductionCycleRepository.getFeedQuantitySinceStocking(regEntityFarmPond.getId()));
 			} catch (DataAccessException e) {
 				farmDashboardPond.setInProduction("n/a");
 			}
@@ -302,42 +306,7 @@ public class FarmDashboardDataBuilder {
 		return productionsArray;
 	}
 
-	private static String getPoundActivity(Long farmID, Long poundId) {
-		return "SELECT \n" +
-				"    CASE\n" +
-				"\tWHEN (SELECT count(activity.CL_POND_ACTIVITY_TYPE_ID) from (SELECT dt_farmaq_pond_management.CL_POND_ACTIVITY_TYPE_ID\n" +
-				"    FROM reg_entity_farmaq_ponds \n" +
-				"    LEFT JOIN dt_farmaq_pond_management ON reg_entity_farmaq_ponds.ID = dt_farmaq_pond_management.REG_ENTITY_FARM_POND_ID\n" +
-				"\tWHERE REG_ENTITY_FARM_ID=" + farmID + "\n" +
-				"\tAND reg_entity_farmaq_ponds.ID = " + poundId + "\n" +
-				"\tAND dt_farmaq_pond_management.CL_POND_ACTIVITY_TYPE_ID = 1) as activity) = 0\n" +
-				"\tTHEN FALSE\n" +
-				"    WHEN COUNT(tb.CL_POND_ACTIVITY_TYPE_ID) > 0\n" +
-				"    THEN FALSE\n" +
-				"    ELSE TRUE\n" +
-				"    END AS 'result'\n" +
-				"FROM\n" +
-				"(\n" +
-				"SELECT tbl.CL_POND_ACTIVITY_TYPE_ID FROM\n" +
-				"(SELECT\n" +
-				"dt_farmaq_pond_management.CL_POND_ACTIVITY_TYPE_ID\n" +
-				"FROM reg_entity_farmaq_ponds \n" +
-				"LEFT JOIN dt_farmaq_pond_management ON reg_entity_farmaq_ponds.ID = dt_farmaq_pond_management.REG_ENTITY_FARM_POND_ID\n" +
-				"WHERE REG_ENTITY_FARM_ID=" + farmID + "\n" +
-				"AND reg_entity_farmaq_ponds.ID = " + poundId + "\n" +
-				"AND dt_farmaq_pond_management.ACTIVITY_START_DATE >= (\n" +
-				"SELECT max(dt_farmaq_pond_management.ACTIVITY_START_DATE)\n" +
-				"FROM reg_entity_farmaq_ponds \n" +
-				"LEFT JOIN dt_farmaq_pond_management ON reg_entity_farmaq_ponds.ID = dt_farmaq_pond_management.REG_ENTITY_FARM_POND_ID \n" +
-				"WHERE REG_ENTITY_FARM_ID=" + farmID + "\n" +
-				"AND reg_entity_farmaq_ponds.ID = " + poundId + "\n" +
-				"AND dt_farmaq_pond_management.CL_POND_ACTIVITY_TYPE_ID = 1 \n" +
-				")\n" +
-				"ORDER BY dt_farmaq_pond_management.ACTIVITY_START_DATE DESC\n" +
-				") AS tbl\n" +
-				"WHERE tbl.CL_POND_ACTIVITY_TYPE_ID = 2\n" +
-				"AND tbl.CL_POND_ACTIVITY_TYPE_ID IS NOT NULL\n" +
-				") as tb";
+	private String getPondActive(Long poundId){
+		return String.valueOf(dtFarmPondProductionCycleRepository.getPondIsInProduction(poundId));
 	}
-
 }

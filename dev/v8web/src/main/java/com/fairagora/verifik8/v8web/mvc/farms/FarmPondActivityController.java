@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.fairagora.verifik8.v8web.data.domain.cl.CLRefProduct;
 import com.fairagora.verifik8.v8web.data.repo.cl.CLRefProductRepository;
+import com.fairagora.verifik8.v8web.services.FarmPondProductionCycleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -43,15 +44,16 @@ public class FarmPondActivityController extends AbstractV8Controller {
 	@Autowired
 	private CLRefProductRepository clRefProductRepository;
 
+	@Autowired
+	private FarmPondProductionCycleService farmPondProductionCycleService;
 
 
 	@PreAuthorize("hasAuthority('R_PONDACTIVTY')")
 	public String getActivityFeedingTotal(Long pondId, Long activityId) {
-		return jdbc.queryForObject("SELECT SUM(MEASURE_VALUE) FROM dt_farmaq_pond_management WHERE ACTIVITY_START_DATE <= (SELECT ACTIVITY_START_DATE FROM dt_farmaq_pond_management WHERE id = "+activityId+") AND CL_POND_ACTIVITY_TYPE_ID = 3 and REG_ENTITY_FARM_POND_ID = "+pondId+";", String.class);
+		return jdbc.queryForObject("SELECT SUM(MEASURE_VALUE) FROM dt_farmaq_pond_management WHERE ACTIVITY_START_DATE <= (SELECT ACTIVITY_START_DATE FROM dt_farmaq_pond_management WHERE id = " + activityId + ") AND CL_POND_ACTIVITY_TYPE_ID = 3 and REG_ENTITY_FARM_POND_ID = " + pondId + ";", String.class);
 	}
 
 	/**
-	 * 
 	 * @param id
 	 * @param pondId
 	 * @param mv
@@ -123,7 +125,6 @@ public class FarmPondActivityController extends AbstractV8Controller {
 	}
 
 	/**
-	 * 
 	 * @param id
 	 * @param plotId
 	 * @param mv
@@ -143,8 +144,11 @@ public class FarmPondActivityController extends AbstractV8Controller {
 
 		if (dto.getId() == null || dto.getId().intValue() == 0) {
 			act = new DTFarmPondActivity();
-		} else
+		} else {
 			act = pondActivityRepository.findOne(dto.getId());
+			farmPondProductionCycleService.rollbackPondProductionCycle(act);
+
+		}
 
 		dtoMapper.fillEntity(dto, act);
 
@@ -152,13 +156,14 @@ public class FarmPondActivityController extends AbstractV8Controller {
 
 		pondActivityRepository.save(act);
 
+		farmPondProductionCycleService.updatePondProductionCycle(act);
+
 		preparePage(farm, pondId, mv);
 
 		return "redirect:/farm/" + farmId + "/ponds.html";
 	}
 
 	/**
-	 * 
 	 * @param id
 	 * @param plotId
 	 * @param mv
@@ -169,7 +174,10 @@ public class FarmPondActivityController extends AbstractV8Controller {
 	public String deletePlotActivities(@PathVariable("farmId") Long farmId, @PathVariable("pondId") Long pondId, @PathParam("activityId") Long activityId, Model mv) {
 
 		RegEntity farm = regEntityRepository.findOne(farmId);
-
+		DTFarmPondActivity act = pondActivityRepository.findOne(activityId);
+		if (act != null) {
+			farmPondProductionCycleService.rollbackPondProductionCycle(act);
+		}
 		pondActivityRepository.delete(activityId);
 
 		preparePage(farm, pondId, mv);
@@ -195,7 +203,6 @@ public class FarmPondActivityController extends AbstractV8Controller {
 
 
 	/**
-	 * 
 	 * @param farm
 	 * @param mv
 	 */
