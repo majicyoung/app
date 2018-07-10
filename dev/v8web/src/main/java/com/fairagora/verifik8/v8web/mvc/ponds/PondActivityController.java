@@ -69,7 +69,11 @@ public class PondActivityController extends AbstractV8Controller {
 	public String getActivityFeedingTotal(Long pondId, Long activityId) {
 		DTFarmPondActivity dtFarmPondActivity = pondActivityRepository.getOne(activityId);
 		DTFarmPondProductionCycle dtFarmPondProductionCycle = farmPondProductionCycleService.getBetweenDate(pondId, dtFarmPondActivity.getActivityStartDate());
-		return jdbc.queryForObject("SELECT SUM(MEASURE_VALUE) FROM dt_farmaq_pond_management WHERE ACTIVITY_START_DATE <= (SELECT ACTIVITY_START_DATE FROM dt_farmaq_pond_management WHERE id = "+activityId+") AND  ACTIVITY_START_DATE >= DATE('"+dtFarmPondProductionCycle.getProductionCycleStart()+"') AND CL_POND_ACTIVITY_TYPE_ID = 3 and REG_ENTITY_FARM_POND_ID = "+pondId+";", String.class);
+		if (dtFarmPondProductionCycle == null){
+			return jdbc.queryForObject("SELECT SUM(MEASURE_VALUE) FROM dt_farmaq_pond_management WHERE ACTIVITY_START_DATE <= (SELECT ACTIVITY_START_DATE FROM dt_farmaq_pond_management WHERE id = "+activityId+") AND CL_POND_ACTIVITY_TYPE_ID = 3 and REG_ENTITY_FARM_POND_ID = "+pondId+";", String.class);
+		} else {
+			return jdbc.queryForObject("SELECT SUM(MEASURE_VALUE) FROM dt_farmaq_pond_management WHERE ACTIVITY_START_DATE <= (SELECT ACTIVITY_START_DATE FROM dt_farmaq_pond_management WHERE id = "+activityId+") AND  ACTIVITY_START_DATE >= DATE('"+dtFarmPondProductionCycle.getProductionCycleStart()+"') AND CL_POND_ACTIVITY_TYPE_ID = 3 and REG_ENTITY_FARM_POND_ID = "+pondId+";", String.class);
+		}
 	}
 
 	/**
