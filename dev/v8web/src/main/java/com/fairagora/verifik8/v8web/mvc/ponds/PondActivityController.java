@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.fairagora.verifik8.v8web.data.domain.cl.CLRefProduct;
 import com.fairagora.verifik8.v8web.data.repo.cl.CLRefProductRepository;
+import com.fairagora.verifik8.v8web.services.FarmPondProductionCycleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -35,8 +36,13 @@ public class PondActivityController extends AbstractV8Controller {
 
 	@Autowired
 	private CLRefProductRepository clRefProductRepository;
+
 	@Autowired
 	protected JdbcTemplate jdbc;
+
+	@Autowired
+	private FarmPondProductionCycleService farmPondProductionCycleService;
+
 	/**
 	 * 
 	 * @param id
@@ -130,14 +136,18 @@ public class PondActivityController extends AbstractV8Controller {
 
 		if (dto.getId() == null || dto.getId().intValue() == 0) {
 			act = new DTFarmPondActivity();
-		} else
+		} else{
 			act = pondActivityRepository.findOne(dto.getId());
+			farmPondProductionCycleService.rollbackPondProductionCycle(act);
+		}
 
 		dtoMapper.fillEntity(dto, act);
 
 		act.setPond(farmPondRepository.findOne(pondId));
 
 		pondActivityRepository.save(act);
+
+		farmPondProductionCycleService.updatePondProductionCycle(act);
 
 		preparePage(pondId, mv);
 
@@ -155,6 +165,10 @@ public class PondActivityController extends AbstractV8Controller {
 	@PreAuthorize("hasAuthority('W_PONDACTIVTY')")
 	@RequestMapping(value = "/ponds/{pondId}/activities/delete.html", method = RequestMethod.POST)
 	public String deletePlotActivities(@PathVariable("pondId") Long pondId, @RequestParam("activityId") Long activityId, Model mv) {
+		DTFarmPondActivity act = pondActivityRepository.findOne(activityId);
+		if (act != null) {
+			farmPondProductionCycleService.rollbackPondProductionCycle(act);
+		}
 		pondActivityRepository.delete(activityId);
 		preparePage(pondId, mv);
 		return "redirect:/ponds/" + pondId + "/activities/browser.html";

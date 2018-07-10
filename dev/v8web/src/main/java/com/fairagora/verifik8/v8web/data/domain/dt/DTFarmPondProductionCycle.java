@@ -122,6 +122,14 @@ public class DTFarmPondProductionCycle  extends V8EntitySupport {
 		this.feedingValue = feedingValue;
 	}
 
+	public void addFeedingValue(Float feedingValue) {
+		this.feedingValue  = (this.feedingValue  == null) ? feedingValue : this.feedingValue  + feedingValue;
+	}
+
+	public void removeFeedingValue(Float feedingValue) {
+		this.feedingValue  = (this.feedingValue  == null) ? feedingValue : this.feedingValue  - feedingValue;
+	}
+
 	public CLAppQuantityUnit getClFeedingValueUnit() {
 		return clFeedingValueUnit;
 	}
@@ -176,6 +184,16 @@ public class DTFarmPondProductionCycle  extends V8EntitySupport {
 
 	public void setAntibioQuantity(Float antibioQuantity) {
 		this.antibioQuantity = antibioQuantity;
+	}
+
+	public void addAntibioQuantity(Float antibioQuantity) {
+		this.antibioQuantity  = (this.antibioQuantity  == null) ? antibioQuantity : this.antibioQuantity  + antibioQuantity;
+
+	}
+
+	public void removeAntibioQuantity(Float antibioQuantity) {
+		this.antibioQuantity  = (this.antibioQuantity  == null) ? antibioQuantity : this.antibioQuantity  - antibioQuantity;
+
 	}
 
 	public CLAppQuantityUnit getClAntibioQuantityUnit() {
