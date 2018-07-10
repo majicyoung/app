@@ -81,6 +81,10 @@ public class FarmPondProductionCycleService {
 		dtFarmPondProductionCycleRepository.save(dtFarmPondProductionCycle);
 	}
 
+	public String getIsInPoduction(Long poundId){
+ 		return dtFarmPondProductionCycleRepository.getPondIsInProduction(poundId);
+	}
+
 	private DTFarmPondProductionCycle getDtFarmPondProductionCycle(DTFarmPondActivity dtFarmPondActivity) {
 		return dtFarmPondProductionCycleRepository.getBetweenDate(dtFarmPondActivity.getPond().getId(), dtFarmPondActivity.getActivityStartDate());
 	}
