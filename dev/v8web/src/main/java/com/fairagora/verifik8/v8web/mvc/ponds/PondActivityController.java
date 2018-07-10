@@ -3,7 +3,9 @@ package com.fairagora.verifik8.v8web.mvc.ponds;
 import java.util.List;
 
 import com.fairagora.verifik8.v8web.data.domain.cl.CLRefProduct;
+import com.fairagora.verifik8.v8web.data.domain.dt.DTFarmPondProductionCycle;
 import com.fairagora.verifik8.v8web.data.repo.cl.CLRefProductRepository;
+import com.fairagora.verifik8.v8web.data.repo.dt.DTFarmPondProductionCycleRepository;
 import com.fairagora.verifik8.v8web.services.FarmPondProductionCycleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -44,8 +46,7 @@ public class PondActivityController extends AbstractV8Controller {
 	private FarmPondProductionCycleService farmPondProductionCycleService;
 
 	/**
-	 * 
-	 * @param id
+	 *
 	 * @param pondId
 	 * @param mv
 	 * @return
@@ -66,7 +67,9 @@ public class PondActivityController extends AbstractV8Controller {
 
 	@PreAuthorize("hasAuthority('R_PONDBROWSER')")
 	public String getActivityFeedingTotal(Long pondId, Long activityId) {
-		return jdbc.queryForObject("SELECT SUM(MEASURE_VALUE) FROM dt_farmaq_pond_management WHERE ACTIVITY_START_DATE <= (SELECT ACTIVITY_START_DATE FROM dt_farmaq_pond_management WHERE id = "+activityId+") AND CL_POND_ACTIVITY_TYPE_ID = 3 and REG_ENTITY_FARM_POND_ID = "+pondId+";", String.class);
+		DTFarmPondActivity dtFarmPondActivity = pondActivityRepository.getOne(activityId);
+		DTFarmPondProductionCycle dtFarmPondProductionCycle = farmPondProductionCycleService.getBetweenDate(pondId, dtFarmPondActivity.getActivityStartDate());
+		return jdbc.queryForObject("SELECT SUM(MEASURE_VALUE) FROM dt_farmaq_pond_management WHERE ACTIVITY_START_DATE <= (SELECT ACTIVITY_START_DATE FROM dt_farmaq_pond_management WHERE id = "+activityId+") AND  ACTIVITY_START_DATE >= DATE('"+dtFarmPondProductionCycle.getProductionCycleStart()+"') AND CL_POND_ACTIVITY_TYPE_ID = 3 and REG_ENTITY_FARM_POND_ID = "+pondId+";", String.class);
 	}
 
 	/**
@@ -118,8 +121,9 @@ public class PondActivityController extends AbstractV8Controller {
 
 	/**
 	 * 
-	 * @param id
-	 * @param plotId
+	 * @param pondId
+	 * @param dto
+	 * @param result
 	 * @param mv
 	 * @return
 	 */
@@ -155,9 +159,9 @@ public class PondActivityController extends AbstractV8Controller {
 	}
 
 	/**
-	 * 
-	 * @param id
-	 * @param plotId
+	 *
+	 * @param pondId
+	 * @param activityId
 	 * @param mv
 	 * @return
 	 */
@@ -191,10 +195,9 @@ public class PondActivityController extends AbstractV8Controller {
 	}
 
 
-
 	/**
-	 * 
-	 * @param farm
+	 *
+	 * @param plotId
 	 * @param mv
 	 */
 	protected void preparePage(Long plotId, Model mv) {

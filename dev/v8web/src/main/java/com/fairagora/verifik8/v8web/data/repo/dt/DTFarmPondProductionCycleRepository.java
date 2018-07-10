@@ -11,6 +11,8 @@ import java.util.Date;
 
 public interface DTFarmPondProductionCycleRepository extends JpaRepository<DTFarmPondProductionCycle, Long> {
 
+	DTFarmPondProductionCycle findByRegEntityFarmPondId(Long regEntityFarmPondId);
+
 	@Query(value = "SELECT dt_farmaq_pond_production_cycle.* FROM dt_farmaq_pond_production_cycle where :productionDate >= dt_farmaq_pond_production_cycle.PRODUCTION_CYCLE_START AND ( dt_farmaq_pond_production_cycle.PRODUCTION_CYCLE_END IS  NULL  OR :productionDate <= dt_farmaq_pond_production_cycle.PRODUCTION_CYCLE_END ) AND dt_farmaq_pond_production_cycle.REG_ENTITY_FARM_POND_ID = :pondId LIMIT  1", nativeQuery = true)
 	DTFarmPondProductionCycle getBetweenDate(@Param("pondId") Long pondId, @Param("productionDate") Date productionDate);
 

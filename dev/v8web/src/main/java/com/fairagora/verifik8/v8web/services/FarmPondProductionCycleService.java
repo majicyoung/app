@@ -4,8 +4,11 @@ import com.fairagora.verifik8.v8web.data.domain.dt.DTFarmPondActivity;
 import com.fairagora.verifik8.v8web.data.domain.dt.DTFarmPondProductionCycle;
 import com.fairagora.verifik8.v8web.data.repo.dt.DTFarmPondProductionCycleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
+
+import java.util.Date;
 
 import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
@@ -83,6 +86,10 @@ public class FarmPondProductionCycleService {
 
 	public String getIsInPoduction(Long poundId){
  		return dtFarmPondProductionCycleRepository.getPondIsInProduction(poundId);
+	}
+
+	public DTFarmPondProductionCycle getBetweenDate(Long pondId, Date productionDate){
+		return dtFarmPondProductionCycleRepository.getBetweenDate(pondId, productionDate);
 	}
 
 	private DTFarmPondProductionCycle getDtFarmPondProductionCycle(DTFarmPondActivity dtFarmPondActivity) {
