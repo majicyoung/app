@@ -1,9 +1,11 @@
 package com.fairagora.verifik8.v8web.data.domain.cl;
 
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import javax.persistence.*;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "cl_ref_product_types")
@@ -13,6 +15,10 @@ public class CLRefProductType extends CodeListSupport {
 	@ManyToOne(optional = true)
 	protected CLRefProductType parent;
 
+	@OneToMany(mappedBy="clRefProductType")
+	@JsonManagedReference
+	private Set<CLRefProduct> clRefProducts;
+
 	public CLRefProductType getParent() {
 		return parent;
 	}
@@ -21,4 +27,23 @@ public class CLRefProductType extends CodeListSupport {
 		this.parent = parent;
 	}
 
+	@ManyToMany(mappedBy="clRefProductTypes")
+	@JsonManagedReference
+	private List<CLFarmPondActivityType> clFarmPondActivityTypes;
+
+	public List<CLFarmPondActivityType> getClFarmPondActivityTypes() {
+		return clFarmPondActivityTypes;
+	}
+
+	public void setClFarmPondActivityTypes(List<CLFarmPondActivityType> clFarmPondActivityTypes) {
+		this.clFarmPondActivityTypes = clFarmPondActivityTypes;
+	}
+
+	public Set<CLRefProduct> getClRefProducts() {
+		return clRefProducts;
+	}
+
+	public void setClRefProducts(Set<CLRefProduct> clRefProducts) {
+		this.clRefProducts = clRefProducts;
+	}
 }

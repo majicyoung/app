@@ -122,7 +122,7 @@ public class RegEntityFarmPond implements V8Entity{
 
 	@Override
 	public String getName() {
-		return getNumber();
+		return getDescription() + " #(" + getNumber() + ")";
 	}
 
 }
