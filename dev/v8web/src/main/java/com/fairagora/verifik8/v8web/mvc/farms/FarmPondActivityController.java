@@ -94,6 +94,8 @@ public class FarmPondActivityController extends AbstractV8Controller {
 		mv.addAttribute("allPondActivityTypes", codeListservice.listActivePondActivityTypes());
 		mv.addAttribute("allProducts", codeListservice.listActiveProducts());
 		mv.addAttribute("allQuantityUnits", codeListservice.listActiveQuantityUnit());
+		mv.addAttribute("allSpecies", codeListservice.listActiveSpecies());
+
 
 		preparePage(farm, pondId, mv);
 
@@ -118,6 +120,7 @@ public class FarmPondActivityController extends AbstractV8Controller {
 		mv.addAttribute("allPondActivityTypes", codeListservice.listActivePondActivityTypes());
 		mv.addAttribute("allProducts", codeListservice.listActiveProductsByActivity(dto.getActivityType()));
 		mv.addAttribute("allQuantityUnits", codeListservice.listActiveQuantityUnit());
+		mv.addAttribute("allSpecies", codeListservice.listActiveSpecies());
 
 		preparePage(farm, pondId, mv);
 		setToReadOnly(mv, "W_PONDMEASURE");
@@ -147,7 +150,6 @@ public class FarmPondActivityController extends AbstractV8Controller {
 		} else {
 			act = pondActivityRepository.findOne(dto.getId());
 			farmPondProductionCycleService.rollbackPondProductionCycle(act);
-
 		}
 
 		dtoMapper.fillEntity(dto, act);
@@ -222,6 +224,8 @@ public class FarmPondActivityController extends AbstractV8Controller {
 		mv.addAttribute("allSpecies", codeListservice.listActiveSpecies());
 		mv.addAttribute("allPondTypes", codeListservice.listActivePondTypes());
 		mv.addAttribute("allQuantityUnits", codeListservice.listActiveQuantityUnit());
+		mv.addAttribute("allSpecies", codeListservice.listActiveSpecies());
+
 	}
 
 }

@@ -31,6 +31,8 @@ public class PondActivityDto {
 
 	protected String comment;
 
+	protected Long species;
+
 	public Long getId() {
 		return id;
 	}
@@ -117,5 +119,13 @@ public class PondActivityDto {
 
 	public void setActivityName(String activityName) {
 		this.activityName = activityName;
+	}
+
+	public Long getSpecies() {
+		return species;
+	}
+
+	public void setSpecies(Long species) {
+		this.species = species;
 	}
 }

@@ -70,6 +70,16 @@
 									<input type="text" class="form-control form-pond " th:field="*{feedLotNumber}"
 												 th:placeholder="#{farm.pond_activity_feed_lot_number}" maxlength="20"/>
 								</div>
+
+								<div class="form-group" id="selectSpecie">
+									<label th:text="|#{farm.pond_activity_species}|"></label>
+									<select class="form-control" th:field="*{species}">
+										<option value="" th:text="|-- #{default.species} --|"></option>
+										<option th:each="unit : ${allSpecies}" th:value="${unit.id}"
+														th:text="${unit.localisedName}"></option>
+									</select>
+								</div>
+
 								<div class="form-group ">
 									<label th:text="|#{farm.pond_activity_comment}|"></label>
 									<input class="form-control" type="text" th:field="*{comment}"/>
@@ -124,21 +134,21 @@
 
           $('#actiProductGroup').show();
           $('#feedLotNumber').hide();
+          $('#selectSpecie').hide();
 
           var actVal = $("#activityType").val();
           if (actVal != null) {
               actVal = parseInt(actVal);
               if ($.inArray(actVal, noProduct) >= 0) {
                   $('#actiProductGroup').hide();
-              } else {
-                  if (actVal == 3) {
-                      $('#feedLotNumber').show();
-
-                  }
+              } else if (actVal == 1) {
+                  $('#selectSpecie').show();
+              } else if (actVal == 3) {
+                  $('#feedLotNumber').show();
               }
           }
 
-          $.get('/farm/'+farmId+'/pond/'+pondId+'/products', {
+          $.get('/farm/' + farmId + '/pond/' + pondId + '/products', {
               activityId: actVal
           }, function (datas) {
               var pond_activity_select_product = /*[[#{farm.pond_activity_select_product}]]*/ 'Select Product';
@@ -147,28 +157,28 @@
                   .find('option')
                   .remove()
                   .end()
-                  .append('<option value="">-- '+pond_activity_select_product+' --</option>')
+                  .append('<option value="">-- ' + pond_activity_select_product + ' --</option>')
                   .val('');
 
 
               $.each(datas, function (index, value) {
                   $('#selectProductGroup').append($('<option>', {
                       value: value.id,
-                      text : value.name
+                      text: value.name
                   }));
               });
           });
       }
 
-      function productChanged(){
+      function productChanged() {
           var productId = $("#selectProductGroup").val();
 
-          $.get('/farm/'+farmId+'/pond/'+pondId+'/products/'+productId+'/unit', function (data) {
+          $.get('/farm/' + farmId + '/pond/' + pondId + '/products/' + productId + '/unit', function (data) {
               $("#selectMeasureUnit").val(data).change();
-          }).fail(function(){
+          }).fail(function () {
               $("#selectMeasureUnit").val("").change();
           });
-			}
+      }
 
       function hasEmptyFields(selector) {
           var hasError = false;
