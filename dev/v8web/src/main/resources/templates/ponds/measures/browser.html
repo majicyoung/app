@@ -12,7 +12,7 @@
 						<!-- messages here -->
 					</div>
 					<div class="box-tools">
-						<a onclick="window.history.back()" class="btn btn-sm btn-flat btn-warning"><i class="fa fa-backward"></i> <span th:text="#{default.back}"></span></a>
+						<a th:href="@{${backUrl}}" class="btn btn-sm btn-flat btn-warning"><i class="fa fa-backward"></i> <span th:text="#{default.back}"></span></a>
 						<a th:href="@{'/ponds/'+${pondId}+'/measures/create.html'}" class="btn btn-sm btn-flat btn-success"><i class="fa fa-plus"></i> <span th:text="#{farm.pond_measure_add}">farm.pond_measure_add</span></a>
 					</div>
 				</div>
@@ -132,7 +132,13 @@
 		$(document).ready(function() {
 			$('.editActBtn').click(function(){
 				var id = $(this).attr("data-id");
-				document.location=[[@{/ponds/}]]+'/'+[[${pondId}]]+'/measures/'+id+'/edit.html';
+          if (/farm/.test(window.location.href)){
+              document.location=[[@{/farm/}]]+[[${farmId}]]+[[@{/pond/}]]+[[${pondId}]]+'/measures/'+id+'/edit.html';
+
+          }else{
+              document.location=[[@{/ponds/}]]+'/'+[[${pondId}]]+'/measures/'+id+'/edit.html';
+          }
+
 			});
 
 
