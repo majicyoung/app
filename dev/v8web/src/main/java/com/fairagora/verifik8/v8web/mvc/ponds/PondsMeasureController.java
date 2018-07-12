@@ -1,6 +1,7 @@
 package com.fairagora.verifik8.v8web.mvc.ponds;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,20 +35,22 @@ public class PondsMeasureController extends AbstractV8Controller {
 	private RegFarmDTOMapper dtoMapper;
 
 	/**
-	 * 
 	 * @param id
 	 * @param pondId
 	 * @param mv
 	 * @return
 	 */
+	@SuppressWarnings("OptionalUsedAsFieldOrParameterType")
 	@PreAuthorize("hasAuthority('R_PONDMEASURE')")
-	@RequestMapping(value = "/ponds/{pondId}/measures/browser.html", method = RequestMethod.GET)
-	public String showPondMeasure(@PathVariable("pondId") Long pondId, Model mv) {
+	@RequestMapping(value = {"/ponds/{pondId}/measures/browser.html", "/farm/{farmId}/pond/{pondId}/measures/browser.html"}, method = RequestMethod.GET)
+	public String showPondMeasure(@PathVariable("farmId") Optional<Long> farmId, @PathVariable("pondId") Long pondId, Model mv) {
 
 		List<DTFarmPondMeasurement> measures = pondMeasuresRepository.findByPondId(pondId);
 		mv.addAttribute("measures", measures);
 		mv.addAttribute("pondId", pondId);
+		mv.addAttribute("farmId", farmId.orElse(null));
 		mv.addAttribute("measureTypes", measures.stream().map(m -> m.getMeasureType()).distinct().collect(Collectors.toList()));
+		mv.addAttribute("backUrl", farmId.map(id -> "/farm/" + id + "/ponds.html").orElse("/ponds/browser.html"));
 
 		preparePage(pondId, mv);
 
@@ -55,24 +58,27 @@ public class PondsMeasureController extends AbstractV8Controller {
 		return "ponds/measures/browser";
 	}
 
+	@SuppressWarnings("OptionalUsedAsFieldOrParameterType")
 	@PreAuthorize("hasAuthority('W_PONDMEASURE')")
-	@RequestMapping(value = "/ponds/{pondId}/measures/create.html", method = RequestMethod.GET)
-	public String createPondMeasure(@PathVariable("pondId") Long pondId, Model mv) {
+	@RequestMapping(value = {"/ponds/{pondId}/measures/create.html", "/farm/{farmId}/pond/{pondId}/measures/create.html"}, method = RequestMethod.GET)
+	public String createPondMeasure(@PathVariable("farmId") Optional<Long> farmId, @PathVariable("pondId") Long pondId, Model mv) {
 
 		PondMeasurementDto dto = new PondMeasurementDto();
 		dto.setPond(pondId);
 
 		mv.addAttribute("measureDto", dto);
 		mv.addAttribute("measureId", 0l);
+		mv.addAttribute("backUrl", farmId.map(id -> "/farm/" + id + "/ponds.html").orElse("/ponds/browser.html"));
 
 		preparePage(pondId, mv);
 
 		return "ponds/measures/editor";
 	}
 
+	@SuppressWarnings("OptionalUsedAsFieldOrParameterType")
 	@PreAuthorize("hasAuthority('R_PONDMEASURE')")
-	@RequestMapping(value = "/ponds/{pondId}/measures/{activityId}/edit.html", method = RequestMethod.GET)
-	public String showPondMeasures(@PathVariable("pondId") Long pondId, @PathVariable("activityId") Long activityId, Model mv) {
+	@RequestMapping(value = {"/ponds/{pondId}/measures/{activityId}/edit.html", "/farm/{farmId}/pond/{pondId}/measures/{activityId}/edit.html"}, method = RequestMethod.GET)
+	public String showPondMeasures(@PathVariable("farmId") Optional<Long> farmId, @PathVariable("pondId") Long pondId, @PathVariable("activityId") Long activityId, Model mv) {
 
 		DTFarmPondMeasurement act = pondMeasuresRepository.findOne(activityId);
 
@@ -82,7 +88,9 @@ public class PondsMeasureController extends AbstractV8Controller {
 
 		mv.addAttribute("measureDto", dto);
 		mv.addAttribute("pondId", pondId);
+		mv.addAttribute("farmId", farmId.orElse(null));
 		mv.addAttribute("measureId", 0l);
+		mv.addAttribute("backUrl", farmId.map(id -> "/farm/" + id + "/ponds.html").orElse("/ponds/browser.html"));
 
 		setToReadOnly(mv, "W_PONDMEASURE");
 		preparePage(pondId, mv);
@@ -91,15 +99,15 @@ public class PondsMeasureController extends AbstractV8Controller {
 	}
 
 	/**
-	 * 
 	 * @param id
 	 * @param pondId
 	 * @param mv
 	 * @return
 	 */
+	@SuppressWarnings("OptionalUsedAsFieldOrParameterType")
 	@PreAuthorize("hasAuthority('W_PONDMEASURE')")
-	@RequestMapping(value = "/ponds/{pondId}/measures/update.html", method = RequestMethod.POST)
-	public String updatePondMeasures(@PathVariable("pondId") Long pondId, PondMeasurementDto dto, BindingResult result, Model mv) {
+	@RequestMapping(value = {"/ponds/{pondId}/measures/update.html", "/farm/{farmId}/pond/{pondId}/measures/update.html"}, method = RequestMethod.POST)
+	public String updatePondMeasures(@PathVariable("farmId") Optional<Long> farmId, @PathVariable("pondId") Long pondId, PondMeasurementDto dto, BindingResult result, Model mv) {
 
 		DTFarmPondMeasurement measure = null;
 
@@ -115,30 +123,30 @@ public class PondsMeasureController extends AbstractV8Controller {
 		pondMeasuresRepository.save(measure);
 
 		preparePage(pondId, mv);
-
-		return "redirect:/ponds/" + pondId + "/measures/browser.html";
+		return farmId.map(id -> "redirect:/farm/" + id + "/pond/" + pondId + "/measures/browser.html")
+				.orElse("redirect:/ponds/" + pondId + "/measures/browser.html");
 	}
 
 	/**
-	 * 
 	 * @param id
 	 * @param pondId
 	 * @param mv
 	 * @return
 	 */
+	@SuppressWarnings("OptionalUsedAsFieldOrParameterType")
 	@PreAuthorize("hasAuthority('W_PONDMEASURE')")
-	@RequestMapping(value = "/ponds/{pondId}/measures/delete.html", method = RequestMethod.POST)
-	public String deletePondMeasure(@PathVariable("pondId") Long pondId, @RequestParam("activityId") Long activityId, Model mv) {
+	@RequestMapping(value = {"/ponds/{pondId}/measures/delete.html", "/farm/{farmId}/pond/{pondId}/measures/delete.html"}, method = RequestMethod.POST)
+	public String deletePondMeasure(@PathVariable("farmId") Optional<Long> farmId, @PathVariable("pondId") Long pondId, @RequestParam("activityId") Long activityId, Model mv) {
 
 		pondMeasuresRepository.delete(activityId);
 
 		preparePage(pondId, mv);
 
-		return "redirect:/ponds/" + pondId + "/measures/browser.html";
+		return farmId.map(id -> "redirect:/farm/" + id + "/pond/" + pondId + "/measures/browser.html")
+				.orElse("redirect:/ponds/" + pondId + "/measures/browser.html");
 	}
 
 	/**
-	 * 
 	 * @param farm
 	 * @param mv
 	 */
