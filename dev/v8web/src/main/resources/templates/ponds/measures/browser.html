@@ -12,6 +12,7 @@
 						<!-- messages here -->
 					</div>
 					<div class="box-tools">
+						<a onclick="window.history.back()" class="btn btn-sm btn-flat btn-warning"><i class="fa fa-backward"></i> <span th:text="#{default.back}"></span></a>
 						<a th:href="@{'/ponds/'+${pondId}+'/measures/create.html'}" class="btn btn-sm btn-flat btn-success"><i class="fa fa-plus"></i> <span th:text="#{farm.pond_measure_add}">farm.pond_measure_add</span></a>
 					</div>
 				</div>
@@ -72,17 +73,17 @@
 <th:block layout:fragment="page-scripts">
 	<script th:src="@{/static/dist/js/Chart.bundle.min.js}"></script>
 	<script type="text/javascript" th:inline="javascript">
-	
+
 		var myDataTableData = null;
-	
-		
+
+
 		function changeMeasure(obj){
 			var q = $(obj).val();
 			console.log(q);
 			myDataTableData.columns('.measure_type').search(q).draw();
 			showMeasureChart(q);
 		}
-		
+
 		function showMeasureChart(ms){
 			$("#wrapper-chart").empty();
 			if(ms=='') return false;
@@ -127,14 +128,14 @@
 		    };
 			var areaChart = new Chart(areaChartCanvas,{type:'line',data:areaChartData,options:areaChartOptions});
 		}
-		
+
 		$(document).ready(function() {
 			$('.editActBtn').click(function(){
 				var id = $(this).attr("data-id");
 				document.location=[[@{/ponds/}]]+'/'+[[${pondId}]]+'/measures/'+id+'/edit.html';
 			});
-		
-			
+
+
 			myDataTableData = $('#datatables-pond-data').DataTable({
 				"order": [[ 0, "desc" ]],
 				"columnDefs": [{"orderable":false,"targets":4}],
@@ -142,9 +143,9 @@
 		            "url": langURL
 		        }
 			});
-			
+
 		});
-		
+
 	</script>
 </th:block>
 </html>

@@ -8,7 +8,7 @@
 				<div class="box-header with-border">
 					<h3 class="box-title" th:text="farm.edit_pond_data"></h3>
 					<div class="box-tools">
-						<a th:href="@{'/ponds/browser.html}" class="btn btn-sm btn-flat btn-warning"><i class="fa fa-backward"></i> <span th:text="#{default.back}"></span></a>
+						<a onclick="window.history.back()" class="btn btn-sm btn-flat btn-warning"><i class="fa fa-backward"></i> <span th:text="#{default.back}"></span></a>
 					</div>
 				</div>
 				<form class="mainForm" th:action="@{'/ponds/'+${pondId}+'/measures/update.html'}" th:object="${measureDto}" id="pondEditorForm" method="post">
