@@ -90,7 +90,7 @@
 					<div class="box-footer text-center">
 						<small>* <span th:text="#{default.mandatory_field}"></span></small>
 
-						<a th:href="@{'/ponds/'+${pondId}+'/activities/browser.html'}" class="btn btn-warning"><i
+						<a th:href="@{${backUrl}}" class="btn btn-warning"><i
 								class="fa fa-times"></i><span th:text="#{default.cancel}"></span></a>
 						<button type="submit" class="btn btn-success">
 							<span th:text="#{default.submit}"></span> <i class="fa fa-check"></i>
