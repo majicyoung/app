@@ -93,6 +93,7 @@ public class PondActivityController extends AbstractV8Controller {
 		mv.addAttribute("allQuantityUnits", codeListservice.listActiveQuantityUnit());
 		mv.addAttribute("allSpecies", codeListservice.listActiveSpecies());
 		mv.addAttribute("backUrl", farmId.map(id -> "/farm/" + id + "/ponds.html").orElse("/ponds/browser.html"));
+		mv.addAttribute("submitUrl", farmId.map(id -> "/farm/" + id + "/pond/" + pondId + "/activities/update.html").orElse("/ponds/" + pondId + "/activities/update.html"));
 
 
 		preparePage(pondId, mv);
@@ -116,6 +117,8 @@ public class PondActivityController extends AbstractV8Controller {
 		mv.addAttribute("allQuantityUnits", codeListservice.listActiveQuantityUnit());
 		mv.addAttribute("allSpecies", codeListservice.listActiveSpecies());
 		mv.addAttribute("backUrl", farmId.map(id -> "/farm/" + id + "/ponds.html").orElse("/ponds/browser.html"));
+		mv.addAttribute("submitUrl", farmId.map(id -> "/farm/" + id + "/pond/" + pondId + "/activities/update.html").orElse("/ponds/" + pondId + "/activities/update.html"));
+
 
 
 		preparePage(pondId, mv);

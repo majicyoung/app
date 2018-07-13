@@ -14,7 +14,7 @@
 								class="fa fa-backward"></i> <span th:text="#{default.back}"></span></a>
 					</div>
 				</div>
-				<form class="mainForm" th:action="@{'/ponds/'+${pondId}+'/activities/update.html'}" th:object="${activityDto}"
+				<form class="mainForm" th:action="@{${submitUrl}}" th:object="${activityDto}"
 							id="pondEditorForm" method="post">
 					<input type="hidden" id="pondId" th:field="*{pond}"/>
 					<input type="hidden" id="activityId" th:field="*{id}"/>
