@@ -1,9 +1,13 @@
 package com.fairagora.verifik8.v8web.mvc.ponds;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.fairagora.verifik8.v8web.data.domain.cl.CLRefProduct;
+import com.fairagora.verifik8.v8web.data.domain.dt.DTFarmPondProductionCycle;
 import com.fairagora.verifik8.v8web.data.repo.cl.CLRefProductRepository;
+import com.fairagora.verifik8.v8web.data.repo.dt.DTFarmPondProductionCycleRepository;
+import com.fairagora.verifik8.v8web.services.FarmPondProductionCycleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -21,6 +25,8 @@ import com.fairagora.verifik8.v8web.mvc.AbstractV8Controller;
 import com.fairagora.verifik8.v8web.mvc.farms.RegFarmDTOMapper;
 import com.fairagora.verifik8.v8web.mvc.ponds.dto.PondActivityDto;
 
+import javax.servlet.http.HttpServletRequest;
+
 @Controller
 public class PondActivityController extends AbstractV8Controller {
 
@@ -35,54 +41,60 @@ public class PondActivityController extends AbstractV8Controller {
 
 	@Autowired
 	private CLRefProductRepository clRefProductRepository;
+
 	@Autowired
 	protected JdbcTemplate jdbc;
+
+	@Autowired
+	private FarmPondProductionCycleService farmPondProductionCycleService;
+
 	/**
-	 * 
-	 * @param id
 	 * @param pondId
 	 * @param mv
 	 * @return
 	 */
+	@SuppressWarnings("OptionalUsedAsFieldOrParameterType")
 	@PreAuthorize("hasAuthority('R_PONDACTIVTY')")
-	@RequestMapping(value = "/ponds/{pondId}/activities/browser.html", method = RequestMethod.GET)
-	public String showPlotActivities(@PathVariable("pondId") Long pondId, Model mv) {
+	@RequestMapping(value = {"/ponds/{pondId}/activities/browser.html", "/farm/{farmId}/pond/{pondId}/activities/browser.html"}, method = RequestMethod.GET)
+	public String showPlotActivities(@PathVariable("farmId") Optional<Long> farmId, @PathVariable("pondId") Long pondId, Model mv) {
 
 		List<DTFarmPondActivity> activities = pondActivityRepository.findByPondId(pondId);
 		mv.addAttribute("activities", activities);
 		mv.addAttribute("pondId", pondId);
-
+		mv.addAttribute("farmId", farmId.orElse(null));
+		mv.addAttribute("backUrl", farmId.map(id -> "/farm/" + id + "/ponds.html").orElse("/ponds/browser.html"));
 		preparePage(pondId, mv);
 		setToReadOnly(mv, "W_PONDACTIVTY");
 
 		return "ponds/activities/browser";
 	}
 
-	@PreAuthorize("hasAuthority('R_PONDBROWSER')")
-	public String getActivityFeedingTotal(Long pondId, Long activityId) {
-		return jdbc.queryForObject("SELECT SUM(MEASURE_VALUE) FROM dt_farmaq_pond_management WHERE ACTIVITY_START_DATE <= (SELECT ACTIVITY_START_DATE FROM dt_farmaq_pond_management WHERE id = "+activityId+") AND CL_POND_ACTIVITY_TYPE_ID = 3 and REG_ENTITY_FARM_POND_ID = "+pondId+";", String.class);
-	}
 
 	/**
-	 * 
 	 * @param pondId
 	 * @param mv
 	 * @return
 	 */
+	@SuppressWarnings("OptionalUsedAsFieldOrParameterType")
 	@PreAuthorize("hasAuthority('W_PONDACTIVTY')")
-	@RequestMapping(value = "/ponds/{pondId}/activities/create.html", method = RequestMethod.GET)
-	public String createPlotActivities(@PathVariable("pondId") Long pondId, Model mv) {
+	@RequestMapping(value = {"/ponds/{pondId}/activities/create.html", "/farm/{farmId}/pond/{pondId}/activities/create.html"}, method = RequestMethod.GET)
+	public String createPlotActivities(@PathVariable("farmId") Optional<Long> farmId, @PathVariable("pondId") Long pondId, Model mv) {
 
 		PondActivityDto dto = new PondActivityDto();
 		dto.setPond(pondId);
 
 		mv.addAttribute("activityDto", dto);
 		mv.addAttribute("pondId", pondId);
+		mv.addAttribute("farmId", farmId.orElse(null));
 		mv.addAttribute("activityId", 0l);
 
 		mv.addAttribute("allPondActivityTypes", codeListservice.listActivePondActivityTypes());
 		mv.addAttribute("allProducts", codeListservice.listActiveProducts());
 		mv.addAttribute("allQuantityUnits", codeListservice.listActiveQuantityUnit());
+		mv.addAttribute("allSpecies", codeListservice.listActiveSpecies());
+		mv.addAttribute("backUrl", farmId.map(id -> "/farm/" + id + "/ponds.html").orElse("/ponds/browser.html"));
+		mv.addAttribute("submitUrl", farmId.map(id -> "/farm/" + id + "/pond/" + pondId + "/activities/update.html").orElse("/ponds/" + pondId + "/activities/update.html"));
+
 
 		preparePage(pondId, mv);
 
@@ -90,8 +102,8 @@ public class PondActivityController extends AbstractV8Controller {
 	}
 
 	@PreAuthorize("hasAuthority('R_PONDACTIVTY')")
-	@RequestMapping(value = "/ponds/{pondId}/activities/{activityId}/edit.html", method = RequestMethod.GET)
-	public String showPondActivities(@PathVariable("pondId") Long pondId, @PathVariable("activityId") Long activityId, Model mv) {
+	@RequestMapping(value = {"/ponds/{pondId}/activities/{activityId}/edit.html",  "/farm/{farmId}/pond/{pondId}/activities/{activityId}/edit.html"}, method = RequestMethod.GET)
+	public String showPondActivities(@PathVariable("farmId") Optional<Long> farmId, @PathVariable("pondId") Long pondId, @PathVariable("activityId") Long activityId, Model mv) {
 
 		DTFarmPondActivity act = pondActivityRepository.findOne(activityId);
 
@@ -100,10 +112,14 @@ public class PondActivityController extends AbstractV8Controller {
 
 		mv.addAttribute("activityDto", dto);
 		mv.addAttribute("activityId", act.getId());
-
 		mv.addAttribute("allPondActivityTypes", codeListservice.listActivePondActivityTypes());
 		mv.addAttribute("allProducts", codeListservice.listActiveProductsByActivity(dto.getActivityType()));
 		mv.addAttribute("allQuantityUnits", codeListservice.listActiveQuantityUnit());
+		mv.addAttribute("allSpecies", codeListservice.listActiveSpecies());
+		mv.addAttribute("backUrl", farmId.map(id -> "/farm/" + id + "/ponds.html").orElse("/ponds/browser.html"));
+		mv.addAttribute("submitUrl", farmId.map(id -> "/farm/" + id + "/pond/" + pondId + "/activities/update.html").orElse("/ponds/" + pondId + "/activities/update.html"));
+
+
 
 		preparePage(pondId, mv);
 		setToReadOnly(mv, "W_PONDACTIVTY");
@@ -111,16 +127,16 @@ public class PondActivityController extends AbstractV8Controller {
 	}
 
 	/**
-	 * 
-	 * @param id
-	 * @param plotId
+	 * @param pondId
+	 * @param dto
+	 * @param result
 	 * @param mv
 	 * @return
 	 */
 	@Transactional
 	@PreAuthorize("hasAuthority('W_PONDACTIVTY')")
-	@RequestMapping(value = "/ponds/{pondId}/activities/update.html", method = RequestMethod.POST)
-	public String showPlotActivities(@PathVariable("pondId") Long pondId, PondActivityDto dto, BindingResult result, Model mv) {
+	@RequestMapping(value = {"/ponds/{pondId}/activities/update.html", "/farm/{farmId}/pond/{pondId}/activities/update.html"}, method = RequestMethod.POST)
+	public String showPlotActivities(@PathVariable("farmId") Optional<Long> farmId, @PathVariable("pondId") Long pondId, PondActivityDto dto, BindingResult result, Model mv) {
 
 		DTFarmPondActivity act = null;
 
@@ -130,8 +146,10 @@ public class PondActivityController extends AbstractV8Controller {
 
 		if (dto.getId() == null || dto.getId().intValue() == 0) {
 			act = new DTFarmPondActivity();
-		} else
+		} else {
 			act = pondActivityRepository.findOne(dto.getId());
+			farmPondProductionCycleService.rollbackPondProductionCycle(act);
+		}
 
 		dtoMapper.fillEntity(dto, act);
 
@@ -139,27 +157,30 @@ public class PondActivityController extends AbstractV8Controller {
 
 		pondActivityRepository.save(act);
 
-		preparePage(pondId, mv);
+		farmPondProductionCycleService.updatePondProductionCycle(act);
 
-		return "redirect:/ponds/" + pondId + "/activities/browser.html";
+		preparePage(pondId, mv);
+		return farmId.map(id -> "redirect:/farm/" + id + "/pond/" + pondId + "/activities/browser.html").orElse("redirect:/ponds/" + pondId + "/activities/browser.html");
 	}
 
 	/**
-	 * 
-	 * @param id
-	 * @param plotId
+	 * @param pondId
+	 * @param activityId
 	 * @param mv
 	 * @return
 	 */
 	@Transactional
 	@PreAuthorize("hasAuthority('W_PONDACTIVTY')")
-	@RequestMapping(value = "/ponds/{pondId}/activities/delete.html", method = RequestMethod.POST)
-	public String deletePlotActivities(@PathVariable("pondId") Long pondId, @RequestParam("activityId") Long activityId, Model mv) {
+	@RequestMapping(value = {"/ponds/{pondId}/activities/delete.html", "/farm/{farmId}/pond/{pondId}/activities/delete.html"}, method = RequestMethod.POST)
+	public String deletePlotActivities(@PathVariable("farmId") Optional<Long> farmId, @PathVariable("pondId") Long pondId, @RequestParam("activityId") Long activityId, Model mv) {
+		DTFarmPondActivity act = pondActivityRepository.findOne(activityId);
+		if (act != null) {
+			farmPondProductionCycleService.rollbackPondProductionCycle(act);
+		}
 		pondActivityRepository.delete(activityId);
 		preparePage(pondId, mv);
-		return "redirect:/ponds/" + pondId + "/activities/browser.html";
+		return farmId.map(id -> "redirect:/farm/" + id + "/pond/" + pondId + "/activities/browser.html").orElse("redirect:/ponds/" + pondId + "/activities/browser.html");
 	}
-
 
 
 	@PreAuthorize("hasAuthority('W_PONDMEASURE')")
@@ -176,11 +197,19 @@ public class PondActivityController extends AbstractV8Controller {
 		return clRefProductRepository.findOne(productId).getClAppQuantityUnit().getId();
 	}
 
-
+	@PreAuthorize("hasAuthority('R_PONDBROWSER')")
+	public String getActivityFeedingTotal(Long pondId, Long activityId) {
+		DTFarmPondActivity dtFarmPondActivity = pondActivityRepository.getOne(activityId);
+		DTFarmPondProductionCycle dtFarmPondProductionCycle = farmPondProductionCycleService.getBetweenDate(pondId, dtFarmPondActivity.getActivityStartDate());
+		if (dtFarmPondProductionCycle == null) {
+			return jdbc.queryForObject("SELECT SUM(MEASURE_VALUE) FROM dt_farmaq_pond_management WHERE ACTIVITY_START_DATE <= (SELECT ACTIVITY_START_DATE FROM dt_farmaq_pond_management WHERE id = " + activityId + ") AND CL_POND_ACTIVITY_TYPE_ID = 3 and REG_ENTITY_FARM_POND_ID = " + pondId + ";", String.class);
+		} else {
+			return jdbc.queryForObject("SELECT SUM(MEASURE_VALUE) FROM dt_farmaq_pond_management WHERE ACTIVITY_START_DATE <= (SELECT ACTIVITY_START_DATE FROM dt_farmaq_pond_management WHERE id = " + activityId + ") AND  ACTIVITY_START_DATE >= DATE('" + dtFarmPondProductionCycle.getProductionCycleStart() + "') AND CL_POND_ACTIVITY_TYPE_ID = 3 and REG_ENTITY_FARM_POND_ID = " + pondId + ";", String.class);
+		}
+	}
 
 	/**
-	 * 
-	 * @param farm
+	 * @param plotId
 	 * @param mv
 	 */
 	protected void preparePage(Long plotId, Model mv) {
@@ -190,7 +219,6 @@ public class PondActivityController extends AbstractV8Controller {
 		p.setDescription("default.farm_page_description");
 		p.setNavBarPrefix("/ponds");
 		mv.addAttribute("v8p", p);
-
 		mv.addAttribute("pondId", plotId);
 
 	}
