@@ -14,7 +14,7 @@
 								class="fa fa-backward"></i> <span th:text="#{default.back}"></span></a>
 					</div>
 				</div>
-				<form class="mainForm" th:action="@{'/ponds/'+${pondId}+'/activities/update.html'}" th:object="${activityDto}"
+				<form class="mainForm" th:action="@{${submitUrl}}" th:object="${activityDto}"
 							id="pondEditorForm" method="post">
 					<input type="hidden" id="pondId" th:field="*{pond}"/>
 					<input type="hidden" id="activityId" th:field="*{id}"/>
@@ -90,7 +90,7 @@
 					<div class="box-footer text-center">
 						<small>* <span th:text="#{default.mandatory_field}"></span></small>
 
-						<a th:href="@{'/ponds/'+${pondId}+'/activities/browser.html'}" class="btn btn-warning"><i
+						<a th:href="@{${backUrl}}" class="btn btn-warning"><i
 								class="fa fa-times"></i><span th:text="#{default.cancel}"></span></a>
 						<button type="submit" class="btn btn-success">
 							<span th:text="#{default.submit}"></span> <i class="fa fa-check"></i>
@@ -124,6 +124,7 @@
               closeOnDateSelect: true
 
           });
+          activityTypeChanged();
       });
 
       var noProduct = [2, 6, 7, 8, 10];
