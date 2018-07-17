@@ -1,16 +1,19 @@
 package com.fairagora.verifik8.v8web.mvc.plots;
 
 import java.util.List;
+import java.util.Optional;
 
+import com.fairagora.verifik8.v8web.data.domain.cl.CLRefProduct;
+import com.fairagora.verifik8.v8web.data.domain.dt.DTFarmPlotProductionCycle;
+import com.fairagora.verifik8.v8web.data.repo.cl.CLRefProductRepository;
+import com.fairagora.verifik8.v8web.services.FarmPlotProductionCycleService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import com.fairagora.verifik8.v8web.data.application.V8Page;
 import com.fairagora.verifik8.v8web.data.domain.dt.DTFarmPlotActivity;
@@ -32,50 +35,44 @@ public class PlotsActivityController extends AbstractV8Controller {
 	@Autowired
 	private RegFarmDTOMapper dtoMapper;
 
+	@Autowired
+	private CLRefProductRepository clRefProductRepository;
+
+	@Autowired
+	protected JdbcTemplate jdbc;
+
+	@Autowired
+	private FarmPlotProductionCycleService farmPlotProductionCycleService;
+
+
 	/**
-	 * 
-	 * @param id
 	 * @param plotId
 	 * @param mv
 	 * @return
 	 */
-	@PreAuthorize("hasAuthority('R_PLOTACTIVITY')")
-	@RequestMapping(value = "/plots/{plotId}/activities/browser.html", method = RequestMethod.GET)
-	public String showPlotActivities(@PathVariable("plotId") Long plotId, Model mv) {
+	@SuppressWarnings("OptionalUsedAsFieldOrParameterType")
+	@PreAuthorize("hasAuthority('R_PONDACTIVTY')")
+	@RequestMapping(value = {"/plots/{plotId}/activities/browser.html", "/farm/{farmId}/plots/{plotId}/activities/browser.html"}, method = RequestMethod.GET)
+	public String showPondActivities(@PathVariable("farmId") Optional<Long> farmId, @PathVariable("plotId") Long plotId, Model mv) {
 
 		List<DTFarmPlotActivity> activities = plotActivityRepository.findByPlotId(plotId);
 		mv.addAttribute("activities", activities);
 		mv.addAttribute("plotId", plotId);
+		mv.addAttribute("farmId", farmId.orElse(null));
+		mv.addAttribute("backUrl", farmId.map(id -> "/farm/" + id + "/plots.html").orElse("/plots/browser.html"));
 
 		preparePage(plotId, mv);
 		setToReadOnly(mv, "W_PLOTACTIVITY");
 		return "plots/activities/browser";
 	}
 
-	@PreAuthorize("hasAuthority('W_PLOTACTIVITY')")
-	@RequestMapping(value = "/plots/{plotId}/activities/create.html", method = RequestMethod.GET)
-	public String createPlotActivities(@PathVariable("plotId") Long plotId, Model mv) {
 
-		PlotActivityDto dto = new PlotActivityDto();
-		dto.setPlot(plotId);
 
-		mv.addAttribute("activityDto", dto);
-		mv.addAttribute("plotId", plotId);
-		mv.addAttribute("activityId", 0l);
 
-		mv.addAttribute("allActivityTypes", codeListservice.listActiveActivityTypes());
-		mv.addAttribute("allProducts", codeListservice.listActiveProducts());
-		mv.addAttribute("allTilingActivityTypes", codeListservice.listActiveTilingActivityTypes());
-		mv.addAttribute("allQuantityUnits", codeListservice.listActiveQuantityUnit());
-
-		preparePage(plotId, mv);
-
-		return "plots/activities/editor";
-	}
 
 	@PreAuthorize("hasAuthority('R_PLOTACTIVITY')")
-	@RequestMapping(value = "/plots/{plotId}/activities/{activityId}/edit.html", method = RequestMethod.GET)
-	public String showPlotActivities(@PathVariable("plotId") Long plotId, @PathVariable("activityId") Long activityId, Model mv) {
+	@RequestMapping(value = {"/plots/{plotId}/activities/{activityId}/edit.html", "/farm/{farmId}/plots/{plotId}/activities/{activityId}/edit.html"}, method = RequestMethod.GET)
+	public String showPlotActivities(@PathVariable("farmId") Optional<Long> farmId, @PathVariable("plotId") Long plotId, @PathVariable("activityId") Long activityId, Model mv) {
 
 		DTFarmPlotActivity act = plotActivityRepository.findOne(activityId);
 
@@ -89,10 +86,39 @@ public class PlotsActivityController extends AbstractV8Controller {
 		mv.addAttribute("allProducts", codeListservice.listActiveProducts());
 		mv.addAttribute("allTilingActivityTypes", codeListservice.listActiveTilingActivityTypes());
 		mv.addAttribute("allQuantityUnits", codeListservice.listActiveQuantityUnit());
+		mv.addAttribute("backUrl", farmId.map(id -> "/farm/" + farmId + "/ponds.html").orElse("/ponds/browser.html"));
+		mv.addAttribute("submitUrl", farmId.map(id -> "/farm/" + farmId + "/plots/" + plotId + "/activities/update.html").orElse("/plots/" + plotId + "/activities/update.html"));
 
 		preparePage(plotId, mv);
 
 		setToReadOnly(mv, "W_PLOTACTIVITY");
+
+		return "plots/activities/editor";
+	}
+
+
+
+	@PreAuthorize("hasAuthority('W_PLOTACTIVITY')")
+	@RequestMapping(value = {"/plots/{plotId}/activities/create.html", "/farm/{farmId}/plots/{plotId}/activities/create.html"}, method = RequestMethod.GET)
+	public String createPlotActivities(@PathVariable("farmId") Optional<Long> farmId, @PathVariable("plotId") Long plotId, Model mv) {
+
+		PlotActivityDto dto = new PlotActivityDto();
+		dto.setPlot(plotId);
+
+		mv.addAttribute("activityDto", dto);
+		mv.addAttribute("plotId", plotId);
+		mv.addAttribute("farmId", farmId.orElse(null));
+		mv.addAttribute("activityId", 0l);
+
+		mv.addAttribute("allActivityTypes", codeListservice.listActiveActivityTypes());
+		mv.addAttribute("allProducts", codeListservice.listActiveProducts());
+		mv.addAttribute("allTilingActivityTypes", codeListservice.listActiveTilingActivityTypes());
+		mv.addAttribute("allQuantityUnits", codeListservice.listActiveQuantityUnit());
+		mv.addAttribute("backUrl", farmId.map(id -> "/farm/" + farmId + "/ponds.html").orElse("/ponds/browser.html"));
+		mv.addAttribute("submitUrl", farmId.map(id -> "/farm/" + farmId + "/plots/" + plotId + "/activities/update.html").orElse("/plots/" + plotId + "/activities/update.html"));
+
+		preparePage(plotId, mv);
+
 		return "plots/activities/editor";
 	}
 
@@ -104,8 +130,8 @@ public class PlotsActivityController extends AbstractV8Controller {
 	 * @return
 	 */
 	@PreAuthorize("hasAuthority('W_PLOTACTIVITY')")
-	@RequestMapping(value = "/plots/{plotId}/activities/update.html", method = RequestMethod.POST)
-	public String showPlotActivities(@PathVariable("plotId") Long plotId, PlotActivityDto dto, BindingResult result, Model mv) {
+	@RequestMapping(value = {"/plots/{plotId}/activities/update.html",  "/farm/{farmId}/pond/{pondId}/activities/update.html"}, method = RequestMethod.POST)
+	public String showPlotActivities(@PathVariable("farmId") Optional<Long> farmId, @PathVariable("plotId") Long plotId, PlotActivityDto dto, BindingResult result, Model mv) {
 
 		DTFarmPlotActivity act = null;
 
@@ -115,8 +141,11 @@ public class PlotsActivityController extends AbstractV8Controller {
 
 		if (dto.getId() == null || dto.getId().intValue() == 0) {
 			act = new DTFarmPlotActivity();
-		} else
+		} else {
 			act = plotActivityRepository.findOne(dto.getId());
+			farmPlotProductionCycleService.rollbackPlotProductionCycle(act);
+		}
+
 
 		dtoMapper.fillEntity(dto, act);
 
@@ -124,9 +153,11 @@ public class PlotsActivityController extends AbstractV8Controller {
 
 		plotActivityRepository.save(act);
 
+		farmPlotProductionCycleService.updatePlotProductionCycle(act);
+
 		preparePage(plotId, mv);
 
-		return "redirect:/plots/" + plotId + "/activities/browser.html";
+		return farmId.map(id -> "redirect:/farm/" + id + "/plots/" + plotId + "/activities/browser.html").orElse("redirect:/plots/" + plotId + "/activities/browser.html");
 	}
 
 	/**
@@ -146,6 +177,36 @@ public class PlotsActivityController extends AbstractV8Controller {
 
 		return "redirect:/plots/" + plotId + "/activities/browser.html";
 	}
+
+
+
+	@PreAuthorize("hasAuthority('W_PONDMEASURE')")
+	@RequestMapping(value = "/plots/{plotId}/products", method = RequestMethod.GET)
+	@ResponseBody
+	public List<CLRefProduct> getProducts(@PathVariable("plotId") Long plotId, @RequestParam("activityId") Long activityId, Model mv) {
+		return codeListservice.listActiveProductsByActivity(activityId);
+	}
+
+	@PreAuthorize("hasAuthority('W_PONDMEASURE')")
+	@RequestMapping(value = "/plots/{plotId}/products/{productId}/unit", method = RequestMethod.GET)
+	@ResponseBody
+	public Long getProductRecommendedUnit(@PathVariable("plotId") Long plotId, @PathVariable("productId") Long productId, Model mv) {
+		return clRefProductRepository.findOne(productId).getClAppQuantityUnit().getId();
+	}
+
+	@PreAuthorize("hasAuthority('R_PONDBROWSER')")
+	public String getActivityFeedingTotal(Long plotId, Long activityId) {
+		DTFarmPlotActivity dtFarmPlotActivity = plotActivityRepository.getOne(activityId);
+		DTFarmPlotProductionCycle dtFarmPlotProductionCycle  = farmPlotProductionCycleService.getBetweenDate(plotId, dtFarmPlotActivity.getActivityStartDate());
+		if (dtFarmPlotProductionCycle == null) {
+			return jdbc.queryForObject("SELECT SUM(MEASURE_VALUE) FROM dt_farmag_plot_management WHERE ACTIVITY_START_DATE <= (SELECT ACTIVITY_START_DATE FROM dt_farmag_plot_management WHERE id = " + activityId + ") AND CL_PLOT_ACTIVITY_TYPE_ID = 3 and REG_ENTITY_FARM_PLOT_ID = " + plotId + ";", String.class);
+		} else {
+			return jdbc.queryForObject("SELECT SUM(MEASURE_VALUE) FROM dt_farmag_plot_management WHERE ACTIVITY_START_DATE <= (SELECT ACTIVITY_START_DATE FROM dt_farmag_plot_management WHERE id = " + activityId + ") AND  ACTIVITY_START_DATE >= DATE('" + dtFarmPlotProductionCycle.getProductionCycleStart() + "') AND CL_PLOT_ACTIVITY_TYPE_ID = 3 and REG_ENTITY_FARM_PLOT_ID = " + plotId + ";", String.class);
+		}
+	}
+
+
+
 
 	/**
 	 * 
