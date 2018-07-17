@@ -184,12 +184,16 @@
 
           $('.viewActivitiesPlotDataBtn').click(function () {
               var id = $(this).attr("data-id");
-              document.location = '/farm/'+farmId + '/plots/' + id + '/activities/browser.html';
+              document.location = [[@{/farm/
+          }]]
+              +farmId + [[@{'/plots/'}]] + id + '/activities/browser.html';
           });
 
           $('.addActivitiesPlotDataBtn').click(function () {
               var id = $(this).attr("data-id");
-              document.location = '/farm/'+farmId +'/plots/' + id + '/activities/create.html';
+              document.location = [[@{/farm/
+          }]]
+              +farmId + [[@{'/plots/'}]] + id + '/activities/create.html';
           });
 
       });
