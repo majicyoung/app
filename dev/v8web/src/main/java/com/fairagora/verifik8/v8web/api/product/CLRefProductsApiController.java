@@ -21,7 +21,7 @@ public class CLRefProductsApiController extends AbstractV8Controller {
 
 	@GetMapping(path = "/products")
 	public ResponseEntity<?> listAllClRefProducts() {
-		List<?> products = clRefProductRepository.findAll();
+		List<?> products = clRefProductRepository.getProductAndFarmPondActivityId();
 
 		if (products.isEmpty()) {
 			return new ResponseEntity<Object>(HttpStatus.NO_CONTENT);
