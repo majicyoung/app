@@ -36,7 +36,6 @@ import com.fairagora.verifik8.v8web.data.domain.cl.CLRefProduct;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLRefProductType;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLRefSpecies;
 import com.fairagora.verifik8.v8web.data.domain.cl.ClAppTerminationContractReason;
-import com.fairagora.verifik8.v8web.data.domain.jt.JTPondActivityProductTypes;
 import com.fairagora.verifik8.v8web.data.repo.cl.CLAppCompanyPositionTypeRepository;
 import com.fairagora.verifik8.v8web.data.repo.cl.CLAppContractTypeRepository;
 import com.fairagora.verifik8.v8web.data.repo.cl.CLAppEntityTypeRepository;
@@ -252,10 +251,6 @@ public class CodeListsService {
 
 	public List<CLRefProduct> listActiveProductsByActivity(Long activityId) {
 		return productRepository.getFindByEnabledTrueAndFActivityIdOrderByName(activityId);
-	}
-	
-	public List<JTPondActivityProductTypes> listActiveProductsByActivity() {
-		return productRepository.getFindByEnabledTrueAndFActivityIdOrderByName();
 	}
 
 	public List<CLAppTilingActivityType> listActiveTilingActivityTypes() {
