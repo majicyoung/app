@@ -33,6 +33,7 @@ public class FarmPlotProductionCycleService {
 				dtFarmPlotProductionCycle.setClSeedQuantityUnit(dtFarmPlotActivity.getMeasure().getUnit());
 				dtFarmPlotProductionCycle.setProductionCycleStart(dtFarmPlotActivity.getActivityStartDate());
 				dtFarmPlotProductionCycle.setRegEntityFarmPlot(dtFarmPlotActivity.getPlot());
+				dtFarmPlotProductionCycle.setClRefCommodities(dtFarmPlotActivity.getPlot().getCommodities());
 				dtFarmPlotProductionCycle.setProductionCycleNumber(getLatestCycleNumber(dtFarmPlotActivity) + 1);
 				break;
 			case "HARV1":

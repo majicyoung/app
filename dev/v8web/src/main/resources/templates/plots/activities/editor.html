@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html layout:decorator="inc/main-layout" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html layout:decorator="inc/main-layout" xmlns:th="http://www.thymeleaf.org"
+			xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+			xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
 <div layout:fragment="content">
 	<div class="row">
@@ -8,52 +10,81 @@
 				<div class="box-header with-border">
 					<h3 class="box-title" th:text="#{farm.plot_activity_add}"></h3>
 					<div class="box-tools">
-						<a th:href="@{'/plots/'+${plotId}+'/activities/browser.html'}" class="btn btn-sm btn-flat btn-warning"><i class="fa fa-backward"></i> <span th:text="#{default.back}"></span></a>
+						<a th:href="@{'/plots/'+${plotId}+'/activities/browser.html'}" class="btn btn-sm btn-flat btn-warning"><i
+								class="fa fa-backward"></i> <span th:text="#{default.back}"></span></a>
 					</div>
 				</div>
-				<form class="mainForm" th:action="@{'/plots/'+${plotId}+'/activities/update.html'}" th:object="${activityDto}" id="plotEditorForm" method="post">
-					<input type="hidden" id="plotId" th:field="*{plot}" />
-					<input type="hidden" id="activityId" th:field="*{id}" />
+				<form class="mainForm" th:action="@{'/plots/'+${plotId}+'/activities/update.html'}" th:object="${activityDto}"
+							id="plotEditorForm" method="post">
+					<input type="hidden" id="plotId" th:field="*{plot}"/>
+					<input type="hidden" id="activityId" th:field="*{id}"/>
 					<div class="box-body">
 						<div class="row">
 							<div class="col-md-6 col-sm-6 col-xs-12">
 								<div class="form-group ">
 									<label th:text="|#{farm.plot_activity_type}#|">default.farm*</label>
-									<select class="form-control" th:field="*{activityType}" required="required" onchange="activityTypeChanged()">
-										<option value="" th:text="|-- #{farm.plot_activity_select_type} --|">-- default.select_farm --</option> 
-										<option th:each="actType:${allActivityTypes}" th:value="${actType.id}" th:text="${actType.localisedName}"></option> 
+									<select class="form-control" th:field="*{activityType}" required="required"
+													onchange="activityTypeChanged()">
+										<option value="" th:text="|-- #{farm.plot_activity_select_type} --|">-- default.select_farm --
+										</option>
+										<option th:each="actType:${allActivityTypes}" th:value="${actType.id}"
+														th:text="${actType.localisedName}"></option>
 									</select>
 								</div>
 								<div class="form-group ">
-									<label for="number" class="control-label" th:text="|#{farm.plot_activity_start}*|">farm.plot_number*</label>
-									<input type="text" class="form-control form-plot form-plot-required datefield" th:field="*{activityStartDate}" th:placeholder="#{farm.plot_activity_start}" maxlength="10" required="required"/>
+									<label for="number" class="control-label"
+												 th:text="|#{farm.plot_activity_start}*|">farm.plot_number*</label>
+									<input type="text" class="form-control form-plot form-plot-required datefield"
+												 th:field="*{activityStartDate}" th:placeholder="#{farm.plot_activity_start}" maxlength="10"
+												 required="required"/>
 								</div>
 								<div class="form-group ">
-									<label for="number" class="control-label" th:text="|#{farm.plot_activity_end}*|">farm.plot_number*</label>
-									<input type="text" class="form-control form-plot form-plot-required datefield" th:field="*{activityEndDate}" th:placeholder="#{farm.plot_activity_end}" maxlength="10" required="required"/>
+									<label for="number" class="control-label"
+												 th:text="|#{farm.plot_activity_end}*|">farm.plot_number*</label>
+									<input type="text" class="form-control form-plot form-plot-required datefield"
+												 th:field="*{activityEndDate}" th:placeholder="#{farm.plot_activity_end}" maxlength="10"
+												 required="required"/>
 								</div>
 								<div class="form-group" id="actiProductGroup">
 									<label th:text="|#{farm.plot_activity_product}|"></label>
-									<select class="form-control" th:field="*{product}" >
-										<option value="" th:text="|-- #{farm.plot_activity_select_product} --|">-- default.select_farm --</option> 
-										<option th:each="actType:${allProducts}" th:value="${actType.id}" th:text="${actType.localisedName}"></option> 
+									<select class="form-control" th:field="*{product}">
+										<option value="" th:text="|-- #{farm.plot_activity_select_product} --|">-- default.select_farm --
+										</option>
+										<option th:each="actType:${allProducts}" th:value="${actType.id}"
+														th:text="${actType.localisedName}"></option>
 									</select>
 								</div>
 								<div class="form-group " id="tilingActiGroup">
 									<label th:text="|#{farm.plot_activity_tilingActivityType}|"></label>
 									<select class="form-control" th:field="*{tilingActivityType}">
-										<option value="" th:text="|-- #{farm.plot_activity_select_tilingActivityType} --|">-- default.select_farm --</option> 
-										<option th:each="actType:${allTilingActivityTypes}" th:value="${actType.id}" th:text="${actType.localisedName}"></option> 
+										<option value="" th:text="|-- #{farm.plot_activity_select_tilingActivityType} --|">--
+											default.select_farm --
+										</option>
+										<option th:each="actType:${allTilingActivityTypes}" th:value="${actType.id}"
+														th:text="${actType.localisedName}"></option>
 									</select>
 								</div>
 								<div class="form-group">
 									<label th:text="|#{farm.plot_activity_measure}|"></label>
-									<input type="text" class="form-control form-pond form-pond-required" th:field="*{measure.quantity}" />
+									<input type="text" class="form-control form-pond form-pond-required" th:field="*{measure.quantity}"/>
 									<select class="form-control" th:field="*{measure.unit}">
 										<option value="" th:text="|-- #{default.select_unit} --|"></option>
-										<option th:each="unit : ${allQuantityUnits}" th:value="${unit.id}" th:text="${unit.localisedName}"></option>
+										<option th:each="unit : ${allQuantityUnits}" th:value="${unit.id}"
+														th:text="${unit.localisedName}"></option>
 									</select>
 								</div>
+
+
+								<div class="form-group" id="selectCommodities">
+									<label th:text="|#{farm.plot_activity_commodities}|"></label>
+									<select class="form-control" th:field="*{commodities}">
+										<option value="" th:text="|-- #{default.commodities} --|"></option>
+										<option th:each="unit : ${allCommodities}" th:value="${unit.id}"
+														th:text="${unit.localisedName}"></option>
+									</select>
+								</div>
+
+
 								<div class="form-group ">
 									<label th:text="|#{farm.plot_activity_comment}|"></label>
 									<input class="form-control" type="text" th:field="*{comment}"/>
@@ -62,9 +93,10 @@
 						</div>
 					</div>
 					<div class="box-footer text-center">
-						<small>* <span th:text="#{default.mandatory_field}"></span></small> 
-						
-						<a th:href="@{'/plots/'+${plotId}+'/activities/browser.html'}" class="btn btn-warning"><i class="fa fa-times"></i><span th:text="#{default.cancel}"></span></a>
+						<small>* <span th:text="#{default.mandatory_field}"></span></small>
+
+						<a th:href="@{'/plots/'+${plotId}+'/activities/browser.html'}" class="btn btn-warning"><i
+								class="fa fa-times"></i><span th:text="#{default.cancel}"></span></a>
 						<button type="submit" class="btn btn-success">
 							<span th:text="#{default.submit}"></span> <i class="fa fa-check"></i>
 						</button>
@@ -77,49 +109,53 @@
 
 <th:block layout:fragment="page-scripts">
 	<script type="text/javascript">
-		$(document).ready(function() {
-			$('.datefield').datetimepicker({
-				format: 'Y-m-d h:i:s',
-				closeOnDateSelect:true
-			});
-			activityTypeChanged();
-		});
+      $(document).ready(function () {
+          $('.datefield').datetimepicker({
+              format: 'Y-m-d h:i:s',
+              closeOnDateSelect: true
+          });
+          activityTypeChanged();
+      });
 
-		var noProductNorTilingActivity = [1, 2, 3, 4, 5, 6, 12 , 99];
-		
-		function activityTypeChanged(){
-			
-			$('#actiProductGroup').show();
-			$('#tilingActiGroup').show();
-			
-			var actVal = $("#activityType").val();
-			
-			if(actVal!=null){
-				actVal=parseInt(actVal);			
-				
-				if($.inArray(actVal,noProductNorTilingActivity)>=0){
-					$('#actiProductGroup').hide();
-					$('#tilingActiGroup').hide();
-				}
-				
-				if(actVal!=11)
-					$('#tilingActiGroup').hide();
-				
-			}
-			
-		}
-		
-		function hasEmptyFields(selector) {
-			var hasError = false;
-			$(selector).each(function(index, element) {
-				if ($(element).val() == '') {
-					hasError = true;
-					$(element).closest('.form-group').addClass('has-error');
-				} else
-					$(element).closest('.form-group').removeClass('has-error');
-			});
-			return hasError;
-		}
+      var noProductNorTilingActivity = [2, 3, 4, 5, 6, 12, 99];
+
+      function activityTypeChanged() {
+
+          $('#actiProductGroup').show();
+          $('#tilingActiGroup').show();
+          $('#selectCommodities').hide();
+
+
+          var actVal = $("#activityType").val();
+
+          if (actVal != null) {
+              actVal = parseInt(actVal);
+              if ($.inArray(actVal, noProductNorTilingActivity) >= 0) {
+                  $('#actiProductGroup').hide();
+                  $('#tilingActiGroup').hide();
+              }else if(actVal == 1) {
+                  $('#selectCommodities').show();
+              }
+
+
+              if (actVal != 11)
+                  $('#tilingActiGroup').hide();
+
+          }
+
+      }
+
+      function hasEmptyFields(selector) {
+          var hasError = false;
+          $(selector).each(function (index, element) {
+              if ($(element).val() == '') {
+                  hasError = true;
+                  $(element).closest('.form-group').addClass('has-error');
+              } else
+                  $(element).closest('.form-group').removeClass('has-error');
+          });
+          return hasError;
+      }
 	</script>
 </th:block>
 </html>

@@ -86,6 +86,7 @@ public class PlotsActivityController extends AbstractV8Controller {
 		mv.addAttribute("allProducts", codeListservice.listActiveProducts());
 		mv.addAttribute("allTilingActivityTypes", codeListservice.listActiveTilingActivityTypes());
 		mv.addAttribute("allQuantityUnits", codeListservice.listActiveQuantityUnit());
+		mv.addAttribute("allCommodities", codeListservice.listActiveCommodities());
 		mv.addAttribute("backUrl", farmId.map(id -> "/farm/" + farmId + "/ponds.html").orElse("/ponds/browser.html"));
 		mv.addAttribute("submitUrl", farmId.map(id -> "/farm/" + farmId + "/plots/" + plotId + "/activities/update.html").orElse("/plots/" + plotId + "/activities/update.html"));
 
@@ -114,6 +115,7 @@ public class PlotsActivityController extends AbstractV8Controller {
 		mv.addAttribute("allProducts", codeListservice.listActiveProducts());
 		mv.addAttribute("allTilingActivityTypes", codeListservice.listActiveTilingActivityTypes());
 		mv.addAttribute("allQuantityUnits", codeListservice.listActiveQuantityUnit());
+		mv.addAttribute("allCommodities", codeListservice.listActiveCommodities());
 		mv.addAttribute("backUrl", farmId.map(id -> "/farm/" + farmId + "/ponds.html").orElse("/ponds/browser.html"));
 		mv.addAttribute("submitUrl", farmId.map(id -> "/farm/" + farmId + "/plots/" + plotId + "/activities/update.html").orElse("/plots/" + plotId + "/activities/update.html"));
 
@@ -195,7 +197,7 @@ public class PlotsActivityController extends AbstractV8Controller {
 	}
 
 	@PreAuthorize("hasAuthority('R_PONDBROWSER')")
-	public String getActivityFeedingTotal(Long plotId, Long activityId) {
+	public String getActivityFertiliseTotal(Long plotId, Long activityId) {
 		DTFarmPlotActivity dtFarmPlotActivity = plotActivityRepository.getOne(activityId);
 		DTFarmPlotProductionCycle dtFarmPlotProductionCycle  = farmPlotProductionCycleService.getBetweenDate(plotId, dtFarmPlotActivity.getActivityStartDate());
 		if (dtFarmPlotProductionCycle == null) {
