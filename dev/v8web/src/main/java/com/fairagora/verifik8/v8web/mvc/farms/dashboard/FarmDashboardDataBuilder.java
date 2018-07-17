@@ -9,6 +9,8 @@ import com.fairagora.verifik8.v8web.data.domain.cl.CLAppMeasureType;
 import com.fairagora.verifik8.v8web.data.domain.reg.farm.RegEntityFarmPlot;
 import com.fairagora.verifik8.v8web.data.domain.reg.farm.RegEntityFarmPond;
 import com.fairagora.verifik8.v8web.data.repo.cl.CLAppMeasureTypeRepository;
+import com.fairagora.verifik8.v8web.data.repo.dt.DTFarmPlotActivityRepository;
+import com.fairagora.verifik8.v8web.data.repo.dt.DTFarmPlotProductionCycleRepository;
 import com.fairagora.verifik8.v8web.data.repo.dt.DTFarmPondActivityRepository;
 import com.fairagora.verifik8.v8web.data.repo.dt.DTFarmPondProductionCycleRepository;
 import com.fairagora.verifik8.v8web.data.repo.reg.RegEntityFarmPlotRepository;
@@ -31,13 +33,12 @@ public class FarmDashboardDataBuilder {
 	private RegEntityFarmPlotRepository regEntityFarmPlotRepository;
 
 	@Autowired
-	private DTFarmPondActivityRepository dtFarmPondActivityRepository;
-
-	@Autowired
 	private CLAppMeasureTypeRepository clAppMeasureTypeRepository;
 
 	@Autowired
 	private DTFarmPondProductionCycleRepository dtFarmPondProductionCycleRepository;
+	@Autowired
+	private DTFarmPlotProductionCycleRepository dtFarmPlotProductionCycleRepository;
 
 	public FarmDashboardDto get(Long farmId) {
 		FarmDashboardDto dash = new FarmDashboardDto();
@@ -242,8 +243,7 @@ public class FarmDashboardDataBuilder {
 			}
 
 			try {
-				//farmDashboardPlot.setFertilizationQuantity(dtFarmPondProductionCycleRepository.getFeedQuantitySinceStocking(regEntityFarmPlot.getId()));
-				farmDashboardPlot.setFertilizationQuantity("0");
+				farmDashboardPlot.setFertilizationQuantity(dtFarmPlotProductionCycleRepository.getFertilizerQuantitySinceStocking(regEntityFarmPlot.getId()));
 			} catch (DataAccessException e) {
 				farmDashboardPlot.setInProduction("n/a");
 			}
@@ -427,8 +427,6 @@ public class FarmDashboardDataBuilder {
 		return String.valueOf(dtFarmPondProductionCycleRepository.getPondIsInProduction(poundId));
 	}
 	private String getPlotActive(Long poundId){
-		//return String.valueOf(dtFarmPondProductionCycleRepository.getPondIsInProduction(poundId));
-		//TODO: Create farm plot production cycle
-		return "1";
+		return String.valueOf(dtFarmPlotProductionCycleRepository.getPlotIsInProduction(poundId));
 	}
 }

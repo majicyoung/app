@@ -179,12 +179,12 @@ public class DTFarmPlotProductionCycle extends V8EntitySupport {
 	}
 
 
-	public void addFertilizersValue(Float pesticidesQuantity) {
-		this.pesticidesQuantity  = (this.pesticidesQuantity  == null) ? pesticidesQuantity : this.pesticidesQuantity  + pesticidesQuantity;
+	public void addFertilizersValue(Float fertilizersQuantity) {
+		this.fertilizersQuantity  = (this.fertilizersQuantity  == null) ? fertilizersQuantity : this.fertilizersQuantity  + fertilizersQuantity;
 	}
 
-	public void removeFertilizersValue(Float pesticidesQuantity) {
-		this.pesticidesQuantity  = (this.pesticidesQuantity  == null) ? pesticidesQuantity : this.pesticidesQuantity  - pesticidesQuantity;
+	public void removeFertilizersValue(Float fertilizersQuantity) {
+		this.fertilizersQuantity  = (this.fertilizersQuantity  == null) ? fertilizersQuantity : this.fertilizersQuantity  - fertilizersQuantity;
 	}
 
 

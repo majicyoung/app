@@ -133,8 +133,6 @@
 													<th th:text="#{dashboard.plot.sowing_quantity}"/>
 													<th th:text="#{dashboard.plot.in_production}"/>
 													<th th:text="#{dashboard.plot.fertilisation_quantity}"/>
-													<th th:text="#{dashboard.plot.mortality_rate}"/>
-													<th th:text="#{dashboard.plot.disease}"/>
 													<th th:text="#{dashboard.plot.pesticide_use}"/>
 												</tr>
 												</thead>
@@ -151,10 +149,6 @@
 																																						style="color:red"></span>
 														</td>
 														<td th:text="${plot.getFertilizationQuantity()}"></td>
-														<td th:text="${plot.getMortalityRate()}"></td>
-														<td th:if="${plot.getDisease()}"><span class="fa fa-check" style="color:green"></span></td>
-														<td th:if="${not plot.getDisease()}"><span class="fa fa-close" style="color:red"></span>
-														</td>
 														<td th:if="${plot.getPesticideUse()}"><span class="fa fa-check"
 																																					style="color:green"></span>
 														</td>

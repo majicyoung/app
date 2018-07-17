@@ -76,20 +76,20 @@ public class FarmPlotProductionCycleService {
 				break;
 			case "FERT":
 				dtFarmPlotProductionCycle.removeFertilizersValue(dtFarmPlotActivity.getMeasure().getQuantity());
-				if (dtFarmPlotProductionCycle.getFertilizersQuantity() <= 0) {
+				if (dtFarmPlotProductionCycle.getFertilizersQuantity() != null && dtFarmPlotProductionCycle.getFertilizersQuantity() <= 0) {
 					dtFarmPlotProductionCycle.setClFertilizersQuantityUnit(null);
 				}
 				break;
 			case "PEST":
 				dtFarmPlotProductionCycle.removePesticitesQuantity(dtFarmPlotActivity.getMeasure().getQuantity());
-				if (dtFarmPlotProductionCycle.getPesticidesQuantity() <= 0) {
+				if (dtFarmPlotProductionCycle.getPesticidesQuantity() != null && dtFarmPlotProductionCycle.getPesticidesQuantity() <= 0) {
 					dtFarmPlotProductionCycle.setClPesticidesQuantityUnit(null);
 					dtFarmPlotProductionCycle.setUsePesticitesInCycle(FALSE);
 				}
 				break;
 			case "HERB":
 				dtFarmPlotProductionCycle.removeHerbicidesQuantity(dtFarmPlotActivity.getMeasure().getQuantity());
-				if (dtFarmPlotProductionCycle.getHerbicidesQuantity() <= 0) {
+				if (dtFarmPlotProductionCycle.getHerbicidesQuantity() != null && dtFarmPlotProductionCycle.getHerbicidesQuantity() <= 0) {
 					dtFarmPlotProductionCycle.setClHerbicidesQuantityUnit(null);
 					dtFarmPlotProductionCycle.setUseHerbicidesInCycle(FALSE);
 				}

@@ -201,9 +201,9 @@ public class PlotsActivityController extends AbstractV8Controller {
 		DTFarmPlotActivity dtFarmPlotActivity = plotActivityRepository.getOne(activityId);
 		DTFarmPlotProductionCycle dtFarmPlotProductionCycle  = farmPlotProductionCycleService.getBetweenDate(plotId, dtFarmPlotActivity.getActivityStartDate());
 		if (dtFarmPlotProductionCycle == null) {
-			return jdbc.queryForObject("SELECT SUM(MEASURE_VALUE) FROM dt_farmag_plot_management WHERE ACTIVITY_START_DATE <= (SELECT ACTIVITY_START_DATE FROM dt_farmag_plot_management WHERE id = " + activityId + ") AND CL_PLOT_ACTIVITY_TYPE_ID = 3 and REG_ENTITY_FARM_PLOT_ID = " + plotId + ";", String.class);
+			return jdbc.queryForObject("SELECT SUM(MEASURE_VALUE) FROM dt_farmag_plot_management WHERE ACTIVITY_START_DATE <= (SELECT ACTIVITY_START_DATE FROM dt_farmag_plot_management WHERE id = " + activityId + ") AND CL_PLOT_ACTIVITY_TYPE_ID = 10 and REG_ENTITY_FARM_PLOT_ID = " + plotId + ";", String.class);
 		} else {
-			return jdbc.queryForObject("SELECT SUM(MEASURE_VALUE) FROM dt_farmag_plot_management WHERE ACTIVITY_START_DATE <= (SELECT ACTIVITY_START_DATE FROM dt_farmag_plot_management WHERE id = " + activityId + ") AND  ACTIVITY_START_DATE >= DATE('" + dtFarmPlotProductionCycle.getProductionCycleStart() + "') AND CL_PLOT_ACTIVITY_TYPE_ID = 3 and REG_ENTITY_FARM_PLOT_ID = " + plotId + ";", String.class);
+			return jdbc.queryForObject("SELECT SUM(MEASURE_VALUE) FROM dt_farmag_plot_management WHERE ACTIVITY_START_DATE <= (SELECT ACTIVITY_START_DATE FROM dt_farmag_plot_management WHERE id = " + activityId + ") AND  ACTIVITY_START_DATE >= DATE('" + dtFarmPlotProductionCycle.getProductionCycleStart() + "') AND CL_PLOT_ACTIVITY_TYPE_ID = 10 and REG_ENTITY_FARM_PLOT_ID = " + plotId + ";", String.class);
 		}
 	}
 
