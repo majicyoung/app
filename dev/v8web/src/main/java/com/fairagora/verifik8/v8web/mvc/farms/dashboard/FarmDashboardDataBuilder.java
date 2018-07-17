@@ -6,10 +6,12 @@ import java.util.*;
 
 import com.fairagora.verifik8.v8web.config.helper.BooleanHelper;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLAppMeasureType;
+import com.fairagora.verifik8.v8web.data.domain.reg.farm.RegEntityFarmPlot;
 import com.fairagora.verifik8.v8web.data.domain.reg.farm.RegEntityFarmPond;
 import com.fairagora.verifik8.v8web.data.repo.cl.CLAppMeasureTypeRepository;
 import com.fairagora.verifik8.v8web.data.repo.dt.DTFarmPondActivityRepository;
 import com.fairagora.verifik8.v8web.data.repo.dt.DTFarmPondProductionCycleRepository;
+import com.fairagora.verifik8.v8web.data.repo.reg.RegEntityFarmPlotRepository;
 import com.fairagora.verifik8.v8web.data.repo.reg.RegEntityFarmPondRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -24,6 +26,9 @@ public class FarmDashboardDataBuilder {
 
 	@Autowired
 	private RegEntityFarmPondRepository regEntityFarmPondRepository;
+
+	@Autowired
+	private RegEntityFarmPlotRepository regEntityFarmPlotRepository;
 
 	@Autowired
 	private DTFarmPondActivityRepository dtFarmPondActivityRepository;
@@ -45,6 +50,8 @@ public class FarmDashboardDataBuilder {
 		AqProdCurrentYear(dash, farmId);
 
 		buildPoundTable(dash, farmId);
+
+		buildPlotTable(dash, farmId);
 
 		return dash;
 	}
@@ -135,6 +142,9 @@ public class FarmDashboardDataBuilder {
 		dash.getTopKpis().add(new FarmDashboardTopKpi<Integer>().setup("Number of Plots", "nbPlots",
 				jdbc.queryForObject("SELECT count(ID) FROM reg_entity_farmag_plots WHERE REG_ENTITY_FARM_ID= " + farmId, Integer.class)));
 
+		dash.getTopKpis().add(new FarmDashboardTopKpi<Integer>().setup("Number Active of Ponds", "nbActivePlots",
+				getNumberOfActivePlot(farmId)));
+
 		dash.getTopKpis().add(new FarmDashboardTopKpi<Integer>().setup("Total Production in " + y, "totalProductionAq",
 				jdbc.queryForObject("SELECT SUM(CONVERT(PRODUCTION_QUANTITY, SIGNED INTEGER)) FROM `dt_farmaq_production` WHERE YEAR(DATE_FROM) >= " + y + "  AND REG_ENTITY_FARM_ID=" + farmId, Integer.class)));
 
@@ -150,6 +160,16 @@ public class FarmDashboardDataBuilder {
 		int activeCount = 0;
 		for (RegEntityFarmPond regEntityFarmPond : regEntityFarmPondRepository.findByFarmId(farmId)) {
 			if (BooleanHelper.parseBoolean(getPondActive(regEntityFarmPond.getId()))) {
+				activeCount++;
+			}
+		}
+		return activeCount;
+	}
+
+	private Integer getNumberOfActivePlot(Long farmId) {
+		int activeCount = 0;
+		for (RegEntityFarmPlot regEntityFarmPlot: regEntityFarmPlotRepository.findByFarmId(farmId)) {
+			if (BooleanHelper.parseBoolean(getPondActive(regEntityFarmPlot.getId()))) {
 				activeCount++;
 			}
 		}
@@ -198,6 +218,49 @@ public class FarmDashboardDataBuilder {
 		}
 
 	}
+	private void buildPlotTable(FarmDashboardDto dash, Long farmId) {
+		for (RegEntityFarmPlot regEntityFarmPlot: regEntityFarmPlotRepository.findByFarmId(farmId)) {
+			FarmDashboardPlot farmDashboardPlot= new FarmDashboardPlot();
+			farmDashboardPlot.setPlotId(regEntityFarmPlot.getNumber());
+			farmDashboardPlot.setArea(regEntityFarmPlot.getSize().toString());
+			try {
+				farmDashboardPlot.setSowingDate(jdbc.queryForObject("SELECT max(dt_farmag_plot_management.ACTIVITY_START_DATE) FROM dt_farmag_plot_management where dt_farmag_plot_management.REG_ENTITY_FARM_PLOT_ID = " + regEntityFarmPlot.getId() + " AND dt_farmag_plot_management.CL_PLOT_ACTIVITY_TYPE_ID = 1", String.class));
+			} catch (DataAccessException e) {
+				farmDashboardPlot.setSowingDate("n/a");
+			}
+
+			try {
+				farmDashboardPlot.setSowingQuantity(jdbc.queryForObject("SELECT a.MEASURE_VALUE FROM (SELECT dt_farmag_plot_management.MEASURE_VALUE, max(dt_farmag_plot_management.ACTIVITY_START_DATE) FROM dt_farmag_plot_management where dt_farmag_plot_management.REG_ENTITY_FARM_POND_ID = " + regEntityFarmPlot.getId() + " AND dt_farmag_plot_management.CL_POND_ACTIVITY_TYPE_ID = 1) AS a", String.class));
+			} catch (DataAccessException e) {
+				farmDashboardPlot.setSowingQuantity("n/a");
+			}
+
+			try {
+				farmDashboardPlot.setInProduction(getPlotActive(regEntityFarmPlot.getId()));
+			} catch (DataAccessException e) {
+				farmDashboardPlot.setInProduction("n/a");
+			}
+
+			try {
+				//farmDashboardPlot.setFertilizationQuantity(dtFarmPondProductionCycleRepository.getFeedQuantitySinceStocking(regEntityFarmPlot.getId()));
+				farmDashboardPlot.setFertilizationQuantity("0");
+			} catch (DataAccessException e) {
+				farmDashboardPlot.setInProduction("n/a");
+			}
+
+			farmDashboardPlot.setMortalityRate("n/a");
+			farmDashboardPlot.setDisease("n/a");
+
+			try {
+				farmDashboardPlot.setPesticideUse(jdbc.queryForObject("SELECT count(*) FROM dt_farmag_plot_management where dt_farmag_plot_management.REG_ENTITY_FARM_POND_ID = " + regEntityFarmPlot.getId() + " AND ( dt_farmag_plot_management.CL_PLOT_ACTIVITY_TYPE_ID = 7 OR dt_farmag_plot_management.CL_PLOT_ACTIVITY_TYPE_ID = 8 OR dt_farmag_plot_management.CL_PLOT_ACTIVITY_TYPE_ID = 9 ) ", String.class));
+			} catch (DataAccessException e) {
+				farmDashboardPlot.setPesticideUse("n/a");
+			}
+			dash.getPlotSeries().add(farmDashboardPlot);
+
+		}
+
+	}
 
 	public List<FarmDashboardChartSelector> getPoundInitilizeChartList(Long farmId) {
 		List<FarmDashboardChartSelector> farmDashboardChartSelectors = new ArrayList<>();
@@ -205,6 +268,14 @@ public class FarmDashboardDataBuilder {
 				.filter(regEntityFarmPond -> regEntityFarmPond.getType().getId() == 2)
 				.limit(4)
 				.forEach(regEntityFarmPond -> farmDashboardChartSelectors.add(new FarmDashboardChartSelector(regEntityFarmPond.getId(), regEntityFarmPond.getName())));
+		return farmDashboardChartSelectors;
+	}
+
+	public List<FarmDashboardChartSelector> getPlotInitilizeChartList(Long farmId) {
+		List<FarmDashboardChartSelector> farmDashboardChartSelectors = new ArrayList<>();
+		regEntityFarmPlotRepository.findByFarmId(farmId).stream()
+				.limit(4)
+				.forEach(regEntityFarmPlot -> farmDashboardChartSelectors.add(new FarmDashboardChartSelector(regEntityFarmPlot.getId(), regEntityFarmPlot.getName())));
 		return farmDashboardChartSelectors;
 	}
 
@@ -216,8 +287,16 @@ public class FarmDashboardDataBuilder {
 		return farmDashboardChartSelectors;
 	}
 
+	public List<FarmDashboardChartSelector> getPlotChartList(Long farmId) {
+		List<FarmDashboardChartSelector> farmDashboardChartSelectors = new ArrayList<>();
+		for (RegEntityFarmPlot regEntityFarmPlot : regEntityFarmPlotRepository.findByFarmId(farmId)) {
+			farmDashboardChartSelectors.add(new FarmDashboardChartSelector(regEntityFarmPlot.getId(), regEntityFarmPlot.getName()));
+		}
+		return farmDashboardChartSelectors;
+	}
+
 	/**
-	 * Get the productions array by pound and date selected.
+	 * Get the pond productions array by pound and date selected.
 	 *
 	 * @param startDate start date of query.
 	 * @param endDate   end date of query.
@@ -240,6 +319,30 @@ public class FarmDashboardDataBuilder {
 		return productionsArray;
 	}
 
+	/**
+	 * Get the plots productions array by pound and date selected.
+	 *
+	 * @param startDate start date of query.
+	 * @param endDate   end date of query.
+	 * @param plotIds  plots we want to query.
+	 * @return query result.
+	 */
+	public Map<String, Map<String, Double>> getPlotProduction(Long farmId, String startDate, String endDate, String[] plotIds) {
+		Map<String, Map<String, Double>> productionsArray = new HashMap<>(new HashMap<>());
+		String plotIdsString = String.join(" or REG_ENTITY_FARM_PLOT_ID= ", plotIds);
+		List<Map<String, Object>> queryList = jdbc.queryForList("SELECT REG_ENTITY_FARM_PLOT_ID, SUM(MEASURE_VALUE), DATE(ACTIVITY_START_DATE) FROM dt_farmag_plot_management WHERE (CL_PLOT_ACTIVITY_TYPE_ID=3 OR CL_PLOT_ACTIVITY_TYPE_ID=4  OR CL_PLOT_ACTIVITY_TYPE_ID=5 )  AND (REG_ENTITY_FARM_PLOT_ID= " + plotIdsString + " ) AND ACTIVITY_START_DATE >= STR_TO_DATE('" + startDate + "', '%Y-%m-%d') AND ACTIVITY_START_DATE <= STR_TO_DATE('" + endDate + "', '%Y-%m-%d') GROUP BY REG_ENTITY_FARM_PLOT_ID , DATE(ACTIVITY_START_DATE)");
+		for (Map<String, Object> stringObjectMap : queryList) {
+			String activityDate = stringObjectMap.get("DATE(ACTIVITY_START_DATE)").toString();
+			Double measureValue = (Double) stringObjectMap.get("SUM(MEASURE_VALUE)");
+			String farmPlotId = stringObjectMap.get("REG_ENTITY_FARM_PLOT_ID").toString();
+			if (!productionsArray.containsKey(activityDate)) {
+				productionsArray.put(activityDate, new HashMap<>());
+			}
+			productionsArray.get(activityDate).put(farmPlotId, measureValue);
+		}
+		return productionsArray;
+	}
+
 
 	/**
 	 * Get Date list of the productions we are looking for.
@@ -252,6 +355,20 @@ public class FarmDashboardDataBuilder {
 	public List<String> getPoundProductionDate(Long farmId, String startDate, String endDate, String[] poundIds) {
 		String poundIdsString = String.join(" or REG_ENTITY_FARM_POND_ID= ", poundIds);
 		return jdbc.queryForList("SELECT DATE(ACTIVITY_START_DATE) FROM dt_farmaq_pond_management WHERE CL_POND_ACTIVITY_TYPE_ID=2  AND (REG_ENTITY_FARM_POND_ID= " + poundIdsString + " ) AND ACTIVITY_START_DATE >= STR_TO_DATE('" + startDate + "', '%Y-%m-%d') AND ACTIVITY_START_DATE <= STR_TO_DATE('" + endDate + "', '%Y-%m-%d') GROUP BY DATE(ACTIVITY_START_DATE)", String.class);
+	}
+
+
+	/**
+	 * Get Date list of the plots productions we are looking for.
+	 *
+	 * @param startDate start date of query.
+	 * @param endDate   end date of query.
+	 * @param plotIds  plots we want to query.
+	 * @return list of dates.
+	 */
+	public List<String> getPlotProductionDate(Long farmId, String startDate, String endDate, String[] plotIds) {
+		String plotIdsString = String.join(" or REG_ENTITY_FARM_PLOT_ID= ", plotIds);
+		return jdbc.queryForList("SELECT DATE(ACTIVITY_START_DATE) FROM dt_farmag_plot_management WHERE (CL_PLOT_ACTIVITY_TYPE_ID=3 OR CL_PLOT_ACTIVITY_TYPE_ID=4  OR CL_PLOT_ACTIVITY_TYPE_ID=5 )  AND (REG_ENTITY_FARM_PLOT_ID= " + plotIdsString + " ) AND ACTIVITY_START_DATE >= STR_TO_DATE('" + startDate + "', '%Y-%m-%d') AND ACTIVITY_START_DATE <= STR_TO_DATE('" + endDate + "', '%Y-%m-%d') GROUP BY DATE(ACTIVITY_START_DATE)", String.class);
 	}
 
 	/**
@@ -308,5 +425,10 @@ public class FarmDashboardDataBuilder {
 
 	private String getPondActive(Long poundId){
 		return String.valueOf(dtFarmPondProductionCycleRepository.getPondIsInProduction(poundId));
+	}
+	private String getPlotActive(Long poundId){
+		//return String.valueOf(dtFarmPondProductionCycleRepository.getPondIsInProduction(poundId));
+		//TODO: Create farm plot production cycle
+		return "1";
 	}
 }
