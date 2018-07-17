@@ -231,7 +231,7 @@ public class FarmDashboardDataBuilder {
 			}
 
 			try {
-				farmDashboardPlot.setSowingQuantity(jdbc.queryForObject("SELECT a.MEASURE_VALUE FROM (SELECT dt_farmag_plot_management.MEASURE_VALUE, max(dt_farmag_plot_management.ACTIVITY_START_DATE) FROM dt_farmag_plot_management where dt_farmag_plot_management.REG_ENTITY_FARM_POND_ID = " + regEntityFarmPlot.getId() + " AND dt_farmag_plot_management.CL_POND_ACTIVITY_TYPE_ID = 1) AS a", String.class));
+				farmDashboardPlot.setSowingQuantity(jdbc.queryForObject("SELECT a.MEASURE_VALUE FROM (SELECT dt_farmag_plot_management.MEASURE_VALUE, max(dt_farmag_plot_management.ACTIVITY_START_DATE) FROM dt_farmag_plot_management where dt_farmag_plot_management.REG_ENTITY_FARM_PLOT_ID = " + regEntityFarmPlot.getId() + " AND dt_farmag_plot_management.CL_PLOT_ACTIVITY_TYPE_ID= 1) AS a", String.class));
 			} catch (DataAccessException e) {
 				farmDashboardPlot.setSowingQuantity("n/a");
 			}
@@ -252,7 +252,7 @@ public class FarmDashboardDataBuilder {
 			farmDashboardPlot.setDisease("n/a");
 
 			try {
-				farmDashboardPlot.setPesticideUse(jdbc.queryForObject("SELECT count(*) FROM dt_farmag_plot_management where dt_farmag_plot_management.REG_ENTITY_FARM_POND_ID = " + regEntityFarmPlot.getId() + " AND ( dt_farmag_plot_management.CL_PLOT_ACTIVITY_TYPE_ID = 7 OR dt_farmag_plot_management.CL_PLOT_ACTIVITY_TYPE_ID = 8 OR dt_farmag_plot_management.CL_PLOT_ACTIVITY_TYPE_ID = 9 ) ", String.class));
+				farmDashboardPlot.setPesticideUse(jdbc.queryForObject("SELECT count(*) FROM dt_farmag_plot_management where dt_farmag_plot_management.REG_ENTITY_FARM_PLOT_ID = " + regEntityFarmPlot.getId() + " AND ( dt_farmag_plot_management.CL_PLOT_ACTIVITY_TYPE_ID = 7 OR dt_farmag_plot_management.CL_PLOT_ACTIVITY_TYPE_ID = 8 OR dt_farmag_plot_management.CL_PLOT_ACTIVITY_TYPE_ID = 9 ) ", String.class));
 			} catch (DataAccessException e) {
 				farmDashboardPlot.setPesticideUse("n/a");
 			}

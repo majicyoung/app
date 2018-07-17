@@ -87,8 +87,8 @@ public class PlotsActivityController extends AbstractV8Controller {
 		mv.addAttribute("allTilingActivityTypes", codeListservice.listActiveTilingActivityTypes());
 		mv.addAttribute("allQuantityUnits", codeListservice.listActiveQuantityUnit());
 		mv.addAttribute("allCommodities", codeListservice.listActiveCommodities());
-		mv.addAttribute("backUrl", farmId.map(id -> "/farm/" + farmId + "/ponds.html").orElse("/ponds/browser.html"));
-		mv.addAttribute("submitUrl", farmId.map(id -> "/farm/" + farmId + "/plots/" + plotId + "/activities/update.html").orElse("/plots/" + plotId + "/activities/update.html"));
+		mv.addAttribute("backUrl", farmId.map(id -> "/farm/" + id + "/plots.html").orElse("/plots/browser.html"));
+		mv.addAttribute("submitUrl", farmId.map(id -> "/farm/" + id + "/plots/" + plotId + "/activities/update.html").orElse("/plots/" + plotId + "/activities/update.html"));
 
 		preparePage(plotId, mv);
 
@@ -116,8 +116,8 @@ public class PlotsActivityController extends AbstractV8Controller {
 		mv.addAttribute("allTilingActivityTypes", codeListservice.listActiveTilingActivityTypes());
 		mv.addAttribute("allQuantityUnits", codeListservice.listActiveQuantityUnit());
 		mv.addAttribute("allCommodities", codeListservice.listActiveCommodities());
-		mv.addAttribute("backUrl", farmId.map(id -> "/farm/" + farmId + "/ponds.html").orElse("/ponds/browser.html"));
-		mv.addAttribute("submitUrl", farmId.map(id -> "/farm/" + farmId + "/plots/" + plotId + "/activities/update.html").orElse("/plots/" + plotId + "/activities/update.html"));
+		mv.addAttribute("backUrl", farmId.map(id -> "/farm/" + id + "/plots.html").orElse("/plots/browser.html"));
+		mv.addAttribute("submitUrl", farmId.map(id -> "/farm/" + id + "/plots/" + plotId + "/activities/update.html").orElse("/plots/" + plotId + "/activities/update.html"));
 
 		preparePage(plotId, mv);
 
@@ -170,14 +170,15 @@ public class PlotsActivityController extends AbstractV8Controller {
 	 * @return
 	 */
 	@PreAuthorize("hasAuthority('W_PLOTACTIVITY')")
-	@RequestMapping(value = "/plots/{plotId}/activities/delete.html", method = RequestMethod.POST)
-	public String deletePlotActivities(@PathVariable("plotId") Long plotId, @RequestParam("activityId") Long activityId, Model mv) {
+	@RequestMapping(value = {"/plots/{plotId}/activities/delete.html", "/farm/{farmId}/plots/{plotId}/activities/delete.html"}, method = RequestMethod.POST)
+	public String deletePlotActivities(@PathVariable("farmId") Optional<Long> farmId, @PathVariable("plotId") Long plotId, @RequestParam("activityId") Long activityId, Model mv) {
 
 		plotActivityRepository.delete(activityId);
 
 		preparePage(plotId, mv);
 
-		return "redirect:/plots/" + plotId + "/activities/browser.html";
+		return farmId.map(id -> "redirect:/farm/" + id + "/plots/" + plotId + "/activities/browser.html").orElse("redirect:/plots/" + plotId + "/activities/browser.html");
+
 	}
 
 
