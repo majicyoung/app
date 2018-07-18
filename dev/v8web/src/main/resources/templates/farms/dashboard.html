@@ -181,7 +181,9 @@
 										</div>
 										<br/>
 										<select class="form-control production_select2_multiple" multiple="multiple"
-														th:attr="data-placeholder=#{farm.ponds}"></select>
+														th:attr="data-placeholder=#{farm.ponds}" th:if="${v8App.pondProfile}"></select>
+										<select class="form-control production_select2_multiple" multiple="multiple"
+														th:attr="data-placeholder=#{farm.plots}" th:if="${v8App.plotProfile}"></select>
 										<br/><br/>
 										<button type="button" class="btn btn-block btn-primary" onclick="onProductionSubmitButtonClick()">
 											Submit
