@@ -15,6 +15,8 @@ public class FarmDashboardDto {
 
 	protected List<FarmDashboardPond>  pondsSeries = new ArrayList<>();
 
+	protected List<FarmDashboardPlot>  plotsSeries = new ArrayList<>();
+
 	public List<FarmDashboardTopKpi<?>> getTopKpis() {
 		return topKpis;
 	}
@@ -24,6 +26,8 @@ public class FarmDashboardDto {
 	}
 
 	public List<FarmDashboardPond> getPondSeries() { return pondsSeries;}
+
+	public List<FarmDashboardPlot> getPlotSeries() { return plotsSeries;}
 
 
 	/**

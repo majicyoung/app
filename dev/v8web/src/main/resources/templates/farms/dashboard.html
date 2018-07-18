@@ -41,11 +41,24 @@
 												<span class="description-text" th:text="${dashboard.topKpisMap['nbPonds'].value}"></span>
 											</div>
 										</div>
+
+										<div class="col-sm-3 col-xs-12 border-right" th:if="${v8App.plotProfile}">
+											<div class="description-block">
+												<h5 class="description-header" th:text="#{farm.plot_count}"></h5>
+												<span class="description-text" th:text="${dashboard.topKpisMap['nbPlots'].value}"></span>
+											</div>
+										</div>
 										<div class="clearfix visible-sm-block"></div>
 										<div class="col-sm-3 col-xs-12 border-right" th:if="${v8App.pondProfile}">
 											<div class="description-block">
 												<h5 class="description-header" th:text="#{farm.pond_active_count}"></h5>
 												<span class="description-text" th:text="${dashboard.topKpisMap['nbActivePonds'].value}"></span>
+											</div>
+										</div>
+										<div class="col-sm-3 col-xs-12 border-right" th:if="${v8App.plotProfile}">
+											<div class="description-block">
+												<h5 class="description-header" th:text="#{farm.plot_active_count}"></h5>
+												<span class="description-text" th:text="${dashboard.topKpisMap['nbActivePlots'].value}"></span>
 											</div>
 										</div>
 										<div class="clearfix visible-sm-block"></div>
@@ -57,49 +70,99 @@
 										</div>
 									</div>
 
-									<div class="box-header">
-										<h3 class="box-title" th:text="#{dashboard.pond_title}"></h3>
-									</div>
-									<div class="box-body">
-										<table class="table">
-											<thead class="thead-dark">
-											<tr>
-												<th th:text="#{dashboard.pound.pond_id}"/>
-												<th th:text="#{dashboard.pound.area}"/>
-												<th th:text="#{dashboard.pound.stocking_date}"/>
-												<th th:text="#{dashboard.pound.stocking_quantity}"/>
-												<th th:text="#{dashboard.pound.in_production}"/>
-												<th th:text="#{dashboard.pound.feed_quantity}"/>
-												<th th:text="#{dashboard.pound.mortality_rate}"/>
-												<th th:text="#{dashboard.pound.disease}"/>
-												<th th:text="#{dashboard.pound.antibiotic_use}"/>
-											</tr>
-											</thead>
-											<tbody>
-											<th:block th:each="pond : ${dashboard.getPondSeries()}">
-												<tr th:classappend="${pond.getInProduction()} ? bg-success : bg-danger">
-													<td th:text="${pond.getPoundId()}"></td>
-													<td th:text="${pond.getArea()}"></td>
-													<td th:text="${pond.getStockingDate()}"></td>
-													<td th:text="${pond.getStockingQuantity()}"></td>
-													<td th:if="${pond.getInProduction()}"><span class="fa fa-check" style="color:green"></span>
-													</td>
-													<td th:if="${not pond.getInProduction()}"><span class="fa fa-close" style="color:red"></span>
-													</td>
-													<td th:text="${pond.getFeedQuantity()}"></td>
-													<td th:text="${pond.getMortalityRate()}"></td>
-													<td th:if="${pond.getDisease()}"><span class="fa fa-check" style="color:green"></span></td>
-													<td th:if="${not pond.getDisease()}"><span class="fa fa-close" style="color:red"></span></td>
-													<td th:if="${pond.getAntibioticsUse()}"><span class="fa fa-check" style="color:green"></span>
-													</td>
-													<td th:if="${not pond.getAntibioticsUse()}"><span class="fa fa-close"
-																																						style="color:red"></span></td>
-
+									<div  th:if="${v8App.pondProfile}">
+										<div class="box-header">
+											<h3 class="box-title" th:text="#{dashboard.pond_title}"></h3>
+										</div>
+										<div class="box-body">
+											<table class="table">
+												<thead class="thead-dark">
+												<tr>
+													<th th:text="#{dashboard.pound.pond_id}"/>
+													<th th:text="#{dashboard.pound.area}"/>
+													<th th:text="#{dashboard.pound.stocking_date}"/>
+													<th th:text="#{dashboard.pound.stocking_quantity}"/>
+													<th th:text="#{dashboard.pound.in_production}"/>
+													<th th:text="#{dashboard.pound.feed_quantity}"/>
+													<th th:text="#{dashboard.pound.mortality_rate}"/>
+													<th th:text="#{dashboard.pound.disease}"/>
+													<th th:text="#{dashboard.pound.antibiotic_use}"/>
 												</tr>
-											</th:block>
-											</tbody>
-										</table>
+												</thead>
+												<tbody>
+												<th:block th:each="pond : ${dashboard.getPondSeries()}">
+													<tr th:classappend="${pond.getInProduction()} ? bg-success : bg-danger">
+														<td th:text="${pond.getPoundId()}"></td>
+														<td th:text="${pond.getArea()}"></td>
+														<td th:text="${pond.getStockingDate()}"></td>
+														<td th:text="${pond.getStockingQuantity()}"></td>
+														<td th:if="${pond.getInProduction()}"><span class="fa fa-check" style="color:green"></span>
+														</td>
+														<td th:if="${not pond.getInProduction()}"><span class="fa fa-close"
+																																						style="color:red"></span>
+														</td>
+														<td th:text="${pond.getFeedQuantity()}"></td>
+														<td th:text="${pond.getMortalityRate()}"></td>
+														<td th:if="${pond.getDisease()}"><span class="fa fa-check" style="color:green"></span></td>
+														<td th:if="${not pond.getDisease()}"><span class="fa fa-close" style="color:red"></span>
+														</td>
+														<td th:if="${pond.getAntibioticsUse()}"><span class="fa fa-check"
+																																					style="color:green"></span>
+														</td>
+														<td th:if="${not pond.getAntibioticsUse()}"><span class="fa fa-close"
+																																							style="color:red"></span></td>
+
+													</tr>
+												</th:block>
+												</tbody>
+											</table>
+										</div>
 									</div>
+
+									<div  th:if="${v8App.plotProfile}">
+										<div class="box-header">
+											<h3 class="box-title" th:text="#{dashboard.plot_title}"></h3>
+										</div>
+										<div class="box-body">
+											<table class="table">
+												<thead class="thead-dark">
+												<tr>
+													<th th:text="#{dashboard.plot.plot_id}"/>
+													<th th:text="#{dashboard.plot.area}"/>
+													<th th:text="#{dashboard.plot.sowing_date}"/>
+													<th th:text="#{dashboard.plot.sowing_quantity}"/>
+													<th th:text="#{dashboard.plot.in_production}"/>
+													<th th:text="#{dashboard.plot.fertilisation_quantity}"/>
+													<th th:text="#{dashboard.plot.pesticide_use}"/>
+												</tr>
+												</thead>
+												<tbody>
+												<th:block th:each="plot : ${dashboard.getPlotSeries()}">
+													<tr th:classappend="${plot.getInProduction()} ? bg-success : bg-danger">
+														<td th:text="${plot.getPlotId()}"></td>
+														<td th:text="${plot.getArea()}"></td>
+														<td th:text="${plot.getSowingDate()}"></td>
+														<td th:text="${plot.getSowingQuantity()}"></td>
+														<td th:if="${plot.getInProduction()}"><span class="fa fa-check" style="color:green"></span>
+														</td>
+														<td th:if="${not plot.getInProduction()}"><span class="fa fa-close"
+																																						style="color:red"></span>
+														</td>
+														<td th:text="${plot.getFertilizationQuantity()}"></td>
+														<td th:if="${plot.getPesticideUse()}"><span class="fa fa-check"
+																																					style="color:green"></span>
+														</td>
+														<td th:if="${not plot.getPesticideUse()}"><span class="fa fa-close"
+																																							style="color:red"></span></td>
+
+													</tr>
+												</th:block>
+												</tbody>
+											</table>
+										</div>
+									</div>
+
+
 								</div>
 							</div>
 							<div class="row">
@@ -118,7 +181,9 @@
 										</div>
 										<br/>
 										<select class="form-control production_select2_multiple" multiple="multiple"
-														th:attr="data-placeholder=#{farm.ponds}"></select>
+														th:attr="data-placeholder=#{farm.ponds}" th:if="${v8App.pondProfile}"></select>
+										<select class="form-control production_select2_multiple" multiple="multiple"
+														th:attr="data-placeholder=#{farm.plots}" th:if="${v8App.plotProfile}"></select>
 										<br/><br/>
 										<button type="button" class="btn btn-block btn-primary" onclick="onProductionSubmitButtonClick()">
 											Submit
@@ -129,7 +194,8 @@
 									</div>
 								</div>
 							</div>
-							<div class="row">
+
+							<div class="row"  th:if="${v8App.pondProfile}">
 								<div class="box-header">
 									<h3 class="box-title" th:text="#{farm.water}"></h3>
 								</div>
@@ -173,30 +239,50 @@
 	<script type="text/javascript" th:inline="javascript">
       /*<![CDATA[*/
       var farmId =/*[[${farmId}]]*/;
+			var isPondProfile = /*[[${v8App.pondProfile}]]*/;
+			var isPlotProfile = /*[[${v8App.plotProfile}]]*/;
 
       $(document).ready(function () {
 
           // Create chart for production
           initDatePicker('#production_datepicker');
-          initSelect2Multiple('.production_select2_multiple', '/farm/' + farmId + '/dashboard/poundslist');
+          if (isPondProfile){
+              initSelect2Multiple('.production_select2_multiple', '/farm/' + farmId + '/dashboard/poundslist');
+          }else if(isPlotProfile){
+              initSelect2Multiple('.production_select2_multiple', '/farm/' + farmId + '/dashboard/plotslist');
+          }
 
-          initDatePicker('#water_datepicker');
-          initSelect2Multiple('.water_select2_multiple', '/farm/' + farmId + '/dashboard/poundslist');
-          initSelect2Multiple('.water_select2', '/farm/' + farmId + '/dashboard/waterscontrollist');
+          if (isPondProfile){
+              initDatePicker('#water_datepicker');
+              if (isPondProfile){
+                  initSelect2Multiple('.water_select2_multiple', '/farm/' + farmId + '/dashboard/poundslist');
+              }else if(isPlotProfile){
+                  initSelect2Multiple('.water_select2_multiple', '/farm/' + farmId + '/dashboard/plotslist');
+              }
+              initSelect2Multiple('.water_select2', '/farm/' + farmId + '/dashboard/waterscontrollist');
 
-          google.charts.load("current", {packages:['corechart', 'bar']});
+          }
+
+          google.charts.load("current", {packages: ['corechart', 'bar']});
           google.charts.setOnLoadCallback(function () {
-              initProductionGraph();
+              if (isPondProfile){
+                  initProductionGraph('/farm/' + farmId + '/dashboard/pond/productions/initialize');
+              }else if(isPlotProfile){
+                  initProductionGraph('/farm/' + farmId + '/dashboard/plot/productions/initialize');
+              }
           });
-          google.charts.setOnLoadCallback(function () {
-							initWaterGraph();
-          });
+
+          if (isPondProfile){
+              google.charts.setOnLoadCallback(function () {
+                  initWaterGraph();
+              });
+          }
       });
 
-      function initProductionGraph() {
+      function initProductionGraph(url) {
           var startDateProduction = $('#production_datepicker').data('daterangepicker').startDate.format('YYYY-MM-DD');
           var endDateProduction = $('#production_datepicker').data('daterangepicker').endDate.format('YYYY-MM-DD');
-          $.post('/farm/' + farmId + '/dashboard/productions/initialize', {
+          $.post(url, {
               start: startDateProduction,
               end: endDateProduction
           }, function (data) {
@@ -252,14 +338,27 @@
           var endDate = $('#production_datepicker').data('daterangepicker').endDate.format('YYYY-MM-DD');
           var selectProductions = $('.production_select2_multiple').val();
 
-          $.post('/farm/' + farmId + '/dashboard/productions', {
-              start: startDate,
-              end: endDate,
-              'poundIds[]': selectProductions
-          }, function (data) {
-              $(".result").html(data);
-              drawChart('production_line_chart', 'Production', data);
-          });
+          if (isPondProfile){
+              $.post('/farm/' + farmId + '/dashboard/pond/productions', {
+                  start: startDate,
+                  end: endDate,
+                  'poundIds[]': selectProductions
+              }, function (data) {
+                  $(".result").html(data);
+                  drawChart('production_line_chart', 'Production', data);
+              });
+          }else if(isPlotProfile){
+              $.post('/farm/' + farmId + '/dashboard/plot/productions', {
+                  start: startDate,
+                  end: endDate,
+                  'plotIds[]': selectProductions
+              }, function (data) {
+                  $(".result").html(data);
+                  drawChart('production_line_chart', 'Production', data);
+              });
+          }
+
+
       }
 
       function onWaterSubmitButtonClick() {
@@ -288,7 +387,6 @@
           chart.draw(new google.visualization.DataView(data), options);
 
       }
-
 
 
       /*]]>*/
