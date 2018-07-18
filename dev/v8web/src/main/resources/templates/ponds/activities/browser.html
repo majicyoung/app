@@ -13,6 +13,7 @@
 						<!-- messages here -->
 					</div>
 					<div class="box-tools">
+						<a th:href="@{${backUrl}}" class="btn btn-sm btn-flat btn-warning"><i class="fa fa-backward"></i> <span th:text="#{default.back}"></span></a>
 						<a th:href="@{'/ponds/'+${pondId}+'/activities/create.html'}" class="btn btn-sm btn-flat btn-success"><i class="fa fa-plus"></i> <span th:text="#{farm.pond_activity_add}">farm.add_pond_activity</span></a>
 					</div>
 				</div>
@@ -24,6 +25,7 @@
 								<th th:text="#{farm.pond_activity_name}">farm.pond_activity_name</th>
 								<th th:text="#{farm.pond_activity_value}">farm.pond_activity_value</th>
 								<th th:text="#{farm.pond_activity_unit}">farm.pond_activity_unit</th>
+								<th th:text="#{farm.pond_activity_total}">farm.pond_activity_total</th>
 								<th width="120"></th>
 							</tr>
 						</thead>
@@ -33,6 +35,7 @@
 								<td th:text="${act.activityType.localisedName}"></td>
 								<td th:text="${act.measure.quantity}"></td>
 								<td th:text="${act.measure.unitCode}"></td>
+								<td th:text="${act.activityType.id == 3 ? @pondActivityController.getActivityFeedingTotal(pondId, act.id) : '-'}"></td>
 								<td align="center">
 									<a href="javascript:void(0);" th:attr="data-id=${act.id}" class="btn btn-xs btn-flat btn-primary editActBtn"><i class="fa fa-edit"></i></a>
 									<form th:action="@{'/ponds/'+${pondId}+'/activities/delete.html'}" method="post" style="display: inline;">
@@ -56,7 +59,11 @@
 		$(document).ready(function() {
 			$('.editActBtn').click(function(){
 				var id = $(this).attr("data-id");
-				document.location=[[@{/ponds/}]]+'/'+[[${pondId}]]+'/activities/'+id+'/edit.html';
+          if (/farm/.test(window.location.href)){
+              document.location=[[@{/farm/}]]+[[${farmId}]]+[[@{/pond/}]]+[[${pondId}]]+'/activities/'+id+'/edit.html';
+          }else{
+              document.location=[[@{/ponds/}]]+[[${pondId}]]+'/activities/'+id+'/edit.html';
+          }
 			});
 		 
 			$('#datatables-pond-activities').DataTable({

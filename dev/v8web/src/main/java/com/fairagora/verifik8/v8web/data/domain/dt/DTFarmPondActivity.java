@@ -19,6 +19,7 @@ import javax.persistence.Table;
 import com.fairagora.verifik8.v8web.data.domain.V8EntitySupport;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLFarmPondActivityType;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLRefProduct;
+import com.fairagora.verifik8.v8web.data.domain.cl.CLRefSpecies;
 import com.fairagora.verifik8.v8web.data.domain.commons.V8Measure;
 import com.fairagora.verifik8.v8web.data.domain.reg.farm.RegEntityFarmPond;
 
@@ -65,6 +66,10 @@ public class DTFarmPondActivity extends V8EntitySupport {
 	
 	@Column(name = "FEED_LOT_NUMBER", length = 216)
 	protected String feedLotNumber;
+
+	@ManyToOne(optional = true)
+	@JoinColumn(name = "CL_REF_SPECIES_ID")
+	protected CLRefSpecies species;
 
 	public Long getId() {
 		return id;
@@ -136,6 +141,14 @@ public class DTFarmPondActivity extends V8EntitySupport {
 
 	public void setFeedLotNumber(String feedLotNumber) {
 		this.feedLotNumber = feedLotNumber;
+	}
+
+	public CLRefSpecies getSpecies() {
+		return species;
+	}
+
+	public void setSpecies(CLRefSpecies species) {
+		this.species = species;
 	}
 
 	@Override

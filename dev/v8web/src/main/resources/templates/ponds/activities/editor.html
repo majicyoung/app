@@ -10,11 +10,11 @@
 				<div class="box-header with-border">
 					<h3 class="box-title" th:text="#{farm.pond_activity_add}"></h3>
 					<div class="box-tools">
-						<a th:href="@{'/ponds/'+${pondId}+'/activities/browser.html'}" class="btn btn-sm btn-flat btn-warning"><i
+						<a th:href="@{${backUrl}}" class="btn btn-sm btn-flat btn-warning"><i
 								class="fa fa-backward"></i> <span th:text="#{default.back}"></span></a>
 					</div>
 				</div>
-				<form class="mainForm" th:action="@{'/ponds/'+${pondId}+'/activities/update.html'}" th:object="${activityDto}"
+				<form class="mainForm" th:action="@{${submitUrl}}" th:object="${activityDto}"
 							id="pondEditorForm" method="post">
 					<input type="hidden" id="pondId" th:field="*{pond}"/>
 					<input type="hidden" id="activityId" th:field="*{id}"/>
@@ -31,14 +31,14 @@
 														th:text="${actType.localisedName}"></option>
 									</select>
 								</div>
-								<div class="form-group ">
+								<div id="form-starttime" class="input-append date">
 									<label for="number" class="control-label"
 												 th:text="|#{farm.pond_activity_start}*|">farm.pond_number*</label>
 									<input id="datetime-starttime" type="text" class="form-control form-pond form-pond-required datefield"
 												 th:field="*{activityStartDate}" th:placeholder="#{farm.pond_activity_start}" maxlength="10"
 												 required="required"/>
 								</div>
-								<div class="form-group ">
+								<div id="form-endtime" class="input-append date">
 									<label for="number" class="control-label"
 												 th:text="|#{farm.pond_activity_end}*|">farm.pond_number*</label>
 									<input id="datetime-endtime" type="text" class="form-control form-pond form-pond-required datefield"
@@ -46,7 +46,7 @@
 												 required="required"/>
 								</div>
 								<div class="form-group" id="actiProductGroup">
-									<label  th:text="|#{farm.pond_activity_product}|"></label>
+									<label th:text="|#{farm.pond_activity_product}|"></label>
 									<select id="selectProductGroup" class="form-control" th:field="*{product}"
 													onchange="productChanged()">
 										<option value="" th:text="|-- #{farm.pond_activity_select_product} --|">-- default.select_product
@@ -66,9 +66,18 @@
 									</select>
 								</div>
 								<div class="form-group " id="feedLotNumber">
-									<label for="feed_lot_number" class="control-label" th:text="|#{farm.pond_activity_feed_lot_number}|">pond_activity_feed_lot_number</label>
+									<label for="feed_lot_number" class="control-label" th:text="|#{farm.pond_activity_feed_lot_number}|">farm.pond_activity_feed_lot_number</label>
 									<input type="text" class="form-control form-pond " th:field="*{feedLotNumber}"
 												 th:placeholder="#{farm.pond_activity_feed_lot_number}" maxlength="20"/>
+								</div>
+
+								<div class="form-group" id="selectSpecie">
+									<label th:text="|#{farm.pond_activity_species}|"></label>
+									<select class="form-control" th:field="*{species}">
+										<option value="" th:text="|-- #{default.species} --|"></option>
+										<option th:each="unit : ${allSpecies}" th:value="${unit.id}"
+														th:text="${unit.localisedName}"></option>
+									</select>
 								</div>
 
 								<div class="form-group ">
@@ -81,7 +90,7 @@
 					<div class="box-footer text-center">
 						<small>* <span th:text="#{default.mandatory_field}"></span></small>
 
-						<a th:href="@{'/ponds/'+${pondId}+'/activities/browser.html'}" class="btn btn-warning"><i
+						<a th:href="@{${backUrl}}" class="btn btn-warning"><i
 								class="fa fa-times"></i><span th:text="#{default.cancel}"></span></a>
 						<button type="submit" class="btn btn-success">
 							<span th:text="#{default.submit}"></span> <i class="fa fa-check"></i>
@@ -96,7 +105,9 @@
 <th:block layout:fragment="page-scripts">
 	<script th:inline="javascript">
       /*<![CDATA[*/
-			var pondId =/*[[${pondId}]]*/;
+
+      var farmId =/*[[${farmId}]]*/;
+      var pondId =/*[[${pondId}]]*/;
 
       $(document).ready(function () {
           $('#datetime-starttime').datetimepicker({
@@ -104,7 +115,7 @@
                   $('#datetime-endtime').val($('#datetime-starttime').val())
               },
               format: 'Y-m-d h:i:s',
-							closeOnDateSelect: true
+              closeOnDateSelect: true
 
           });
 
@@ -113,26 +124,25 @@
               closeOnDateSelect: true
 
           });
-
+          activityTypeChanged();
       });
-
 
       var noProduct = [2, 6, 7, 8, 10];
       function activityTypeChanged() {
 
           $('#actiProductGroup').show();
           $('#feedLotNumber').hide();
+          $('#selectSpecie').hide();
 
           var actVal = $("#activityType").val();
           if (actVal != null) {
               actVal = parseInt(actVal);
               if ($.inArray(actVal, noProduct) >= 0) {
                   $('#actiProductGroup').hide();
-              } else {
-                  if (actVal == 3) {
-                      $('#feedLotNumber').show();
-
-                  }
+              } else if (actVal == 1) {
+                  $('#selectSpecie').show();
+              } else if (actVal == 3) {
+                  $('#feedLotNumber').show();
               }
           }
 
@@ -152,7 +162,7 @@
               $.each(datas, function (index, value) {
                   $('#selectProductGroup').append($('<option>', {
                       value: value.id,
-                      text : value.name
+                      text: value.name
                   }));
               });
           });
