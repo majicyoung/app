@@ -41,10 +41,16 @@ public class ProfileController extends AbstractV8Controller{
 
 		SYSUser user = userService.getUserByEmail();
 		
+		Map<String, Object> userFilter = new HashMap<>();
+		userFilter.put("email", user.getEmail());
+		userFilter.put("id", user.getId());
+		userFilter.put("name", user.getName());
+		userFilter.put("role", user.getRole());
+		
 		Map<String, Object> profileMap = new HashMap<>();
 		profileMap.put("farms", farms);
 		profileMap.put("ponds", ponds);
-		profileMap.put("user", user);
+		profileMap.put("user", userFilter);
 
 		return new ResponseEntity<>(profileMap, HttpStatus.OK);
 	}
