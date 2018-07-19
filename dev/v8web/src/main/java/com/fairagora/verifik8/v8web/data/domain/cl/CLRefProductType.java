@@ -1,6 +1,5 @@
 package com.fairagora.verifik8.v8web.data.domain.cl;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
