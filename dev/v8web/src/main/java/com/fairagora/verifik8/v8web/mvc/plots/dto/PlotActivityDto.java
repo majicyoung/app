@@ -31,6 +31,8 @@ public class PlotActivityDto {
 
 	protected String comment;
 
+	protected Long commodities;
+
 	public Long getId() {
 		return id;
 	}
@@ -117,5 +119,13 @@ public class PlotActivityDto {
 
 	public void setActivityName(String activityName) {
 		this.activityName = activityName;
+	}
+
+	public Long getCommodities() {
+		return commodities;
+	}
+
+	public void setCommodities(Long commodities) {
+		this.commodities = commodities;
 	}
 }

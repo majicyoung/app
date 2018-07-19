@@ -3,7 +3,6 @@ package com.fairagora.verifik8.v8web.mvc.farms;
 import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
 
-import com.fairagora.verifik8.v8web.data.domain.cl.CLAppMeasureType;
 import com.fairagora.verifik8.v8web.data.repo.reg.RegEntityFarmPondRepository;
 import com.fairagora.verifik8.v8web.mvc.farms.dashboard.FarmDashboardChartSelector;
 import com.fairagora.verifik8.v8web.mvc.farms.dashboard.FarmDashboardSelectorResult;
@@ -96,6 +95,20 @@ public class FarmDashboardController extends AbstractV8Controller {
 		return result;
 	}
 
+	@RequestMapping(value = "/farm/{id}/dashboard/plotslist", method = RequestMethod.GET)
+	@ResponseBody
+	public String getPlotList(@PathVariable("id") Long id, Model mv) {
+		List<FarmDashboardChartSelector> farmDashboardChartSelectors = farmDashboardDataBuilder.getPlotChartList(id);
+		ObjectMapper mapper = new ObjectMapper();
+		String result = "";
+		try {
+			result = mapper.writeValueAsString(new FarmDashboardSelectorResult<>(farmDashboardChartSelectors));
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+
 	@RequestMapping(value = "/farm/{id}/dashboard/waterscontrollist", method = RequestMethod.GET)
 	@ResponseBody
 	public String getWaters(Model mv) {
@@ -110,22 +123,42 @@ public class FarmDashboardController extends AbstractV8Controller {
 		return result;
 	}
 
-	@RequestMapping(value = "/farm/{id}/dashboard/productions", method = RequestMethod.POST)
+	@RequestMapping(value = "/farm/{id}/dashboard/pond/productions", method = RequestMethod.POST)
 	@ResponseBody
-	public List<Object> queryProductions(@PathVariable("id") Long id, @RequestParam("start") String startDate, @RequestParam("end") String endDate, @RequestParam(value = "poundIds[]") String[] poundIds, Model mv) {
+	public List<Object> queryPondProductions(@PathVariable("id") Long id, @RequestParam("start") String startDate, @RequestParam("end") String endDate, @RequestParam(value = "poundIds[]") String[] poundIds, Model mv) {
 		Map<String, Map<String, Double>> dataArray = farmDashboardDataBuilder.getPoundProduction(id, startDate, endDate, poundIds);
 		List<String> dataDate = farmDashboardDataBuilder.getPoundProductionDate(id, startDate, endDate, poundIds);
 		return formatGraphArray(poundIds, dataArray, dataDate);
 	}
 
 
-	@Transactional
-	@RequestMapping(value = "/farm/{id}/dashboard/productions/initialize", method = RequestMethod.POST)
+	@RequestMapping(value = "/farm/{id}/dashboard/plot/productions", method = RequestMethod.POST)
 	@ResponseBody
-	public List<Object> initProductionGraph(@PathVariable("id") Long id, @RequestParam("start") String startDate, @RequestParam("end") String endDate, Model mv){
+	public List<Object> queryPlotProductions(@PathVariable("id") Long id, @RequestParam("start") String startDate, @RequestParam("end") String endDate, @RequestParam(value = "plotIds[]") String[] plotIds, Model mv) {
+		Map<String, Map<String, Double>> dataArray = farmDashboardDataBuilder.getPlotProduction(id, startDate, endDate, plotIds);
+		List<String> dataDate = farmDashboardDataBuilder.getPlotProductionDate(id, startDate, endDate, plotIds);
+		return formatGraphArray(plotIds, dataArray, dataDate);
+	}
+
+
+
+	@Transactional
+	@RequestMapping(value = "/farm/{id}/dashboard/pond/productions/initialize", method = RequestMethod.POST)
+	@ResponseBody
+	public List<Object> initPondProductionGraph(@PathVariable("id") Long id, @RequestParam("start") String startDate, @RequestParam("end") String endDate, Model mv){
 		List<FarmDashboardChartSelector> farmDashboardChartSelectors =  farmDashboardDataBuilder.getPoundInitilizeChartList(id);
 		String[] poundIds = farmDashboardChartSelectors.stream().map(FarmDashboardChartSelector::getId).map(String::valueOf).toArray(String[]::new);
-		return queryProductions(id, startDate, endDate, poundIds,mv);
+		return queryPondProductions(id, startDate, endDate, poundIds,mv);
+	}
+
+
+	@Transactional
+	@RequestMapping(value = "/farm/{id}/dashboard/plot/productions/initialize", method = RequestMethod.POST)
+	@ResponseBody
+	public List<Object> initPlotProductionGraph(@PathVariable("id") Long id, @RequestParam("start") String startDate, @RequestParam("end") String endDate, Model mv){
+		List<FarmDashboardChartSelector> farmDashboardChartSelectors =  farmDashboardDataBuilder.getPlotInitilizeChartList(id);
+		String[] plotIds = farmDashboardChartSelectors.stream().map(FarmDashboardChartSelector::getId).map(String::valueOf).toArray(String[]::new);
+		return queryPlotProductions(id, startDate, endDate, plotIds,mv);
 	}
 
 

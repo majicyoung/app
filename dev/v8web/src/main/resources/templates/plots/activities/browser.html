@@ -13,6 +13,7 @@
 						<!-- messages here -->
 					</div>
 					<div class="box-tools">
+						<a th:href="@{${backUrl}}" class="btn btn-sm btn-flat btn-warning"><i class="fa fa-backward"></i> <span th:text="#{default.back}"></span></a>
 						<a th:href="@{'/plots/'+${plotId}+'/activities/create.html'}" class="btn btn-sm btn-flat btn-success"><i class="fa fa-plus"></i> <span th:text="#{farm.plot_activity_add}">farm.add_plot_activity</span></a>
 					</div>
 				</div>
@@ -21,18 +22,20 @@
 						<thead>
 							<tr>
 								<th th:text="#{farm.plot_activity_start}">farm.plot_activity_start</th>
-								<th th:text="#{farm.plot_activity_end}">farm.plot_activity_end</th>
 								<th th:text="#{farm.plot_activity_name}">farm.plot_activity_name</th>
-								<th th:text="#{farm.plot_activity_comment}">farm.plot_activity_name</th>
+								<th th:text="#{farm.plot_activity_value}">farm.plot_activity_value</th>
+								<th th:text="#{farm.plot_activity_unit}">farm.plot_activity_unit</th>
+								<th th:text="#{farm.plot_activity_total}">farm.plot_activity_total</th>
 								<th width="120"></th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr th:each="act:${activities}">
 								<td th:text="${#dates.format(act.activityStartDate,'yyyy-MM-dd HH:mm:ss')}"></td>
-								<td th:text="${#dates.format(act.activityEndDate,'yyyy-MM-dd HH:mm:ss')}"></td>
 								<td th:text="${act.activityType.localisedName}"></td>
-								<td th:text="${act.comment}"></td>
+								<td th:text="${act.measure.quantity}"></td>
+								<td th:text="${act.measure.unitCode}"></td>
+								<td th:text="${act.activityType.id == 10 ? @plotsActivityController.getActivityFertiliseTotal(plotId, act.id) : '-'}"></td>
 								<td align="center">
 									<a href="javascript:void(0);" th:attr="data-id=${act.id}" class="btn btn-xs btn-flat btn-primary editActBtn"><i class="fa fa-edit"></i></a>
 									<form th:action="@{'/plots/'+${plotId}+'/activities/delete.html'}" method="post" style="display: inline;">
@@ -54,11 +57,14 @@
 <th:block layout:fragment="page-scripts">
 	<script type="text/javascript" th:inline="javascript">
 		$(document).ready(function() {
-			$('.editActBtn').click(function(){
-				var id = $(this).attr("data-id");
-				document.location=[[@{/plots/}]]+'/'+[[${plotId}]]+'/activities/'+id+'/edit.html';
-			});
-		 
+        $('.editActBtn').click(function(){
+            var id = $(this).attr("data-id");
+            if (/farm/.test(window.location.href)){
+                document.location=[[@{/farm/}]]+[[${farmId}]]+[[@{/plots/}]]+[[${plotId}]]+'/activities/'+id+'/edit.html';
+            }else{
+                document.location=[[@{/plots/}]]+[[${plotId}]]+'/activities/'+id+'/edit.html';
+            }
+        });
 			$('#datatables-plot-activities').DataTable({
 				"order": [[ 0, "desc" ]],
 				"language": {
