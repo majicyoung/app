@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-@RequestMapping("api")
+@RequestMapping(value = {"api", "green"})
 public class OauthController {
 
 	@Autowired
