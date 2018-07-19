@@ -187,7 +187,7 @@ public class PlotsActivityController extends AbstractV8Controller {
 	@RequestMapping(value = "/plots/{plotId}/products", method = RequestMethod.GET)
 	@ResponseBody
 	public List<CLRefProduct> getProducts(@PathVariable("plotId") Long plotId, @RequestParam("activityId") Long activityId, Model mv) {
-		return codeListservice.listActiveProductsByActivity(activityId);
+		return codeListservice.listActiveProductsByPlotActivity(activityId);
 	}
 
 	@PreAuthorize("hasAuthority('W_PONDMEASURE')")
