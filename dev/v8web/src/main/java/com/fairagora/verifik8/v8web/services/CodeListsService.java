@@ -253,6 +253,10 @@ public class CodeListsService {
 		return productRepository.getFindByEnabledTrueAndFActivityIdOrderByName(activityId);
 	}
 
+	public List<CLRefProduct> listActiveProductsByPlotActivity(Long activityId) {
+		return productRepository.getFindByEnabledTrueAndPlotActivityIdOrderByName(activityId);
+	}
+
 	public List<CLAppTilingActivityType> listActiveTilingActivityTypes() {
 		return tilingActivityTypeRepository.findByEnabledTrueOrderByName();
 	}
