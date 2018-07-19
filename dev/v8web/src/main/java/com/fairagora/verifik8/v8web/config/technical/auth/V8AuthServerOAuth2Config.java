@@ -1,6 +1,7 @@
 package com.fairagora.verifik8.v8web.config.technical.auth;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
@@ -12,6 +13,9 @@ import org.springframework.security.oauth2.provider.token.TokenStore;
 @Configuration
 @EnableAuthorizationServer
 public class V8AuthServerOAuth2Config extends AuthorizationServerConfigurerAdapter {
+	
+	@Value("${v8app.url}")
+	private String v8apiUrl;
 
 	// TODO [UKS 2018-06-25] hardcoded for quick setup only
 	static final String CLIENT_ID = "verifik8-client";
@@ -45,6 +49,6 @@ public class V8AuthServerOAuth2Config extends AuthorizationServerConfigurerAdapt
 	public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
 		endpoints.tokenStore(tokenStore).authenticationManager(authenticationManager);
 		
-		endpoints.pathMapping("/oauth/token", "/api/oauth/token");
+		endpoints.pathMapping("/oauth/token", "/"+v8apiUrl+"/oauth/token");
 	}
 }

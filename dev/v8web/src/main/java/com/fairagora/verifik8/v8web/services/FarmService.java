@@ -21,6 +21,7 @@ import com.fairagora.verifik8.v8web.data.domain.cl.CLAppEntityType;
 import com.fairagora.verifik8.v8web.data.domain.commons.V8Measure;
 import com.fairagora.verifik8.v8web.data.domain.reg.RegEntity;
 import com.fairagora.verifik8.v8web.data.domain.reg.farm.RegEntityFarmDetails;
+import com.fairagora.verifik8.v8web.data.domain.reg.farm.RegEntityFarmPlot;
 import com.fairagora.verifik8.v8web.data.domain.reg.farm.RegEntityFarmPond;
 import com.fairagora.verifik8.v8web.data.domain.sys.SYSRole;
 import com.fairagora.verifik8.v8web.data.domain.sys.SYSUser;
@@ -39,6 +40,9 @@ public class FarmService extends AbstractV8Service {
 
 	@Autowired
 	private RegEntityFarmPondRepository regEntityFarmPondRepository;
+	
+	@Autowired
+	private RegEntityFarmPlotRepository regEntityFarmPlotRepository;
 
 	@Autowired
 	protected RegEntityFarmSupplierAssignmentRepository regEntityFarmSupplierRepository;
@@ -206,6 +210,45 @@ public class FarmService extends AbstractV8Service {
 		return regEntityPonds;
 	}
 
+	@Transactional
+	public List<RegEntityFarmPlot> listAllPlotsForLoggedUser(V8LoggedUser loggedUser) {
+		List<RegEntityFarmPlot> regEntityPlots = new ArrayList<>();
+
+		SYSUser user = userRepo.findByEmail(loggedUser.getUsername());
+		if (user != null) {
+			switch (user.getRole().getCode()) {
+			case SYSRole.SADMIN:
+				regEntityPlots.addAll(regEntityFarmPlotRepository.findAll());
+				break;
+
+			case SYSRole.coop:
+				List<RegEntityFarmDetails> farmDetails = farmDetailsRepository
+						.findByCooperativeId(user.getCooperative().getId());
+				for (RegEntityFarmDetails f : farmDetails) {
+					regEntityPlots.addAll(regEntityFarmPlotRepository.findByFarmId(f.getEntity().getId()));
+				}
+				break;
+
+			case SYSRole.farm:
+				List<V8Farm> farmDetails1 = listFarms();
+				for (V8Farm f : farmDetails1) {
+					regEntityPlots.addAll(regEntityFarmPlotRepository.findByFarmId(f.getId()));
+				}
+				break;
+
+			case SYSRole.country:
+				List<RegEntity> farms = regEntityRepository
+						.findByEntityTypeCodeAndNationalityId(CLAppEntityType.CODE_FARM, user.getCountry().getId());
+				for (RegEntity f : farms) {
+					regEntityPlots.addAll(regEntityFarmPlotRepository.findByFarmId(f.getId()));
+				}
+				break;
+			}
+		}
+
+		return regEntityPlots;
+	}
+	
 	@Transactional
 	public List<RegEntityFarmPond> listVisiblePoundsForLoggedUser(V8LoggedUser loggedUser) {
 		List<RegEntityFarmPond> r = new ArrayList<>();
