@@ -17,7 +17,7 @@ import com.fairagora.verifik8.v8web.mvc.AbstractV8Controller;
 @RequestMapping("api")
 @RestController
 public class CLRefProductsApiController extends AbstractV8Controller {
-
+	
 	@Autowired
 	private CLRefProductRepository clRefProductRepository;
 
@@ -29,7 +29,7 @@ public class CLRefProductsApiController extends AbstractV8Controller {
 		
 		List<CustomProducts> activity = clRefProductRepository.getFarmPondActivity();
 		
-		for(CustomProducts cp : products) {
+		for (CustomProducts cp : products) {
 			CustomProducts cproduct = new CustomProducts();
 			for(CustomProducts actCp : activity) {
 				if(actCp.getProductTypeId() == cp.getProductTypeId()) {

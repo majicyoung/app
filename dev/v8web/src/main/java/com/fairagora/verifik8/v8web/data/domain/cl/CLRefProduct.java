@@ -16,7 +16,6 @@ public class CLRefProduct extends CodeListSupport{
 	@JsonBackReference
 	protected CLRefProductType clRefProductType;
 
-
 	@ManyToOne
 	@JoinColumn(name = "CL_RECOMMAND_UNIT_ID", nullable = true)
 	@JsonBackReference

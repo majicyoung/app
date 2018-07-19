@@ -83,8 +83,5 @@ public class CustomProducts {
 
 	public void setUnitId(long unitId) {
 		this.unitId = unitId;
-	}
-	
-	
-	
+	}	
 }
