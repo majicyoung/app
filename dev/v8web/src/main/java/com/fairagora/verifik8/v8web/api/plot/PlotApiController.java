@@ -8,10 +8,12 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fairagora.verifik8.v8web.data.domain.cl.CLFarmPlotActivityType;
 import com.fairagora.verifik8.v8web.data.domain.sys.SYSUser;
 import com.fairagora.verifik8.v8web.mvc.AbstractV8Controller;
 import com.fairagora.verifik8.v8web.mvc.farms.RegFarmDTOMapper;
@@ -32,6 +34,13 @@ public class PlotApiController extends AbstractV8Controller{
 	
 	@Autowired
 	private UserService userService;
+	
+	@GetMapping(path = "/activities")
+	public ResponseEntity<?> showPondActivities() {
+		List<CLFarmPlotActivityType> clFarmPlotActivityTypeList = codeListservice.listActiveActivityTypes();
+
+		return new ResponseEntity<Object>(clFarmPlotActivityTypeList, HttpStatus.OK);
+	}
 
 	@RequestMapping(path = "/profile", method = RequestMethod.GET)
 	public ResponseEntity<Object> getFarmByUser() {
