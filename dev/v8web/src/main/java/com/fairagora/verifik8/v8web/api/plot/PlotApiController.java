@@ -24,7 +24,6 @@ import com.fairagora.verifik8.v8web.services.enhanced.V8Farm;
 @RestController
 public class PlotApiController extends AbstractV8Controller{
 
-
 	@Autowired
 	private RegFarmDTOMapper regFarmDtoMapper;
 
