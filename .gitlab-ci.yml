@@ -74,9 +74,11 @@ api_deploy:
     - cd ~/verifik8
     - docker-compose pull api2
     - docker-compose up -d --no-deps api2
+    - docker-compose pull api_green
+    - docker-compose up -d --no-deps api_green
   stage: deploy
   tags:
     - staging2
   variables:
     GIT_STRATEGY: none
-  when: manual
+
