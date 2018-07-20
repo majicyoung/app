@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fairagora.verifik8.v8web.data.domain.CustomProducts;
+import com.fairagora.verifik8.v8web.data.domain.cl.CLAppQuantityUnit;
 import com.fairagora.verifik8.v8web.data.repo.cl.CLAppQuantityUnitRepository;
 import com.fairagora.verifik8.v8web.data.repo.cl.CLRefProductRepository;
 import com.fairagora.verifik8.v8web.mvc.AbstractV8Controller;
@@ -57,7 +58,7 @@ public class PlotActivityApiController  extends AbstractV8Controller{
 	
 	@GetMapping(path="/quantity-units")
 	public ResponseEntity<?> showQuantityUnits() {
-		List<?> quantityUnits = clAppQuantityUnitRepository.getQuantityUnit();
+		List<CLAppQuantityUnit> quantityUnits = clAppQuantityUnitRepository.getQuantityUnit();
 		
 		if(quantityUnits.isEmpty()) {
 			return new ResponseEntity<Object>(HttpStatus.NO_CONTENT);

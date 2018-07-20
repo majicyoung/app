@@ -11,9 +11,9 @@ public interface CLAppQuantityUnitRepository extends CodeListRepository<CLAppQua
 	List<CLAppQuantityUnit> findByEnabledTrueOrderByName();
 	
 	@Query(value = "SELECT * FROM cl_app_quantity_units as qu "
-			+ "WHERE qu.CL_QUANTITY_UNIT_TYPE_ID=1 OR "
-			+ "qu.CL_QUANTITY_UNIT_TYPE_ID=2 OR "
-			+ "qu.CL_QUANTITY_UNIT_TYPE_ID=3 AND qu.ENABLED = TRUE ORDER BY qu.NAME", nativeQuery = true)
+			+ "WHERE qu.CL_QUANTITY_UNIT_TYPE_ID=2 OR "
+			+ "qu.CL_QUANTITY_UNIT_TYPE_ID=3 OR "
+			+ "qu.CL_QUANTITY_UNIT_TYPE_ID=4 AND qu.ENABLED = TRUE ORDER BY qu.NAME", nativeQuery = true)
 	List<CLAppQuantityUnit> getQuantityUnit();
 
 }
