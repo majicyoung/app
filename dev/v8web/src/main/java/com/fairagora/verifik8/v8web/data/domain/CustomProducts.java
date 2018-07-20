@@ -1,19 +1,19 @@
 package com.fairagora.verifik8.v8web.data.domain;
 
 public class CustomProducts {
-	protected long activityId;
+	protected Long activityId;
 	protected String code;
 	protected String description;
-	protected long id;
+	protected Long id;
 	protected String name;
-	protected long productTypeId;
-	protected long unitId;
+	protected Long productTypeId;
+	protected Long unitId;
 
 	public CustomProducts() {
 		super();
 	}
 
-	public CustomProducts(String code, String description, long id, String name, long productTypeId, long unitId) {
+	public CustomProducts(String code, String description, Long id, String name, Long productTypeId, Long unitId) {
 		super();
 		this.code = code;
 		this.description = description;
@@ -23,17 +23,17 @@ public class CustomProducts {
 		this.unitId = unitId;
 	}
 
-	public CustomProducts(long activityId, long productTypeId) {
+	public CustomProducts(Long activityId, Long productTypeId) {
 		super();
 		this.activityId = activityId;
 		this.productTypeId = productTypeId;
 	}
 
-	public long getActivityId() {
+	public Long getActivityId() {
 		return activityId;
 	}
 
-	public void setActivityId(long activityId) {
+	public void setActivityId(Long activityId) {
 		this.activityId = activityId;
 	}
 
@@ -53,11 +53,11 @@ public class CustomProducts {
 		this.description = description;
 	}
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -69,19 +69,19 @@ public class CustomProducts {
 		this.name = name;
 	}
 
-	public long getProductTypeId() {
+	public Long getProductTypeId() {
 		return productTypeId;
 	}
 
-	public void setProductTypeId(long productTypeId) {
+	public void setProductTypeId(Long productTypeId) {
 		this.productTypeId = productTypeId;
 	}
 
-	public long getUnitId() {
+	public Long getUnitId() {
 		return unitId;
 	}
 
-	public void setUnitId(long unitId) {
+	public void setUnitId(Long unitId) {
 		this.unitId = unitId;
 	}	
 }
