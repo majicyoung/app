@@ -1,0 +1,84 @@
+stages:
+  - build
+  - deploy
+
+variables:
+  CONTAINER: verifik8_api_$CI_PIPELINE_ID
+  DOCKERFILE_PATH: ./dev/v8web
+  IMAGE: registry.united-asian.com/verifik8/backend
+  IMAGE_DEVELOP: $IMAGE:$CI_BUILD_REF_NAME.develop
+  IMAGE_LATEST: $IMAGE:$VERSION
+  IMAGE_LOCAL: verifiki8/v8web-1.0.0-snapshot:$CI_PIPELINE_ID
+  IMAGE_STAGING: $IMAGE:staging
+  IMAGE_TAGGED: $IMAGE:$CI_BUILD_REF_NAME
+  SERVICE: api2
+  TAG: "$VERSION.0"
+  VERSION: "0.2"
+
+build:
+  after_script:
+    - docker rmi -f $IMAGE_LOCAL
+  before_script:
+    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN registry.united-asian.com
+  environment: build
+  except:
+    - api
+    - development
+    - master
+    - staging
+    - tags
+  script:
+    - docker build -t $IMAGE_LOCAL
+      --build-arg build=$CI_PIPELINE_ID
+      --build-arg version=$TAG
+      -f $DOCKERFILE_PATH/Dockerfile $DOCKERFILE_PATH
+    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN registry.united-asian.com
+  stage: build
+  tags:
+    - builder
+    - verifik8
+
+api_build:
+  after_script:
+    - docker rmi -f $IMAGE_LOCAL
+    - docker rmi -f $IMAGE_DEVELOP
+  before_script:
+    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN registry.united-asian.com
+  environment: build
+  only:
+    - "api"
+  script:
+    - docker build -t $IMAGE_LOCAL
+      --build-arg build=$CI_PIPELINE_ID
+      --build-arg version=$TAG
+      -f $DOCKERFILE_PATH/Dockerfile $DOCKERFILE_PATH
+    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN registry.united-asian.com
+    - docker tag $IMAGE_LOCAL $IMAGE_DEVELOP
+    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN registry.united-asian.com
+    - docker push $IMAGE_DEVELOP
+  stage: build
+  tags:
+    - builder
+    - verifik8
+
+api_deploy:
+#  after_script:
+#    - docker rm verifik8_deployment_tester_$CI_PIPELINE_ID
+  before_script:
+    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN registry.united-asian.com
+  environment:
+    name: develop
+  only:
+    - "api"
+  script:
+    - cd ~/verifik8
+    - docker-compose pull api2
+    - docker-compose up -d --no-deps api2
+    - docker-compose pull api_green
+    - docker-compose up -d --no-deps api_green
+  stage: deploy
+  tags:
+    - staging2
+  variables:
+    GIT_STRATEGY: none
+
