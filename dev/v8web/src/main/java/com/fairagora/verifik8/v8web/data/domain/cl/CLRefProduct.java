@@ -9,20 +9,17 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "cl_ref_products")
-public class CLRefProduct extends CodeListSupport {
-
+public class CLRefProduct extends CodeListSupport{
 
 	@ManyToOne
 	@JoinColumn(name="CL_PRODUCTS_TYPE_ID", nullable=false)
 	@JsonBackReference
 	protected CLRefProductType clRefProductType;
 
-
 	@ManyToOne
 	@JoinColumn(name = "CL_RECOMMAND_UNIT_ID", nullable = true)
 	@JsonBackReference
 	protected CLAppQuantityUnit clAppQuantityUnit;
-
 
 	public CLRefProductType getClRefProductType() {
 		return clRefProductType;
@@ -38,5 +35,5 @@ public class CLRefProduct extends CodeListSupport {
 
 	public void setClAppQuantityUnit(CLAppQuantityUnit clAppQuantityUnit) {
 		this.clAppQuantityUnit = clAppQuantityUnit;
-	}
+	}	
 }

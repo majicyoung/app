@@ -8,8 +8,6 @@ import java.util.List;
 @Entity
 @Table(name = "cl_farm_pond_activity_types")
 public class CLFarmPondActivityType extends CodeListSupport {
-
-
 	@ManyToMany
 	@JoinTable(
 			name="jt_pond_activity_product_types",

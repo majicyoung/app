@@ -31,14 +31,15 @@ public class V8UserDetailsService implements UserDetailsService, ApplicationList
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-		SYSUser u = userRepository.findByEmail(username);
+		SYSUser u = userRepository.findByEmail(username.toLowerCase());
 		if (u == null) {
 			throw new UsernameNotFoundException(username);
 		}
 
 		V8LoggedUser loggedUser = new V8LoggedUser(u);
 
-		jdbc.queryForList(AUTORITIES_BY_USERNAME, new Object[] { username }, String.class).forEach(s -> loggedUser.addAuthority(new SimpleGrantedAuthority(s.toUpperCase())));
+		jdbc.queryForList(AUTORITIES_BY_USERNAME, new Object[] { username.toLowerCase() }, String.class)
+				.forEach(s -> loggedUser.addAuthority(new SimpleGrantedAuthority(s.toUpperCase())));
 
 		String sql = "";
 		sql += "SELECT sys_rights.CODE, sys_rights.RANKING, sys_pages.CODE FROM sys_users_rights";
@@ -85,7 +86,8 @@ public class V8UserDetailsService implements UserDetailsService, ApplicationList
 			event.getAuthentication().getAuthorities().forEach(a -> {
 				System.out.println("\t" + a.getAuthority());
 			});
-			System.out.println("--- END USER LOGIN ------------------------------------------------------------------------");
+			System.out.println(
+					"--- END USER LOGIN ------------------------------------------------------------------------");
 		}
 	}
 

@@ -38,8 +38,5 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	      .frameOptions()
 	      .sameOrigin();
 		
-
-	}
-
-	 
+	} 
 }
