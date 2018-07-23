@@ -5,31 +5,30 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.fairagora.verifik8.v8web.data.domain.cl.CLFarmPondActivityType;
+import com.fairagora.verifik8.v8web.data.domain.cl.CLFarmPlotActivityType;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLRefProductType;
 import com.fairagora.verifik8.v8web.data.domain.cl.CodeListSupport;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
-@Table(name = "jt_pond_activity_product_types")
-public class JTPondActivityProductTypes extends CodeListSupport {
-	
+@Table(name = "jt_plot_activity_product_types")
+public class JTPlotActivityProductTypes extends CodeListSupport{
 	@ManyToOne
-	@JoinColumn(name="CL_FARM_POND_ACTIVITY_ID", nullable=false)
+	@JoinColumn(name="CL_FARM_PLOT_ACTIVITY_ID", nullable=false)
 	@JsonBackReference
-	protected CLFarmPondActivityType clFarmPondActivityType;
+	protected CLFarmPlotActivityType clFarmPlotActivityType;
 	
 	@ManyToOne
 	@JoinColumn(name="CL_PRODUCT_TYPE_ID", nullable=false)
 	@JsonBackReference
 	protected CLRefProductType clRefProductType;
 
-	public CLFarmPondActivityType getClFarmPondActivityType() {
-		return clFarmPondActivityType;
+	public CLFarmPlotActivityType getClFarmPlotActivityType() {
+		return clFarmPlotActivityType;
 	}
 
-	public void setClFarmPondActivityType(CLFarmPondActivityType clFarmPondActivityType) {
-		this.clFarmPondActivityType = clFarmPondActivityType;
+	public void setClFarmPlotActivityType(CLFarmPlotActivityType clFarmPlotActivityType) {
+		this.clFarmPlotActivityType = clFarmPlotActivityType;
 	}
 
 	public CLRefProductType getClRefProductType() {
