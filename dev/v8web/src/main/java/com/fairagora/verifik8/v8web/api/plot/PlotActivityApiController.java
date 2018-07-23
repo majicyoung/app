@@ -21,9 +21,13 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fairagora.verifik8.v8web.data.domain.CustomProducts;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLAppQuantityUnit;
 import com.fairagora.verifik8.v8web.data.domain.dt.DTFarmPlotActivity;
+import com.fairagora.verifik8.v8web.data.domain.dt.DTFarmPlotMeasurement;
+import com.fairagora.verifik8.v8web.data.domain.dt.DTFarmPondMeasurement;
 import com.fairagora.verifik8.v8web.data.repo.cl.CLAppQuantityUnitRepository;
 import com.fairagora.verifik8.v8web.data.repo.cl.CLRefProductRepository;
 import com.fairagora.verifik8.v8web.data.repo.dt.DTFarmPlotActivityRepository;
+import com.fairagora.verifik8.v8web.data.repo.dt.DTFarmPlotMeasurementRepository;
+import com.fairagora.verifik8.v8web.data.repo.dt.DTFarmPondMeasurementRepository;
 import com.fairagora.verifik8.v8web.data.repo.reg.RegEntityFarmPlotRepository;
 import com.fairagora.verifik8.v8web.mvc.AbstractV8Controller;
 import com.fairagora.verifik8.v8web.mvc.farms.RegFarmDTOMapper;
@@ -32,7 +36,7 @@ import com.fairagora.verifik8.v8web.mvc.plots.dto.PlotActivityDto;
 @RequestMapping("green")
 @RestController
 public class PlotActivityApiController  extends AbstractV8Controller{
-
+	
 	@Autowired
 	private DTFarmPlotActivityRepository plotActivityRepository;
 
@@ -67,6 +71,17 @@ public class PlotActivityApiController  extends AbstractV8Controller{
 		plotActivityRepository.save(act);
 
 		return new ResponseEntity<Object>(HttpStatus.CREATED);
+	}
+	
+	@GetMapping(path = "/activities-measures")
+	public ResponseEntity<List<DTFarmPlotActivity>> getAllActivityMeasure() {
+		List<DTFarmPlotActivity> measures = plotActivityRepository.findAll();
+		
+		if (measures.isEmpty()) {
+			return new ResponseEntity<List<DTFarmPlotActivity>>(HttpStatus.NO_CONTENT);
+		}
+
+		return new ResponseEntity<List<DTFarmPlotActivity>>(measures, HttpStatus.OK);
 	}
 
 
