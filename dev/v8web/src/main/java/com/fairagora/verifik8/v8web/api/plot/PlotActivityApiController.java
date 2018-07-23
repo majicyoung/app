@@ -70,7 +70,7 @@ public class PlotActivityApiController  extends AbstractV8Controller{
 
 		plotActivityRepository.save(act);
 
-		return new ResponseEntity<Object>(HttpStatus.CREATED);
+		return new ResponseEntity<Object>(act, HttpStatus.CREATED);
 	}
 	
 	@GetMapping(path = "/activities-measures")

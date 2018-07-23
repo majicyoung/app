@@ -28,8 +28,8 @@ public interface CLRefProductRepository extends CodeListRepository<CLRefProduct>
 	
 	@Query(value = ""
 			+ "SELECT " + 
-			"NEW com.fairagora.verifik8.v8web.data.domain.CustomProducts(activityType.clFarmPondActivityType.id, productType.id) FROM " + 
-			"JTPondActivityProductTypes as activityType " + 
+			"NEW com.fairagora.verifik8.v8web.data.domain.CustomProducts(activityType.clFarmPlotActivityType.id, productType.id) FROM " + 
+			"JTPlotActivityProductTypes as activityType " +
 			"JOIN activityType.clRefProductType as productType ")
 	List<CustomProducts> getFarmPondActivity();
 }
