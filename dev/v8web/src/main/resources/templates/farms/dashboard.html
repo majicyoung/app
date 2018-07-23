@@ -227,6 +227,42 @@
 									</div>
 								</div>
 							</div>
+
+							<div class="row"  th:if="${v8App.plotProfile}">
+								<div class="box-header">
+									<h3 class="box-title" th:text="#{farm.pesticide}"></h3>
+								</div>
+								<div class="box-body">
+									<div class="col-sm-3">
+										<div class="form-group">
+											<div class="input-group">
+												<button type="button" class="btn btn-default pull-right" id="pesticide_datepicker">
+                    <span>
+                      <i class="fa fa-calendar"></i> Date range picker
+                    </span>
+													<i class="fa fa-caret-down"></i>
+												</button>
+											</div>
+											<br/>
+											<select class="form-control pesticide_plot_select_multiple" multiple="multiple"
+															th:attr="data-placeholder=#{farm.plots}"></select>
+											<br/><br/>
+											<select class="form-control pesticide_select"
+															th:attr="data-placeholder=#{farm.pesticide}"></select>
+											<br/><br/>
+											<button type="button" class="btn btn-block btn-primary" onclick="onPesticideSubmitButtonClick()">
+												Submit
+											</button>
+										</div>
+									</div>
+									<div class="col-sm-9">
+										<div id="pesticide_chart" style="width: 100%; height: 500px"></div>
+									</div>
+								</div>
+							</div>
+
+
+
 						</div>
 					</div>
 				</div>
@@ -254,12 +290,14 @@
 
           if (isPondProfile){
               initDatePicker('#water_datepicker');
-              if (isPondProfile){
-                  initSelect2Multiple('.water_select2_multiple', '/farm/' + farmId + '/dashboard/poundslist');
-              }else if(isPlotProfile){
-                  initSelect2Multiple('.water_select2_multiple', '/farm/' + farmId + '/dashboard/plotslist');
-              }
+							initSelect2Multiple('.water_select2_multiple', '/farm/' + farmId + '/dashboard/poundslist');
               initSelect2Multiple('.water_select2', '/farm/' + farmId + '/dashboard/waterscontrollist');
+
+          }else if(isPlotProfile){
+              initDatePicker('#pesticide_datepicker');
+              initSelect2Multiple('.pesticide_plot_select_multiple', '/farm/' + farmId + '/dashboard/plotslist');
+              initSelect2Multiple('.pesticide_select', '/farm/' + farmId + '/dashboard/pesticidecontrollist');
+
 
           }
 
@@ -276,7 +314,11 @@
               google.charts.setOnLoadCallback(function () {
                   initWaterGraph();
               });
-          }
+          }else if(isPlotProfile){
+              google.charts.setOnLoadCallback(function () {
+                  initPesticideGraph();
+              });
+					}
       });
 
       function initProductionGraph(url) {
@@ -298,6 +340,16 @@
               end: endDateWater
           }, function (data) {
               drawChart('water_line_chart', 'Water', data);
+          });
+      }
+      function initPesticideGraph() {
+          var startDateWater = $('#pesticide_datepicker').data('daterangepicker').startDate.format('YYYY-MM-DD');
+          var endDateWater = $('#pesticide_datepicker').data('daterangepicker').endDate.format('YYYY-MM-DD');
+          $.post('/farm/' + farmId + '/dashboard/pesticides/initialize', {
+              start: startDateWater,
+              end: endDateWater
+          }, function (data) {
+              drawChart('pesticide_chart', 'Pesticide', data);
           });
       }
 
@@ -376,6 +428,24 @@
               drawChart('water_line_chart', 'Water', data);
           });
       }
+
+
+      function onPesticideSubmitButtonClick() {
+          var startDate = $('#pesticide_datepicker').data('daterangepicker').startDate.format('YYYY-MM-DD');
+          var endDate = $('#pesticide_datepicker').data('daterangepicker').endDate.format('YYYY-MM-DD');
+          var selectProductions = $('.pesticide_plot_select_multiple').val();
+          var selectPesticide = $('.pesticide_select').val();
+
+          $.get('/farm/' + farmId + '/dashboard/pesticides', {
+              start: startDate,
+              end: endDate,
+              'plotIds[]': selectProductions,
+              measureId: selectPesticide
+          }, function (data) {
+              drawChart('pesticide_chart', 'Pesticide', data);
+          });
+      }
+
 
 
       function drawChart(id, title, data) {
