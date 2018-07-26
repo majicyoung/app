@@ -16,6 +16,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
+
 import com.fairagora.verifik8.v8web.data.domain.V8EntitySupport;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLFarmPondActivityType;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLRefProduct;
@@ -34,6 +37,7 @@ public class DTFarmPondActivity extends V8EntitySupport {
 
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "REG_ENTITY_FARM_POND_ID")
+	@NotFound(action = NotFoundAction.IGNORE)
 	protected RegEntityFarmPond pond;
 
 	@Column(name = "ACTIVITY_START_DATE")
@@ -67,8 +71,9 @@ public class DTFarmPondActivity extends V8EntitySupport {
 	@Column(name = "FEED_LOT_NUMBER", length = 216)
 	protected String feedLotNumber;
 
-	@ManyToOne(optional = true)
+	@ManyToOne(optional = false)
 	@JoinColumn(name = "CL_REF_SPECIES_ID")
+	@NotFound(action = NotFoundAction.IGNORE)
 	protected CLRefSpecies species;
 
 	public Long getId() {

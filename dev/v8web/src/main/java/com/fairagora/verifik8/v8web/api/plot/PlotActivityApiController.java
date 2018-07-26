@@ -91,7 +91,7 @@ public class PlotActivityApiController  extends AbstractV8Controller{
 		
 		List<CustomProducts> products = clRefProductRepository.getProductAndFarmPondActivityId();
 		
-		List<CustomProducts> activity = clRefProductRepository.getFarmPondActivity();
+		List<CustomProducts> activity = clRefProductRepository.getFarmPlotActivity();
 		
 		for (CustomProducts cp : products) {
 			CustomProducts cproduct = new CustomProducts();
