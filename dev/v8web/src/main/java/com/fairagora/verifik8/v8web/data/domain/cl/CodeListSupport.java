@@ -98,6 +98,14 @@ public abstract class CodeListSupport extends V8EntitySupport {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+	
+	public Long getRanking() {
+		return ranking;
+	}
+
+	public void setRanking(Long ranking) {
+		this.ranking = ranking;
+	}
 
 	public String getI18nDefault() {
 		return i18nDefault;
