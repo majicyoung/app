@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fairagora.verifik8.v8web.data.domain.cl.CLFarmPondActivityType;
+import com.fairagora.verifik8.v8web.data.domain.dt.DTFarmPlotActivity;
 import com.fairagora.verifik8.v8web.data.domain.dt.DTFarmPondActivity;
 import com.fairagora.verifik8.v8web.data.repo.dt.DTFarmPondActivityRepository;
 import com.fairagora.verifik8.v8web.data.repo.reg.RegEntityFarmPondRepository;
@@ -55,7 +56,18 @@ public class PondsActivityController extends AbstractV8Controller {
 
 		pondActivityRepository.save(act);
 		
-		return new ResponseEntity<Object>(HttpStatus.CREATED);
+		return new ResponseEntity<Object>(act, HttpStatus.CREATED);
+	}
+	
+	@GetMapping(path = "/activities-measures")
+	public ResponseEntity<?> getAllActivityMeasure() {
+		List<DTFarmPondActivity> measures = pondActivityRepository.findAll();
+		
+		if (measures.isEmpty()) {
+			return new ResponseEntity<List<DTFarmPondActivity>>(HttpStatus.NO_CONTENT);
+		}
+
+		return new ResponseEntity<List<DTFarmPondActivity>>(measures, HttpStatus.OK);
 	}
 
 }
