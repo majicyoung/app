@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLAppMeasureType;
 import com.fairagora.verifik8.v8web.services.CodeListsService;
 
-@RequestMapping("api")
+@RequestMapping("blue")
 @RestController
 public class CacheController {
 

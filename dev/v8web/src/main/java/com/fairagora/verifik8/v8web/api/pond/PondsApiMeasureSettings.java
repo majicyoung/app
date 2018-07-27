@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fairagora.verifik8.v8web.mvc.AbstractV8Controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-@RequestMapping("api")
+@RequestMapping("blue")
 @RestController
 public class PondsApiMeasureSettings extends AbstractV8Controller {
 
