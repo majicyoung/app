@@ -19,7 +19,7 @@ public class PondApiController {
 	@Autowired
 	private RegEntityFarmPondRepository farmPondRepository;
 
-	@RequestMapping(value = "/api/pond/{pondId}", method = RequestMethod.GET)
+	@RequestMapping(value = "/blue/pond/{pondId}", method = RequestMethod.GET)
 	public ApiPond loadPond(@PathVariable("pondId") Long pondId) {
 		RegEntityFarmPond pound = farmPondRepository.findOne(pondId);
 
@@ -36,7 +36,7 @@ public class PondApiController {
 		return null;
 	}
 
-	@RequestMapping(value = "/api/ponds-by-farm/{farmId}", method = RequestMethod.GET)
+	@RequestMapping(value = "/blue/ponds-by-farm/{farmId}", method = RequestMethod.GET)
 	public List<ApiPond> loadPondsByFarm(@PathVariable("farmId") Long farmId) {
 
 		List<RegEntityFarmPond> ponds = farmPondRepository.findByFarmId(farmId);

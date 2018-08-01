@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fairagora.verifik8.v8web.mvc.AbstractV8Controller;
 
-@RequestMapping("api")
+@RequestMapping("blue")
 @RestController
 public class CLAppQuantityUnitsApiController extends AbstractV8Controller{
 

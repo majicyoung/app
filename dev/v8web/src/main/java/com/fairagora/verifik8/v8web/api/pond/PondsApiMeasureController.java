@@ -20,7 +20,7 @@ import com.fairagora.verifik8.v8web.mvc.AbstractV8Controller;
 import com.fairagora.verifik8.v8web.mvc.farms.RegFarmDTOMapper;
 import com.fairagora.verifik8.v8web.mvc.ponds.dto.PondMeasurementDto;
 
-@RequestMapping("api")
+@RequestMapping("blue")
 @RestController
 public class PondsApiMeasureController extends AbstractV8Controller{
 	

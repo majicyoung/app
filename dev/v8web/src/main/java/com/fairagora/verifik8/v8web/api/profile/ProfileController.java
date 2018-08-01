@@ -20,7 +20,7 @@ import com.fairagora.verifik8.v8web.services.FarmService;
 import com.fairagora.verifik8.v8web.services.UserService;
 import com.fairagora.verifik8.v8web.services.enhanced.V8Farm;
 
-@RequestMapping("api")
+@RequestMapping("blue")
 @RestController
 public class ProfileController extends AbstractV8Controller{
 	
