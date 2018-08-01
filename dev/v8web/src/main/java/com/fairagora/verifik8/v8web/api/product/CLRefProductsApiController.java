@@ -14,7 +14,7 @@ import com.fairagora.verifik8.v8web.data.domain.CustomProducts;
 import com.fairagora.verifik8.v8web.data.repo.cl.CLRefProductRepository;
 import com.fairagora.verifik8.v8web.mvc.AbstractV8Controller;
 
-@RequestMapping("api")
+@RequestMapping("blue")
 @RestController
 public class CLRefProductsApiController extends AbstractV8Controller {
 	
