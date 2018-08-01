@@ -14,7 +14,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLAppMeasureType;
 import com.fairagora.verifik8.v8web.services.CodeListsService;
 
+<<<<<<< Updated upstream
 @RequestMapping("api")
+=======
+@RequestMapping({"blue", "green"})
+>>>>>>> Stashed changes
 @RestController
 public class CacheController {
 
