@@ -107,14 +107,14 @@ public class BlueCacheController extends AbstractV8Controller{
 		Map<String, Object> cacheMap = new HashMap<String, Object>();
 		cacheMap.put("measureTypes", clAppMeasureType);
 		cacheMap.put("activities", activities);
-		cacheMap.put("activitiesMeasures", activitiesMeasures);
+		cacheMap.put("activitiesManagement", activitiesMeasures);
 		cacheMap.put("farms", farms);
 		cacheMap.put("ponds", ponds);
 		cacheMap.put("products", listProducts);
-		cacheMap.put("measure-units", quantityUnits);
+		cacheMap.put("measureUnits", quantityUnits);
 		cacheMap.put("user", userFilter);
 		cacheMap.put("indicators", measures);
-		cacheMap.put("measure-setting", pondsApiMeasureSettings.listAllMeasureSettings());
+		cacheMap.put("measureSetting", pondsApiMeasureSettings.listAllMeasureSettings());
 		
 		return new ResponseEntity<Object>(cacheMap, HttpStatus.OK);
 	}
