@@ -1,4 +1,4 @@
-package com.fairagora.verifik8.v8web.api.cache;
+package com.fairagora.verifik8.v8web.api.cache.green;
 
 import java.util.HashMap;
 import java.util.List;
@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLAppMeasureType;
 import com.fairagora.verifik8.v8web.services.CodeListsService;
 
-@RequestMapping({"blue", "green"})
+@RequestMapping("green")
 @RestController
-public class CacheController {
+public class GreenCacheController {
 
 	@Autowired
 	private CodeListsService codeListsService;
