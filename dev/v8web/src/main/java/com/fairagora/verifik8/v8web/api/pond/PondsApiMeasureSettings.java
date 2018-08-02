@@ -19,7 +19,7 @@ public class PondsApiMeasureSettings extends AbstractV8Controller {
 		return new ResponseEntity<>(new PondsApiMeasureSettings().listAllMeasureSettings(), HttpStatus.OK);
 	}
 
-	private Map<?, ?> listAllMeasureSettings() {
+	public Map<?, ?> listAllMeasureSettings() {
 		ObjectMapper objectMapper = new ObjectMapper();
 		Map<?, ?> measureSettingsMap = null;
 
