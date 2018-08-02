@@ -11,7 +11,7 @@ variables:
   IMAGE_LOCAL: verifiki8/backend:$CI_PIPELINE_ID
   IMAGE_STAGING: $IMAGE:staging
   IMAGE_TAGGED: $IMAGE:$CI_BUILD_REF_NAME
-  SERVICE: api2
+  SERVICE: api_blue
   TAG: "$VERSION.0"
   VERSION: "0.2"
 
@@ -91,8 +91,8 @@ develop_deploy:
     - "api"
   script:
     - cd ~/verifik8
-    - docker-compose pull api2
-    - docker-compose up -d --no-deps api2
+    - docker-compose pull api_blue
+    - docker-compose up -d --no-deps api_blue
     - docker-compose pull api_green
     - docker-compose up -d --no-deps api_green
   stage: deploy
@@ -110,8 +110,8 @@ staging_deploy:
     - "staging"
   script:
     - cd ~/verifik8
-    - docker-compose pull api2
-    - docker-compose up -d --no-deps api2
+    - docker-compose pull api_blue
+    - docker-compose up -d --no-deps api_blue
     - docker-compose pull api_green
     - docker-compose up -d --no-deps api_green
   stage: deploy
