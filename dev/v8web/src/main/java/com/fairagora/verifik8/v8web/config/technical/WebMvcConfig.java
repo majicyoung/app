@@ -14,6 +14,8 @@ import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 import org.thymeleaf.extras.java8time.dialect.Java8TimeDialect;
 
+import com.fairagora.verifik8.v8web.api.interceptor.HeaderInterceptor;
+
 import nz.net.ultraq.thymeleaf.LayoutDialect;
 
 @Configuration
@@ -55,6 +57,7 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(localeChangeInterceptor());
+		registry.addInterceptor(new HeaderInterceptor());
 	}
 
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
