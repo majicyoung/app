@@ -29,14 +29,20 @@ public class HeaderInterceptor extends HandlerInterceptorAdapter{
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
-
 		long time = new Date().getTime();
 		
-		if(request.getMethod().equalsIgnoreCase("POST")) {
-			setDbVersion(String.valueOf(time));
+		SYSUser user = getDbVersion();
+		
+		if(user.getCacheVersion() == null) {
+			setDbVersion(String.valueOf(time), user);
+		} else {
+			if(request.getMethod().equalsIgnoreCase("POST")) {
+				setDbVersion(String.valueOf(time), user);
+			}
 		}
 		
-		response.addHeader("dbVersion", String.valueOf(getDbVersion().getCacheVersion()));
+		response.addHeader("db_version", String.valueOf(user.getCacheVersion()));
+		
 		return true;
 	}
 
@@ -44,6 +50,7 @@ public class HeaderInterceptor extends HandlerInterceptorAdapter{
 	public void postHandle(
 			HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView)
 			throws Exception {
+	
 	}
 
 	@Override
@@ -52,35 +59,32 @@ public class HeaderInterceptor extends HandlerInterceptorAdapter{
 			throws Exception {
 	}
 	
-	
 	private SYSUser getDbVersion() {
 		SYSUser user = userService.getUserByEmail();
-		if(user != null) {
-			return user;
-		}
 		
-		return null;
+		return user;
 	}
 	
-	private void setDbVersion(String cacheVersion) {
-		SYSUser newUser = userRepository.findOne(getDbVersion().getId());
+	private void setDbVersion(String cacheVersion, SYSUser user) {
+		
+		SYSUser newUser = userRepository.findOne(user.getId());
 		
 		UserFormDto createUserDto = new UserFormDto();
 		
-		createUserDto.setRole(getDbVersion().getRole().getId());
-		createUserDto.setName(getDbVersion().getName());
-		createUserDto.setPassword(getDbVersion().getPassword());
-		createUserDto.setEmail(getDbVersion().getEmail());
+		createUserDto.setRole(user.getRole().getId());
+		createUserDto.setName(user.getName());
+		createUserDto.setPassword(user.getPassword());
+		createUserDto.setEmail(user.getEmail());
 		createUserDto.setCacheVersion(cacheVersion);
-		createUserDto.setCooperative(getDbVersion().getId());
-		createUserDto.setCountry(getDbVersion().getId());
-		createUserDto.setFarm(getDbVersion().getId());
-		createUserDto.setBuyer(getDbVersion().getId());
-		createUserDto.setSupplier(getDbVersion().getId());
+		createUserDto.setCooperative(user.getCooperative().getId());
+		createUserDto.setCountry(user.getCountry().getId());
+		createUserDto.setFarm(user.getFarm().getId());
+		createUserDto.setBuyer(user.getBuyer().getId());
+		createUserDto.setSupplier(user.getSupplier().getId());
+		createUserDto.setId(user.getId());
 
 		sysUserDTOMapper.fillEntity(createUserDto, newUser);
 
 		userRepository.save(newUser);
 	}
-	
 }

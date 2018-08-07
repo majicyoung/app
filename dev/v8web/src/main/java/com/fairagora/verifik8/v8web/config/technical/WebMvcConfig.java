@@ -53,11 +53,16 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 		lci.setParamName("lang");
 		return lci;
 	}
+	
+	@Bean
+	public HeaderInterceptor headerInterceptor() {
+		return new HeaderInterceptor();
+	}
 
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(localeChangeInterceptor());
-		registry.addInterceptor(new HeaderInterceptor());
+		registry.addInterceptor(headerInterceptor());
 	}
 
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
