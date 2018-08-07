@@ -57,6 +57,7 @@ public class PondsApiMeasureController extends AbstractV8Controller{
 	
 	@GetMapping(path = "/measures")
 	public ResponseEntity<List<DTFarmPondMeasurement>> getAllPondMeasure() {
+		
 		Calendar cal = Calendar.getInstance();
         cal.add(Calendar.YEAR, -1);
         
@@ -65,9 +66,8 @@ public class PondsApiMeasureController extends AbstractV8Controller{
         
         String previousDate = format.format(nextYear);
         String todayDate = format.format(new Date());
-		
-		
-		List<DTFarmPondMeasurement> measures = pondMeasuresRepository.findAllPondMeasure(todayDate, previousDate);
+        
+        List<DTFarmPondMeasurement> measures = pondMeasuresRepository.findAllPondMeasure(todayDate, previousDate);
 		
 		if (measures.isEmpty()) {
 			return new ResponseEntity<List<DTFarmPondMeasurement>>(HttpStatus.NO_CONTENT);
