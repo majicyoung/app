@@ -62,7 +62,7 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(localeChangeInterceptor());
-		registry.addInterceptor(headerInterceptor());
+		registry.addInterceptor(headerInterceptor()).excludePathPatterns("login","/blue/logout","/green/logout");
 	}
 
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {

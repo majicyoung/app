@@ -65,7 +65,7 @@ public class BlueCacheController extends AbstractV8Controller{
 	@GetMapping(path= "/cache")
 	public ResponseEntity<Object> getCacheData() {
 		List<CLAppMeasureType> clAppMeasureType = codeListsService.listActiveMeasureTypes();
-		/* List<CLFarmPondActivityType> activities = codeListservice.listActivePondActivityTypes();
+		List<CLFarmPondActivityType> activities = codeListservice.listActivePondActivityTypes();
 		List<DTFarmPondActivity> activitiesMeasures = pondActivityRepository.findAll();
 		List<?> quantityUnits = codeListservice.listActiveQuantityUnit();
 		List<DTFarmPondMeasurement> measures = pondMeasuresRepository.findAll();
@@ -101,12 +101,12 @@ public class BlueCacheController extends AbstractV8Controller{
 					listProducts.add(cproduct);
 				}
 			}
-		} */
+		}
 
 		
 		Map<String, Object> cacheMap = new HashMap<String, Object>();
 		cacheMap.put("measureTypes", clAppMeasureType);
-		/*cacheMap.put("activities", activities);
+		cacheMap.put("activities", activities);
 		cacheMap.put("activitiesManagement", activitiesMeasures);
 		cacheMap.put("farms", farms);
 		cacheMap.put("ponds", ponds);
@@ -114,7 +114,7 @@ public class BlueCacheController extends AbstractV8Controller{
 		cacheMap.put("measureUnits", quantityUnits);
 		cacheMap.put("user", userFilter);
 		cacheMap.put("indicators", measures);
-		cacheMap.put("measureSetting", pondsApiMeasureSettings.listAllMeasureSettings()); */
+		cacheMap.put("measureSetting", pondsApiMeasureSettings.listAllMeasureSettings());
 		
 		return new ResponseEntity<Object>(cacheMap, HttpStatus.OK);
 	}
