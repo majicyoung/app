@@ -1,5 +1,8 @@
 package com.fairagora.verifik8.v8web.api.pond;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -54,12 +57,21 @@ public class PondsApiMeasureController extends AbstractV8Controller{
 	
 	@GetMapping(path = "/measures")
 	public ResponseEntity<List<DTFarmPondMeasurement>> getAllPondMeasure() {
-		List<DTFarmPondMeasurement> measures = pondMeasuresRepository.findAll();
+		Calendar cal = Calendar.getInstance();
+		cal.add(Calendar.YEAR, -1);
+		
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		Date nextYear = cal.getTime();
+		
+		String previousDate = format.format(nextYear);
+		String todayDate = format.format(new Date());
+		
+		List<DTFarmPondMeasurement> measures = pondMeasuresRepository.findAllPondMeasure(todayDate, previousDate);
 		
 		if (measures.isEmpty()) {
 			return new ResponseEntity<List<DTFarmPondMeasurement>>(HttpStatus.NO_CONTENT);
 		}
-
+		
 		return new ResponseEntity<List<DTFarmPondMeasurement>>(measures, HttpStatus.OK);
 	}
 
