@@ -42,7 +42,7 @@ public class HeaderInterceptor extends HandlerInterceptorAdapter{
 		}
 		
 		response.addHeader("verifik8_database_version", String.valueOf(user.getCacheVersion()));
-		response.setHeader("Access-Control-Expose-Headers", "VERFIKI8_DATABASE_VERSION");
+		response.setHeader("Access-Control-Expose-Headers", "VERIFIK8_DATABASE_VERSION");
 		return true;
 	}
 
