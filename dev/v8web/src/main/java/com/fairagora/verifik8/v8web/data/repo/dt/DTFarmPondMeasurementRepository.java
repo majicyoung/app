@@ -12,7 +12,7 @@ public interface DTFarmPondMeasurementRepository extends JpaRepository<DTFarmPon
 
 	List<DTFarmPondMeasurement> findByPondId(Long pondId);
 	
-	@Query(value = "SELECT * FROM dt_farmaq_pond_measurements WHERE MEASURE_DATE BETWEEN :previousDate AND :currentDate", nativeQuery = true)
-	List<DTFarmPondMeasurement> findAllPondMeasure(@Param("currentDate") String currentDate, @Param("previousDate") String previousDate);
+	@Query(value = "SELECT * FROM dt_farmaq_pond_measurements WHERE REG_ENTITY_FARM_POND_ID=:id AND MEASURE_DATE BETWEEN :previousDate AND :currentDate", nativeQuery = true)
+	List<DTFarmPondMeasurement> findAllPondMeasure(@Param("currentDate") String currentDate, @Param("previousDate") String previousDate,@Param("id") Long id);
 
 }
