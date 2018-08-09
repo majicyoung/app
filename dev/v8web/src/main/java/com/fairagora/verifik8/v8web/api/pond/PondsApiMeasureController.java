@@ -1,11 +1,13 @@
 package com.fairagora.verifik8.v8web.api.pond;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,20 +23,28 @@ import com.fairagora.verifik8.v8web.data.repo.dt.DTFarmPondMeasurementRepository
 import com.fairagora.verifik8.v8web.data.repo.reg.RegEntityFarmPondRepository;
 import com.fairagora.verifik8.v8web.mvc.AbstractV8Controller;
 import com.fairagora.verifik8.v8web.mvc.farms.RegFarmDTOMapper;
+import com.fairagora.verifik8.v8web.mvc.ponds.dto.PondListingDto;
 import com.fairagora.verifik8.v8web.mvc.ponds.dto.PondMeasurementDto;
+import com.fairagora.verifik8.v8web.services.FarmService;
 
 @RequestMapping("blue")
 @RestController
 public class PondsApiMeasureController extends AbstractV8Controller{
 	
 	@Autowired
+	private RegFarmDTOMapper dtoMapper;
+	
+	@Autowired
+	private RegEntityFarmPondRepository farmPondRepository;
+	
+	@Autowired
+	private FarmService farmService;
+
+	@Autowired
 	private DTFarmPondMeasurementRepository pondMeasuresRepository;
 
 	@Autowired
-	private RegEntityFarmPondRepository farmPondRepository;
-
-	@Autowired
-	private RegFarmDTOMapper dtoMapper;
+	private RegFarmDTOMapper regFarmDtoMapper;
 	
 	@PostMapping(path= "/ponds/{pondId}/measures")
 	public ResponseEntity<?> createPondMeasure(@PathVariable("pondId") long pondId, PondMeasurementDto dto) {
@@ -66,7 +76,13 @@ public class PondsApiMeasureController extends AbstractV8Controller{
 		String previousDate = format.format(nextYear);
 		String todayDate = format.format(new Date());
 		
-		List<DTFarmPondMeasurement> measures = pondMeasuresRepository.findAllPondMeasure(todayDate, previousDate);
+		List<PondListingDto> ponds = farmService.listAllPondsForLoggedUser(getLoggedUser()).stream().map(p -> regFarmDtoMapper.toListing(p)).collect(Collectors.toList());
+		
+		List<DTFarmPondMeasurement> measures = new ArrayList<>();
+		
+		for(PondListingDto pond : ponds) {
+			measures.addAll(pondMeasuresRepository.findAllPondMeasure(todayDate, previousDate, pond.getId()));
+		}
 		
 		if (measures.isEmpty()) {
 			return new ResponseEntity<List<DTFarmPondMeasurement>>(HttpStatus.NO_CONTENT);
