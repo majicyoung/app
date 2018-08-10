@@ -60,6 +60,25 @@ develop_build:
     - builder
     - verifik8
 
+develop_deploy:
+  before_script:
+    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN registry.united-asian.com
+  environment:
+    name: develop
+  only:
+    - "api"
+  script:
+    - cd ~/verifik8
+    - docker-compose pull api_blue
+    - docker-compose up -d --no-deps api_blue
+    - docker-compose pull api_green
+    - docker-compose up -d --no-deps api_green
+  stage: deploy
+  tags:
+    - staging2
+  variables:
+    GIT_STRATEGY: none
+
 staging_build:
   after_script:
     - docker rmi -f $IMAGE_LOCAL
@@ -81,25 +100,6 @@ staging_build:
   tags:
     - builder
     - verifik8
-
-develop_deploy:
-  before_script:
-    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN registry.united-asian.com
-  environment:
-    name: develop
-  only:
-    - "api"
-  script:
-    - cd ~/verifik8
-    - docker-compose pull api_blue
-    - docker-compose up -d --no-deps api_blue
-    - docker-compose pull api_green
-    - docker-compose up -d --no-deps api_green
-  stage: deploy
-  tags:
-    - staging2
-  variables:
-    GIT_STRATEGY: none
 
 staging_deploy:
   before_script:
