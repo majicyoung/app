@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fairagora.verifik8.v8web.mvc.AbstractV8Controller;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @RequestMapping("blue")
 @RestController
@@ -23,5 +24,19 @@ public class CLAppQuantityUnitsApiController extends AbstractV8Controller{
 		}
 		
 		return new ResponseEntity<Object>(quantityUnits, HttpStatus.OK);
+	}
+	
+	public List<?> listPondAllMeasureUnits() {
+		ObjectMapper objectMapper = new ObjectMapper();
+		List<?> measureUnitsMap = null;
+
+		try {
+			measureUnitsMap = objectMapper.readValue(getClass().getResource("/json/MeasureUnits.json"), List.class);
+			System.out.println("fdslkf " + measureUnitsMap);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+
+		return measureUnitsMap;
 	}
 }

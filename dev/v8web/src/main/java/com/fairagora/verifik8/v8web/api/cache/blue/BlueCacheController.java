@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fairagora.verifik8.v8web.api.pond.PondsApiMeasureSettings;
+import com.fairagora.verifik8.v8web.api.quantity.units.CLAppQuantityUnitsApiController;
 import com.fairagora.verifik8.v8web.data.domain.CustomProducts;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLAppMeasureType;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLFarmPondActivityType;
@@ -58,8 +59,11 @@ public class BlueCacheController extends AbstractV8Controller{
 	
 	private PondsApiMeasureSettings pondsApiMeasureSettings;
 	
+	private CLAppQuantityUnitsApiController clAppQuantityUnitsApiController;
+	
 	public BlueCacheController() {
 		pondsApiMeasureSettings = new PondsApiMeasureSettings();
+		clAppQuantityUnitsApiController = new CLAppQuantityUnitsApiController();
 	}
 	
 	@GetMapping(path= "/cache")
@@ -111,12 +115,12 @@ public class BlueCacheController extends AbstractV8Controller{
 		cacheMap.put("farms", farms);
 		cacheMap.put("ponds", ponds);
 		cacheMap.put("products", listProducts);
-		cacheMap.put("measureUnits", quantityUnits);
+		cacheMap.put("quantityUnits", quantityUnits);
 		cacheMap.put("user", userFilter);
 		cacheMap.put("indicators", measures);
 		cacheMap.put("measureSetting", pondsApiMeasureSettings.listAllMeasureSettings());
+		cacheMap.put("measureUnits", clAppQuantityUnitsApiController.listPondAllMeasureUnits());
 		
 		return new ResponseEntity<Object>(cacheMap, HttpStatus.OK);
 	}
-	
 }
