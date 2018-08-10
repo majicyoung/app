@@ -1,5 +1,6 @@
 package com.fairagora.verifik8.v8web.api.interceptor;
 
+import java.io.Console;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
@@ -71,16 +72,18 @@ public class HeaderInterceptor extends HandlerInterceptorAdapter{
 		
 		UserFormDto createUserDto = new UserFormDto();
 		
+		System.out.println(user.getCooperative());
+		
 		createUserDto.setRole(user.getRole().getId());
 		createUserDto.setName(user.getName());
 		createUserDto.setPassword(user.getPassword());
 		createUserDto.setEmail(user.getEmail());
 		createUserDto.setCacheVersion(cacheVersion);
-		createUserDto.setCooperative(user.getCooperative().getId());
-		createUserDto.setCountry(user.getCountry().getId());
-		createUserDto.setFarm(user.getFarm().getId());
-		createUserDto.setBuyer(user.getBuyer().getId());
-		createUserDto.setSupplier(user.getSupplier().getId());
+		createUserDto.setCooperative(user.getCooperative() != null ? user.getCooperative().getId() : null);
+		createUserDto.setCountry(user.getCountry() != null ? user.getCountry().getId() : null);
+		createUserDto.setFarm(user.getFarm() != null ? user.getFarm().getId() : null);
+		createUserDto.setBuyer(user.getBuyer() != null ? user.getBuyer().getId() : null);
+		createUserDto.setSupplier(user.getCooperative() != null ? user.getCooperative().getId() : null);
 		createUserDto.setId(user.getId());
 
 		sysUserDTOMapper.fillEntity(createUserDto, newUser);
