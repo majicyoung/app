@@ -32,7 +32,6 @@ public class CLAppQuantityUnitsApiController extends AbstractV8Controller{
 
 		try {
 			measureUnitsMap = objectMapper.readValue(getClass().getResource("/json/MeasureUnits.json"), List.class);
-			System.out.println("fdslkf " + measureUnitsMap);
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
