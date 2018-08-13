@@ -14,6 +14,8 @@ import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 import org.thymeleaf.extras.java8time.dialect.Java8TimeDialect;
 
+import com.fairagora.verifik8.v8web.api.interceptor.HeaderInterceptor;
+
 import nz.net.ultraq.thymeleaf.LayoutDialect;
 
 @Configuration
@@ -51,10 +53,16 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 		lci.setParamName("lang");
 		return lci;
 	}
+	
+	@Bean
+	public HeaderInterceptor headerInterceptor() {
+		return new HeaderInterceptor();
+	}
 
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(localeChangeInterceptor());
+		registry.addInterceptor(headerInterceptor()).excludePathPatterns("login","/blue/logout","/green/logout");
 	}
 
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
