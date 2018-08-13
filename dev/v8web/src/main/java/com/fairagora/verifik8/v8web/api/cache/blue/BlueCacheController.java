@@ -1,18 +1,5 @@
 package com.fairagora.verifik8.v8web.api.cache.blue;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
 import com.fairagora.verifik8.v8web.api.pond.PondsApiMeasureSettings;
 import com.fairagora.verifik8.v8web.api.quantity.units.CLAppQuantityUnitsApiController;
 import com.fairagora.verifik8.v8web.data.domain.CustomProducts;
@@ -31,14 +18,26 @@ import com.fairagora.verifik8.v8web.services.CodeListsService;
 import com.fairagora.verifik8.v8web.services.FarmService;
 import com.fairagora.verifik8.v8web.services.UserService;
 import com.fairagora.verifik8.v8web.services.enhanced.V8Farm;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @RequestMapping("blue")
 @RestController
-public class BlueCacheController extends AbstractV8Controller{
+public class BlueCacheController extends AbstractV8Controller {
 
 	@Autowired
 	private CodeListsService codeListsService;
-	
+
 	@Autowired
 	private RegFarmDTOMapper regFarmDtoMapper;
 
@@ -47,35 +46,35 @@ public class BlueCacheController extends AbstractV8Controller{
 
 	@Autowired
 	private DTFarmPondActivityRepository pondActivityRepository;
-	
+
 	@Autowired
 	private DTFarmPondMeasurementRepository pondMeasuresRepository;
-	
+
 	@Autowired
 	private CLRefProductRepository clRefProductRepository;
-	
+
 	@Autowired
 	private UserService userService;
-	
+
 	private PondsApiMeasureSettings pondsApiMeasureSettings;
-	
+
 	private CLAppQuantityUnitsApiController clAppQuantityUnitsApiController;
-	
+
 	public BlueCacheController() {
 		pondsApiMeasureSettings = new PondsApiMeasureSettings();
 		clAppQuantityUnitsApiController = new CLAppQuantityUnitsApiController();
 	}
-	
-	@GetMapping(path= "/cache")
+
+	@GetMapping(path = "/cache")
 	public ResponseEntity<Object> getCacheData() {
 		List<CLAppMeasureType> clAppMeasureType = codeListsService.listActiveMeasureTypes();
 		List<CLFarmPondActivityType> activities = codeListservice.listActivePondActivityTypes();
 		List<DTFarmPondActivity> activitiesMeasures = pondActivityRepository.findAll();
 		List<?> quantityUnits = codeListservice.listActiveQuantityUnit();
 		List<DTFarmPondMeasurement> measures = pondMeasuresRepository.findAll();
-		
+
 		List<V8Farm> farms = farmService.listFarms();
-		
+
 		List<PondListingDto> ponds = farmService.listAllPondsForLoggedUser(getLoggedUser()).stream().map(p -> regFarmDtoMapper.toListing(p)).collect(Collectors.toList());
 
 		SYSUser user = userService.getUserByEmail();
@@ -84,16 +83,16 @@ public class BlueCacheController extends AbstractV8Controller{
 		userFilter.put("id", user.getId());
 		userFilter.put("name", user.getName());
 		userFilter.put("role", user.getRole());
-		
-		
+
+
 		List<CustomProducts> listProducts = new ArrayList<>();
 		List<CustomProducts> products = clRefProductRepository.getProductAndFarmPondActivityId();
 		List<CustomProducts> activity = clRefProductRepository.getFarmPondActivity();
-		
+
 		for (CustomProducts cp : products) {
 			CustomProducts cproduct = new CustomProducts();
-			for(CustomProducts actCp : activity) {
-				if(actCp.getProductTypeId() == cp.getProductTypeId()) {
+			for (CustomProducts actCp : activity) {
+				if (actCp.getProductTypeId() == cp.getProductTypeId()) {
 					cproduct.setActivityId(actCp.getActivityId());
 					cproduct.setCode(cp.getCode());
 					cproduct.setDescription(cp.getDescription());
@@ -107,7 +106,7 @@ public class BlueCacheController extends AbstractV8Controller{
 			}
 		}
 
-		
+
 		Map<String, Object> cacheMap = new HashMap<String, Object>();
 		cacheMap.put("measureTypes", clAppMeasureType);
 		cacheMap.put("activities", activities);
@@ -120,7 +119,7 @@ public class BlueCacheController extends AbstractV8Controller{
 		cacheMap.put("indicators", measures);
 		cacheMap.put("measureSetting", pondsApiMeasureSettings.listAllMeasureSettings());
 		cacheMap.put("measureUnits", clAppQuantityUnitsApiController.listPondAllMeasureUnits());
-		
+
 		return new ResponseEntity<Object>(cacheMap, HttpStatus.OK);
 	}
 }
