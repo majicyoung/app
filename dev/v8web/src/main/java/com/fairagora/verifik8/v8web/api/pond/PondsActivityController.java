@@ -27,7 +27,6 @@ public class PondsActivityController extends AbstractV8Controller {
 	@Autowired
 	private RegFarmDTOMapper dtoMapper;
 
-
 	@GetMapping(path = "/activities")
 	public ResponseEntity<?> showPondActivities() {
 		List<CLFarmPondActivityType> clFarmPondActivityTypeList = codeListservice.listActivePondActivityTypes();

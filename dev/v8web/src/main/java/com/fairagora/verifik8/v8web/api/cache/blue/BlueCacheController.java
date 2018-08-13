@@ -84,7 +84,6 @@ public class BlueCacheController extends AbstractV8Controller {
 		userFilter.put("name", user.getName());
 		userFilter.put("role", user.getRole());
 
-
 		List<CustomProducts> listProducts = new ArrayList<>();
 		List<CustomProducts> products = clRefProductRepository.getProductAndFarmPondActivityId();
 		List<CustomProducts> activity = clRefProductRepository.getFarmPondActivity();
@@ -105,7 +104,6 @@ public class BlueCacheController extends AbstractV8Controller {
 				}
 			}
 		}
-
 
 		Map<String, Object> cacheMap = new HashMap<String, Object>();
 		cacheMap.put("measureTypes", clAppMeasureType);

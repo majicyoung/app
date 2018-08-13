@@ -37,7 +37,6 @@ public class PlotActivityApiController extends AbstractV8Controller {
 	@Autowired
 	private CLAppQuantityUnitRepository clAppQuantityUnitRepository;
 
-
 	@PostMapping(value = "/ponds/{plotId}/activity")
 	public ResponseEntity<?> createPlotActivities(@PathVariable("plotId") Long plotId, PlotActivityDto dto) {
 		DTFarmPlotActivity act = null;
@@ -47,7 +46,6 @@ public class PlotActivityApiController extends AbstractV8Controller {
 		} else {
 			act = plotActivityRepository.findOne(dto.getId());
 		}
-
 
 		dtoMapper.fillEntity(dto, act);
 
@@ -68,7 +66,6 @@ public class PlotActivityApiController extends AbstractV8Controller {
 
 		return new ResponseEntity<List<DTFarmPlotActivity>>(measures, HttpStatus.OK);
 	}
-
 
 	@GetMapping(path = "/products")
 	public ResponseEntity<?> listAllClRefProducts() {
