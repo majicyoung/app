@@ -1,7 +1,5 @@
 package com.fairagora.verifik8.v8web.api.oauth;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +10,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
+
 @Controller
 @RequestMapping(value = {"blue", "green"})
 public class OauthController {
@@ -20,7 +20,8 @@ public class OauthController {
 	private TokenStore tokenStore;
 
 	@PostMapping(value = "/logout")
-	public @ResponseBody ResponseEntity<HttpStatus> logout(HttpServletRequest request) {
+	public @ResponseBody
+	ResponseEntity<HttpStatus> logout(HttpServletRequest request) {
 		String authHeader = request.getHeader("Authorization");
 		if (authHeader != null) {
 			try {

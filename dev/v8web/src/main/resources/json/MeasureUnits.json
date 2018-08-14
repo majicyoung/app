@@ -1,0 +1,22 @@
+[
+	{
+		"id": 20,
+		"name": "ammonia"
+	},
+	{
+		"id": 21,
+		"name": "dissolved oxygen"
+	},
+	{
+		"id": 16,
+		"name": "ph"
+	},
+	{
+		"id": 19,
+		"name": "salinity"
+	},
+	{
+		"id": 17,
+		"name": "temperature"
+	}
+]
