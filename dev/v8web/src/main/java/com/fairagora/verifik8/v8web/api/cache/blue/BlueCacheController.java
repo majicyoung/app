@@ -4,10 +4,12 @@ import com.fairagora.verifik8.v8web.api.pond.PondsApiMeasureSettings;
 import com.fairagora.verifik8.v8web.api.quantity.units.CLAppQuantityUnitsApiController;
 import com.fairagora.verifik8.v8web.data.domain.CustomProducts;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLAppMeasureType;
+import com.fairagora.verifik8.v8web.data.domain.cl.CLAppQuantityUnit;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLFarmPondActivityType;
 import com.fairagora.verifik8.v8web.data.domain.dt.DTFarmPondActivity;
 import com.fairagora.verifik8.v8web.data.domain.dt.DTFarmPondMeasurement;
 import com.fairagora.verifik8.v8web.data.domain.sys.SYSUser;
+import com.fairagora.verifik8.v8web.data.repo.cl.CLAppQuantityUnitRepository;
 import com.fairagora.verifik8.v8web.data.repo.cl.CLRefProductRepository;
 import com.fairagora.verifik8.v8web.data.repo.dt.DTFarmPondActivityRepository;
 import com.fairagora.verifik8.v8web.data.repo.dt.DTFarmPondMeasurementRepository;
@@ -52,6 +54,9 @@ public class BlueCacheController extends AbstractV8Controller {
 
 	@Autowired
 	private CLRefProductRepository clRefProductRepository;
+	
+	@Autowired
+	private CLAppQuantityUnitRepository clAppQuantityUnitRepository;
 
 	@Autowired
 	private UserService userService;
@@ -70,7 +75,8 @@ public class BlueCacheController extends AbstractV8Controller {
 		List<CLAppMeasureType> clAppMeasureType = codeListsService.listActiveMeasureTypes();
 		List<CLFarmPondActivityType> activities = codeListservice.listActivePondActivityTypes();
 		List<DTFarmPondActivity> activitiesMeasures = pondActivityRepository.findAll();
-		List<?> quantityUnits = codeListservice.listActiveQuantityUnit();
+		List<?> units = codeListservice.listActiveQuantityUnit();
+		List<CLAppQuantityUnit> quantityUnits = clAppQuantityUnitRepository.getQuantityUnit();
 		List<DTFarmPondMeasurement> measures = pondMeasuresRepository.findAll();
 
 		List<V8Farm> farms = farmService.listFarms();
@@ -117,6 +123,7 @@ public class BlueCacheController extends AbstractV8Controller {
 		cacheMap.put("indicators", measures);
 		cacheMap.put("measureSetting", pondsApiMeasureSettings.listAllMeasureSettings());
 		cacheMap.put("measureUnits", clAppQuantityUnitsApiController.listPondAllMeasureUnits());
+		cacheMap.put("units", units);
 
 		return new ResponseEntity<Object>(cacheMap, HttpStatus.OK);
 	}
