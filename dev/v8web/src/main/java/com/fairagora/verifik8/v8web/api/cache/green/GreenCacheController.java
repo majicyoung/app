@@ -1,9 +1,11 @@
 package com.fairagora.verifik8.v8web.api.cache.green;
 
 import com.fairagora.verifik8.v8web.data.domain.CustomProducts;
+import com.fairagora.verifik8.v8web.data.domain.cl.CLAppQuantityUnit;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLFarmPlotActivityType;
 import com.fairagora.verifik8.v8web.data.domain.dt.DTFarmPlotActivity;
 import com.fairagora.verifik8.v8web.data.domain.sys.SYSUser;
+import com.fairagora.verifik8.v8web.data.repo.cl.CLAppQuantityUnitRepository;
 import com.fairagora.verifik8.v8web.data.repo.cl.CLRefProductRepository;
 import com.fairagora.verifik8.v8web.data.repo.dt.DTFarmPlotActivityRepository;
 import com.fairagora.verifik8.v8web.mvc.AbstractV8Controller;
@@ -40,6 +42,9 @@ public class GreenCacheController extends AbstractV8Controller {
 
 	@Autowired
 	private CLRefProductRepository clRefProductRepository;
+	
+	@Autowired
+	private CLAppQuantityUnitRepository clAppQuantityUnitRepository;
 
 	@Autowired
 	private UserService userService;
@@ -48,7 +53,7 @@ public class GreenCacheController extends AbstractV8Controller {
 	public ResponseEntity<Object> getCacheData() {
 		List<CLFarmPlotActivityType> activities = codeListservice.listActiveActivityTypes();
 		List<DTFarmPlotActivity> activitiesMeasures = plotActivityRepository.findAll();
-		List<?> quantityUnits = codeListservice.listActiveQuantityUnit();
+		List<CLAppQuantityUnit> quantityUnits = clAppQuantityUnitRepository.getQuantityUnit();
 
 		List<V8Farm> farms = farmService.listFarms();
 
