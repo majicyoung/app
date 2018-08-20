@@ -6,6 +6,8 @@ import com.fairagora.verifik8.v8web.mvc.infra.dtomapping.SysUserDTOMapper;
 import com.fairagora.verifik8.v8web.mvc.users.dto.UserFormDto;
 import com.fairagora.verifik8.v8web.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
@@ -28,19 +30,23 @@ public class HeaderInterceptor extends HandlerInterceptorAdapter {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		long time = new Date().getTime();
-
-		SYSUser user = getDbVersion();
-
-		if (user.getCacheVersion() == null) {
-			setDbVersion(String.valueOf(time), user);
-		} else {
-			if (request.getMethod().equalsIgnoreCase("POST")) {
+		
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		if(!auth.getName().equalsIgnoreCase("anonymousUser")) {
+			SYSUser user = getDbVersion();
+	
+			if (user.getCacheVersion() == null) {
 				setDbVersion(String.valueOf(time), user);
+			} else {
+				if (request.getMethod().equalsIgnoreCase("POST")) {
+					setDbVersion(String.valueOf(time), user);
+				}
 			}
+	
+			response.addHeader("verifik8_database_version", String.valueOf(user.getCacheVersion()));
+			response.setHeader("Access-Control-Expose-Headers", "VERIFIK8_DATABASE_VERSION");
 		}
-
-		response.addHeader("verifik8_database_version", String.valueOf(user.getCacheVersion()));
-		response.setHeader("Access-Control-Expose-Headers", "VERIFIK8_DATABASE_VERSION");
+		
 		return true;
 	}
 
