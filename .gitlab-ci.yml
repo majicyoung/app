@@ -95,6 +95,10 @@ develop_deploy:
     - docker-compose up -d --no-deps api_blue
     - docker-compose pull api_green
     - docker-compose up -d --no-deps api_green
+    - docker-compose pull blue_web
+    - docker-compose up -d --no-deps blue_web
+    - docker-compose pull green_web
+    - docker-compose up -d --no-deps green_web
   stage: deploy
   tags:
     - staging2
@@ -114,6 +118,10 @@ staging_deploy:
     - docker-compose up -d --no-deps api_blue
     - docker-compose pull api_green
     - docker-compose up -d --no-deps api_green
+    - docker-compose pull blue_web
+    - docker-compose up -d --no-deps blue_web
+    - docker-compose pull green_web
+    - docker-compose up -d --no-deps green_web
   stage: deploy
   tags:
     - staging2
