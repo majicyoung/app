@@ -20,6 +20,8 @@ import com.fairagora.verifik8.v8web.services.CodeListsService;
 import com.fairagora.verifik8.v8web.services.FarmService;
 import com.fairagora.verifik8.v8web.services.UserService;
 import com.fairagora.verifik8.v8web.services.enhanced.V8Farm;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -124,7 +126,21 @@ public class BlueCacheController extends AbstractV8Controller {
 		cacheMap.put("measureSetting", pondsApiMeasureSettings.listAllMeasureSettings());
 		cacheMap.put("measureUnits", clAppQuantityUnitsApiController.listPondAllMeasureUnits());
 		cacheMap.put("units", units);
+		cacheMap.put("activitySettings", listPondActivitySettings());
 
 		return new ResponseEntity<Object>(cacheMap, HttpStatus.OK);
+	}
+	
+	protected Map<?, ?> listPondActivitySettings() {
+		ObjectMapper objectMapper = new ObjectMapper();
+		Map<?, ?> measureSettingsMap = null;
+
+		try {
+			measureSettingsMap = objectMapper.readValue(getClass().getResource("/json/PondActivitySettings.json"), Map.class);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+
+		return measureSettingsMap;
 	}
 }
