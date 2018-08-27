@@ -2,6 +2,7 @@ package com.fairagora.verifik8.v8web.api.cache.green;
 
 import com.fairagora.verifik8.v8web.data.domain.CustomProducts;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLAppQuantityUnit;
+import com.fairagora.verifik8.v8web.data.domain.cl.CLAppTilingActivityType;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLFarmPlotActivityType;
 import com.fairagora.verifik8.v8web.data.domain.dt.DTFarmPlotActivity;
 import com.fairagora.verifik8.v8web.data.domain.sys.SYSUser;
@@ -54,6 +55,7 @@ public class GreenCacheController extends AbstractV8Controller {
 		List<CLFarmPlotActivityType> activities = codeListservice.listActiveActivityTypes();
 		List<DTFarmPlotActivity> activitiesMeasures = plotActivityRepository.findAll();
 		List<CLAppQuantityUnit> quantityUnits = clAppQuantityUnitRepository.getQuantityUnit();
+		List<CLAppTilingActivityType> tilingActivityType = codeListservice.listActiveTilingActivityTypes();
 
 		List<V8Farm> farms = farmService.listFarms();
 
@@ -95,6 +97,7 @@ public class GreenCacheController extends AbstractV8Controller {
 		cacheMap.put("products", listProducts);
 		cacheMap.put("quantityUnits", quantityUnits);
 		cacheMap.put("user", userFilter);
+		cacheMap.put("tilingActivityType", tilingActivityType);
 
 		return new ResponseEntity<Object>(cacheMap, HttpStatus.OK);
 	}

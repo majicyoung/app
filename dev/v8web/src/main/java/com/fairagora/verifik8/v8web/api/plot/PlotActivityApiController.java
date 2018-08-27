@@ -2,6 +2,7 @@ package com.fairagora.verifik8.v8web.api.plot;
 
 import com.fairagora.verifik8.v8web.data.domain.CustomProducts;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLAppQuantityUnit;
+import com.fairagora.verifik8.v8web.data.domain.cl.CLAppTilingActivityType;
 import com.fairagora.verifik8.v8web.data.domain.dt.DTFarmPlotActivity;
 import com.fairagora.verifik8.v8web.data.repo.cl.CLAppQuantityUnitRepository;
 import com.fairagora.verifik8.v8web.data.repo.cl.CLRefProductRepository;
@@ -104,5 +105,16 @@ public class PlotActivityApiController extends AbstractV8Controller {
 		}
 
 		return new ResponseEntity<Object>(quantityUnits, HttpStatus.OK);
+	}
+	
+	@GetMapping(path = "/tiling-activity-type")
+	public ResponseEntity<?> showTilingActivityType() {
+		List<CLAppTilingActivityType> tilingActivityType = codeListservice.listActiveTilingActivityTypes();
+		
+		if (tilingActivityType.isEmpty()) {
+			return new ResponseEntity<Object>(HttpStatus.NO_CONTENT);
+		}
+		
+		return new ResponseEntity<Object>(tilingActivityType, HttpStatus.OK);
 	}
 }
