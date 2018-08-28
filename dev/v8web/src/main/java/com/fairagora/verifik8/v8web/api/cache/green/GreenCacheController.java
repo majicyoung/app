@@ -15,6 +15,8 @@ import com.fairagora.verifik8.v8web.mvc.plots.dto.PlotListingDto;
 import com.fairagora.verifik8.v8web.services.FarmService;
 import com.fairagora.verifik8.v8web.services.UserService;
 import com.fairagora.verifik8.v8web.services.enhanced.V8Farm;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -98,8 +100,22 @@ public class GreenCacheController extends AbstractV8Controller {
 		cacheMap.put("quantityUnits", quantityUnits);
 		cacheMap.put("user", userFilter);
 		cacheMap.put("tilingActivityType", tilingActivityType);
+		cacheMap.put("activitySettings", listPlotdActivitySettings());
 
 		return new ResponseEntity<Object>(cacheMap, HttpStatus.OK);
+	}
+	
+	protected Map<?, ?> listPlotdActivitySettings() {
+		ObjectMapper objectMapper = new ObjectMapper();
+		Map<?, ?> measureSettingsMap = null;
+
+		try {
+			measureSettingsMap = objectMapper.readValue(getClass().getResource("/json/PlotActivitySettings.json"), Map.class);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+
+		return measureSettingsMap;
 	}
 
 }
