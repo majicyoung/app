@@ -1,9 +1,12 @@
 package com.fairagora.verifik8.v8web.api.cache.green;
 
 import com.fairagora.verifik8.v8web.data.domain.CustomProducts;
+import com.fairagora.verifik8.v8web.data.domain.cl.CLAppQuantityUnit;
+import com.fairagora.verifik8.v8web.data.domain.cl.CLAppTilingActivityType;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLFarmPlotActivityType;
 import com.fairagora.verifik8.v8web.data.domain.dt.DTFarmPlotActivity;
 import com.fairagora.verifik8.v8web.data.domain.sys.SYSUser;
+import com.fairagora.verifik8.v8web.data.repo.cl.CLAppQuantityUnitRepository;
 import com.fairagora.verifik8.v8web.data.repo.cl.CLRefProductRepository;
 import com.fairagora.verifik8.v8web.data.repo.dt.DTFarmPlotActivityRepository;
 import com.fairagora.verifik8.v8web.mvc.AbstractV8Controller;
@@ -12,6 +15,8 @@ import com.fairagora.verifik8.v8web.mvc.plots.dto.PlotListingDto;
 import com.fairagora.verifik8.v8web.services.FarmService;
 import com.fairagora.verifik8.v8web.services.UserService;
 import com.fairagora.verifik8.v8web.services.enhanced.V8Farm;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -40,6 +45,9 @@ public class GreenCacheController extends AbstractV8Controller {
 
 	@Autowired
 	private CLRefProductRepository clRefProductRepository;
+	
+	@Autowired
+	private CLAppQuantityUnitRepository clAppQuantityUnitRepository;
 
 	@Autowired
 	private UserService userService;
@@ -48,7 +56,8 @@ public class GreenCacheController extends AbstractV8Controller {
 	public ResponseEntity<Object> getCacheData() {
 		List<CLFarmPlotActivityType> activities = codeListservice.listActiveActivityTypes();
 		List<DTFarmPlotActivity> activitiesMeasures = plotActivityRepository.findAll();
-		List<?> quantityUnits = codeListservice.listActiveQuantityUnit();
+		List<CLAppQuantityUnit> quantityUnits = clAppQuantityUnitRepository.getQuantityUnit();
+		List<CLAppTilingActivityType> tilingActivityType = codeListservice.listActiveTilingActivityTypes();
 
 		List<V8Farm> farms = farmService.listFarms();
 
@@ -90,8 +99,23 @@ public class GreenCacheController extends AbstractV8Controller {
 		cacheMap.put("products", listProducts);
 		cacheMap.put("quantityUnits", quantityUnits);
 		cacheMap.put("user", userFilter);
+		cacheMap.put("tilingActivityType", tilingActivityType);
+		cacheMap.put("activitySettings", listPlotdActivitySettings());
 
 		return new ResponseEntity<Object>(cacheMap, HttpStatus.OK);
+	}
+	
+	protected Map<?, ?> listPlotdActivitySettings() {
+		ObjectMapper objectMapper = new ObjectMapper();
+		Map<?, ?> measureSettingsMap = null;
+
+		try {
+			measureSettingsMap = objectMapper.readValue(getClass().getResource("/json/PlotActivitySettings.json"), Map.class);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+
+		return measureSettingsMap;
 	}
 
 }
