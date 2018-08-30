@@ -3,7 +3,6 @@ stages:
   - deploy
 
 variables:
-  CONTAINER: verifik8_api_$CI_PIPELINE_ID
   DOCKERFILE_PATH: ./dev/v8web
   IMAGE: registry.united-asian.com/verifik8/backend
   IMAGE_DEVELOP: $IMAGE:$CI_BUILD_REF_NAME.develop
@@ -11,7 +10,6 @@ variables:
   IMAGE_LOCAL: verifiki8/backend:$CI_PIPELINE_ID
   IMAGE_STAGING: $IMAGE:staging
   IMAGE_TAGGED: $IMAGE:$CI_BUILD_REF_NAME
-  SERVICE: api_blue
   TAG: "$VERSION.0"
   VERSION: "0.2"
 
@@ -69,14 +67,10 @@ develop_deploy:
     - "api"
   script:
     - cd ~/verifik8
-    - docker-compose pull api_blue
-    - docker-compose up -d --no-deps api_blue
-    - docker-compose pull api_green
-    - docker-compose up -d --no-deps api_green
-    - docker-compose pull web_blue
-    - docker-compose up -d --no-deps web_blue
-    - docker-compose pull web_green
-    - docker-compose up -d --no-deps web_green
+    - docker-compose pull blue
+    - docker-compose up -d --no-deps blue
+    - docker-compose pull green
+    - docker-compose up -d --no-deps green
   stage: deploy
   tags:
     - staging2
@@ -114,14 +108,10 @@ staging_deploy:
     - "staging"
   script:
     - cd ~/verifik8
-    - docker-compose pull api_blue
-    - docker-compose up -d --no-deps api_blue
-    - docker-compose pull api_green
-    - docker-compose up -d --no-deps api_green
-    - docker-compose pull web_blue
-    - docker-compose up -d --no-deps web_blue
-    - docker-compose pull web_green
-    - docker-compose up -d --no-deps web_green
+    - docker-compose pull blue
+    - docker-compose up -d --no-deps blue
+    - docker-compose pull green
+    - docker-compose up -d --no-deps green
   stage: deploy
   tags:
     - staging2
