@@ -1,6 +1,7 @@
 package com.fairagora.verifik8.v8web.api.plot;
 
 import com.fairagora.verifik8.v8web.data.domain.cl.CLFarmPlotActivityType;
+import com.fairagora.verifik8.v8web.data.domain.dt.DTFarmPondMeasurement;
 import com.fairagora.verifik8.v8web.data.domain.sys.SYSUser;
 import com.fairagora.verifik8.v8web.mvc.AbstractV8Controller;
 import com.fairagora.verifik8.v8web.mvc.farms.RegFarmDTOMapper;
@@ -61,6 +62,16 @@ public class PlotApiController extends AbstractV8Controller {
 		profileMap.put("user", userFilter);
 
 		return new ResponseEntity<>(profileMap, HttpStatus.OK);
+	}
+	
+	@RequestMapping("/measure-settings")
+	public ResponseEntity<?> showCustomMeasurement() {
+		return new ResponseEntity<>(null, HttpStatus.OK);
+	}
+	
+	@GetMapping(path = "/measures")
+	public ResponseEntity<List<DTFarmPondMeasurement>> getMeasures() {
+		return new ResponseEntity<>(null, HttpStatus.OK);
 	}
 
 }
