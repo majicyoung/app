@@ -89,10 +89,10 @@ develop_deploy:
     - "api"
   script:
     - cd ~/verifik8
-    - docker-compose pull backend_blue
-    - docker-compose up -d --no-deps backend_blue
-    - docker-compose pull backend_green
-    - docker-compose up -d --no-deps backend_green
+    - docker-compose pull blue
+    - docker-compose up -d --no-deps blue
+    - docker-compose pull green
+    - docker-compose up -d --no-deps green
   stage: deploy
   tags:
     - staging2
