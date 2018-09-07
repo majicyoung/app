@@ -16,6 +16,7 @@ public class UserFormDto {
 	protected String password;
 	@Email
 	protected String email;
+	protected String cacheVersion;
 
 	/**
 	 * id of the country, optional
@@ -76,6 +77,14 @@ public class UserFormDto {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public String getCacheVersion() {
+		return cacheVersion;
+	}
+
+	public void setCacheVersion(String cacheVersion) {
+		this.cacheVersion = cacheVersion;
 	}
 
 	public Long getCountry() {
