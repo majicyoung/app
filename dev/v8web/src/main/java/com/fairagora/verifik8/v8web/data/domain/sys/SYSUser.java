@@ -24,6 +24,7 @@ public class SYSUser {
 	protected String name;
 	protected String email;
 	protected String password;
+	protected String cacheVersion;
 
 	protected boolean active;
 
@@ -84,6 +85,14 @@ public class SYSUser {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public String getCacheVersion() {
+		return cacheVersion;
+	}
+
+	public void setCacheVersion(String cacheVersion) {
+		this.cacheVersion = cacheVersion;
 	}
 
 	public boolean isActive() {
