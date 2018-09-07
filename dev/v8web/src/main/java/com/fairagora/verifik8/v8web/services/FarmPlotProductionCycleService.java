@@ -24,9 +24,14 @@ public class FarmPlotProductionCycleService {
 
 	public void updatePlotProductionCycle(DTFarmPlotActivity dtFarmPlotActivity) {
 		DTFarmPlotProductionCycle dtFarmPlotProductionCycle = getDtFarmPlotProductionCycle(dtFarmPlotActivity);
+		if(dtFarmPlotProductionCycle == null &&  !dtFarmPlotActivity.getActivityType().getCode().equals("SOWI")){
+			return;
+		}
+
 		if (dtFarmPlotProductionCycle == null) {
 			dtFarmPlotProductionCycle = new DTFarmPlotProductionCycle();
 		}
+
 		switch (dtFarmPlotActivity.getActivityType().getCode()) {
 			case "SOWI":
 				dtFarmPlotProductionCycle.setSeedQuantity(dtFarmPlotActivity.getMeasure().getQuantity());

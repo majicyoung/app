@@ -25,6 +25,9 @@ public class FarmPondProductionCycleService {
 
 	public void updatePondProductionCycle(DTFarmPondActivity dtFarmPondActivity) {
 		DTFarmPondProductionCycle dtFarmPondProductionCycle = getDtFarmPondProductionCycle(dtFarmPondActivity);
+		if (dtFarmPondProductionCycle == null && !dtFarmPondActivity.getActivityType().getCode().equals("PONDSTOCK")) {
+			return;
+		}
 		if (dtFarmPondProductionCycle == null) {
 			dtFarmPondProductionCycle = new DTFarmPondProductionCycle();
 		}
