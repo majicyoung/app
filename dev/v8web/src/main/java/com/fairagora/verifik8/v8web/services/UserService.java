@@ -7,8 +7,13 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import org.apache.commons.lang3.SystemUtils;
+import com.fairagora.verifik8.v8web.data.domain.sys.SYSPasswordResetToken;
+import com.fairagora.verifik8.v8web.data.domain.sys.SYSVerificationToken;
+import com.fairagora.verifik8.v8web.data.repo.sys.SYSPasswordResetTokenRepository;
+import com.fairagora.verifik8.v8web.data.repo.sys.SYSVerificationTokenRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,12 +25,20 @@ import com.fairagora.verifik8.v8web.data.repo.reg.RegEntityFarmDetailsRepository
 import com.fairagora.verifik8.v8web.data.repo.sys.SYSUserRepository;
 
 @Service
+@Transactional
 public class UserService extends AbstractV8Service {
 
 	@Autowired
 	protected SYSUserRepository userRepository;
 	@Autowired
 	private RegEntityFarmDetailsRepository farmDetailsRepository;
+	@Autowired
+	@Qualifier("encoder")
+	private PasswordEncoder passwordEncoder;
+	@Autowired
+	private SYSVerificationTokenRepository sysVerificationTokenRepository;
+	@Autowired
+	private SYSPasswordResetTokenRepository sysPasswordResetTokenRepository;
 
 	@Transactional
 	public List<SYSUser> listUsers() {
@@ -72,5 +85,54 @@ public class UserService extends AbstractV8Service {
 		
 		return user;
 	}
+
+
+
+	public SYSUser registerNewUserAccount(final SYSUser sysUser) {
+		if (emailExist(sysUser.getEmail())) {
+		//	throw new UserAlreadyExistException("There is an account with that email adress: " + accountDto.getEmail());
+		}
+		sysUser.setPassword(passwordEncoder.encode(sysUser.getPassword()));
+		return userRepository.save(sysUser);
+	}
+
+	public SYSUser getUser(final String verificationToken) {
+		final SYSVerificationToken token = sysVerificationTokenRepository.findByToken(verificationToken);
+		if (token != null) {
+			return token.getSysUser();
+		}
+		return null;
+	}
+
+	public SYSVerificationToken getSysVerificationToken(final String VerificationToken) {
+		return sysVerificationTokenRepository.findByToken(VerificationToken);
+	}
+
+	public void saveRegisteredUser(final SYSUser sysUser) {
+		userRepository.save(sysUser);
+	}
+
+	public void deleteUser(final SYSUser sysUser) {
+		final SYSVerificationToken verificationToken = sysVerificationTokenRepository.findBySysUser(sysUser);
+
+		if (verificationToken != null) {
+			sysVerificationTokenRepository.delete(verificationToken);
+		}
+
+		final SYSPasswordResetToken sysPasswordToken = sysPasswordResetTokenRepository.findBySysUser(sysUser);
+
+		if (sysPasswordToken != null) {
+			sysPasswordResetTokenRepository.delete(sysPasswordToken);
+		}
+
+		userRepository.delete(sysUser);
+	}
+
+
+	private boolean emailExist(final String email) {
+		return userRepository.findByEmail(email) != null;
+	}
+
+
 
 }
