@@ -80,6 +80,11 @@ public class UsersController extends AbstractV8Controller {
 
 	}
 
+	@RequestMapping(value = "/forgotpassword", method = RequestMethod.GET)
+	public String showForgetPasswordForm(Model mv) {
+		return "forgot-password";
+	}
+
 	private void prepareForUserEdition(UserFormDto dto, Model mv) {
 		V8Page p = new V8Page();
 		p.setTitle("default.users");
