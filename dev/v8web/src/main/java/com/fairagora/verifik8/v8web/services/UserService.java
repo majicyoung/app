@@ -28,111 +28,111 @@ import com.fairagora.verifik8.v8web.data.repo.sys.SYSUserRepository;
 @Transactional
 public class UserService extends AbstractV8Service {
 
-	@Autowired
-	protected SYSUserRepository userRepository;
-	@Autowired
-	private RegEntityFarmDetailsRepository farmDetailsRepository;
-	@Autowired
-	@Qualifier("encoder")
-	private PasswordEncoder passwordEncoder;
-	@Autowired
-	private SYSVerificationTokenRepository sysVerificationTokenRepository;
-	@Autowired
-	private SYSPasswordResetTokenRepository sysPasswordResetTokenRepository;
+    @Autowired
+    protected SYSUserRepository userRepository;
+    @Autowired
+    private RegEntityFarmDetailsRepository farmDetailsRepository;
+    @Autowired
+    @Qualifier("encoder")
+    private PasswordEncoder passwordEncoder;
+    @Autowired
+    private SYSVerificationTokenRepository sysVerificationTokenRepository;
+    @Autowired
+    private SYSPasswordResetTokenRepository sysPasswordResetTokenRepository;
 
-	@Transactional
-	public List<SYSUser> listUsers() {
+    @Transactional
+    public List<SYSUser> listUsers() {
 
-		Set<SYSUser> l = new HashSet<>();
+        Set<SYSUser> l = new HashSet<>();
 
-		V8LoggedUser loggedUser = getLoggedUser();
-		SYSUser u = userRepository.findByEmail(loggedUser.getUsername());
+        V8LoggedUser loggedUser = getLoggedUser();
+        SYSUser u = userRepository.findByEmail(loggedUser.getUsername());
 
-		l.add(u);
+        l.add(u);
 
-		if (u.getRole() != null) {
-			switch (u.getRole().getCode()) {
-			case SYSRole.SADMIN:
-				l.addAll(userRepository.findAll());
-				break;
+        if (u.getRole() != null) {
+            switch (u.getRole().getCode()) {
+                case SYSRole.SADMIN:
+                    l.addAll(userRepository.findAll());
+                    break;
 
-			case SYSRole.farm:
-				break;
+                case SYSRole.farm:
+                    break;
 
-			case SYSRole.coop:
-				List<RegEntityFarmDetails> farmDetails = farmDetailsRepository.findByCooperativeId(u.getCooperative().getId());
-				for (RegEntityFarmDetails f : farmDetails) {
-					if (f.getOwner() != null) {
-						SYSUser su = userRepository.findOne(f.getOwner().getId());
-						if (su != null)
-							l.add(su);
-					}
-				}
-				break;
+                case SYSRole.coop:
+                    List<RegEntityFarmDetails> farmDetails = farmDetailsRepository.findByCooperativeId(u.getCooperative().getId());
+                    for (RegEntityFarmDetails f : farmDetails) {
+                        if (f.getOwner() != null) {
+                            SYSUser su = userRepository.findOne(f.getOwner().getId());
+                            if (su != null)
+                                l.add(su);
+                        }
+                    }
+                    break;
 
-			}
-		}
+            }
+        }
 
-		List<SYSUser> sysUsers = new ArrayList<>(l);
-		Collections.sort(sysUsers, Comparator.comparing(SYSUser::getName));
-		return sysUsers;
-	}
-	
-	@Transactional
-	public SYSUser getUserByEmail() {
-		V8LoggedUser loggedUser = getLoggedUser();
-		SYSUser user = userRepository.findByEmail(loggedUser.getUsername());
-		
-		return user;
-	}
+        List<SYSUser> sysUsers = new ArrayList<>(l);
+        Collections.sort(sysUsers, Comparator.comparing(SYSUser::getName));
+        return sysUsers;
+    }
 
+    @Transactional
+    public SYSUser getUserByEmail() {
+        V8LoggedUser loggedUser = getLoggedUser();
+        SYSUser user = userRepository.findByEmail(loggedUser.getUsername());
 
+        return user;
+    }
 
-	public SYSUser registerNewUserAccount(final SYSUser sysUser) {
-		if (emailExist(sysUser.getEmail())) {
-		//	throw new UserAlreadyExistException("There is an account with that email adress: " + accountDto.getEmail());
-		}
-		sysUser.setPassword(passwordEncoder.encode(sysUser.getPassword()));
-		return userRepository.save(sysUser);
-	}
+    public SYSUser registerNewUserAccount(final SYSUser sysUser) {
+        if (emailExist(sysUser.getEmail())) {
+            //	throw new UserAlreadyExistException("There is an account with that email adress: " + accountDto.getEmail());
+        }
+        sysUser.setPassword(passwordEncoder.encode(sysUser.getPassword()));
+        return userRepository.save(sysUser);
+    }
 
-	public SYSUser getUser(final String verificationToken) {
-		final SYSVerificationToken token = sysVerificationTokenRepository.findByToken(verificationToken);
-		if (token != null) {
-			return token.getSysUser();
-		}
-		return null;
-	}
+    public SYSUser getUser(final String verificationToken) {
+        final SYSVerificationToken token = sysVerificationTokenRepository.findByToken(verificationToken);
+        if (token != null) {
+            return token.getSysUser();
+        }
+        return null;
+    }
 
-	public SYSVerificationToken getSysVerificationToken(final String VerificationToken) {
-		return sysVerificationTokenRepository.findByToken(VerificationToken);
-	}
+    public SYSVerificationToken getSysVerificationToken(final String VerificationToken) {
+        return sysVerificationTokenRepository.findByToken(VerificationToken);
+    }
 
-	public void saveRegisteredUser(final SYSUser sysUser) {
-		userRepository.save(sysUser);
-	}
+    public void saveRegisteredUser(final SYSUser sysUser) {
+        userRepository.save(sysUser);
+    }
 
-	public void deleteUser(final SYSUser sysUser) {
-		final SYSVerificationToken verificationToken = sysVerificationTokenRepository.findBySysUser(sysUser);
+    public void deleteUser(final SYSUser sysUser) {
+        final SYSVerificationToken verificationToken = sysVerificationTokenRepository.findBySysUser(sysUser);
 
-		if (verificationToken != null) {
-			sysVerificationTokenRepository.delete(verificationToken);
-		}
+        if (verificationToken != null) {
+            sysVerificationTokenRepository.delete(verificationToken);
+        }
 
-		final SYSPasswordResetToken sysPasswordToken = sysPasswordResetTokenRepository.findBySysUser(sysUser);
+        final SYSPasswordResetToken sysPasswordToken = sysPasswordResetTokenRepository.findBySysUser(sysUser);
 
-		if (sysPasswordToken != null) {
-			sysPasswordResetTokenRepository.delete(sysPasswordToken);
-		}
+        if (sysPasswordToken != null) {
+            sysPasswordResetTokenRepository.delete(sysPasswordToken);
+        }
 
-		userRepository.delete(sysUser);
-	}
+        userRepository.delete(sysUser);
+    }
 
+    private boolean emailExist(final String email) {
+        return userRepository.findByEmail(email) != null;
+    }
 
-	private boolean emailExist(final String email) {
-		return userRepository.findByEmail(email) != null;
-	}
-
-
+    public void createPasswordResetTokenForUser(final SYSUser user, final String token) {
+        final SYSPasswordResetToken myToken = new SYSPasswordResetToken(token, user);
+        sysPasswordResetTokenRepository.save(myToken);
+    }
 
 }

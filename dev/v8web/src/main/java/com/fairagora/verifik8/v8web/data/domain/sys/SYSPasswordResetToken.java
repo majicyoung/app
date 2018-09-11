@@ -1,7 +1,5 @@
 package com.fairagora.verifik8.v8web.data.domain.sys;
 
-import com.fairagora.verifik8.v8web.data.domain.V8Entity;
-
 import java.util.Calendar;
 import java.util.Date;
 
@@ -9,7 +7,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "sys_password_reset_tokens")
-public class SYSPasswordResetToken implements V8Entity {
+public class SYSPasswordResetToken {
 
     private static final int EXPIRATION = 60 * 24;
 
@@ -18,11 +16,11 @@ public class SYSPasswordResetToken implements V8Entity {
     @Column(name = "ID")
     protected Long id;
 
-    @Column(name = "CODE", unique = true, length = 2, nullable = false)
-    protected String code;
+    // @Column(name = "CODE", unique = true, length = 2, nullable = false)
+    // protected String code;
 
-    @Column(name = "NAME", length = 64, nullable = false)
-    protected String name;
+    // @Column(name = "NAME", length = 64, nullable = false)
+    // protected String name;
 
     @Column(name = "TOKEN")
     private String token;
@@ -58,27 +56,26 @@ public class SYSPasswordResetToken implements V8Entity {
         return id;
     }
 
-    @Override
     public void setId(Long id) {
         this.id = id;
     }
 
-    public String getCode() {
-        return code;
-    }
+//    public String getCode() {
+//        return code;
+//    }
 
-    public void setCode(String code) {
-        this.code = code;
-    }
+//    public void setCode(String code) {
+//        this.code = code;
+//    }
 
-    @Override
-    public String getName() {
-        return name;
-    }
+//    @Override
+//    public String getName() {
+//        return name;
+//    }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+//    public void setName(String name) {
+//        this.name = name;
+//    }
 
     public String getToken() {
         return token;
