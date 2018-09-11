@@ -2,6 +2,7 @@ package com.fairagora.verifik8.v8web.mvc.users;
 
 import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,7 +13,10 @@ import com.fairagora.verifik8.v8web.data.repo.sys.SYSPasswordResetTokenRepositor
 import com.fairagora.verifik8.v8web.data.repo.sys.SYSUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.MessageSource;
 import org.springframework.data.domain.Sort;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -54,6 +58,12 @@ public class UsersController extends AbstractV8Controller {
 
     @Autowired
     private SysUserDTOMapper sysUserDTOMapper;
+
+    @Autowired
+    private JavaMailSender mailSender;
+
+    @Autowired
+    private MessageSource messageSource;
 
     @PreAuthorize("hasAuthority('R_USERBROWSER')")
     @RequestMapping(value = "/users.html", method = RequestMethod.GET)
@@ -102,16 +112,6 @@ public class UsersController extends AbstractV8Controller {
 
     }
 
-    @RequestMapping(value = "/resetpassword", method = RequestMethod.POST)
-    public String resetPassword(@RequestParam("password") final String password) {
-
-        SYSUser user = userService.getUserByEmail();
-        user.setPassword(passwordEncoder.encode(password));
-
-        userService.saveRegisteredUser(user);
-        return "redirect:/login";
-    }
-
     @RequestMapping(value = "/forgotpassword", method = RequestMethod.GET)
     public String showForgetPasswordForm(Model mv) {
         return "forgot-password";
@@ -123,8 +123,9 @@ public class UsersController extends AbstractV8Controller {
         final SYSUser user = userRepository.findByEmail(email);
         if (user != null) {
             final String token = UUID.randomUUID().toString();
+            final Locale locale = request.getLocale();
             userService.createPasswordResetTokenForUser(user, token);
-            // mailSender.send(constructResetTokenEmail(getAppUrl(request), request.getLocale(), token, user));
+            mailSender.send(constructResetTokenEmail(getAppUrl(request), user, token, locale));
         }
 
         // return new GenericResponse(messages.getMessage("message.resetPasswordEmail", null, request.getLocale()));
@@ -149,6 +150,17 @@ public class UsersController extends AbstractV8Controller {
 
         return "reset-password";
     }
+
+    @RequestMapping(value = "/resetpassword", method = RequestMethod.POST)
+    public String resetPassword(@RequestParam("password") final String password) {
+
+        SYSUser user = userService.getUserByEmail();
+        user.setPassword(passwordEncoder.encode(password));
+
+        userService.saveRegisteredUser(user);
+        return "redirect:/login";
+    }
+
 
     private void prepareForUserEdition(UserFormDto dto, Model mv) {
         V8Page p = new V8Page();
@@ -194,4 +206,25 @@ public class UsersController extends AbstractV8Controller {
         return "redirect:/users.html";
     }
 
+    private String getAppUrl(HttpServletRequest request) {
+        return "http://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
+    }
+
+    private SimpleMailMessage constructResetTokenEmail(final String contextPath, final SYSUser user, final String token, final Locale locale) {
+        final String url = contextPath + "/resetpassword?id=" + user.getId() + "&token=" + token;
+        String messages[] = {url};
+
+        final String subject = messageSource.getMessage("user.reset_password.email.subject", null, locale);
+        final String body = messageSource.getMessage("user.reset_password.email.body", messages, locale);
+
+        return constructEmail(subject, body, user);
+    }
+
+    private SimpleMailMessage constructEmail(String subject, String body, SYSUser user) {
+        final SimpleMailMessage email = new SimpleMailMessage();
+        email.setTo(user.getEmail());
+        email.setSubject(subject);
+        email.setText(body);
+        return email;
+    }
 }
