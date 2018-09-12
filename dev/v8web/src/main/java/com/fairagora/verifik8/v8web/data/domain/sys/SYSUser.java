@@ -16,129 +16,140 @@ import com.fairagora.verifik8.v8web.data.domain.reg.RegEntity;
 @Table(name = "sys_users")
 public class SYSUser {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "ID")
-	protected Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ID")
+    protected Long id;
 
-	protected String name;
-	protected String email;
-	protected String password;
+    protected String name;
+    protected String email;
+    protected String password;
 
-	protected boolean active;
+    protected boolean active;
 
-	@ManyToOne
-	@JoinColumn(name = "SYS_ROLE_ID")
-	protected SYSRole role;
+    @Column(name = "phone_number")
+    protected String phoneNumber;
 
-	/**
-	 * country is used in case the user is a country manager
-	 */
-	@ManyToOne
-	@JoinColumn(name = "CL_COUNTRY_ID")
-	protected CLRefCountry country;
+    @ManyToOne
+    @JoinColumn(name = "SYS_ROLE_ID")
+    protected SYSRole role;
 
-	@ManyToOne
-	@JoinColumn(name = "REG_ENTITY_FARM_ID")
-	protected RegEntity farm;
+    /**
+     * country is used in case the user is a country manager
+     */
+    @ManyToOne
+    @JoinColumn(name = "CL_COUNTRY_ID")
+    protected CLRefCountry country;
 
-	@ManyToOne
-	@JoinColumn(name = "REG_ENTITY_COOP_ID")
-	protected RegEntity cooperative;
+    @ManyToOne
+    @JoinColumn(name = "REG_ENTITY_FARM_ID")
+    protected RegEntity farm;
 
-	@ManyToOne
-	@JoinColumn(name = "REG_ENTITY_SUPPLIER_ID")
-	protected RegEntity supplier;
+    @ManyToOne
+    @JoinColumn(name = "REG_ENTITY_COOP_ID")
+    protected RegEntity cooperative;
 
-	@ManyToOne
-	@JoinColumn(name = "REG_ENTITY_BUYER_ID")
-	protected RegEntity buyer;
+    @ManyToOne
+    @JoinColumn(name = "REG_ENTITY_SUPPLIER_ID")
+    protected RegEntity supplier;
 
-	public Long getId() {
-		return id;
-	}
+    @ManyToOne
+    @JoinColumn(name = "REG_ENTITY_BUYER_ID")
+    protected RegEntity buyer;
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public String getEmail() {
-		return email;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    public String getEmail() {
+        return email;
+    }
 
-	public String getPassword() {
-		return password;
-	}
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+    public String getPassword() {
+        return password;
+    }
 
-	public boolean isActive() {
-		return active;
-	}
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
-	public void setActive(boolean active) {
-		this.active = active;
-	}
+    public boolean isActive() {
+        return active;
+    }
 
-	public SYSRole getRole() {
-		return role;
-	}
+    public void setActive(boolean active) {
+        this.active = active;
+    }
 
-	public void setRole(SYSRole role) {
-		this.role = role;
-	}
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
 
-	public CLRefCountry getCountry() {
-		return country;
-	}
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
 
-	public void setCountry(CLRefCountry country) {
-		this.country = country;
-	}
+    public SYSRole getRole() {
+        return role;
+    }
 
-	public RegEntity getFarm() {
-		return farm;
-	}
+    public void setRole(SYSRole role) {
+        this.role = role;
+    }
 
-	public void setFarm(RegEntity farm) {
-		this.farm = farm;
-	}
+    public CLRefCountry getCountry() {
+        return country;
+    }
 
-	public RegEntity getCooperative() {
-		return cooperative;
-	}
+    public void setCountry(CLRefCountry country) {
+        this.country = country;
+    }
 
-	public void setCooperative(RegEntity cooperative) {
-		this.cooperative = cooperative;
-	}
+    public RegEntity getFarm() {
+        return farm;
+    }
 
-	public RegEntity getSupplier() {
-		return supplier;
-	}
+    public void setFarm(RegEntity farm) {
+        this.farm = farm;
+    }
 
-	public void setSupplier(RegEntity supplier) {
-		this.supplier = supplier;
-	}
+    public RegEntity getCooperative() {
+        return cooperative;
+    }
 
-	public RegEntity getBuyer() {
-		return buyer;
-	}
+    public void setCooperative(RegEntity cooperative) {
+        this.cooperative = cooperative;
+    }
 
-	public void setBuyer(RegEntity buyer) {
-		this.buyer = buyer;
-	}
+    public RegEntity getSupplier() {
+        return supplier;
+    }
+
+    public void setSupplier(RegEntity supplier) {
+        this.supplier = supplier;
+    }
+
+    public RegEntity getBuyer() {
+        return buyer;
+    }
+
+    public void setBuyer(RegEntity buyer) {
+        this.buyer = buyer;
+    }
 }
