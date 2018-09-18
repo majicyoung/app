@@ -4,7 +4,6 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity()
-@Table(name = "cl_app_termination_contract_reasons")
-public class ClAppTerminationContractReason extends CodeListSupport {
-
+@Table(name = "cl_app_location_types")
+public class CLAppLocationType extends CodeListSupport {
 }

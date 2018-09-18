@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "cl_app_payment_frequencies")
-public class CLAppPaymentFrequency extends CodeListSupport {
+@Table(name = "cl_farm_production_types")
+
+public class CLFarmProductionType extends CodeListSupport {
 }

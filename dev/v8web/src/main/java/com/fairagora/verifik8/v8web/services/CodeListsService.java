@@ -1,342 +1,759 @@
 package com.fairagora.verifik8.v8web.services;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import com.fairagora.verifik8.v8web.data.domain.cl.*;
+import com.fairagora.verifik8.v8web.data.repo.cl.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.fairagora.verifik8.v8web.data.domain.cl.CLAppCompanyPositionType;
-import com.fairagora.verifik8.v8web.data.domain.cl.CLAppContractType;
-import com.fairagora.verifik8.v8web.data.domain.cl.CLAppEntityType;
-import com.fairagora.verifik8.v8web.data.domain.cl.CLAppGetBackFinancialDepositReason;
-import com.fairagora.verifik8.v8web.data.domain.cl.CLAppHazardousTrainingType;
-import com.fairagora.verifik8.v8web.data.domain.cl.CLAppHazardousWorkType;
-import com.fairagora.verifik8.v8web.data.domain.cl.CLAppHiringRestrictionType;
-import com.fairagora.verifik8.v8web.data.domain.cl.CLAppHvHeExpensionType;
-import com.fairagora.verifik8.v8web.data.domain.cl.CLAppLegalStatus;
-import com.fairagora.verifik8.v8web.data.domain.cl.CLAppMeasureType;
-import com.fairagora.verifik8.v8web.data.domain.cl.CLAppNoEarlyTerminationContractReason;
-import com.fairagora.verifik8.v8web.data.domain.cl.CLAppPaymentDebtType;
-import com.fairagora.verifik8.v8web.data.domain.cl.CLAppPaymentFrequency;
-import com.fairagora.verifik8.v8web.data.domain.cl.CLAppQuantityUnit;
-import com.fairagora.verifik8.v8web.data.domain.cl.CLAppSalaryDeductionType;
-import com.fairagora.verifik8.v8web.data.domain.cl.CLAppSoilAnalysisType;
-import com.fairagora.verifik8.v8web.data.domain.cl.CLAppTilingActivityType;
-import com.fairagora.verifik8.v8web.data.domain.cl.CLAppWorkerEntityDocumentTypes;
-import com.fairagora.verifik8.v8web.data.domain.cl.CLFarmPlotActivityType;
-import com.fairagora.verifik8.v8web.data.domain.cl.CLFarmPondActivityType;
-import com.fairagora.verifik8.v8web.data.domain.cl.CLFarmPondType;
-import com.fairagora.verifik8.v8web.data.domain.cl.CLRefCommodities;
-import com.fairagora.verifik8.v8web.data.domain.cl.CLRefCountry;
-import com.fairagora.verifik8.v8web.data.domain.cl.CLRefCurrency;
-import com.fairagora.verifik8.v8web.data.domain.cl.CLRefLanguage;
-import com.fairagora.verifik8.v8web.data.domain.cl.CLRefProduct;
-import com.fairagora.verifik8.v8web.data.domain.cl.CLRefProductType;
-import com.fairagora.verifik8.v8web.data.domain.cl.CLRefSpecies;
-import com.fairagora.verifik8.v8web.data.domain.cl.ClAppTerminationContractReason;
-import com.fairagora.verifik8.v8web.data.repo.cl.CLAppCompanyPositionTypeRepository;
-import com.fairagora.verifik8.v8web.data.repo.cl.CLAppContractTypeRepository;
-import com.fairagora.verifik8.v8web.data.repo.cl.CLAppEntityTypeRepository;
-import com.fairagora.verifik8.v8web.data.repo.cl.CLAppGetBackFinancialDepositReasonRepository;
-import com.fairagora.verifik8.v8web.data.repo.cl.CLAppHazardousTrainingTypeRepository;
-import com.fairagora.verifik8.v8web.data.repo.cl.CLAppHazardousWorkTypeRepository;
-import com.fairagora.verifik8.v8web.data.repo.cl.CLAppHiringRestrictionTypeRepository;
-import com.fairagora.verifik8.v8web.data.repo.cl.CLAppHvHeExpensionTypeRepository;
-import com.fairagora.verifik8.v8web.data.repo.cl.CLAppLegalStatusRepository;
-import com.fairagora.verifik8.v8web.data.repo.cl.CLAppMeasureTypeRepository;
-import com.fairagora.verifik8.v8web.data.repo.cl.CLAppNoEarlyTerminationContractReasonRepository;
-import com.fairagora.verifik8.v8web.data.repo.cl.CLAppPaymentDebtTypeRepository;
-import com.fairagora.verifik8.v8web.data.repo.cl.CLAppPaymentFrequenciesRepository;
-import com.fairagora.verifik8.v8web.data.repo.cl.CLAppQuantityUnitRepository;
-import com.fairagora.verifik8.v8web.data.repo.cl.CLAppSalaryDeductionTypeRepository;
-import com.fairagora.verifik8.v8web.data.repo.cl.CLAppSoilAnalysisTypeRepository;
-import com.fairagora.verifik8.v8web.data.repo.cl.CLAppTilingActivityTypeRepository;
-import com.fairagora.verifik8.v8web.data.repo.cl.CLAppWorkerEntityDocumentTypesRepository;
-import com.fairagora.verifik8.v8web.data.repo.cl.CLFarmPlotActivityTypeRepository;
-import com.fairagora.verifik8.v8web.data.repo.cl.CLFarmPondActivityTypeRepository;
-import com.fairagora.verifik8.v8web.data.repo.cl.CLFarmPondTypeRepository;
-import com.fairagora.verifik8.v8web.data.repo.cl.CLRefCommoditiesRepository;
-import com.fairagora.verifik8.v8web.data.repo.cl.CLRefCountryRepository;
-import com.fairagora.verifik8.v8web.data.repo.cl.CLRefCurrencyRepository;
-import com.fairagora.verifik8.v8web.data.repo.cl.CLRefLanguageRepository;
-import com.fairagora.verifik8.v8web.data.repo.cl.CLRefProductRepository;
-import com.fairagora.verifik8.v8web.data.repo.cl.CLRefProductTypesRepository;
-import com.fairagora.verifik8.v8web.data.repo.cl.CLRefSpeciesRepository;
-import com.fairagora.verifik8.v8web.data.repo.cl.ClAppTerminationContractReasonRepository;
-
 @Service
 public class CodeListsService {
 
-	@Autowired
-	private CLRefCountryRepository countriesRepository;
+    /*****  cl_app *****/
 
-	@Autowired
-	private CLRefSpeciesRepository speciesRepository;
+    @Autowired
+    private CLAppAdministrativeCharacteristicTypeRepository appAdministrativeCharacteristicTypeRepository;
 
-	@Autowired
-	private CLFarmPondTypeRepository pondTypesRepository;
+    @Autowired
+    private CLAppCompanyPositionTypeRepository appCompanyPositionTypeRepository;
 
-	@Autowired
-	private CLRefCommoditiesRepository commoditiesRepository;
+    @Autowired
+    private CLAppContractTypeRepository appContractTypesRepository;
 
-	@Autowired
-	private CLAppHazardousWorkTypeRepository hazardousWorkTypeRepository;
+    @Autowired
+    private CLAppDebtTypeRepository appDebtTypeRepository;
 
-	@Autowired
-	private CLAppHazardousTrainingTypeRepository hazardousTrainingTypeRepository;
-	
-	@Autowired
-	private CLRefProductTypesRepository productTypesRepository;
+    @Autowired
+    private CLAppDeclarationSourcesTypeRepository appDeclarationSourcesTypeRepository;
 
-	@Autowired
-	private CLAppQuantityUnitRepository quantityUnitsRepository;
+    @Autowired
+    private CLAppDeductionSalaryTypeRepository appDeductionSalaryTypeRepository;
 
-	@Autowired
-	private CLAppHvHeExpensionTypeRepository hvHeExpensionTypeRepository;
+    @Autowired
+    private CLAppEnergyTypeRepository appEnergyTypeRepository;
 
-	@Autowired
-	private CLAppCompanyPositionTypeRepository companyPositionTypeRepository;
+    @Autowired
+    private CLAppEngineRoleRepository appEngineRoleRepository;
 
-	@Autowired
-	private CLAppHvHeExpensionTypeRepository highValueExpensionTypeRepository;
+    @Autowired
+    private CLAppEngineTypeRepository appEngineTypeRepository;
 
-	@Autowired
-	private CLFarmPlotActivityTypeRepository plotActivityTypesRepository;
+    @Autowired
+    private CLAppEntityDocumentTypesRepository appEntityDocumentTypesRepository;
 
-	@Autowired
-	private CLFarmPondActivityTypeRepository pondActivityTypesRepository;
+    @Autowired
+    private CLAppEntityTypeRepository appEntityTypeRepository;
 
-	@Autowired
-	private CLRefProductRepository productRepository;
+    @Autowired
+    private CLAppFreshWaterSypplyTypeRepository appFreshWaterSypplyTypeRepository;
 
-	@Autowired
-	private CLRefCurrencyRepository currencyRepository;
+    @Autowired
+    private CLAppGetBackFinancialDepositReasonRepository appGetBackFinancialDepositReasonRepository;
 
-	@Autowired
-	private CLAppTilingActivityTypeRepository tilingActivityTypeRepository;
+    @Autowired
+    private CLAppHazardousTrainingTypeRepository appHazardousTrainingTypeRepository;
 
-	@Autowired
-	private CLAppSoilAnalysisTypeRepository soilAnalysisTypeRepository;
-	@Autowired
-	private CLAppLegalStatusRepository legalStatusRepository;
+    @Autowired
+    private CLAppHazardousWorkTypeRepository appHazardousWorkTypeRepository;
 
-	@Autowired
-	private CLRefLanguageRepository languageRepository;
+    @Autowired
+    private CLAppHiringRestrictionTypeRepository appHiringRestrictionTypeRepository;
 
-	@Autowired
-	private CLAppContractTypeRepository contractTypesRepository;
+    @Autowired
+    private CLAppHullTypeRepository appHullTypeRepository;
 
-	@Autowired
-	private CLAppPaymentFrequenciesRepository paymentFrequenciesRepository;
+    @Autowired
+    private CLAppHvHeExpensionTypeRepository appHvHeExpensionTypeRepository;
 
-	@Autowired
-	private CLAppGetBackFinancialDepositReasonRepository getBackFinancialDepositReasonRepository;
+    @Autowired
+    private CLAppLegalStatusRepository appLegalStatusRepository;
 
-	@Autowired
-	private CLAppHiringRestrictionTypeRepository hiringRestrictionTypeRepository;
+    @Autowired
+    private CLAppLicenseTypeRepository appLicenseTypeRepository;
 
-	@Autowired
-	private CLAppNoEarlyTerminationContractReasonRepository noEarlyTerminationContractReasonRepository;
+    @Autowired
+    private CLAppLocationTypeRepository appLocationTypeRepository;
 
-	@Autowired
-	private CLAppPaymentDebtTypeRepository paymentDebtTypeRepository;
+    @Autowired
+    private CLAppLocationRepository appLocationRepository;
 
-	@Autowired
-	private CLAppSalaryDeductionTypeRepository salaryDeductionTypeRepository;
+    @Autowired
+    private CLAppMeasureTypeRepository appMeasureTypeRepository;
 
-	@Autowired
-	private ClAppTerminationContractReasonRepository terminationContractReasonRepository;
+    @Autowired
+    private CLAppNoEarlyTerminationContractReasonRepository appNoEarlyTerminationContractReasonRepository;
 
-	@Autowired
-	private CLAppWorkerEntityDocumentTypesRepository workerEntityDocumentTypesRepository;
+    @Autowired
+    private CLAppPaymentDebtTypeRepository appPaymentDebtTypeRepository;
 
-	/**
-	 * 
-	 * @return
-	 */
-	public List<CLAppHvHeExpensionType> listActiveHighValueExpensionTypes() {
-		return highValueExpensionTypeRepository.findByEnabledTrueOrderByName();
-	}
+    @Autowired
+    private CLAppPaymentFrequencyRepository appPaymentFrequencyRepository;
 
-	/**
-	 * 
-	 * @return
-	 */
-	public List<CLAppCompanyPositionType> listActivePositionTypes() {
-		return companyPositionTypeRepository.findByEnabledTrueOrderByName();
-	}
+    @Autowired
+    private CLAppPowerUnitRepository appPowerUnitRepository;
 
-	/**
-	 * return a sorted list of countries
-	 * 
-	 * @return
-	 */
-	public List<CLRefCountry> listActiveCountries() {
-		return countriesRepository.findByEnabledTrueOrderByName();
-	}
+    @Autowired
+    private CLAppProdDataEntryTypeRepository appProdDataEntryTypeRepository;
 
-	/**
-	 * return a sorted list of active product types
-	 * 
-	 * @return
-	 */
-	public List<CLRefProductType> listActiveProductTypes() {
-		return productTypesRepository.findByEnabledTrueOrderByName();
-	}
+    @Autowired
+    private CLAppPropulsionTypeRepository appPropulsionTypeRepository;
 
-	/**
-	 * return a sorted list of active quantity unit types
-	 * 
-	 * @return
-	 */
-	public List<CLAppQuantityUnit> listActiveQuantityUnit() {
-		return quantityUnitsRepository.findByEnabledTrueOrderByName();
-	}
+    @Autowired
+    private CLAppQuantityUnitTypeRepository appQuantityUnitTypeRepository;
 
-	/**
-	 * return a sorted list of active hvhe expension types
-	 * 
-	 * @return
-	 */
-	public List<CLAppHvHeExpensionType> listHvHeExpensionTypes() {
-		return hvHeExpensionTypeRepository.findByEnabledTrueOrderByName();
-	}
+    @Autowired
+    private CLAppQuantityUnitRepository appQuantityUnitRepository;
 
-	/**
-	 * 
-	 * @param productType
-	 * @return
-	 */
-	public CLRefProductType getProductType(Long productType) {
-		return productTypesRepository.findOne(productType);
-	}
+    @Autowired
+    private CLAppQuestionnaireAnswerRepository appQuestionnaireAnswerRepository;
 
-	/**
-	 * 
-	 * @return
-	 */
-	public List<CLAppHazardousWorkType> listActiveHazardousWorkType() {
-		return hazardousWorkTypeRepository.findByEnabledTrueOrderByName();
-	}
+    @Autowired
+    private CLAppSoilAnalysisTypeRepository appSoilAnalysisTypeRepository;
 
-	/**
-	 * 
-	 * @return
-	 */
-	public List<CLRefSpecies> listActiveSpecies() {
-		return speciesRepository.findByEnabledTrueOrderByName();
-	}
+    @Autowired
+    private CLAppStaffDeclarationTypeRepository appStaffDeclarationTypeRepository;
 
-	public List<CLFarmPondType> listActivePondTypes() {
-		return pondTypesRepository.findByEnabledTrueOrderByName();
-	}
+    @Autowired
+    private CLAppTerminationContractReasonRepository appTerminationContractReasonRepository;
 
-	public List<CLRefCommodities> listActiveCommodities() {
-		return commoditiesRepository.findByEnabledTrueOrderByName();
-	}
+    @Autowired
+    private CLAppTilingActivityTypeRepository appTilingActivityTypeRepository;
 
-	public List<CLFarmPlotActivityType> listActiveActivityTypes() {
-		return plotActivityTypesRepository.findByEnabledTrueOrderByName();
-	}
+    @Autowired
+    private CLAppVesselCharacteristicRepository appVesselCharacteristicRepository;
 
-	public List<CLFarmPondActivityType> listActivePondActivityTypes() {
-		return pondActivityTypesRepository.findByEnabledTrueOrderByName();
-	}
+    @Autowired
+    private CLAppVesselEquipmentTypeRepository appVesselEquipmentTypeRepository;
 
-	public List<CLRefProduct> listActiveProducts() {
-		return productRepository.findByEnabledTrueOrderByName();
-	}
+    @Autowired
+    private CLAppVesselHistoricalCharacteristicTypeRepository appVesselHistoricalCharacteristicTypeRepository;
 
-	public List<CLRefProduct> listActiveProductsByActivity(Long activityId) {
-		return productRepository.getFindByEnabledTrueAndFActivityIdOrderByName(activityId);
-	}
+    @Autowired
+    private CLAppVesselOperationalStatusRepository appVesselOperationalStatusRepository;
 
-	public List<CLRefProduct> listActiveProductsByPlotActivity(Long activityId) {
-		return productRepository.getFindByEnabledTrueAndPlotActivityIdOrderByName(activityId);
-	}
+    @Autowired
+    private CLAppWaterSupplyTypeRepository appWaterSupplyTypeRepository;
 
-	public List<CLAppTilingActivityType> listActiveTilingActivityTypes() {
-		return tilingActivityTypeRepository.findByEnabledTrueOrderByName();
-	}
+    /*****  cl_farm *****/
 
-	@Autowired
-	private CLAppMeasureTypeRepository measureTypeRepository;
+    @Autowired
+    private CLFarmBuildingTypeRepository farmBuildingTypeRepository;
 
-	public List<CLAppMeasureType> listActiveMeasureTypes() {
-		return measureTypeRepository.findByEnabledTrueOrderByName();
-	}
+    @Autowired
+    private CLFarmPlotActivityTypeRepository farmPlotActivityTypesRepository;
 
-	@Autowired
-	CLAppEntityTypeRepository entityTypeRepository;
+    @Autowired
+    private CLFarmPondActivityTypeRepository farmPondActivityTypesRepository;
 
-	@Transactional
-	public CLAppEntityType findEntityType(String codeInd) {
-		for (CLAppEntityType e : entityTypeRepository.findAll())
-			if (e.getCode().equals(codeInd))
-				return e;
-		return null;
-	}
+    @Autowired
+    private CLFarmPondTypeRepository farmPondTypesRepository;
 
-	public List<CLAppEntityType> listActiveCompanyEntityTypes() {
-		return entityTypeRepository.findByEnabledTrueAndCompanyTrueOrderByName();
-	}
+    @Autowired
+    private CLFarmProductionTypeRepository farmProductionTypeRepository;
 
-	public List<CLAppSoilAnalysisType> listActiveSoilAnalysisType() {
-		return soilAnalysisTypeRepository.findByEnabledTrueOrderByName();
-	}
+    @Autowired
+    private CLFarmTypeRepository farmTypeRepository;
 
-	public List<CLAppLegalStatus> listActiveLegalStatuses() {
-		return legalStatusRepository.findByEnabledTrueOrderByName();
-	}
+    /***** cl_fish *****/
 
-	public List<CLRefLanguage> listActiveLanguages() {
-		return languageRepository.findByEnabledTrueOrderByName();
-	}
+    @Autowired
+    private CLFishFishingTypeRepository fishFishingTypeRepository;
 
-	public List<CLAppContractType> listActiveContractTypes() {
-		return contractTypesRepository.findByEnabledTrueOrderByName();
-	}
+    @Autowired
+    private CLFishFishingZoneRepository fishFishingZoneRepository;
 
-	public List<CLAppPaymentFrequency> listActivePaymentFrequencies() {
-		return paymentFrequenciesRepository.findByEnabledTrueOrderByName();
-	}
+    /*****  cl_ref *****/
 
-	public List<CLRefCurrency> listActiveCurrencies() {
-		return currencyRepository.findByEnabledTrueOrderByName();
-	}
+    @Autowired
+    private CLRefAdminLevel1Repository refAdminLevel1Repository;
 
-	public List<CLAppGetBackFinancialDepositReason> listActiveGetBackFinancialDepositReason() {
-		return getBackFinancialDepositReasonRepository.findByEnabledTrueOrderByName();
-	}
+    @Autowired
+    private CLRefAdminLevel2Repository refAdminLevel2Repository;
 
-	public List<CLAppNoEarlyTerminationContractReason> listActiveNoEarlyTerminationContractReason() {
-		return noEarlyTerminationContractReasonRepository.findByEnabledTrueOrderByName();
-	}
+    @Autowired
+    private CLRefCommodityRepository refCommodityRepository;
 
-	public List<ClAppTerminationContractReason> listActiveTerminationContractReason() {
-		return terminationContractReasonRepository.findByEnabledTrueOrderByName();
-	}
+    @Autowired
+    private CLRefCountryRepository refCountryRepository;
 
-	public List<CLAppWorkerEntityDocumentTypes> listActiveWorkerEntityDocumentTypes() {
-		return workerEntityDocumentTypesRepository.findByEnabledTrueOrderByName();
-	}
+    @Autowired
+    private CLRefCurrencyRepository refCurrencyRepository;
 
-	public List<CLAppSalaryDeductionType> listActiveSalaryDeductionType() {
-		return salaryDeductionTypeRepository.findByEnabledTrueOrderByName();
-	}
+    @Autowired
+    private CLRefDeclarationSourceRepository refDeclarationSourceRepository;
 
-	public List<CLAppPaymentDebtType> listActivePaymentDebtType() {
-		return paymentDebtTypeRepository.findByEnabledTrueOrderByName();
-	}
+    @Autowired
+    private CLRefGearCharacteristicRepository refGearCharacteristicRepository;
 
-	public List<CLAppHiringRestrictionType> listActiveHiringRestrictionTypeRepository() {
-		return hiringRestrictionTypeRepository.findByEnabledTrueOrderByName();
-	}
+    @Autowired
+    private CLRefGearRepository refGearRepository;
 
-	public List<CLAppHazardousTrainingType> listHazardousTrainingTypeRepository() {
-		return hazardousTrainingTypeRepository.findByEnabledTrueOrderByName();
-	}
+    @Autowired
+    private CLRefLandingSiteRepository refLandingSiteRepository;
+
+    @Autowired
+    private CLRefLanguageRepository refLanguageRepository;
+
+    @Autowired
+    private CLRefLanguageCountryRepository refLanguageCountryRepository;
+
+    @Autowired
+    private CLRefProductTypesRepository refProductTypesRepository;
+
+    @Autowired
+    private CLRefProductRepository refProductRepository;
+
+    @Autowired
+    private CLRefRegionRepository refRegionRepository;
+
+    @Autowired
+    private CLRefSpeciesRepository refSpeciesRepository;
+
+    @Autowired
+    private CLRefVesselTypeRepository refVesselTypeRepository;
+
+
+    /***** cl_app - get *****/
+
+    public CLAppAdministrativeCharacteristicType getAppAdministrativeCharacteristicType(long id) {
+        return appAdministrativeCharacteristicTypeRepository.findOne(id);
+    }
+
+    public CLAppCompanyPositionType getAppCompanyPositionType(long id) {
+        return appCompanyPositionTypeRepository.findOne(id);
+    }
+
+    public List<CLAppCompanyPositionType> listActivePositionTypes() {
+        return appCompanyPositionTypeRepository.findByEnabledTrueOrderByName();
+    }
+
+    public CLAppContractType getAppContractType(long id) {
+        return appContractTypesRepository.findOne(id);
+    }
+
+    public List<CLAppContractType> listActiveContractTypes() {
+        return appContractTypesRepository.findByEnabledTrueOrderByName();
+    }
+
+    public CLAppDebtType getAppDebtType(long id) {
+        return appDebtTypeRepository.findOne(id);
+    }
+
+    public CLAppDeclarationSourcesType getAppDeclarationSourcesType(long id) {
+        return appDeclarationSourcesTypeRepository.findOne(id);
+    }
+
+    public CLAppDeductionSalaryType getAppDeductionSalaryType(long id) {
+        return appDeductionSalaryTypeRepository.findOne(id);
+    }
+
+    public List<CLAppDeductionSalaryType> listActiveSalaryDeductionType() {
+        return appDeductionSalaryTypeRepository.findByEnabledTrueOrderByName();
+    }
+
+    public CLAppEnergyType getAppEnergyType(long id) {
+        return appEnergyTypeRepository.findOne(id);
+    }
+
+    public CLAppEngineRole getAppEngineRole(long id) {
+        return appEngineRoleRepository.findOne(id);
+    }
+
+    public CLAppEngineType getAppEngineType(long id) {
+        return appEngineTypeRepository.findOne(id);
+    }
+
+    public CLAppEntityDocumentTypes getAppEntityDocumentType(long id) {
+        return appEntityDocumentTypesRepository.findOne(id);
+    }
+
+    public List<CLAppEntityDocumentTypes> listActiveWorkerEntityDocumentTypes() {
+        return appEntityDocumentTypesRepository.findByEnabledTrueOrderByName();
+    }
+
+    public CLAppEntityType getAppEntityType(long id) {
+        return appEntityTypeRepository.findOne(id);
+    }
+
+    @Transactional
+    public CLAppEntityType findEntityType(String codeInd) {
+        for (CLAppEntityType e : appEntityTypeRepository.findAll())
+            if (e.getCode().equals(codeInd))
+                return e;
+        return null;
+    }
+
+    public List<CLAppEntityType> listActiveCompanyEntityTypes() {
+        return appEntityTypeRepository.findByEnabledTrueAndCompanyTrueOrderByName();
+    }
+
+    public CLAppFreshWaterSypplyType getAppFreshWaterSypplyType(long id) {
+        return appFreshWaterSypplyTypeRepository.findOne(id);
+    }
+
+    public CLAppGetBackFinancialDepositReason getAppGetBackFinancialDepositReason(long id) {
+        return appGetBackFinancialDepositReasonRepository.findOne(id);
+    }
+
+    public List<CLAppGetBackFinancialDepositReason> listActiveGetBackFinancialDepositReason() {
+        return appGetBackFinancialDepositReasonRepository.findByEnabledTrueOrderByName();
+    }
+
+    public CLAppHazardousTrainingType getAppHazardousTrainingType(long id) {
+        return appHazardousTrainingTypeRepository.findOne(id);
+    }
+
+    public List<CLAppHazardousTrainingType> listHazardousTrainingTypeRepository() {
+        return appHazardousTrainingTypeRepository.findByEnabledTrueOrderByName();
+    }
+
+    public CLAppHazardousWorkType getAppHazardousWorkType(long id) {
+        return appHazardousWorkTypeRepository.findOne(id);
+    }
+
+    public List<CLAppHazardousWorkType> listActiveHazardousWorkType() {
+        return appHazardousWorkTypeRepository.findByEnabledTrueOrderByName();
+    }
+
+    public CLAppHiringRestrictionType getAppHiringRestrictionType(long id) {
+        return appHiringRestrictionTypeRepository.findOne(id);
+    }
+
+    public List<CLAppHiringRestrictionType> listActiveHiringRestrictionTypeRepository() {
+        return appHiringRestrictionTypeRepository.findByEnabledTrueOrderByName();
+    }
+
+    public CLAppHullType getAppHullType(long id) {
+        return appHullTypeRepository.findOne(id);
+    }
+
+    public CLAppHvHeExpensionType getAppHvHeExpensionType(long id) {
+        return appHvHeExpensionTypeRepository.findOne(id);
+    }
+
+    public List<CLAppHvHeExpensionType> listHvHeExpensionTypes() {
+        return appHvHeExpensionTypeRepository.findByEnabledTrueOrderByName();
+    }
+
+    public List<CLAppHvHeExpensionType> listActiveHighValueExpensionTypes() {
+        return appHvHeExpensionTypeRepository.findByEnabledTrueOrderByName();
+    }
+
+    public CLAppLegalStatus getAppLegalStatus(long id) {
+        return appLegalStatusRepository.findOne(id);
+    }
+
+    public List<CLAppLegalStatus> listActiveLegalStatuses() {
+        return appLegalStatusRepository.findByEnabledTrueOrderByName();
+    }
+
+    public CLAppLicenseType getAppLicenceType(long id) {
+        return appLicenseTypeRepository.findOne(id);
+    }
+
+    public CLAppLocationType getAppLocationType(long id) {
+        return appLocationTypeRepository.findOne(id);
+    }
+
+    public CLAppLocation getAppLocation(long id) {
+        return appLocationRepository.findOne(id);
+    }
+
+    public CLAppMeasureType getAppMeasureType(long id) {
+        return appMeasureTypeRepository.findOne(id);
+    }
+
+    public List<CLAppMeasureType> listActiveMeasureTypes() {
+        return appMeasureTypeRepository.findByEnabledTrueOrderByName();
+    }
+
+    public CLAppNoEarlyTerminationContractReason getAppNoEarlyTerminationContractReason(long id) {
+        return appNoEarlyTerminationContractReasonRepository.findOne(id);
+    }
+
+    public List<CLAppNoEarlyTerminationContractReason> listActiveNoEarlyTerminationContractReason() {
+        return appNoEarlyTerminationContractReasonRepository.findByEnabledTrueOrderByName();
+    }
+
+    public CLAppPaymentDebtType getAppPaymentDebtType(long id) {
+        return appPaymentDebtTypeRepository.findOne(id);
+    }
+
+    public List<CLAppPaymentDebtType> listActivePaymentDebtType() {
+        return appPaymentDebtTypeRepository.findByEnabledTrueOrderByName();
+    }
+
+    public CLAppPaymentFrequency getAppPaymentFrequency(long id) {
+        return appPaymentFrequencyRepository.findOne(id);
+    }
+
+    public List<CLAppPaymentFrequency> listActivePaymentFrequencies() {
+        return appPaymentFrequencyRepository.findByEnabledTrueOrderByName();
+    }
+
+    public CLAppPowerUnit getAppPowerUnit(long id) {
+        return appPowerUnitRepository.findOne(id);
+    }
+
+    public CLAppProdDataEntryType getAppProDataEntryType(long id) {
+        return appProdDataEntryTypeRepository.findOne(id);
+    }
+
+    public CLAppPropulsionType getAppPropulsionTypeRepository(long id) {
+        return appPropulsionTypeRepository.findOne(id);
+    }
+
+    public CLAppQuantityUnitType getAppQuantityUnitType(long id) {
+        return appQuantityUnitTypeRepository.findOne(id);
+    }
+
+    public CLAppQuantityUnit getAppQuantityUnit(long id) {
+        return appQuantityUnitRepository.findOne(id);
+    }
+
+    public List<CLAppQuantityUnit> listActiveQuantityUnit() {
+        return appQuantityUnitRepository.findByEnabledTrueOrderByName();
+    }
+
+    public CLAppQuestionnaireAnswer getAppQuestionnaireAnswer(long id) {
+        return appQuestionnaireAnswerRepository.findOne(id);
+    }
+
+    public CLAppSoilAnalysisType getAppSoilAnalysisType(long id) {
+        return appSoilAnalysisTypeRepository.findOne(id);
+    }
+
+    public List<CLAppSoilAnalysisType> listActiveSoilAnalysisType() {
+        return appSoilAnalysisTypeRepository.findByEnabledTrueOrderByName();
+    }
+
+    public CLAppStaffDeclarationType getAppStaffDeclarationType(long id) {
+        return appStaffDeclarationTypeRepository.findOne(id);
+    }
+
+    public CLAppTerminationContractReason getAppTerminationContractReason(long id) {
+        return appTerminationContractReasonRepository.findOne(id);
+    }
+
+    public List<CLAppTerminationContractReason> listActiveTerminationContractReason() {
+        return appTerminationContractReasonRepository.findByEnabledTrueOrderByName();
+    }
+
+    public CLAppTilingActivityType getAppTilingActivityType(long id) {
+        return appTilingActivityTypeRepository.findOne(id);
+    }
+
+    public List<CLAppTilingActivityType> listActiveTilingActivityTypes() {
+        return appTilingActivityTypeRepository.findByEnabledTrueOrderByName();
+    }
+
+    public CLAppVesselCharacteristic getAppVesselCharacteristic(long id) {
+        return appVesselCharacteristicRepository.findOne(id);
+    }
+
+    public CLAppVesselEquipmentType getAppVesselEquipmentType(long id) {
+        return appVesselEquipmentTypeRepository.findOne(id);
+    }
+
+    public CLAppVesselHistoricalCharacteristicType getAppVesselHistoricalCharacteristicType(long id) {
+        return appVesselHistoricalCharacteristicTypeRepository.findOne(id);
+    }
+
+    public CLAppVesselOperationalStatus getAppVesselOperationalStatus(long id) {
+        return appVesselOperationalStatusRepository.findOne(id);
+    }
+
+    public CLAppWaterSupplyType getAppWaterSupplyType(long id) {
+        return appWaterSupplyTypeRepository.findOne(id);
+    }
+
+    /***** cl_farm - get *****/
+
+    public CLFarmBuildingType getFarmBuildingType(long id) {
+        return farmBuildingTypeRepository.findOne(id);
+    }
+
+    public CLFarmPlotActivityType getFarmPlotActivityType(long id) {
+        return farmPlotActivityTypesRepository.findOne(id);
+    }
+    public List<CLFarmPlotActivityType> listActiveActivityTypes() {
+        return farmPlotActivityTypesRepository.findByEnabledTrueOrderByName();
+    }
+
+    public CLFarmPondActivityType getFarmPondActivityType(long id) {
+        return farmPondActivityTypesRepository.findOne(id);
+    }
+
+    public List<CLFarmPondActivityType> listActivePondActivityTypes() {
+        return farmPondActivityTypesRepository.findByEnabledTrueOrderByName();
+    }
+
+    public CLFarmPondType getFarmPondType(long id) {
+        return farmPondTypesRepository.findOne(id);
+    }
+
+    public List<CLFarmPondType> listActivePondTypes() {
+        return farmPondTypesRepository.findByEnabledTrueOrderByName();
+    }
+
+    public CLFarmProductionType getFarmProductionType(long id) {
+        return farmProductionTypeRepository.findOne(id);
+    }
+
+    public CLFarmType getFarmType(long id) {
+        return farmTypeRepository.findOne(id);
+    }
+
+    /***** cl_fish - get *****/
+
+    public CLFishFishingType getFishFishingType(long id) {
+        return fishFishingTypeRepository.findOne(id);
+    }
+
+    public CLFishFishingZone getFishFishingZone(long id) {
+        return fishFishingZoneRepository.findOne(id);
+    }
+
+    /***** cl_ref - get *****/
+
+    public CLRefAdminLevel1 getRefAdminLevel1(long id) {
+        return refAdminLevel1Repository.findOne(id);
+    }
+
+    public CLRefAdminLevel2 getRefAdminLevel2(long id) {
+        return refAdminLevel2Repository.findOne(id);
+    }
+
+    public CLRefCommodity getRefCommodity(long id) {
+        return refCommodityRepository.findOne(id);
+    }
+
+    public List<CLRefCommodity> listActiveCommodities() {
+        return refCommodityRepository.findByEnabledTrueOrderByName();
+    }
+
+    public CLRefCountry getRefCountry(long id) {
+        return refCountryRepository.findOne(id);
+    }
+
+    public List<CLRefCountry> listActiveCountries() {
+        return refCountryRepository.findByEnabledTrueOrderByName();
+    }
+
+    public CLRefCurrency getRefCurrency(long id) {
+        return refCurrencyRepository.findOne(id);
+    }
+
+    public List<CLRefCurrency> listActiveCurrencies() {
+        return refCurrencyRepository.findByEnabledTrueOrderByName();
+    }
+
+    public CLRefDeclarationSource getRefDeclarationSource(long id) {
+        return refDeclarationSourceRepository.findOne(id);
+    }
+
+    public CLRefGearCharacteristic getRefGearCharacteristic(long id) {
+        return refGearCharacteristicRepository.findOne(id);
+    }
+
+    public CLRefGear getRefGear(long id) {
+        return refGearRepository.findOne(id);
+    }
+
+    public CLRefLandingSite getRefLandingSite(long id) {
+        return refLandingSiteRepository.findOne(id);
+    }
+
+    public CLRefLanguage getRefLanguage(long id) {
+        return refLanguageRepository.findOne(id);
+    }
+
+    public List<CLRefLanguage> listActiveLanguages() {
+        return refLanguageRepository.findByEnabledTrueOrderByName();
+    }
+
+    public CLRefLanguageCountry getRefLanguageCountry(long id) {
+        return refLanguageCountryRepository.findOne(id);
+    }
+
+    public CLRefProductType getRefProductType(long id) {
+        return refProductTypesRepository.findOne(id);
+    }
+
+    public List<CLRefProductType> listActiveProductTypes() {
+        return refProductTypesRepository.findByEnabledTrueOrderByName();
+    }
+
+    public CLRefProduct getRefProduct(long id) {
+        return refProductRepository.findOne(id);
+    }
+
+    public List<CLRefProduct> listActiveProducts() {
+        return refProductRepository.findByEnabledTrueOrderByName();
+    }
+
+    public List<CLRefProduct> listActiveProductsByActivity(Long activityId) {
+        return refProductRepository.getFindByEnabledTrueAndFActivityIdOrderByName(activityId);
+    }
+
+    public List<CLRefProduct> listActiveProductsByPlotActivity(Long activityId) {
+        return refProductRepository.getFindByEnabledTrueAndPlotActivityIdOrderByName(activityId);
+    }
+
+
+    public CLRefRegion getRefRegion(long id) {
+        return refRegionRepository.findOne(id);
+    }
+
+    public CLRefSpecies getRefSpechie(long id) {
+        return refSpeciesRepository.findOne(id);
+    }
+
+    public List<CLRefSpecies> listActiveSpecies() {
+        return refSpeciesRepository.findByEnabledTrueOrderByName();
+    }
+
+    public CLRefVesselType getRefVesselType(long id) {
+        return refVesselTypeRepository.findOne(id);
+    }
+
+    public CodeListSupport get(String tableName, long id) {
+        switch (tableName) {
+            case "cl_app_administrative_characteristic_types":
+                return getAppAdministrativeCharacteristicType(id);
+            case "cl_app_company_position_types":
+                return getAppCompanyPositionType(id);
+            case "cl_app_contract_types":
+                return getAppContractType(id);
+            case "cl_app_debt_types":
+                return getAppDebtType(id);
+            case "cl_app_declaration_sources_types":
+                return getAppDeclarationSourcesType(id);
+            case "cl_app_deduction_salary_types":
+                return getAppDeductionSalaryType(id);
+            case "cl_app_energy_types":
+                return getAppEnergyType(id);
+            case "cl_app_engine_roles":
+                return getAppEngineRole(id);
+            case "cl_app_engine_types":
+                return getAppEngineType(id);
+            case "cl_app_entity_document_types":
+                return getAppEntityDocumentType(id);
+            case "cl_app_entity_types":
+                return getAppEntityType(id);
+            case "cl_app_fresh_water_sypply_types":
+                return getAppFreshWaterSypplyType(id);
+            case "cl_app_get_back_financial_deposit_reasons":
+                return getAppGetBackFinancialDepositReason(id);
+            case "cl_app_hazardous_training_types":
+                return getAppHazardousTrainingType(id);
+            case "cl_app_hazardous_work_type":
+                return getAppHazardousWorkType(id);
+            case "cl_app_hiring_restriction_types":
+                return getAppHiringRestrictionType(id);
+            case "cl_app_hull_types":
+                return getAppHullType(id);
+            case "cl_app_hvhe_expension_types":
+                return getAppHvHeExpensionType(id);
+            case "cl_app_legal_status":
+                return getAppLegalStatus(id);
+            case "cl_app_license_types":
+                return getAppLicenceType(id);
+            case "cl_app_location_types":
+                return getAppLocationType(id);
+            case "cl_app_locations":
+                return getAppLocation(id);
+            case "cl_app_measure_types":
+                return getAppMeasureType(id);
+            case "cl_app_no_early_termination_contract_reasons":
+                return getAppNoEarlyTerminationContractReason(id);
+            case "cl_app_payment_debt_types":
+                return getAppPaymentDebtType(id);
+            case "cl_app_payment_frequencies":
+                return getAppPaymentFrequency(id);
+            case "cl_app_power_units":
+                return getAppPowerUnit(id);
+            case "cl_app_prod_data_entry_types":
+                return getAppProDataEntryType(id);
+            case "cl_app_propulsion_types":
+                return getAppPropulsionTypeRepository(id);
+            case "cl_app_quantity_unit_types":
+                return getAppQuantityUnitType(id);
+            case "cl_app_quantity_units":
+                return getAppQuantityUnit(id);
+            case "cl_app_questionnaire_answers":
+                return getAppQuestionnaireAnswer(id);
+            case "cl_app_soil_analysis_types":
+                return getAppSoilAnalysisType(id);
+            case "cl_app_staff_declaration_types":
+                return getAppStaffDeclarationType(id);
+            case "cl_app_termination_contract_reasons":
+                return getAppTerminationContractReason(id);
+            case "cl_app_tiling_activity_types":
+                return getAppTilingActivityType(id);
+            case "cl_app_vessel_characteristics":
+                return getAppVesselCharacteristic(id);
+            case "cl_app_vessel_equipment_types":
+                return getAppVesselEquipmentType(id);
+            case "cl_app_vessel_historical_characteristic_types":
+                return getAppVesselHistoricalCharacteristicType(id);
+            case "cl_app_vessel_operational_status":
+                return getAppVesselOperationalStatus(id);
+            case "cl_app_water_supply_types":
+                return getAppWaterSupplyType(id);
+            case "cl_farm_building_types":
+                return getFarmBuildingType(id);
+            case "cl_farm_plot_activity_types":
+                return getFarmPlotActivityType(id);
+            case "cl_farm_pond_activity_types":
+                return getFarmPondActivityType(id);
+            case "cl_farm_pond_types":
+                return getFarmPondType(id);
+            case "cl_farm_production_types":
+                return getFarmProductionType(id);
+            case "cl_farm_types":
+                return getFarmType(id);
+            case "cl_fish_fishing_types":
+                return getFishFishingType(id);
+            case "cl_fish_fishing_zones":
+                return getFishFishingZone(id);
+            case "cl_ref_admin_level_1":
+                return getRefAdminLevel1(id);
+            case "cl_ref_admin_level_2":
+                return getRefAdminLevel2(id);
+            case "cl_ref_commodities":
+                return getRefCommodity(id);
+            case "cl_ref_countries":
+                return getRefCountry(id);
+            case "cl_ref_currencies":
+                return getRefCurrency(id);
+            case "cl_ref_declaration_sources":
+                return getRefDeclarationSource(id);
+            case "cl_ref_gear_characteristics":
+                return getRefGearCharacteristic(id);
+            case "cl_ref_gears":
+                return getRefGear(id);
+            case "cl_ref_landing_sites":
+                return getRefLandingSite(id);
+            case "cl_ref_languages":
+                return getRefLanguage(id);
+            case "cl_ref_languages_countries":
+                return getRefLanguageCountry(id);
+            case "cl_ref_product_types":
+                return getRefProductType(id);
+            case "cl_ref_products":
+                return getRefProduct(id);
+            case "cl_ref_regions":
+                return getRefRegion(id);
+            case "cl_ref_species":
+                return getRefSpechie(id);
+            case "cl_ref_vessel_types":
+                return getRefVesselType(id);
+            default:
+                return null;
+        }
+    }
 
 }

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html layout:decorator="inc/main-layout" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<div layout:fragment="content">
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header with-border">
+                    <h3 class="box-title pull-left" th:text="${table}">table</h3>
+                    <div class="box-tools">
+                        <a th:href="@{'/admin/codelists/browser/'+${table}+'/create.html'}" class="btn btn-sm btn-flat btn-success"><i
+                                class="fa fa-plus"></i> <span th:text="#{user.add}">user.add</span></a>
+                    </div>
+                </div>
+                <div class="box-body">
+                    <table class="table table-hover table-striped table-bordered datatable" id="userTable">
+                        <thead>
+                        <tr>
+                            <div th:each="values : ${allDatas[0]}">
+                                <th th:if="${values.key!='UPDATER_ID' AND values.key!='COMMENT' AND values.key!='CREATED_AT' AND values.key!='UPDATED_AT'}"
+                                    th:inline="text">[[${values.key}]]
+                                </th>
+                            </div>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="data : ${allDatas}">
+                            <div th:each="values : ${data}">
+                                <td th:if="${values.key!='UPDATER_ID' AND values.key!='COMMENT' AND values.key!='CREATED_AT' AND values.key!='UPDATED_AT'}"
+                                    th:inline="text">[[${values.value}]]
+                                </td>
+                            </div>
+                            <td align="center">
+                                <a th:href="@{'/admin/codelists/browser/'+${table}+'/'+${data.id}+'/edit.html'}"
+                                   class="btn btn-sm btn-flat btn-primary"><i class="fa fa-edit"></i></a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</html>

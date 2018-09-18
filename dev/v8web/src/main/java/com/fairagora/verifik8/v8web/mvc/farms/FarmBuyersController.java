@@ -52,7 +52,7 @@ public class FarmBuyersController extends AbstractV8Controller {
 		RegEntityFarmBuyerAssignment newAst = new RegEntityFarmBuyerAssignment();
 		newAst.setFarm(regEntityRepository.findOne(id));
 		newAst.setBuyer(regEntityRepository.findOne(buyer));
-		newAst.setProductType(codeListservice.getProductType(productType));
+		newAst.setProductType(codeListservice.getRefProductType(productType));
 
 		regEntityFarmBuyerAssignmentRepository.save(newAst);
 

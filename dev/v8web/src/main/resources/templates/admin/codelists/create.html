@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html layout:decorator="inc/main-layout" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<div layout:fragment="content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box" id="user-box">
+                <div class="box-header with-border">
+                    <h3 class="box-title" th:text="#{user.add}" th:if="${newEntity}">user.add</h3>
+                    <h3 class="box-title" th:text="#{user.edit}" th:if="${!newEntity}">user.edit</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</html>

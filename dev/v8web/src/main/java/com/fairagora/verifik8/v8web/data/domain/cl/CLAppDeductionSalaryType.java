@@ -9,7 +9,7 @@ import java.util.List;
 
 @Entity()
 @Table(name = "cl_app_deduction_salary_types")
-public class CLAppSalaryDeductionType extends CodeListSupport {
+public class CLAppDeductionSalaryType extends CodeListSupport {
 
 
 	@ManyToMany(mappedBy="salaryDeductionTypes")
