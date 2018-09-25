@@ -15,6 +15,10 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
+	static final String CLIENT_SECRET = "verifik8-secret";
+	static final String REMEBER_ME_PARAM = "remember_me";
+	static final String COOKIE_NAME = "verifik8-remember_me";
+	
 	@Autowired
 	private DataSource dataSource;
 
@@ -33,10 +37,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .and()
         .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login")
             .permitAll();
+		http.rememberMe(). 
+	        key(CLIENT_SECRET).
+	        rememberMeParameter(REMEBER_ME_PARAM).
+	        rememberMeCookieName(COOKIE_NAME).
+	        tokenValiditySeconds(86400);
 		http.csrf().disable();
 		http.headers()
 	      .frameOptions()
 	      .sameOrigin();
 		
-	} 
+	}
 }
