@@ -89,13 +89,11 @@ develop_deploy:
     - "api"
   script:
     - cd ~/verifik8
-    - docker-compose pull backend_blue
-    - docker-compose up -d --no-deps backend_blue
-    - docker-compose pull app_green
-    - docker-compose up -d --no-deps backend_green
+    - docker service update backend_blue --detach=false --image=$IMAGE_DEVELOP --with-registry-auth
+    - docker service update backend_green --detach=false --image=$IMAGE_DEVELOP --with-registry-auth
   stage: deploy
   tags:
-    - staging2
+    - uat
   variables:
     GIT_STRATEGY: none
 
