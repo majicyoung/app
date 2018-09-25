@@ -15,9 +15,9 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-	static final String CLIENT_SECRET = "verifik8-secret";
+	static final String CLIENT_SECRET = "verifik8_secret";
 	static final String REMEBER_ME_PARAM = "remember_me";
-	static final String COOKIE_NAME = "verifik8-remember_me";
+	static final String COOKIE_NAME = "verifik8_remember_me";
 	
 	@Autowired
 	private DataSource dataSource;
