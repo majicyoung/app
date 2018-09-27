@@ -41,7 +41,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	        key(CLIENT_SECRET).
 	        rememberMeParameter(REMEBER_ME_PARAM).
 	        rememberMeCookieName(COOKIE_NAME).
-	        tokenValiditySeconds(86400);
+	        tokenValiditySeconds(864000);
 		http.csrf().disable();
 		http.headers()
 	      .frameOptions()
