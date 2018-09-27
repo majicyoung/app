@@ -10,10 +10,10 @@ import com.fairagora.verifik8.v8web.data.domain.reg.farm.RegEntityFarmDetails;
 
 public interface RegEntityFarmDetailsRepository extends JpaRepository<RegEntityFarmDetails, Long> {
 
-	public Optional<RegEntityFarmDetails> findByEntityId(Long id);
+	Optional<RegEntityFarmDetails> findByEntityId(Long id);
 
-	public List<RegEntityFarmDetails> findByOwnerId(Long id);
+	List<RegEntityFarmDetails> findByOwnerId(Long id);
 
-	public List<RegEntityFarmDetails> findByCooperativeId(Long id);
+	List<RegEntityFarmDetails> findByCooperativeId(Long id);
 
 }

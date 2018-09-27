@@ -32,7 +32,7 @@ public class HeaderInterceptor extends HandlerInterceptorAdapter {
 		long time = new Date().getTime();
 		
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		if(!auth.getName().equalsIgnoreCase("anonymousUser")) {
+		if(auth!= null && !auth.getName().equalsIgnoreCase("anonymousUser")) {
 			SYSUser user = getDbVersion();
 	
 			if (user.getCacheVersion() == null) {

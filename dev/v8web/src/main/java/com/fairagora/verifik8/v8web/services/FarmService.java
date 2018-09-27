@@ -268,9 +268,9 @@ public class FarmService extends AbstractV8Service {
 				break;
 
 			case SYSRole.farm:
-				List<RegEntityFarmDetails> farmDetails1 = farmDetailsRepository.findByOwnerId(u.getId());
-				for (RegEntityFarmDetails f : farmDetails1) {
-					r.addAll(regEntityFarmPondRepository.findByFarmId(f.getId()));
+				if(u.getFarm() != null){
+					Optional<RegEntityFarmDetails> farmDetails1 = farmDetailsRepository.findByEntityId(u.getFarm().getId());
+					farmDetails1.ifPresent(d -> r.addAll(regEntityFarmPondRepository.findByFarmId(d.getEntity().getId())));
 				}
 				break;
 
