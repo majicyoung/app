@@ -1,9 +1,9 @@
 package com.fairagora.verifik8.v8web.mvc.admin;
 
-import com.fairagora.verifik8.v8web.data.domain.cl.CLAppCompanyPositionType;
-import com.fairagora.verifik8.v8web.data.domain.cl.CodeListSupport;
+import com.fairagora.verifik8.v8web.data.domain.V8EntitySupport;
+import com.fairagora.verifik8.v8web.data.domain.cl.*;
+import com.fairagora.verifik8.v8web.data.domain.reg.V8Base;
 import com.fairagora.verifik8.v8web.mvc.admin.dto.CLDto;
-import com.fairagora.verifik8.v8web.mvc.users.dto.UserFormDto;
 import com.fairagora.verifik8.v8web.services.CodeListsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -16,11 +16,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.fairagora.verifik8.v8web.data.application.V8Page;
 import com.fairagora.verifik8.v8web.mvc.AbstractV8Controller;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-
 @Controller
 public class AdminController extends AbstractV8Controller {
 
@@ -29,6 +24,9 @@ public class AdminController extends AbstractV8Controller {
 
     @Autowired
     protected CodeListsService codeListservice;
+
+    @Autowired
+    protected CLDTOMapper cldtoMapper;
 
     @RequestMapping(value = "/admin/admin.html", method = RequestMethod.GET)
     public String adminPage(Model mv) {
@@ -86,8 +84,21 @@ public class AdminController extends AbstractV8Controller {
     @RequestMapping(value = "/admin/codelists/browser/{name}/{id}/edit.html", method = RequestMethod.GET)
     public String editCL(@PathVariable("name") String name, @PathVariable("id") Long id, Model mv) {
 
-        CodeListSupport codeListSupport = codeListservice.get(name, id);
+        BaseCodeListSupport v8Base = codeListservice.get(name, id);
 
+        CLDto clDto = new CLDto();
+
+        if (v8Base instanceof CLAppEntityType) {
+            CLAppEntityType clAppEntityType = (CLAppEntityType) v8Base;
+            cldtoMapper.toDto(clAppEntityType, clDto);
+
+        } else if (v8Base instanceof CLAppLegalStatus) {
+            CLAppLegalStatus clAppLegalStatus = (CLAppLegalStatus) v8Base;
+            cldtoMapper.toDto(clAppLegalStatus, clDto);
+
+        } else {
+            // cldtoMapper.toDto(codeListSupport, clDto);
+        }
 
 //        Map<String, Object> data = jdbc.queryForMap("SELECT * FROM " + name + " WHERE id = " + id);
 //

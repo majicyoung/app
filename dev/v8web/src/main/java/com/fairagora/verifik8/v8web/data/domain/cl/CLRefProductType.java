@@ -45,4 +45,17 @@ public class CLRefProductType extends CodeListSupport {
 	public void setClRefProducts(Set<CLRefProduct> clRefProducts) {
 		this.clRefProducts = clRefProducts;
 	}
+
+	@ManyToOne(optional = false)
+	@JoinColumn(name = "CL_RECOMAND_QUANTITY_UNIT_ID")
+	protected CLAppQuantityUnit appQuantityUnit;
+
+	public CLAppQuantityUnit getQuantityUnit() {
+		return appQuantityUnit;
+	}
+
+	public void setQuantityUnit(CLAppQuantityUnit appQuantityUnit) {
+		this.appQuantityUnit = appQuantityUnit;
+	}
+
 }

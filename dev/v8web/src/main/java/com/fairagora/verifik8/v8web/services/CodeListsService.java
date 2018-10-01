@@ -2,7 +2,9 @@ package com.fairagora.verifik8.v8web.services;
 
 import java.util.List;
 
+import com.fairagora.verifik8.v8web.data.domain.V8EntitySupport;
 import com.fairagora.verifik8.v8web.data.domain.cl.*;
+import com.fairagora.verifik8.v8web.data.domain.reg.V8Base;
 import com.fairagora.verifik8.v8web.data.repo.cl.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -619,7 +621,7 @@ public class CodeListsService {
         return refVesselTypeRepository.findOne(id);
     }
 
-    public CodeListSupport get(String tableName, long id) {
+    public BaseCodeListSupport get(String tableName, long id) {
         switch (tableName) {
             case "cl_app_administrative_characteristic_types":
                 return getAppAdministrativeCharacteristicType(id);
@@ -731,8 +733,8 @@ public class CodeListsService {
                 return getRefCurrency(id);
             case "cl_ref_declaration_sources":
                 return getRefDeclarationSource(id);
-            case "cl_ref_gear_characteristics":
-                return getRefGearCharacteristic(id);
+            // case "cl_ref_gear_characteristics":
+                // return getRefGearCharacteristic(id);
             case "cl_ref_gears":
                 return getRefGear(id);
             case "cl_ref_landing_sites":

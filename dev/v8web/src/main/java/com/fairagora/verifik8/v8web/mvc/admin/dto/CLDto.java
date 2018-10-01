@@ -32,6 +32,34 @@ public class CLDto {
 
     protected String i18nKh;
 
+    protected Boolean company;
+
+    protected String cpcCode;
+
+    protected String hsCode;
+
+    protected String isoCode;
+
+    protected String scientificName;
+
+    protected Long appEntityTypeId;
+
+    protected Long appLocationType;
+
+    protected Long appQuantityUnit;
+
+    protected Long appQuantityUnitType;
+
+    protected Long farmTypeId;
+
+    protected Long refAdminLevel1;
+
+    protected Long refCountry;
+
+    protected Long refRegion;
+
+    protected Long refProductType;
+
     public Long getId() {
         return id;
     }
@@ -150,5 +178,117 @@ public class CLDto {
 
     public void setI18nKh(String i18nKh) {
         this.i18nKh = i18nKh;
+    }
+
+    public Boolean isCompany() {
+        return company;
+    }
+
+    public void setCompany(Boolean company) {
+        this.company = company;
+    }
+
+    public String getCpcCode() {
+        return cpcCode;
+    }
+
+    public void setCpcCode(String cpcCode) {
+        this.cpcCode = cpcCode;
+    }
+
+    public String getHsCode() {
+        return hsCode;
+    }
+
+    public void setHsCode(String hsCode) {
+        this.hsCode = hsCode;
+    }
+
+    public String getIsoCode() {
+        return isoCode;
+    }
+
+    public void setIsoCode(String isoCode) {
+        this.isoCode = isoCode;
+    }
+
+    public String getScientificName() {
+        return scientificName;
+    }
+
+    public void setScientificName(String scientificName) {
+        this.scientificName = scientificName;
+    }
+
+    public Long getAppEntityTypeId() {
+        return appEntityTypeId;
+    }
+
+    public void setAppEntityTypeId(Long appEntityTypeId) {
+        this.appEntityTypeId = appEntityTypeId;
+    }
+
+    public Long getAppLocationType() {
+        return appLocationType;
+    }
+
+    public void setAppLocationType(Long appLocationType) {
+        this.appLocationType = appLocationType;
+    }
+
+    public Long getAppQuantityUnit() {
+        return appQuantityUnit;
+    }
+
+    public void setAppQuantityUnit(Long appQuantityUnit) {
+        this.appQuantityUnit = appQuantityUnit;
+    }
+
+    public Long getAppQuantityUnitType() {
+        return appQuantityUnitType;
+    }
+
+    public void setAppQuantityUnitType(Long appQuantityUnitType) {
+        this.appQuantityUnitType = appQuantityUnitType;
+    }
+
+    public Long getFarmTypeId() {
+        return farmTypeId;
+    }
+
+    public void setFarmTypeId(Long farmTypeId) {
+        this.farmTypeId = farmTypeId;
+    }
+
+    public Long getRefAdminLevel1() {
+        return refAdminLevel1;
+    }
+
+    public void setRefAdminLevel1(Long refAdminLevel1) {
+        this.refAdminLevel1 = refAdminLevel1;
+    }
+
+    public Long getRefCountry() {
+        return refCountry;
+    }
+
+    public void setRefCountry(Long refCountry) {
+        this.refCountry = refCountry;
+    }
+
+    public Long getRefRegion() {
+        return refRegion;
+    }
+
+    public void setRefRegion(Long refRegion) {
+        this.refRegion = refRegion;
+    }
+
+    public Long getRefProductType() {
+        return refProductType;
+    }
+
+    public void setRefProductType(Long refProductType) {
+        this.refProductType = refProductType;
     }
 }

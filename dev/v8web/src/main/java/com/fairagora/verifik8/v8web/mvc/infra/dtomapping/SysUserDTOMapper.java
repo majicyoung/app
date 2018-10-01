@@ -16,7 +16,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Mapper(componentModel = "spring", uses = {EntityDtoMapper.class}, unmappedTargetPolicy = ReportingPolicy.IGNORE, imports = {BCryptPasswordEncoder.class})
 public interface SysUserDTOMapper {
 
-
 	void toDto(SYSUser user, @MappingTarget UserFormDto dto);
 
 	@Mapping(target = "password",

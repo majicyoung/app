@@ -11,11 +11,7 @@ import org.springframework.context.i18n.LocaleContextHolder;
 import com.fairagora.verifik8.v8web.data.domain.V8EntitySupport;
 
 @MappedSuperclass
-public abstract class CodeListSupport extends V8EntitySupport {
-
-	@Id
-	@Column(name = "ID")
-	protected Long id;
+public abstract class CodeListSupport extends BaseCodeListSupport {
 
 	@Column(name = "ENABLED")
 	protected boolean enabled;
@@ -23,11 +19,11 @@ public abstract class CodeListSupport extends V8EntitySupport {
 	@Column(name = "CODE", unique = true, length = 2, nullable = false)
 	protected String code;
 
-	@Column(name = "NAME", length = 64, nullable = false)
-	protected String name;
-
 	@Column(name = "RANKING", length = 6, nullable = false)
 	protected Long ranking;
+
+	@Column(name = "NAME", length = 64, nullable = false)
+	protected String name;
 	
 	@Column(name = "DESCRIPTION", length = 128, nullable = false)
 	protected String description;

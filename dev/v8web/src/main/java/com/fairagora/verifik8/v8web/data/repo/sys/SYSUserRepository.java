@@ -8,7 +8,7 @@ import org.springframework.data.repository.query.Param;
 
 public interface SYSUserRepository extends JpaRepository<SYSUser, Long> {
 
-	SYSUser findByEmail(String email);
+    SYSUser findByEmail(String email);
 
-	SYSUser findByPhoneNumber(String phoneNumber);
+    SYSUser findByPhoneNumber(String phoneNumber);
 }
