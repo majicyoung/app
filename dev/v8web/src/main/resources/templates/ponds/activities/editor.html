@@ -110,6 +110,7 @@
       var pondId =/*[[${pondId}]]*/;
 
       $(document).ready(function () {
+          $.datetimepicker.setLocale(lang);
           $('#datetime-starttime').datetimepicker({
               onChangeDateTime: function (e) {
                   $('#datetime-endtime').val($('#datetime-starttime').val())

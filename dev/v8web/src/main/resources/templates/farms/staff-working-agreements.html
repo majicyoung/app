@@ -162,7 +162,8 @@
 	<script type="text/javascript">
 	
 		$(document).ready(function() {
-			$('.datefield').datetimepicker({
+        $.datetimepicker.setLocale(lang);
+        $('.datefield').datetimepicker({
 				format: 'Y-m-d'
 			});
 			
