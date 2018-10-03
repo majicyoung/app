@@ -138,7 +138,8 @@
 			
 			myDataTableData = $('#datatables-plot-data').DataTable({
 				"order": [[ 0, "desc" ]],
-				"columnDefs": [{"orderable":false,"targets":4}],
+          "responsive": true,
+          "columnDefs": [{"orderable":false,"targets":4}],
 				"language": {
 		            "url": langURL
 		        }
