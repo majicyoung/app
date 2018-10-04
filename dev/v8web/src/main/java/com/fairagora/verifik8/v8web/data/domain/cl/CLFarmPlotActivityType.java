@@ -17,4 +17,11 @@ public class CLFarmPlotActivityType extends CodeListSupport {
 	@JsonBackReference
 	protected CLAppQuantityUnit clAppQuantityUnit;
 
+	public CLAppQuantityUnit getClAppQuantityUnit() {
+		return clAppQuantityUnit;
+	}
+
+	public void setClAppQuantityUnit(CLAppQuantityUnit clAppQuantityUnit) {
+		this.clAppQuantityUnit = clAppQuantityUnit;
+	}
 }
