@@ -67,6 +67,8 @@ public class PlotsActivityController extends AbstractV8Controller {
 		mv.addAttribute("plotId", plotId);
 		mv.addAttribute("farmId", farmId.orElse(null));
 		mv.addAttribute("backUrl", farmId.map(id -> "/farm/" + id + "/plots.html").orElse("/plots/browser.html"));
+		mv.addAttribute("createActivityUrl", farmId.map(id -> "/farm/" + id + "/plots/"+plotId+"/activities/create.html").orElse("/plots/"+plotId+"/activities/create.html"));
+
 
 		preparePage(plotId, mv);
 		setToReadOnly(mv, "W_PLOTACTIVITY");

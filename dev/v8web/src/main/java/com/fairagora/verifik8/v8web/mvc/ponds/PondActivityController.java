@@ -69,6 +69,7 @@ public class PondActivityController extends AbstractV8Controller {
 		mv.addAttribute("pondId", pondId);
 		mv.addAttribute("farmId", farmId.orElse(null));
 		mv.addAttribute("backUrl", farmId.map(id -> "/farm/" + id + "/ponds.html").orElse("/ponds/browser.html"));
+		mv.addAttribute("createActivityUrl", farmId.map(id -> "/farm/" + id + "/pond/"+pondId+"/activities/create.html").orElse("/ponds/"+pondId+"/activities/create.html"));
 		preparePage(pondId, mv);
 		setToReadOnly(mv, "W_PONDACTIVTY");
 

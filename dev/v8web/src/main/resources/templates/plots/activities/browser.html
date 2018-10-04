@@ -14,7 +14,7 @@
 					</div>
 					<div class="box-tools">
 						<a th:href="@{${backUrl}}" class="btn btn-sm btn-flat btn-warning"><i class="fa fa-backward"></i> <span th:text="#{default.back}"></span></a>
-						<a th:href="@{'/plots/'+${plotId}+'/activities/create.html'}" class="btn btn-sm btn-flat btn-success"><i class="fa fa-plus"></i> <span th:text="#{farm.plot_activity_add}">farm.add_plot_activity</span></a>
+						<a th:href="@{${createActivityUrl}}" class="btn btn-sm btn-flat btn-success"><i class="fa fa-plus"></i> <span th:text="#{farm.plot_activity_add}">farm.add_plot_activity</span></a>
 					</div>
 				</div>
 				<div class="box-body">

@@ -14,7 +14,7 @@
 					</div>
 					<div class="box-tools">
 						<a th:href="@{${backUrl}}" class="btn btn-sm btn-flat btn-warning"><i class="fa fa-backward"></i> <span th:text="#{default.back}"></span></a>
-						<a th:href="@{'/ponds/'+${pondId}+'/activities/create.html'}" class="btn btn-sm btn-flat btn-success"><i class="fa fa-plus"></i> <span th:text="#{farm.pond_activity_add}">farm.add_pond_activity</span></a>
+						<a th:href="@{${createActivityUrl}}" class="btn btn-sm btn-flat btn-success"><i class="fa fa-plus"></i> <span th:text="#{farm.pond_activity_add}">farm.add_pond_activity</span></a>
 					</div>
 				</div>
 				<div class="box-body">
