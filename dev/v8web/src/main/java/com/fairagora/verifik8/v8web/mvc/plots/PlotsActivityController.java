@@ -132,7 +132,7 @@ public class PlotsActivityController extends AbstractV8Controller {
 	 * @return
 	 */
 	@PreAuthorize("hasAuthority('W_PLOTACTIVITY')")
-	@RequestMapping(value = {"/plots/{plotId}/activities/update.html",  "/farm/{farmId}/pond/{pondId}/activities/update.html"}, method = RequestMethod.POST)
+	@RequestMapping(value = {"/plots/{plotId}/activities/update.html",  "/farm/{farmId}/plots/{pondId}/activities/update.html"}, method = RequestMethod.POST)
 	public String showPlotActivities(@PathVariable("farmId") Optional<Long> farmId, @PathVariable("plotId") Long plotId, PlotActivityDto dto, BindingResult result, Model mv) {
 
 		DTFarmPlotActivity act = null;

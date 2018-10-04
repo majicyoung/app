@@ -93,7 +93,7 @@ public class PondActivityController extends AbstractV8Controller {
 		mv.addAttribute("allQuantityUnits", codeListservice.listActiveQuantityUnit());
 		mv.addAttribute("allSpecies", codeListservice.listActiveSpecies());
 		mv.addAttribute("backUrl", farmId.map(id -> "/farm/" + id + "/ponds.html").orElse("/ponds/browser.html"));
-		mv.addAttribute("submitUrl", farmId.map(id -> "/farm/" + id + "/pond/" + pondId + "/activities/update.html").orElse("/ponds/" + pondId + "/activities/update.html"));
+		mv.addAttribute("submitUrl", farmId.map(id -> "/farm/" + id + "/ponds/" + pondId + "/activities/update.html").orElse("/ponds/" + pondId + "/activities/update.html"));
 
 
 		preparePage(pondId, mv);
@@ -117,7 +117,7 @@ public class PondActivityController extends AbstractV8Controller {
 		mv.addAttribute("allQuantityUnits", codeListservice.listActiveQuantityUnit());
 		mv.addAttribute("allSpecies", codeListservice.listActiveSpecies());
 		mv.addAttribute("backUrl", farmId.map(id -> "/farm/" + id + "/ponds.html").orElse("/ponds/browser.html"));
-		mv.addAttribute("submitUrl", farmId.map(id -> "/farm/" + id + "/pond/" + pondId + "/activities/update.html").orElse("/ponds/" + pondId + "/activities/update.html"));
+		mv.addAttribute("submitUrl", farmId.map(id -> "/farm/" + id + "/ponds/" + pondId + "/activities/update.html").orElse("/ponds/" + pondId + "/activities/update.html"));
 
 
 
@@ -135,7 +135,7 @@ public class PondActivityController extends AbstractV8Controller {
 	 */
 	@Transactional
 	@PreAuthorize("hasAuthority('W_PONDACTIVTY')")
-	@RequestMapping(value = {"/ponds/{pondId}/activities/update.html", "/farm/{farmId}/pond/{pondId}/activities/update.html"}, method = RequestMethod.POST)
+	@RequestMapping(value = {"/ponds/{pondId}/activities/update.html", "/farm/{farmId}/ponds/{pondId}/activities/update.html"}, method = RequestMethod.POST)
 	public String showPondActivities(@PathVariable("farmId") Optional<Long> farmId, @PathVariable("pondId") Long pondId, PondActivityDto dto, BindingResult result, Model mv) {
 
 		DTFarmPondActivity act = null;
