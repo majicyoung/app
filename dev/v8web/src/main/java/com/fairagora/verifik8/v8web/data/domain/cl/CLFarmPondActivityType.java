@@ -16,6 +16,11 @@ public class CLFarmPondActivityType extends CodeListSupport {
 	@JsonBackReference
 	protected List<CLRefProductType> clRefProductTypes;
 
+	@ManyToOne
+	@JoinColumn(name = "CL_RECOMMAND_UNIT_ID", nullable = true)
+	@JsonBackReference
+	protected CLAppQuantityUnit clAppQuantityUnit;
+
 	public List<CLRefProductType> getClRefProductTypes() {
 		return clRefProductTypes;
 	}
