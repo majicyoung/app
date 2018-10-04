@@ -57,8 +57,9 @@
 <th:block layout:fragment="page-scripts">
 	<script type="text/javascript" th:inline="javascript">
 		$(document).ready(function() {
-        $('.editActBtn').click(function(){
-            var id = $(this).attr("data-id");
+				$(document).on('click', '.editActBtn', function () {
+
+						var id = $(this).attr("data-id");
             if (/farm/.test(window.location.href)){
                 document.location=[[@{/farm/}]]+[[${farmId}]]+[[@{/plots/}]]+[[${plotId}]]+'/activities/'+id+'/edit.html';
             }else{

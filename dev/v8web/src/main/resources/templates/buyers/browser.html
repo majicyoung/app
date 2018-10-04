@@ -61,11 +61,9 @@
       $(document).ready(function () {
 
 
-          $('.editBuyerBtn').click(function () {
+          $(document).on('click', '.editBuyerBtn', function () {
               var id = $(this).attr("data-id");
-              document.location = [[@{/buyers/
-          }]]
-              +id + '/edit.html';
+              document.location = [[@{/buyers/}]]+id + '/edit.html';
           });
 
 

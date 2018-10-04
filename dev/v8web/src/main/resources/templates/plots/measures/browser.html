@@ -130,9 +130,9 @@
 		}
 		
 		$(document).ready(function() {
-			$('.editActBtn').click(function(){
-				var id = $(this).attr("data-id");
-				document.location=[[@{/plots/}]]+'/'+[[${plotId}]]+'/measures/'+id+'/edit.html';
+				$(document).on('click', '.editActBtn', function () {
+				    var id = $(this).attr("data-id");
+				    document.location=[[@{/plots/}]]+'/'+[[${plotId}]]+'/measures/'+id+'/edit.html';
 			});
 		
 			

@@ -130,8 +130,8 @@
 		}
 
 		$(document).ready(function() {
-			$('.editActBtn').click(function(){
-				var id = $(this).attr("data-id");
+          $(document).on('click', '.editActBtn', function () {
+              var id = $(this).attr("data-id");
           if (/farm/.test(window.location.href)){
               document.location=[[@{/farm/}]]+[[${farmId}]]+[[@{/pond/}]]+[[${pondId}]]+'/measures/'+id+'/edit.html';
 
