@@ -128,15 +128,17 @@
           activityTypeChanged();
       });
 
-      var noProduct = [2, 6, 7, 8, 10];
+				var noProduct = [2, 6, 7, 8, 10];
       function activityTypeChanged() {
 
           $('#actiProductGroup').show();
           $('#feedLotNumber').hide();
           $('#selectSpecie').hide();
 
+
+
           var actVal = $("#activityType").val();
-          if (actVal != null) {
+          if (actVal != null && !!actVal.trim()) {
               actVal = parseInt(actVal);
               if ($.inArray(actVal, noProduct) >= 0) {
                   $('#actiProductGroup').hide();
@@ -145,28 +147,34 @@
               } else if (actVal == 3) {
                   $('#feedLotNumber').show();
               }
-          }
 
-          $.get('/ponds/'+pondId+'/products', {
-              activityId: actVal
-          }, function (datas) {
-              var pond_activity_select_product = /*[[#{farm.pond_activity_select_product}]]*/ 'Select Product';
-              $("#selectMeasureUnit").val("").change();
-              $('#selectProductGroup')
-                  .find('option')
-                  .remove()
-                  .end()
-                  .append('<option value="">-- '+pond_activity_select_product+' --</option>')
-                  .val('');
-
-
-              $.each(datas, function (index, value) {
-                  $('#selectProductGroup').append($('<option>', {
-                      value: value.id,
-                      text: value.name
-                  }));
+              $.get('/ponds/'+pondId+'/activities/'+actVal+'/unit', function (data) {
+                  $("#selectMeasureUnit").val(data).change();
+              }).fail(function(){
+                  $("#selectMeasureUnit").val("").change();
               });
-          });
+
+              $.get('/ponds/'+pondId+'/products', {
+                  activityId: actVal
+              }, function (datas) {
+                  var pond_activity_select_product = /*[[#{farm.pond_activity_select_product}]]*/ 'Select Product';
+                  $("#selectMeasureUnit").val("").change();
+                  $('#selectProductGroup')
+                      .find('option')
+                      .remove()
+                      .end()
+                      .append('<option value="">-- '+pond_activity_select_product+' --</option>')
+                      .val('');
+                  $.each(datas, function (index, value) {
+                      $('#selectProductGroup').append($('<option>', {
+                          value: value.id,
+                          text: value.name
+                      }));
+                  });
+              });
+
+					}
+
       }
 
       function productChanged(){

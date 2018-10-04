@@ -28,4 +28,12 @@ public class CLFarmPondActivityType extends CodeListSupport {
 	public void setClRefProductTypes(List<CLRefProductType> clRefProductTypes) {
 		this.clRefProductTypes = clRefProductTypes;
 	}
+
+	public CLAppQuantityUnit getClAppQuantityUnit() {
+		return clAppQuantityUnit;
+	}
+
+	public void setClAppQuantityUnit(CLAppQuantityUnit clAppQuantityUnit) {
+		this.clAppQuantityUnit = clAppQuantityUnit;
+	}
 }

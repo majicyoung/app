@@ -3,8 +3,12 @@ package com.fairagora.verifik8.v8web.mvc.ponds;
 import java.util.List;
 import java.util.Optional;
 
+import com.fairagora.verifik8.v8web.data.domain.cl.CLAppQuantityUnit;
+import com.fairagora.verifik8.v8web.data.domain.cl.CLFarmPondActivityType;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLRefProduct;
 import com.fairagora.verifik8.v8web.data.domain.dt.DTFarmPondProductionCycle;
+import com.fairagora.verifik8.v8web.data.repo.cl.CLFarmPondActivityTypeRepository;
+import com.fairagora.verifik8.v8web.data.repo.cl.CLFarmPondTypeRepository;
 import com.fairagora.verifik8.v8web.data.repo.cl.CLRefProductRepository;
 import com.fairagora.verifik8.v8web.data.repo.dt.DTFarmPondProductionCycleRepository;
 import com.fairagora.verifik8.v8web.services.FarmPondProductionCycleService;
@@ -41,6 +45,8 @@ public class PondActivityController extends AbstractV8Controller {
 
 	@Autowired
 	private CLRefProductRepository clRefProductRepository;
+	@Autowired
+	private CLFarmPondActivityTypeRepository clFarmPondActivityTypeRepository;
 
 	@Autowired
 	protected JdbcTemplate jdbc;
@@ -195,6 +201,18 @@ public class PondActivityController extends AbstractV8Controller {
 	@ResponseBody
 	public Long getProductRecommendedUnit(@PathVariable("pondId") Long pondId, @PathVariable("productId") Long productId, Model mv) {
 		return clRefProductRepository.findOne(productId).getClAppQuantityUnit().getId();
+	}
+
+	@PreAuthorize("hasAuthority('W_PONDMEASURE')")
+	@RequestMapping(value = "/ponds/{pondId}/activities/{activityId}/unit", method = RequestMethod.GET)
+	@ResponseBody
+	public Long getActivityRecommendedUnit(@PathVariable("pondId") Long pondId, @PathVariable("activityId") Long activityId, Model mv) {
+		CLAppQuantityUnit clAppQuantityUnit=  clFarmPondActivityTypeRepository.findOne(activityId).getClAppQuantityUnit();
+		if (clAppQuantityUnit != null){
+			return clAppQuantityUnit.getId();
+		}else {
+			return null;
+		}
 	}
 
 	@PreAuthorize("hasAuthority('R_PONDBROWSER')")
