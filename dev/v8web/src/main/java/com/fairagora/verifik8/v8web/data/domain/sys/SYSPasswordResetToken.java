@@ -15,12 +15,12 @@ public class SYSPasswordResetToken {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
     protected Long id;
-
-    // @Column(name = "CODE", unique = true, length = 2, nullable = false)
-    // protected String code;
-
-    // @Column(name = "NAME", length = 64, nullable = false)
-    // protected String name;
+//
+//     @Column(name = "CODE", unique = true, length = 2, nullable = false)
+//     protected String code;
+//
+//     @Column(name = "NAME", length = 64, nullable = false)
+//     protected String name;
 
     @Column(name = "TOKEN")
     private String token;

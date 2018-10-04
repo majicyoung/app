@@ -54,17 +54,16 @@
 <th:block layout:fragment="page-scripts">
 	<script type="text/javascript" th:inline="javascript">
 		$(document).ready(function() {
-			
-			
-			$('.editSupplierBtn').click(function(){
-				var id = $(this).attr("data-id");
-				document.location=[[@{/suppliers/}]]+id+'/edit.html';
-			});
+		    $(document).on('click', '.editSupplierBtn', function () {
+		        var id = $(this).attr("data-id");
+		        document.location=[[@{/suppliers/}]]+id+'/edit.html';
+		    });
 
 			
 			 $('#datatables-browser').DataTable({
 				"order": [[ 0, "desc" ]],
-				"columnDefs": [{"orderable":false,"targets":4}],
+           "responsive": true,
+           "columnDefs": [{"orderable":false,"targets":4}],
 				"language": {
 		            "url": langURL
 		        }
