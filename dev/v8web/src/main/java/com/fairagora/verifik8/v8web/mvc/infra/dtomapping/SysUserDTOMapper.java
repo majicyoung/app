@@ -17,15 +17,18 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public interface SysUserDTOMapper {
 
 
-	void toDto(SYSUser user, @MappingTarget UserFormDto dto);
+    void toDto(SYSUser user, @MappingTarget UserFormDto dto);
 
-	@Mapping(target = "password",
-			expression = "java( new BCryptPasswordEncoder(11).encode(dto.getPassword()) )")
-	void fillEntity(UserFormDto dto, @MappingTarget SYSUser user);
+    @Mapping(target = "password",
+            expression = "java( new BCryptPasswordEncoder(11).encode(dto.getPassword()) )")
+    void fillEntity(UserFormDto dto, @MappingTarget SYSUser user);
 
-	void toDto(SYSRole findOne, @MappingTarget RoleFormDto dto);
+    @Mapping(target = "password", ignore = true)
+    void fillEntityIgnorePassword(UserFormDto dto, @MappingTarget SYSUser user);
 
-	@Mapping(target = "id", ignore = true)
-	void fillEntity(RoleFormDto dto, @MappingTarget SYSRole u);
+    void toDto(SYSRole findOne, @MappingTarget RoleFormDto dto);
+
+    @Mapping(target = "id", ignore = true)
+    void fillEntity(RoleFormDto dto, @MappingTarget SYSRole u);
 
 }
