@@ -37,7 +37,7 @@ public class ExcelReader {
 		// Getting the Sheet at index zero
 		Sheet sheet = workbook.getSheetAt(0);
 
-		// Create a DataFormatter to format and get each cell's value as String
+		// Create a DataFormatter to format and gets each cell's value as String
 		DataFormatter dataFormatter = new DataFormatter();
 
 		//Read row and set it on document.

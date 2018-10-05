@@ -16,6 +16,9 @@ public class CodeListsService {
     /*****  cl_app *****/
 
     @Autowired
+    private CLColumnRepository columnRepository;
+
+    @Autowired
     private CLAppAdministrativeCharacteristicTypeRepository appAdministrativeCharacteristicTypeRepository;
 
     @Autowired
@@ -217,14 +220,22 @@ public class CodeListsService {
     private CLRefVesselTypeRepository refVesselTypeRepository;
 
 
-    /***** cl_app - get *****/
+    /***** cl_app - gets *****/
 
     public CLAppAdministrativeCharacteristicType getAppAdministrativeCharacteristicType(long id) {
         return appAdministrativeCharacteristicTypeRepository.findOne(id);
     }
 
+    public List<? extends BaseCodeListSupport> getAppAdministrativeCharacteristicTypes() {
+        return appAdministrativeCharacteristicTypeRepository.findAll();
+    }
+
     public CLAppCompanyPositionType getAppCompanyPositionType(long id) {
         return appCompanyPositionTypeRepository.findOne(id);
+    }
+
+    public List<? extends BaseCodeListSupport> getAppCompanyPositionTypes() {
+        return appCompanyPositionTypeRepository.findAll();
     }
 
     public List<CLAppCompanyPositionType> listActivePositionTypes() {
@@ -235,12 +246,20 @@ public class CodeListsService {
         return appContractTypesRepository.findOne(id);
     }
 
+    public List<? extends BaseCodeListSupport> getAppContractTypes() {
+        return appContractTypesRepository.findAll();
+    }
+
     public List<CLAppContractType> listActiveContractTypes() {
         return appContractTypesRepository.findByEnabledTrueOrderByName();
     }
 
     public CLAppDebtType getAppDebtType(long id) {
         return appDebtTypeRepository.findOne(id);
+    }
+
+    public List<? extends BaseCodeListSupport> getAppDebtTypes() {
+        return appDebtTypeRepository.findAll();
     }
 
     public CLAppDeclarationSourcesType getAppDeclarationSourcesType(long id) {
@@ -471,7 +490,7 @@ public class CodeListsService {
         return appWaterSupplyTypeRepository.findOne(id);
     }
 
-    /***** cl_farm - get *****/
+    /***** cl_farm - gets *****/
 
     public CLFarmBuildingType getFarmBuildingType(long id) {
         return farmBuildingTypeRepository.findOne(id);
@@ -480,6 +499,7 @@ public class CodeListsService {
     public CLFarmPlotActivityType getFarmPlotActivityType(long id) {
         return farmPlotActivityTypesRepository.findOne(id);
     }
+
     public List<CLFarmPlotActivityType> listActiveActivityTypes() {
         return farmPlotActivityTypesRepository.findByEnabledTrueOrderByName();
     }
@@ -508,7 +528,7 @@ public class CodeListsService {
         return farmTypeRepository.findOne(id);
     }
 
-    /***** cl_fish - get *****/
+    /***** cl_fish - gets *****/
 
     public CLFishFishingType getFishFishingType(long id) {
         return fishFishingTypeRepository.findOne(id);
@@ -518,7 +538,7 @@ public class CodeListsService {
         return fishFishingZoneRepository.findOne(id);
     }
 
-    /***** cl_ref - get *****/
+    /***** cl_ref - gets *****/
 
     public CLRefAdminLevel1 getRefAdminLevel1(long id) {
         return refAdminLevel1Repository.findOne(id);
@@ -621,7 +641,26 @@ public class CodeListsService {
         return refVesselTypeRepository.findOne(id);
     }
 
-    public BaseCodeListSupport get(String tableName, long id) {
+    public CLColumn getColumn(String tableName) {
+        return columnRepository.findOne(tableName);
+    }
+
+    public List<? extends BaseCodeListSupport> gets(String tableName) {
+        switch (tableName) {
+            case "cl_app_administrative_characteristic_types":
+                return getAppAdministrativeCharacteristicTypes();
+            case "cl_app_company_position_types":
+                return getAppCompanyPositionTypes();
+            case "cl_app_contract_types":
+                return getAppContractTypes();
+            case "cl_app_debt_types":
+                return getAppDebtTypes();
+            default:
+                return null;
+        }
+    }
+
+    public BaseCodeListSupport gets(String tableName, long id) {
         switch (tableName) {
             case "cl_app_administrative_characteristic_types":
                 return getAppAdministrativeCharacteristicType(id);
@@ -734,7 +773,7 @@ public class CodeListsService {
             case "cl_ref_declaration_sources":
                 return getRefDeclarationSource(id);
             // case "cl_ref_gear_characteristics":
-                // return getRefGearCharacteristic(id);
+            // return getRefGearCharacteristic(id);
             case "cl_ref_gears":
                 return getRefGear(id);
             case "cl_ref_landing_sites":

@@ -1,20 +1,27 @@
 package com.fairagora.verifik8.v8web.mvc.admin;
 
-import com.fairagora.verifik8.v8web.data.domain.V8EntitySupport;
 import com.fairagora.verifik8.v8web.data.domain.cl.*;
-import com.fairagora.verifik8.v8web.data.domain.reg.V8Base;
+import com.fairagora.verifik8.v8web.data.domain.sys.SYSRole;
+import com.fairagora.verifik8.v8web.data.repo.cl.CLAppAdministrativeCharacteristicTypeRepository;
+import com.fairagora.verifik8.v8web.mvc.admin.dto.CLColumnDto;
 import com.fairagora.verifik8.v8web.mvc.admin.dto.CLDto;
+import com.fairagora.verifik8.v8web.mvc.users.dto.RoleFormDto;
 import com.fairagora.verifik8.v8web.services.CodeListsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.fairagora.verifik8.v8web.data.application.V8Page;
 import com.fairagora.verifik8.v8web.mvc.AbstractV8Controller;
+
+import java.util.List;
 
 @Controller
 public class AdminController extends AbstractV8Controller {
@@ -26,7 +33,13 @@ public class AdminController extends AbstractV8Controller {
     protected CodeListsService codeListservice;
 
     @Autowired
+    protected CLColumnDTOMapper clColumnDTOMapper;
+
+    @Autowired
     protected CLDTOMapper cldtoMapper;
+
+    @Autowired
+    protected CLAppAdministrativeCharacteristicTypeRepository clAppAdministrativeCharacteristicTypeRepository;
 
     @RequestMapping(value = "/admin/admin.html", method = RequestMethod.GET)
     public String adminPage(Model mv) {
@@ -55,8 +68,8 @@ public class AdminController extends AbstractV8Controller {
         return "admin/codelists/browser";
     }
 
-    @RequestMapping(value = "/admin/codelists/browser/{name}", method = RequestMethod.GET)
-    public String showCL(@PathVariable("name") String name, Model mv) {
+    @RequestMapping(value = "/admin/codelists/browser/{table}", method = RequestMethod.GET)
+    public String showCL(@PathVariable("table") String table, Model mv) {
 
         V8Page p = new V8Page();
         p.setTitle("admin.home");
@@ -64,73 +77,90 @@ public class AdminController extends AbstractV8Controller {
         p.setNavBarPrefix("/admin");
         mv.addAttribute("v8p", p);
 
-        mv.addAttribute("table", name);
+        CLColumn column = codeListservice.getColumn(table);
+        List<? extends BaseCodeListSupport> datas = codeListservice.gets(table);
 
-        mv.addAttribute("allDatas", jdbc.queryForList("SELECT * FROM " + name));
+        CLColumnDto dto = new CLColumnDto();
+        clColumnDTOMapper.toDto(column, dto);
+
+        mv.addAttribute("table", table);
+        mv.addAttribute("column", dto);
+        mv.addAttribute("datas", datas);
 
         return "admin/codelists/listing";
     }
 
-    @RequestMapping(value = "/admin/codelists/browser/{name}/create.html", method = RequestMethod.GET)
-    public String createCL(@PathVariable("name") String name, Model mv) {
+    @RequestMapping(value = "/admin/codelists/browser/{table}/create.html", method = RequestMethod.GET)
+    public String createCL(@PathVariable("table") String table, Model mv) {
 
-        CLDto clDto = new CLDto();
+        CLColumn column = codeListservice.getColumn(table);
+        CLColumnDto clColumnDto = new CLColumnDto();
+        clColumnDTOMapper.toDto(column, clColumnDto);
 
-        prepareForCLEdition(clDto, mv);
+        prepareForCLEdition(table, clColumnDto, new CLDto(), mv);
 
         return "admin/codelists/create";
     }
 
-    @RequestMapping(value = "/admin/codelists/browser/{name}/{id}/edit.html", method = RequestMethod.GET)
-    public String editCL(@PathVariable("name") String name, @PathVariable("id") Long id, Model mv) {
-
-        BaseCodeListSupport v8Base = codeListservice.get(name, id);
-
-        CLDto clDto = new CLDto();
-
-        if (v8Base instanceof CLAppEntityType) {
-            CLAppEntityType clAppEntityType = (CLAppEntityType) v8Base;
-            cldtoMapper.toDto(clAppEntityType, clDto);
-
-        } else if (v8Base instanceof CLAppLegalStatus) {
-            CLAppLegalStatus clAppLegalStatus = (CLAppLegalStatus) v8Base;
-            cldtoMapper.toDto(clAppLegalStatus, clDto);
-
-        } else {
-            // cldtoMapper.toDto(codeListSupport, clDto);
+    @RequestMapping(value = "/admin/codelists/browser/{table}/create.html", method = RequestMethod.POST)
+    public String createCL(@PathVariable("table") String table, @Validated @ModelAttribute("clDto") CLDto dto, BindingResult bindResults, Model mv) {
+        switch (table) {
+            case "cl_app_administrative_characteristic_types":
+                CLAppAdministrativeCharacteristicType newCLData = new CLAppAdministrativeCharacteristicType();
+                cldtoMapper.fillEntity(dto, newCLData);
+                clAppAdministrativeCharacteristicTypeRepository.save(newCLData);
+                break;
         }
 
-//        Map<String, Object> data = jdbc.queryForMap("SELECT * FROM " + name + " WHERE id = " + id);
-//
-//        CLDto clDto = new CLDto();
-//
-//
-//        for (int i = 0; i < list.size(); i++) {
-//            CLAppCompanyPositionType type = (CLAppCompanyPositionType) list.get(i);
-//        }
-//
-//        if (data.get("id") != null) clDto.setId(((Integer) data.get("id")).longValue());
-//        if (data.get("enabled") != null) clDto.setEnabled((Boolean) data.get("enabled"));
-//        if (data.get("code") != null) clDto.setCode(String.valueOf(data.get("code")));
-//        if (data.get("ranking") != null) clDto.setRanking(((Integer) data.get("ranking")).longValue());
-//        if (data.get("name") != null) clDto.setName(String.valueOf(data.get("name")));
-//        if (data.get("description") != null) clDto.setName(String.valueOf(data.get("description")));
-//        if (data.get("i18n_default") != null) clDto.setI18nDefault(String.valueOf(data.get("i18n_default")));
-//        if (data.get("i18n_en") != null) clDto.setI18nEn(String.valueOf(data.get("i18n_en")));
-//        if (data.get("i18n_fr") != null) clDto.setI18nFr(String.valueOf(data.get("i18n_fr")));
-//        if (data.get("i18n_es") != null) clDto.setI18nEs(String.valueOf(data.get("i18n_es")));
-//        if (data.get("i18n_th") != null) clDto.setI18nTh(String.valueOf(data.get("i18n_th")));
-//        if (data.get("i18n_vt") != null) clDto.setI18nVt(String.valueOf(data.get("i18n_vt")));
-//        if (data.get("i18n_la") != null) clDto.setI18nLa(String.valueOf(data.get("i18n_la")));
-//        if (data.get("i18n_id") != null) clDto.setI18nId(String.valueOf(data.get("i18n_id")));
-//        if (data.get("i18n_kh") != null) clDto.setI18nKh(String.valueOf(data.get("i18n_kh")));
+        return "redirect:/admin/codelists/browser/" + table + "/";
+    }
 
-        prepareForCLEdition(new CLDto(), mv);
+    @RequestMapping(value = "/admin/codelists/browser/{table}/{id}/update.html", method = RequestMethod.POST)
+    public String updateCL(@PathVariable("table") String table, @Validated @ModelAttribute("clDto") CLDto dto, @PathVariable("id") Long id, BindingResult bindResults, Model mv) {
+
+        switch (table) {
+            case "cl_app_administrative_characteristic_types":
+                CLAppAdministrativeCharacteristicType newCLData = clAppAdministrativeCharacteristicTypeRepository.findOne(id);
+                cldtoMapper.fillEntity(dto, newCLData);
+                clAppAdministrativeCharacteristicTypeRepository.save(newCLData);
+                break;
+        }
+
+        return "redirect:/admin/codelists/browser/" + table + "/";
+    }
+
+    @RequestMapping(value = "/admin/codelists/browser/{table}/{id}/delete.html", method = RequestMethod.POST)
+    public String deleteCL(@PathVariable("table") String table, @PathVariable("id") Long id, Model mv) {
+
+        switch (table) {
+            case "cl_app_administrative_characteristic_types":
+                clAppAdministrativeCharacteristicTypeRepository.delete(id);
+                break;
+        }
+
+        return "redirect:/admin/codelists/browser/" + table + "/";
+    }
+
+    @RequestMapping(value = "/admin/codelists/browser/{table}/{id}/edit.html", method = RequestMethod.GET)
+    public String editCL(@PathVariable("table") String table, @PathVariable("id") Long id, Model mv) {
+
+        // Get all column names
+        CLColumn column = codeListservice.getColumn(table);
+        CLColumnDto clColumnDto = new CLColumnDto();
+        clColumnDTOMapper.toDto(column, clColumnDto);
+
+        // Get all datas
+        BaseCodeListSupport v8Base = codeListservice.gets(table, id);
+        CodeListSupport codeListSupport = (CodeListSupport) v8Base;
+        CLDto clDto = new CLDto();
+        cldtoMapper.toDto(codeListSupport, clDto);
+
+        prepareForCLEdition(table, clColumnDto, clDto, mv);
 
         return "admin/codelists/create";
     }
 
-    private void prepareForCLEdition(CLDto clDto, Model mv) {
+    private void prepareForCLEdition(String table, CLColumnDto clColumnDto, CLDto clDto, Model mv) {
         V8Page p = new V8Page();
         p.setTitle("admin.home");
         p.setDescription("admin.home");
@@ -138,6 +168,9 @@ public class AdminController extends AbstractV8Controller {
         mv.addAttribute("v8p", p);
 
         mv.addAttribute("newEntity", clDto.getId() == null);
+        mv.addAttribute("table", table);
+        mv.addAttribute("clColumnDto", clColumnDto);
         mv.addAttribute("clDto", clDto);
+
     }
 }

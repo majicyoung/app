@@ -54,7 +54,7 @@ public abstract class CodeListSupport extends BaseCodeListSupport {
 	
 	@Column(name = "I18N_KH", length = 256, nullable = false)
 	protected String i18nKh;
-	
+
 	public Long getId() {
 		return id;
 	}
@@ -77,6 +77,14 @@ public abstract class CodeListSupport extends BaseCodeListSupport {
 
 	public void setCode(String code) {
 		this.code = code;
+	}
+
+	public Long getRanking() {
+		return ranking;
+	}
+
+	public void setRanking(Long ranking) {
+		this.ranking = ranking;
 	}
 
 	public String getName() {
@@ -142,11 +150,11 @@ public abstract class CodeListSupport extends BaseCodeListSupport {
 	public void setI18nVt(String i18nVt) {
 		this.i18nVt = i18nVt;
 	}
-	
+
 	public String getI18nLa() {
 		return i18nLa;
 	}
-	
+
 	public void setI18nLa(String i18nLa) {
 		this.i18nLa = i18nLa;
 	}
@@ -154,7 +162,7 @@ public abstract class CodeListSupport extends BaseCodeListSupport {
 	public String getI18nId() {
 		return i18nId;
 	}
-	
+
 	public void setI18nId(String i18nId) {
 		this.i18nId = i18nId;
 	}
@@ -162,11 +170,11 @@ public abstract class CodeListSupport extends BaseCodeListSupport {
 	public String getI18nKh() {
 		return i18nKh;
 	}
-	
+
 	public void setI18nKh(String i18nKh) {
 		this.i18nKh = i18nKh;
 	}
-	
+
 
 	public String getLocalisedName() {
 		Locale locale = LocaleContextHolder.getLocale();

@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html layout:decorator="inc/main-layout" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
 <div layout:fragment="content">
@@ -8,9 +7,381 @@
         <div class="col-xs-12">
             <div class="box" id="user-box">
                 <div class="box-header with-border">
-                    <h3 class="box-title" th:text="#{user.add}" th:if="${newEntity}">user.add</h3>
-                    <h3 class="box-title" th:text="#{user.edit}" th:if="${!newEntity}">user.edit</h3>
+                    <h3 class="box-title" th:text="#{cl.add}" th:if="${newEntity}">cl.add</h3>
+                    <h3 class="box-title" th:text="#{cl.edit}" th:if="${!newEntity}">cl.edit</h3>
+                    <div class="box-tools">
+                        <a th:href="@{'/admin/codelists/browser/'+${table}+'/'}"
+                           class="btn btn-sm btn-flat btn-warning"><i
+                                class="fa fa-backward"></i> <span th:text="#{default.back}"></span></a>
+                    </div>
                 </div>
+                <form role="form" class="mainForm"
+                      th:action="@{${newEntity ? '/admin/codelists/browser/'+table+'/create.html' : '/admin/codelists/browser/'+table+'/'+clDto.id+'/update.html'}}"
+                      th:object="${clDto}" method="post" autocomplete="off"
+                      onsubmit="return !hasEmptyFields('#user-box form .form-control[required]');">
+                    <input type="hidden" th:field="*{id}"/>
+                    <div class="box-body" id="bloc-user-form">
+                        <div class="row" th:if="${clColumnDto.enabled==true}">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="form-group">
+                                    <label th:text="#{cl.column.enabled}">cl.column.enabled</label>
+                                    <input type="text" class="form-control" th:placeholder="#{cl.column.enabled}"
+                                           required="required" th:field="*{enabled}"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" th:if="${clColumnDto.code==true}">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="form-group">
+                                    <label th:text="#{cl.column.code}">cl.column.code</label>
+                                    <input type="text" class="form-control" th:placeholder="#{cl.column.code}"
+                                           required="required" th:field="*{code}"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" th:if="${clColumnDto.ranking==true}">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="form-group">
+                                    <label th:text="#{cl.column.ranking}">cl.column.ranking</label>
+                                    <input type="text" class="form-control" th:placeholder="#{cl.column.ranking}"
+                                           required="required" th:field="*{ranking}"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" th:if="${clColumnDto.name==true}">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="form-group">
+                                    <label th:text="#{cl.column.name}">cl.column.name</label>
+                                    <input type="text" class="form-control" th:placeholder="#{cl.column.name}"
+                                           required="required" th:field="*{name}"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" th:if="${clColumnDto.description==true}">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="form-group">
+                                    <label th:text="#{cl.column.description}">cl.column.description</label>
+                                    <input type="text" class="form-control" th:placeholder="#{cl.column.description}"
+                                           required="required" th:field="*{description}"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" th:if="${clColumnDto.i18nDefault==true}">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="form-group">
+                                    <label th:text="#{cl.column.i18nDefault}">cl.column.i18nDefault</label>
+                                    <input type="text" class="form-control" th:placeholder="#{cl.column.i18nDefault}"
+                                           required="required" th:field="*{i18nDefault}"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" th:if="${clColumnDto.i18nEn==true}">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="form-group">
+                                    <label th:text="#{cl.column.i18nEn}">cl.column.i18nEn</label>
+                                    <input type="text" class="form-control" th:placeholder="#{cl.column.i18nEn}"
+                                           th:field="*{i18nEn}"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" th:if="${clColumnDto.i18nFr==true}">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="form-group">
+                                    <label th:text="#{cl.column.i18nFr}">cl.column.i18nFr</label>
+                                    <input type="text" class="form-control" th:placeholder="#{cl.column.i18nFr}"
+                                           th:field="*{i18nFr}"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" th:if="${clColumnDto.i18nEs==true}">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="form-group">
+                                    <label th:text="#{cl.column.i18nEs}">cl.column.i18nEs</label>
+                                    <input type="text" class="form-control" th:placeholder="#{cl.column.i18nEs}"
+                                           th:field="*{i18nEs}"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" th:if="${clColumnDto.i18nTh==true}">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="form-group">
+                                    <label th:text="#{cl.column.i18nTh}">cl.column.i18nTh</label>
+                                    <input type="text" class="form-control" th:placeholder="#{cl.column.i18nTh}"
+                                           th:field="*{i18nTh}"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" th:if="${clColumnDto.i18nVt==true}">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="form-group">
+                                    <label th:text="#{cl.column.i18nVt}">cl.column.i18nVt</label>
+                                    <input type="text" class="form-control" th:placeholder="#{cl.column.i18nVt}"
+                                           th:field="*{i18nVt}"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" th:if="${clColumnDto.i18nLa==true}">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="form-group">
+                                    <label th:text="#{cl.column.i18nLa}">cl.column.i18nLa</label>
+                                    <input type="text" class="form-control" th:placeholder="#{cl.column.i18nLa}"
+                                           th:field="*{i18nLa}"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" th:if="${clColumnDto.i18nId==true}">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="form-group">
+                                    <label th:text="#{cl.column.i18nId}">cl.column.i18nId</label>
+                                    <input type="text" class="form-control" th:placeholder="#{cl.column.i18nId}"
+                                           th:field="*{i18nId}"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" th:if="${clColumnDto.i18nKh==true}">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="form-group">
+                                    <label th:text="#{cl.column.i18nKh}">cl.column.i18nKh</label>
+                                    <input type="text" class="form-control" th:placeholder="#{cl.column.i18nKh}"
+                                           th:field="*{i18nKh}"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" th:if="${clColumnDto.company==true}">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="form-group">
+                                    <label th:text="#{cl.column.company}">cl.column.company</label>
+                                    <input type="text" class="form-control" th:placeholder="#{cl.column.company}"
+                                           th:field="*{company}"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" th:if="${clColumnDto.valueMeasure==true}">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="form-group">
+                                    <label th:text="#{cl.column.valueMeasure}">cl.column.valueMeasure</label>
+                                    <input type="text" class="form-control" th:placeholder="#{cl.column.valueMeasure}"
+                                           th:field="*{valueMeasure}"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" th:if="${clColumnDto.valueCode==true}">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="form-group">
+                                    <label th:text="#{cl.column.valueCode}">cl.column.valueCode</label>
+                                    <input type="text" class="form-control" th:placeholder="#{cl.column.valueCode}"
+                                           th:field="*{valueCode}"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" th:if="${clColumnDto.valueDate==true}">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="form-group">
+                                    <label th:text="#{cl.column.valueDate}">cl.column.valueDate</label>
+                                    <input type="text" class="form-control" th:placeholder="#{cl.column.valueDate}"
+                                           th:field="*{valueDate}"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" th:if="${clColumnDto.valueIndicator==true}">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="form-group">
+                                    <label th:text="#{cl.column.valueIndicator}">cl.column.valueIndicator</label>
+                                    <input type="text" class="form-control" th:placeholder="#{cl.column.valueIndicator}"
+                                           th:field="*{valueIndicator}"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" th:if="${clColumnDto.valueQuantity==true}">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="form-group">
+                                    <label th:text="#{cl.column.valueQuantity}">cl.column.valueQuantity</label>
+                                    <input type="text" class="form-control" th:placeholder="#{cl.column.valueQuantity}"
+                                           th:field="*{valueQuantity}"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" th:if="${clColumnDto.cpcCode==true}">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="form-group">
+                                    <label th:text="#{cl.column.cpcCode}">cl.column.cpcCode</label>
+                                    <input type="text" class="form-control" th:placeholder="#{cl.column.cpcCode}"
+                                           th:field="*{cpcCode}"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" th:if="${clColumnDto.hsCode==true}">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="form-group">
+                                    <label th:text="#{cl.column.hsCode}">cl.column.hsCode</label>
+                                    <input type="text" class="form-control" th:placeholder="#{cl.column.hsCode}"
+                                           th:field="*{hsCode}"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" th:if="${clColumnDto.iso3Code==true}">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="form-group">
+                                    <label th:text="#{cl.column.iso3Code}">cl.column.iso3Code</label>
+                                    <input type="text" class="form-control" th:placeholder="#{cl.column.iso3Code}"
+                                           th:field="*{iso3Code}"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" th:if="${clColumnDto.scientificName==true}">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="form-group">
+                                    <label th:text="#{cl.column.scientificName}">cl.column.scientificName</label>
+                                    <input type="text" class="form-control" th:placeholder="#{cl.column.scientificName}"
+                                           th:field="*{scientificName}"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" th:if="${clColumnDto.clAdminLevel1Id==true}">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="form-group">
+                                    <label th:text="#{cl.column.clAdminLevel1Id}">cl.column.clAdminLevel1Id</label>
+                                    <input type="text" class="form-control"
+                                           th:placeholder="#{cl.column.clAdminLevel1Id}"
+                                           th:field="*{clAdminLevel1Id}"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" th:if="${clColumnDto.clAppConstructionLocationType==true}">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="form-group">
+                                    <label th:text="#{cl.column.clAppConstructionLocationType}">cl.column.clAppConstructionLocationType</label>
+                                    <input type="text" class="form-control"
+                                           th:placeholder="#{cl.column.clAppConstructionLocationType}"
+                                           th:field="*{clAppConstructionLocationType}"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" th:if="${clColumnDto.clCountryId==true}">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="form-group">
+                                    <label th:text="#{cl.column.clCountryId}">cl.column.clCountryId</label>
+                                    <input type="text" class="form-control" th:placeholder="#{cl.column.clCountryId}"
+                                           th:field="*{clCountryId}"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" th:if="${clColumnDto.clEntityTypeId==true}">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="form-group">
+                                    <label th:text="#{cl.column.clEntityTypeId}">cl.column.clEntityTypeId</label>
+                                    <input type="text" class="form-control" th:placeholder="#{cl.column.clEntityTypeId}"
+                                           th:field="*{clEntityTypeId}"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" th:if="${clColumnDto.clFarmTypeId==true}">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="form-group">
+                                    <label th:text="#{cl.column.clFarmTypeId}">cl.column.clFarmTypeId</label>
+                                    <input type="text" class="form-control" th:placeholder="#{cl.column.clFarmTypeId}"
+                                           th:field="*{clFarmTypeId}"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" th:if="${clColumnDto.clLanguageId==true}">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="form-group">
+                                    <label th:text="#{cl.column.clLanguageId}">cl.column.clLanguageId</label>
+                                    <input type="text" class="form-control" th:placeholder="#{cl.column.clLanguageId}"
+                                           th:field="*{clLanguageId}"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" th:if="${clColumnDto.clProductsTypeId==true}">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="form-group">
+                                    <label th:text="#{cl.column.clProductsTypeId}">cl.column.clProductsTypeId</label>
+                                    <input type="text" class="form-control"
+                                           th:placeholder="#{cl.column.clProductsTypeId}"
+                                           th:field="*{clProductsTypeId}"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" th:if="${clColumnDto.clQuantityUnitTypeId==true}">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="form-group">
+                                    <label th:text="#{cl.column.clQuantityUnitTypeId}">cl.column.clQuantityUnitTypeId</label>
+                                    <input type="text" class="form-control"
+                                           th:placeholder="#{cl.column.clQuantityUnitTypeId}"
+                                           th:field="*{clQuantityUnitTypeId}"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" th:if="${clColumnDto.clRecommandUnitId==true}">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="form-group">
+                                    <label th:text="#{cl.column.clRecommandUnitId}">cl.column.clRecommandUnitId</label>
+                                    <input type="text" class="form-control"
+                                           th:placeholder="#{cl.column.clRecommandUnitId}"
+                                           th:field="*{clRecommandUnitId}"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" th:if="${clColumnDto.clRecomandQuantityUnitId==true}">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="form-group">
+                                    <label th:text="#{cl.column.clRecomandQuantityUnitId}">cl.column.clRecomandQuantityUnitId</label>
+                                    <input type="text" class="form-control"
+                                           th:placeholder="#{cl.column.clRecomandQuantityUnitId}"
+                                           th:field="*{clRecomandQuantityUnitId}"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" th:if="${clColumnDto.clRefCountryId==true}">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="form-group">
+                                    <label th:text="#{cl.column.clRefCountryId}">cl.column.clRefCountryId</label>
+                                    <input type="text" class="form-control" th:placeholder="#{cl.column.clRefCountryId}"
+                                           th:field="*{clRefCountryId}"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" th:if="${clColumnDto.clRefRegionId==true}">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="form-group">
+                                    <label th:text="#{cl.column.clRefRegionId}">cl.column.clRefRegionId</label>
+                                    <input type="text" class="form-control" th:placeholder="#{cl.column.clRefRegionId}"
+                                           th:field="*{clRefRegionId}"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" th:if="${clColumnDto.clValueMeasureUnitId==true}">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="form-group">
+                                    <label th:text="#{cl.column.clValueMeasureUnitId}">cl.column.clValueMeasureUnitId</label>
+                                    <input type="text" class="form-control"
+                                           th:placeholder="#{cl.column.clValueMeasureUnitId}"
+                                           th:field="*{clValueMeasureUnitId}"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" th:if="${clColumnDto.clValueQuantityUnitId==true}">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="form-group">
+                                    <label th:text="#{cl.column.clValueQuantityUnitId}">cl.column.clValueQuantityUnitId</label>
+                                    <input type="text" class="form-control"
+                                           th:placeholder="#{cl.column.clValueQuantityUnitId}"
+                                           th:field="*{clValueQuantityUnitId}"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box-footer text-center">
+                        <small th:text="'*'+#{default.mandatory_field}">*default.mandatory_field</small>
+                        <a th:href="@{/roles.html}" class="btn btn-warning"><i class="fa fa-times"></i>
+                            <span th:text="#{default.cancel}">default.cancel</span></a>
+
+                        <button type="submit" class="btn btn-success">
+                            <span th:text="#{default.submit}">default.submit</span> <i class="fa fa-check"></i>
+                        </button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
