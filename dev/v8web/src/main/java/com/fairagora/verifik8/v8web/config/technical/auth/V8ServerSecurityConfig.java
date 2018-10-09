@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -39,6 +40,7 @@ public class V8ServerSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	public void globalUserDetails(AuthenticationManagerBuilder auth) throws Exception {
+		auth.authenticationProvider(authProvider());
 		auth.userDetailsService(userDetailsService); //.passwordEncoder(encoder());
 	}
 
@@ -68,7 +70,7 @@ public class V8ServerSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Bean
 	public BCryptPasswordEncoder encoder() {
-		return new BCryptPasswordEncoder();
+		return new BCryptPasswordEncoder(11);
 	}
 
 	@Bean
@@ -81,5 +83,13 @@ public class V8ServerSecurityConfig extends WebSecurityConfigurerAdapter {
 		config.addAllowedMethod("*");
 		source.registerCorsConfiguration("/**", config);
 		return new CorsFilter(source);
+	}
+	
+	 @Bean
+	 public DaoAuthenticationProvider authProvider() {
+		 DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
+		 authProvider.setUserDetailsService(userDetailsService);
+		 authProvider.setPasswordEncoder(encoder());
+		 return authProvider;
 	}
 }
