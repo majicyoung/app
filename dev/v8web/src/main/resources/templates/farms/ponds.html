@@ -26,7 +26,7 @@
                           var ponds = [];
                           var totalFarmPondSize = 0;
                       </script>
-                      <table class="table table-bordered table-striped table-hover table-farm-staff"
+                      <table id="pondList" class="table table-bordered table-striped table-hover table-farm-staff"
                              style="margin: 10px 0;">
                         <tr>
                           <th th:text="#{farm.pond_number}">farm.pond_number</th>
@@ -196,6 +196,9 @@
       /*<![CDATA[*/
       var farmSize = [[${farmSize}]];
       var farmId = [[${farmId}]];
+
+
+
       $(document).ready(function () {
 
 
@@ -255,6 +258,13 @@
           });
 
           document.getElementById("totalFarmPondSize").innerHTML = totalFarmPondSize;
+
+          $('#pondList').DataTable({
+              "responsive": true,
+              "language": {
+                  "url": langURL
+              }
+          });
       });
 
       function addFarmPond() {

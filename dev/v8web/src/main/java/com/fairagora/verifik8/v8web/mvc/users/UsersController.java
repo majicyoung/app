@@ -1,20 +1,33 @@
 package com.fairagora.verifik8.v8web.mvc.users;
 
+import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.fairagora.verifik8.v8web.config.technical.auth.V8LoggedUser;
+import com.fairagora.verifik8.v8web.data.domain.sys.SYSPasswordResetToken;
+import com.fairagora.verifik8.v8web.data.repo.sys.SYSPasswordResetTokenRepository;
+import com.fairagora.verifik8.v8web.data.repo.sys.SYSUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.MessageSource;
 import org.springframework.data.domain.Sort;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import com.fairagora.verifik8.v8web.data.application.V8Page;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLAppEntityType;
@@ -27,101 +40,191 @@ import com.fairagora.verifik8.v8web.services.UserService;
 @Controller
 public class UsersController extends AbstractV8Controller {
 
-	@Autowired
-	private UserService userService;
-	
-	@Autowired
-	private SysUserDTOMapper sysUserDTOMapper;
+    @Autowired
+    private UserService userService;
 
-	@PreAuthorize("hasAuthority('R_USERBROWSER')")
-	@RequestMapping(value = "/users.html", method = RequestMethod.GET)
-	public String showUsersList(Model mv, HttpServletRequest req) {
+    @Autowired
+    private SYSUserRepository userRepository;
 
-		V8Page p = new V8Page();
-		p.setTitle("default.users");
-		p.setDescription("default.user_page_description");
-		p.setNavBarPrefix("/users");
-		mv.addAttribute("v8p", p);
+    @Autowired
+    private UserDetailsService userDetailsService;
 
-		List<SYSUser> users = userService.listUsers();
-		mv.addAttribute("users", users);
+    @Autowired
+    @Qualifier("encoder")
+    private PasswordEncoder passwordEncoder;
 
-		return "users/listing";
+    @Autowired
+    private SYSPasswordResetTokenRepository sysPasswordResetTokenRepository;
 
-	}
+    @Autowired
+    private SysUserDTOMapper sysUserDTOMapper;
 
-	@PreAuthorize("hasAuthority('W_USEREDITOR')")
-	@RequestMapping(value = "/user/{id}/delete.html", method = RequestMethod.POST)
-	public String deleteUser(@PathVariable("id") Long id, Model mv) {
-		userRepository.delete(id);
-		return "redirect:/users.html";
-	}
+    @Autowired
+    private JavaMailSender mailSender;
 
-	@PreAuthorize("hasAuthority('R_USEREDITOR')")
-	@RequestMapping(value = "/user/{id}/edit.html", method = RequestMethod.GET)
-	public String showEditUser(@PathVariable("id") Long id, Model mv) {
-		UserFormDto dto = new UserFormDto();
+    @Autowired
+    private MessageSource messageSource;
 
-		sysUserDTOMapper.toDto(userRepository.findOne(id), dto);
-		setToReadOnly(mv, "W_USEREDITOR");
-		prepareForUserEdition(dto, mv);
-		return "users/create";
-	}
+    @PreAuthorize("hasAuthority('R_USERBROWSER')")
+    @RequestMapping(value = "/users.html", method = RequestMethod.GET)
+    public String showUsersList(Model mv, HttpServletRequest req) {
 
-	@PreAuthorize("hasAuthority('W_USEREDITOR')")
-	@RequestMapping(value = "/users/create.html", method = RequestMethod.GET)
-	public String showCreateUserForm(Model mv) {
+        V8Page p = new V8Page();
+        p.setTitle("default.users");
+        p.setDescription("default.user_page_description");
+        p.setNavBarPrefix("/users");
+        mv.addAttribute("v8p", p);
 
-		UserFormDto dto = new UserFormDto();
+        List<SYSUser> users = userService.listUsers();
+        mv.addAttribute("users", users);
 
-		prepareForUserEdition(dto, mv);
+        return "users/listing";
 
-		return "users/create";
+    }
 
-	}
+    @PreAuthorize("hasAuthority('W_USEREDITOR')")
+    @RequestMapping(value = "/user/{id}/delete.html", method = RequestMethod.POST)
+    public String deleteUser(@PathVariable("id") Long id, Model mv) {
+        userRepository.delete(id);
+        return "redirect:/users.html";
+    }
 
-	private void prepareForUserEdition(UserFormDto dto, Model mv) {
-		V8Page p = new V8Page();
-		p.setTitle("default.users");
-		p.setDescription("default.user_page_description");
-		p.setNavBarPrefix("/users");
-		mv.addAttribute("v8p", p);
+    @PreAuthorize("hasAuthority('R_USEREDITOR')")
+    @RequestMapping(value = "/user/{id}/edit.html", method = RequestMethod.GET)
+    public String showEditUser(@PathVariable("id") Long id, Model mv) {
+        UserFormDto dto = new UserFormDto();
 
-		mv.addAttribute("newEntity", dto.getId() == null);
+        sysUserDTOMapper.toDto(userRepository.findOne(id), dto);
+        setToReadOnly(mv, "W_USEREDITOR");
+        prepareForUserEdition(dto, mv);
+        return "users/create";
+    }
 
-		mv.addAttribute("userDto", dto);
-		mv.addAttribute("allCountries", countryRepository.findAll(new Sort("name")));
-		mv.addAttribute("allCooperatives", regEntityRepository.findByEntityTypeCode(CLAppEntityType.CODE_COOP));
-		mv.addAttribute("allFarms", regEntityRepository.findByEntityTypeCode(CLAppEntityType.CODE_FARM));
-		mv.addAttribute("allSuppliers", regEntityRepository.findByEntityTypeCode(CLAppEntityType.CODE_COM));
-		mv.addAttribute("allBuyers", regEntityRepository.findByEntityTypeCode(CLAppEntityType.CODE_COM));
-	}
+    @PreAuthorize("hasAuthority('W_USEREDITOR')")
+    @RequestMapping(value = "/users/create.html", method = RequestMethod.GET)
+    public String showCreateUserForm(Model mv) {
 
-	@PreAuthorize("hasAuthority('W_USEREDITOR')")
-	@RequestMapping(value = "/users/create.html", method = RequestMethod.POST)
-	public String createUser(@Validated @ModelAttribute("userDto") UserFormDto createUserDto, BindingResult bindResults, Model mv) {
+        UserFormDto dto = new UserFormDto();
 
-		SYSUser newUser = new SYSUser();
+        prepareForUserEdition(dto, mv);
 
-		sysUserDTOMapper.fillEntity(createUserDto, newUser);
-		newUser.setActive(true);
+        return "users/create";
 
-		userRepository.save(newUser);
+    }
 
-		return "redirect:/users.html";
-	}
+    @RequestMapping(value = "/forgotpassword", method = RequestMethod.GET)
+    public String showForgetPasswordForm(Model mv) {
+        return "forgot-password";
+    }
 
-	@PreAuthorize("hasAuthority('W_USEREDITOR')")
-	@RequestMapping(value = "/user/{id}/update.html", method = RequestMethod.POST)
-	public String createUser(@Validated @ModelAttribute("userDto") UserFormDto createUserDto, @PathVariable("id") Long userId, BindingResult bindResults, Model mv) {
+    @RequestMapping(value = "/forgotpassword", method = RequestMethod.POST)
+    @ResponseBody
+    public String forgetPassword(final HttpServletRequest request, @RequestParam("email") final String email) {
+        final SYSUser user = userRepository.findByEmail(email);
+        if (user != null) {
+            final String token = UUID.randomUUID().toString();
+            final Locale locale = request.getLocale();
+            userService.createPasswordResetTokenForUser(user, token);
+            mailSender.send(constructResetTokenEmail(getAppUrl(request), user, token, locale));
+        }
 
-		SYSUser newUser = userRepository.findOne(userId);
+        // return new GenericResponse(messages.getMessage("message.resetPasswordEmail", null, request.getLocale()));
+        return "";
+    }
 
-		sysUserDTOMapper.fillEntity(createUserDto, newUser);
+    @RequestMapping(value = "/resetpassword", method = RequestMethod.GET)
+    public String showResetPasswordForm(Model mv, @RequestParam("id") final long id, @RequestParam("token") final String token) {
+        final SYSPasswordResetToken passToken = sysPasswordResetTokenRepository.findByToken(token);
+        final SYSUser user = passToken.getSysUser();
+        if ((passToken == null) || (user.getId() != id)) {
+            return "redirect:/login";
+        }
 
-		userRepository.save(newUser);
+        final Calendar cal = Calendar.getInstance();
+        if ((passToken.getExpiryDate().getTime() - cal.getTime().getTime()) <= 0) {
+            return "redirect:/login";
+        }
 
-		return "redirect:/users.html";
-	}
+        final Authentication auth = new UsernamePasswordAuthenticationToken(new V8LoggedUser(user), null, userDetailsService.loadUserByUsername(user.getEmail()).getAuthorities());
+        SecurityContextHolder.getContext().setAuthentication(auth);
 
+        return "reset-password";
+    }
+
+    @RequestMapping(value = "/resetpassword", method = RequestMethod.POST)
+    public String resetPassword(@RequestParam("password") final String password) {
+
+        SYSUser user = userService.getUserByEmail();
+        user.setPassword(passwordEncoder.encode(password));
+
+        userService.saveRegisteredUser(user);
+        return "redirect:/login";
+    }
+
+
+    private void prepareForUserEdition(UserFormDto dto, Model mv) {
+        V8Page p = new V8Page();
+        p.setTitle("default.users");
+        p.setDescription("default.user_page_description");
+        p.setNavBarPrefix("/users");
+        mv.addAttribute("v8p", p);
+
+        mv.addAttribute("newEntity", dto.getId() == null);
+
+        mv.addAttribute("userDto", dto);
+        mv.addAttribute("allCountries", countryRepository.findAll(new Sort("name")));
+        mv.addAttribute("allCooperatives", regEntityRepository.findByEntityTypeCode(CLAppEntityType.CODE_COOP));
+        mv.addAttribute("allFarms", regEntityRepository.findByEntityTypeCode(CLAppEntityType.CODE_FARM));
+        mv.addAttribute("allSuppliers", regEntityRepository.findByEntityTypeCode(CLAppEntityType.CODE_COM));
+        mv.addAttribute("allBuyers", regEntityRepository.findByEntityTypeCode(CLAppEntityType.CODE_COM));
+    }
+
+    @PreAuthorize("hasAuthority('W_USEREDITOR')")
+    @RequestMapping(value = "/users/create.html", method = RequestMethod.POST)
+    public String createUser(@Validated @ModelAttribute("userDto") UserFormDto createUserDto, BindingResult bindResults, Model mv) {
+
+        SYSUser newUser = new SYSUser();
+
+        sysUserDTOMapper.fillEntity(createUserDto, newUser);
+        newUser.setActive(true);
+
+        userRepository.save(newUser);
+
+        return "redirect:/users.html";
+    }
+
+    @PreAuthorize("hasAuthority('W_USEREDITOR')")
+    @RequestMapping(value = "/user/{id}/update.html", method = RequestMethod.POST)
+    public String createUser(@Validated @ModelAttribute("userDto") UserFormDto createUserDto, @PathVariable("id") Long userId, BindingResult bindResults, Model mv) {
+
+        SYSUser newUser = userRepository.findOne(userId);
+
+        sysUserDTOMapper.fillEntity(createUserDto, newUser);
+
+        userRepository.save(newUser);
+
+        return "redirect:/users.html";
+    }
+
+    private String getAppUrl(HttpServletRequest request) {
+        return "http://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
+    }
+
+    private SimpleMailMessage constructResetTokenEmail(final String contextPath, final SYSUser user, final String token, final Locale locale) {
+        final String url = contextPath + "/resetpassword?id=" + user.getId() + "&token=" + token;
+        String messages[] = {url};
+
+        final String subject = messageSource.getMessage("user.reset_password.email.subject", null, locale);
+        final String body = messageSource.getMessage("user.reset_password.email.body", messages, locale);
+
+        return constructEmail(subject, body, user);
+    }
+
+    private SimpleMailMessage constructEmail(String subject, String body, SYSUser user) {
+        final SimpleMailMessage email = new SimpleMailMessage();
+        email.setTo(user.getEmail());
+        email.setSubject(subject);
+        email.setText(body);
+        return email;
+    }
 }
