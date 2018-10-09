@@ -43,7 +43,7 @@
                             <div class="col-md-12 col-sm-12 col-xs-12">
                                 <div class="form-group">
                                     <label th:text="#{cl.column.ranking}">cl.column.ranking</label>
-                                    <input type="text" class="form-control" th:placeholder="#{cl.column.ranking}"
+                                    <input type="number" class="form-control" th:placeholder="#{cl.column.ranking}"
                                            required="required" th:field="*{ranking}"/>
                                 </div>
                             </div>
@@ -152,7 +152,7 @@
                                 <div class="form-group">
                                     <label th:text="#{cl.column.company}">cl.column.company</label>
                                     <input type="text" class="form-control" th:placeholder="#{cl.column.company}"
-                                           th:field="*{company}"/>
+                                           required="required" th:field="*{company}"/>
                                 </div>
                             </div>
                         </div>

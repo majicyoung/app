@@ -42,23 +42,33 @@ public class CLDto {
 
     protected String scientificName;
 
-    protected Long appEntityTypeId;
+    protected Long clAdminLevel1Id;
 
-    protected Long appLocationType;
+    protected Long clAppConstructionLocationType;
 
-    protected Long appQuantityUnit;
+    protected Long clCountryId;
 
-    protected Long appQuantityUnitType;
+    protected Long clEntityTypeId;
 
-    protected Long farmTypeId;
+    protected Long clFarmTypeId;
 
-    protected Long refAdminLevel1;
+    protected Long clLanguageId;
 
-    protected Long refCountry;
+    protected Long clProductsTypeId;
 
-    protected Long refRegion;
+    protected Long clQuantityUnitTypeId;
 
-    protected Long refProductType;
+    protected Long clRecommandUnitId;
+
+    protected Long clRecomandQuantityUnitId;
+
+    protected Long clRefCountryId;
+
+    protected Long clRefRegionId;
+
+    protected Long clValueMeasureUnitId;
+
+    protected Long clValueQuantityUnitId;
 
     public Long getId() {
         return id;
@@ -180,7 +190,7 @@ public class CLDto {
         this.i18nKh = i18nKh;
     }
 
-    public Boolean isCompany() {
+    public Boolean getCompany() {
         return company;
     }
 
@@ -220,75 +230,115 @@ public class CLDto {
         this.scientificName = scientificName;
     }
 
-    public Long getAppEntityTypeId() {
-        return appEntityTypeId;
+    public Long getClAdminLevel1Id() {
+        return clAdminLevel1Id;
     }
 
-    public void setAppEntityTypeId(Long appEntityTypeId) {
-        this.appEntityTypeId = appEntityTypeId;
+    public void setClAdminLevel1Id(Long clAdminLevel1Id) {
+        this.clAdminLevel1Id = clAdminLevel1Id;
     }
 
-    public Long getAppLocationType() {
-        return appLocationType;
+    public Long getClAppConstructionLocationType() {
+        return clAppConstructionLocationType;
     }
 
-    public void setAppLocationType(Long appLocationType) {
-        this.appLocationType = appLocationType;
+    public void setClAppConstructionLocationType(Long clAppConstructionLocationType) {
+        this.clAppConstructionLocationType = clAppConstructionLocationType;
     }
 
-    public Long getAppQuantityUnit() {
-        return appQuantityUnit;
+    public Long getClCountryId() {
+        return clCountryId;
     }
 
-    public void setAppQuantityUnit(Long appQuantityUnit) {
-        this.appQuantityUnit = appQuantityUnit;
+    public void setClCountryId(Long clCountryId) {
+        this.clCountryId = clCountryId;
     }
 
-    public Long getAppQuantityUnitType() {
-        return appQuantityUnitType;
+    public Long getClEntityTypeId() {
+        return clEntityTypeId;
     }
 
-    public void setAppQuantityUnitType(Long appQuantityUnitType) {
-        this.appQuantityUnitType = appQuantityUnitType;
+    public void setClEntityTypeId(Long clEntityTypeId) {
+        this.clEntityTypeId = clEntityTypeId;
     }
 
-    public Long getFarmTypeId() {
-        return farmTypeId;
+    public Long getClFarmTypeId() {
+        return clFarmTypeId;
     }
 
-    public void setFarmTypeId(Long farmTypeId) {
-        this.farmTypeId = farmTypeId;
+    public void setClFarmTypeId(Long clFarmTypeId) {
+        this.clFarmTypeId = clFarmTypeId;
     }
 
-    public Long getRefAdminLevel1() {
-        return refAdminLevel1;
+    public Long getClLanguageId() {
+        return clLanguageId;
     }
 
-    public void setRefAdminLevel1(Long refAdminLevel1) {
-        this.refAdminLevel1 = refAdminLevel1;
+    public void setClLanguageId(Long clLanguageId) {
+        this.clLanguageId = clLanguageId;
     }
 
-    public Long getRefCountry() {
-        return refCountry;
+    public Long getClProductsTypeId() {
+        return clProductsTypeId;
     }
 
-    public void setRefCountry(Long refCountry) {
-        this.refCountry = refCountry;
+    public void setClProductsTypeId(Long clProductsTypeId) {
+        this.clProductsTypeId = clProductsTypeId;
     }
 
-    public Long getRefRegion() {
-        return refRegion;
+    public Long getClQuantityUnitTypeId() {
+        return clQuantityUnitTypeId;
     }
 
-    public void setRefRegion(Long refRegion) {
-        this.refRegion = refRegion;
+    public void setClQuantityUnitTypeId(Long clQuantityUnitTypeId) {
+        this.clQuantityUnitTypeId = clQuantityUnitTypeId;
     }
 
-    public Long getRefProductType() {
-        return refProductType;
+    public Long getClRecommandUnitId() {
+        return clRecommandUnitId;
     }
 
-    public void setRefProductType(Long refProductType) {
-        this.refProductType = refProductType;
+    public void setClRecommandUnitId(Long clRecommandUnitId) {
+        this.clRecommandUnitId = clRecommandUnitId;
+    }
+
+    public Long getClRecomandQuantityUnitId() {
+        return clRecomandQuantityUnitId;
+    }
+
+    public void setClRecomandQuantityUnitId(Long clRecomandQuantityUnitId) {
+        this.clRecomandQuantityUnitId = clRecomandQuantityUnitId;
+    }
+
+    public Long getClRefCountryId() {
+        return clRefCountryId;
+    }
+
+    public void setClRefCountryId(Long clRefCountryId) {
+        this.clRefCountryId = clRefCountryId;
+    }
+
+    public Long getClRefRegionId() {
+        return clRefRegionId;
+    }
+
+    public void setClRefRegionId(Long clRefRegionId) {
+        this.clRefRegionId = clRefRegionId;
+    }
+
+    public Long getClValueMeasureUnitId() {
+        return clValueMeasureUnitId;
+    }
+
+    public void setClValueMeasureUnitId(Long clValueMeasureUnitId) {
+        this.clValueMeasureUnitId = clValueMeasureUnitId;
+    }
+
+    public Long getClValueQuantityUnitId() {
+        return clValueQuantityUnitId;
+    }
+
+    public void setClValueQuantityUnitId(Long clValueQuantityUnitId) {
+        this.clValueQuantityUnitId = clValueQuantityUnitId;
     }
 }

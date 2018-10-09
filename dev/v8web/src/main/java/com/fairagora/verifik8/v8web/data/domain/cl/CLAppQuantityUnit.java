@@ -11,14 +11,13 @@ public class CLAppQuantityUnit extends CodeListSupport {
 
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "CL_QUANTITY_UNIT_TYPE_ID")
-	protected CLAppQuantityUnitType type;
+	protected CLAppQuantityUnitType  clQuantityUnitTypeId;
 
-	public CLAppQuantityUnitType getType() {
-		return type;
+	public CLAppQuantityUnitType getClQuantityUnitTypeId() {
+		return clQuantityUnitTypeId;
 	}
 
-	public void setType(CLAppQuantityUnitType type) {
-		this.type = type;
+	public void setClQuantityUnitTypeId(CLAppQuantityUnitType clQuantityUnitTypeId) {
+		this.clQuantityUnitTypeId = clQuantityUnitTypeId;
 	}
-
 }

@@ -1,11 +1,9 @@
 package com.fairagora.verifik8.v8web.mvc.admin;
 
 import com.fairagora.verifik8.v8web.data.domain.cl.*;
-import com.fairagora.verifik8.v8web.data.domain.sys.SYSRole;
 import com.fairagora.verifik8.v8web.data.repo.cl.CLAppAdministrativeCharacteristicTypeRepository;
 import com.fairagora.verifik8.v8web.mvc.admin.dto.CLColumnDto;
 import com.fairagora.verifik8.v8web.mvc.admin.dto.CLDto;
-import com.fairagora.verifik8.v8web.mvc.users.dto.RoleFormDto;
 import com.fairagora.verifik8.v8web.services.CodeListsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -21,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.fairagora.verifik8.v8web.data.application.V8Page;
 import com.fairagora.verifik8.v8web.mvc.AbstractV8Controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -78,14 +77,37 @@ public class AdminController extends AbstractV8Controller {
         mv.addAttribute("v8p", p);
 
         CLColumn column = codeListservice.getColumn(table);
-        List<? extends BaseCodeListSupport> datas = codeListservice.gets(table);
+        CLColumnDto clColumnDto = new CLColumnDto();
+        clColumnDTOMapper.toDto(column, clColumnDto);
 
-        CLColumnDto dto = new CLColumnDto();
-        clColumnDTOMapper.toDto(column, dto);
+        List<? extends BaseCodeListSupport> datas = codeListservice.gets(table);
+        List<CLDto> clDtos = new ArrayList<>();
+        for (BaseCodeListSupport baseCodeListSupport : datas) {
+
+            CLDto clDto = new CLDto();
+
+            if (baseCodeListSupport instanceof CLAppEntityType) {
+                cldtoMapper.toDto((CLAppEntityType) baseCodeListSupport, clDto);
+            } else if (baseCodeListSupport instanceof CLAppHazardousWorkType) {
+                cldtoMapper.toDto((CLAppHazardousWorkType) baseCodeListSupport, clDto);
+            } else if (baseCodeListSupport instanceof CLAppHiringRestrictionType) {
+                cldtoMapper.toDto((CLAppHiringRestrictionType) baseCodeListSupport, clDto);
+            } else if (baseCodeListSupport instanceof CLAppLegalStatus) {
+                cldtoMapper.toDto((CLAppLegalStatus) baseCodeListSupport, clDto);
+            } else if (baseCodeListSupport instanceof CLAppQuantityUnit) {
+                cldtoMapper.toDto((CLAppQuantityUnit) baseCodeListSupport, clDto);
+            } else if (baseCodeListSupport instanceof CodeListSupport) {
+                cldtoMapper.toDto((CodeListSupport) baseCodeListSupport, clDto);
+            } else {
+                cldtoMapper.toDto(baseCodeListSupport, clDto);
+            }
+
+            clDtos.add(clDto);
+        }
 
         mv.addAttribute("table", table);
-        mv.addAttribute("column", dto);
-        mv.addAttribute("datas", datas);
+        mv.addAttribute("column", clColumnDto);
+        mv.addAttribute("datas", clDtos);
 
         return "admin/codelists/listing";
     }
@@ -104,28 +126,13 @@ public class AdminController extends AbstractV8Controller {
 
     @RequestMapping(value = "/admin/codelists/browser/{table}/create.html", method = RequestMethod.POST)
     public String createCL(@PathVariable("table") String table, @Validated @ModelAttribute("clDto") CLDto dto, BindingResult bindResults, Model mv) {
-        switch (table) {
-            case "cl_app_administrative_characteristic_types":
-                CLAppAdministrativeCharacteristicType newCLData = new CLAppAdministrativeCharacteristicType();
-                cldtoMapper.fillEntity(dto, newCLData);
-                clAppAdministrativeCharacteristicTypeRepository.save(newCLData);
-                break;
-        }
-
+        codeListservice.addCL(table, dto, null);
         return "redirect:/admin/codelists/browser/" + table + "/";
     }
 
     @RequestMapping(value = "/admin/codelists/browser/{table}/{id}/update.html", method = RequestMethod.POST)
     public String updateCL(@PathVariable("table") String table, @Validated @ModelAttribute("clDto") CLDto dto, @PathVariable("id") Long id, BindingResult bindResults, Model mv) {
-
-        switch (table) {
-            case "cl_app_administrative_characteristic_types":
-                CLAppAdministrativeCharacteristicType newCLData = clAppAdministrativeCharacteristicTypeRepository.findOne(id);
-                cldtoMapper.fillEntity(dto, newCLData);
-                clAppAdministrativeCharacteristicTypeRepository.save(newCLData);
-                break;
-        }
-
+        codeListservice.addCL(table, dto, id);
         return "redirect:/admin/codelists/browser/" + table + "/";
     }
 
@@ -150,10 +157,24 @@ public class AdminController extends AbstractV8Controller {
         clColumnDTOMapper.toDto(column, clColumnDto);
 
         // Get all datas
-        BaseCodeListSupport v8Base = codeListservice.gets(table, id);
-        CodeListSupport codeListSupport = (CodeListSupport) v8Base;
+        CodeListSupport codeListSupport = (CodeListSupport) codeListservice.get(table, id);
         CLDto clDto = new CLDto();
-        cldtoMapper.toDto(codeListSupport, clDto);
+
+        if (codeListSupport instanceof CLAppEntityType) {
+            cldtoMapper.toDto((CLAppEntityType) codeListSupport, clDto);
+        } else if (codeListSupport instanceof CLAppHazardousWorkType) {
+            cldtoMapper.toDto((CLAppHazardousWorkType) codeListSupport, clDto);
+        } else if (codeListSupport instanceof CLAppHiringRestrictionType) {
+            cldtoMapper.toDto((CLAppHiringRestrictionType) codeListSupport, clDto);
+        } else if (codeListSupport instanceof CLAppLegalStatus) {
+            cldtoMapper.toDto((CLAppLegalStatus) codeListSupport, clDto);
+        } else if (codeListSupport instanceof CLAppQuantityUnit) {
+            cldtoMapper.toDto((CLAppQuantityUnit) codeListSupport, clDto);
+        } else if (codeListSupport instanceof CodeListSupport) {
+            cldtoMapper.toDto((CodeListSupport) codeListSupport, clDto);
+        } else {
+            cldtoMapper.toDto(codeListSupport, clDto);
+        }
 
         prepareForCLEdition(table, clColumnDto, clDto, mv);
 

@@ -11,6 +11,9 @@
                 <div class="box-header with-border">
                     <h3 class="box-title pull-left" th:text="${table}">table</h3>
                     <div class="box-tools">
+                        <a th:href="@{'/admin/codelists/browser.html'}"
+                           class="btn btn-sm btn-flat btn-warning"><i
+                                class="fa fa-backward"></i> <span th:text="#{default.back}"></span></a>
                         <a th:href="@{'/admin/codelists/browser/'+${table}+'/create.html'}"
                            class="btn btn-sm btn-flat btn-success">
                             <i class="fa fa-plus"></i> <span th:text="#{cl.add}">cl.add</span></a>
@@ -70,7 +73,10 @@
                         </tr>
                         </thead>
                         <tbody>
+
+
                         <tr th:each="data : ${datas}">
+
                             <td th:if="${column.id==true}" th:text="${data.id}">[[${data.id}]]</td>
                             <td th:if="${column.enabled==true}" th:text="${data.enabled}">[[${data.enabled}]]</td>
                             <td th:if="${column.code==true}" th:text="${data.code}">[[${data.code}]]</td>
@@ -104,6 +110,57 @@
                                 [[${data.valueQuantity}]]
                             </td>
                             <td th:if="${column.cpcCode==true}" th:text="${data.cpcCode}">[[${data.cpcCode}]]</td>
+
+                            <td th:if="${column.hsCode==true}" th:text="${data.hsCode}">[[${data.hsCode}]]</td>
+                            <td th:if="${column.iso3Code==true}" th:text="${data.iso3Code}">[[${data.iso3Code}]]</td>
+                            <td th:if="${column.scientificName==true}" th:text="${data.scientificName}">
+                                [[${data.scientificName}]]
+                            </td>
+                            <td th:if="${column.clAdminLevel1Id==true}" th:text="${data.clAdminLevel1Id}">
+                                [[${data.clAdminLevel1Id}]]
+                            </td>
+                            <td th:if="${column.clAppConstructionLocationType==true}"
+                                th:text="${data.clAppConstructionLocationType}">
+                                [[${data.clAppConstructionLocationType}]]
+                            </td>
+                            <td th:if="${column.clCountryId==true}" th:text="${data.clCountryId}">
+                                [[${data.clCountryId}]]
+                            </td>
+
+                            <td th:if="${column.clEntityTypeId==true}" th:text="${data.clEntityTypeId} ?: ''">
+                                [[${data.clEntityTypeId}]]
+                            </td>
+                            <td th:if="${column.clFarmTypeId==true}" th:text="${data.clFarmTypeId} ?: ''">
+                                [[${data.clFarmTypeId}]]
+                            </td>
+                            <td th:if="${column.clLanguageId==true}" th:text="${data.clLanguageId}">
+                                [[${data.clLanguageId}]]
+                            </td>
+                            <td th:if="${column.clProductsTypeId==true}" th:text="${data.clProductsTypeId}">
+                                [[${data.clProductsTypeId}]]
+                            </td>
+                            <td th:if="${column.clQuantityUnitTypeId==true}" th:text="${data.clQuantityUnitTypeId}">
+                                [[${data.clQuantityUnitTypeId}]]
+                            </td>
+                            <td th:if="${column.clRecommandUnitId==true}" th:text="${data.clRecommandUnitId}">
+                                [[${data.clRecommandUnitId}]]
+                            </td>
+                            <td th:if="${column.clRecomandQuantityUnitId==true}"
+                                th:text="${data.clRecomandQuantityUnitId}">
+                                [[${data.clRecomandQuantityUnitId}]]
+                            </td>
+                            <td th:if="${column.clRefCountryId==true}" th:text="${data.clRefCountryId}">
+                                [[${data.clRefCountryId}]]
+                            </td>
+                            <td th:if="${column.clRefRegionId==true}" th:text="${data.clRefRegionId}">
+                                [[${data.clRefRegionId}]]
+                            </td>
+                            <td th:if="${column.clValueQuantityUnitId==true}" th:text="${data.clValueQuantityUnitId}">
+                                [[${data.clValueQuantityUnitId}]]
+                            </td>
+                            <td th:if="${column.clValueMeasureUnitId==true}" th:text="${data.clValueMeasureUnitId}">
+                                [[${data.clValueMeasureUnitId}]]
+                            </td>
 
                             <td align="center">
                                 <a th:href="@{'/admin/codelists/browser/'+${table}+'/'+${data.id}+'/edit.html'}"

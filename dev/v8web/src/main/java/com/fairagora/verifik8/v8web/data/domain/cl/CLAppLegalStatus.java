@@ -11,14 +11,14 @@ public class CLAppLegalStatus extends CodeListSupport {
 
     @JoinColumn(name = "CL_COUNTRY_ID")
     @ManyToOne(optional = true)
-    protected CLRefCountry country;
+    protected CLRefCountry clRefCountryId;
 
-    public CLRefCountry getRefCountry() {
-        return country;
+    public CLRefCountry getClRefCountryId() {
+        return clRefCountryId;
     }
 
-    public void setRefCountry(CLRefCountry country) {
-        this.country = country;
+    public void setClRefCountryId(CLRefCountry clRefCountryId) {
+        this.clRefCountryId = clRefCountryId;
     }
 
 }
