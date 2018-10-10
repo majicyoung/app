@@ -36,8 +36,9 @@ public class V8ServerSecurityConfig extends WebSecurityConfigurerAdapter {
 		return super.authenticationManagerBean();
 	}
 
-	@Autowired
-	public void globalUserDetails(AuthenticationManagerBuilder auth) throws Exception {
+	@Override
+	public void configure(AuthenticationManagerBuilder auth) throws Exception {
+		auth.userDetailsService(userDetailsService);
 		auth.authenticationProvider(authProvider());
 	}
 
