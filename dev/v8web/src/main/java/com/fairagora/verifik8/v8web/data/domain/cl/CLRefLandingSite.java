@@ -11,13 +11,13 @@ public class CLRefLandingSite extends CodeListSupport {
 
     @JoinColumn(name = "CL_ADMIN_LEVEL_1_ID")
     @ManyToOne(optional = false)
-    protected CLRefAdminLevel1 refAdminLevel1;
+    protected CLRefAdminLevel1 clAdminLevel1Id;
 
-    public CLRefAdminLevel1 getAdminLevel1() {
-        return refAdminLevel1;
+    public CLRefAdminLevel1 getClAdminLevel1Id() {
+        return clAdminLevel1Id;
     }
 
-    public void setAdminLevel1(CLRefAdminLevel1 refAdminLevel1) {
-        this.refAdminLevel1 = refAdminLevel1;
+    public void setClAdminLevel1Id(CLRefAdminLevel1 clAdminLevel1Id) {
+        this.clAdminLevel1Id = clAdminLevel1Id;
     }
 }

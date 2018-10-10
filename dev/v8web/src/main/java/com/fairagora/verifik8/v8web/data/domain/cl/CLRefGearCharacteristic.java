@@ -5,10 +5,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "cl_ref_gear_characteristics")
-public class CLRefGearCharacteristic extends CodeListSupport {
-
-    @Column(name = "CL_REF_GEAR_ID")
-    protected Long clRefGearId;
+public class CLRefGearCharacteristic extends BaseCodeListSupport {
 
     @Column(name = "DESCRIPTION", length = 128, nullable = false)
     protected String description;
@@ -39,12 +36,11 @@ public class CLRefGearCharacteristic extends CodeListSupport {
 
     @Override
     public Long getId() {
-        return clRefGearId;
+        return null;
     }
 
     @Override
     public void setId(Long id) {
-        clRefGearId = id;
     }
 
     @Override
@@ -52,7 +48,79 @@ public class CLRefGearCharacteristic extends CodeListSupport {
         return "";
     }
 
-//    @Override
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getValueMeasure() {
+        return valueMeasure;
+    }
+
+    public void setValueMeasure(String valueMeasure) {
+        this.valueMeasure = valueMeasure;
+    }
+
+    public Long getClValueMeasureUnitId() {
+        return clValueMeasureUnitId;
+    }
+
+    public void setClValueMeasureUnitId(Long clValueMeasureUnitId) {
+        this.clValueMeasureUnitId = clValueMeasureUnitId;
+    }
+
+    public String getValueText() {
+        return valueText;
+    }
+
+    public void setValueText(String valueText) {
+        this.valueText = valueText;
+    }
+
+    public String getValueCode() {
+        return valueCode;
+    }
+
+    public void setValueCode(String valueCode) {
+        this.valueCode = valueCode;
+    }
+
+    public Date getValueDate() {
+        return valueDate;
+    }
+
+    public void setValueDate(Date valueDate) {
+        this.valueDate = valueDate;
+    }
+
+    public String getValueIndicator() {
+        return valueIndicator;
+    }
+
+    public void setValueIndicator(String valueIndicator) {
+        this.valueIndicator = valueIndicator;
+    }
+
+    public Float getValueQuantity() {
+        return valueQuantity;
+    }
+
+    public void setValueQuantity(Float valueQuantity) {
+        this.valueQuantity = valueQuantity;
+    }
+
+    public Long getClValueQuantityUnitId() {
+        return clValueQuantityUnitId;
+    }
+
+    public void setClValueQuantityUnitId(Long clValueQuantityUnitId) {
+        this.clValueQuantityUnitId = clValueQuantityUnitId;
+    }
+
+    //    @Override
 //    public Long getId() {
 //        return clRefGearId;
 //    }

@@ -45,7 +45,6 @@ public interface CLDTOMapper {
 
     void toDto(CLRefSpecies clRefSpecies, @MappingTarget CLDto dto);
 
-
     @Mapping(target = "id", ignore = true)
     void fillEntity(CLDto dto, @MappingTarget CodeListSupport codeListSupport);
 

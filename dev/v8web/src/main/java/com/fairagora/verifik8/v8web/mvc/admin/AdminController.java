@@ -83,25 +83,7 @@ public class AdminController extends AbstractV8Controller {
         List<? extends BaseCodeListSupport> datas = codeListservice.gets(table);
         List<CLDto> clDtos = new ArrayList<>();
         for (BaseCodeListSupport baseCodeListSupport : datas) {
-
-            CLDto clDto = new CLDto();
-
-            if (baseCodeListSupport instanceof CLAppEntityType) {
-                cldtoMapper.toDto((CLAppEntityType) baseCodeListSupport, clDto);
-            } else if (baseCodeListSupport instanceof CLAppHazardousWorkType) {
-                cldtoMapper.toDto((CLAppHazardousWorkType) baseCodeListSupport, clDto);
-            } else if (baseCodeListSupport instanceof CLAppHiringRestrictionType) {
-                cldtoMapper.toDto((CLAppHiringRestrictionType) baseCodeListSupport, clDto);
-            } else if (baseCodeListSupport instanceof CLAppLegalStatus) {
-                cldtoMapper.toDto((CLAppLegalStatus) baseCodeListSupport, clDto);
-            } else if (baseCodeListSupport instanceof CLAppQuantityUnit) {
-                cldtoMapper.toDto((CLAppQuantityUnit) baseCodeListSupport, clDto);
-            } else if (baseCodeListSupport instanceof CodeListSupport) {
-                cldtoMapper.toDto((CodeListSupport) baseCodeListSupport, clDto);
-            } else {
-                cldtoMapper.toDto(baseCodeListSupport, clDto);
-            }
-
+            CLDto clDto = mapping(baseCodeListSupport);
             clDtos.add(clDto);
         }
 
@@ -138,13 +120,7 @@ public class AdminController extends AbstractV8Controller {
 
     @RequestMapping(value = "/admin/codelists/browser/{table}/{id}/delete.html", method = RequestMethod.POST)
     public String deleteCL(@PathVariable("table") String table, @PathVariable("id") Long id, Model mv) {
-
-        switch (table) {
-            case "cl_app_administrative_characteristic_types":
-                clAppAdministrativeCharacteristicTypeRepository.delete(id);
-                break;
-        }
-
+        codeListservice.deleteCL(table, id);
         return "redirect:/admin/codelists/browser/" + table + "/";
     }
 
@@ -157,24 +133,8 @@ public class AdminController extends AbstractV8Controller {
         clColumnDTOMapper.toDto(column, clColumnDto);
 
         // Get all datas
-        CodeListSupport codeListSupport = (CodeListSupport) codeListservice.get(table, id);
-        CLDto clDto = new CLDto();
-
-        if (codeListSupport instanceof CLAppEntityType) {
-            cldtoMapper.toDto((CLAppEntityType) codeListSupport, clDto);
-        } else if (codeListSupport instanceof CLAppHazardousWorkType) {
-            cldtoMapper.toDto((CLAppHazardousWorkType) codeListSupport, clDto);
-        } else if (codeListSupport instanceof CLAppHiringRestrictionType) {
-            cldtoMapper.toDto((CLAppHiringRestrictionType) codeListSupport, clDto);
-        } else if (codeListSupport instanceof CLAppLegalStatus) {
-            cldtoMapper.toDto((CLAppLegalStatus) codeListSupport, clDto);
-        } else if (codeListSupport instanceof CLAppQuantityUnit) {
-            cldtoMapper.toDto((CLAppQuantityUnit) codeListSupport, clDto);
-        } else if (codeListSupport instanceof CodeListSupport) {
-            cldtoMapper.toDto((CodeListSupport) codeListSupport, clDto);
-        } else {
-            cldtoMapper.toDto(codeListSupport, clDto);
-        }
+        BaseCodeListSupport baseCodeListSupport = codeListservice.get(table, id);
+        CLDto clDto = mapping(baseCodeListSupport);
 
         prepareForCLEdition(table, clColumnDto, clDto, mv);
 
@@ -193,5 +153,45 @@ public class AdminController extends AbstractV8Controller {
         mv.addAttribute("clColumnDto", clColumnDto);
         mv.addAttribute("clDto", clDto);
 
+    }
+
+    private CLDto mapping(BaseCodeListSupport baseCodeListSupport) {
+        CLDto clDto = new CLDto();
+
+        if (baseCodeListSupport instanceof CLAppEntityType) {
+            cldtoMapper.toDto((CLAppEntityType) baseCodeListSupport, clDto);
+        } else if (baseCodeListSupport instanceof CLAppHazardousWorkType) {
+            cldtoMapper.toDto((CLAppHazardousWorkType) baseCodeListSupport, clDto);
+        } else if (baseCodeListSupport instanceof CLAppHiringRestrictionType) {
+            cldtoMapper.toDto((CLAppHiringRestrictionType) baseCodeListSupport, clDto);
+        } else if (baseCodeListSupport instanceof CLAppLegalStatus) {
+            cldtoMapper.toDto((CLAppLegalStatus) baseCodeListSupport, clDto);
+        } else if (baseCodeListSupport instanceof CLAppQuantityUnit) {
+            cldtoMapper.toDto((CLAppQuantityUnit) baseCodeListSupport, clDto);
+        } else if (baseCodeListSupport instanceof CLRefAdminLevel2) {
+            cldtoMapper.toDto((CLRefAdminLevel2) baseCodeListSupport, clDto);
+        } else if (baseCodeListSupport instanceof CLRefCountry) {
+            cldtoMapper.toDto((CLRefCountry) baseCodeListSupport, clDto);
+        } else if (baseCodeListSupport instanceof CLRefGearCharacteristic) {
+            cldtoMapper.toDto((CLRefGearCharacteristic) baseCodeListSupport, clDto);
+        } else if (baseCodeListSupport instanceof CLRefLandingSite) {
+            cldtoMapper.toDto((CLRefLandingSite) baseCodeListSupport, clDto);
+        } else if (baseCodeListSupport instanceof CLRefLanguageCountry) {
+            cldtoMapper.toDto((CLRefLanguageCountry) baseCodeListSupport, clDto);
+        } else if (baseCodeListSupport instanceof CLRefProductType) {
+            cldtoMapper.toDto((CLRefProductType) baseCodeListSupport, clDto);
+        } else if (baseCodeListSupport instanceof CLRefProduct) {
+            cldtoMapper.toDto((CLRefProduct) baseCodeListSupport, clDto);
+        } else if (baseCodeListSupport instanceof CLRefRegion) {
+            cldtoMapper.toDto((CLRefRegion) baseCodeListSupport, clDto);
+        } else if (baseCodeListSupport instanceof CLRefSpecies) {
+            cldtoMapper.toDto((CLRefSpecies) baseCodeListSupport, clDto);
+        } else if (baseCodeListSupport instanceof CodeListSupport) {
+            cldtoMapper.toDto((CodeListSupport) baseCodeListSupport, clDto);
+        } else {
+            cldtoMapper.toDto(baseCodeListSupport, clDto);
+        }
+
+        return clDto;
     }
 }

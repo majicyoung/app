@@ -7,7 +7,6 @@ import com.fairagora.verifik8.v8web.data.repo.cl.*;
 import com.fairagora.verifik8.v8web.mvc.admin.CLDTOMapper;
 import com.fairagora.verifik8.v8web.mvc.admin.dto.CLDto;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.method.P;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -1851,8 +1850,8 @@ public class CodeListsService {
                 return getRefCurrency(id);
             case "cl_ref_declaration_sources":
                 return getRefDeclarationSource(id);
-             case "cl_ref_gear_characteristics":
-                 return getRefGearCharacteristic(id);
+            case "cl_ref_gear_characteristics":
+                return getRefGearCharacteristic(id);
             case "cl_ref_gears":
                 return getRefGear(id);
             case "cl_ref_landing_sites":
@@ -1974,7 +1973,7 @@ public class CodeListsService {
                 return getFarmTypes();
             case "cl_fish_fishing_types":
                 return getFishFishingTypes();
-            case "cl_fish_fishing_zones":   //  TODO Start test here
+            case "cl_fish_fishing_zones":
                 return getFishFishingZones();
             case "cl_ref_admin_level_1":
                 return getRefAdminLevel1();
@@ -2000,7 +1999,7 @@ public class CodeListsService {
                 return getRefLanguageCountries();
             case "cl_ref_product_types":
                 return getRefProductTypes();
-            case "cl_ref_products":
+            case "cl_ref_products":     // TODO - Can't get data
                 return getRefProducts();
             case "cl_ref_regions":
                 return getRefRegions();
@@ -2010,6 +2009,206 @@ public class CodeListsService {
                 return getRefVesselTypes();
             default:
                 return null;
+        }
+    }
+
+    public void deleteCL(String tableName, Long id) {
+        switch (tableName) {
+            case "cl_app_administrative_characteristic_types":
+                appAdministrativeCharacteristicTypeRepository.delete(id);
+                break;
+            case "cl_app_company_position_types":
+                appCompanyPositionTypeRepository.delete(id);
+                break;
+            case "cl_app_contract_types":
+                appContractTypesRepository.delete(id);
+                break;
+            case "cl_app_debt_types":
+                appDebtTypeRepository.delete(id);
+                break;
+            case "cl_app_declaration_sources_types":
+                appDeclarationSourcesTypeRepository.delete(id);
+                break;
+            case "cl_app_deduction_salary_types":
+                appDeductionSalaryTypeRepository.delete(id);
+                break;
+            case "cl_app_energy_types":
+                appEnergyTypeRepository.delete(id);
+                break;
+            case "cl_app_engine_roles":
+                appEngineRoleRepository.delete(id);
+                break;
+            case "cl_app_engine_types":
+                appEngineTypeRepository.delete(id);
+                break;
+            case "cl_app_entity_document_types":
+                appEntityDocumentTypesRepository.delete(id);
+                break;
+            case "cl_app_entity_types":
+                appEntityTypeRepository.delete(id);
+                break;
+            case "cl_app_fresh_water_sypply_types":
+                appFreshWaterSypplyTypeRepository.delete(id);
+                break;
+            case "cl_app_get_back_financial_deposit_reasons":
+                appGetBackFinancialDepositReasonRepository.delete(id);
+                break;
+            case "cl_app_hazardous_training_types":
+                appHazardousTrainingTypeRepository.delete(id);
+                break;
+            case "cl_app_hazardous_work_type":
+                appHazardousWorkTypeRepository.delete(id);
+                break;
+            case "cl_app_hiring_restriction_types":
+                appHiringRestrictionTypeRepository.delete(id);
+                break;
+            case "cl_app_hull_types":
+                appHullTypeRepository.delete(id);
+                break;
+            case "cl_app_hvhe_expension_types":
+                appHvHeExpensionTypeRepository.delete(id);
+                break;
+            case "cl_app_legal_status":
+                appLegalStatusRepository.delete(id);
+                break;
+            case "cl_app_license_types":
+                appLicenseTypeRepository.delete(id);
+                break;
+            case "cl_app_location_types":
+                appLocationTypeRepository.delete(id);
+                break;
+            case "cl_app_locations":
+                appLocationRepository.delete(id);
+                break;
+            case "cl_app_measure_types":
+                appMeasureTypeRepository.delete(id);
+                break;
+            case "cl_app_no_early_termination_contract_reasons":
+                appNoEarlyTerminationContractReasonRepository.delete(id);
+                break;
+            case "cl_app_payment_debt_types":
+                appPaymentDebtTypeRepository.delete(id);
+                break;
+            case "cl_app_payment_frequencies":
+                appPaymentFrequencyRepository.delete(id);
+                break;
+            case "cl_app_power_units":
+                appPowerUnitRepository.delete(id);
+                break;
+            case "cl_app_prod_data_entry_types":
+                appProdDataEntryTypeRepository.delete(id);
+                break;
+            case "cl_app_propulsion_types":
+                appPropulsionTypeRepository.delete(id);
+                break;
+            case "cl_app_quantity_unit_types":
+                appQuantityUnitTypeRepository.delete(id);
+                break;
+            case "cl_app_quantity_units":
+                appQuantityUnitRepository.delete(id);
+                break;
+            case "cl_app_questionnaire_answers":
+                appQuestionnaireAnswerRepository.delete(id);
+                break;
+            case "cl_app_soil_analysis_types":
+                appSoilAnalysisTypeRepository.delete(id);
+                break;
+            case "cl_app_staff_declaration_types":
+                appStaffDeclarationTypeRepository.delete(id);
+                break;
+            case "cl_app_termination_contract_reasons":
+                appTerminationContractReasonRepository.delete(id);
+                break;
+            case "cl_app_tiling_activity_types":
+                appTilingActivityTypeRepository.delete(id);
+                break;
+            case "cl_app_vessel_characteristics":
+                appVesselCharacteristicRepository.delete(id);
+                break;
+            case "cl_app_vessel_equipment_types":
+                appVesselEquipmentTypeRepository.delete(id);
+                break;
+            case "cl_app_vessel_historical_characteristic_types":
+                appVesselHistoricalCharacteristicTypeRepository.delete(id);
+                break;
+            case "cl_app_vessel_operational_status":
+                appVesselOperationalStatusRepository.delete(id);
+                break;
+            case "cl_app_water_supply_types":
+                appWaterSupplyTypeRepository.delete(id);
+                break;
+            case "cl_farm_building_types":
+                farmBuildingTypeRepository.delete(id);
+                break;
+            case "cl_farm_plot_activity_types":
+                farmPlotActivityTypesRepository.delete(id);
+                break;
+            case "cl_farm_pond_activity_types":
+                farmPondActivityTypesRepository.delete(id);
+                break;
+            case "cl_farm_pond_types":
+                farmPondTypesRepository.delete(id);
+                break;
+            case "cl_farm_production_types":
+                farmProductionTypeRepository.delete(id);
+                break;
+            case "cl_farm_types":
+                farmTypeRepository.delete(id);
+                break;
+            case "cl_fish_fishing_types":
+                fishFishingTypeRepository.delete(id);
+                break;
+            case "cl_fish_fishing_zones":
+                fishFishingZoneRepository.delete(id);
+                break;
+            case "cl_ref_admin_level_1":
+                refAdminLevel1Repository.delete(id);
+                break;
+            case "cl_ref_admin_level_2":
+                refAdminLevel2Repository.delete(id);
+                break;
+            case "cl_ref_commodities":
+                refCommodityRepository.delete(id);
+                break;
+            case "cl_ref_countries":
+                refCountryRepository.delete(id);
+                break;
+            case "cl_ref_currencies":
+                refCurrencyRepository.delete(id);
+                break;
+            case "cl_ref_declaration_sources":
+                refDeclarationSourceRepository.delete(id);
+                break;
+            case "cl_ref_gear_characteristics":
+                refGearCharacteristicRepository.delete(id);
+                break;
+            case "cl_ref_gears":
+                refGearRepository.delete(id);
+                break;
+            case "cl_ref_landing_sites":
+                refLandingSiteRepository.delete(id);
+                break;
+            case "cl_ref_languages":
+                refLanguageRepository.delete(id);
+                break;
+            case "cl_ref_languages_countries":
+                refLanguageCountryRepository.delete(id);
+                break;
+            case "cl_ref_product_types":
+                refProductTypesRepository.delete(id);
+                break;
+            case "cl_ref_products":
+                refProductRepository.delete(id);
+                break;
+            case "cl_ref_regions":
+                refRegionRepository.delete(id);
+                break;
+            case "cl_ref_species":
+                refSpeciesRepository.delete(id);
+                break;
+            case "cl_ref_vessel_types":
+                refVesselTypeRepository.delete(id);
+                break;
         }
     }
 }

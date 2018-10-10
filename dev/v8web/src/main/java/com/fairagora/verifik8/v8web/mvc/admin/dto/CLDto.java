@@ -34,11 +34,23 @@ public class CLDto {
 
     protected Boolean company;
 
+    protected String valueMeasure;
+
+    protected String valueText;
+
+    protected String valueCode;
+
+    protected String valueDate;
+
+    protected String valueIndicator;
+
+    protected String valueQuantity;
+
     protected String cpcCode;
 
     protected String hsCode;
 
-    protected String isoCode;
+    protected String iso3Code;
 
     protected String scientificName;
 
@@ -198,6 +210,54 @@ public class CLDto {
         this.company = company;
     }
 
+    public String getValueMeasure() {
+        return valueMeasure;
+    }
+
+    public void setValueMeasure(String valueMeasure) {
+        this.valueMeasure = valueMeasure;
+    }
+
+    public String getValueText() {
+        return valueText;
+    }
+
+    public void setValueText(String valueText) {
+        this.valueText = valueText;
+    }
+
+    public String getValueCode() {
+        return valueCode;
+    }
+
+    public void setValueCode(String valueCode) {
+        this.valueCode = valueCode;
+    }
+
+    public String getValueDate() {
+        return valueDate;
+    }
+
+    public void setValueDate(String valueDate) {
+        this.valueDate = valueDate;
+    }
+
+    public String getValueIndicator() {
+        return valueIndicator;
+    }
+
+    public void setValueIndicator(String valueIndicator) {
+        this.valueIndicator = valueIndicator;
+    }
+
+    public String getValueQuantity() {
+        return valueQuantity;
+    }
+
+    public void setValueQuantity(String valueQuantity) {
+        this.valueQuantity = valueQuantity;
+    }
+
     public String getCpcCode() {
         return cpcCode;
     }
@@ -214,12 +274,12 @@ public class CLDto {
         this.hsCode = hsCode;
     }
 
-    public String getIsoCode() {
-        return isoCode;
+    public String getIso3Code() {
+        return iso3Code;
     }
 
-    public void setIsoCode(String isoCode) {
-        this.isoCode = isoCode;
+    public void setIso3Code(String iso3Code) {
+        this.iso3Code = iso3Code;
     }
 
     public String getScientificName() {
@@ -341,4 +401,5 @@ public class CLDto {
     public void setClValueQuantityUnitId(Long clValueQuantityUnitId) {
         this.clValueQuantityUnitId = clValueQuantityUnitId;
     }
+
 }

@@ -165,6 +165,15 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="row" th:if="${clColumnDto.valueText==true}">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="form-group">
+                                    <label th:text="#{cl.column.valueText}">cl.column.valueText</label>
+                                    <input type="text" class="form-control" th:placeholder="#{cl.column.valueText}"
+                                           th:field="*{valueText}"/>
+                                </div>
+                            </div>
+                        </div>
                         <div class="row" th:if="${clColumnDto.valueCode==true}">
                             <div class="col-md-12 col-sm-12 col-xs-12">
                                 <div class="form-group">
