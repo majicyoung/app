@@ -3,8 +3,10 @@ package com.fairagora.verifik8.v8web.config.technical.auth;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -73,15 +75,19 @@ public class V8ServerSecurityConfig extends WebSecurityConfigurerAdapter {
 	}
 
 	@Bean
-	public CorsFilter corsFilter() {
+	public FilterRegistrationBean filter() {
 		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
 		CorsConfiguration config = new CorsConfiguration();
 		config.setAllowCredentials(true);
 		config.addAllowedOrigin("*");
 		config.addAllowedHeader("*");
 		config.addAllowedMethod("*");
-		source.registerCorsConfiguration("/**", config);
-		return new CorsFilter(source);
+		source.registerCorsConfiguration("/green/**", config);
+		source.registerCorsConfiguration("/green/oauth/**", config);
+		
+		FilterRegistrationBean bean = new FilterRegistrationBean(new CorsFilter(source));
+		bean.setOrder(Ordered.HIGHEST_PRECEDENCE);
+		return bean;
 	}
 	
 	@Bean
