@@ -8,6 +8,7 @@ import org.springframework.security.oauth2.config.annotation.configurers.ClientD
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
+import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 
 @Configuration
@@ -36,7 +37,12 @@ public class V8AuthServerOAuth2Config extends AuthorizationServerConfigurerAdapt
 
 	@Autowired
 	private AuthenticationManager authenticationManager;
-
+	
+	@Override
+	public void configure(AuthorizationServerSecurityConfigurer oauthServer) throws Exception {
+		oauthServer.checkTokenAccess("permitAll()");
+	}
+	
 	@Override
 	public void configure(ClientDetailsServiceConfigurer configurer) throws Exception {
 		configurer.inMemory().withClient(CLIENT_ID).secret(CLIENT_SECRET)
