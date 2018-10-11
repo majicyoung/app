@@ -84,6 +84,7 @@ public class V8ServerSecurityConfig extends WebSecurityConfigurerAdapter {
 		config.addAllowedMethod("*");
 		source.registerCorsConfiguration("/green/**", config);
 		source.registerCorsConfiguration("/green/oauth/**", config);
+		source.registerCorsConfiguration("/**", config);
 		
 		FilterRegistrationBean bean = new FilterRegistrationBean(new CorsFilter(source));
 		bean.setOrder(Ordered.HIGHEST_PRECEDENCE);
