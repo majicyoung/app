@@ -21,7 +21,11 @@ public interface CLDTOMapper {
 
     void toDto(CLAppHiringRestrictionType clAppHiringRestrictionType, @MappingTarget CLDto clDto);
 
+    void toDto(CLAppHvHeExpensionType clAppHvHeExpensionType, @MappingTarget CLDto dto);
+
     void toDto(CLAppLegalStatus clAppLegalStatus, @MappingTarget CLDto dto);
+
+    void toDto(CLAppLocation clAppLocation, @MappingTarget CLDto dto);
 
     void toDto(CLAppQuantityUnit clAppQuantityUnit, @MappingTarget CLDto dto);
 
@@ -59,6 +63,9 @@ public interface CLDTOMapper {
 
     @Mapping(target = "id", ignore = true)
     void fillEntity(CLDto dto, @MappingTarget CLAppLegalStatus clAppLegalStatus);
+
+    @Mapping(target = "id", ignore = true)
+    void fillEntity(CLDto dto, @MappingTarget CLAppLocation clAppLocation);
 
     @Mapping(target = "id", ignore = true)
     void fillEntity(CLDto dto, @MappingTarget CLAppQuantityUnit clAppQuantityUnit);

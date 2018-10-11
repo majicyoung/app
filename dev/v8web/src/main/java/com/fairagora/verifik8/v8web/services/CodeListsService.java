@@ -890,7 +890,7 @@ public class CodeListsService {
         return columnRepository.findOne(tableName);
     }
 
-    public void addCL(String tableName, CLDto clDto, Long id) {
+    public void addCL(String tableName, CLDto clDto, Long id) throws Exception {
         switch (tableName) {
             case "cl_app_administrative_characteristic_types": {
                 CLAppAdministrativeCharacteristicType newCL;
@@ -1996,10 +1996,10 @@ public class CodeListsService {
             case "cl_ref_languages":
                 return getRefLanguages();
             case "cl_ref_languages_countries":
-                return getRefLanguageCountries();
+                return getRefLanguageCountries();   // Todo - no id
             case "cl_ref_product_types":
                 return getRefProductTypes();
-            case "cl_ref_products":     // TODO - Can't get data
+            case "cl_ref_products":
                 return getRefProducts();
             case "cl_ref_regions":
                 return getRefRegions();

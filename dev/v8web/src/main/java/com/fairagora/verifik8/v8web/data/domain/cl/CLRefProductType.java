@@ -1,6 +1,8 @@
 package com.fairagora.verifik8.v8web.data.domain.cl;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
 
 import javax.persistence.*;
 import java.util.List;
@@ -10,20 +12,20 @@ import java.util.Set;
 @Table(name = "cl_ref_product_types")
 public class CLRefProductType extends CodeListSupport {
 
+	@ManyToOne(optional = true, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@NotFound(action = NotFoundAction.IGNORE)
 	@JoinColumn(name = "PARENT_CODE")
-	@ManyToOne(optional = true)
-	protected CLRefProductType parent;
+	protected CLRefProductType clRefProductTypeId;
 
-	@OneToMany(mappedBy="clRefProductType")
-	@JsonManagedReference
+	@OneToMany(mappedBy="clRefProductType", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Set<CLRefProduct> clRefProducts;
 
-	public CLRefProductType getParent() {
-		return parent;
+	public CLRefProductType getClRefProductTypeId() {
+		return clRefProductTypeId;
 	}
 
-	public void setParent(CLRefProductType parent) {
-		this.parent = parent;
+	public void setClRefProductTypeId(CLRefProductType clRefProductTypeId) {
+		this.clRefProductTypeId = clRefProductTypeId;
 	}
 
 	@ManyToMany(mappedBy="clRefProductTypes")
@@ -46,7 +48,7 @@ public class CLRefProductType extends CodeListSupport {
 		this.clRefProducts = clRefProducts;
 	}
 
-	@ManyToOne(optional = false)
+	@ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "CL_RECOMAND_QUANTITY_UNIT_ID")
 	protected CLAppQuantityUnit clRecomandQuantityUnitId;
 

@@ -7,13 +7,11 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import java.util.List;
 
-@Entity()
+@Entity
 @Table(name = "cl_app_deduction_salary_types")
 public class CLAppDeductionSalaryType extends CodeListSupport {
 
-
 	@ManyToMany(mappedBy="salaryDeductionTypes")
 	private List<RegEntityStaffManagement> regEntityStaffManagements;
-
 
 }

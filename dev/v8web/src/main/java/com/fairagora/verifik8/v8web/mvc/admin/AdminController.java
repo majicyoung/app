@@ -11,10 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import com.fairagora.verifik8.v8web.data.application.V8Page;
 import com.fairagora.verifik8.v8web.mvc.AbstractV8Controller;
@@ -68,7 +65,7 @@ public class AdminController extends AbstractV8Controller {
     }
 
     @RequestMapping(value = "/admin/codelists/browser/{table}", method = RequestMethod.GET)
-    public String showCL(@PathVariable("table") String table, Model mv) {
+    public String showCL(@PathVariable("table") String table, @RequestParam(value = "error", required = false) String error, Model mv) {
 
         V8Page p = new V8Page();
         p.setTitle("admin.home");
@@ -90,6 +87,7 @@ public class AdminController extends AbstractV8Controller {
         mv.addAttribute("table", table);
         mv.addAttribute("column", clColumnDto);
         mv.addAttribute("datas", clDtos);
+        mv.addAttribute("error", error);
 
         return "admin/codelists/listing";
     }
@@ -108,14 +106,22 @@ public class AdminController extends AbstractV8Controller {
 
     @RequestMapping(value = "/admin/codelists/browser/{table}/create.html", method = RequestMethod.POST)
     public String createCL(@PathVariable("table") String table, @Validated @ModelAttribute("clDto") CLDto dto, BindingResult bindResults, Model mv) {
-        codeListservice.addCL(table, dto, null);
-        return "redirect:/admin/codelists/browser/" + table + "/";
+        try {
+            codeListservice.addCL(table, dto, null);
+            return "redirect:/admin/codelists/browser/" + table + "/";
+        } catch (Exception e) {
+            return "redirect:/admin/codelists/browser/" + table + "/?error=" + e.getCause().getCause().getMessage();
+        }
     }
 
     @RequestMapping(value = "/admin/codelists/browser/{table}/{id}/update.html", method = RequestMethod.POST)
     public String updateCL(@PathVariable("table") String table, @Validated @ModelAttribute("clDto") CLDto dto, @PathVariable("id") Long id, BindingResult bindResults, Model mv) {
-        codeListservice.addCL(table, dto, id);
-        return "redirect:/admin/codelists/browser/" + table + "/";
+        try {
+            codeListservice.addCL(table, dto, id);
+            return "redirect:/admin/codelists/browser/" + table + "/";
+        } catch (Exception e) {
+            return "redirect:/admin/codelists/browser/" + table + "/?error=" + e.getCause().getCause().getMessage();
+        }
     }
 
     @RequestMapping(value = "/admin/codelists/browser/{table}/{id}/delete.html", method = RequestMethod.POST)
@@ -166,10 +172,16 @@ public class AdminController extends AbstractV8Controller {
             cldtoMapper.toDto((CLAppHiringRestrictionType) baseCodeListSupport, clDto);
         } else if (baseCodeListSupport instanceof CLAppLegalStatus) {
             cldtoMapper.toDto((CLAppLegalStatus) baseCodeListSupport, clDto);
+        } else if (baseCodeListSupport instanceof CLAppLocation) {
+            cldtoMapper.toDto((CLAppLocation) baseCodeListSupport, clDto);
+        } else if (baseCodeListSupport instanceof CLAppHvHeExpensionType) {
+            cldtoMapper.toDto((CLAppHvHeExpensionType) baseCodeListSupport, clDto);
         } else if (baseCodeListSupport instanceof CLAppQuantityUnit) {
             cldtoMapper.toDto((CLAppQuantityUnit) baseCodeListSupport, clDto);
         } else if (baseCodeListSupport instanceof CLRefAdminLevel2) {
             cldtoMapper.toDto((CLRefAdminLevel2) baseCodeListSupport, clDto);
+        } else if (baseCodeListSupport instanceof CLRefCommodity) {
+            cldtoMapper.toDto((CLRefCommodity) baseCodeListSupport, clDto);
         } else if (baseCodeListSupport instanceof CLRefCountry) {
             cldtoMapper.toDto((CLRefCountry) baseCodeListSupport, clDto);
         } else if (baseCodeListSupport instanceof CLRefGearCharacteristic) {

@@ -36,11 +36,12 @@ public class CLRefGearCharacteristic extends BaseCodeListSupport {
 
     @Override
     public Long getId() {
-        return null;
+        return id;
     }
 
     @Override
     public void setId(Long id) {
+        this.id = id;
     }
 
     @Override

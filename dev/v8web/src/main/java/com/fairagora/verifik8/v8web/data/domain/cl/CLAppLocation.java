@@ -11,37 +11,38 @@ public class CLAppLocation extends CodeListSupport {
 
     @JoinColumn(name = "CL_REF_COUNTRY_ID")
     @ManyToOne(optional = true)
-    protected CLRefCountry refCountry;
+    protected CLRefCountry clCountryId;
 
-    public CLRefCountry getRefCountry() {
-        return refCountry;
+    public CLRefCountry getClCountryId() {
+        return clCountryId;
     }
 
-    public void setEntityType(CLRefCountry refCountry) {
-        this.refCountry = refCountry;
+    public void setClCountryId(CLRefCountry clCountryId) {
+        this.clCountryId = clCountryId;
     }
 
     @JoinColumn(name = "CL_REF_REGION_ID")
     @ManyToOne(optional = true)
-    protected CLRefRegion refRegion;
+    protected CLRefRegion clRefRegionId;
 
-    public CLRefRegion getRefRegion() {
-        return refRegion;
+    public CLRefRegion getClRefRegionId() {
+        return clRefRegionId;
     }
 
-    public void setRefRegion(CLRefRegion refRegion) {
-        this.refRegion = refRegion;
+    public void setClRefRegionId(CLRefRegion clRefRegionId) {
+        this.clRefRegionId = clRefRegionId;
     }
 
     @JoinColumn(name = "CL_APP_CONSTRUCTION_LOCATION_TYPE")
     @ManyToOne(optional = true)
-    protected CLAppLocationType appLocationType;
+    protected CLAppLocationType clAppConstructionLocationType;
 
-    public CLAppLocationType getAppLocationType() {
-        return appLocationType;
+    public CLAppLocationType getClAppConstructionLocationType() {
+        return clAppConstructionLocationType;
     }
 
-    public void setAppLocationType(CLAppLocationType appLocationType) {
-        this.appLocationType = appLocationType;
+    public void setClAppConstructionLocationType(CLAppLocationType clAppConstructionLocationType) {
+        this.clAppConstructionLocationType = clAppConstructionLocationType;
     }
+
 }

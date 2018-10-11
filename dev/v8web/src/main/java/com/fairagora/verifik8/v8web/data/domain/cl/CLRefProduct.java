@@ -2,10 +2,7 @@ package com.fairagora.verifik8.v8web.data.domain.cl;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "cl_ref_products")
@@ -19,7 +16,7 @@ public class CLRefProduct extends CodeListSupport{
 	@ManyToOne
 	@JoinColumn(name = "CL_RECOMMAND_UNIT_ID", nullable = true)
 	@JsonBackReference
-	protected CLAppQuantityUnit clAppQuantityUnit;
+	protected CLAppQuantityUnit clAppConstructionLocationType;
 
 	public CLRefProductType getClRefProductType() {
 		return clRefProductType;
@@ -29,11 +26,11 @@ public class CLRefProduct extends CodeListSupport{
 		this.clRefProductType = clRefProductType;
 	}
 
-	public CLAppQuantityUnit getClAppQuantityUnit() {
-		return clAppQuantityUnit;
+	public CLAppQuantityUnit getClAppConstructionLocationType() {
+		return clAppConstructionLocationType;
 	}
 
-	public void setClAppQuantityUnit(CLAppQuantityUnit clAppQuantityUnit) {
-		this.clAppQuantityUnit = clAppQuantityUnit;
-	}	
+	public void setClAppConstructionLocationType(CLAppQuantityUnit clAppConstructionLocationType) {
+		this.clAppConstructionLocationType = clAppConstructionLocationType;
+	}
 }

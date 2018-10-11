@@ -5,6 +5,11 @@
 
 <div layout:fragment="content">
 
+    <div th:if="${error!=null}" id="error-panel" class="alert alert-danger alert-dismissible">
+        <button id="error-panel-close-button" type="button" class="close">&times;</button>
+        <span id="error-panel-message" th:text="${error}"></span>
+    </div>
+
     <div class="row">
         <div class="col-xs-12">
             <div class="box">
@@ -23,51 +28,50 @@
                     <table class="table table-hover table-striped table-bordered datatable" id="userTable">
                         <thead>
                         <tr>
-                            <th th:if="${column.id==true}" th:inline="text">id</th>
-                            <th th:if="${column.enabled==true}" th:inline="text">enabled</th>
-                            <th th:if="${column.code==true}" th:inline="text">code</th>
-                            <th th:if="${column.ranking==true}" th:inline="text">ranking</th>
-                            <th th:if="${column.name==true}" th:inline="text">name</th>
-                            <th th:if="${column.description==true}" th:inline="text">description</th>
-                            <th th:if="${column.i18nDefault==true}" th:inline="text">i18nDefault</th>
-                            <th th:if="${column.i18nEn==true}" th:inline="text">i18nEn</th>
-                            <th th:if="${column.i18nFr==true}" th:inline="text">i18nFr</th>
-                            <th th:if="${column.i18nEs==true}" th:inline="text">i18nEs</th>
-                            <th th:if="${column.i18nTh==true}" th:inline="text">i18nTh</th>
-                            <th th:if="${column.i18nVt==true}" th:inline="text">i18nVt</th>
-                            <th th:if="${column.i18nLa==true}" th:inline="text">i18nLa</th>
-                            <th th:if="${column.i18nId==true}" th:inline="text">i18nId</th>
-                            <th th:if="${column.i18nKh==true}" th:inline="text">i18nKh</th>
-                            <th th:if="${column.company==true}" th:inline="text">isCompany</th>
-                            <th th:if="${column.valueMeasure==true}" th:inline="text">valueMeasure</th>
-                            <th th:if="${column.valueText==true}" th:inline="text">valueText</th>
-                            <th th:if="${column.valueCode==true}" th:inline="text">valueCode</th>
-                            <th th:if="${column.valueDate==true}" th:inline="text">valueDate</th>
-                            <th th:if="${column.valueIndicator==true}" th:inline="text">valueIndicator</th>
-                            <th th:if="${column.valueQuantity==true}" th:inline="text">valueQuantity</th>
-                            <th th:if="${column.cpcCode==true}" th:inline="text">cpcCode</th>
-                            <th th:if="${column.hsCode==true}" th:inline="text">hsCode</th>
-                            <th th:if="${column.iso3Code==true}" th:inline="text">iso3Code</th>
-                            <th th:if="${column.scientificName==true}" th:inline="text">scientificName</th>
-                            <th th:if="${column.clAdminLevel1Id==true}" th:inline="text">clAdminLevel1Id</th>
-                            <th th:if="${column.clAppConstructionLocationType==true}" th:inline="text">
+                            <th th:if="${column.id==true}" th:text="#{cl.column.id}" th:inline="text">id</th>
+                            <th th:if="${column.enabled==true}" th:text="#{cl.column.enabled}" th:inline="text">enabled</th>
+                            <th th:if="${column.code==true}" th:text="#{cl.column.code}" th:inline="text">code</th>
+                            <th th:if="${column.ranking==true}" th:text="#{cl.column.ranking}" th:inline="text">ranking</th>
+                            <th th:if="${column.name==true}" th:text="#{cl.column.name}" th:inline="text">name</th>
+                            <th th:if="${column.description==true}" th:text="#{cl.column.description}" th:inline="text">description</th>
+                            <th th:if="${column.i18nDefault==true}" th:text="#{cl.column.i18nDefault}" th:inline="text">i18nDefault</th>
+                            <th th:if="${column.i18nEn==true}" th:text="#{cl.column.i18nEn}" th:inline="text">i18nEn</th>
+                            <th th:if="${column.i18nFr==true}" th:text="#{cl.column.i18nFr}" th:inline="text">i18nFr</th>
+                            <th th:if="${column.i18nEs==true}" th:text="#{cl.column.i18nEs}" th:inline="text">i18nEs</th>
+                            <th th:if="${column.i18nTh==true}" th:text="#{cl.column.i18nTh}" th:inline="text">i18nTh</th>
+                            <th th:if="${column.i18nVt==true}" th:text="#{cl.column.i18nVt}" th:inline="text">i18nVt</th>
+                            <th th:if="${column.i18nLa==true}" th:text="#{cl.column.i18nLa}" th:inline="text">i18nLa</th>
+                            <th th:if="${column.i18nId==true}" th:text="#{cl.column.i18nId}" th:inline="text">i18nId</th>
+                            <th th:if="${column.i18nKh==true}" th:text="#{cl.column.i18nKh}" th:inline="text">i18nKh</th>
+                            <th th:if="${column.company==true}" th:text="#{cl.column.company}" th:inline="text">isCompany</th>
+                            <th th:if="${column.valueMeasure==true}" th:text="#{cl.column.valueMeasure}" th:inline="text">valueMeasure</th>
+                            <th th:if="${column.valueText==true}" th:text="#{cl.column.valueText}" th:inline="text">valueText</th>
+                            <th th:if="${column.valueCode==true}" th:text="#{cl.column.valueCode}" th:inline="text">valueCode</th>
+                            <th th:if="${column.valueDate==true}" th:text="#{cl.column.valueDate}" th:inline="text">valueDate</th>
+                            <th th:if="${column.valueIndicator==true}" th:text="#{cl.column.valueIndicator}" th:inline="text">valueIndicator</th>
+                            <th th:if="${column.valueQuantity==true}" th:text="#{cl.column.valueQuantity}" th:inline="text">valueQuantity</th>
+                            <th th:if="${column.cpcCode==true}" th:text="#{cl.column.cpcCode}" th:inline="text">cpcCode</th>
+                            <th th:if="${column.hsCode==true}" th:text="#{cl.column.hsCode}" th:inline="text">hsCode</th>
+                            <th th:if="${column.iso3Code==true}" th:text="#{cl.column.iso3Code}" th:inline="text">iso3Code</th>
+                            <th th:if="${column.scientificName==true}" th:text="#{cl.column.scientificName}" th:inline="text">scientificName</th>
+                            <th th:if="${column.clAdminLevel1Id==true}" th:text="#{cl.column.clAdminLevel1Id}" th:inline="text">clAdminLevel1Id</th>
+                            <th th:if="${column.clAppConstructionLocationType==true}" th:text="#{cl.column.clAppConstructionLocationType}" th:inline="text">
                                 clAppConstructionLocationType
                             </th>
-                            <th th:if="${column.clCountryId==true}" th:inline="text">clCountryId</th>
-                            <th th:if="${column.clEntityTypeId==true}" th:inline="text">clEntityTypeId</th>
-                            <th th:if="${column.clFarmTypeId==true}" th:inline="text">clFarmTypeId</th>
-                            <th th:if="${column.clLanguageId==true}" th:inline="text">clLanguageId</th>
-                            <th th:if="${column.clProductsTypeId==true}" th:inline="text">clProductsTypeId</th>
-                            <th th:if="${column.clQuantityUnitTypeId==true}" th:inline="text">clQuantityUnitTypeId</th>
-                            <th th:if="${column.clRecommandUnitId==true}" th:inline="text">clRecommandUnitId</th>
-                            <th th:if="${column.clRecomandQuantityUnitId==true}" th:inline="text">
+                            <th th:if="${column.clCountryId==true}" th:text="#{cl.column.clCountryId}" th:inline="text">clCountryId</th>
+                            <th th:if="${column.clEntityTypeId==true}" th:text="#{cl.column.clEntityTypeId}" th:inline="text">clEntityTypeId</th>
+                            <th th:if="${column.clFarmTypeId==true}" th:text="#{cl.column.clFarmTypeId}" th:inline="text">clFarmTypeId</th>
+                            <th th:if="${column.clLanguageId==true}" th:text="#{cl.column.clLanguageId}" th:inline="text">clLanguageId</th>
+                            <th th:if="${column.clProductsTypeId==true}" th:text="#{cl.column.clProductsTypeId}" th:inline="text">clProductsTypeId</th>
+                            <th th:if="${column.clQuantityUnitTypeId==true}" th:text="#{cl.column.clQuantityUnitTypeId}" th:inline="text">clQuantityUnitTypeId</th>
+                            <th th:if="${column.clRecommandUnitId==true}" th:text="#{cl.column.clRecomandQuantityUnitId}" th:inline="text">clRecommandUnitId</th>
+                            <th th:if="${column.clRecomandQuantityUnitId==true}" th:text="#{cl.column.clRecomandQuantityUnitId}" th:inline="text">
                                 clRecomandQuantityUnitId
                             </th>
-                            <th th:if="${column.clRefCountryId==true}" th:inline="text">clRefCountryId</th>
-                            <th th:if="${column.clRefRegionId==true}" th:inline="text">clRefRegionId</th>
-                            <th th:if="${column.clValueQuantityUnitId==true}" th:inline="text">clValueQuantityUnitId
+                            <th th:if="${column.clRefRegionId==true}" th:text="#{cl.column.clRefRegionId}" th:inline="text">clRefRegionId</th>
+                            <th th:if="${column.clValueQuantityUnitId==true}" th:text="#{cl.column.clValueQuantityUnitId}" th:inline="text">clValueQuantityUnitId
                             </th>
-                            <th th:if="${column.clValueMeasureUnitId==true}" th:inline="text">clValueMeasureUnitId</th>
+                            <th th:if="${column.clValueMeasureUnitId==true}" th:text="#{cl.column.clValueMeasureUnitId}" th:inline="text">clValueMeasureUnitId</th>
                             <th th:inline="text"></th>
 
                         </tr>
@@ -136,8 +140,8 @@
                             <td th:if="${column.clLanguageId==true}" th:text="${data.clLanguageId}">
                                 [[${data.clLanguageId}]]
                             </td>
-                            <td th:if="${column.clProductsTypeId==true}" th:text="${data.clProductsTypeId}">
-                                [[${data.clProductsTypeId}]]
+                            <td th:if="${column.clProductsTypeId==true}" th:text="${data.clRefProductType}">
+                                [[${data.clRefProductType}]]
                             </td>
                             <td th:if="${column.clQuantityUnitTypeId==true}" th:text="${data.clQuantityUnitTypeId}">
                                 [[${data.clQuantityUnitTypeId}]]
@@ -148,9 +152,6 @@
                             <td th:if="${column.clRecomandQuantityUnitId==true}"
                                 th:text="${data.clRecomandQuantityUnitId}">
                                 [[${data.clRecomandQuantityUnitId}]]
-                            </td>
-                            <td th:if="${column.clRefCountryId==true}" th:text="${data.clRefCountryId}">
-                                [[${data.clRefCountryId}]]
                             </td>
                             <td th:if="${column.clRefRegionId==true}" th:text="${data.clRefRegionId}">
                                 [[${data.clRefRegionId}]]

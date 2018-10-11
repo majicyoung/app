@@ -60,6 +60,8 @@ public class CLColumnDto {
 
     protected boolean clAppConstructionLocationType;
 
+    protected boolean clAppQuantityUnit;
+
     protected boolean clCountryId;
 
     protected boolean clEntityTypeId;
@@ -76,7 +78,6 @@ public class CLColumnDto {
 
     protected boolean clRecomandQuantityUnitId;
 
-    protected boolean clRefCountryId;
 
     protected boolean clRefRegionId;
 
@@ -316,6 +317,14 @@ public class CLColumnDto {
         this.clAppConstructionLocationType = clAppConstructionLocationType;
     }
 
+    public boolean isClAppQuantityUnit() {
+        return clAppQuantityUnit;
+    }
+
+    public void setClAppQuantityUnit(boolean clAppQuantityUnit) {
+        this.clAppQuantityUnit = clAppQuantityUnit;
+    }
+
     public boolean isClCountryId() {
         return clCountryId;
     }
@@ -378,14 +387,6 @@ public class CLColumnDto {
 
     public void setClRecomandQuantityUnitId(boolean clRecomandQuantityUnitId) {
         this.clRecomandQuantityUnitId = clRecomandQuantityUnitId;
-    }
-
-    public boolean isClRefCountryId() {
-        return clRefCountryId;
-    }
-
-    public void setClRefCountryId(boolean clRefCountryId) {
-        this.clRefCountryId = clRefCountryId;
     }
 
     public boolean isClRefRegionId() {

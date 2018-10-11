@@ -58,6 +58,8 @@ public class CLDto {
 
     protected Long clAppConstructionLocationType;
 
+    protected Long clAppQuantityUnit;
+
     protected Long clCountryId;
 
     protected Long clEntityTypeId;
@@ -66,15 +68,13 @@ public class CLDto {
 
     protected Long clLanguageId;
 
-    protected Long clProductsTypeId;
+    protected Long clRefProductType;
 
     protected Long clQuantityUnitTypeId;
 
     protected Long clRecommandUnitId;
 
     protected Long clRecomandQuantityUnitId;
-
-    protected Long clRefCountryId;
 
     protected Long clRefRegionId;
 
@@ -306,6 +306,14 @@ public class CLDto {
         this.clAppConstructionLocationType = clAppConstructionLocationType;
     }
 
+    public Long getClAppQuantityUnit() {
+        return clAppQuantityUnit;
+    }
+
+    public void setClAppQuantityUnit(Long clAppQuantityUnit) {
+        this.clAppQuantityUnit = clAppQuantityUnit;
+    }
+
     public Long getClCountryId() {
         return clCountryId;
     }
@@ -338,12 +346,12 @@ public class CLDto {
         this.clLanguageId = clLanguageId;
     }
 
-    public Long getClProductsTypeId() {
-        return clProductsTypeId;
+    public Long getClRefProductType() {
+        return clRefProductType;
     }
 
-    public void setClProductsTypeId(Long clProductsTypeId) {
-        this.clProductsTypeId = clProductsTypeId;
+    public void setClRefProductType(Long clRefProductType) {
+        this.clRefProductType = clRefProductType;
     }
 
     public Long getClQuantityUnitTypeId() {
@@ -368,14 +376,6 @@ public class CLDto {
 
     public void setClRecomandQuantityUnitId(Long clRecomandQuantityUnitId) {
         this.clRecomandQuantityUnitId = clRecomandQuantityUnitId;
-    }
-
-    public Long getClRefCountryId() {
-        return clRefCountryId;
-    }
-
-    public void setClRefCountryId(Long clRefCountryId) {
-        this.clRefCountryId = clRefCountryId;
     }
 
     public Long getClRefRegionId() {

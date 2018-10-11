@@ -8,7 +8,6 @@ import javax.persistence.Table;
 @Table(name = "cl_ref_commodities")
 public class CLRefCommodity extends CodeListSupport {
 
-
 	@Column(name = "CPC_CODE", unique = false, length = 20, nullable = true)
 	protected String cpcCode;
 

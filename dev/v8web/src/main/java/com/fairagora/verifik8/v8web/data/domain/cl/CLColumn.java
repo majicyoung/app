@@ -118,9 +118,6 @@ public class CLColumn {
     @Column(name = "CL_RECOMAND_QUANTITY_UNIT_ID")
     protected boolean clRecomandQuantityUnitId;
 
-    @Column(name = "CL_REF_COUNTRY_ID")
-    protected boolean clRefCountryId;
-
     @Column(name = "CL_REF_REGION_ID")
     protected boolean clRefRegionId;
 
@@ -424,14 +421,6 @@ public class CLColumn {
 
     public void setClRecomandQuantityUnitId(boolean clRecomandQuantityUnitId) {
         this.clRecomandQuantityUnitId = clRecomandQuantityUnitId;
-    }
-
-    public boolean isClRefCountryId() {
-        return clRefCountryId;
-    }
-
-    public void setClRefCountryId(boolean clRefCountryId) {
-        this.clRefCountryId = clRefCountryId;
     }
 
     public boolean isClRefRegionId() {

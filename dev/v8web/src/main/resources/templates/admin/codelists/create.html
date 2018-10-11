@@ -24,7 +24,7 @@
                         <div class="row" th:if="${clColumnDto.enabled==true}">
                             <div class="col-md-12 col-sm-12 col-xs-12">
                                 <div class="form-group">
-                                    <label th:text="#{cl.column.enabled}">cl.column.enabled</label>
+                                    <label th:text="#{cl.column.enabled}+'*'">cl.column.enabled</label>
                                     <input type="text" class="form-control" th:placeholder="#{cl.column.enabled}"
                                            required="required" th:field="*{enabled}"/>
                                 </div>
@@ -33,7 +33,7 @@
                         <div class="row" th:if="${clColumnDto.code==true}">
                             <div class="col-md-12 col-sm-12 col-xs-12">
                                 <div class="form-group">
-                                    <label th:text="#{cl.column.code}">cl.column.code</label>
+                                    <label th:text="#{cl.column.code}+'*'">cl.column.code</label>
                                     <input type="text" class="form-control" th:placeholder="#{cl.column.code}"
                                            required="required" th:field="*{code}"/>
                                 </div>
@@ -42,7 +42,7 @@
                         <div class="row" th:if="${clColumnDto.ranking==true}">
                             <div class="col-md-12 col-sm-12 col-xs-12">
                                 <div class="form-group">
-                                    <label th:text="#{cl.column.ranking}">cl.column.ranking</label>
+                                    <label th:text="#{cl.column.ranking}+'*'">cl.column.ranking</label>
                                     <input type="number" class="form-control" th:placeholder="#{cl.column.ranking}"
                                            required="required" th:field="*{ranking}"/>
                                 </div>
@@ -51,7 +51,7 @@
                         <div class="row" th:if="${clColumnDto.name==true}">
                             <div class="col-md-12 col-sm-12 col-xs-12">
                                 <div class="form-group">
-                                    <label th:text="#{cl.column.name}">cl.column.name</label>
+                                    <label th:text="#{cl.column.name}+'*'">cl.column.name</label>
                                     <input type="text" class="form-control" th:placeholder="#{cl.column.name}"
                                            required="required" th:field="*{name}"/>
                                 </div>
@@ -62,14 +62,14 @@
                                 <div class="form-group">
                                     <label th:text="#{cl.column.description}">cl.column.description</label>
                                     <input type="text" class="form-control" th:placeholder="#{cl.column.description}"
-                                           required="required" th:field="*{description}"/>
+                                           th:field="*{description}"/>
                                 </div>
                             </div>
                         </div>
                         <div class="row" th:if="${clColumnDto.i18nDefault==true}">
                             <div class="col-md-12 col-sm-12 col-xs-12">
                                 <div class="form-group">
-                                    <label th:text="#{cl.column.i18nDefault}">cl.column.i18nDefault</label>
+                                    <label th:text="#{cl.column.i18nDefault}+'*'">cl.column.i18nDefault</label>
                                     <input type="text" class="form-control" th:placeholder="#{cl.column.i18nDefault}"
                                            required="required" th:field="*{i18nDefault}"/>
                                 </div>
@@ -269,9 +269,9 @@
                         <div class="row" th:if="${clColumnDto.clCountryId==true}">
                             <div class="col-md-12 col-sm-12 col-xs-12">
                                 <div class="form-group">
-                                    <label th:text="#{cl.column.clCountryId}">cl.column.clCountryId</label>
+                                    <label th:text="#{cl.column.clCountryId}+'*'">cl.column.clCountryId</label>
                                     <input type="text" class="form-control" th:placeholder="#{cl.column.clCountryId}"
-                                           th:field="*{clCountryId}"/>
+                                           required="required" th:field="*{clCountryId}"/>
                                 </div>
                             </div>
                         </div>
@@ -308,7 +308,7 @@
                                     <label th:text="#{cl.column.clProductsTypeId}">cl.column.clProductsTypeId</label>
                                     <input type="text" class="form-control"
                                            th:placeholder="#{cl.column.clProductsTypeId}"
-                                           th:field="*{clProductsTypeId}"/>
+                                           th:field="*{clRefProductType}"/>
                                 </div>
                             </div>
                         </div>
@@ -339,15 +339,6 @@
                                     <input type="text" class="form-control"
                                            th:placeholder="#{cl.column.clRecomandQuantityUnitId}"
                                            th:field="*{clRecomandQuantityUnitId}"/>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row" th:if="${clColumnDto.clRefCountryId==true}">
-                            <div class="col-md-12 col-sm-12 col-xs-12">
-                                <div class="form-group">
-                                    <label th:text="#{cl.column.clRefCountryId}">cl.column.clRefCountryId</label>
-                                    <input type="text" class="form-control" th:placeholder="#{cl.column.clRefCountryId}"
-                                           th:field="*{clRefCountryId}"/>
                                 </div>
                             </div>
                         </div>
@@ -383,7 +374,7 @@
                     </div>
                     <div class="box-footer text-center">
                         <small th:text="'*'+#{default.mandatory_field}">*default.mandatory_field</small>
-                        <a th:href="@{/roles.html}" class="btn btn-warning"><i class="fa fa-times"></i>
+                        <a th:href="@{'/admin/codelists/browser/'+${table}}" class="btn btn-warning"><i class="fa fa-times"></i>
                             <span th:text="#{default.cancel}">default.cancel</span></a>
 
                         <button type="submit" class="btn btn-success">
