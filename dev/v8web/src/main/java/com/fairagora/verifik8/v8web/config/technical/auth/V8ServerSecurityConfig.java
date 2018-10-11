@@ -1,6 +1,7 @@
 package com.fairagora.verifik8.v8web.config.technical.auth;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -26,6 +27,8 @@ import org.springframework.web.filter.CorsFilter;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 @Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
 public class V8ServerSecurityConfig extends WebSecurityConfigurerAdapter {
+	@Value("${v8app.url}")
+	private String v8apiUrl;
 
 	@Autowired
 	private V8UserDetailsService userDetailsService;
@@ -47,9 +50,7 @@ public class V8ServerSecurityConfig extends WebSecurityConfigurerAdapter {
 		http
 		.cors()
 		.and()
-			.anonymous().disable()
-			.authorizeRequests()
-			.antMatchers("/api/**").permitAll();
+			.antMatcher("/" + v8apiUrl + "/**").authorizeRequests().anyRequest().authenticated();
 		http.csrf().disable();
 		http.headers()
 			.frameOptions()
