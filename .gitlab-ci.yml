@@ -110,6 +110,8 @@ develop_deploy:
     - cd ~/verifik8
     - docker service update verifik8_backend_blue --detach=false --image=$IMAGE_DEVELOP --with-registry-auth
     - docker service update verifik8_backend_green --detach=false --image=$IMAGE_DEVELOP --with-registry-auth
+    - docker service update verifik8_api_blue --detach=false --image=$IMAGE_DEVELOP --with-registry-auth
+    - docker service update verifik8_api_green --detach=false --image=$IMAGE_DEVELOP --with-registry-auth
   stage: deploy
   tags:
     - develop

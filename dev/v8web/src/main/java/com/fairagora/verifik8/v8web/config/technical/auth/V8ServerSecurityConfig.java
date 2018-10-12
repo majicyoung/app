@@ -1,32 +1,36 @@
 package com.fairagora.verifik8.v8web.config.technical.auth;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.InMemoryTokenStore;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 @Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
 public class V8ServerSecurityConfig extends WebSecurityConfigurerAdapter {
+	@Value("${v8app.url}")
+	private String v8apiUrl;
 
 	@Autowired
 	private V8UserDetailsService userDetailsService;
@@ -37,9 +41,10 @@ public class V8ServerSecurityConfig extends WebSecurityConfigurerAdapter {
 		return super.authenticationManagerBean();
 	}
 
-	@Autowired
-	public void globalUserDetails(AuthenticationManagerBuilder auth) throws Exception {
-		auth.userDetailsService(userDetailsService); //.passwordEncoder(encoder());
+	@Override
+	public void configure(AuthenticationManagerBuilder auth) throws Exception {
+		auth.userDetailsService(userDetailsService);
+		auth.authenticationProvider(authProvider());
 	}
 
 	@Override
@@ -47,9 +52,7 @@ public class V8ServerSecurityConfig extends WebSecurityConfigurerAdapter {
 		http
 		.cors()
 		.and()
-			.anonymous().disable()
-			.authorizeRequests()
-			.antMatchers("/api/**").permitAll();
+			.antMatcher("/" + v8apiUrl + "/**").authorizeRequests().anyRequest().authenticated();
 		http.csrf().disable();
 		http.headers()
 			.frameOptions()
@@ -68,18 +71,31 @@ public class V8ServerSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Bean
 	public BCryptPasswordEncoder encoder() {
-		return new BCryptPasswordEncoder();
+		return new BCryptPasswordEncoder(11);
 	}
 
 	@Bean
-	public CorsFilter corsFilter() {
+	public FilterRegistrationBean filter() {
 		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
 		CorsConfiguration config = new CorsConfiguration();
 		config.setAllowCredentials(true);
 		config.addAllowedOrigin("*");
 		config.addAllowedHeader("*");
 		config.addAllowedMethod("*");
+		source.registerCorsConfiguration("/green/**", config);
+		source.registerCorsConfiguration("/green/oauth/**", config);
 		source.registerCorsConfiguration("/**", config);
-		return new CorsFilter(source);
+		
+		FilterRegistrationBean bean = new FilterRegistrationBean(new CorsFilter(source));
+		bean.setOrder(Ordered.HIGHEST_PRECEDENCE);
+		return bean;
+	}
+	
+	@Bean
+	public DaoAuthenticationProvider authProvider() {
+		DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
+		authProvider.setUserDetailsService(userDetailsService);
+		authProvider.setPasswordEncoder(encoder());
+		return authProvider;
 	}
 }

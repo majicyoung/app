@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html layout:decorator="inc/main-layout" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html layout:decorator="inc/main-layout" xmlns:th="http://www.thymeleaf.org"
+			xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+			xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
 <div layout:fragment="content">
 
@@ -13,46 +15,58 @@
 						<!-- messages here -->
 					</div>
 					<div class="box-tools">
-						<a th:href="@{/ponds/create.html}" class="btn btn-sm btn-flat btn-success"><i class="fa fa-plus"></i> <span th:text="#{farm.add_pond}">farm.add_pond</span></a>
+						<a th:href="@{/ponds/create.html}" class="btn btn-sm btn-flat btn-success"><i class="fa fa-plus"></i> <span
+								th:text="#{farm.add_pond}">farm.add_pond</span></a>
 					</div>
 				</div>
 				<div class="box-body">
 					<table class="table table-hover table-striped table-bordered datatable" id="datatables-browser">
 						<thead>
-							<tr>
-								<th th:text="#{default.name}">farm.pond_number</th>
-								<th th:text="#{farm.pond_number}">farm.pond_number</th>
-								<th th:text="#{default.area}"></th>
-								<th th:text="#{default.unit}"></th>
-								<th th:text="#{default.type}"></th>
-								<th th:text="#{default.species}"></th>
-								<th width="120"></th>
-							</tr>
+						<tr>
+							<th th:text="#{default.name}">farm.pond_number</th>
+							<th th:text="#{farm.pond_number}">farm.pond_number</th>
+							<th th:text="#{default.area}"></th>
+							<th th:text="#{default.unit}"></th>
+							<th th:text="#{default.type}"></th>
+							<th th:text="#{default.species}"></th>
+							<th width="120"></th>
+						</tr>
 						</thead>
 						<tbody>
-							<tr th:each="pond:${listing}">
-								<td th:text="${pond.farm}"></td>
-								<td th:text="${pond.number}"></td>
-								<td th:text="${pond.size.quantity}"></td>
-								<td th:text="${pond.size.unitName}"></td>
-								<td th:text="${pond.type}"></td>
-								<td th:text="${pond.species}"></td>
-								<td align="center">
-									<a href="javascript:void(0);" th:attr="data-id=${pond.id}" class="btn btn-sm btn-flat btn-primary editPondBtn" th:title="#{tooltip.edit_pond}"><i class="fa fa-edit"></i></a>
-									<a href="javascript:void(0);" th:attr="data-id=${pond.id}" class="btn btn-sm btn-flat btn-info addActivitiesPondDataBtn" th:title="#{tooltip.add_pond_activity}"><i class="fa fa-plus"></i></a>
-									<a href="javascript:void(0);" th:attr="data-id=${pond.id}" class="btn btn-sm btn-flat btn-info viewActivitiesPondDataBtn" th:title="#{tooltip.view_pond_activity}"><i class="fa fa-eye"></i></a>									<!--  <a href="javascript:void(0);" th:attr="data-id=${plot.id}" class="btn btn-xs btn-flat btn-info viewDataPlotDataBtn" th:title="#{tooltip.view_plot_data}"><i class="fa fa-bar-chart"></i></a>-->
-					
-									<a href="javascript:void(0);" th:attr="data-id=${pond.id}" class="btn btn-sm btn-flat btn-info addPondDataBtn" th:title="#{tooltip.add_pond_data}"><i class="fa fa-plus"></i></a>
-									<a href="javascript:void(0);" th:attr="data-id=${pond.id}" class="btn btn-sm btn-flat btn-info viewDataPondDataBtn" th:title="#{tooltip.view_pond_data}"><i class="fa fa-bar-chart"></i></a>
+						<tr th:each="pond:${listing}">
+							<td th:text="${pond.farm}"></td>
+							<td th:text="${pond.number}"></td>
+							<td th:text="${pond.size.quantity}"></td>
+							<td th:text="${pond.size.unitName}"></td>
+							<td th:text="${pond.type}"></td>
+							<td th:text="${pond.species}"></td>
+							<td align="center">
+								<a href="javascript:void(0);" th:attr="data-id=${pond.id}"
+									 class="btn btn-sm btn-flat btn-primary editPondBtn" th:title="#{tooltip.edit_pond}"><i
+										class="fa fa-edit"></i></a>
+								<a href="javascript:void(0);" th:attr="data-id=${pond.id}"
+									 class="btn btn-sm btn-flat btn-info addActivitiesPondDataBtn"
+									 th:title="#{tooltip.add_pond_activity}"><i class="fa fa-plus"></i></a>
+								<a href="javascript:void(0);" th:attr="data-id=${pond.id}"
+									 class="btn btn-sm btn-flat btn-info viewActivitiesPondDataBtn"
+									 th:title="#{tooltip.view_pond_activity}"><i class="fa fa-eye"></i></a>
+								<!--  <a href="javascript:void(0);" th:attr="data-id=${plot.id}" class="btn btn-xs btn-flat btn-info viewDataPlotDataBtn" th:title="#{tooltip.view_plot_data}"><i class="fa fa-bar-chart"></i></a>-->
 
-									<form th:action="@{/ponds/delete.html}" method="post" style="display: inline;">
-										<input type="hidden" th:value="${pond.id}" th:name="pondId" />
-										<button type="submit" class="btn btn-sm btn-flat btn-danger" th:title="#{tooltip.delete_pond}">
-											<i class="fa fa-trash"></i>
-										</button>
-									</form>
-								</td>
-							</tr>
+								<a href="javascript:void(0);" th:attr="data-id=${pond.id}"
+									 class="btn btn-sm btn-flat btn-info addPondDataBtn" th:title="#{tooltip.add_pond_data}"><i
+										class="fa fa-plus"></i></a>
+								<a href="javascript:void(0);" th:attr="data-id=${pond.id}"
+									 class="btn btn-sm btn-flat btn-info viewDataPondDataBtn" th:title="#{tooltip.view_pond_data}"><i
+										class="fa fa-bar-chart"></i></a>
+
+								<form th:action="@{/ponds/delete.html}" method="post" style="display: inline;">
+									<input type="hidden" th:value="${pond.id}" th:name="pondId"/>
+									<button type="submit" class="btn btn-sm btn-flat btn-danger" th:title="#{tooltip.delete_pond}">
+										<i class="fa fa-trash"></i>
+									</button>
+								</form>
+							</td>
+						</tr>
 						</tbody>
 					</table>
 				</div>
@@ -63,44 +77,47 @@
 
 <th:block layout:fragment="page-scripts">
 	<script type="text/javascript" th:inline="javascript">
-		$(document).ready(function() {
-			
-			$('.addPondDataBtn').click(function(){
-				var id = $(this).attr("data-id");
-				document.location=[[@{/ponds/}]]+id+'/measures/create.html';
-			});
-			
-			$('.editPondBtn').click(function(){
-				var id = $(this).attr("data-id");
-				document.location=[[@{/ponds/}]]+id+'/edit.html';
-			});
+      $(document).ready(function () {
 
-			$('.viewDataPondDataBtn').click(function(){
-				var id = $(this).attr("data-id");
-				document.location=[[@{/ponds/}]]+id+'/measures/browser.html';
-			});
-			
-			 $('#datatables-browser').DataTable({
-				"order": [[ 0, "desc" ]],
-				"columnDefs": [{"orderable":false,"targets":4}],
-				"language": {
-		            "url": langURL
-		        }
-			});
+          $(document).on('click', '.addPondDataBtn', function () {
+              var id = $(this).attr("data-id");
+              document.location = [[@{/ponds/}]] + id + '/measures/create.html';
+          });
 
-			$('.viewActivitiesPondDataBtn').click(function(){
-				var id = $(this).attr("data-id");
-				document.location=[[@{/ponds/}]]+id+'/activities/browser.html';
-			});
-			
-			$('.addActivitiesPondDataBtn').click(function(){
-				var id = $(this).attr("data-id");
-				document.location=[[@{/ponds/}]]+id+'/activities/create.html';
-			});	
-			 
-			 
-		});
-		
+          $(document).on('click', '.editPondBtn', function () {
+              var id = $(this).attr("data-id");
+              document.location = [[@{/ponds/}]] + id + '/edit.html';
+          });
+
+          $(document).on('click', '.viewDataPondDataBtn', function () {
+              var id = $(this).attr("data-id");
+              document.location = [[@{/ponds/}]] + id + '/measures/browser.html';
+          });
+
+
+          $(document).on('click', '.viewActivitiesPondDataBtn', function () {
+              var id = $(this).attr("data-id");
+              document.location = [[@{/ponds/}]] + id + '/activities/browser.html';
+          });
+
+          $(document).on('click', '.addActivitiesPondDataBtn', function () {
+              var id = $(this).attr("data-id");
+              document.location = [[@{/ponds/}]] + id + '/activities/create.html';
+          });
+
+
+          $('#datatables-browser').DataTable({
+              "order": [[0, "desc"]],
+              "responsive": true,
+              "columnDefs": [{"orderable": false, "targets": 4}],
+              "language": {
+                  "url": langURL
+              }
+          });
+
+
+      });
+
 	</script>
 </th:block>
 </html>

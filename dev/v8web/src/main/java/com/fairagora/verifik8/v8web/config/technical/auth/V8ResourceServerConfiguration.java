@@ -23,7 +23,7 @@ public class V8ResourceServerConfiguration extends ResourceServerConfigurerAdapt
 		http
 		.anonymous().disable()
 		.authorizeRequests()
-		.antMatchers("/api/**").authenticated()
+		.antMatchers("/green/**", "/blue/**").authenticated()
 		.and().exceptionHandling().accessDeniedHandler(new OAuth2AccessDeniedHandler());
 	}
 }
