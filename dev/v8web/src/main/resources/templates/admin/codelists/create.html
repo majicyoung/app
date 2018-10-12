@@ -16,7 +16,7 @@
                     </div>
                 </div>
                 <form role="form" class="mainForm"
-                      th:action="@{${newEntity ? '/admin/codelists/browser/'+table+'/create.html' : '/admin/codelists/browser/'+table+'/'+clDto.id+'/update.html'}}"
+                      th:action="@{${newEntity? '/admin/codelists/browser/'+table+'/create.html' : (tableCLRefLanguagesCountries ? '/admin/codelists/browser/'+table+'/'+clDto.clLanguageId+'/'+clDto.clCountryId+'/update.html' : '/admin/codelists/browser/'+table+'/'+clDto.id+'/update.html')}}"
                       th:object="${clDto}" method="post" autocomplete="off"
                       onsubmit="return !hasEmptyFields('#user-box form .form-control[required]');">
                     <input type="hidden" th:field="*{id}"/>
@@ -374,7 +374,8 @@
                     </div>
                     <div class="box-footer text-center">
                         <small th:text="'*'+#{default.mandatory_field}">*default.mandatory_field</small>
-                        <a th:href="@{'/admin/codelists/browser/'+${table}}" class="btn btn-warning"><i class="fa fa-times"></i>
+                        <a th:href="@{'/admin/codelists/browser/'+${table}}" class="btn btn-warning"><i
+                                class="fa fa-times"></i>
                             <span th:text="#{default.cancel}">default.cancel</span></a>
 
                         <button type="submit" class="btn btn-success">

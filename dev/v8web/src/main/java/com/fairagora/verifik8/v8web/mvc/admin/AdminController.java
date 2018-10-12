@@ -1,6 +1,5 @@
 package com.fairagora.verifik8.v8web.mvc.admin;
 
-import com.fairagora.verifik8.v8web.data.domain.cl.*;
 import com.fairagora.verifik8.v8web.data.repo.cl.CLAppAdministrativeCharacteristicTypeRepository;
 import com.fairagora.verifik8.v8web.mvc.admin.dto.CLColumnDto;
 import com.fairagora.verifik8.v8web.mvc.admin.dto.CLDto;
@@ -16,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 import com.fairagora.verifik8.v8web.data.application.V8Page;
 import com.fairagora.verifik8.v8web.mvc.AbstractV8Controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -30,9 +28,6 @@ public class AdminController extends AbstractV8Controller {
 
     @Autowired
     protected CLColumnDTOMapper clColumnDTOMapper;
-
-    @Autowired
-    protected CLDTOMapper cldtoMapper;
 
     @Autowired
     protected CLAppAdministrativeCharacteristicTypeRepository clAppAdministrativeCharacteristicTypeRepository;
@@ -49,7 +44,6 @@ public class AdminController extends AbstractV8Controller {
         return "admin/admin";
     }
 
-
     @RequestMapping(value = "/admin/codelists/browser.html", method = RequestMethod.GET)
     public String CLPage(Model mv) {
 
@@ -59,7 +53,8 @@ public class AdminController extends AbstractV8Controller {
         p.setNavBarPrefix("/admin");
         mv.addAttribute("v8p", p);
 
-        mv.addAttribute("allTables", jdbc.queryForList("SELECT table_name FROM information_schema.tables WHERE table_name LIKE \"cl_%\"", String.class));
+        List<CLColumnDto> clColumnDtos = codeListservice.getColumns();
+        mv.addAttribute("allTables", clColumnDtos);
 
         return "admin/codelists/browser";
     }
@@ -73,16 +68,8 @@ public class AdminController extends AbstractV8Controller {
         p.setNavBarPrefix("/admin");
         mv.addAttribute("v8p", p);
 
-        CLColumn column = codeListservice.getColumn(table);
-        CLColumnDto clColumnDto = new CLColumnDto();
-        clColumnDTOMapper.toDto(column, clColumnDto);
-
-        List<? extends BaseCodeListSupport> datas = codeListservice.gets(table);
-        List<CLDto> clDtos = new ArrayList<>();
-        for (BaseCodeListSupport baseCodeListSupport : datas) {
-            CLDto clDto = mapping(baseCodeListSupport);
-            clDtos.add(clDto);
-        }
+        CLColumnDto clColumnDto = codeListservice.getColumn(table);
+        List<CLDto> clDtos = codeListservice.getCLs(table);
 
         mv.addAttribute("table", table);
         mv.addAttribute("column", clColumnDto);
@@ -95,9 +82,7 @@ public class AdminController extends AbstractV8Controller {
     @RequestMapping(value = "/admin/codelists/browser/{table}/create.html", method = RequestMethod.GET)
     public String createCL(@PathVariable("table") String table, Model mv) {
 
-        CLColumn column = codeListservice.getColumn(table);
-        CLColumnDto clColumnDto = new CLColumnDto();
-        clColumnDTOMapper.toDto(column, clColumnDto);
+        CLColumnDto clColumnDto = codeListservice.getColumn(table);
 
         prepareForCLEdition(table, clColumnDto, new CLDto(), mv);
 
@@ -107,7 +92,11 @@ public class AdminController extends AbstractV8Controller {
     @RequestMapping(value = "/admin/codelists/browser/{table}/create.html", method = RequestMethod.POST)
     public String createCL(@PathVariable("table") String table, @Validated @ModelAttribute("clDto") CLDto dto, BindingResult bindResults, Model mv) {
         try {
-            codeListservice.addCL(table, dto, null);
+            if (table.equals("cl_ref_languages_countries")) {
+                codeListservice.addCL(dto, null, null);
+            } else {
+                codeListservice.addCL(table, dto, null);
+            }
             return "redirect:/admin/codelists/browser/" + table + "/";
         } catch (Exception e) {
             return "redirect:/admin/codelists/browser/" + table + "/?error=" + e.getCause().getCause().getMessage();
@@ -124,6 +113,16 @@ public class AdminController extends AbstractV8Controller {
         }
     }
 
+    @RequestMapping(value = "/admin/codelists/browser/{table}/{languageId}/{countryId}/update.html", method = RequestMethod.POST)
+    public String updateCL(@PathVariable("table") String table, @Validated @ModelAttribute("clDto") CLDto dto, @PathVariable("languageId") Long languageId, @PathVariable("countryId") Long countryId, BindingResult bindResults, Model mv) {
+        try {
+            codeListservice.addCL(dto, languageId, countryId);
+            return "redirect:/admin/codelists/browser/" + table + "/";
+        } catch (Exception e) {
+            return "redirect:/admin/codelists/browser/" + table + "/?error=" + e.getCause().getCause().getMessage();
+        }
+    }
+
     @RequestMapping(value = "/admin/codelists/browser/{table}/{id}/delete.html", method = RequestMethod.POST)
     public String deleteCL(@PathVariable("table") String table, @PathVariable("id") Long id, Model mv) {
         codeListservice.deleteCL(table, id);
@@ -134,17 +133,33 @@ public class AdminController extends AbstractV8Controller {
     public String editCL(@PathVariable("table") String table, @PathVariable("id") Long id, Model mv) {
 
         // Get all column names
-        CLColumn column = codeListservice.getColumn(table);
-        CLColumnDto clColumnDto = new CLColumnDto();
-        clColumnDTOMapper.toDto(column, clColumnDto);
+        CLColumnDto clColumnDto = codeListservice.getColumn(table);
 
-        // Get all datas
-        BaseCodeListSupport baseCodeListSupport = codeListservice.get(table, id);
-        CLDto clDto = mapping(baseCodeListSupport);
-
+        // Get data
+        CLDto clDto = codeListservice.getCL(table, id);
         prepareForCLEdition(table, clColumnDto, clDto, mv);
 
         return "admin/codelists/create";
+    }
+
+    /***** For cl_ref_languages_countries table only *****/
+    @RequestMapping(value = "/admin/codelists/browser/{table}/{languageId}/{countryId}/edit.html", method = RequestMethod.GET)
+    public String editCL(@PathVariable("table") String table, @PathVariable("languageId") Long languageId, @PathVariable("countryId") Long countryId, Model mv) {
+
+        // Get all column names
+        CLColumnDto clColumnDto = codeListservice.getColumn(table);
+
+        // Get data
+        CLDto clDto = codeListservice.getCL(languageId, countryId);
+        prepareForCLEdition(table, clColumnDto, clDto, mv);
+
+        return "admin/codelists/create";
+    }
+
+    @RequestMapping(value = "/admin/codelists/browser/{table}/{languageId}/{countryId}/delete.html", method = RequestMethod.POST)
+    public String deleteCL(@PathVariable("table") String table, @PathVariable("languageId") Long languageId, @PathVariable("countryId") Long countryId, Model mv) {
+        codeListservice.deleteCL(languageId, countryId);
+        return "redirect:/admin/codelists/browser/" + table + "/";
     }
 
     private void prepareForCLEdition(String table, CLColumnDto clColumnDto, CLDto clDto, Model mv) {
@@ -154,56 +169,11 @@ public class AdminController extends AbstractV8Controller {
         p.setNavBarPrefix("/admin");
         mv.addAttribute("v8p", p);
 
-        mv.addAttribute("newEntity", clDto.getId() == null);
         mv.addAttribute("table", table);
+        mv.addAttribute("tableCLRefLanguagesCountries", table.equals("cl_ref_languages_countries"));
+        mv.addAttribute("newEntity", table.equals("cl_ref_languages_countries") ? (clDto.getClLanguageId() == null && clDto.getClCountryId() == null) : clDto.getId() == null);
         mv.addAttribute("clColumnDto", clColumnDto);
         mv.addAttribute("clDto", clDto);
-
     }
 
-    private CLDto mapping(BaseCodeListSupport baseCodeListSupport) {
-        CLDto clDto = new CLDto();
-
-        if (baseCodeListSupport instanceof CLAppEntityType) {
-            cldtoMapper.toDto((CLAppEntityType) baseCodeListSupport, clDto);
-        } else if (baseCodeListSupport instanceof CLAppHazardousWorkType) {
-            cldtoMapper.toDto((CLAppHazardousWorkType) baseCodeListSupport, clDto);
-        } else if (baseCodeListSupport instanceof CLAppHiringRestrictionType) {
-            cldtoMapper.toDto((CLAppHiringRestrictionType) baseCodeListSupport, clDto);
-        } else if (baseCodeListSupport instanceof CLAppLegalStatus) {
-            cldtoMapper.toDto((CLAppLegalStatus) baseCodeListSupport, clDto);
-        } else if (baseCodeListSupport instanceof CLAppLocation) {
-            cldtoMapper.toDto((CLAppLocation) baseCodeListSupport, clDto);
-        } else if (baseCodeListSupport instanceof CLAppHvHeExpensionType) {
-            cldtoMapper.toDto((CLAppHvHeExpensionType) baseCodeListSupport, clDto);
-        } else if (baseCodeListSupport instanceof CLAppQuantityUnit) {
-            cldtoMapper.toDto((CLAppQuantityUnit) baseCodeListSupport, clDto);
-        } else if (baseCodeListSupport instanceof CLRefAdminLevel2) {
-            cldtoMapper.toDto((CLRefAdminLevel2) baseCodeListSupport, clDto);
-        } else if (baseCodeListSupport instanceof CLRefCommodity) {
-            cldtoMapper.toDto((CLRefCommodity) baseCodeListSupport, clDto);
-        } else if (baseCodeListSupport instanceof CLRefCountry) {
-            cldtoMapper.toDto((CLRefCountry) baseCodeListSupport, clDto);
-        } else if (baseCodeListSupport instanceof CLRefGearCharacteristic) {
-            cldtoMapper.toDto((CLRefGearCharacteristic) baseCodeListSupport, clDto);
-        } else if (baseCodeListSupport instanceof CLRefLandingSite) {
-            cldtoMapper.toDto((CLRefLandingSite) baseCodeListSupport, clDto);
-        } else if (baseCodeListSupport instanceof CLRefLanguageCountry) {
-            cldtoMapper.toDto((CLRefLanguageCountry) baseCodeListSupport, clDto);
-        } else if (baseCodeListSupport instanceof CLRefProductType) {
-            cldtoMapper.toDto((CLRefProductType) baseCodeListSupport, clDto);
-        } else if (baseCodeListSupport instanceof CLRefProduct) {
-            cldtoMapper.toDto((CLRefProduct) baseCodeListSupport, clDto);
-        } else if (baseCodeListSupport instanceof CLRefRegion) {
-            cldtoMapper.toDto((CLRefRegion) baseCodeListSupport, clDto);
-        } else if (baseCodeListSupport instanceof CLRefSpecies) {
-            cldtoMapper.toDto((CLRefSpecies) baseCodeListSupport, clDto);
-        } else if (baseCodeListSupport instanceof CodeListSupport) {
-            cldtoMapper.toDto((CodeListSupport) baseCodeListSupport, clDto);
-        } else {
-            cldtoMapper.toDto(baseCodeListSupport, clDto);
-        }
-
-        return clDto;
-    }
 }

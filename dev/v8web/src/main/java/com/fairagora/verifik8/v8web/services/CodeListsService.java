@@ -1,10 +1,13 @@
 package com.fairagora.verifik8.v8web.services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.fairagora.verifik8.v8web.data.domain.cl.*;
 import com.fairagora.verifik8.v8web.data.repo.cl.*;
+import com.fairagora.verifik8.v8web.mvc.admin.CLColumnDTOMapper;
 import com.fairagora.verifik8.v8web.mvc.admin.CLDTOMapper;
+import com.fairagora.verifik8.v8web.mvc.admin.dto.CLColumnDto;
 import com.fairagora.verifik8.v8web.mvc.admin.dto.CLDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,10 +16,10 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class CodeListsService {
 
-    /*****  cl_app *****/
-
     @Autowired
     private CLColumnRepository columnRepository;
+
+    /*****  cl_app *****/
 
     @Autowired
     private CLAppAdministrativeCharacteristicTypeRepository appAdministrativeCharacteristicTypeRepository;
@@ -219,8 +222,13 @@ public class CodeListsService {
     @Autowired
     private CLRefVesselTypeRepository refVesselTypeRepository;
 
+    /*****  mapper *****/
+
     @Autowired
     protected CLDTOMapper cldtoMapper;
+
+    @Autowired
+    protected CLColumnDTOMapper clColumnDTOMapper;
 
     /***** cl_app - gets *****/
 
@@ -228,7 +236,7 @@ public class CodeListsService {
         return appAdministrativeCharacteristicTypeRepository.findOne(id);
     }
 
-    public List<? extends BaseCodeListSupport> getAppAdministrativeCharacteristicTypes() {
+    public List<CLAppAdministrativeCharacteristicType> getAppAdministrativeCharacteristicTypes() {
         return appAdministrativeCharacteristicTypeRepository.findAll();
     }
 
@@ -236,7 +244,7 @@ public class CodeListsService {
         return appCompanyPositionTypeRepository.findOne(id);
     }
 
-    public List<? extends BaseCodeListSupport> getAppCompanyPositionTypes() {
+    public List<CLAppCompanyPositionType> getAppCompanyPositionTypes() {
         return appCompanyPositionTypeRepository.findAll();
     }
 
@@ -248,7 +256,7 @@ public class CodeListsService {
         return appContractTypesRepository.findOne(id);
     }
 
-    public List<? extends BaseCodeListSupport> getAppContractTypes() {
+    public List<CLAppContractType> getAppContractTypes() {
         return appContractTypesRepository.findAll();
     }
 
@@ -260,7 +268,7 @@ public class CodeListsService {
         return appDebtTypeRepository.findOne(id);
     }
 
-    public List<? extends BaseCodeListSupport> getAppDebtTypes() {
+    public List<CLAppDebtType> getAppDebtTypes() {
         return appDebtTypeRepository.findAll();
     }
 
@@ -268,7 +276,7 @@ public class CodeListsService {
         return appDeclarationSourcesTypeRepository.findOne(id);
     }
 
-    public List<? extends BaseCodeListSupport> getAppDeclarationSourcesTypes() {
+    public List<CLAppDeclarationSourcesType> getAppDeclarationSourcesTypes() {
         return appDeclarationSourcesTypeRepository.findAll();
     }
 
@@ -276,7 +284,7 @@ public class CodeListsService {
         return appDeductionSalaryTypeRepository.findOne(id);
     }
 
-    public List<? extends BaseCodeListSupport> getAppDeductionSalaryTypes() {
+    public List<CLAppDeductionSalaryType> getAppDeductionSalaryTypes() {
         return appDeductionSalaryTypeRepository.findAll();
     }
 
@@ -288,7 +296,7 @@ public class CodeListsService {
         return appEnergyTypeRepository.findOne(id);
     }
 
-    public List<? extends BaseCodeListSupport> getAppEnergyTypes() {
+    public List<CLAppEnergyType> getAppEnergyTypes() {
         return appEnergyTypeRepository.findAll();
     }
 
@@ -296,7 +304,7 @@ public class CodeListsService {
         return appEngineRoleRepository.findOne(id);
     }
 
-    public List<? extends BaseCodeListSupport> getAppEngineRoles() {
+    public List<CLAppEngineRole> getAppEngineRoles() {
         return appEngineRoleRepository.findAll();
     }
 
@@ -304,7 +312,7 @@ public class CodeListsService {
         return appEngineTypeRepository.findOne(id);
     }
 
-    public List<? extends BaseCodeListSupport> getAppEngineTypes() {
+    public List<CLAppEngineType> getAppEngineTypes() {
         return appEngineTypeRepository.findAll();
     }
 
@@ -312,7 +320,7 @@ public class CodeListsService {
         return appEntityDocumentTypesRepository.findOne(id);
     }
 
-    public List<? extends BaseCodeListSupport> getAppEntityDocumentTypes() {
+    public List<CLAppEntityDocumentTypes> getAppEntityDocumentTypes() {
         return appEntityDocumentTypesRepository.findAll();
     }
 
@@ -324,7 +332,7 @@ public class CodeListsService {
         return appEntityTypeRepository.findOne(id);
     }
 
-    public List<? extends BaseCodeListSupport> getAppEntityTypes() {
+    public List<CLAppEntityType> getAppEntityTypes() {
         return appEntityTypeRepository.findAll();
     }
 
@@ -344,7 +352,7 @@ public class CodeListsService {
         return appFreshWaterSypplyTypeRepository.findOne(id);
     }
 
-    public List<? extends BaseCodeListSupport> getAppFreshWaterSypplyTypes() {
+    public List<CLAppFreshWaterSypplyType> getAppFreshWaterSypplyTypes() {
         return appFreshWaterSypplyTypeRepository.findAll();
     }
 
@@ -352,7 +360,7 @@ public class CodeListsService {
         return appGetBackFinancialDepositReasonRepository.findOne(id);
     }
 
-    public List<? extends BaseCodeListSupport> getAppGetBackFinancialDepositReasons() {
+    public List<CLAppGetBackFinancialDepositReason> getAppGetBackFinancialDepositReasons() {
         return appGetBackFinancialDepositReasonRepository.findAll();
     }
 
@@ -364,7 +372,7 @@ public class CodeListsService {
         return appHazardousTrainingTypeRepository.findOne(id);
     }
 
-    public List<? extends BaseCodeListSupport> getAppHazardousTrainingTypes() {
+    public List<CLAppHazardousTrainingType> getAppHazardousTrainingTypes() {
         return appHazardousTrainingTypeRepository.findAll();
     }
 
@@ -376,7 +384,7 @@ public class CodeListsService {
         return appHazardousWorkTypeRepository.findOne(id);
     }
 
-    public List<? extends BaseCodeListSupport> getAppHazardousWorkTypes() {
+    public List<CLAppHazardousWorkType> getAppHazardousWorkTypes() {
         return appHazardousWorkTypeRepository.findAll();
     }
 
@@ -388,7 +396,7 @@ public class CodeListsService {
         return appHiringRestrictionTypeRepository.findOne(id);
     }
 
-    public List<? extends BaseCodeListSupport> getAppHiringRestrictionTypes() {
+    public List<CLAppHiringRestrictionType> getAppHiringRestrictionTypes() {
         return appHiringRestrictionTypeRepository.findAll();
     }
 
@@ -400,7 +408,7 @@ public class CodeListsService {
         return appHullTypeRepository.findOne(id);
     }
 
-    public List<? extends BaseCodeListSupport> getAppHullTypes() {
+    public List<CLAppHullType> getAppHullTypes() {
         return appHullTypeRepository.findAll();
     }
 
@@ -408,7 +416,7 @@ public class CodeListsService {
         return appHvHeExpensionTypeRepository.findOne(id);
     }
 
-    public List<? extends BaseCodeListSupport> getAppHvHeExpensionTypes() {
+    public List<CLAppHvHeExpensionType> getAppHvHeExpensionTypes() {
         return appHvHeExpensionTypeRepository.findAll();
     }
 
@@ -424,7 +432,7 @@ public class CodeListsService {
         return appLegalStatusRepository.findOne(id);
     }
 
-    public List<? extends BaseCodeListSupport> getAppLegalStatus() {
+    public List<CLAppLegalStatus> getAppLegalStatus() {
         return appLegalStatusRepository.findAll();
     }
 
@@ -436,7 +444,7 @@ public class CodeListsService {
         return appLicenseTypeRepository.findOne(id);
     }
 
-    public List<? extends BaseCodeListSupport> getAppLicenceTypes() {
+    public List<CLAppLicenseType> getAppLicenceTypes() {
         return appLicenseTypeRepository.findAll();
     }
 
@@ -444,7 +452,7 @@ public class CodeListsService {
         return appLocationTypeRepository.findOne(id);
     }
 
-    public List<? extends BaseCodeListSupport> getAppLocationTypes() {
+    public List<CLAppLocationType> getAppLocationTypes() {
         return appLocationTypeRepository.findAll();
     }
 
@@ -452,7 +460,7 @@ public class CodeListsService {
         return appLocationRepository.findOne(id);
     }
 
-    public List<? extends BaseCodeListSupport> getAppLocations() {
+    public List<CLAppLocation> getAppLocations() {
         return appLocationRepository.findAll();
     }
 
@@ -460,7 +468,7 @@ public class CodeListsService {
         return appMeasureTypeRepository.findOne(id);
     }
 
-    public List<? extends BaseCodeListSupport> getAppMeasureTypes() {
+    public List<CLAppMeasureType> getAppMeasureTypes() {
         return appMeasureTypeRepository.findAll();
     }
 
@@ -472,7 +480,7 @@ public class CodeListsService {
         return appNoEarlyTerminationContractReasonRepository.findOne(id);
     }
 
-    public List<? extends BaseCodeListSupport> getAppNoEarlyTerminationContractReasons() {
+    public List<CLAppNoEarlyTerminationContractReason> getAppNoEarlyTerminationContractReasons() {
         return appNoEarlyTerminationContractReasonRepository.findAll();
     }
 
@@ -484,7 +492,7 @@ public class CodeListsService {
         return appPaymentDebtTypeRepository.findOne(id);
     }
 
-    public List<? extends BaseCodeListSupport> getAppPaymentDebtTypes() {
+    public List<CLAppPaymentDebtType> getAppPaymentDebtTypes() {
         return appPaymentDebtTypeRepository.findAll();
     }
 
@@ -496,7 +504,7 @@ public class CodeListsService {
         return appPaymentFrequencyRepository.findOne(id);
     }
 
-    public List<? extends BaseCodeListSupport> getAppPaymentFrequencies() {
+    public List<CLAppPaymentFrequency> getAppPaymentFrequencies() {
         return appPaymentFrequencyRepository.findAll();
     }
 
@@ -508,7 +516,7 @@ public class CodeListsService {
         return appPowerUnitRepository.findOne(id);
     }
 
-    public List<? extends BaseCodeListSupport> getAppPowerUnits() {
+    public List<CLAppPowerUnit> getAppPowerUnits() {
         return appPowerUnitRepository.findAll();
     }
 
@@ -516,15 +524,15 @@ public class CodeListsService {
         return appProdDataEntryTypeRepository.findOne(id);
     }
 
-    public List<? extends BaseCodeListSupport> getAppProDataEntryTypes() {
+    public List<CLAppProdDataEntryType> getAppProDataEntryTypes() {
         return appProdDataEntryTypeRepository.findAll();
     }
 
-    public CLAppPropulsionType getAppPropulsionTypeRepository(long id) {
+    public CLAppPropulsionType getAppPropulsionType(long id) {
         return appPropulsionTypeRepository.findOne(id);
     }
 
-    public List<? extends BaseCodeListSupport> getAppPropulsionTypes() {
+    public List<CLAppPropulsionType> getAppPropulsionTypes() {
         return appPropulsionTypeRepository.findAll();
     }
 
@@ -532,7 +540,7 @@ public class CodeListsService {
         return appQuantityUnitTypeRepository.findOne(id);
     }
 
-    public List<? extends BaseCodeListSupport> getAppQuantityUnitTypes() {
+    public List<CLAppQuantityUnitType> getAppQuantityUnitTypes() {
         return appQuantityUnitTypeRepository.findAll();
     }
 
@@ -540,7 +548,7 @@ public class CodeListsService {
         return appQuantityUnitRepository.findOne(id);
     }
 
-    public List<? extends BaseCodeListSupport> getAppQuantityUnits() {
+    public List<CLAppQuantityUnit> getAppQuantityUnits() {
         return appQuantityUnitRepository.findAll();
     }
 
@@ -552,7 +560,7 @@ public class CodeListsService {
         return appQuestionnaireAnswerRepository.findOne(id);
     }
 
-    public List<? extends BaseCodeListSupport> getAppQuestionnaireAnswers() {
+    public List<CLAppQuestionnaireAnswer> getAppQuestionnaireAnswers() {
         return appQuestionnaireAnswerRepository.findAll();
     }
 
@@ -560,7 +568,7 @@ public class CodeListsService {
         return appSoilAnalysisTypeRepository.findOne(id);
     }
 
-    public List<? extends BaseCodeListSupport> getAppSoilAnalysisTypes() {
+    public List<CLAppSoilAnalysisType> getAppSoilAnalysisTypes() {
         return appSoilAnalysisTypeRepository.findAll();
     }
 
@@ -572,7 +580,7 @@ public class CodeListsService {
         return appStaffDeclarationTypeRepository.findOne(id);
     }
 
-    public List<? extends BaseCodeListSupport> getAppStaffDeclarationTypes() {
+    public List<CLAppStaffDeclarationType> getAppStaffDeclarationTypes() {
         return appStaffDeclarationTypeRepository.findAll();
     }
 
@@ -580,7 +588,7 @@ public class CodeListsService {
         return appTerminationContractReasonRepository.findOne(id);
     }
 
-    public List<? extends BaseCodeListSupport> getAppTerminationContractReasons() {
+    public List<CLAppTerminationContractReason> getAppTerminationContractReasons() {
         return appTerminationContractReasonRepository.findAll();
     }
 
@@ -592,7 +600,7 @@ public class CodeListsService {
         return appTilingActivityTypeRepository.findOne(id);
     }
 
-    public List<? extends BaseCodeListSupport> getAppTilingActivityTypes() {
+    public List<CLAppTilingActivityType> getAppTilingActivityTypes() {
         return appTilingActivityTypeRepository.findAll();
     }
 
@@ -604,7 +612,7 @@ public class CodeListsService {
         return appVesselCharacteristicRepository.findOne(id);
     }
 
-    public List<? extends BaseCodeListSupport> getAppVesselCharacteristics() {
+    public List<CLAppVesselCharacteristic> getAppVesselCharacteristics() {
         return appVesselCharacteristicRepository.findAll();
     }
 
@@ -612,7 +620,7 @@ public class CodeListsService {
         return appVesselEquipmentTypeRepository.findOne(id);
     }
 
-    public List<? extends BaseCodeListSupport> getAppVesselEquipmentTypes() {
+    public List<CLAppVesselEquipmentType> getAppVesselEquipmentTypes() {
         return appVesselEquipmentTypeRepository.findAll();
     }
 
@@ -620,7 +628,7 @@ public class CodeListsService {
         return appVesselHistoricalCharacteristicTypeRepository.findOne(id);
     }
 
-    public List<? extends BaseCodeListSupport> getAppVesselHistoricalCharacteristicTypes() {
+    public List<CLAppVesselHistoricalCharacteristicType> getAppVesselHistoricalCharacteristicTypes() {
         return appVesselHistoricalCharacteristicTypeRepository.findAll();
     }
 
@@ -628,7 +636,7 @@ public class CodeListsService {
         return appVesselOperationalStatusRepository.findOne(id);
     }
 
-    public List<? extends BaseCodeListSupport> getAppVesselOperationalStatus() {
+    public List<CLAppVesselOperationalStatus> getAppVesselOperationalStatus() {
         return appVesselOperationalStatusRepository.findAll();
     }
 
@@ -636,7 +644,7 @@ public class CodeListsService {
         return appWaterSupplyTypeRepository.findOne(id);
     }
 
-    public List<? extends BaseCodeListSupport> getAppWaterSupplyTypes() {
+    public List<CLAppWaterSupplyType> getAppWaterSupplyTypes() {
         return appWaterSupplyTypeRepository.findAll();
     }
 
@@ -646,7 +654,7 @@ public class CodeListsService {
         return farmBuildingTypeRepository.findOne(id);
     }
 
-    public List<? extends BaseCodeListSupport> getFarmBuildingTypes() {
+    public List<CLFarmBuildingType> getFarmBuildingTypes() {
         return farmBuildingTypeRepository.findAll();
     }
 
@@ -654,7 +662,7 @@ public class CodeListsService {
         return farmPlotActivityTypesRepository.findOne(id);
     }
 
-    public List<? extends BaseCodeListSupport> getFarmPlotActivityTypes() {
+    public List<CLFarmPlotActivityType> getFarmPlotActivityTypes() {
         return farmPlotActivityTypesRepository.findAll();
     }
 
@@ -666,7 +674,7 @@ public class CodeListsService {
         return farmPondActivityTypesRepository.findOne(id);
     }
 
-    public List<? extends BaseCodeListSupport> getFarmPondActivityTypes() {
+    public List<CLFarmPondActivityType> getFarmPondActivityTypes() {
         return farmPondActivityTypesRepository.findAll();
     }
 
@@ -678,7 +686,7 @@ public class CodeListsService {
         return farmPondTypesRepository.findOne(id);
     }
 
-    public List<? extends BaseCodeListSupport> getFarmPondTypes() {
+    public List<CLFarmPondType> getFarmPondTypes() {
         return farmPondTypesRepository.findAll();
     }
 
@@ -690,7 +698,7 @@ public class CodeListsService {
         return farmProductionTypeRepository.findOne(id);
     }
 
-    public List<? extends BaseCodeListSupport> getFarmProductionTypes() {
+    public List<CLFarmProductionType> getFarmProductionTypes() {
         return farmProductionTypeRepository.findAll();
     }
 
@@ -698,7 +706,7 @@ public class CodeListsService {
         return farmTypeRepository.findOne(id);
     }
 
-    public List<? extends BaseCodeListSupport> getFarmTypes() {
+    public List<CLFarmType> getFarmTypes() {
         return farmTypeRepository.findAll();
     }
 
@@ -708,7 +716,7 @@ public class CodeListsService {
         return fishFishingTypeRepository.findOne(id);
     }
 
-    public List<? extends BaseCodeListSupport> getFishFishingTypes() {
+    public List<CLFishFishingType> getFishFishingTypes() {
         return fishFishingTypeRepository.findAll();
     }
 
@@ -716,7 +724,7 @@ public class CodeListsService {
         return fishFishingZoneRepository.findOne(id);
     }
 
-    public List<? extends BaseCodeListSupport> getFishFishingZones() {
+    public List<CLFishFishingZone> getFishFishingZones() {
         return fishFishingZoneRepository.findAll();
     }
 
@@ -726,7 +734,7 @@ public class CodeListsService {
         return refAdminLevel1Repository.findOne(id);
     }
 
-    public List<? extends BaseCodeListSupport> getRefAdminLevel1() {
+    public List<CLRefAdminLevel1> getRefAdminLevel1() {
         return refAdminLevel1Repository.findAll();
     }
 
@@ -734,7 +742,7 @@ public class CodeListsService {
         return refAdminLevel2Repository.findOne(id);
     }
 
-    public List<? extends BaseCodeListSupport> getRefAdminLevel2() {
+    public List<CLRefAdminLevel2> getRefAdminLevel2() {
         return refAdminLevel2Repository.findAll();
     }
 
@@ -742,7 +750,7 @@ public class CodeListsService {
         return refCommodityRepository.findOne(id);
     }
 
-    public List<? extends BaseCodeListSupport> getRefCommodities() {
+    public List<CLRefCommodity> getRefCommodities() {
         return refCommodityRepository.findAll();
     }
 
@@ -754,7 +762,7 @@ public class CodeListsService {
         return refCountryRepository.findOne(id);
     }
 
-    public List<? extends BaseCodeListSupport> getRefCountries() {
+    public List<CLRefCountry> getRefCountries() {
         return refCountryRepository.findAll();
     }
 
@@ -766,7 +774,7 @@ public class CodeListsService {
         return refCurrencyRepository.findOne(id);
     }
 
-    public List<? extends BaseCodeListSupport> getRefCurrencies() {
+    public List<CLRefCurrency> getRefCurrencies() {
         return refCurrencyRepository.findAll();
     }
 
@@ -778,7 +786,7 @@ public class CodeListsService {
         return refDeclarationSourceRepository.findOne(id);
     }
 
-    public List<? extends BaseCodeListSupport> getRefDeclarationSources() {
+    public List<CLRefDeclarationSource> getRefDeclarationSources() {
         return refDeclarationSourceRepository.findAll();
     }
 
@@ -786,7 +794,7 @@ public class CodeListsService {
         return refGearCharacteristicRepository.findOne(id);
     }
 
-    public List<? extends BaseCodeListSupport> getRefGearCharacteristics() {
+    public List<CLRefGearCharacteristic> getRefGearCharacteristics() {
         return refGearCharacteristicRepository.findAll();
     }
 
@@ -794,7 +802,7 @@ public class CodeListsService {
         return refGearRepository.findOne(id);
     }
 
-    public List<? extends BaseCodeListSupport> getRefGears() {
+    public List<CLRefGear> getRefGears() {
         return refGearRepository.findAll();
     }
 
@@ -802,7 +810,7 @@ public class CodeListsService {
         return refLandingSiteRepository.findOne(id);
     }
 
-    public List<? extends BaseCodeListSupport> getRefLandingSites() {
+    public List<CLRefLandingSite> getRefLandingSites() {
         return refLandingSiteRepository.findAll();
     }
 
@@ -810,7 +818,7 @@ public class CodeListsService {
         return refLanguageRepository.findOne(id);
     }
 
-    public List<? extends BaseCodeListSupport> getRefLanguages() {
+    public List<CLRefLanguage> getRefLanguages() {
         return refLanguageRepository.findAll();
     }
 
@@ -818,11 +826,11 @@ public class CodeListsService {
         return refLanguageRepository.findByEnabledTrueOrderByName();
     }
 
-    public CLRefLanguageCountry getRefLanguageCountry(long id) {
-        return refLanguageCountryRepository.findOne(id);
+    public CLRefLanguageCountry getRefLanguageCountry(long languageId, long countryId) {
+        return refLanguageCountryRepository.findOne(new LanguageCountryKey(languageId, countryId));
     }
 
-    public List<? extends BaseCodeListSupport> getRefLanguageCountries() {
+    public List<CLRefLanguageCountry> getRefLanguageCountries() {
         return refLanguageCountryRepository.findAll();
     }
 
@@ -830,7 +838,7 @@ public class CodeListsService {
         return refProductTypesRepository.findOne(id);
     }
 
-    public List<? extends BaseCodeListSupport> getRefProductTypes() {
+    public List<CLRefProductType> getRefProductTypes() {
         return refProductTypesRepository.findAll();
     }
 
@@ -842,7 +850,7 @@ public class CodeListsService {
         return refProductRepository.findOne(id);
     }
 
-    public List<? extends BaseCodeListSupport> getRefProducts() {
+    public List<CLRefProduct> getRefProducts() {
         return refProductRepository.findAll();
     }
 
@@ -862,7 +870,7 @@ public class CodeListsService {
         return refRegionRepository.findOne(id);
     }
 
-    public List<? extends BaseCodeListSupport> getRefRegions() {
+    public List<CLRefRegion> getRefRegions() {
         return refRegionRepository.findAll();
     }
 
@@ -870,7 +878,7 @@ public class CodeListsService {
         return refSpeciesRepository.findOne(id);
     }
 
-    public List<? extends BaseCodeListSupport> getRefSpechies() {
+    public List<CLRefSpecies> getRefSpechies() {
         return refSpeciesRepository.findAll();
     }
 
@@ -882,12 +890,26 @@ public class CodeListsService {
         return refVesselTypeRepository.findOne(id);
     }
 
-    public List<? extends BaseCodeListSupport> getRefVesselTypes() {
+    public List<CLRefVesselType> getRefVesselTypes() {
         return refVesselTypeRepository.findAll();
     }
 
-    public CLColumn getColumn(String tableName) {
-        return columnRepository.findOne(tableName);
+    public CLColumnDto getColumn(String tableName) {
+        CLColumn clColumn = columnRepository.findOne(tableName);
+        CLColumnDto dto = new CLColumnDto();
+        clColumnDTOMapper.toDto(clColumn, dto);
+        return dto;
+    }
+
+    public List<CLColumnDto> getColumns() {
+        List<CLColumn> clColumns = columnRepository.findAll();
+        List<CLColumnDto> clColumnDtos = new ArrayList<>();
+        for (CLColumn column : clColumns) {
+            CLColumnDto dto = new CLColumnDto();
+            clColumnDTOMapper.toDto(column, dto);
+            clColumnDtos.add(dto);
+        }
+        return clColumnDtos;
     }
 
     public void addCL(String tableName, CLDto clDto, Long id) throws Exception {
@@ -1656,19 +1678,6 @@ public class CodeListsService {
 
                 break;
             }
-            case "cl_ref_languages_countries": {
-                CLRefLanguageCountry newCL;
-                if (id == null) {
-                    newCL = new CLRefLanguageCountry();
-                } else {
-                    newCL = refLanguageCountryRepository.findOne(id);
-                }
-
-                cldtoMapper.fillEntity(clDto, newCL);
-                refLanguageCountryRepository.save(newCL);
-
-                break;
-            }
             case "cl_ref_product_types": {
                 CLRefProductType newCL;
                 if (id == null) {
@@ -1738,278 +1747,931 @@ public class CodeListsService {
         }
     }
 
-    public BaseCodeListSupport get(String tableName, long id) {
+    public CLDto getCL(String tableName, long id) {
+        CLDto dto = new CLDto();
+
         switch (tableName) {
-            case "cl_app_administrative_characteristic_types":
-                return getAppAdministrativeCharacteristicType(id);
-            case "cl_app_company_position_types":
-                return getAppCompanyPositionType(id);
-            case "cl_app_contract_types":
-                return getAppContractType(id);
-            case "cl_app_debt_types":
-                return getAppDebtType(id);
-            case "cl_app_declaration_sources_types":
-                return getAppDeclarationSourcesType(id);
-            case "cl_app_deduction_salary_types":
-                return getAppDeductionSalaryType(id);
-            case "cl_app_energy_types":
-                return getAppEnergyType(id);
-            case "cl_app_engine_roles":
-                return getAppEngineRole(id);
-            case "cl_app_engine_types":
-                return getAppEngineType(id);
-            case "cl_app_entity_document_types":
-                return getAppEntityDocumentType(id);
-            case "cl_app_entity_types":
-                return getAppEntityType(id);
-            case "cl_app_fresh_water_sypply_types":
-                return getAppFreshWaterSypplyType(id);
-            case "cl_app_get_back_financial_deposit_reasons":
-                return getAppGetBackFinancialDepositReason(id);
-            case "cl_app_hazardous_training_types":
-                return getAppHazardousTrainingType(id);
-            case "cl_app_hazardous_work_type":
-                return getAppHazardousWorkType(id);
-            case "cl_app_hiring_restriction_types":
-                return getAppHiringRestrictionType(id);
-            case "cl_app_hull_types":
-                return getAppHullType(id);
-            case "cl_app_hvhe_expension_types":
-                return getAppHvHeExpensionType(id);
-            case "cl_app_legal_status":
-                return getAppLegalStatus(id);
-            case "cl_app_license_types":
-                return getAppLicenceType(id);
-            case "cl_app_location_types":
-                return getAppLocationType(id);
-            case "cl_app_locations":
-                return getAppLocation(id);
-            case "cl_app_measure_types":
-                return getAppMeasureType(id);
-            case "cl_app_no_early_termination_contract_reasons":
-                return getAppNoEarlyTerminationContractReason(id);
-            case "cl_app_payment_debt_types":
-                return getAppPaymentDebtType(id);
-            case "cl_app_payment_frequencies":
-                return getAppPaymentFrequency(id);
-            case "cl_app_power_units":
-                return getAppPowerUnit(id);
-            case "cl_app_prod_data_entry_types":
-                return getAppProDataEntryType(id);
-            case "cl_app_propulsion_types":
-                return getAppPropulsionTypeRepository(id);
-            case "cl_app_quantity_unit_types":
-                return getAppQuantityUnitType(id);
-            case "cl_app_quantity_units":
-                return getAppQuantityUnit(id);
-            case "cl_app_questionnaire_answers":
-                return getAppQuestionnaireAnswer(id);
-            case "cl_app_soil_analysis_types":
-                return getAppSoilAnalysisType(id);
-            case "cl_app_staff_declaration_types":
-                return getAppStaffDeclarationType(id);
-            case "cl_app_termination_contract_reasons":
-                return getAppTerminationContractReason(id);
-            case "cl_app_tiling_activity_types":
-                return getAppTilingActivityType(id);
-            case "cl_app_vessel_characteristics":
-                return getAppVesselCharacteristic(id);
-            case "cl_app_vessel_equipment_types":
-                return getAppVesselEquipmentType(id);
-            case "cl_app_vessel_historical_characteristic_types":
-                return getAppVesselHistoricalCharacteristicType(id);
-            case "cl_app_vessel_operational_status":
-                return getAppVesselOperationalStatus(id);
-            case "cl_app_water_supply_types":
-                return getAppWaterSupplyType(id);
-            case "cl_farm_building_types":
-                return getFarmBuildingType(id);
-            case "cl_farm_plot_activity_types":
-                return getFarmPlotActivityType(id);
-            case "cl_farm_pond_activity_types":
-                return getFarmPondActivityType(id);
-            case "cl_farm_pond_types":
-                return getFarmPondType(id);
-            case "cl_farm_production_types":
-                return getFarmProductionType(id);
-            case "cl_farm_types":
-                return getFarmType(id);
-            case "cl_fish_fishing_types":
-                return getFishFishingType(id);
-            case "cl_fish_fishing_zones":
-                return getFishFishingZone(id);
-            case "cl_ref_admin_level_1":
-                return getRefAdminLevel1(id);
-            case "cl_ref_admin_level_2":
-                return getRefAdminLevel2(id);
-            case "cl_ref_commodities":
-                return getRefCommodity(id);
-            case "cl_ref_countries":
-                return getRefCountry(id);
-            case "cl_ref_currencies":
-                return getRefCurrency(id);
-            case "cl_ref_declaration_sources":
-                return getRefDeclarationSource(id);
-            case "cl_ref_gear_characteristics":
-                return getRefGearCharacteristic(id);
-            case "cl_ref_gears":
-                return getRefGear(id);
-            case "cl_ref_landing_sites":
-                return getRefLandingSite(id);
-            case "cl_ref_languages":
-                return getRefLanguage(id);
-            case "cl_ref_languages_countries":
-                return getRefLanguageCountry(id);
-            case "cl_ref_product_types":
-                return getRefProductType(id);
-            case "cl_ref_products":
-                return getRefProduct(id);
-            case "cl_ref_regions":
-                return getRefRegion(id);
-            case "cl_ref_species":
-                return getRefSpechie(id);
-            case "cl_ref_vessel_types":
-                return getRefVesselType(id);
+            case "cl_app_administrative_characteristic_types": {
+                CLAppAdministrativeCharacteristicType entity = getAppAdministrativeCharacteristicType(id);
+                cldtoMapper.toDto(entity, dto);
+                return dto;
+            }
+            case "cl_app_company_position_types": {
+                CLAppCompanyPositionType entity = getAppCompanyPositionType(id);
+                cldtoMapper.toDto(entity, dto);
+                return dto;
+            }
+            case "cl_app_contract_types": {
+                CLAppContractType entity = getAppContractType(id);
+                cldtoMapper.toDto(entity, dto);
+                return dto;
+            }
+            case "cl_app_debt_types": {
+                CLAppDebtType entity = getAppDebtType(id);
+                cldtoMapper.toDto(entity, dto);
+                return dto;
+            }
+            case "cl_app_declaration_sources_types": {
+                CLAppDeclarationSourcesType entity = getAppDeclarationSourcesType(id);
+                cldtoMapper.toDto(entity, dto);
+                return dto;
+            }
+            case "cl_app_deduction_salary_types": {
+                CLAppDeductionSalaryType entity = getAppDeductionSalaryType(id);
+                cldtoMapper.toDto(entity, dto);
+                return dto;
+            }
+            case "cl_app_energy_types": {
+                CLAppEnergyType entity = getAppEnergyType(id);
+                cldtoMapper.toDto(entity, dto);
+                return dto;
+            }
+            case "cl_app_engine_roles": {
+                CLAppEngineRole entity = getAppEngineRole(id);
+                cldtoMapper.toDto(entity, dto);
+                return dto;
+            }
+            case "cl_app_engine_types": {
+                CLAppEngineType entity = getAppEngineType(id);
+                cldtoMapper.toDto(entity, dto);
+                return dto;
+            }
+            case "cl_app_entity_document_types": {
+                CLAppEntityDocumentTypes entity = getAppEntityDocumentType(id);
+                cldtoMapper.toDto(entity, dto);
+                return dto;
+            }
+            case "cl_app_entity_types": {
+                CLAppEntityType entity = getAppEntityType(id);
+                cldtoMapper.toDto(entity, dto);
+                return dto;
+            }
+            case "cl_app_fresh_water_sypply_types": {
+                CLAppFreshWaterSypplyType entity = getAppFreshWaterSypplyType(id);
+                cldtoMapper.toDto(entity, dto);
+                return dto;
+            }
+            case "cl_app_get_back_financial_deposit_reasons": {
+                CLAppGetBackFinancialDepositReason entity = getAppGetBackFinancialDepositReason(id);
+                cldtoMapper.toDto(entity, dto);
+                return dto;
+            }
+            case "cl_app_hazardous_training_types": {
+                CLAppHazardousTrainingType entity = getAppHazardousTrainingType(id);
+                cldtoMapper.toDto(entity, dto);
+                return dto;
+            }
+            case "cl_app_hazardous_work_type": {
+                CLAppHazardousWorkType entity = getAppHazardousWorkType(id);
+                cldtoMapper.toDto(entity, dto);
+                return dto;
+            }
+            case "cl_app_hiring_restriction_types": {
+                CLAppHiringRestrictionType entity = getAppHiringRestrictionType(id);
+                cldtoMapper.toDto(entity, dto);
+                return dto;
+            }
+            case "cl_app_hull_types": {
+                CLAppHullType entity = getAppHullType(id);
+                cldtoMapper.toDto(entity, dto);
+                return dto;
+            }
+            case "cl_app_hvhe_expension_types": {
+                CLAppHvHeExpensionType entity = getAppHvHeExpensionType(id);
+                cldtoMapper.toDto(entity, dto);
+                return dto;
+            }
+            case "cl_app_legal_status": {
+                CLAppLegalStatus entity = getAppLegalStatus(id);
+                cldtoMapper.toDto(entity, dto);
+                return dto;
+            }
+            case "cl_app_license_types": {
+                CLAppLicenseType entity = getAppLicenceType(id);
+                cldtoMapper.toDto(entity, dto);
+                return dto;
+            }
+            case "cl_app_location_types": {
+                CLAppLocationType entity = getAppLocationType(id);
+                cldtoMapper.toDto(entity, dto);
+                return dto;
+            }
+            case "cl_app_locations": {
+                CLAppLocation entity = getAppLocation(id);
+                cldtoMapper.toDto(entity, dto);
+                return dto;
+            }
+            case "cl_app_measure_types": {
+                CLAppMeasureType entity = getAppMeasureType(id);
+                cldtoMapper.toDto(entity, dto);
+                return dto;
+            }
+            case "cl_app_no_early_termination_contract_reasons": {
+                CLAppNoEarlyTerminationContractReason entity = getAppNoEarlyTerminationContractReason(id);
+                cldtoMapper.toDto(entity, dto);
+                return dto;
+            }
+            case "cl_app_payment_debt_types": {
+                CLAppPaymentDebtType entity = getAppPaymentDebtType(id);
+                cldtoMapper.toDto(entity, dto);
+                return dto;
+            }
+            case "cl_app_payment_frequencies": {
+                CLAppPaymentFrequency entity = getAppPaymentFrequency(id);
+                cldtoMapper.toDto(entity, dto);
+                return dto;
+            }
+            case "cl_app_power_units": {
+                CLAppPowerUnit entity = getAppPowerUnit(id);
+                cldtoMapper.toDto(entity, dto);
+                return dto;
+            }
+            case "cl_app_prod_data_entry_types": {
+                CLAppProdDataEntryType entity = getAppProDataEntryType(id);
+                cldtoMapper.toDto(entity, dto);
+                return dto;
+            }
+            case "cl_app_propulsion_types": {
+                CLAppPropulsionType entity = getAppPropulsionType(id);
+                cldtoMapper.toDto(entity, dto);
+                return dto;
+            }
+            case "cl_app_quantity_unit_types": {
+                CLAppQuantityUnitType entity = getAppQuantityUnitType(id);
+                cldtoMapper.toDto(entity, dto);
+                return dto;
+            }
+            case "cl_app_quantity_units": {
+                CLAppQuantityUnit entity = getAppQuantityUnit(id);
+                cldtoMapper.toDto(entity, dto);
+                return dto;
+            }
+            case "cl_app_questionnaire_answers": {
+                CLAppQuestionnaireAnswer entity = getAppQuestionnaireAnswer(id);
+                cldtoMapper.toDto(entity, dto);
+                return dto;
+            }
+            case "cl_app_soil_analysis_types": {
+                CLAppSoilAnalysisType entity = getAppSoilAnalysisType(id);
+                cldtoMapper.toDto(entity, dto);
+                return dto;
+            }
+            case "cl_app_staff_declaration_types": {
+                CLAppStaffDeclarationType entity = getAppStaffDeclarationType(id);
+                cldtoMapper.toDto(entity, dto);
+                return dto;
+            }
+            case "cl_app_termination_contract_reasons": {
+                CLAppTerminationContractReason entity = getAppTerminationContractReason(id);
+                cldtoMapper.toDto(entity, dto);
+                return dto;
+            }
+            case "cl_app_tiling_activity_types": {
+                CLAppTilingActivityType entity = getAppTilingActivityType(id);
+                cldtoMapper.toDto(entity, dto);
+                return dto;
+            }
+            case "cl_app_vessel_characteristics": {
+                CLAppVesselCharacteristic entity = getAppVesselCharacteristic(id);
+                cldtoMapper.toDto(entity, dto);
+                return dto;
+            }
+            case "cl_app_vessel_equipment_types": {
+                CLAppVesselEquipmentType entity = getAppVesselEquipmentType(id);
+                cldtoMapper.toDto(entity, dto);
+                return dto;
+            }
+            case "cl_app_vessel_historical_characteristic_types": {
+                CLAppVesselHistoricalCharacteristicType entity = getAppVesselHistoricalCharacteristicType(id);
+                cldtoMapper.toDto(entity, dto);
+                return dto;
+            }
+            case "cl_app_vessel_operational_status": {
+                CLAppVesselOperationalStatus entity = getAppVesselOperationalStatus(id);
+                cldtoMapper.toDto(entity, dto);
+                return dto;
+            }
+            case "cl_app_water_supply_types": {
+                CLAppWaterSupplyType entity = getAppWaterSupplyType(id);
+                cldtoMapper.toDto(entity, dto);
+                return dto;
+            }
+            case "cl_farm_building_types": {
+                CLFarmBuildingType entity = getFarmBuildingType(id);
+                cldtoMapper.toDto(entity, dto);
+                return dto;
+            }
+            case "cl_farm_plot_activity_types": {
+                CLFarmPlotActivityType entity = getFarmPlotActivityType(id);
+                cldtoMapper.toDto(entity, dto);
+                return dto;
+            }
+            case "cl_farm_pond_activity_types": {
+                CLFarmPondActivityType entity = getFarmPondActivityType(id);
+                cldtoMapper.toDto(entity, dto);
+                return dto;
+            }
+            case "cl_farm_pond_types": {
+                CLFarmPondType entity = getFarmPondType(id);
+                cldtoMapper.toDto(entity, dto);
+                return dto;
+            }
+            case "cl_farm_production_types": {
+                CLFarmProductionType entity = getFarmProductionType(id);
+                cldtoMapper.toDto(entity, dto);
+                return dto;
+            }
+            case "cl_farm_types": {
+                CLFarmType entity = getFarmType(id);
+                cldtoMapper.toDto(entity, dto);
+                return dto;
+            }
+            case "cl_fish_fishing_types": {
+                CLFishFishingType entity = getFishFishingType(id);
+                cldtoMapper.toDto(entity, dto);
+                return dto;
+            }
+            case "cl_fish_fishing_zones": {
+                CLFishFishingZone entity = getFishFishingZone(id);
+                cldtoMapper.toDto(entity, dto);
+                return dto;
+            }
+            case "cl_ref_admin_level_1": {
+                CLRefAdminLevel1 entity = getRefAdminLevel1(id);
+                cldtoMapper.toDto(entity, dto);
+                return dto;
+            }
+            case "cl_ref_admin_level_2": {
+                CLRefAdminLevel2 entity = getRefAdminLevel2(id);
+                cldtoMapper.toDto(entity, dto);
+                return dto;
+            }
+            case "cl_ref_commodities": {
+                CLRefCommodity entity = getRefCommodity(id);
+                cldtoMapper.toDto(entity, dto);
+                return dto;
+            }
+            case "cl_ref_countries": {
+                CLRefCountry entity = getRefCountry(id);
+                cldtoMapper.toDto(entity, dto);
+                return dto;
+            }
+            case "cl_ref_currencies": {
+                CLRefCurrency entity = getRefCurrency(id);
+                cldtoMapper.toDto(entity, dto);
+                return dto;
+            }
+            case "cl_ref_declaration_sources": {
+                CLRefDeclarationSource entity = getRefDeclarationSource(id);
+                cldtoMapper.toDto(entity, dto);
+                return dto;
+            }
+            case "cl_ref_gear_characteristics": {
+                CLRefGearCharacteristic entity = getRefGearCharacteristic(id);
+                cldtoMapper.toDto(entity, dto);
+                return dto;
+            }
+            case "cl_ref_gears": {
+                CLRefGear entity = getRefGear(id);
+                cldtoMapper.toDto(entity, dto);
+                return dto;
+            }
+            case "cl_ref_landing_sites": {
+                CLRefLandingSite entity = getRefLandingSite(id);
+                cldtoMapper.toDto(entity, dto);
+                return dto;
+            }
+            case "cl_ref_languages": {
+                CLRefLanguage entity = getRefLanguage(id);
+                cldtoMapper.toDto(entity, dto);
+                return dto;
+            }
+            case "cl_ref_languages_countries": {
+                CLRefLanguageCountry entity = getRefLanguageCountry(159, 205);
+                cldtoMapper.toDto(entity, dto);
+                return dto;
+            }
+            case "cl_ref_product_types": {
+                CLRefProductType entity = getRefProductType(id);
+                cldtoMapper.toDto(entity, dto);
+                return dto;
+            }
+            case "cl_ref_products": {
+                CLRefProduct entity = getRefProduct(id);
+                cldtoMapper.toDto(entity, dto);
+                return dto;
+            }
+            case "cl_ref_regions": {
+                CLRefRegion entity = getRefRegion(id);
+                cldtoMapper.toDto(entity, dto);
+                return dto;
+            }
+            case "cl_ref_species": {
+                CLRefSpecies entity = getRefSpechie(id);
+                cldtoMapper.toDto(entity, dto);
+                return dto;
+            }
+            case "cl_ref_vessel_types": {
+                CLRefVesselType entity = getRefVesselType(id);
+                cldtoMapper.toDto(entity, dto);
+                return dto;
+            }
             default:
-                return null;
+                return dto;
         }
     }
 
-    public List<? extends BaseCodeListSupport> gets(String tableName) {
+    public List<CLDto> getCLs(String tableName) {
+        List<CLDto> clDtos = new ArrayList<>();
         switch (tableName) {
-            case "cl_app_administrative_characteristic_types":
-                return getAppAdministrativeCharacteristicTypes();
-            case "cl_app_company_position_types":
-                return getAppCompanyPositionTypes();
-            case "cl_app_contract_types":
-                return getAppContractTypes();
-            case "cl_app_debt_types":
-                return getAppDebtTypes();
-            case "cl_app_declaration_sources_types":
-                return getAppDeclarationSourcesTypes();
-            case "cl_app_deduction_salary_types":
-                return getAppDeductionSalaryTypes();
-            case "cl_app_energy_types":
-                return getAppEnergyTypes();
-            case "cl_app_engine_roles":
-                return getAppEngineRoles();
-            case "cl_app_engine_types":
-                return getAppEngineTypes();
-            case "cl_app_entity_document_types":
-                return getAppEntityDocumentTypes();
-            case "cl_app_entity_types":
-                return getAppEntityTypes();
-            case "cl_app_fresh_water_sypply_types":
-                return getAppFreshWaterSypplyTypes();
-            case "cl_app_get_back_financial_deposit_reasons":
-                return getAppGetBackFinancialDepositReasons();
-            case "cl_app_hazardous_training_types":
-                return getAppHazardousTrainingTypes();
-            case "cl_app_hazardous_work_type":
-                return getAppHazardousWorkTypes();
-            case "cl_app_hiring_restriction_types":
-                return getAppHiringRestrictionTypes();
-            case "cl_app_hull_types":
-                return getAppHullTypes();
-            case "cl_app_hvhe_expension_types":
-                return getAppHvHeExpensionTypes();
-            case "cl_app_legal_status":
-                return getAppLegalStatus();
-            case "cl_app_license_types":
-                return getAppLicenceTypes();
-            case "cl_app_location_types":
-                return getAppLocationTypes();
-            case "cl_app_locations":
-                return getAppLocations();
-            case "cl_app_measure_types":
-                return getAppMeasureTypes();
-            case "cl_app_no_early_termination_contract_reasons":
-                return getAppNoEarlyTerminationContractReasons();
-            case "cl_app_payment_debt_types":
-                return getAppPaymentDebtTypes();
-            case "cl_app_payment_frequencies":
-                return getAppPaymentFrequencies();
-            case "cl_app_power_units":
-                return getAppPowerUnits();
-            case "cl_app_prod_data_entry_types":
-                return getAppProDataEntryTypes();
-            case "cl_app_propulsion_types":
-                return getAppPropulsionTypes();
-            case "cl_app_quantity_unit_types":
-                return getAppQuantityUnitTypes();
-            case "cl_app_quantity_units":
-                return getAppQuantityUnits();
-            case "cl_app_questionnaire_answers":
-                return getAppQuestionnaireAnswers();
-            case "cl_app_soil_analysis_types":
-                return getAppSoilAnalysisTypes();
-            case "cl_app_staff_declaration_types":
-                return getAppStaffDeclarationTypes();
-            case "cl_app_termination_contract_reasons":
-                return getAppTerminationContractReasons();
-            case "cl_app_tiling_activity_types":
-                return getAppTilingActivityTypes();
-            case "cl_app_vessel_characteristics":
-                return getAppVesselCharacteristics();
-            case "cl_app_vessel_equipment_types":
-                return getAppVesselEquipmentTypes();
-            case "cl_app_vessel_historical_characteristic_types":
-                return getAppVesselHistoricalCharacteristicTypes();
-            case "cl_app_vessel_operational_status":
-                return getAppVesselOperationalStatus();
-            case "cl_app_water_supply_types":
-                return getAppWaterSupplyTypes();
-            case "cl_farm_building_types":
-                return getFarmBuildingTypes();
-            case "cl_farm_plot_activity_types":
-                return getFarmPlotActivityTypes();
-            case "cl_farm_pond_activity_types":
-                return getFarmPondActivityTypes();
-            case "cl_farm_pond_types":
-                return getFarmPondTypes();
-            case "cl_farm_production_types":
-                return getFarmProductionTypes();
-            case "cl_farm_types":
-                return getFarmTypes();
-            case "cl_fish_fishing_types":
-                return getFishFishingTypes();
-            case "cl_fish_fishing_zones":
-                return getFishFishingZones();
-            case "cl_ref_admin_level_1":
-                return getRefAdminLevel1();
-            case "cl_ref_admin_level_2":
-                return getRefAdminLevel2();
-            case "cl_ref_commodities":
-                return getRefCommodities();
-            case "cl_ref_countries":
-                return getRefCountries();
-            case "cl_ref_currencies":
-                return getRefCurrencies();
-            case "cl_ref_declaration_sources":
-                return getRefDeclarationSources();
-            case "cl_ref_gear_characteristics":
-                return getRefGearCharacteristics();
-            case "cl_ref_gears":
-                return getRefGears();
-            case "cl_ref_landing_sites":
-                return getRefLandingSites();
-            case "cl_ref_languages":
-                return getRefLanguages();
-            case "cl_ref_languages_countries":
-                return getRefLanguageCountries();   // Todo - no id
-            case "cl_ref_product_types":
-                return getRefProductTypes();
-            case "cl_ref_products":
-                return getRefProducts();
-            case "cl_ref_regions":
-                return getRefRegions();
-            case "cl_ref_species":
-                return getRefSpechies();
-            case "cl_ref_vessel_types":
-                return getRefVesselTypes();
-            default:
-                return null;
+            case "cl_app_administrative_characteristic_types": {
+                List<CLAppAdministrativeCharacteristicType> entities = getAppAdministrativeCharacteristicTypes();
+                for (CLAppAdministrativeCharacteristicType entity : entities) {
+                    CLDto dto = new CLDto();
+                    cldtoMapper.toDto(entity, dto);
+                    clDtos.add(dto);
+                }
+                break;
+            }
+            case "cl_app_company_position_types": {
+                List<CLAppCompanyPositionType> entities = getAppCompanyPositionTypes();
+                for (CLAppCompanyPositionType entity : entities) {
+                    CLDto dto = new CLDto();
+                    cldtoMapper.toDto(entity, dto);
+                    clDtos.add(dto);
+                }
+                break;
+            }
+            case "cl_app_contract_types": {
+                List<CLAppContractType> entities = getAppContractTypes();
+                for (CLAppContractType entity : entities) {
+                    CLDto dto = new CLDto();
+                    cldtoMapper.toDto(entity, dto);
+                    clDtos.add(dto);
+                }
+                break;
+            }
+            case "cl_app_debt_types": {
+                List<CLAppDebtType> entities = getAppDebtTypes();
+                for (CLAppDebtType entity : entities) {
+                    CLDto dto = new CLDto();
+                    cldtoMapper.toDto(entity, dto);
+                    clDtos.add(dto);
+                }
+                break;
+            }
+            case "cl_app_declaration_sources_types": {
+                List<CLAppDeclarationSourcesType> entities = getAppDeclarationSourcesTypes();
+                for (CLAppDeclarationSourcesType entity : entities) {
+                    CLDto dto = new CLDto();
+                    cldtoMapper.toDto(entity, dto);
+                    clDtos.add(dto);
+                }
+                break;
+            }
+            case "cl_app_deduction_salary_types": {
+                List<CLAppDeductionSalaryType> entities = getAppDeductionSalaryTypes();
+                for (CLAppDeductionSalaryType entity : entities) {
+                    CLDto dto = new CLDto();
+                    cldtoMapper.toDto(entity, dto);
+                    clDtos.add(dto);
+                }
+                break;
+            }
+            case "cl_app_energy_types": {
+                List<CLAppEnergyType> entities = getAppEnergyTypes();
+                for (CLAppEnergyType entity : entities) {
+                    CLDto dto = new CLDto();
+                    cldtoMapper.toDto(entity, dto);
+                    clDtos.add(dto);
+                }
+                break;
+            }
+            case "cl_app_engine_roles": {
+                List<CLAppEngineRole> entities = getAppEngineRoles();
+                for (CLAppEngineRole entity : entities) {
+                    CLDto dto = new CLDto();
+                    cldtoMapper.toDto(entity, dto);
+                    clDtos.add(dto);
+                }
+                break;
+            }
+            case "cl_app_engine_types": {
+                List<CLAppEngineType> entities = getAppEngineTypes();
+                for (CLAppEngineType entity : entities) {
+                    CLDto dto = new CLDto();
+                    cldtoMapper.toDto(entity, dto);
+                    clDtos.add(dto);
+                }
+                break;
+            }
+            case "cl_app_entity_document_types": {
+                List<CLAppEntityDocumentTypes> entities = getAppEntityDocumentTypes();
+                for (CLAppEntityDocumentTypes entity : entities) {
+                    CLDto dto = new CLDto();
+                    cldtoMapper.toDto(entity, dto);
+                    clDtos.add(dto);
+                }
+                break;
+            }
+            case "cl_app_entity_types": {
+                List<CLAppEntityType> entities = getAppEntityTypes();
+                for (CLAppEntityType entity : entities) {
+                    CLDto dto = new CLDto();
+                    cldtoMapper.toDto(entity, dto);
+                    clDtos.add(dto);
+                }
+                break;
+            }
+            case "cl_app_fresh_water_sypply_types": {
+                List<CLAppFreshWaterSypplyType> entities = getAppFreshWaterSypplyTypes();
+                for (CLAppFreshWaterSypplyType entity : entities) {
+                    CLDto dto = new CLDto();
+                    cldtoMapper.toDto(entity, dto);
+                    clDtos.add(dto);
+                }
+                break;
+            }
+            case "cl_app_get_back_financial_deposit_reasons": {
+                List<CLAppGetBackFinancialDepositReason> entities = getAppGetBackFinancialDepositReasons();
+                for (CLAppGetBackFinancialDepositReason entity : entities) {
+                    CLDto dto = new CLDto();
+                    cldtoMapper.toDto(entity, dto);
+                    clDtos.add(dto);
+                }
+                break;
+            }
+            case "cl_app_hazardous_training_types": {
+                List<CLAppHazardousTrainingType> entities = getAppHazardousTrainingTypes();
+                for (CLAppHazardousTrainingType entity : entities) {
+                    CLDto dto = new CLDto();
+                    cldtoMapper.toDto(entity, dto);
+                    clDtos.add(dto);
+                }
+                break;
+            }
+            case "cl_app_hazardous_work_type": {
+                List<CLAppHazardousWorkType> entities = getAppHazardousWorkTypes();
+                for (CLAppHazardousWorkType entity : entities) {
+                    CLDto dto = new CLDto();
+                    cldtoMapper.toDto(entity, dto);
+                    clDtos.add(dto);
+                }
+                break;
+            }
+            case "cl_app_hiring_restriction_types": {
+                List<CLAppHiringRestrictionType> entities = getAppHiringRestrictionTypes();
+                for (CLAppHiringRestrictionType entity : entities) {
+                    CLDto dto = new CLDto();
+                    cldtoMapper.toDto(entity, dto);
+                    clDtos.add(dto);
+                }
+                break;
+            }
+            case "cl_app_hull_types": {
+                List<CLAppHullType> entities = getAppHullTypes();
+                for (CLAppHullType entity : entities) {
+                    CLDto dto = new CLDto();
+                    cldtoMapper.toDto(entity, dto);
+                    clDtos.add(dto);
+                }
+                break;
+            }
+            case "cl_app_hvhe_expension_types": {
+                List<CLAppHvHeExpensionType> entities = getAppHvHeExpensionTypes();
+                for (CLAppHvHeExpensionType entity : entities) {
+                    CLDto dto = new CLDto();
+                    cldtoMapper.toDto(entity, dto);
+                    clDtos.add(dto);
+                }
+                break;
+            }
+            case "cl_app_legal_status": {
+                List<CLAppLegalStatus> entities = getAppLegalStatus();
+                for (CLAppLegalStatus entity : entities) {
+                    CLDto dto = new CLDto();
+                    cldtoMapper.toDto(entity, dto);
+                    clDtos.add(dto);
+                }
+                break;
+            }
+            case "cl_app_license_types": {
+                List<CLAppLicenseType> entities = getAppLicenceTypes();
+                for (CLAppLicenseType entity : entities) {
+                    CLDto dto = new CLDto();
+                    cldtoMapper.toDto(entity, dto);
+                    clDtos.add(dto);
+                }
+                break;
+            }
+            case "cl_app_location_types": {
+                List<CLAppLocationType> entities = getAppLocationTypes();
+                for (CLAppLocationType entity : entities) {
+                    CLDto dto = new CLDto();
+                    cldtoMapper.toDto(entity, dto);
+                    clDtos.add(dto);
+                }
+                break;
+            }
+            case "cl_app_locations": {
+                List<CLAppLocation> entities = getAppLocations();
+                for (CLAppLocation entity : entities) {
+                    CLDto dto = new CLDto();
+                    cldtoMapper.toDto(entity, dto);
+                    clDtos.add(dto);
+                }
+                break;
+            }
+            case "cl_app_measure_types": {
+                List<CLAppMeasureType> entities = getAppMeasureTypes();
+                for (CLAppMeasureType entity : entities) {
+                    CLDto dto = new CLDto();
+                    cldtoMapper.toDto(entity, dto);
+                    clDtos.add(dto);
+                }
+                break;
+            }
+            case "cl_app_no_early_termination_contract_reasons": {
+                List<CLAppNoEarlyTerminationContractReason> entities = getAppNoEarlyTerminationContractReasons();
+                for (CLAppNoEarlyTerminationContractReason entity : entities) {
+                    CLDto dto = new CLDto();
+                    cldtoMapper.toDto(entity, dto);
+                    clDtos.add(dto);
+                }
+                break;
+            }
+            case "cl_app_payment_debt_types": {
+                List<CLAppPaymentDebtType> entities = getAppPaymentDebtTypes();
+                for (CLAppPaymentDebtType entity : entities) {
+                    CLDto dto = new CLDto();
+                    cldtoMapper.toDto(entity, dto);
+                    clDtos.add(dto);
+                }
+                break;
+            }
+            case "cl_app_payment_frequencies": {
+                List<CLAppPaymentFrequency> entities = getAppPaymentFrequencies();
+                for (CLAppPaymentFrequency entity : entities) {
+                    CLDto dto = new CLDto();
+                    cldtoMapper.toDto(entity, dto);
+                    clDtos.add(dto);
+                }
+                break;
+            }
+            case "cl_app_power_units": {
+                List<CLAppPowerUnit> entities = getAppPowerUnits();
+                for (CLAppPowerUnit entity : entities) {
+                    CLDto dto = new CLDto();
+                    cldtoMapper.toDto(entity, dto);
+                    clDtos.add(dto);
+                }
+                break;
+            }
+            case "cl_app_prod_data_entry_types": {
+                List<CLAppProdDataEntryType> entities = getAppProDataEntryTypes();
+                for (CLAppProdDataEntryType entity : entities) {
+                    CLDto dto = new CLDto();
+                    cldtoMapper.toDto(entity, dto);
+                    clDtos.add(dto);
+                }
+                break;
+            }
+            case "cl_app_propulsion_types": {
+                List<CLAppPropulsionType> entities = getAppPropulsionTypes();
+                for (CLAppPropulsionType entity : entities) {
+                    CLDto dto = new CLDto();
+                    cldtoMapper.toDto(entity, dto);
+                    clDtos.add(dto);
+                }
+                break;
+            }
+            case "cl_app_quantity_unit_types": {
+                List<CLAppQuantityUnitType> entities = getAppQuantityUnitTypes();
+                for (CLAppQuantityUnitType entity : entities) {
+                    CLDto dto = new CLDto();
+                    cldtoMapper.toDto(entity, dto);
+                    clDtos.add(dto);
+                }
+                break;
+            }
+            case "cl_app_quantity_units": {
+                List<CLAppQuantityUnit> entities = getAppQuantityUnits();
+                for (CLAppQuantityUnit entity : entities) {
+                    CLDto dto = new CLDto();
+                    cldtoMapper.toDto(entity, dto);
+                    clDtos.add(dto);
+                }
+                break;
+            }
+            case "cl_app_questionnaire_answers": {
+                List<CLAppQuestionnaireAnswer> entities = getAppQuestionnaireAnswers();
+                for (CLAppQuestionnaireAnswer entity : entities) {
+                    CLDto dto = new CLDto();
+                    cldtoMapper.toDto(entity, dto);
+                    clDtos.add(dto);
+                }
+                break;
+            }
+            case "cl_app_soil_analysis_types": {
+                List<CLAppSoilAnalysisType> entities = getAppSoilAnalysisTypes();
+                for (CLAppSoilAnalysisType entity : entities) {
+                    CLDto dto = new CLDto();
+                    cldtoMapper.toDto(entity, dto);
+                    clDtos.add(dto);
+                }
+                break;
+            }
+            case "cl_app_staff_declaration_types": {
+                List<CLAppStaffDeclarationType> entities = getAppStaffDeclarationTypes();
+                for (CLAppStaffDeclarationType entity : entities) {
+                    CLDto dto = new CLDto();
+                    cldtoMapper.toDto(entity, dto);
+                    clDtos.add(dto);
+                }
+                break;
+            }
+            case "cl_app_termination_contract_reasons": {
+                List<CLAppTerminationContractReason> entities = getAppTerminationContractReasons();
+                for (CLAppTerminationContractReason entity : entities) {
+                    CLDto dto = new CLDto();
+                    cldtoMapper.toDto(entity, dto);
+                    clDtos.add(dto);
+                }
+                break;
+            }
+            case "cl_app_tiling_activity_types": {
+                List<CLAppTilingActivityType> entities = getAppTilingActivityTypes();
+                for (CLAppTilingActivityType entity : entities) {
+                    CLDto dto = new CLDto();
+                    cldtoMapper.toDto(entity, dto);
+                    clDtos.add(dto);
+                }
+                break;
+            }
+            case "cl_app_vessel_characteristics": {
+                List<CLAppVesselCharacteristic> entities = getAppVesselCharacteristics();
+                for (CLAppVesselCharacteristic entity : entities) {
+                    CLDto dto = new CLDto();
+                    cldtoMapper.toDto(entity, dto);
+                    clDtos.add(dto);
+                }
+                break;
+            }
+            case "cl_app_vessel_equipment_types": {
+                List<CLAppVesselEquipmentType> entities = getAppVesselEquipmentTypes();
+                for (CLAppVesselEquipmentType entity : entities) {
+                    CLDto dto = new CLDto();
+                    cldtoMapper.toDto(entity, dto);
+                    clDtos.add(dto);
+                }
+                break;
+            }
+            case "cl_app_vessel_historical_characteristic_types": {
+                List<CLAppVesselHistoricalCharacteristicType> entities = getAppVesselHistoricalCharacteristicTypes();
+                for (CLAppVesselHistoricalCharacteristicType entity : entities) {
+                    CLDto dto = new CLDto();
+                    cldtoMapper.toDto(entity, dto);
+                    clDtos.add(dto);
+                }
+                break;
+            }
+            case "cl_app_vessel_operational_status": {
+                List<CLAppVesselOperationalStatus> entities = getAppVesselOperationalStatus();
+                for (CLAppVesselOperationalStatus entity : entities) {
+                    CLDto dto = new CLDto();
+                    cldtoMapper.toDto(entity, dto);
+                    clDtos.add(dto);
+                }
+                break;
+            }
+            case "cl_app_water_supply_types": {
+                List<CLAppWaterSupplyType> entities = getAppWaterSupplyTypes();
+                for (CLAppWaterSupplyType entity : entities) {
+                    CLDto dto = new CLDto();
+                    cldtoMapper.toDto(entity, dto);
+                    clDtos.add(dto);
+                }
+                break;
+            }
+            case "cl_farm_building_types": {
+                List<CLFarmBuildingType> entities = getFarmBuildingTypes();
+                for (CLFarmBuildingType entity : entities) {
+                    CLDto dto = new CLDto();
+                    cldtoMapper.toDto(entity, dto);
+                    clDtos.add(dto);
+                }
+                break;
+            }
+            case "cl_farm_plot_activity_types": {
+                List<CLFarmPlotActivityType> entities = getFarmPlotActivityTypes();
+                for (CLFarmPlotActivityType entity : entities) {
+                    CLDto dto = new CLDto();
+                    cldtoMapper.toDto(entity, dto);
+                    clDtos.add(dto);
+                }
+                break;
+            }
+            case "cl_farm_pond_activity_types": {
+                List<CLFarmPondActivityType> entities = getFarmPondActivityTypes();
+                for (CLFarmPondActivityType entity : entities) {
+                    CLDto dto = new CLDto();
+                    cldtoMapper.toDto(entity, dto);
+                    clDtos.add(dto);
+                }
+                break;
+            }
+            case "cl_farm_pond_types": {
+                List<CLFarmPondType> entities = getFarmPondTypes();
+                for (CLFarmPondType entity : entities) {
+                    CLDto dto = new CLDto();
+                    cldtoMapper.toDto(entity, dto);
+                    clDtos.add(dto);
+                }
+                break;
+            }
+            case "cl_farm_production_types": {
+                List<CLFarmProductionType> entities = getFarmProductionTypes();
+                for (CLFarmProductionType entity : entities) {
+                    CLDto dto = new CLDto();
+                    cldtoMapper.toDto(entity, dto);
+                    clDtos.add(dto);
+                }
+                break;
+            }
+            case "cl_farm_types": {
+                List<CLFarmType> entities = getFarmTypes();
+                for (CLFarmType entity : entities) {
+                    CLDto dto = new CLDto();
+                    cldtoMapper.toDto(entity, dto);
+                    clDtos.add(dto);
+                }
+                break;
+            }
+            case "cl_fish_fishing_types": {
+                List<CLFishFishingType> entities = getFishFishingTypes();
+                for (CLFishFishingType entity : entities) {
+                    CLDto dto = new CLDto();
+                    cldtoMapper.toDto(entity, dto);
+                    clDtos.add(dto);
+                }
+                break;
+            }
+            case "cl_fish_fishing_zones": {
+                List<CLFishFishingZone> entities = getFishFishingZones();
+                for (CLFishFishingZone entity : entities) {
+                    CLDto dto = new CLDto();
+                    cldtoMapper.toDto(entity, dto);
+                    clDtos.add(dto);
+                }
+                break;
+            }
+            case "cl_ref_admin_level_1": {
+                List<CLRefAdminLevel1> entities = getRefAdminLevel1();
+                for (CLRefAdminLevel1 entity : entities) {
+                    CLDto dto = new CLDto();
+                    cldtoMapper.toDto(entity, dto);
+                    clDtos.add(dto);
+                }
+                break;
+            }
+            case "cl_ref_admin_level_2": {
+                List<CLRefAdminLevel2> entities = getRefAdminLevel2();
+                for (CLRefAdminLevel2 entity : entities) {
+                    CLDto dto = new CLDto();
+                    cldtoMapper.toDto(entity, dto);
+                    clDtos.add(dto);
+                }
+                break;
+            }
+            case "cl_ref_commodities": {
+                List<CLRefCommodity> entities = getRefCommodities();
+                for (CLRefCommodity entity : entities) {
+                    CLDto dto = new CLDto();
+                    cldtoMapper.toDto(entity, dto);
+                    clDtos.add(dto);
+                }
+                break;
+            }
+            case "cl_ref_countries": {
+                List<CLRefCountry> entities = getRefCountries();
+                for (CLRefCountry entity : entities) {
+                    CLDto dto = new CLDto();
+                    cldtoMapper.toDto(entity, dto);
+                    clDtos.add(dto);
+                }
+                break;
+            }
+            case "cl_ref_currencies": {
+                List<CLRefCurrency> entities = getRefCurrencies();
+                for (CLRefCurrency entity : entities) {
+                    CLDto dto = new CLDto();
+                    cldtoMapper.toDto(entity, dto);
+                    clDtos.add(dto);
+                }
+                break;
+            }
+            case "cl_ref_declaration_sources": {
+                List<CLRefDeclarationSource> entities = getRefDeclarationSources();
+                for (CLRefDeclarationSource entity : entities) {
+                    CLDto dto = new CLDto();
+                    cldtoMapper.toDto(entity, dto);
+                    clDtos.add(dto);
+                }
+                break;
+            }
+            case "cl_ref_gear_characteristics": {
+                List<CLRefGearCharacteristic> entities = getRefGearCharacteristics();
+                for (CLRefGearCharacteristic entity : entities) {
+                    CLDto dto = new CLDto();
+                    cldtoMapper.toDto(entity, dto);
+                    clDtos.add(dto);
+                }
+                break;
+            }
+            case "cl_ref_gears": {
+                List<CLRefGear> entities = getRefGears();
+                for (CLRefGear entity : entities) {
+                    CLDto dto = new CLDto();
+                    cldtoMapper.toDto(entity, dto);
+                    clDtos.add(dto);
+                }
+                break;
+            }
+            case "cl_ref_landing_sites": {
+                List<CLRefLandingSite> entities = getRefLandingSites();
+                for (CLRefLandingSite entity : entities) {
+                    CLDto dto = new CLDto();
+                    cldtoMapper.toDto(entity, dto);
+                    clDtos.add(dto);
+                }
+                break;
+            }
+            case "cl_ref_languages": {
+                List<CLRefLanguage> entities = getRefLanguages();
+                for (CLRefLanguage entity : entities) {
+                    CLDto dto = new CLDto();
+                    cldtoMapper.toDto(entity, dto);
+                    clDtos.add(dto);
+                }
+                break;
+            }
+            case "cl_ref_languages_countries": {
+                List<CLRefLanguageCountry> entities = getRefLanguageCountries();
+                for (CLRefLanguageCountry entity : entities) {
+                    CLDto dto = new CLDto();
+                    cldtoMapper.toDto(entity, dto);
+                    clDtos.add(dto);
+                }
+                break;
+            }
+            case "cl_ref_product_types": {
+                List<CLRefProductType> entities = getRefProductTypes();
+                for (CLRefProductType entity : entities) {
+                    CLDto dto = new CLDto();
+                    cldtoMapper.toDto(entity, dto);
+                    clDtos.add(dto);
+                }
+                break;
+            }
+            case "cl_ref_products": {
+                List<CLRefProduct> entities = getRefProducts();
+                for (CLRefProduct entity : entities) {
+                    CLDto dto = new CLDto();
+                    cldtoMapper.toDto(entity, dto);
+                    clDtos.add(dto);
+                }
+                break;
+            }
+            case "cl_ref_regions": {
+                List<CLRefRegion> entities = getRefRegions();
+                for (CLRefRegion entity : entities) {
+                    CLDto dto = new CLDto();
+                    cldtoMapper.toDto(entity, dto);
+                    clDtos.add(dto);
+                }
+                break;
+            }
+            case "cl_ref_species": {
+                List<CLRefSpecies> entities = getRefSpechies();
+                for (CLRefSpecies entity : entities) {
+                    CLDto dto = new CLDto();
+                    cldtoMapper.toDto(entity, dto);
+                    clDtos.add(dto);
+                }
+                break;
+            }
+            case "cl_ref_vessel_types": {
+                List<CLRefVesselType> entities = getRefVesselTypes();
+                for (CLRefVesselType entity : entities) {
+                    CLDto dto = new CLDto();
+                    cldtoMapper.toDto(entity, dto);
+                    clDtos.add(dto);
+                }
+                break;
+            }
         }
+
+        return clDtos;
     }
 
     public void deleteCL(String tableName, Long id) {
@@ -2191,9 +2853,6 @@ public class CodeListsService {
             case "cl_ref_languages":
                 refLanguageRepository.delete(id);
                 break;
-            case "cl_ref_languages_countries":
-                refLanguageCountryRepository.delete(id);
-                break;
             case "cl_ref_product_types":
                 refProductTypesRepository.delete(id);
                 break;
@@ -2210,5 +2869,40 @@ public class CodeListsService {
                 refVesselTypeRepository.delete(id);
                 break;
         }
+    }
+
+    /***** For cl_ref_languages_countries table only *****/
+
+    public void addCL(CLDto clDto, Long languageId, Long countryId) throws Exception{
+        CLRefLanguageCountry newCL;
+        if (languageId != null && countryId != null) {
+            newCL = refLanguageCountryRepository.findOne(new LanguageCountryKey(languageId, countryId));
+        } else {
+            newCL = new CLRefLanguageCountry();
+        }
+        cldtoMapper.fillEntity(clDto, newCL);
+        refLanguageCountryRepository.save(newCL);
+    }
+
+    public CLDto getCL(long languageId, long countryId) {
+        CLDto dto = new CLDto();
+        CLRefLanguageCountry entity = getRefLanguageCountry(languageId, countryId);
+        cldtoMapper.toDto(entity, dto);
+        return dto;
+    }
+
+    public List<CLDto> getCLs() {
+        List<CLDto> clDtos = new ArrayList<>();
+        List<CLRefLanguageCountry> entities = getRefLanguageCountries();
+        for (CLRefLanguageCountry entity : entities) {
+            CLDto dto = new CLDto();
+            cldtoMapper.toDto(entity, dto);
+            clDtos.add(dto);
+        }
+        return clDtos;
+    }
+
+    public void deleteCL(long languageId, long countryId) {
+        refLanguageCountryRepository.delete(new LanguageCountryKey(languageId, countryId));
     }
 }

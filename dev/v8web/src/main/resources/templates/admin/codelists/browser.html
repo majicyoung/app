@@ -26,9 +26,9 @@
                         </thead>
                         <tbody>
                         <tr th:each="table : ${allTables}">
-                            <td th:inline="text">[[${table}]]</td>
+                            <td th:inline="text">[[${table.tableName}]]</td>
                             <td align="center">
-                                <a th:href="@{'/admin/codelists/browser/'+${table}}"
+                                <a th:href="@{'/admin/codelists/browser/'+${table.tableName}}"
                                    class="btn btn-sm btn-flat btn-primary"><i class="fa fa-edit"></i></a>
                             </td>
                         </tr>
