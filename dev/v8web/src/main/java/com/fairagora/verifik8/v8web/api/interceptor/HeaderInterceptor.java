@@ -75,8 +75,6 @@ public class HeaderInterceptor extends HandlerInterceptorAdapter {
 
 		UserFormDto createUserDto = new UserFormDto();
 
-		System.out.println(user.getCooperative());
-
 		createUserDto.setRole(user.getRole().getId());
 		createUserDto.setName(user.getName());
 		createUserDto.setPassword(user.getPassword());
