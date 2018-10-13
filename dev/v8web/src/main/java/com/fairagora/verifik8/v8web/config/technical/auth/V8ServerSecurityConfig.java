@@ -65,11 +65,6 @@ public class V8ServerSecurityConfig extends WebSecurityConfigurerAdapter {
 	}
 
 	@Bean
-	public TokenStore tokenStore() {
-		return new InMemoryTokenStore();
-	}
-
-	@Bean
 	public BCryptPasswordEncoder encoder() {
 		return new BCryptPasswordEncoder(11);
 	}
