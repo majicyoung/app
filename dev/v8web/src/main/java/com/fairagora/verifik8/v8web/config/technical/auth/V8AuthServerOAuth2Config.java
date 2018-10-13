@@ -1,7 +1,10 @@
 package com.fairagora.verifik8.v8web.config.technical.auth;
 
+import javax.sql.DataSource;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
@@ -10,6 +13,8 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.token.TokenStore;
+import org.springframework.security.oauth2.provider.token.store.InMemoryTokenStore;
+import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
 
 @Configuration
 @EnableAuthorizationServer
@@ -33,7 +38,12 @@ public class V8AuthServerOAuth2Config extends AuthorizationServerConfigurerAdapt
 	static final int FREFRESH_TOKEN_VALIDITY_SECONDS = 6 * 60 * 60 * 240;
 
 	@Autowired
-	private TokenStore tokenStore;
+	private DataSource dataSource;
+	    
+	@Bean
+	public TokenStore tokenStore() {
+		return new JdbcTokenStore(dataSource);
+	}
 
 	@Autowired
 	private AuthenticationManager authenticationManager;
@@ -53,7 +63,7 @@ public class V8AuthServerOAuth2Config extends AuthorizationServerConfigurerAdapt
 	
 	@Override
 	public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
-		endpoints.tokenStore(tokenStore).authenticationManager(authenticationManager);
+		endpoints.tokenStore(tokenStore()).authenticationManager(authenticationManager);
 		
 		endpoints.pathMapping("/oauth/token", "/"+v8apiUrl+"/oauth/token");
 	}
