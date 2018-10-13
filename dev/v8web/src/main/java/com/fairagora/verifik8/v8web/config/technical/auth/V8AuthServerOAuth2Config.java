@@ -50,7 +50,7 @@ public class V8AuthServerOAuth2Config extends AuthorizationServerConfigurerAdapt
 	
 	@Override
 	public void configure(AuthorizationServerSecurityConfigurer oauthServer) throws Exception {
-		 oauthServer.checkTokenAccess("permitAll()");
+		oauthServer.checkTokenAccess("permitAll()");
 	}
 	
 	@Override
