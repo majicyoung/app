@@ -1,9 +1,11 @@
 package com.fairagora.verifik8.v8web.mvc.admin;
 
+import com.fairagora.verifik8.v8web.data.domain.sys.SYSSubPage;
 import com.fairagora.verifik8.v8web.data.repo.cl.CLAppAdministrativeCharacteristicTypeRepository;
 import com.fairagora.verifik8.v8web.mvc.admin.dto.CLColumnDto;
 import com.fairagora.verifik8.v8web.mvc.admin.dto.CLDto;
 import com.fairagora.verifik8.v8web.services.CodeListsService;
+import com.fairagora.verifik8.v8web.services.SubPageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
@@ -27,6 +29,9 @@ public class AdminController extends AbstractV8Controller {
     protected CodeListsService codeListservice;
 
     @Autowired
+    protected SubPageService subPageService;
+
+    @Autowired
     protected CLColumnDTOMapper clColumnDTOMapper;
 
     @Autowired
@@ -43,6 +48,8 @@ public class AdminController extends AbstractV8Controller {
 
         return "admin/admin";
     }
+
+    /****************** CL management *****************/
 
     @RequestMapping(value = "/admin/codelists/browser.html", method = RequestMethod.GET)
     public String CLPage(Model mv) {
@@ -176,4 +183,19 @@ public class AdminController extends AbstractV8Controller {
         mv.addAttribute("clDto", clDto);
     }
 
+    /****************** Sub page *****************/
+
+    @RequestMapping(value = "/admin/subpages/listing.html", method = RequestMethod.GET)
+    public String subPage(Model mv) {
+
+        V8Page p = new V8Page();
+        p.setTitle("admin.home");
+        p.setDescription("admin.home");
+        p.setNavBarPrefix("/admin");
+        mv.addAttribute("v8p", p);
+
+        mv.addAttribute("subPages", subPageService.getSubPages());
+
+        return "admin/subpages/listing";
+    }
 }

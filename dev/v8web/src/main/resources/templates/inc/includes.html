@@ -116,8 +116,9 @@
 					<!--<li th:class="${v8p.getNavActive('/admin')}"><a th:href="@{/admin/admin.html}"><i-->
 							<!--class="fa fa-caret-right"></i><span th:text="#{admin.home}">admin.home</span></a></li>-->
 					<li th:class="${v8p.getNavActive('/clmanagement')}"><a th:href="@{'/admin/codelists/browser.html'}"><i
-							class="fa fa-caret-right"></i><span
-							th:text="#{admin.codeListsManagement}">admin.codeListsManagement</span></a></li>
+							class="fa fa-caret-right"></i><span th:text="#{admin.codeListsManagement}">admin.codeListsManagement</span></a></li>
+					<li th:class="${v8p.getNavActive('/subpage')}"><a th:href="@{'/admin/subpages/listing.html'}"><i
+							class="fa fa-caret-right"></i><span th:text="#{admin.subPage}">admin.subPage</span></a></li>
 				</ul>
 			</li>
 			<li style="display: none" class="{{ Request::is('/settings')?'active':'' }}"><a href="#"><i
