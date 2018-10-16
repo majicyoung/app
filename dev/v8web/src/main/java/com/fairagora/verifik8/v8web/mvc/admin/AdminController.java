@@ -1,9 +1,9 @@
 package com.fairagora.verifik8.v8web.mvc.admin;
 
-import com.fairagora.verifik8.v8web.data.domain.sys.SYSSubPage;
 import com.fairagora.verifik8.v8web.data.repo.cl.CLAppAdministrativeCharacteristicTypeRepository;
 import com.fairagora.verifik8.v8web.mvc.admin.dto.CLColumnDto;
 import com.fairagora.verifik8.v8web.mvc.admin.dto.CLDto;
+import com.fairagora.verifik8.v8web.mvc.admin.dto.SYSSubPageDto;
 import com.fairagora.verifik8.v8web.services.CodeListsService;
 import com.fairagora.verifik8.v8web.services.SubPageService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,9 +30,6 @@ public class AdminController extends AbstractV8Controller {
 
     @Autowired
     protected SubPageService subPageService;
-
-    @Autowired
-    protected CLColumnDTOMapper clColumnDTOMapper;
 
     @Autowired
     protected CLAppAdministrativeCharacteristicTypeRepository clAppAdministrativeCharacteristicTypeRepository;
@@ -197,5 +194,40 @@ public class AdminController extends AbstractV8Controller {
         mv.addAttribute("subPages", subPageService.getSubPages());
 
         return "admin/subpages/listing";
+    }
+
+    @RequestMapping(value = "/admin/subpages/create.html", method = RequestMethod.GET)
+    public String createSubPage(Model mv) {
+
+        prepareForSubPageEdition(new SYSSubPageDto(), mv);
+
+        return "admin/subpages/create";
+    }
+
+    @RequestMapping(value = "/admin/subpages/{id}/edit.html", method = RequestMethod.GET)
+    public String editSubPage(@PathVariable("id") Long id, Model mv) {
+
+        SYSSubPageDto dto = subPageService.getSYSSubPageDto(id);
+
+        prepareForSubPageEdition(dto, mv);
+
+        return "admin/subpages/create";
+    }
+
+    @RequestMapping(value = "/admin/subpages/{id}/delete.html", method = RequestMethod.POST)
+    public String deleteCL(@PathVariable("id") Long id,  Model mv) {
+        subPageService.deleteSubPage(id);
+        return "redirect:/admin/subpages/listing.html";
+    }
+
+    private void prepareForSubPageEdition(SYSSubPageDto dto, Model mv) {
+        V8Page p = new V8Page();
+        p.setTitle("admin.home");
+        p.setDescription("admin.home");
+        p.setNavBarPrefix("/admin");
+        mv.addAttribute("v8p", p);
+
+        mv.addAttribute("newEntity", dto.getId() == null);
+        mv.addAttribute("dto", dto);
     }
 }
