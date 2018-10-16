@@ -95,6 +95,10 @@ public class UsersController extends AbstractV8Controller {
         UserFormDto dto = new UserFormDto();
 
         sysUserDTOMapper.toDto(userRepository.findOne(id), dto);
+
+        // Remove password in box
+        dto.setPassword(null);
+
         setToReadOnly(mv, "W_USEREDITOR");
         prepareForUserEdition(dto, mv);
         return "users/create";
@@ -195,13 +199,26 @@ public class UsersController extends AbstractV8Controller {
 
     @PreAuthorize("hasAuthority('W_USEREDITOR')")
     @RequestMapping(value = "/user/{id}/update.html", method = RequestMethod.POST)
-    public String createUser(@Validated @ModelAttribute("userDto") UserFormDto createUserDto, @PathVariable("id") Long userId, BindingResult bindResults, Model mv) {
+    public String updateUser(@Validated @ModelAttribute("userDto") UserFormDto updateUserDto, @PathVariable("id") Long userId, BindingResult bindResults, Model mv) {
 
-        SYSUser newUser = userRepository.findOne(userId);
+        SYSUser user = userRepository.findOne(userId);
+        boolean isOwnerAccount = getLoggedUser().getUsername().equals(user.getEmail());
+        boolean isChangeEmail = (!user.getEmail().equals(updateUserDto.getEmail()));
 
-        sysUserDTOMapper.fillEntity(createUserDto, newUser);
+        if (updateUserDto.getPassword().isEmpty()) {
+            // If user didn't put password in the box, ignore to map password attr
+            sysUserDTOMapper.fillEntityIgnorePassword(updateUserDto, user);
+        } else {
+            sysUserDTOMapper.fillEntity(updateUserDto, user);
+        }
 
-        userRepository.save(newUser);
+        // Update user
+        userRepository.save(user);
+
+        // If user change email, force to logout
+        if (isOwnerAccount && isChangeEmail) {
+            return "redirect:/logout";
+        }
 
         return "redirect:/users.html";
     }

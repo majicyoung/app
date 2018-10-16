@@ -128,8 +128,9 @@
 				document.getElementById("individualCountry").value = "205"; // only for Thailand and sugar cane - to be removed when expanding
 				document.getElementById("individualNationality").value = "205";
 			}
-					
-			$('.datefield').datetimepicker({
+
+        $.datetimepicker.setLocale(lang);
+        $('.datefield').datetimepicker({
 				format: 'Y-m-d',
 				closeOnDateSelect:true
 			});
