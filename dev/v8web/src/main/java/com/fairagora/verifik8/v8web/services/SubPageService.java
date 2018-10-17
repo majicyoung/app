@@ -12,7 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-
 @Service
 @Transactional
 public class SubPageService extends AbstractV8Service {
@@ -25,6 +24,16 @@ public class SubPageService extends AbstractV8Service {
 
     @Autowired
     protected SYSPageDTOMapper sysPageDTOMapper;
+
+    public void addSYSSubPageDto(SYSSubPageDto dto) {
+
+        SYSSubPage sysSubPage = new SYSSubPage();
+
+        sysPageDTOMapper.fillEntity(dto, sysSubPage);
+
+        sysSubPageRepository.save(sysSubPage);
+
+    }
 
     @Transactional
     public List<SYSPage> getPages() {
@@ -45,4 +54,15 @@ public class SubPageService extends AbstractV8Service {
     public void deleteSubPage(long id) {
         sysSubPageRepository.delete(id);
     }
+
+    public void updateSYSSubPageDto(Long id, SYSSubPageDto dto) {
+
+        SYSSubPage sysSubPage = sysSubPageRepository.findOne(id);
+
+        sysPageDTOMapper.fillEntity(dto, sysSubPage);
+
+        sysSubPageRepository.save(sysSubPage);
+
+    }
+
 }

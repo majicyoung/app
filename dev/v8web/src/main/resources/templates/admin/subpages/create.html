@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html layout:decorator="inc/main-layout" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<div layout:fragment="content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box" id="user-box">
+                <div class="box-header with-border">
+                    <h3 class="box-title" th:text="#{admin.subPage.list.create}" th:if="${newEntity}">
+                        admin.subPage.list.create</h3>
+                    <h3 class="box-title" th:text="#{admin.subPage.list.edit}" th:if="${!newEntity}">
+                        admin.subPage.list.edit</h3>
+                    <div class="box-tools">
+                        <a th:href="@{'/admin/subpages/listing.html'}"
+                           class="btn btn-sm btn-flat btn-warning"><i
+                                class="fa fa-backward"></i> <span th:text="#{default.back}"></span></a>
+                    </div>
+                </div>
+                <form role="form" class="mainForm"
+                      th:action="@{${newEntity ? '/admin/subpages/create.html' : '/admin/subpages/'+id+'/update.html'}}"
+                      th:object="${dto}" method="post" autocomplete="off"
+                      onsubmit="return !hasEmptyFields('#user-box form .form-control[required]');">
+                    <input type="hidden" th:field="*{id}"/>
+                    <div class="box-body" id="bloc-user-form">
+                        <div class="row">
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    <label th:text="#{admin.subPage.list.create.enabled}+'*'">admin.subPage.list.create.enabled*</label>
+                                    <input type="text" class="form-control"
+                                           th:placeholder="#{admin.subPage.list.create.enabled}" required="required"
+                                           th:field="*{enabled}"/>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    <label th:text="#{admin.subPage.list.create.code}+'*'">admin.subPage.list.create.code*</label>
+                                    <input type="text" class="form-control"
+                                           th:placeholder="#{admin.subPage.list.create.code}" required="required"
+                                           th:field="*{code}"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    <label th:text="#{admin.subPage.list.create.ranking}+'*'">admin.subPage.list.create.ranking*</label>
+                                    <input type="number" class="form-control"
+                                           th:placeholder="#{admin.subPage.list.create.ranking}" required="required"
+                                           th:field="*{ranking}"/>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    <label th:text="#{admin.subPage.list.create.name}+'*'">admin.subPage.list.create.name*</label>
+                                    <input type="text" class="form-control"
+                                           th:placeholder="#{admin.subPage.list.create.name}" required="required"
+                                           th:field="*{name}"/>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    <label th:text="#{admin.subPage.list.create.sysPage}+'*'">admin.subPage.list.table.sysPage*</label>
+                                    <select class="form-control" id="inputFarmOwner" th:field="*{sysPage}"
+                                            required="required">
+                                        <option value="" th:text="|-- #{admin.subPage.list.select_page} --|">
+                                            #{admin.subPage.list.select_page}
+                                        </option>
+                                        <option th:each="page : ${allPages}" th:value="${page.id}"
+                                                th:text="${page.name}"></option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    <label th:text="#{admin.subPage.list.create.description}">admin.subPage.list.create.description</label>
+                                    <input type="text" class="form-control"
+                                           th:placeholder="#{admin.subPage.list.create.description}"
+                                           th:field="*{description}"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    <label th:text="#{admin.subPage.list.create.i18nDefault}+'*'">admin.subPage.list.create.i18nDefault*</label>
+                                    <input type="text" class="form-control"
+                                           th:placeholder="#{admin.subPage.list.create.i18nDefault}" required="required"
+                                           th:field="*{i18nDefault}"/>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    <label th:text="#{admin.subPage.list.create.i18nEn}">admin.subPage.list.create.i18nEn</label>
+                                    <input type="text" class="form-control"
+                                           th:placeholder="#{admin.subPage.list.create.i18nEn}"
+                                           th:field="*{i18nEn}"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    <label th:text="#{admin.subPage.list.create.i18nFr}">admin.subPage.list.create.i18nFr</label>
+                                    <input type="text" class="form-control"
+                                           th:placeholder="#{admin.subPage.list.create.i18nFr}"
+                                           th:field="*{i18nFr}"/>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    <label th:text="#{admin.subPage.list.create.i18nEs}">admin.subPage.list.create.i18nEs</label>
+                                    <input type="text" class="form-control"
+                                           th:placeholder="#{admin.subPage.list.create.i18nEs}"
+                                           th:field="*{i18nEs}"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    <label th:text="#{admin.subPage.list.create.i18nTh}">admin.subPage.list.create.i18nTh</label>
+                                    <input type="text" class="form-control"
+                                           th:placeholder="#{admin.subPage.list.create.i18nTh}"
+                                           th:field="*{i18nTh}"/>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    <label th:text="#{admin.subPage.list.create.i18nVt}">admin.subPage.list.create.i18nVt</label>
+                                    <input type="text" class="form-control"
+                                           th:placeholder="#{admin.subPage.list.create.i18nVt}"
+                                           th:field="*{i18nVt}"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    <label th:text="#{admin.subPage.list.create.i18nLa}">admin.subPage.list.create.i18nLa</label>
+                                    <input type="text" class="form-control"
+                                           th:placeholder="#{admin.subPage.list.create.i18nLa}"
+                                           th:field="*{i18nLa}"/>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    <label th:text="#{admin.subPage.list.create.i18nId}">admin.subPage.list.create.i18nId</label>
+                                    <input type="text" class="form-control"
+                                           th:placeholder="#{admin.subPage.list.create.i18nId}"
+                                           th:field="*{i18nId}"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    <label th:text="#{admin.subPage.list.create.i18nKh}">admin.subPage.list.create.i18nKh</label>
+                                    <input type="text" class="form-control"
+                                           th:placeholder="#{admin.subPage.list.create.i18nKh}"
+                                           th:field="*{i18nKh}"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box-footer text-center">
+                        <small th:text="'*'+#{default.mandatory_field}">*default.mandatory_field</small>
+                        <a th:href="@{'/admin/subpages/listing.html'}" class="btn btn-warning"><i
+                                class="fa fa-times"></i>
+                            <span th:text="#{default.cancel}">default.cancel</span></a>
+
+                        <button type="submit" class="btn btn-success">
+                            <span th:text="#{default.submit}">default.submit</span> <i class="fa fa-check"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+</html>

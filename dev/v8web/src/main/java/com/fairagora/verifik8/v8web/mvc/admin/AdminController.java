@@ -204,6 +204,14 @@ public class AdminController extends AbstractV8Controller {
         return "admin/subpages/create";
     }
 
+    @RequestMapping(value = "/admin/subpages/create.html", method = RequestMethod.POST)
+    public String createSubPage(@Validated @ModelAttribute("dto") SYSSubPageDto dto, BindingResult bindResults, Model mv) {
+
+        subPageService.addSYSSubPageDto(dto);
+
+        return "redirect:/admin/subpages/listing.html";
+    }
+
     @RequestMapping(value = "/admin/subpages/{id}/edit.html", method = RequestMethod.GET)
     public String editSubPage(@PathVariable("id") Long id, Model mv) {
 
@@ -214,8 +222,16 @@ public class AdminController extends AbstractV8Controller {
         return "admin/subpages/create";
     }
 
+    @RequestMapping(value = "/admin/subpages/{id}/update.html", method = RequestMethod.POST)
+    public String updateSubPage(@Validated @ModelAttribute("dto") SYSSubPageDto dto, @PathVariable("id") Long id, BindingResult bindResults, Model mv) {
+
+        subPageService.updateSYSSubPageDto(id, dto);
+
+        return "redirect:/admin/subpages/listing.html";
+    }
+
     @RequestMapping(value = "/admin/subpages/{id}/delete.html", method = RequestMethod.POST)
-    public String deleteCL(@PathVariable("id") Long id,  Model mv) {
+    public String deleteCL(@PathVariable("id") Long id, Model mv) {
         subPageService.deleteSubPage(id);
         return "redirect:/admin/subpages/listing.html";
     }
@@ -229,5 +245,6 @@ public class AdminController extends AbstractV8Controller {
 
         mv.addAttribute("newEntity", dto.getId() == null);
         mv.addAttribute("dto", dto);
+        mv.addAttribute("allPages", subPageService.getPages());
     }
 }
