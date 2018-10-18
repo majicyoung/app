@@ -8,6 +8,7 @@ import com.fairagora.verifik8.v8web.services.CodeListsService;
 import com.fairagora.verifik8.v8web.services.SubPageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -48,6 +49,7 @@ public class AdminController extends AbstractV8Controller {
 
     /****************** CL management *****************/
 
+    @PreAuthorize("hasAuthority('R_CLBROWSER')")
     @RequestMapping(value = "/admin/codelists/browser.html", method = RequestMethod.GET)
     public String CLPage(Model mv) {
 
@@ -63,6 +65,7 @@ public class AdminController extends AbstractV8Controller {
         return "admin/codelists/browser";
     }
 
+    @PreAuthorize("hasAuthority('R_CLBROWSER')")
     @RequestMapping(value = "/admin/codelists/browser/{table}", method = RequestMethod.GET)
     public String showCL(@PathVariable("table") String table, @RequestParam(value = "error", required = false) String error, Model mv) {
 
@@ -83,6 +86,7 @@ public class AdminController extends AbstractV8Controller {
         return "admin/codelists/listing";
     }
 
+    @PreAuthorize("hasAuthority('R_CLEDITOR')")
     @RequestMapping(value = "/admin/codelists/browser/{table}/create.html", method = RequestMethod.GET)
     public String createCL(@PathVariable("table") String table, Model mv) {
 
@@ -93,6 +97,7 @@ public class AdminController extends AbstractV8Controller {
         return "admin/codelists/create";
     }
 
+    @PreAuthorize("hasAuthority('R_CLEDITOR')")
     @RequestMapping(value = "/admin/codelists/browser/{table}/create.html", method = RequestMethod.POST)
     public String createCL(@PathVariable("table") String table, @Validated @ModelAttribute("clDto") CLDto dto, BindingResult bindResults, Model mv) {
         try {
@@ -107,6 +112,7 @@ public class AdminController extends AbstractV8Controller {
         }
     }
 
+    @PreAuthorize("hasAuthority('R_CLEDITOR')")
     @RequestMapping(value = "/admin/codelists/browser/{table}/{id}/update.html", method = RequestMethod.POST)
     public String updateCL(@PathVariable("table") String table, @Validated @ModelAttribute("clDto") CLDto dto, @PathVariable("id") Long id, BindingResult bindResults, Model mv) {
         try {
@@ -117,6 +123,7 @@ public class AdminController extends AbstractV8Controller {
         }
     }
 
+    @PreAuthorize("hasAuthority('W_CLEDITOR')")
     @RequestMapping(value = "/admin/codelists/browser/{table}/{languageId}/{countryId}/update.html", method = RequestMethod.POST)
     public String updateCL(@PathVariable("table") String table, @Validated @ModelAttribute("clDto") CLDto dto, @PathVariable("languageId") Long languageId, @PathVariable("countryId") Long countryId, BindingResult bindResults, Model mv) {
         try {
@@ -127,12 +134,14 @@ public class AdminController extends AbstractV8Controller {
         }
     }
 
+    @PreAuthorize("hasAuthority('W_CLEDITOR')")
     @RequestMapping(value = "/admin/codelists/browser/{table}/{id}/delete.html", method = RequestMethod.POST)
     public String deleteCL(@PathVariable("table") String table, @PathVariable("id") Long id, Model mv) {
         codeListservice.deleteCL(table, id);
         return "redirect:/admin/codelists/browser/" + table + "/";
     }
 
+    @PreAuthorize("hasAuthority('R_CLEDITOR')")
     @RequestMapping(value = "/admin/codelists/browser/{table}/{id}/edit.html", method = RequestMethod.GET)
     public String editCL(@PathVariable("table") String table, @PathVariable("id") Long id, Model mv) {
 
@@ -147,6 +156,7 @@ public class AdminController extends AbstractV8Controller {
     }
 
     /***** For cl_ref_languages_countries table only *****/
+    @PreAuthorize("hasAuthority('R_CLEDITOR')")
     @RequestMapping(value = "/admin/codelists/browser/{table}/{languageId}/{countryId}/edit.html", method = RequestMethod.GET)
     public String editCL(@PathVariable("table") String table, @PathVariable("languageId") Long languageId, @PathVariable("countryId") Long countryId, Model mv) {
 
@@ -160,6 +170,7 @@ public class AdminController extends AbstractV8Controller {
         return "admin/codelists/create";
     }
 
+    @PreAuthorize("hasAuthority('W_CLEDITOR')")
     @RequestMapping(value = "/admin/codelists/browser/{table}/{languageId}/{countryId}/delete.html", method = RequestMethod.POST)
     public String deleteCL(@PathVariable("table") String table, @PathVariable("languageId") Long languageId, @PathVariable("countryId") Long countryId, Model mv) {
         codeListservice.deleteCL(languageId, countryId);
@@ -182,6 +193,7 @@ public class AdminController extends AbstractV8Controller {
 
     /****************** Sub page *****************/
 
+    @PreAuthorize("hasAuthority('R_SUBPAGEBROWSER')")
     @RequestMapping(value = "/admin/subpages/listing.html", method = RequestMethod.GET)
     public String subPage(Model mv) {
 
@@ -196,6 +208,7 @@ public class AdminController extends AbstractV8Controller {
         return "admin/subpages/listing";
     }
 
+    @PreAuthorize("hasAuthority('R_SUBPAGEEDITOR')")
     @RequestMapping(value = "/admin/subpages/create.html", method = RequestMethod.GET)
     public String createSubPage(Model mv) {
 
@@ -204,6 +217,7 @@ public class AdminController extends AbstractV8Controller {
         return "admin/subpages/create";
     }
 
+    @PreAuthorize("hasAuthority('W_SUBPAGEEDITOR')")
     @RequestMapping(value = "/admin/subpages/create.html", method = RequestMethod.POST)
     public String createSubPage(@Validated @ModelAttribute("dto") SYSSubPageDto dto, BindingResult bindResults, Model mv) {
 
@@ -212,6 +226,7 @@ public class AdminController extends AbstractV8Controller {
         return "redirect:/admin/subpages/listing.html";
     }
 
+    @PreAuthorize("hasAuthority('W_SUBPAGEEDITOR')")
     @RequestMapping(value = "/admin/subpages/{id}/edit.html", method = RequestMethod.GET)
     public String editSubPage(@PathVariable("id") Long id, Model mv) {
 
@@ -222,6 +237,7 @@ public class AdminController extends AbstractV8Controller {
         return "admin/subpages/create";
     }
 
+    @PreAuthorize("hasAuthority('W_SUBPAGEEDITOR')")
     @RequestMapping(value = "/admin/subpages/{id}/update.html", method = RequestMethod.POST)
     public String updateSubPage(@Validated @ModelAttribute("dto") SYSSubPageDto dto, @PathVariable("id") Long id, BindingResult bindResults, Model mv) {
 
@@ -230,6 +246,7 @@ public class AdminController extends AbstractV8Controller {
         return "redirect:/admin/subpages/listing.html";
     }
 
+    @PreAuthorize("hasAuthority('W_SUBPAGEEDITOR')")
     @RequestMapping(value = "/admin/subpages/{id}/delete.html", method = RequestMethod.POST)
     public String deleteCL(@PathVariable("id") Long id, Model mv) {
         subPageService.deleteSubPage(id);
