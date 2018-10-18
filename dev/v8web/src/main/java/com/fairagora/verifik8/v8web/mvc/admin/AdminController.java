@@ -3,7 +3,9 @@ package com.fairagora.verifik8.v8web.mvc.admin;
 import com.fairagora.verifik8.v8web.data.repo.cl.CLAppAdministrativeCharacteristicTypeRepository;
 import com.fairagora.verifik8.v8web.mvc.admin.dto.CLColumnDto;
 import com.fairagora.verifik8.v8web.mvc.admin.dto.CLDto;
+import com.fairagora.verifik8.v8web.mvc.admin.dto.SYSSubPageDto;
 import com.fairagora.verifik8.v8web.services.CodeListsService;
+import com.fairagora.verifik8.v8web.services.SubPageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
@@ -27,7 +29,7 @@ public class AdminController extends AbstractV8Controller {
     protected CodeListsService codeListservice;
 
     @Autowired
-    protected CLColumnDTOMapper clColumnDTOMapper;
+    protected SubPageService subPageService;
 
     @Autowired
     protected CLAppAdministrativeCharacteristicTypeRepository clAppAdministrativeCharacteristicTypeRepository;
@@ -43,6 +45,8 @@ public class AdminController extends AbstractV8Controller {
 
         return "admin/admin";
     }
+
+    /****************** CL management *****************/
 
     @RequestMapping(value = "/admin/codelists/browser.html", method = RequestMethod.GET)
     public String CLPage(Model mv) {
@@ -176,4 +180,71 @@ public class AdminController extends AbstractV8Controller {
         mv.addAttribute("clDto", clDto);
     }
 
+    /****************** Sub page *****************/
+
+    @RequestMapping(value = "/admin/subpages/listing.html", method = RequestMethod.GET)
+    public String subPage(Model mv) {
+
+        V8Page p = new V8Page();
+        p.setTitle("admin.home");
+        p.setDescription("admin.home");
+        p.setNavBarPrefix("/admin");
+        mv.addAttribute("v8p", p);
+
+        mv.addAttribute("subPages", subPageService.getSubPages());
+
+        return "admin/subpages/listing";
+    }
+
+    @RequestMapping(value = "/admin/subpages/create.html", method = RequestMethod.GET)
+    public String createSubPage(Model mv) {
+
+        prepareForSubPageEdition(new SYSSubPageDto(), mv);
+
+        return "admin/subpages/create";
+    }
+
+    @RequestMapping(value = "/admin/subpages/create.html", method = RequestMethod.POST)
+    public String createSubPage(@Validated @ModelAttribute("dto") SYSSubPageDto dto, BindingResult bindResults, Model mv) {
+
+        subPageService.addSYSSubPageDto(dto);
+
+        return "redirect:/admin/subpages/listing.html";
+    }
+
+    @RequestMapping(value = "/admin/subpages/{id}/edit.html", method = RequestMethod.GET)
+    public String editSubPage(@PathVariable("id") Long id, Model mv) {
+
+        SYSSubPageDto dto = subPageService.getSYSSubPageDto(id);
+
+        prepareForSubPageEdition(dto, mv);
+
+        return "admin/subpages/create";
+    }
+
+    @RequestMapping(value = "/admin/subpages/{id}/update.html", method = RequestMethod.POST)
+    public String updateSubPage(@Validated @ModelAttribute("dto") SYSSubPageDto dto, @PathVariable("id") Long id, BindingResult bindResults, Model mv) {
+
+        subPageService.updateSYSSubPageDto(id, dto);
+
+        return "redirect:/admin/subpages/listing.html";
+    }
+
+    @RequestMapping(value = "/admin/subpages/{id}/delete.html", method = RequestMethod.POST)
+    public String deleteCL(@PathVariable("id") Long id, Model mv) {
+        subPageService.deleteSubPage(id);
+        return "redirect:/admin/subpages/listing.html";
+    }
+
+    private void prepareForSubPageEdition(SYSSubPageDto dto, Model mv) {
+        V8Page p = new V8Page();
+        p.setTitle("admin.home");
+        p.setDescription("admin.home");
+        p.setNavBarPrefix("/admin");
+        mv.addAttribute("v8p", p);
+
+        mv.addAttribute("newEntity", dto.getId() == null);
+        mv.addAttribute("dto", dto);
+        mv.addAttribute("allPages", subPageService.getPages());
+    }
 }
