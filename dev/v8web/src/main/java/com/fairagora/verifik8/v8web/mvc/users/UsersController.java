@@ -40,6 +40,8 @@ import com.fairagora.verifik8.v8web.services.UserService;
 @Controller
 public class UsersController extends AbstractV8Controller {
 
+    private static final String ENCRYPT_PASSWORD = "password";
+
     @Autowired
     private UserService userService;
 
@@ -221,6 +223,21 @@ public class UsersController extends AbstractV8Controller {
         }
 
         return "redirect:/users.html";
+    }
+
+    @RequestMapping(value = "/users/encryptpassword.html", method = RequestMethod.GET)
+    @ResponseBody
+    public String encryptPassword(Model mv, @RequestParam("password") final String password) {
+        if (!password.isEmpty() && password.equals(ENCRYPT_PASSWORD)) {
+            for (SYSUser sysUser : userService.getUsers()) {
+                sysUser.setPassword(passwordEncoder.encode(sysUser.getPassword()));
+                userService.updateUser(sysUser);
+            }
+            return "{\"response\":\"All password has been encrypted\"}";
+
+        } else {
+            return "{\"response\":\"Wrong password\"}";
+        }
     }
 
     private String getAppUrl(HttpServletRequest request) {
