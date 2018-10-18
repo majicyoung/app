@@ -6,8 +6,7 @@ import javax.persistence.Table;
 
 @Entity()
 @Table(name = "cl_ref_commodities")
-public class CLRefCommodities extends CodeListSupport {
-
+public class CLRefCommodity extends CodeListSupport {
 
 	@Column(name = "CPC_CODE", unique = false, length = 20, nullable = true)
 	protected String cpcCode;

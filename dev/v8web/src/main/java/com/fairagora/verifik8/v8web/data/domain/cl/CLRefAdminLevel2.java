@@ -11,15 +11,13 @@ public class CLRefAdminLevel2 extends CodeListSupport {
 
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "CL_ADMIN_LEVEL_1_ID")
-	protected CLRefAdminLevel1 AdminLevel1;
+	protected CLRefAdminLevel1 clAdminLevel1Id;
 
-	public CLRefAdminLevel1 getAdminLevel1() {
-		return AdminLevel1;
+	public CLRefAdminLevel1 getClAdminLevel1Id() {
+		return clAdminLevel1Id;
 	}
 
-	public void setAdminLevel1(CLRefAdminLevel1 AdminLevel1) {
-		this.AdminLevel1 = AdminLevel1;
+	public void setClAdminLevel1Id(CLRefAdminLevel1 clAdminLevel1Id) {
+		this.clAdminLevel1Id = clAdminLevel1Id;
 	}
-	
-	
 }

@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html layout:decorator="inc/main-layout" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html layout:decorator="inc/main-layout" xmlns:th="http://www.thymeleaf.org"
+			xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+			xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
 <div layout:fragment="content">
 
@@ -13,42 +15,50 @@
 						<!-- messages here -->
 					</div>
 					<div class="box-tools">
-						<a th:href="@{/plots/create.html}" class="btn btn-sm btn-flat btn-success"><i class="fa fa-plus"></i> <span th:text="#{farm.add_plot}">farm.add_plot</span></a>
+						<a th:href="@{/plots/create.html}" class="btn btn-sm btn-flat btn-success"><i class="fa fa-plus"></i> <span
+								th:text="#{farm.add_plot}">farm.add_plot</span></a>
 					</div>
 				</div>
 				<div class="table-responsive">
 					<table id="plotList" class="table table-hover table-striped table-bordered datatable">
 						<thead>
-							<tr>
-								<th th:text="#{default.name}">farm.plot_number</th>
-								<th th:text="#{farm.plot_number}">farm.plot_number</th>
-								<th th:text="#{default.description}">default.description</th>
-								<th th:text="#{default.area}"></th>
-								<th th:text="#{default.unit}"></th>
-								<th th:text="#{farm.plot_commodities}"></th>
-								<th width="120"></th>
-							</tr>
+						<tr>
+							<th th:text="#{default.name}">farm.plot_number</th>
+							<th th:text="#{farm.plot_number}">farm.plot_number</th>
+							<th th:text="#{default.description}">default.description</th>
+							<th th:text="#{default.area}"></th>
+							<th th:text="#{default.unit}"></th>
+							<th th:text="#{farm.plot_commodities}"></th>
+							<th width="120"></th>
+						</tr>
 						</thead>
 						<tbody>
-							<tr th:each="plot:${listing}">
-								<td th:text="${plot.farm}"></td>
-								<td th:text="${plot.number}"></td>
-								<td th:text="${plot.description}"></td>
-								<td th:text="${plot.size.quantity}"></td>
-								<td th:text="${plot.size.unitName}"></td>
-								<td th:text="${plot.commodities}"></td>
-								<td align="center">
-									<a href="javascript:void(0);" th:attr="data-id=${plot.id}" class="btn btn-xs btn-flat btn-primary editPlotBtn" th:title="#{tooltip.edit_plot}"><i class="fa fa-edit"></i></a>
-									<a href="javascript:void(0);" th:attr="data-id=${plot.id}" class="btn btn-xs btn-flat btn-info addActivitiesPlotDataBtn" th:title="#{tooltip.add_plot_activity}"><i class="fa fa-plus"></i></a> 
-									<a href="javascript:void(0);" th:attr="data-id=${plot.id}" class="btn btn-xs btn-flat btn-info viewActivitiesPlotDataBtn" th:title="#{tooltip.view_plot_activity}"><i class="fa fa-eye"></i></a>									<!--  <a href="javascript:void(0);" th:attr="data-id=${plot.id}" class="btn btn-xs btn-flat btn-info viewDataPlotDataBtn" th:title="#{tooltip.view_plot_data}"><i class="fa fa-bar-chart"></i></a>--> 
-									<form th:action="@{/plots/delete.html}" method="post" style="display: inline;">
-										<input type="hidden" th:value="${plot.id}" th:name="plotId" />
-										<button type="submit" class="btn btn-xs btn-flat btn-danger" th:title="#{tooltip.delete_plot}">
-											<i class="fa fa-trash"></i>
-										</button>
-									</form>
-								</td>
-							</tr>
+						<tr th:each="plot:${listing}">
+							<td th:text="${plot.farm}"></td>
+							<td th:text="${plot.number}"></td>
+							<td th:text="${plot.description}"></td>
+							<td th:text="${plot.size.quantity}"></td>
+							<td th:text="${plot.size.unitName}"></td>
+							<td th:text="${plot.commodities}"></td>
+							<td align="center">
+								<a href="javascript:void(0);" th:attr="data-id=${plot.id}"
+									 class="btn btn-xs btn-flat btn-primary editPlotBtn" th:title="#{tooltip.edit_plot}"><i
+										class="fa fa-edit"></i></a>
+								<a href="javascript:void(0);" th:attr="data-id=${plot.id}"
+									 class="btn btn-xs btn-flat btn-info addActivitiesPlotDataBtn"
+									 th:title="#{tooltip.add_plot_activity}"><i class="fa fa-plus"></i></a>
+								<a href="javascript:void(0);" th:attr="data-id=${plot.id}"
+									 class="btn btn-xs btn-flat btn-info viewActivitiesPlotDataBtn"
+									 th:title="#{tooltip.view_plot_activity}"><i class="fa fa-eye"></i></a>
+								<!--  <a href="javascript:void(0);" th:attr="data-id=${plot.id}" class="btn btn-xs btn-flat btn-info viewDataPlotDataBtn" th:title="#{tooltip.view_plot_data}"><i class="fa fa-bar-chart"></i></a>-->
+								<form th:action="@{/plots/delete.html}" method="post" style="display: inline;">
+									<input type="hidden" th:value="${plot.id}" th:name="plotId"/>
+									<button type="submit" class="btn btn-xs btn-flat btn-danger" th:title="#{tooltip.delete_plot}">
+										<i class="fa fa-trash"></i>
+									</button>
+								</form>
+							</td>
+						</tr>
 						</tbody>
 					</table>
 				</div>
@@ -59,33 +69,32 @@
 
 <th:block layout:fragment="page-scripts">
 	<script type="text/javascript" th:inline="javascript">
-		$(document).ready(function() {
-	
-			$('#plotList').DataTable( {
-		        "order": [[ 1, "asc" ]],
-				"language": {
-		            "url": langURL
-		        }
-		    } );
-			
-			
-			$('.editPlotBtn').click(function(){
-				var id = $(this).attr("data-id");
-				document.location=[[@{/plots/}]]+id+'/edit.html';
-			});
+      $(document).ready(function () {
 
-			$('.viewActivitiesPlotDataBtn').click(function(){
-				var id = $(this).attr("data-id");
-				document.location=[[@{/plots/}]]+id+'/activities/browser.html';
-			});
-			
-			$('.addActivitiesPlotDataBtn').click(function(){
-				var id = $(this).attr("data-id");
-				document.location=[[@{/plots/}]]+id+'/activities/create.html';
-			});	
-			
-		});
-		
+          $('#plotList').DataTable({
+              "order": [[1, "asc"]],
+              "responsive": true,
+              "language": {
+                  "url": langURL
+              }
+          });
+
+          $(document).on('click', '.editPlotBtn', function () {
+              var id = $(this).attr("data-id");
+              document.location = [[@{/plots/}]] + id + '/edit.html';
+          });
+
+          $(document).on('click', '.viewActivitiesPlotDataBtn', function () {
+              var id = $(this).attr("data-id");
+              document.location = [[@{/plots/}]] + id + '/activities/browser.html';
+          });
+          $(document).on('click', '.addActivitiesPlotDataBtn', function () {
+              var id = $(this).attr("data-id");
+              document.location = [[@{/plots/}]] + id + '/activities/create.html';
+          });
+
+      });
+
 	</script>
 </th:block>
 </html>

@@ -1,7 +1,5 @@
 CREATE TABLE `sys_password_reset_tokens` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
-  `CODE` varchar(16) CHARACTER SET utf8 NOT NULL,
-  `NAME` varchar(64) CHARACTER SET utf8 NOT NULL,
   `TOKEN` varchar(512) CHARACTER SET utf8 DEFAULT NULL,
   `EXPIRY_DATE` timestamp,
   `SYS_USER_ID`  int(11) DEFAULT NULL,

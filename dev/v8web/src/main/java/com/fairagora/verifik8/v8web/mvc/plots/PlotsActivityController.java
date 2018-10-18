@@ -3,8 +3,11 @@ package com.fairagora.verifik8.v8web.mvc.plots;
 import java.util.List;
 import java.util.Optional;
 
+import com.fairagora.verifik8.v8web.data.domain.cl.CLAppQuantityUnit;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLRefProduct;
 import com.fairagora.verifik8.v8web.data.domain.dt.DTFarmPlotProductionCycle;
+import com.fairagora.verifik8.v8web.data.repo.cl.CLFarmPlotActivityTypeRepository;
+import com.fairagora.verifik8.v8web.data.repo.cl.CLFarmPondActivityTypeRepository;
 import com.fairagora.verifik8.v8web.data.repo.cl.CLRefProductRepository;
 import com.fairagora.verifik8.v8web.services.FarmPlotProductionCycleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +42,10 @@ public class PlotsActivityController extends AbstractV8Controller {
 	private CLRefProductRepository clRefProductRepository;
 
 	@Autowired
+	private CLFarmPlotActivityTypeRepository clFarmPlotActivityTypeRepository;
+
+
+	@Autowired
 	protected JdbcTemplate jdbc;
 
 	@Autowired
@@ -60,6 +67,8 @@ public class PlotsActivityController extends AbstractV8Controller {
 		mv.addAttribute("plotId", plotId);
 		mv.addAttribute("farmId", farmId.orElse(null));
 		mv.addAttribute("backUrl", farmId.map(id -> "/farm/" + id + "/plots.html").orElse("/plots/browser.html"));
+		mv.addAttribute("createActivityUrl", farmId.map(id -> "/farm/" + id + "/plots/"+plotId+"/activities/create.html").orElse("/plots/"+plotId+"/activities/create.html"));
+
 
 		preparePage(plotId, mv);
 		setToReadOnly(mv, "W_PLOTACTIVITY");
@@ -132,7 +141,7 @@ public class PlotsActivityController extends AbstractV8Controller {
 	 * @return
 	 */
 	@PreAuthorize("hasAuthority('W_PLOTACTIVITY')")
-	@RequestMapping(value = {"/plots/{plotId}/activities/update.html",  "/farm/{farmId}/pond/{pondId}/activities/update.html"}, method = RequestMethod.POST)
+	@RequestMapping(value = {"/plots/{plotId}/activities/update.html",  "/farm/{farmId}/plots/{pondId}/activities/update.html"}, method = RequestMethod.POST)
 	public String showPlotActivities(@PathVariable("farmId") Optional<Long> farmId, @PathVariable("plotId") Long plotId, PlotActivityDto dto, BindingResult result, Model mv) {
 
 		DTFarmPlotActivity act = null;
@@ -194,7 +203,19 @@ public class PlotsActivityController extends AbstractV8Controller {
 	@RequestMapping(value = "/plots/{plotId}/products/{productId}/unit", method = RequestMethod.GET)
 	@ResponseBody
 	public Long getProductRecommendedUnit(@PathVariable("plotId") Long plotId, @PathVariable("productId") Long productId, Model mv) {
-		return clRefProductRepository.findOne(productId).getClAppQuantityUnit().getId();
+		return clRefProductRepository.findOne(productId).getClAppConstructionLocationType().getId();
+	}
+
+	@PreAuthorize("hasAuthority('W_PONDMEASURE')")
+	@RequestMapping(value = "/plots/{pondId}/activities/{activityId}/unit", method = RequestMethod.GET)
+	@ResponseBody
+	public Long getActivityRecommendedUnit(@PathVariable("pondId") Long pondId, @PathVariable("activityId") Long activityId, Model mv) {
+		CLAppQuantityUnit clAppQuantityUnit=  clFarmPlotActivityTypeRepository.findOne(activityId).getClAppQuantityUnit();
+		if (clAppQuantityUnit != null){
+			return clAppQuantityUnit.getId();
+		}else {
+			return null;
+		}
 	}
 
 	@PreAuthorize("hasAuthority('R_PONDBROWSER')")
