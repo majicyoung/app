@@ -1,0 +1,1 @@
+alter table `cl_ref_gear_characteristics` change `CL_REF_GEAR_ID` `ID` int not null;

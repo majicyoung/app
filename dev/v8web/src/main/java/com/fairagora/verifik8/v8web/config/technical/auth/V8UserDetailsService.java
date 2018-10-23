@@ -20,7 +20,7 @@ import com.fairagora.verifik8.v8web.data.repo.sys.SYSUserRepository;
 public class V8UserDetailsService implements UserDetailsService, ApplicationListener<AuthenticationSuccessEvent> {
 
     private static final String USERS_BY_NAME = "SELECT email,password,active FROM sys_users WHERE email=?";
-    private static final String AUTORITIES_BY_USERNAME = "SELECT CONCAT('ROLE_',sys_roles.CODE) FROM sys_users LEFT JOIN sys_roles ON sys_roles.ID=SYS_ROLE_ID WHERE email=? or sys_users.name=?";
+    private static final String AUTORITIES_BY_USERNAME = "SELECT CONCAT('ROLE_',sys_roles.CODE) FROM sys_users LEFT JOIN sys_roles ON sys_roles.ID=SYS_ROLE_ID WHERE email=? or sys_users.phone_number=?";
 
     @Autowired
     private SYSUserRepository userRepository;

@@ -201,7 +201,7 @@ public class PondActivityController extends AbstractV8Controller {
 	@RequestMapping(value = "/ponds/{pondId}/products/{productId}/unit", method = RequestMethod.GET)
 	@ResponseBody
 	public Long getProductRecommendedUnit(@PathVariable("pondId") Long pondId, @PathVariable("productId") Long productId, Model mv) {
-		return clRefProductRepository.findOne(productId).getClAppQuantityUnit().getId();
+		return clRefProductRepository.findOne(productId).getClAppConstructionLocationType().getId();
 	}
 
 	@PreAuthorize("hasAuthority('W_PONDMEASURE')")

@@ -134,7 +134,7 @@ public class PlotsActivityController extends AbstractV8Controller {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param id
 	 * @param plotId
 	 * @param mv
@@ -172,7 +172,7 @@ public class PlotsActivityController extends AbstractV8Controller {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param id
 	 * @param plotId
 	 * @param mv
@@ -203,7 +203,7 @@ public class PlotsActivityController extends AbstractV8Controller {
 	@RequestMapping(value = "/plots/{plotId}/products/{productId}/unit", method = RequestMethod.GET)
 	@ResponseBody
 	public Long getProductRecommendedUnit(@PathVariable("plotId") Long plotId, @PathVariable("productId") Long productId, Model mv) {
-		return clRefProductRepository.findOne(productId).getClAppQuantityUnit().getId();
+		return clRefProductRepository.findOne(productId).getClAppConstructionLocationType().getId();
 	}
 
 	@PreAuthorize("hasAuthority('W_PONDMEASURE')")
@@ -233,7 +233,7 @@ public class PlotsActivityController extends AbstractV8Controller {
 
 
 	/**
-	 * 
+	 *
 	 * @param farm
 	 * @param mv
 	 */

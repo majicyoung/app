@@ -40,7 +40,7 @@ public class FarmService extends AbstractV8Service {
 
 	@Autowired
 	private RegEntityFarmPondRepository regEntityFarmPondRepository;
-	
+
 	@Autowired
 	private RegEntityFarmPlotRepository regEntityFarmPlotRepository;
 
@@ -51,10 +51,18 @@ public class FarmService extends AbstractV8Service {
 	protected RegEntityFarmBuyerAssignmentRepository regEntityFarmBuyerAssignmentRepository;
 
 
+	@Autowired
+	private SYSUserRepository userRepo;
+
+
+	@Autowired
+	private RegEntityFarmDetailsRepository farmDetailsRepository;
+
+
 	/**
 	 * Return a list of Model Enhanced Farms, useful for display form meta data,
 	 * in an optimized way
-	 * 
+	 *
 	 * @return
 	 */
 	public List<V8Farm>
@@ -99,11 +107,8 @@ public class FarmService extends AbstractV8Service {
 		return farms;
 	}
 
-	@Autowired
-	private SYSUserRepository userRepo;
-
 	/**
-	 * 
+	 *
 	 * @param farmsEntities
 	 * @return
 	 */
@@ -160,9 +165,6 @@ public class FarmService extends AbstractV8Service {
 
 	}
 
-	@Autowired
-	private RegEntityFarmDetailsRepository farmDetailsRepository;
-
 	@Transactional
 	public void deleteFarm(Long id) {
 		regEntityRepository.delete(id);
@@ -191,10 +193,11 @@ public class FarmService extends AbstractV8Service {
 				break;
 
 			case SYSRole.farm:
-				List<V8Farm> farmDetails1 = listFarms();
-				for (V8Farm f : farmDetails1) {
-					regEntityPonds.addAll(regEntityFarmPondRepository.findByFarmId(f.getId()));
-				}
+//				List<V8Farm> farmDetails1 = listFarms();
+//				for (V8Farm f : farmDetails1) {
+//					regEntityPonds.addAll(regEntityFarmPondRepository.findByFarmId(f.getId()));
+//				}
+				regEntityPonds.addAll(regEntityFarmPondRepository.findByFarmId(user.getFarm().getId()));
 				break;
 
 			case SYSRole.country:
@@ -230,10 +233,12 @@ public class FarmService extends AbstractV8Service {
 				break;
 
 			case SYSRole.farm:
-				List<V8Farm> farmDetails1 = listFarms();
-				for (V8Farm f : farmDetails1) {
-					regEntityPlots.addAll(regEntityFarmPlotRepository.findByFarmId(f.getId()));
-				}
+//				List<V8Farm> farmDetails1 = listFarms();
+//				for (V8Farm f : farmDetails1) {
+//					regEntityPlots.addAll(regEntityFarmPlotRepository.findByFarmId(f.getId()));
+//				}
+				regEntityPlots.addAll(regEntityFarmPlotRepository.findByFarmId(user.getFarm().getId()));
+
 				break;
 
 			case SYSRole.country:
@@ -248,7 +253,7 @@ public class FarmService extends AbstractV8Service {
 
 		return regEntityPlots;
 	}
-	
+
 	@Transactional
 	public List<RegEntityFarmPond> listVisiblePoundsForLoggedUser(V8LoggedUser loggedUser) {
 		List<RegEntityFarmPond> r = new ArrayList<>();
@@ -268,10 +273,9 @@ public class FarmService extends AbstractV8Service {
 				break;
 
 			case SYSRole.farm:
-				if(u.getFarm() != null){
-					Optional<RegEntityFarmDetails> farmDetails1 = farmDetailsRepository.findByEntityId(u.getFarm().getId());
-					farmDetails1.ifPresent(d -> r.addAll(regEntityFarmPondRepository.findByFarmId(d.getEntity().getId())));
-				}
+
+				r.addAll(regEntityFarmPondRepository.findByFarmId(u.getFarm().getId()));
+
 				break;
 
 			case SYSRole.country:
@@ -306,10 +310,7 @@ public class FarmService extends AbstractV8Service {
 					break;
 
 				case SYSRole.farm:
-					List<RegEntityFarmDetails> farmDetails1 = farmDetailsRepository.findByOwnerId(u.getId());
-					for (RegEntityFarmDetails f : farmDetails1) {
-						r.addAll(regEntityFarmSupplierRepository.findByFarmIdOrderBySupplierName(f.getId()));
-					}
+					r.addAll(regEntityFarmSupplierRepository.findByFarmIdOrderBySupplierName(u.getFarm().getId()));
 					break;
 
 				case SYSRole.country:

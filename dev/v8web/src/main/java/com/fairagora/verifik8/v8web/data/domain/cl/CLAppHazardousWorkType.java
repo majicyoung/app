@@ -11,33 +11,29 @@ public class CLAppHazardousWorkType extends CodeListSupport {
 
 	@JoinColumn(name = "CL_ENTITY_TYPE_ID")
 	@ManyToOne(optional = true)
-	protected CLAppEntityType entityType;
-
-	public CLAppEntityType getEntityType() {
-		return entityType;
-	}
-
-	public void setEntityType(CLAppEntityType entityType) {
-		this.entityType = entityType;
-	}
-	
+	protected CLAppEntityType clEntityTypeId;
 
 	@JoinColumn(name = "CL_FARM_TYPE_ID")
 	@ManyToOne(optional = true)
-	protected CLFarmType farmType;
-
-	public CLFarmType getFarmType() {
-		return farmType;
-	}
-
-	public void setFarmType(CLFarmType farmType) {
-		this.farmType = farmType;
-	}
-
+	protected CLFarmType clFarmTypeId;
 
 	@ManyToMany(mappedBy="hazardousWorkTypes")
 	private List<RegEntityStaffManagement> regEntityStaffManagements;
-	
-	
-	
+
+	public CLAppEntityType getClEntityTypeId() {
+		return clEntityTypeId;
+	}
+
+	public void setClEntityTypeId(CLAppEntityType clEntityTypeId) {
+		this.clEntityTypeId = clEntityTypeId;
+	}
+
+	public CLFarmType getClFarmTypeId() {
+		return clFarmTypeId;
+	}
+
+	public void setClFarmTypeId(CLFarmType clFarmTypeId) {
+		this.clFarmTypeId = clFarmTypeId;
+	}
+
 }

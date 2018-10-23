@@ -106,7 +106,7 @@
                   <div class="col-xs-12">
                     <div class="col-xs-6">
                       <form th:action="@{'/farm/'+${farmId}+'/pond.html'}" th:object="${pondDto}" id="pondEditorForm"
-                            method="post">
+                            method="post" onsubmit="return addFarmPond()">
                         <h4 class="form-pond-title" th:text="#{farm.add_pond}"></h4>
                         <input type="hidden" id="pondId" th:field="*{id}"/>
                         <input type="hidden" id="farm" th:field="*{farm}"/>
@@ -114,7 +114,7 @@
                           <label for="number" class="col-xs-3 control-label" th:text="|#{farm.pond_number}*|">farm.pond_number*</label>
                           <div class="col-xs-9">
                             <input type="text" class="form-control form-pond form-pond-required" th:field="*{number}"
-                                   th:placeholder="#{farm.pond_number}" maxlength="10"/>
+                                   th:placeholder="#{farm.pond_number}" maxlength="10" required="required"/>
                           </div>
                         </div>
                         <div class="form-group row">
@@ -131,11 +131,12 @@
                             <div class="col-xs-6">
                               <input type="text" class="form-control form-pond form-pond-required"
                                      id="inputFarmPondArea" th:placeholder="#{default.area}"
+                                     required="required"
                                      th:field="*{size.quantity}"/>
                             </div>
                             <div class="col-xs-6">
                               <select class="form-control form-pond form-pond-required" id="inputFarmPondAreaUnit"
-                                      th:field="*{size.unit}">
+                                      th:field="*{size.unit}" required="required">
                                 <option value="" th:text="|-- #{default.select_unit} --|"></option>
                                 <option th:each="unit : ${allQuantityUnits}" th:value="${unit.id}"
                                         th:text="${unit.localisedName}"></option>
@@ -147,7 +148,7 @@
                           <label for="inputFarmPondType" class="col-xs-3 control-label"
                                  th:text="#{farm.pond_type}"></label>
                           <div class="col-xs-9">
-                            <select class="form-control form-pond" id="inputFarmPondType" th:field="*{type}">
+                            <select class="form-control form-pond" id="inputFarmPondType" th:field="*{type}" th:required="required">
                               <option value="" th:text="|-- #{farm.select_pond_type} --|">farm.select_pond_type</option>
                               <option th:each="ptype : ${allPondTypes}" th:value="${ptype.id}"
                                       th:text="${ptype.localisedName}"></option>
@@ -167,9 +168,9 @@
                         </div>
                         <div class="form-group row">
                           <div class="col-xs-9 col-xs-offset-3 text-left" style="margin-top: 20px;">
-                            <a href="javascript:void(0);" class="btn btn-flat btn-primary btn-form-pond"
-                               onclick="addFarmPond();"><i class="fa fa-plus"></i> <span
-                                th:text="#{farm.add_pond}"></span></a>
+                            <button type="submit" class="btn btn-flat btn-primary btn-form-pond">
+                              <i class="fa fa-plus"></i> <span
+                                th:text="#{farm.add_pond}"></span></button>
                             <a href="javascript:void(0);" class="btn btn-flat btn-warning btn-form-pond hide"
                                th:title="#{default.cancel}" onclick="resetForm(5,'pond');"><i class="fa fa-times"></i>
                               <span th:text="#{default.cancel}"></span></a>
@@ -205,38 +206,22 @@
           $('.addPondDataBtn').click(function () {
 
               var id = $(this).attr("data-id");
-              document.location = [[@{/farm/
-          }]]
-              +farmId + [[@{/pond/
-          }]]
-              +id + '/measures/create.html';
+              document.location = [[@{/farm/}]] +farmId + [[@{/pond/}]]+id + '/measures/create.html';
           });
 
           $('.viewDataPondDataBtn').click(function () {
               var id = $(this).attr("data-id");
-              document.location = [[@{/farm/
-          }]]
-              +farmId + [[@{/pond/
-          }]]
-              +id + '/measures/browser.html';
+              document.location = [[@{/farm/}]]+farmId + [[@{/pond/}]]+id + '/measures/browser.html';
           });
 
           $('.viewActivitiesPondDataBtn').click(function () {
               var id = $(this).attr("data-id");
-              document.location = [[@{/farm/
-          }]]
-              +farmId + [[@{/pond/
-          }]]
-              +id + '/activities/browser.html';
+              document.location = [[@{/farm/}]]+farmId + [[@{/pond/}]]+id + '/activities/browser.html';
           });
 
           $('.addActivitiesPondDataBtn').click(function () {
               var id = $(this).attr("data-id");
-              document.location = [[@{/farm/
-          }]]
-              +farmId + [[@{/pond/
-          }]]
-              +id + '/activities/create.html';
+              document.location = [[@{/farm/}]]+farmId + [[@{/pond/}]]+id + '/activities/create.html';
           });
 
           $(".editPondBtn").click(function () {
@@ -275,8 +260,10 @@
               alert([[#{farm.msg_sizePond_exceeds_farmSize}]]);
               $('#totalFarmPondSize').addClass("bg-danger");
               $('#totalFarmPondSize').removeClass("bg-success");
+              return false;
+          }else{
+              return true;
           }
-          $("#pondEditorForm").submit();
       }
 
 

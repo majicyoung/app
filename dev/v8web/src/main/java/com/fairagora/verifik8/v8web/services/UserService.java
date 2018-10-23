@@ -135,4 +135,12 @@ public class UserService extends AbstractV8Service {
         sysPasswordResetTokenRepository.save(myToken);
     }
 
+    public List<SYSUser> getUsers() {
+        return userRepository.findAll();
+    }
+
+    public void updateUser(SYSUser sysUser) {
+        userRepository.save(sysUser);
+    }
+
 }

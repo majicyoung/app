@@ -1,122 +1,122 @@
 {
 	"Ammonia": {
 		"accept": {
-			"max": 0.02,
-			"min": 0
+			"max": 30,
+			"min": 20
 		},
 		"danger": {
 			"max": {
-				"maxLower": 0.5,
-				"maxUpper": 1.00
+				"maxLower": 40,
+				"maxUpper": 50
 			},
 			"min": {
 				"minLower": 0,
-				"minUpper": 0
+				"minUpper": 15
 			}
 		},
-		"default": 0.02,
-		"max": 1.00,
+		"default": 25,
+		"max": 50,
 		"min": 0,
-		"step": 0.01,
+		"step": 0.1,
 		"warning": {
-			"max": 0.5,
-			"min": 0.02
+			"max": 18,
+			"min": 10
 		}
 	},
 	"Dissolved Oxygen": {
 		"accept": {
-			"max": 7,
-			"min": 5
+			"max": 9,
+			"min": 7
 		},
 		"danger": {
 			"max": {
-				"maxLower": 0,
-				"maxUpper": 0
+				"maxLower": 10,
+				"maxUpper": 16
 			},
 			"min": {
-				"minLower": 0,
-				"minUpper": 2
+				"minLower": 1,
+				"minUpper": 6
 			}
 		},
-		"default": 6,
-		"max": 10,
+		"default": 8,
+		"max": 16,
 		"min": 0,
 		"step": 0.1,
 		"warning": {
-			"max": 10,
+			"max": 7,
 			"min": 4
 		}
 	},
 	"pH": {
 		"accept": {
-			"max": 8.4,
-			"min": 7.2
+			"max": 7.4,
+			"min": 6.5
 		},
 		"danger": {
 			"max": {
-				"maxLower": 8.4,
-				"maxUpper": 9
+				"maxLower": 8,
+				"maxUpper": 14
 			},
 			"min": {
-				"minLower": 6,
-				"minUpper": 7.2
+				"minLower": 0,
+				"minUpper": 6
 			}
 		},
-		"default": 7.5,
-		"max": 9,
-		"min": 6,
+		"default": 7,
+		"max": 14,
+		"min": 0,
 		"step": 0.1,
 		"warning": {
-			"max": 0,
-			"min": 0
+			"max": 8,
+			"min": 6
 		}
 	},
 	"Salinity": {
 		"accept": {
-			"max": 35,
-			"min": 10
+			"max": 30,
+			"min": 20
 		},
 		"danger": {
 			"max": {
-				"maxLower": 35,
-				"maxUpper": 40
+				"maxLower": 40,
+				"maxUpper": 50
 			},
 			"min": {
 				"minLower": 0,
-				"minUpper": 0
+				"minUpper": 15
 			}
 		},
-		"default": 35,
-		"max": 40,
+		"default": 34.7,
+		"max": 50,
 		"min": 0,
 		"step": 0.1,
 		"warning": {
-			"max": 10,
-			"min": 0
+			"max": 18,
+			"min": 10
 		}
 	},
 	"Temperature": {
 		"accept": {
-			"max": 31,
-			"min": 22
+			"max": 30,
+			"min": 20
 		},
 		"danger": {
 			"max": {
-				"maxLower": 31,
-				"maxUpper": 34
+				"maxLower": 40,
+				"maxUpper": 50
 			},
 			"min": {
 				"minLower": 0,
-				"minUpper": 0
+				"minUpper": 15
 			}
 		},
-		"default": 26,
-		"max": 34,
-		"min": 15,
+		"default": 25,
+		"max": 50,
+		"min": 0,
 		"step": 0.1,
 		"warning": {
-			"max": 22,
-			"min": 15
+			"max": 18,
+			"min": 10
 		}
 	}
 }
