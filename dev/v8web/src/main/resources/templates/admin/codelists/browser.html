@@ -1,52 +1,42 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
-<head>
-<object th:include="inc/includes :: head" th:remove="tag"></object>
-<title th:text="|${v8App.appName} ${'|'} #{page.home.title}|"></title>
-</head>
+<html layout:decorator="inc/main-layout" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
+<div layout:fragment="content">
 
-<body class="hold-transition sidebar-mini" th:classappend="${v8App.themeColor}"> 
-<div class="wrapper">
-<header class="main-header" th:include="inc/includes :: main-header"></header>
-<aside class="main-sidebar" th:include="inc/includes :: main-sidebar"></aside>
-
- <div class="content-wrapper">
-    <section class="content-header">
-      <h1 >
-        <span th:text="#{${v8p.title}}"></span>
-        <small th:text="#{${v8p.description}}">{{ $page_description or null }}</small>
-      </h1>
-      <ol class="breadcrumb">
-        <li><a th:href="@{'/codelists/browser.html}"><i class="fa fa-dashboard"></i> <span th:text="#{admin.codeListsManagement}">admin.codeListsManagement</span></a></li>
-      </ol>
-    </section>
-    <section class="content">
-    hello
-        
-	
-
-
-
-    </section>
-  </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header with-border">
+                    <h3 class="box-title pull-left" th:text="#{admin.referenceDataManagement.list}">
+                        admin.referenceDataManagement.list</h3>
+                    <div class="box-tools">
+                    </div>
+                </div>
+                <div class="box-body">
+                    <table class="table table-hover table-striped table-bordered datatable" id="userTable">
+                        <thead>
+                        <tr>
+                            <th th:text="#{admin.referenceDataManagement.tableName}">
+                                admin.referenceDataManagement.tableName
+                            </th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="table : ${allTables}">
+                            <td th:inline="text">[[${table.tableName}]]</td>
+                            <td align="center">
+                                <a th:href="@{'/admin/codelists/browser/'+${table.tableName}}"
+                                   class="btn btn-sm btn-flat btn-primary"><i class="fa fa-edit"></i></a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-<th:block th:include="inc/includes :: footer-scripts" th:remove="tag"></th:block>
-
-<script src="http://fairagorav8.pagre-it.com/bower_components/admin-lte/plugins/chartjs/Chart.min.js"></script>
-
-<script type="text/javascript" th:inline="javascript">
-/*<![CDATA[*/
-	
-	$(document).ready(function() {
-	
-	});	
-	
-
-/*]]>*/
-</script>
-
-
-
-</body>
 </html>

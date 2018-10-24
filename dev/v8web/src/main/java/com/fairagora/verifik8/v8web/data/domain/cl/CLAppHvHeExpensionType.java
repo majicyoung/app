@@ -11,13 +11,13 @@ public class CLAppHvHeExpensionType extends CodeListSupport {
 
 	@JoinColumn(name = "CL_COUNTRY_ID")
 	@ManyToOne(optional = false)
-	protected CLRefCountry country;
+	protected CLRefCountry clCountryId;
 
-	public CLRefCountry getCountry() {
-		return country;
+	public CLRefCountry getClCountryId() {
+		return clCountryId;
 	}
 
-	public void setCountry(CLRefCountry country) {
-		this.country = country;
+	public void setClCountryId(CLRefCountry clCountryId) {
+		this.clCountryId = clCountryId;
 	}
 }

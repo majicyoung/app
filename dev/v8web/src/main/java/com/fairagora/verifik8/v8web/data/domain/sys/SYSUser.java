@@ -16,17 +16,17 @@ import com.fairagora.verifik8.v8web.data.domain.reg.RegEntity;
 @Table(name = "sys_users")
 public class SYSUser {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "ID")
-	protected Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ID")
+    protected Long id;
 
-	protected String name;
-	protected String email;
-	protected String password;
-	protected String cacheVersion;
+    protected String name;
+    protected String email;
+    protected String password;
+    protected String cacheVersion;
 
-	protected boolean active;
+    protected boolean active;
 
     @Column(name = "phone_number")
     protected String phoneNumber;
@@ -70,6 +70,14 @@ public class SYSUser {
         return name;
     }
 
+    public String getCacheVersion() {
+		return cacheVersion;
+	}
+
+	public void setCacheVersion(String cacheVersion) {
+		this.cacheVersion = cacheVersion;
+	}
+
     public void setName(String name) {
         this.name = name;
     }
@@ -89,14 +97,6 @@ public class SYSUser {
     public void setPassword(String password) {
         this.password = password;
     }
-    
-    public String getCacheVersion() {
-		return cacheVersion;
-	}
-
-	public void setCacheVersion(String cacheVersion) {
-		this.cacheVersion = cacheVersion;
-	}
 
     public boolean isActive() {
         return active;

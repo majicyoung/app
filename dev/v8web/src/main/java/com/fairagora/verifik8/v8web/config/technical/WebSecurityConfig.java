@@ -34,13 +34,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
     	auth.userDetailsService(userDetailsService);
+
         auth.authenticationProvider(authProvider());
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                .authorizeRequests().antMatchers("/webjars/**", "/static/**", "/forgotpassword*", "/resetpassword*").permitAll().anyRequest().anonymous()
+                .authorizeRequests().antMatchers("/webjars/**", "/static/**", "/forgotpassword*", "/resetpassword*", "/users/encryptpassword.html").permitAll().anyRequest().anonymous()
                 .and()
                 .authorizeRequests()
                 .antMatchers("/").permitAll()
@@ -52,11 +53,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login")
                 .permitAll();
-        http.rememberMe() 
-	        .key(CLIENT_SECRET)
-	        .rememberMeParameter(REMEBER_ME_PARAM)
-	        .rememberMeCookieName(COOKIE_NAME)
-	        .tokenValiditySeconds(864000);
+
         http.csrf().disable();
         http.headers()
                 .frameOptions()

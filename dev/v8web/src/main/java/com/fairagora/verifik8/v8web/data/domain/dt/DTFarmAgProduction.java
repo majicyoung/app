@@ -18,7 +18,7 @@ import javax.persistence.Table;
 
 import com.fairagora.verifik8.v8web.data.domain.V8EntitySupport;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLAppProdDataEntryType;
-import com.fairagora.verifik8.v8web.data.domain.cl.CLRefCommodities;
+import com.fairagora.verifik8.v8web.data.domain.cl.CLRefCommodity;
 import com.fairagora.verifik8.v8web.data.domain.commons.V8Measure;
 import com.fairagora.verifik8.v8web.data.domain.reg.RegEntity;
 
@@ -43,7 +43,7 @@ public class DTFarmAgProduction extends V8EntitySupport {
 
 	@ManyToOne
 	@JoinColumn(name = "CL_COMMODITIES_ID")
-	protected CLRefCommodities commodities;
+	protected CLRefCommodity commodities;
 
 	@ManyToOne
 	@JoinColumn(name = "CL_PROD_DATA_ENTRY_TYPE_ID")
@@ -87,11 +87,11 @@ public class DTFarmAgProduction extends V8EntitySupport {
 		this.dateTo = dateTo;
 	}
 
-	public CLRefCommodities getCommodities() {
+	public CLRefCommodity getCommodities() {
 		return commodities;
 	}
 
-	public void setCommodities(CLRefCommodities commodities) {
+	public void setCommodities(CLRefCommodity commodities) {
 		this.commodities = commodities;
 	}
 

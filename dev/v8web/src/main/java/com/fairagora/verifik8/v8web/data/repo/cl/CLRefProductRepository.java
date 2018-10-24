@@ -20,7 +20,7 @@ public interface CLRefProductRepository extends CodeListRepository<CLRefProduct>
 
 	@Query(value = ""
 			+ "SELECT " + 
-			"NEW com.fairagora.verifik8.v8web.data.domain.CustomProducts(product.code, product.description, product.id, product.name, product.clRefProductType.id, product.clAppQuantityUnit.id) FROM " + 
+			"NEW com.fairagora.verifik8.v8web.data.domain.CustomProducts(product.code, product.description, product.id, product.name, product.clRefProductType.id, product.clAppConstructionLocationType.id) FROM " +
 			"CLRefProduct as product " + 
 			"JOIN product.clRefProductType as productType " + 
 			"WHERE product.enabled = TRUE ORDER BY product.name")

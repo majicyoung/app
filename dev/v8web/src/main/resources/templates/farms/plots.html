@@ -81,7 +81,7 @@
 													<label for="number" class="col-xs-3 control-label" th:text="|#{farm.plot_number}*|">farm.plot_number*</label>
 													<div class="col-xs-9">
 														<input type="text" class="form-control form-plot form-plot-required" th:field="*{number}"
-																	 th:placeholder="#{farm.plot_number}" maxlength="10"/>
+																	 th:placeholder="#{farm.plot_number}" maxlength="10" required="required"/>
 													</div>
 												</div>
 												<div class="form-group row">
@@ -98,11 +98,13 @@
 														<div class="col-xs-6">
 															<input type="text" class="form-control form-plot form-plot-required"
 																		 id="inputFarmPlotArea" th:placeholder="#{default.area}"
-																		 th:field="*{size.quantity}"/>
+																		 th:field="*{size.quantity}"
+																		 required="required"/>
 														</div>
 														<div class="col-xs-6">
 															<select class="form-control form-plot form-plot-required" id="inputFarmPlotAreaUnit"
-																			th:field="*{size.unit}">
+																			th:field="*{size.unit}"
+																			required="required">
 																<option value="" th:text="|-- #{default.select_unit} --|"></option>
 																<option th:each="unit : ${allQuantityUnits}" th:value="${unit.id}"
 																				th:text="${unit.localisedName}"></option>
@@ -112,10 +114,11 @@
 												</div>
 												<div class="form-group row">
 													<label for="inputFarmPlotCommodity" class="col-xs-3 control-label"
-																 th:text="#{farm.plot_commodities}"></label>
+																 th:text="|#{farm.plot_commodities}*|"></label>
 													<div class="col-xs-9">
 														<select class="form-control form-plot" id="inputFarmPlotCommodity"
-																		th:field="*{commodities}">
+																		th:field="*{commodities}"
+																		required="required">
 															<option value="" th:text="|-- #{farm.select_plot_commodities} --|">farm.select_plot_type
 															</option>
 															<option th:each="ptype : ${allCommodities}" th:value="${ptype.id}"
@@ -132,9 +135,9 @@
 												</div>
 												<div class="form-group row">
 													<div class="col-xs-9 col-xs-offset-3 text-left" style="margin-top: 20px;">
-														<a href="javascript:void(0);" class="btn btn-flat btn-primary btn-form-plot"
-															 onclick="addFarmPlot();"><i class="fa fa-plus"></i> <span
-																th:text="#{farm.add_plot}"></span></a>
+														<button type="submit" class="btn btn-flat btn-primary btn-form-plot"
+															 onsubmit="return addFarmPlot()"><i class="fa fa-plus"></i> <span
+																th:text="#{farm.add_plot}"></span></button>
 														<a href="javascript:void(0);" class="btn btn-flat btn-warning btn-form-plot hide"
 															 th:title="#{default.cancel}" onclick="resetForm(5,'plot');"><i class="fa fa-times"></i>
 															<span th:text="#{default.cancel}"></span></a>
@@ -207,7 +210,7 @@
       });
 
       function addFarmPlot() {
-          $("#plotEditorForm").submit();
+          return true;
       }
 
       /*]]>*/
