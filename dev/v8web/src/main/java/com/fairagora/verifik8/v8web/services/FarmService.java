@@ -131,6 +131,7 @@ public class FarmService extends AbstractV8Service {
 						return farmsEntities;
 					case SYSRole.coop:
 						// Get farm own by the cooperative.
+						if (user.getCooperative() == null) break;
 						List<RegEntityFarmDetails> farmDetails = farmDetailsRepository.findByCooperativeId(user.getCooperative().getId());
 						farmDetails.stream().map(RegEntityFarmDetails::getEntity).forEach(filtered::add);
 						return filtered;
@@ -138,6 +139,7 @@ public class FarmService extends AbstractV8Service {
 						// as an FARM user, I shall see only my own farm, from my
 						// user profile, if I have no farm defined, I will see no
 						// farm
+						if (user.getFarm() == null) break;
 						farmsEntities.stream().filter(f -> user.getFarm() != null && f.getId().equals(user.getFarm().getId())).forEach(filtered::add);
 						break;
 					case SYSRole.country:
@@ -147,11 +149,13 @@ public class FarmService extends AbstractV8Service {
 						break;
 					case SYSRole.supplier:
 						//Has supplier I should see the farm i get assign too
+						if (user.getSupplier() == null) break;
 						List<RegEntityFarmSupplierAssignment> regEntityFarmSupplierAssignments = regEntityFarmSupplierRepository.findBySupplierId(user.getSupplier().getId());
 						regEntityFarmSupplierAssignments.stream().map(RegEntityFarmSupplierAssignment::getFarm).forEach(filtered::add);
 						return filtered;
 					case SYSRole.buyer:
 						//Has buyer I should see the farm i get assign too
+						if (user.getBuyer() == null) break;
 						List<RegEntityFarmBuyerAssignment> regEntityFarmBuyerAssignments  = regEntityFarmBuyerAssignmentRepository.findByBuyerId(user.getBuyer().getId());
 						regEntityFarmBuyerAssignments.stream().map(RegEntityFarmBuyerAssignment::getFarm).forEach(filtered::add);
 						return filtered;
@@ -185,6 +189,7 @@ public class FarmService extends AbstractV8Service {
 				break;
 
 			case SYSRole.coop:
+				if (user.getCooperative() == null) break;
 				List<RegEntityFarmDetails> farmDetails = farmDetailsRepository
 						.findByCooperativeId(user.getCooperative().getId());
 				for (RegEntityFarmDetails f : farmDetails) {
@@ -197,6 +202,7 @@ public class FarmService extends AbstractV8Service {
 //				for (V8Farm f : farmDetails1) {
 //					regEntityPonds.addAll(regEntityFarmPondRepository.findByFarmId(f.getId()));
 //				}
+				if (user.getFarm() == null) break;
 				regEntityPonds.addAll(regEntityFarmPondRepository.findByFarmId(user.getFarm().getId()));
 				break;
 
@@ -225,6 +231,7 @@ public class FarmService extends AbstractV8Service {
 				break;
 
 			case SYSRole.coop:
+				if (user.getCooperative() == null) break;
 				List<RegEntityFarmDetails> farmDetails = farmDetailsRepository
 						.findByCooperativeId(user.getCooperative().getId());
 				for (RegEntityFarmDetails f : farmDetails) {
@@ -237,8 +244,8 @@ public class FarmService extends AbstractV8Service {
 //				for (V8Farm f : farmDetails1) {
 //					regEntityPlots.addAll(regEntityFarmPlotRepository.findByFarmId(f.getId()));
 //				}
+				if(user.getFarm()==null) break;
 				regEntityPlots.addAll(regEntityFarmPlotRepository.findByFarmId(user.getFarm().getId()));
-
 				break;
 
 			case SYSRole.country:
