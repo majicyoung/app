@@ -9,14 +9,13 @@ import javax.persistence.Table;
 public class CLRefRegion extends CodeListSupport {
 
 	@Column(name = "ISO_3_CODE", unique = true, length = 3, nullable = false)
-	protected String isoCode;
+	protected String iso3Code;
 
-	public String getIsoCode() {
-		return isoCode;
-	}
+    public String getIso3Code() {
+        return iso3Code;
+    }
 
-	public void setIsoCode(String isoCode) {
-		this.isoCode = isoCode;
-	}
-
+    public void setIso3Code(String iso3Code) {
+        this.iso3Code = iso3Code;
+    }
 }

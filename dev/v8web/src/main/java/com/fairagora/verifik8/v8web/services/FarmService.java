@@ -40,7 +40,7 @@ public class FarmService extends AbstractV8Service {
 
 	@Autowired
 	private RegEntityFarmPondRepository regEntityFarmPondRepository;
-	
+
 	@Autowired
 	private RegEntityFarmPlotRepository regEntityFarmPlotRepository;
 
@@ -51,10 +51,18 @@ public class FarmService extends AbstractV8Service {
 	protected RegEntityFarmBuyerAssignmentRepository regEntityFarmBuyerAssignmentRepository;
 
 
+	@Autowired
+	private SYSUserRepository userRepo;
+
+
+	@Autowired
+	private RegEntityFarmDetailsRepository farmDetailsRepository;
+
+
 	/**
 	 * Return a list of Model Enhanced Farms, useful for display form meta data,
 	 * in an optimized way
-	 * 
+	 *
 	 * @return
 	 */
 	public List<V8Farm>
@@ -99,11 +107,8 @@ public class FarmService extends AbstractV8Service {
 		return farms;
 	}
 
-	@Autowired
-	private SYSUserRepository userRepo;
-
 	/**
-	 * 
+	 *
 	 * @param farmsEntities
 	 * @return
 	 */
@@ -126,6 +131,7 @@ public class FarmService extends AbstractV8Service {
 						return farmsEntities;
 					case SYSRole.coop:
 						// Get farm own by the cooperative.
+						if (user.getCooperative() == null) break;
 						List<RegEntityFarmDetails> farmDetails = farmDetailsRepository.findByCooperativeId(user.getCooperative().getId());
 						farmDetails.stream().map(RegEntityFarmDetails::getEntity).forEach(filtered::add);
 						return filtered;
@@ -133,6 +139,7 @@ public class FarmService extends AbstractV8Service {
 						// as an FARM user, I shall see only my own farm, from my
 						// user profile, if I have no farm defined, I will see no
 						// farm
+						if (user.getFarm() == null) break;
 						farmsEntities.stream().filter(f -> user.getFarm() != null && f.getId().equals(user.getFarm().getId())).forEach(filtered::add);
 						break;
 					case SYSRole.country:
@@ -142,11 +149,13 @@ public class FarmService extends AbstractV8Service {
 						break;
 					case SYSRole.supplier:
 						//Has supplier I should see the farm i get assign too
+						if (user.getSupplier() == null) break;
 						List<RegEntityFarmSupplierAssignment> regEntityFarmSupplierAssignments = regEntityFarmSupplierRepository.findBySupplierId(user.getSupplier().getId());
 						regEntityFarmSupplierAssignments.stream().map(RegEntityFarmSupplierAssignment::getFarm).forEach(filtered::add);
 						return filtered;
 					case SYSRole.buyer:
 						//Has buyer I should see the farm i get assign too
+						if (user.getBuyer() == null) break;
 						List<RegEntityFarmBuyerAssignment> regEntityFarmBuyerAssignments  = regEntityFarmBuyerAssignmentRepository.findByBuyerId(user.getBuyer().getId());
 						regEntityFarmBuyerAssignments.stream().map(RegEntityFarmBuyerAssignment::getFarm).forEach(filtered::add);
 						return filtered;
@@ -159,9 +168,6 @@ public class FarmService extends AbstractV8Service {
 		return filtered;
 
 	}
-
-	@Autowired
-	private RegEntityFarmDetailsRepository farmDetailsRepository;
 
 	@Transactional
 	public void deleteFarm(Long id) {
@@ -183,6 +189,7 @@ public class FarmService extends AbstractV8Service {
 				break;
 
 			case SYSRole.coop:
+				if (user.getCooperative() == null) break;
 				List<RegEntityFarmDetails> farmDetails = farmDetailsRepository
 						.findByCooperativeId(user.getCooperative().getId());
 				for (RegEntityFarmDetails f : farmDetails) {
@@ -191,10 +198,12 @@ public class FarmService extends AbstractV8Service {
 				break;
 
 			case SYSRole.farm:
-				List<V8Farm> farmDetails1 = listFarms();
-				for (V8Farm f : farmDetails1) {
-					regEntityPonds.addAll(regEntityFarmPondRepository.findByFarmId(f.getId()));
-				}
+//				List<V8Farm> farmDetails1 = listFarms();
+//				for (V8Farm f : farmDetails1) {
+//					regEntityPonds.addAll(regEntityFarmPondRepository.findByFarmId(f.getId()));
+//				}
+				if (user.getFarm() == null) break;
+				regEntityPonds.addAll(regEntityFarmPondRepository.findByFarmId(user.getFarm().getId()));
 				break;
 
 			case SYSRole.country:
@@ -222,6 +231,7 @@ public class FarmService extends AbstractV8Service {
 				break;
 
 			case SYSRole.coop:
+				if (user.getCooperative() == null) break;
 				List<RegEntityFarmDetails> farmDetails = farmDetailsRepository
 						.findByCooperativeId(user.getCooperative().getId());
 				for (RegEntityFarmDetails f : farmDetails) {
@@ -230,10 +240,12 @@ public class FarmService extends AbstractV8Service {
 				break;
 
 			case SYSRole.farm:
-				List<V8Farm> farmDetails1 = listFarms();
-				for (V8Farm f : farmDetails1) {
-					regEntityPlots.addAll(regEntityFarmPlotRepository.findByFarmId(f.getId()));
-				}
+//				List<V8Farm> farmDetails1 = listFarms();
+//				for (V8Farm f : farmDetails1) {
+//					regEntityPlots.addAll(regEntityFarmPlotRepository.findByFarmId(f.getId()));
+//				}
+				if(user.getFarm()==null) break;
+				regEntityPlots.addAll(regEntityFarmPlotRepository.findByFarmId(user.getFarm().getId()));
 				break;
 
 			case SYSRole.country:
@@ -248,7 +260,7 @@ public class FarmService extends AbstractV8Service {
 
 		return regEntityPlots;
 	}
-	
+
 	@Transactional
 	public List<RegEntityFarmPond> listVisiblePoundsForLoggedUser(V8LoggedUser loggedUser) {
 		List<RegEntityFarmPond> r = new ArrayList<>();
@@ -268,10 +280,9 @@ public class FarmService extends AbstractV8Service {
 				break;
 
 			case SYSRole.farm:
-				if(u.getFarm() != null){
-					Optional<RegEntityFarmDetails> farmDetails1 = farmDetailsRepository.findByEntityId(u.getFarm().getId());
-					farmDetails1.ifPresent(d -> r.addAll(regEntityFarmPondRepository.findByFarmId(d.getEntity().getId())));
-				}
+
+				r.addAll(regEntityFarmPondRepository.findByFarmId(u.getFarm().getId()));
+
 				break;
 
 			case SYSRole.country:
@@ -306,10 +317,7 @@ public class FarmService extends AbstractV8Service {
 					break;
 
 				case SYSRole.farm:
-					List<RegEntityFarmDetails> farmDetails1 = farmDetailsRepository.findByOwnerId(u.getId());
-					for (RegEntityFarmDetails f : farmDetails1) {
-						r.addAll(regEntityFarmSupplierRepository.findByFarmIdOrderBySupplierName(f.getId()));
-					}
+					r.addAll(regEntityFarmSupplierRepository.findByFarmIdOrderBySupplierName(u.getFarm().getId()));
 					break;
 
 				case SYSRole.country:

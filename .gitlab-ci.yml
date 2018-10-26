@@ -10,8 +10,8 @@ variables:
   IMAGE_LOCAL: verifiki8/backend:$CI_PIPELINE_ID
   IMAGE_STAGING: $IMAGE:staging
   IMAGE_TAGGED: $IMAGE:$CI_BUILD_REF_NAME
-  TAG: "$VERSION.0"
-  VERSION: "0.2"
+  TAG: "$VERSION.1"
+  VERSION: "1.0"
 
 build:
   after_script:
@@ -99,6 +99,26 @@ staging_build:
     - builder
     - verifik8
 
+develop_deploy:
+  before_script:
+    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN registry.united-asian.com
+  environment:
+    name: develop
+  only:
+    - "api"
+  script:
+    - cd ~/verifik8
+    - docker service update verifik8_backend_blue --detach=false --image=$IMAGE_DEVELOP --with-registry-auth
+    - docker service update verifik8_backend_green --detach=false --image=$IMAGE_DEVELOP --with-registry-auth
+    - docker service update verifik8_api_blue --detach=false --image=$IMAGE_DEVELOP --with-registry-auth
+    - docker service update verifik8_api_green --detach=false --image=$IMAGE_DEVELOP --with-registry-auth
+  stage: deploy
+  tags:
+    - develop
+    - uat
+  variables:
+    GIT_STRATEGY: none
+
 staging_deploy:
   before_script:
     - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN registry.united-asian.com
@@ -112,6 +132,10 @@ staging_deploy:
     - docker-compose up -d --no-deps backend_blue
     - docker-compose pull backend_green
     - docker-compose up -d --no-deps backend_green
+    - docker-compose pull api_blue
+    - docker-compose up -d --no-deps api_blue
+    - docker-compose pull api_green
+    - docker-compose up -d --no-deps api_green
   stage: deploy
   tags:
     - staging
