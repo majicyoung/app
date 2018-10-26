@@ -19,76 +19,85 @@ import com.fairagora.verifik8.v8web.data.repo.sys.SYSUserRepository;
 @Service
 public class V8UserDetailsService implements UserDetailsService, ApplicationListener<AuthenticationSuccessEvent> {
 
-	private static final String USERS_BY_NAME = "SELECT email,password,active FROM sys_users WHERE email=?";
-	private static final String AUTORITIES_BY_USERNAME = "SELECT CONCAT('ROLE_',sys_roles.CODE) FROM sys_users LEFT JOIN sys_roles ON sys_roles.ID=SYS_ROLE_ID WHERE email=?";
+    private static final String USERS_BY_NAME = "SELECT email,password,active FROM sys_users WHERE email=?";
+    private static final String AUTORITIES_BY_USERNAME = "SELECT CONCAT('ROLE_',sys_roles.CODE) FROM sys_users LEFT JOIN sys_roles ON sys_roles.ID=SYS_ROLE_ID WHERE email=? or sys_users.phone_number=?";
 
-	@Autowired
-	private SYSUserRepository userRepository;
+    @Autowired
+    private SYSUserRepository userRepository;
 
-	@Autowired
-	private JdbcTemplate jdbc;
+    @Autowired
+    private JdbcTemplate jdbc;
 
-	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-		SYSUser u = userRepository.findByEmail(username.toLowerCase());
-		if (u == null) {
-			throw new UsernameNotFoundException(username);
-		}
+        SYSUser u = null;
 
-		V8LoggedUser loggedUser = new V8LoggedUser(u);
+        if (userRepository.findByEmail(username.toLowerCase()) != null) {
+            u = userRepository.findByEmail(username.toLowerCase());
+        } else {
+            if (userRepository.findByPhoneNumber(username.toLowerCase()) != null) {
+                u = userRepository.findByPhoneNumber(username.toLowerCase());
+            }
+        }
 
-		jdbc.queryForList(AUTORITIES_BY_USERNAME, new Object[] { username.toLowerCase() }, String.class)
-				.forEach(s -> loggedUser.addAuthority(new SimpleGrantedAuthority(s.toUpperCase())));
+        if (u == null) {
+            throw new UsernameNotFoundException(username);
+        }
 
-		String sql = "";
-		sql += "SELECT sys_rights.CODE, sys_rights.RANKING, sys_pages.CODE FROM sys_users_rights";
-		sql += "	LEFT JOIN sys_rights ON sys_rights.ID=sys_users_rights.SYS_RIGHT_ID";
-		sql += "	LEFT JOIN sys_pages ON sys_pages.ID=sys_users_rights.SYS_PAGE_ID";
-		sql += "	LEFT JOIN sys_users ON sys_users.SYS_ROLE_ID=sys_users_rights.SYS_ROLE_ID";
-		sql += "	WHERE sys_users.ID=" + u.getId();
-		sql += "		AND sys_rights.CODE IS NOT NULL";
-		sql += "		AND length(sys_rights.CODE) >0";
-		sql += "		AND sys_pages.CODE IS NOT NULL";
-		sql += "		AND length(sys_pages.CODE) >0";
-		sql += "	ORDER BY sys_rights.RANKING DESC";
+        V8LoggedUser loggedUser = new V8LoggedUser(u);
 
-		SqlRowSet rs = jdbc.queryForRowSet(sql);
-		HashSet<String> pageCodes = new HashSet<>();
-		while (rs.next()) {
-			String right = rs.getString(1);
-			int ranking = rs.getInt(2);
-			String page = rs.getString(3);
+        jdbc.queryForList(AUTORITIES_BY_USERNAME, new Object[]{username.toLowerCase(), username.toLowerCase()}, String.class)
+                .forEach(s -> loggedUser.addAuthority(new SimpleGrantedAuthority(s.toUpperCase())));
 
-			// rights are ordered by ranking, and we don't want to override
-			if (pageCodes.contains(page))
-				continue;
-			pageCodes.add(page);
+        String sql = "";
+        sql += "SELECT sys_rights.CODE, sys_rights.RANKING, sys_pages.CODE FROM sys_users_rights";
+        sql += "	LEFT JOIN sys_rights ON sys_rights.ID=sys_users_rights.SYS_RIGHT_ID";
+        sql += "	LEFT JOIN sys_pages ON sys_pages.ID=sys_users_rights.SYS_PAGE_ID";
+        sql += "	LEFT JOIN sys_users ON sys_users.SYS_ROLE_ID=sys_users_rights.SYS_ROLE_ID";
+        sql += "	WHERE sys_users.ID=" + u.getId();
+        sql += "		AND sys_rights.CODE IS NOT NULL";
+        sql += "		AND length(sys_rights.CODE) >0";
+        sql += "		AND sys_pages.CODE IS NOT NULL";
+        sql += "		AND length(sys_pages.CODE) >0";
+        sql += "	ORDER BY sys_rights.RANKING DESC";
 
-			// save the plain data base value to get more details
-			loggedUser.addAuthority(new SimpleGrantedAuthority(right + "_" + page));
+        SqlRowSet rs = jdbc.queryForRowSet(sql);
+        HashSet<String> pageCodes = new HashSet<>();
+        while (rs.next()) {
+            String right = rs.getString(1);
+            int ranking = rs.getInt(2);
+            String page = rs.getString(3);
 
-			// compute Read and Write status on pages
-			if ("A".equals(right) || "AF".equals(right))
-				loggedUser.addAuthority(new SimpleGrantedAuthority("W_" + page));
-			if (!"X".equalsIgnoreCase(right)) {
-				loggedUser.addAuthority(new SimpleGrantedAuthority("R_" + page));
-			}
-		}
+            // rights are ordered by ranking, and we don't want to override
+            if (pageCodes.contains(page))
+                continue;
+            pageCodes.add(page);
 
-		return loggedUser;
-	}
+            // save the plain data base value to get more details
+            loggedUser.addAuthority(new SimpleGrantedAuthority(right + "_" + page));
 
-	@Override
-	public void onApplicationEvent(AuthenticationSuccessEvent event) {
-		if (event.getAuthentication() != null) {
-			System.out.println("--- DEBUG -- USER LOGIN :" + event.getAuthentication().getName());
-			event.getAuthentication().getAuthorities().forEach(a -> {
-				System.out.println("\t" + a.getAuthority());
-			});
-			System.out.println(
-					"--- END USER LOGIN ------------------------------------------------------------------------");
-		}
-	}
+            // compute Read and Write status on pages
+            if ("A".equals(right) || "AF".equals(right))
+                loggedUser.addAuthority(new SimpleGrantedAuthority("W_" + page));
+            if (!"X".equalsIgnoreCase(right)) {
+                loggedUser.addAuthority(new SimpleGrantedAuthority("R_" + page));
+            }
+        }
+
+        return loggedUser;
+    }
+
+    @Override
+    public void onApplicationEvent(AuthenticationSuccessEvent event) {
+        if (event.getAuthentication() != null) {
+            System.out.println("--- DEBUG -- USER LOGIN :" + event.getAuthentication().getName());
+            event.getAuthentication().getAuthorities().forEach(a -> {
+                System.out.println("\t" + a.getAuthority());
+            });
+            System.out.println(
+                    "--- END USER LOGIN ------------------------------------------------------------------------");
+        }
+    }
 
 }

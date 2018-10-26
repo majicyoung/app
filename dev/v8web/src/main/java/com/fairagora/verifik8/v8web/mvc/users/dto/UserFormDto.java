@@ -18,6 +18,8 @@ public class UserFormDto {
 	protected String email;
 	protected String cacheVersion;
 
+	protected String phoneNumber;
+
 	/**
 	 * id of the country, optional
 	 */
@@ -85,6 +87,14 @@ public class UserFormDto {
 
 	public void setCacheVersion(String cacheVersion) {
 		this.cacheVersion = cacheVersion;
+	}
+
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
 	}
 
 	public Long getCountry() {

@@ -5,14 +5,8 @@ import java.util.List;
 
 import javax.persistence.*;
 
-import com.fairagora.verifik8.v8web.data.domain.cl.CLAppGetBackFinancialDepositReason;
-import com.fairagora.verifik8.v8web.data.domain.cl.CLAppHazardousWorkType;
-import com.fairagora.verifik8.v8web.data.domain.cl.CLAppHiringRestrictionType;
-import com.fairagora.verifik8.v8web.data.domain.cl.CLAppNoEarlyTerminationContractReason;
-import com.fairagora.verifik8.v8web.data.domain.cl.CLAppPaymentDebtType;
-import com.fairagora.verifik8.v8web.data.domain.cl.CLAppSalaryDeductionType;
-import com.fairagora.verifik8.v8web.data.domain.cl.CLAppWorkerEntityDocumentTypes;
-import com.fairagora.verifik8.v8web.data.domain.cl.ClAppTerminationContractReason;
+import com.fairagora.verifik8.v8web.data.domain.cl.*;
+import com.fairagora.verifik8.v8web.data.domain.cl.CLAppDeductionSalaryType;
 import com.fairagora.verifik8.v8web.data.domain.commons.Attachment;
 import com.fairagora.verifik8.v8web.data.domain.reg.RegPicture;
 import org.hibernate.annotations.Fetch;
@@ -203,7 +197,7 @@ public class RegEntityStaffManagement {
 
 	@ManyToOne(optional = true)
 	@JoinColumn(name = "CL_CONTRACT_TERMINATION_REASON_ID")
-	protected ClAppTerminationContractReason contractTerminationReason;
+	protected CLAppTerminationContractReason contractTerminationReason;
 
 	@Column(name = "CONTRACT_TERMINATION_OTHER_REASON")
 	protected String contractTerminationOtherReason;
@@ -216,7 +210,7 @@ public class RegEntityStaffManagement {
 			name="reg_entity_staff_management_cl_app_entity_document_types",
 			joinColumns=@JoinColumn(name="CL_KEPT_WORKER_ENTITY_DOCUMENT_TYPE_ID", referencedColumnName="REG_ENTITY_FARM_ID"),
 			inverseJoinColumns=@JoinColumn(name="REG_ENTITY_FARM_ID", referencedColumnName="ID"))
-	protected List<CLAppWorkerEntityDocumentTypes> keptWorkerEntityDocumentTypes;
+	protected List<CLAppEntityDocumentTypes> keptWorkerEntityDocumentTypes;
 
 	@Column(name = "ANY_CONTRACT_SIGNED_WITH_WORKERS")
 	protected Boolean anyContractSignedWithWorkers;
@@ -232,7 +226,7 @@ public class RegEntityStaffManagement {
 			name="reg_entity_staff_management_cl_app_deduction_salary_types",
 			joinColumns=@JoinColumn(name="CL_APP_DEDUCTION_SALARY_TYPE_ID", referencedColumnName="REG_ENTITY_FARM_ID"),
 			inverseJoinColumns=@JoinColumn(name="REG_ENTITY_FARM_ID", referencedColumnName="ID"))
-	protected List<CLAppSalaryDeductionType> salaryDeductionTypes;
+	protected List<CLAppDeductionSalaryType> salaryDeductionTypes;
 
 	@Column(name = "DEDUCTION_SALARY_OTHER")
 	protected String salaryDeductionOther;
@@ -647,11 +641,11 @@ public class RegEntityStaffManagement {
 		this.noEarlyTerminationContractReason = noEarlyTerminationContractReason;
 	}
 
-	public ClAppTerminationContractReason getContractTerminationReason() {
+	public CLAppTerminationContractReason getContractTerminationReason() {
 		return contractTerminationReason;
 	}
 
-	public void setContractTerminationReason(ClAppTerminationContractReason contractTerminationReason) {
+	public void setContractTerminationReason(CLAppTerminationContractReason contractTerminationReason) {
 		this.contractTerminationReason = contractTerminationReason;
 	}
 
@@ -671,19 +665,19 @@ public class RegEntityStaffManagement {
 		this.keepWorkerDocumentSafeKeeping = keepWorkerDocumentSafeKeeping;
 	}
 
-	public List<CLAppWorkerEntityDocumentTypes> getKeptWorkerEntityDocumentTypes() {
+	public List<CLAppEntityDocumentTypes> getKeptWorkerEntityDocumentTypes() {
 		return keptWorkerEntityDocumentTypes;
 	}
 
-	public void setKeptWorkerEntityDocumentTypes(List<CLAppWorkerEntityDocumentTypes> keptWorkerEntityDocumentTypes) {
+	public void setKeptWorkerEntityDocumentTypes(List<CLAppEntityDocumentTypes> keptWorkerEntityDocumentTypes) {
 		this.keptWorkerEntityDocumentTypes = keptWorkerEntityDocumentTypes;
 	}
 
-	public List<CLAppSalaryDeductionType> getSalaryDeductionTypes() {
+	public List<CLAppDeductionSalaryType> getSalaryDeductionTypes() {
 		return salaryDeductionTypes;
 	}
 
-	public void setSalaryDeductionTypes(List<CLAppSalaryDeductionType> salaryDeductionTypes) {
+	public void setSalaryDeductionTypes(List<CLAppDeductionSalaryType> salaryDeductionTypes) {
 		this.salaryDeductionTypes = salaryDeductionTypes;
 	}
 

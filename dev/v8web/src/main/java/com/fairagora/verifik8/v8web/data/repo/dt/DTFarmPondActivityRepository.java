@@ -8,6 +8,7 @@ import com.fairagora.verifik8.v8web.data.domain.dt.DTFarmPondActivity;
 
 public interface DTFarmPondActivityRepository extends JpaRepository<DTFarmPondActivity, Long> {
 
-	List<DTFarmPondActivity> findByPondId(Long pondId);
+	DTFarmPondActivity findById(Long activityId);
 
+	List<DTFarmPondActivity> findByPondId(Long pondId);
 }

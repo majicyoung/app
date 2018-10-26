@@ -9,7 +9,7 @@ import java.util.List;
 
 @Entity()
 @Table(name = "cl_app_entity_document_types")
-public class CLAppWorkerEntityDocumentTypes extends CodeListSupport {
+public class CLAppEntityDocumentTypes extends CodeListSupport {
 
 	@ManyToMany(mappedBy="keptWorkerEntityDocumentTypes")
 	private List<RegEntityStaffManagement> regEntityStaffManagements;

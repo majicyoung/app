@@ -2,10 +2,8 @@ package com.fairagora.verifik8.v8web.data.domain.dt;
 
 import com.fairagora.verifik8.v8web.data.domain.V8EntitySupport;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLAppQuantityUnit;
-import com.fairagora.verifik8.v8web.data.domain.cl.CLRefCommodities;
-import com.fairagora.verifik8.v8web.data.domain.cl.CLRefSpecies;
+import com.fairagora.verifik8.v8web.data.domain.cl.CLRefCommodity;
 import com.fairagora.verifik8.v8web.data.domain.reg.farm.RegEntityFarmPlot;
-import com.fairagora.verifik8.v8web.data.domain.reg.farm.RegEntityFarmPond;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -80,7 +78,7 @@ public class DTFarmPlotProductionCycle extends V8EntitySupport {
 
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "CL_COMMODITIES_ID")
-	protected CLRefCommodities clRefCommodities;
+	protected CLRefCommodity clRefCommodity;
 
 
 	@Override
@@ -260,11 +258,11 @@ public class DTFarmPlotProductionCycle extends V8EntitySupport {
 		this.clHerbicidesQuantityUnit = clHerbicidesQuantityUnit;
 	}
 
-	public CLRefCommodities getClRefCommodities() {
-		return clRefCommodities;
+	public CLRefCommodity getClRefCommodity() {
+		return clRefCommodity;
 	}
 
-	public void setClRefCommodities(CLRefCommodities clRefCommodities) {
-		this.clRefCommodities = clRefCommodities;
+	public void setClRefCommodity(CLRefCommodity clRefCommodity) {
+		this.clRefCommodity = clRefCommodity;
 	}
 }
