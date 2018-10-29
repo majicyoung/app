@@ -13,9 +13,11 @@ public class FarmPondDto {
 	protected String description;
 
 	protected Long type;
+
 	protected String typeName;
 	
 	protected Long species;
+
 	protected String speciesName;
 	
 	protected V8MeasureDto size;

@@ -36,9 +36,12 @@ public class PlotsBrowsingController extends AbstractV8Controller {
 	@PreAuthorize("hasAuthority('R_PLOTBROWSER')")
 	@RequestMapping(value = "/plots/browser.html", method = RequestMethod.GET)
 	public String showPlotsManagementPage(Model mv) {
+//
+//		List<PlotListingDto> listing = regEntityFarmPlotRepository.findAll().stream()
+//				.map(p -> regFarmDtoMapper.toListing(p)).collect(Collectors.toList());
 
-		List<PlotListingDto> listing = regEntityFarmPlotRepository.findAll().stream()
-				.map(p -> regFarmDtoMapper.toListing(p)).collect(Collectors.toList());
+		List<PlotListingDto> listing = farmService.listAllPlotsForLoggedUser(getLoggedUser()).stream().map(p -> regFarmDtoMapper.toListing(p)).collect(Collectors.toList());
+
 
 		mv.addAttribute("listing", listing);
 

@@ -1,0 +1,1 @@
+ALTER TABLE `sys_users` ADD `phone_number` varchar(10) CHARACTER SET utf8 DEFAULT NULL;

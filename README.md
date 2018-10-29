@@ -96,6 +96,11 @@ INSERT INTO `jt_plot_activity_product_types` (`CL_FARM_PLOT_ACTIVITY_ID`, `CL_PR
 (7, 101, 'Insecticide use', 1, NULL, '2018-08-28 08:00:56', '2018-08-28 08:00:56');
 ```
 
+```sql
+INSERT INTO `cl_app_quantity_units` (`ID`, `ENABLED`, `CODE`, `RANKING`, `NAME`, `DESCRIPTION`, `I18n_DEFAULT`, `I18N_EN`, `I18N_FR`, `I18N_ES`, `I18N_TH`, `I18N_VT`, `I18N_LA`, `I18N_ID`, `I18N_KH`, `CL_QUANTITY_UNIT_TYPE_ID`, `UPDATER_ID`, `COMMENT`, `CREATED_AT`, `UPDATED_AT`) VALUES
+(30, 1, ' Ton', 1, 'Ton', 'Ton', 'Ton', 'Ton', NULL, NULL, 'ตัน', NULL, NULL, NULL, NULL, 3, 1, NULL, '2018-09-27 06:17:47', '2018-09-27 06:17:47');
+```
+
 ### RUN API in postman ###
 
 Api login endpoint

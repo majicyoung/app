@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html layout:decorator="inc/main-layout" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<div layout:fragment="content">
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header with-border">
+                    <h3 class="box-title pull-left" th:text="#{admin.subPage.list.title}">admin.subPage.list.title</h3>
+                    <div class="box-tools">
+                        <a th:href="@{'/admin/subpages/create.html'}"
+                           class="btn btn-sm btn-flat btn-success">
+                            <i class="fa fa-plus"></i> <span
+                                th:text="#{admin.subPage.list.add}">admin.subPage.list.add</span></a>
+                    </div>
+                </div>
+                <div class="box-body">
+                    <table class="table table-hover table-striped table-bordered datatable" id="userTable">
+                        <thead>
+                        <tr>
+                            <th th:text="#{admin.subPage.list.table.id}" th:inline="text">admin.subPage.list.table.id</th>
+                            <th th:text="#{admin.subPage.list.table.name}" th:inline="text">admin.subPage.list.table.name</th>
+                            <th th:text="#{admin.subPage.list.table.ranking}" th:inline="text">admin.subPage.list.table.ranking</th>
+                            <th th:text="#{admin.subPage.list.table.code}" th:inline="text">admin.subPage.list.table.code</th>
+                            <th th:text="#{admin.subPage.list.table.sysPage}" th:inline="text">admin.subPage.list.table.sysPage</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="subpage : ${subPages}">
+                            <td th:text="${subpage.id}">[[${subpage.id}]]</td>
+                            <td th:text="${subpage.name}">[[${subpage.name}]]</td>
+                            <td th:text="${subpage.ranking}">[[${subpage.ranking}]]</td>
+                            <td th:text="${subpage.code}">[[${subpage.code}]]</td>
+                            <td th:text="${subpage.sysPage.name}">[[${subpage.sysPage.name}]]</td>
+                            <td>
+                                <a th:href="@{'/admin/subpages/'+${subpage.id}+'/edit.html'}"
+                                   class="btn btn-sm btn-flat btn-primary"><i class="fa fa-edit"></i></a>
+                                <form class="form-horizontal"
+                                      th:action="@{'/admin/subpages/'+${subpage.id}+'/delete.html'}"
+                                      method="post" style="display:inline-block;"
+                                      onsubmit="return confirm('Do you want to delete this data?');">
+                                    <button type="submit" class="btn btn-sm btn-flat btn-danger"><i class="fa fa-trash"></i></button>
+                                </form>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+</html>
