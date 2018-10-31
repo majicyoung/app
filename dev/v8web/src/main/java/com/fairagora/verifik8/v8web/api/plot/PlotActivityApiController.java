@@ -40,7 +40,7 @@ public class PlotActivityApiController extends AbstractV8Controller {
 
 	@PostMapping(value = "/ponds/{plotId}/activity")
 	public ResponseEntity<?> createPlotActivities(@PathVariable("plotId") Long plotId, PlotActivityDto dto) {
-		DTFarmPlotActivity act = plotActivityRepository.findPlotActivityByPlotAndActivity(dto.getPlot(), dto.getActivityType(), dto.getActivityStartDate(), dto.getActivityEndDate());
+		DTFarmPlotActivity act = plotActivityRepository.findPlotActivityByPlotAndActivity(dto.getPlot(), dto.getActivityType(), dto.getProduct(), dto.getActivityStartDate(), dto.getActivityEndDate());
 
 		if (act == null) {
 			act = new DTFarmPlotActivity();

@@ -16,11 +16,13 @@ public interface DTFarmPlotActivityRepository extends JpaRepository<DTFarmPlotAc
 	@Query(value = "SELECT dt_farmag_plot_management.* FROM dt_farmag_plot_management WHERE "
 			+ "dt_farmag_plot_management.REG_ENTITY_FARM_PLOT_ID = :plotId AND "
 			+ "dt_farmag_plot_management.CL_PLOT_ACTIVITY_TYPE_ID = :activityId AND "
+			+ "dt_farmag_plot_management.CL_PRODUCT_ID = :productId AND "
 			+ "dt_farmag_plot_management.ACTIVITY_START_DATE = :startDate AND "
 			+ "dt_farmag_plot_management.ACTIVITY_END_DATE = :endDate", nativeQuery = true)
 	DTFarmPlotActivity findPlotActivityByPlotAndActivity(
 			@Param("plotId") Long plotId,
 			@Param("activityId") Long activityId,
+			@Param("productId") Long productId,
 			@Param("startDate") Date startDate,
 			@Param("endDate") Date endDate
 		);
