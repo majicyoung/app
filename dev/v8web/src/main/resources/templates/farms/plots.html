@@ -164,19 +164,14 @@
       /*<![CDATA[*/
       var farmId = [[${farmId}]];
 
-      $('#plotList').DataTable({
-          "responsive": true,
-          "language": {
-              "url": langURL
-          }
-      });
+
 
       $(document).ready(function () {
 
           document.getElementById("inputFarmPlotAreaUnit").value = "29"; // only for Thailand and sugar cane - to be removed when expanding
           document.getElementById("inputFarmPlotCommodity").value = "1"; // only for Thailand and sugar cane - to be removed when expanding
 
-          $(".editPlotBtn").click(function () {
+          $(document).on('click', '.editPlotBtn', function () {
               var id = $(this).attr("data-id");
               var p = plots[id];
               if (p != null) {
@@ -193,18 +188,26 @@
               }
           });
 
-          $('.viewActivitiesPlotDataBtn').click(function () {
-              var id = $(this).attr("data-id");
+          $(document).on('click', '.viewActivitiesPlotDataBtn', function () {
+							var id = $(this).attr("data-id");
               document.location = [[@{/farm/
           }]]
               +farmId + [[@{'/plots/'}]] + id + '/activities/browser.html';
           });
 
-          $('.addActivitiesPlotDataBtn').click(function () {
-              var id = $(this).attr("data-id");
+          $(document).on('click', '.addActivitiesPlotDataBtn', function () {
+							var id = $(this).attr("data-id");
               document.location = [[@{/farm/
           }]]
               +farmId + [[@{'/plots/'}]] + id + '/activities/create.html';
+          });
+
+
+          $('#plotList').DataTable({
+              "responsive": true,
+              "language": {
+                  "url": langURL
+              }
           });
 
       });
