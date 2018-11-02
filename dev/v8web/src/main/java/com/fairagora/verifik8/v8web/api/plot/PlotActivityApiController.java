@@ -41,11 +41,17 @@ public class PlotActivityApiController extends AbstractV8Controller {
 	@PostMapping(value = "/ponds/{plotId}/activity")
 	public ResponseEntity<?> createPlotActivities(@PathVariable("plotId") Long plotId, PlotActivityDto dto) {
 		DTFarmPlotActivity act = null;
-
-		if (dto.getId() == null || dto.getId().intValue() == 0) {
+		
+		if(dto.getProduct() == null || dto.getProduct().intValue() == 0) {
+			act = plotActivityRepository.findPlotActivityByPlotAndActivity(dto.getPlot(), dto.getActivityType(), dto.getActivityStartDate(), dto.getActivityEndDate());
+		} else {
+			act = plotActivityRepository.findPlotActivityByPlotAndActivityAndProduct(dto.getPlot(), dto.getActivityType(), dto.getProduct(), dto.getActivityStartDate(), dto.getActivityEndDate());
+		}
+		
+		if (act == null) {
 			act = new DTFarmPlotActivity();
 		} else {
-			act = plotActivityRepository.findOne(dto.getId());
+			return new ResponseEntity<Object>(act, HttpStatus.CONFLICT);
 		}
 
 		dtoMapper.fillEntity(dto, act);
