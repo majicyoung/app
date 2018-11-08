@@ -18,6 +18,5 @@ ALTER TABLE `dt_farmaq_production` ADD CONSTRAINT `FK_FARMAQ_PRODUCTION_PROD_TYP
 
 ALTER TABLE `cl_app_tiling_activity_types` MODIFY ID int(11) NOT NULL auto_increment;
 
-ALTER TABLE `cl_ref_gear_characteristics` MODIFY ID int(11) NOT NULL auto_increment;
 
 ALTER TABLE `cl_ref_products` MODIFY ID int(11) NOT NULL auto_increment;

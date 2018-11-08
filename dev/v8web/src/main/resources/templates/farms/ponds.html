@@ -203,28 +203,27 @@
       $(document).ready(function () {
 
 
-          $('.addPondDataBtn').click(function () {
-
+          $(document).on('click', '.addPondDataBtn', function () {
               var id = $(this).attr("data-id");
               document.location = [[@{/farm/}]] +farmId + [[@{/pond/}]]+id + '/measures/create.html';
           });
 
-          $('.viewDataPondDataBtn').click(function () {
+          $(document).on('click', '.viewDataPondDataBtn', function () {
               var id = $(this).attr("data-id");
               document.location = [[@{/farm/}]]+farmId + [[@{/pond/}]]+id + '/measures/browser.html';
           });
 
-          $('.viewActivitiesPondDataBtn').click(function () {
+          $(document).on('click', '.viewActivitiesPondDataBtn', function () {
               var id = $(this).attr("data-id");
               document.location = [[@{/farm/}]]+farmId + [[@{/pond/}]]+id + '/activities/browser.html';
           });
 
-          $('.addActivitiesPondDataBtn').click(function () {
+          $(document).on('click', '.addActivitiesPondDataBtn', function () {
               var id = $(this).attr("data-id");
               document.location = [[@{/farm/}]]+farmId + [[@{/pond/}]]+id + '/activities/create.html';
           });
 
-          $(".editPondBtn").click(function () {
+          $(document).on('click', '.editPondBtn', function () {
               var id = $(this).attr("data-id");
               var p = ponds[id];
               if (p != null) {
