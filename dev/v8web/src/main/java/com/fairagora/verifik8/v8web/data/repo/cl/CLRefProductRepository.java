@@ -15,7 +15,7 @@ public interface CLRefProductRepository extends CodeListRepository<CLRefProduct>
 	@Query(value = "SELECT cl_ref_products.* FROM cl_ref_products LEFT OUTER JOIN cl_ref_product_types ON cl_ref_products.CL_PRODUCTS_TYPE_ID = cl_ref_product_types.ID LEFT OUTER JOIN jt_pond_activity_product_types ON cl_ref_product_types.ID = jt_pond_activity_product_types.CL_PRODUCT_TYPE_ID WHERE jt_pond_activity_product_types.CL_FARM_POND_ACTIVITY_ID = :activityId AND cl_ref_products.ENABLED = TRUE ORDER BY cl_ref_products.NAME", nativeQuery = true)
 	List<CLRefProduct> getFindByEnabledTrueAndFActivityIdOrderByName(@Param("activityId")  Long activityId);
 
-	@Query(value = "SELECT cl_ref_products.* FROM cl_ref_products ", nativeQuery = true)
+	@Query(value = "SELECT cl_ref_products.* FROM cl_ref_products LEFT OUTER JOIN cl_ref_product_types ON cl_ref_products.CL_PRODUCTS_TYPE_ID = cl_ref_product_types.ID LEFT OUTER JOIN jt_plot_activity_product_types ON cl_ref_product_types.ID = jt_plot_activity_product_types.CL_PRODUCT_TYPE_ID WHERE jt_plot_activity_product_types.CL_FARM_PLOT_ACTIVITY_ID = :activityId AND cl_ref_products.ENABLED = TRUE ORDER BY cl_ref_products.NAME", nativeQuery = true)
 	List<CLRefProduct> getFindByEnabledTrueAndPlotActivityIdOrderByName(@Param("activityId")  Long activityId);
 
 	@Query(value = ""
