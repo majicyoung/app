@@ -12,7 +12,7 @@ variables:
   IMAGE_PROD: $IMAGE:$VERSION
   IMAGE_PROD_TAGGED: $IMAGE:$TAG
   IMAGE_TAGGED: $IMAGE:$CI_BUILD_REF_NAME
-  TAG: "1.0.2"
+  TAG: "1.0.3"
   VERSION: "1.0"
 
 build:
@@ -69,13 +69,14 @@ develop_deploy:
     - "1.0"
   script:
     - cd ~/verifik8
-    - docker-compose pull backend_blue
-    - docker-compose up -d --no-deps backend_blue
-    - docker-compose pull backend_green
-    - docker-compose up -d --no-deps backend_green
+    - docker service update verifik8_backend_blue --detach=false --image=$IMAGE_DEVELOP --with-registry-auth
+    - docker service update verifik8_backend_green --detach=false --image=$IMAGE_DEVELOP --with-registry-auth
+    - docker service update verifik8_api_blue --detach=false --image=$IMAGE_DEVELOP --with-registry-auth
+    - docker service update verifik8_api_green --detach=false --image=$IMAGE_DEVELOP --with-registry-auth
   stage: deploy
   tags:
-    - staging2
+    - develop
+    - uat
   variables:
     GIT_STRATEGY: none
 
@@ -87,7 +88,7 @@ staging_build:
     - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN registry.united-asian.com
   environment: build
   only:
-    - "staging"
+    - staging
   script:
     - docker build -t $IMAGE_LOCAL
       --build-arg build=$CI_PIPELINE_ID
@@ -101,33 +102,13 @@ staging_build:
     - builder
     - verifik8
 
-develop_deploy:
-  before_script:
-    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN registry.united-asian.com
-  environment:
-    name: develop
-  only:
-    - "1.0"
-  script:
-    - cd ~/verifik8
-    - docker service update verifik8_backend_blue --detach=false --image=$IMAGE_DEVELOP --with-registry-auth
-    - docker service update verifik8_backend_green --detach=false --image=$IMAGE_DEVELOP --with-registry-auth
-    - docker service update verifik8_api_blue --detach=false --image=$IMAGE_DEVELOP --with-registry-auth
-    - docker service update verifik8_api_green --detach=false --image=$IMAGE_DEVELOP --with-registry-auth
-  stage: deploy
-  tags:
-    - develop
-    - uat
-  variables:
-    GIT_STRATEGY: none
-
 staging_deploy:
   before_script:
     - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN registry.united-asian.com
   environment:
     name: staging
   only:
-    - "staging"
+    - staging
   script:
     - cd ~/verifik8
     - docker-compose pull backend_blue
@@ -144,6 +125,7 @@ staging_deploy:
     - verifik8
   variables:
     GIT_STRATEGY: none
+  when: manual
 
 prod_build:
   after_script:
@@ -189,3 +171,4 @@ prod_deploy:
     - verifik8
   variables:
     GIT_STRATEGY: none
+  when: manual
