@@ -141,19 +141,19 @@
       $(document).ready(function () {
       });
 
-      if (!isImageExisted("http://" + location.host + "/download/" + [[${farmDto.accessToiletsAttachmentUrl}]])) {
+      if (!isImageExisted(location.protocol + "//" + location.host + "/download/" + [[${farmDto.accessToiletsAttachmentUrl}]])) {
           $("div#toiletsButton").css("visibility", "hidden");
       }
 
-      if (!isImageExisted("http://" + location.host + "/download/" + [[${farmDto.accessRestRoomAttachmentUrl}]])) {
+      if (!isImageExisted(location.protocol + "//" + location.host + "/download/" + [[${farmDto.accessRestRoomAttachmentUrl}]])) {
           $("div#restRoomButton").css("visibility", "hidden");
       }
 
-      if (!isImageExisted("http://" + location.host + "/download/" + [[${farmDto.accessShowerAttachmentUrl}]])) {
+      if (!isImageExisted(location.protocol + "//" + location.host + "/download/" + [[${farmDto.accessShowerAttachmentUrl}]])) {
           $("div#restRoomButton").css("visibility", "hidden");
       }
 
-      if (!isImageExisted("http://" + location.host + "/download/" + [[${farmDto.accessToFreeDrinkingAttachmentUrl}]])) {
+      if (!isImageExisted(location.protocol + "//" + location.host + "/download/" + [[${farmDto.accessToFreeDrinkingAttachmentUrl}]])) {
           $("div#freeDrinkingButton").css("visibility", "hidden");
       }
 
