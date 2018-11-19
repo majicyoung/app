@@ -452,7 +452,7 @@ public class FarmDashboardDataBuilder {
 	 * @return list of dates.
 	 */
 	public List<String> getPlotPesticideMeasureDate(String startDate, String endDate, String[] plotIds, String activityId) {
-		String plotIdsString = String.join(" or REG_ENTITY_FARM_POND_ID= ", plotIds);
+		String plotIdsString = String.join(" or REG_ENTITY_FARM_PLOT_ID= ", plotIds);
 		return jdbc.queryForList("SELECT DATE(ACTIVITY_START_DATE) FROM dt_farmag_plot_management WHERE CL_PLOT_ACTIVITY_TYPE_ID=" + activityId + "  AND (REG_ENTITY_FARM_PLOT_ID= " + plotIdsString + " ) AND ACTIVITY_START_DATE >= STR_TO_DATE('" + startDate + "', '%Y-%m-%d') AND ACTIVITY_END_DATE <= STR_TO_DATE('" + endDate + "', '%Y-%m-%d') GROUP BY DATE(ACTIVITY_START_DATE)", String.class);
 	}
 
