@@ -66,8 +66,8 @@ public class PondActivityController extends AbstractV8Controller {
 	@RequestMapping(value = {"/ponds/{pondId}/activities/browser.html", "/farm/{farmId}/pond/{pondId}/activities/browser.html"}, method = RequestMethod.GET)
 	public String showPondActivities(@PathVariable("farmId") Optional<Long> farmId, @PathVariable("pondId") Long pondId, Model mv) {
 
-		RegEntityFarmPond regEntityFarmPond =  farmPondRepository.findOne(pondId);
 		List<DTFarmPondActivity> activities = pondActivityRepository.findByPondId(pondId);
+		RegEntityFarmPond regEntityFarmPond =  farmPondRepository.findOne(pondId);
 		mv.addAttribute("activities", activities);
 		mv.addAttribute("pondId", pondId);
 		mv.addAttribute("farmId", farmId.orElse(null));
@@ -125,7 +125,7 @@ public class PondActivityController extends AbstractV8Controller {
 	@RequestMapping(value = {"/ponds/{pondId}/activities/{activityId}/edit.html",  "/farm/{farmId}/pond/{pondId}/activities/{activityId}/edit.html"}, method = RequestMethod.GET)
 	public String showPondActivities(@PathVariable("farmId") Optional<Long> farmId, @PathVariable("pondId") Long pondId, @PathVariable("activityId") Long activityId, Model mv) {
 
-		DTFarmPondActivity act = pondActivityRepository.findOne(activityId);
+		DTFarmPondActivity act = pondActivityRepository.findById(activityId);
 
 		PondActivityDto dto = new PondActivityDto();
 		dtoMapper.toDto(act, dto);

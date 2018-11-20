@@ -10,4 +10,6 @@ public interface DTFarmPondActivityRepository extends JpaRepository<DTFarmPondAc
 
 	List<DTFarmPondActivity> findByPondId(Long pondId);
 
+	DTFarmPondActivity findById(Long id);
+
 }
