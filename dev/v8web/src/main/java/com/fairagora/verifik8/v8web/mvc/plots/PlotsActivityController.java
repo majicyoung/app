@@ -38,9 +38,6 @@ public class PlotsActivityController extends AbstractV8Controller {
 	private RegEntityFarmPlotRepository farmPlotRepository;
 
 	@Autowired
-	private RegEntityRepository regEntityRepository;
-
-	@Autowired
 	private RegFarmDTOMapper dtoMapper;
 
 	@Autowired
