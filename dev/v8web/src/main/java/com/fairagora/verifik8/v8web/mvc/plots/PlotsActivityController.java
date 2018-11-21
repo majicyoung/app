@@ -6,9 +6,11 @@ import java.util.Optional;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLAppQuantityUnit;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLRefProduct;
 import com.fairagora.verifik8.v8web.data.domain.dt.DTFarmPlotProductionCycle;
+import com.fairagora.verifik8.v8web.data.domain.reg.farm.RegEntityFarmPlot;
 import com.fairagora.verifik8.v8web.data.repo.cl.CLFarmPlotActivityTypeRepository;
 import com.fairagora.verifik8.v8web.data.repo.cl.CLFarmPondActivityTypeRepository;
 import com.fairagora.verifik8.v8web.data.repo.cl.CLRefProductRepository;
+import com.fairagora.verifik8.v8web.data.repo.reg.RegEntityRepository;
 import com.fairagora.verifik8.v8web.services.FarmPlotProductionCycleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -63,9 +65,12 @@ public class PlotsActivityController extends AbstractV8Controller {
 	public String showPondActivities(@PathVariable("farmId") Optional<Long> farmId, @PathVariable("plotId") Long plotId, Model mv) {
 
 		List<DTFarmPlotActivity> activities = plotActivityRepository.findByPlotId(plotId);
+		RegEntityFarmPlot regEntityFarmPlot =  farmPlotRepository.findOne(plotId);
 		mv.addAttribute("activities", activities);
 		mv.addAttribute("plotId", plotId);
 		mv.addAttribute("farmId", farmId.orElse(null));
+		mv.addAttribute("farmName", regEntityFarmPlot.getFarm().getName());
+		mv.addAttribute("plotName", regEntityFarmPlot.getDescription());
 		mv.addAttribute("backUrl", farmId.map(id -> "/farm/" + id + "/plots.html").orElse("/plots/browser.html"));
 		mv.addAttribute("createActivityUrl", farmId.map(id -> "/farm/" + id + "/plots/"+plotId+"/activities/create.html").orElse("/plots/"+plotId+"/activities/create.html"));
 
@@ -141,7 +146,7 @@ public class PlotsActivityController extends AbstractV8Controller {
 	 * @return
 	 */
 	@PreAuthorize("hasAuthority('W_PLOTACTIVITY')")
-	@RequestMapping(value = {"/plots/{plotId}/activities/update.html",  "/farm/{farmId}/plots/{pondId}/activities/update.html"}, method = RequestMethod.POST)
+	@RequestMapping(value = {"/plots/{plotId}/activities/update.html",  "/farm/{farmId}/plots/{plotId}/activities/update.html"}, method = RequestMethod.POST)
 	public String showPlotActivities(@PathVariable("farmId") Optional<Long> farmId, @PathVariable("plotId") Long plotId, PlotActivityDto dto, BindingResult result, Model mv) {
 
 		DTFarmPlotActivity act = null;

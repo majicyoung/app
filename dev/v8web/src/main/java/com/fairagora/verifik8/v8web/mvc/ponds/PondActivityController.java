@@ -7,6 +7,8 @@ import com.fairagora.verifik8.v8web.data.domain.cl.CLAppQuantityUnit;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLFarmPondActivityType;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLRefProduct;
 import com.fairagora.verifik8.v8web.data.domain.dt.DTFarmPondProductionCycle;
+import com.fairagora.verifik8.v8web.data.domain.reg.farm.RegEntityFarmPlot;
+import com.fairagora.verifik8.v8web.data.domain.reg.farm.RegEntityFarmPond;
 import com.fairagora.verifik8.v8web.data.repo.cl.CLFarmPondActivityTypeRepository;
 import com.fairagora.verifik8.v8web.data.repo.cl.CLFarmPondTypeRepository;
 import com.fairagora.verifik8.v8web.data.repo.cl.CLRefProductRepository;
@@ -65,9 +67,12 @@ public class PondActivityController extends AbstractV8Controller {
 	public String showPondActivities(@PathVariable("farmId") Optional<Long> farmId, @PathVariable("pondId") Long pondId, Model mv) {
 
 		List<DTFarmPondActivity> activities = pondActivityRepository.findByPondId(pondId);
+		RegEntityFarmPond regEntityFarmPond =  farmPondRepository.findOne(pondId);
 		mv.addAttribute("activities", activities);
 		mv.addAttribute("pondId", pondId);
 		mv.addAttribute("farmId", farmId.orElse(null));
+		mv.addAttribute("farmName", regEntityFarmPond.getFarm().getName());
+		mv.addAttribute("pondName", regEntityFarmPond.getDescription());
 		mv.addAttribute("backUrl", farmId.map(id -> "/farm/" + id + "/ponds.html").orElse("/ponds/browser.html"));
 		mv.addAttribute("createActivityUrl", farmId.map(id -> "/farm/" + id + "/pond/"+pondId+"/activities/create.html").orElse("/ponds/"+pondId+"/activities/create.html"));
 		preparePage(pondId, mv);
@@ -108,11 +113,19 @@ public class PondActivityController extends AbstractV8Controller {
 		return "ponds/activities/editor";
 	}
 
+	/**
+	 *
+	 * @param farmId
+	 * @param pondId
+	 * @param activityId
+	 * @param mv
+	 * @return
+	 */
 	@PreAuthorize("hasAuthority('R_PONDACTIVTY')")
 	@RequestMapping(value = {"/ponds/{pondId}/activities/{activityId}/edit.html",  "/farm/{farmId}/pond/{pondId}/activities/{activityId}/edit.html"}, method = RequestMethod.GET)
 	public String showPondActivities(@PathVariable("farmId") Optional<Long> farmId, @PathVariable("pondId") Long pondId, @PathVariable("activityId") Long activityId, Model mv) {
 
-		DTFarmPondActivity act = pondActivityRepository.findOne(activityId);
+		DTFarmPondActivity act = pondActivityRepository.findById(activityId);
 
 		PondActivityDto dto = new PondActivityDto();
 		dtoMapper.toDto(act, dto);

@@ -8,7 +8,9 @@
 		<div class="col-xs-12">
 			<div class="box">
 				<div class="box-header with-border">
-					<h3 class="box-title pull-left" th:text="#{farm.plot_activity_title}"></h3>
+					<div class="pull-left">
+						<h3 class="box-title " th:text="#{farm.plot_activity_title}"></h3> - <span th:text="${farmName}">farmname</span> - <span th:text="${plotName}">plotName</span>
+					</div>
 					<div class="alert-wrapper col-xs-6">
 						<!-- messages here -->
 					</div>
