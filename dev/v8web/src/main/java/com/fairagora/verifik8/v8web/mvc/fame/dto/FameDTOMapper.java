@@ -1,6 +1,7 @@
 package com.fairagora.verifik8.v8web.mvc.fame.dto;
 
 import com.fairagora.verifik8.v8web.data.domain.commons.V8Measure;
+import com.fairagora.verifik8.v8web.data.domain.dt.DTFarmPlotActivity;
 import com.fairagora.verifik8.v8web.data.domain.dt.DTFarmPondActivity;
 import com.fairagora.verifik8.v8web.data.domain.sys.SYSRole;
 import com.fairagora.verifik8.v8web.data.domain.sys.SYSUser;
@@ -24,5 +25,9 @@ public interface FameDTOMapper {
 	void toDto(DTFarmPondActivity activity, @MappingTarget FameActivityDto dto);
 
 	FameActivityDto toListing(DTFarmPondActivity p);
+
+	void toDto(DTFarmPlotActivity activity, @MappingTarget FameActivityDto dto);
+
+	FameActivityDto toListing(DTFarmPlotActivity p);
 
 }

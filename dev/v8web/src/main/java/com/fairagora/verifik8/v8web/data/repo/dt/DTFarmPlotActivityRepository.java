@@ -10,4 +10,7 @@ public interface DTFarmPlotActivityRepository extends JpaRepository<DTFarmPlotAc
 
 	List<DTFarmPlotActivity> findByPlotId(Long plotId);
 
+
+	List<DTFarmPlotActivity> findTop5ByOrderByCreatedAtDesc();
+
 }

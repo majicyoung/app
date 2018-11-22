@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
@@ -38,7 +39,9 @@ public class FameController  extends AbstractV8Controller {
 		preparePage(mv);
 
 		List<FameUserDto>  listing = fameService.getListHallOfFameUsers().stream().map(p -> fameDTOMapper.toListing(p)).collect(Collectors.toList());
-		List<FameActivityDto> fameActivityDtos = fameService.getListLatestPondActivity().stream().map(p -> fameDTOMapper.toListing(p)).collect(Collectors.toList());
+		List<FameActivityDto> fameActivityDtos = new ArrayList<>();
+		fameActivityDtos.addAll(fameService.getListLatestPondActivity().stream().map(p -> fameDTOMapper.toListing(p)).collect(Collectors.toList()));
+		fameActivityDtos.addAll(fameService.getListLatestPlotActivity().stream().map(p -> fameDTOMapper.toListing(p)).collect(Collectors.toList()));
 		mv.addAttribute("listing", listing);
 		mv.addAttribute("activityList", fameActivityDtos);
 

@@ -1,5 +1,6 @@
 package com.fairagora.verifik8.v8web.services;
 
+import com.fairagora.verifik8.v8web.data.domain.dt.DTFarmPlotActivity;
 import com.fairagora.verifik8.v8web.data.domain.dt.DTFarmPondActivity;
 import com.fairagora.verifik8.v8web.data.domain.sys.SYSUser;
 import com.fairagora.verifik8.v8web.data.repo.dt.DTFarmPlotActivityRepository;
@@ -34,6 +35,10 @@ public class FameService {
 
 	public List<DTFarmPondActivity> getListLatestPondActivity(){
 		return pondActivityRepository.findTop5ByOrderByCreatedAtDesc();
+	}
+
+	public List<DTFarmPlotActivity> getListLatestPlotActivity(){
+		return plotActivityRepository.findTop5ByOrderByCreatedAtDesc();
 	}
 
 
