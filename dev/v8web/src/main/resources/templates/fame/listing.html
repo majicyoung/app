@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html layout:decorator="inc/main-layout" xmlns:th="http://www.thymeleaf.org"
+			xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+			xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<div layout:fragment="content">
+
+	<div class="row">
+		<div class="col-xs-12">
+
+			<div class="box box-danger">
+				<div class="box-header with-border">
+					<h3 class="box-title pull-left" th:text="#{hall_of_fame.list}">hall_of_fame.list</h3>
+					<div class="alert-wrapper col-xs-6">
+						<div class="alert alert-success alert-dismissible" th:if="${v8p.message != null}">
+							<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+							<h4 class="pull-left"><i class="icon fa fa-check"></i> <span
+									th:text="#{default.success}">default.success</span> &nbsp;&nbsp;</h4> <span th:text="${v8p.message}">{{ Session::get('message') }}</span>
+						</div>
+					</div>
+					<!-- /.box-header -->
+					<div class="box-body">
+						<table id="userList" class="table table-hover table-striped table-bordered datatable">
+							<tbody>
+							<tr th:each="user:${listing}">
+								<td th:text="${user.id}"></td>
+								<td th:text="${user.email}"></td>
+								<td th:text="${user.name}"></td>
+							</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+
+		<div class="col-xs-7">
+
+			<div class="box box-primary">
+				<div class="box-header with-border">
+					<h3 class="box-title" th:text="#{hall_of_fame.recent_activity}">hall_of_fame.recent_activity</h3>
+				</div>
+				<!-- /.box-header -->
+				<div class="box-body">
+					<ul class="products-list product-list-in-box">
+						<li class="item" th:each="user:${listing}">
+							<div class="product-info">
+								<a href="javascript:void(0)" class="product-title" th:text="${user.name}"></a>
+								<span class="product-description" th:text="${user.email}"></span>
+							</div>
+						</li>
+						<!-- /.item -->
+					</ul>
+				</div>
+				<!-- /.box-body -->
+			</div>
+		</div>
+
+
+		<div class="col-xs-5">
+			<div class="box box-default">
+				<div class="box-header with-border">
+					<h3 class="box-title" th:text="#{hall_of_fame.best_country}">hall_of_fame.best_country</h3>
+				</div>
+				<!-- /.box-header -->
+				<div class="box-body">
+					<div class="row">
+						<div class="col-md-8">
+							<div class="chart-responsive">
+								<canvas id="pieChart" height="155" width="206" style="width: 206px; height: 155px;"></canvas>
+							</div>
+							<!-- ./chart-responsive -->
+						</div>
+						<!-- /.col -->
+						<div class="col-md-4">
+							<ul class="chart-legend clearfix">
+								<li><i class="fa fa-circle-o text-red"></i> South East</li>
+								<li><i class="fa fa-circle-o text-green"></i> South West</li>
+								<li><i class="fa fa-circle-o text-yellow"></i> Center</li>
+								<li><i class="fa fa-circle-o text-aqua"></i> North</li>
+							</ul>
+						</div>
+						<!-- /.col -->
+					</div>
+					<!-- /.row -->
+				</div>
+				<!-- /.box-body -->
+			</div>
+		</div>
+
+
+
+	</div>
+
+</div>
+
+<th:block th:include="inc/includes :: footer-scripts" th:remove="tag"></th:block>
+
+<th:block layout:fragment="page-scripts">
+
+	<script src="http://fairagorav8.pagre-it.com/bower_components/admin-lte/plugins/chartjs/Chart.min.js"></script>
+
+	<script type="text/javascript" th:inline="javascript">
+      /*<![CDATA[*/
+
+      $(document).ready(function () {
+
+          //-------------
+          //- PIE CHART -
+          //-------------
+          // Get context with jQuery - using jQuery's .get() method.
+          var pieChartCanvas = $("#pieChart").get(0).getContext("2d");
+          var pieChart = new Chart(pieChartCanvas);
+          var PieData = [
+              {
+                  value: 20,
+                  color: "#f56954",
+                  highlight: "#f56954",
+                  label: "South East"
+
+              },
+              {
+                  value: 15,
+                  color: "#00a65a",
+                  highlight: "#00a65a",
+                  label: "South West"
+              },
+              {
+                  value: 5,
+                  color: "#f39c12",
+                  highlight: "#f39c12",
+                  label: "Center"
+              },
+              {
+                  value: 6,
+                  color: "#00c0ef",
+                  highlight: "#00c0ef",
+                  label: "North"
+              },
+          ];
+          var pieOptions = {
+              //Boolean - Whether we should show a stroke on each segment
+              segmentShowStroke: true,
+              //String - The colour of each segment stroke
+              segmentStrokeColor: "#fff",
+              //Number - The width of each segment stroke
+              segmentStrokeWidth: 2,
+              //Number - The percentage of the chart that we cut out of the middle
+              percentageInnerCutout: 50, // This is 0 for Pie charts
+              //Number - Amount of animation steps
+              animationSteps: 100,
+              //String - Animation easing effect
+              animationEasing: "easeOutBounce",
+              //Boolean - Whether we animate the rotation of the Doughnut
+              animateRotate: true,
+              //Boolean - Whether we animate scaling the Doughnut from the centre
+              animateScale: false,
+              //Boolean - whether to make the chart responsive to window resizing
+              responsive: true,
+              // Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
+              maintainAspectRatio: true,
+              //String - A legend template
+              legendTemplate: "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<segments.length; i++){%><li><span style=\"background-color:<%=segments[i].fillColor%>\"></span><%if(segments[i].label){%><%=segments[i].label%><%}%></li><%}%></ul>"
+          };
+          //Create pie or douhnut chart
+          // You can switch between pie and douhnut using the method below.
+          pieChart.Doughnut(PieData, pieOptions);
+
+      });
+
+
+      /*]]>*/
+	</script>
+</th:block>
+
+</html>

@@ -55,6 +55,8 @@
 			<li class="header" th:text="#{default.main_nav}">Main Nav</li>
 			<li th:class="${v8p.getNavActive('/home.html')}"><a th:href="@{'/home.html'}"><i
 					class="fa fa-dashboard"></i> <span th:text="#{default.dashboard}">default.dashboard</span></a></li>
+			<li th:class="${v8p.getNavActive('/fame.html')}"><a th:href="@{'/fame.html'}"><i
+					class="fa fa-trophy"></i> <span th:text="#{default.hall_of_fame}">default.hall_of_fame</span></a></li>
 			<li class="treeview {{ (Request::is('farms*') || Request::is('staff*') || Request::is('ponds*') || Request::is('suppliers*')) || Request::is('buyers*'))?'active':'' }}">
 				<a href="#"><i class="fa fa-home"></i> <span th:text="#{default.farms}">default.farms</span>
 					<span class="pull-right-container">
