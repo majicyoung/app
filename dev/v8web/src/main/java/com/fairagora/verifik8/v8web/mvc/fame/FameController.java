@@ -1,18 +1,22 @@
 package com.fairagora.verifik8.v8web.mvc.fame;
 
 import com.fairagora.verifik8.v8web.data.application.V8Page;
-import com.fairagora.verifik8.v8web.data.domain.sys.SYSUser;
 import com.fairagora.verifik8.v8web.mvc.AbstractV8Controller;
-import com.fairagora.verifik8.v8web.mvc.fame.dto.FameUserDTOMapper;
+import com.fairagora.verifik8.v8web.mvc.fame.dto.FameActivityDto;
+import com.fairagora.verifik8.v8web.mvc.fame.dto.FameDTOMapper;
 import com.fairagora.verifik8.v8web.mvc.fame.dto.FameUserDto;
+import com.fairagora.verifik8.v8web.mvc.farms.RegFarmDTOMapper;
+import com.fairagora.verifik8.v8web.mvc.ponds.dto.PondActivityDto;
 import com.fairagora.verifik8.v8web.services.FameService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.List;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 
@@ -23,7 +27,7 @@ public class FameController  extends AbstractV8Controller {
 	private FameService fameService;
 
 	@Autowired
-	private FameUserDTOMapper fameUserDTOMapper;
+	private FameDTOMapper fameDTOMapper;
 
 
 	@SuppressWarnings("OptionalUsedAsFieldOrParameterType")
@@ -33,8 +37,10 @@ public class FameController  extends AbstractV8Controller {
 
 		preparePage(mv);
 
-		List<FameUserDto>  listing = fameService.getListHallOfFameUsers().stream().map(p -> fameUserDTOMapper.toListing(p)).collect(Collectors.toList());
+		List<FameUserDto>  listing = fameService.getListHallOfFameUsers().stream().map(p -> fameDTOMapper.toListing(p)).collect(Collectors.toList());
+		List<FameActivityDto> fameActivityDtos = fameService.getListLatestPondActivity().stream().map(p -> fameDTOMapper.toListing(p)).collect(Collectors.toList());
 		mv.addAttribute("listing", listing);
+		mv.addAttribute("activityList", fameActivityDtos);
 
 
 	//	setToReadOnly(mv, "R_FAME");
