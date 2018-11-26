@@ -39,4 +39,20 @@ public class SysUserStat extends V8Base implements V8Entity {
 		return id.toString();
 	}
 
+
+	public SYSUser getSysUser() {
+		return sysUser;
+	}
+
+	public void setSysUser(SYSUser sysUser) {
+		this.sysUser = sysUser;
+	}
+
+	public Date getConnectionTime() {
+		return connectionTime;
+	}
+
+	public void setConnectionTime(Date connectionTime) {
+		this.connectionTime = connectionTime;
+	}
 }
