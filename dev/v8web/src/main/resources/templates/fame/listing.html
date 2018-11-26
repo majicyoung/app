@@ -18,21 +18,29 @@
 									th:text="#{default.success}">default.success</span> &nbsp;&nbsp;</h4> <span th:text="${v8p.message}">{{ Session::get('message') }}</span>
 						</div>
 					</div>
-					<!-- /.box-header -->
-					<div class="box-body">
-						<table id="userList" class="table table-hover table-striped table-bordered datatable">
-							<tbody>
-							<tr th:each="user:${listing}">
-								<td th:text="${user.id}"></td>
-								<td th:text="${user.email}"></td>
-								<td th:text="${user.name}"></td>
-							</tr>
-							</tbody>
-						</table>
-					</div>
+				</div>
+				<!-- /.box-header -->
+				<div class="box-body">
+					<table id="userList" class="table table-hover table-striped table-bordered datatable">
+						<thead>
+						<tr>
+							<th>UserId</th>
+							<th>Email</th>
+							<th>Name</th>
+							<th>Login count</th>
+						</tr>
+						</thead>
+						<tbody>
+						<tr th:each="user:${listing}">
+							<td th:text="${user.id}"></td>
+							<td th:text="${user.email}"></td>
+							<td th:text="${user.name}"></td>
+							<td th:text="${user.loginNumberCounts}"></td>
+						</tr>
+						</tbody>
+					</table>
 				</div>
 			</div>
-
 		</div>
 
 
@@ -89,7 +97,6 @@
 				<!-- /.box-body -->
 			</div>
 		</div>
-
 
 
 	</div>

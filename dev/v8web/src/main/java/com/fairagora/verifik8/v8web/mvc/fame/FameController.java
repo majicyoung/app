@@ -1,6 +1,7 @@
 package com.fairagora.verifik8.v8web.mvc.fame;
 
 import com.fairagora.verifik8.v8web.data.application.V8Page;
+import com.fairagora.verifik8.v8web.data.repo.sys.SYSUserStatRepository;
 import com.fairagora.verifik8.v8web.mvc.AbstractV8Controller;
 import com.fairagora.verifik8.v8web.mvc.fame.dto.FameActivityDto;
 import com.fairagora.verifik8.v8web.mvc.fame.dto.FameDTOMapper;
@@ -30,6 +31,9 @@ public class FameController  extends AbstractV8Controller {
 	@Autowired
 	private FameDTOMapper fameDTOMapper;
 
+	@Autowired
+	private SYSUserStatRepository sysUserStatRepository;
+
 
 	@SuppressWarnings("OptionalUsedAsFieldOrParameterType")
 	//@PreAuthorize("hasAuthority('R_FAME')")
@@ -38,7 +42,7 @@ public class FameController  extends AbstractV8Controller {
 
 		preparePage(mv);
 
-		List<FameUserDto>  listing = fameService.getListHallOfFameUsers().stream().map(p -> fameDTOMapper.toListing(p)).collect(Collectors.toList());
+		List<FameUserDto>  listing = fameService.getListHallOfFameUsers().stream().map(p -> fameDTOMapper.toListing(p)).map(p -> p.selfSetLoginNumberCounts(sysUserStatRepository.countAllBySysUserId(p.getId()))).collect(Collectors.toList());
 		List<FameActivityDto> fameActivityDtos = new ArrayList<>();
 		fameActivityDtos.addAll(fameService.getListLatestPondActivity().stream().map(p -> fameDTOMapper.toListing(p)).collect(Collectors.toList()));
 		fameActivityDtos.addAll(fameService.getListLatestPlotActivity().stream().map(p -> fameDTOMapper.toListing(p)).collect(Collectors.toList()));

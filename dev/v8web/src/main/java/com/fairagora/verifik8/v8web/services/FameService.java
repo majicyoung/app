@@ -28,7 +28,7 @@ public class FameService {
 
 	public List<SYSUser> getListHallOfFameUsers(){
 
-		return userRepository.findAll().stream().limit(10).collect(Collectors.toList());
+		return userRepository.findBestRewardUsersByLogin().stream().limit(10).collect(Collectors.toList());
 
 	}
 
