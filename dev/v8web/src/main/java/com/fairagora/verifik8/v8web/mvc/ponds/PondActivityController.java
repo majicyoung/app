@@ -13,6 +13,7 @@ import com.fairagora.verifik8.v8web.data.repo.cl.CLFarmPondActivityTypeRepositor
 import com.fairagora.verifik8.v8web.data.repo.cl.CLFarmPondTypeRepository;
 import com.fairagora.verifik8.v8web.data.repo.cl.CLRefProductRepository;
 import com.fairagora.verifik8.v8web.data.repo.dt.DTFarmPondProductionCycleRepository;
+import com.fairagora.verifik8.v8web.services.FameService;
 import com.fairagora.verifik8.v8web.services.FarmPondProductionCycleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -55,6 +56,9 @@ public class PondActivityController extends AbstractV8Controller {
 
 	@Autowired
 	private FarmPondProductionCycleService farmPondProductionCycleService;
+
+	@Autowired
+	private FameService fameService;
 
 	/**
 	 * @param pondId
@@ -156,7 +160,7 @@ public class PondActivityController extends AbstractV8Controller {
 	@Transactional
 	@PreAuthorize("hasAuthority('W_PONDACTIVTY')")
 	@RequestMapping(value = {"/ponds/{pondId}/activities/update.html", "/farm/{farmId}/ponds/{pondId}/activities/update.html"}, method = RequestMethod.POST)
-	public String showPondActivities(@PathVariable("farmId") Optional<Long> farmId, @PathVariable("pondId") Long pondId, PondActivityDto dto, BindingResult result, Model mv) {
+	public String createPondActivities(@PathVariable("farmId") Optional<Long> farmId, @PathVariable("pondId") Long pondId, PondActivityDto dto, BindingResult result, Model mv, HttpServletRequest req) {
 
 		DTFarmPondActivity act = null;
 
@@ -178,6 +182,8 @@ public class PondActivityController extends AbstractV8Controller {
 		pondActivityRepository.save(act);
 
 		farmPondProductionCycleService.updatePondProductionCycle(act);
+
+		fameService.saveLatestFarmPondActivity(loggedUser(req), act);
 
 		preparePage(pondId, mv);
 		return farmId.map(id -> "redirect:/farm/" + id + "/pond/" + pondId + "/activities/browser.html").orElse("redirect:/ponds/" + pondId + "/activities/browser.html");

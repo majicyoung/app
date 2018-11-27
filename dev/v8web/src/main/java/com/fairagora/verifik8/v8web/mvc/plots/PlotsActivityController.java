@@ -11,6 +11,7 @@ import com.fairagora.verifik8.v8web.data.repo.cl.CLFarmPlotActivityTypeRepositor
 import com.fairagora.verifik8.v8web.data.repo.cl.CLFarmPondActivityTypeRepository;
 import com.fairagora.verifik8.v8web.data.repo.cl.CLRefProductRepository;
 import com.fairagora.verifik8.v8web.data.repo.reg.RegEntityRepository;
+import com.fairagora.verifik8.v8web.services.FameService;
 import com.fairagora.verifik8.v8web.services.FarmPlotProductionCycleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -27,6 +28,8 @@ import com.fairagora.verifik8.v8web.data.repo.reg.RegEntityFarmPlotRepository;
 import com.fairagora.verifik8.v8web.mvc.AbstractV8Controller;
 import com.fairagora.verifik8.v8web.mvc.farms.RegFarmDTOMapper;
 import com.fairagora.verifik8.v8web.mvc.plots.dto.PlotActivityDto;
+
+import javax.servlet.http.HttpServletRequest;
 
 @Controller
 public class PlotsActivityController extends AbstractV8Controller {
@@ -52,6 +55,9 @@ public class PlotsActivityController extends AbstractV8Controller {
 
 	@Autowired
 	private FarmPlotProductionCycleService farmPlotProductionCycleService;
+
+	@Autowired
+	private FameService fameService;
 
 
 	/**
@@ -147,7 +153,7 @@ public class PlotsActivityController extends AbstractV8Controller {
 	 */
 	@PreAuthorize("hasAuthority('W_PLOTACTIVITY')")
 	@RequestMapping(value = {"/plots/{plotId}/activities/update.html",  "/farm/{farmId}/plots/{plotId}/activities/update.html"}, method = RequestMethod.POST)
-	public String showPlotActivities(@PathVariable("farmId") Optional<Long> farmId, @PathVariable("plotId") Long plotId, PlotActivityDto dto, BindingResult result, Model mv) {
+	public String showPlotActivities(@PathVariable("farmId") Optional<Long> farmId, @PathVariable("plotId") Long plotId, PlotActivityDto dto, BindingResult result, Model mv, HttpServletRequest req) {
 
 		DTFarmPlotActivity act = null;
 
@@ -170,6 +176,11 @@ public class PlotsActivityController extends AbstractV8Controller {
 		plotActivityRepository.save(act);
 
 		farmPlotProductionCycleService.updatePlotProductionCycle(act);
+
+
+		fameService.saveLatestFarmPlotActivity(loggedUser(req), act);
+
+
 
 		preparePage(plotId, mv);
 

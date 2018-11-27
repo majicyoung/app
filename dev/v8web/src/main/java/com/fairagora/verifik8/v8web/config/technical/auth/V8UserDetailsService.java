@@ -2,7 +2,7 @@ package com.fairagora.verifik8.v8web.config.technical.auth;
 
 import java.util.HashSet;
 
-import com.fairagora.verifik8.v8web.services.AnalyticsService;
+import com.fairagora.verifik8.v8web.services.FameService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -30,7 +30,7 @@ public class V8UserDetailsService implements UserDetailsService, ApplicationList
     private JdbcTemplate jdbc;
 
     @Autowired
-    private AnalyticsService analyticsService;
+    private FameService fameService;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -49,7 +49,7 @@ public class V8UserDetailsService implements UserDetailsService, ApplicationList
             throw new UsernameNotFoundException(username);
         }
 
-        analyticsService.saveUserLogin(u);
+        fameService.saveUserLogin(u);
 
         V8LoggedUser loggedUser = new V8LoggedUser(u);
 
