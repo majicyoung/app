@@ -41,9 +41,13 @@ public class FameService {
 	private SYSUserStatActivityRepository sysUserStatActivityRepository;
 
 
-	public List<SYSUser> getListHallOfFameUsers(){
+	public List<SYSUser> getMostActiveUser(){
+		return userRepository.findBestRewardUsersByLogin();
 
-		return userRepository.findBestRewardUsersByLogin().stream().limit(10).collect(Collectors.toList());
+	}
+
+	public List<SYSUser> getLastActiveUser(){
+		return userRepository.findLastestUsersByLogin();
 
 	}
 

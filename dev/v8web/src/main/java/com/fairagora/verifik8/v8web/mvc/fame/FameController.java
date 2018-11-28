@@ -47,12 +47,10 @@ public class FameController  extends AbstractV8Controller {
 
 		preparePage(mv);
 
-		List<FameUserDto>  listing = fameService.getListHallOfFameUsers().stream().map(p -> fameDTOMapper.toListing(p)).map(p -> p.selfSetLoginNumberCounts(sysUserStatRepository.countAllBySysUserId(p.getId()))).collect(Collectors.toList());
-		List<SysUserStatActivity> sysUserStatActivities = new ArrayList<>();
-	//	sysUserStatActivities.addAll(fameService.getListLatestPondActivity());
-	//	sysUserStatActivities.addAll(fameService.getListLatestPlotActivity());
-		mv.addAttribute("listing", listing);
-		mv.addAttribute("activityList", sysUserStatActivities);
+		List<FameUserDto>  mostActiveUsers = fameService.getMostActiveUser().stream().map(p -> fameDTOMapper.toListing(p)).map(p -> p.selfSetLoginNumberCounts(sysUserStatRepository.countAllBySysUserId(p.getId()))).collect(Collectors.toList());
+		List<FameUserDto>  lastActiveUsers = fameService.getLastActiveUser().stream().map(p -> fameDTOMapper.toListing(p)).map(p -> p.selfSetLoginNumberCounts(sysUserStatRepository.countAllBySysUserId(p.getId()))).collect(Collectors.toList());
+		mv.addAttribute("mostActiveUserList", mostActiveUsers);
+		mv.addAttribute("lastActiveUserList", lastActiveUsers);
 		mv.addAttribute("roleList", sysRoleRepository.findAll());
 
 

@@ -16,4 +16,7 @@ public interface SYSUserRepository extends JpaRepository<SYSUser, Long> {
     @Query(value = "SELECT sys_users.* From sys_users INNER JOIN ( SELECT * from sys_users_stats group by SYS_USER_ID order by COUNT(*) desc ) as a ON sys_users.ID = a.SYS_USER_ID", nativeQuery = true)
     List<SYSUser> findBestRewardUsersByLogin();
 
+    @Query(value = "SELECT sys_users.* From sys_users INNER  join ( SELECT SYS_USER_ID, max(CONNECTION_TIME) as CONNECTION_TIME from sys_users_stats group by SYS_USER_ID ) as a  ON sys_users.ID = a.SYS_USER_ID order by a.CONNECTION_TIME desc", nativeQuery = true)
+    List<SYSUser> findLastestUsersByLogin();
+
 }

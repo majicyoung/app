@@ -69,7 +69,7 @@
 						</tr>
 						</thead>
 						<tbody>
-						<tr th:each="user:${listing}">
+						<tr th:each="user:${mostActiveUserList}">
 							<td th:text="${user.id}"></td>
 							<td th:text="${user.email}"></td>
 							<td th:text="${user.name}"></td>
@@ -99,7 +99,7 @@
 						</tr>
 						</thead>
 						<tbody>
-						<tr th:each="user:${listing}">
+						<tr th:each="user:${lastActiveUserList}">
 							<td th:text="${user.id}"></td>
 							<td th:text="${user.email}"></td>
 							<td th:text="${user.name}"></td>
@@ -196,6 +196,22 @@
               }
           );
           $(id).html($(id).data('daterangepicker').startDate.format('MMMM D, YYYY') + ' - ' + $(id).data('daterangepicker').endDate.format('MMMM D, YYYY'))
+      }
+
+
+
+      function onProductionSubmitButtonClick() {
+          var startDate = $('#production_datepicker').data('daterangepicker').startDate.format('YYYY-MM-DD');
+          var endDate = $('#production_datepicker').data('daterangepicker').endDate.format('YYYY-MM-DD');
+          var selectProductions = $('.production_select2_multiple').val();
+              $.post('/farm/' + farmId + '/dashboard/pond/productions', {
+                  start: startDate,
+                  end: endDate,
+                  'poundIds[]': selectProductions
+              }, function (data) {
+                  $(".result").html(data);
+                  drawChart('production_line_chart', 'Production', data);
+              });
       }
 
       /*]]>*/
