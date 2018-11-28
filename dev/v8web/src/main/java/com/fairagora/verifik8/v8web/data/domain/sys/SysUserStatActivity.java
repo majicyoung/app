@@ -19,20 +19,20 @@ public class SysUserStatActivity  extends V8Base implements V8Entity {
 	protected Long id;
 
 
-	@OneToOne(targetEntity = SYSUser.class, fetch = FetchType.EAGER)
+	@ManyToOne(targetEntity = SYSUser.class, fetch = FetchType.EAGER)
 	@JoinColumn(nullable = false, name = "SYS_USER_ID")
-	private SYSUser sysUser;
+	protected SYSUser sysUser;
 
-	@OneToOne(targetEntity = DTFarmPlotActivity.class, fetch = FetchType.EAGER)
-	@JoinColumn(nullable = false, name = "DT_FARM_PLOT_ACTIVITY_ID")
-	private DTFarmPlotActivity dtFarmPlotActivity;
+//	@ManyToOne(targetEntity = DTFarmPlotActivity.class, fetch = FetchType.LAZY)
+//	@JoinColumn(name = "DT_FARM_PLOT_ACTIVITY_ID", nullable = true)
+//	protected DTFarmPlotActivity dtFarmPlotActivity;
 
-	@OneToOne(targetEntity = DTFarmPondActivity.class, fetch = FetchType.EAGER)
-	@JoinColumn(nullable = false, name = "DT_FARM_POND_ACTIVITY_ID")
-	private DTFarmPondActivity dtFarmPondActivity;
+	@ManyToOne(targetEntity = DTFarmPondActivity.class, fetch = FetchType.EAGER)
+	@JoinColumn(name = "DT_FARM_POND_ACTIVITY_ID", nullable = false)
+	protected DTFarmPondActivity dtFarmPondActivity;
 
 	@Column(name = "ACTIVITY_DATE")
-	private Date activityDate;
+	protected Date activityDate;
 
 
 	@Override
@@ -58,13 +58,13 @@ public class SysUserStatActivity  extends V8Base implements V8Entity {
 		this.sysUser = sysUser;
 	}
 
-	public DTFarmPlotActivity getDtFarmPlotActivity() {
-		return dtFarmPlotActivity;
-	}
-
-	public void setDtFarmPlotActivity(DTFarmPlotActivity dtFarmPlotActivity) {
-		this.dtFarmPlotActivity = dtFarmPlotActivity;
-	}
+//	public DTFarmPlotActivity getDtFarmPlotActivity() {
+//		return dtFarmPlotActivity;
+//	}
+//
+//	public void setDtFarmPlotActivity(DTFarmPlotActivity dtFarmPlotActivity) {
+//		this.dtFarmPlotActivity = dtFarmPlotActivity;
+//	}
 
 	public DTFarmPondActivity getDtFarmPondActivity() {
 		return dtFarmPondActivity;
@@ -81,4 +81,14 @@ public class SysUserStatActivity  extends V8Base implements V8Entity {
 	public void setActivityDate(Date activityDate) {
 		this.activityDate = activityDate;
 	}
+
+//	public String getActivityName(){
+//		if (dtFarmPlotActivity != null){
+//			return dtFarmPlotActivity.getActivityType().getName() + "  " + dtFarmPlotActivity.getName();
+//		}else{
+//			return dtFarmPondActivity.getActivityType().getName() + "  " + dtFarmPondActivity.getName();
+//		}
+//	}
+
+
 }

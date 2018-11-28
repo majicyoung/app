@@ -13,7 +13,7 @@ public interface SYSUserRepository extends JpaRepository<SYSUser, Long> {
 
     SYSUser findByPhoneNumber(String phoneNumber);
 
-    @Query(value = "SELECT sys_users.* From verifik8_blue_test.sys_users INNER JOIN ( SELECT * from sys_users_stats group by SYS_USER_ID order by COUNT(*) desc ) as a ON sys_users.ID = a.SYS_USER_ID", nativeQuery = true)
+    @Query(value = "SELECT sys_users.* From sys_users INNER JOIN ( SELECT * from sys_users_stats group by SYS_USER_ID order by COUNT(*) desc ) as a ON sys_users.ID = a.SYS_USER_ID", nativeQuery = true)
     List<SYSUser> findBestRewardUsersByLogin();
 
 }

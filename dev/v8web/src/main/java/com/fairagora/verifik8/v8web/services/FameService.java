@@ -48,13 +48,13 @@ public class FameService {
 	}
 
 
-	public List<DTFarmPondActivity> getListLatestPondActivity(){
-		return pondActivityRepository.findTop5ByOrderByCreatedAtDesc();
+	public List<SysUserStatActivity> getListLatestPondActivity(){
+		return sysUserStatActivityRepository.getPondUserStatActivity();
 	}
 
-	public List<DTFarmPlotActivity> getListLatestPlotActivity(){
-		return plotActivityRepository.findTop5ByOrderByCreatedAtDesc();
-	}
+//	public List<SysUserStatActivity> getListLatestPlotActivity(){
+//		return sysUserStatActivityRepository.getPlotUserStatActivity();
+//	}
 
 	public void saveUserLogin(SYSUser sysUser){
 		SysUserStat sysUserStat = new SysUserStat();
@@ -74,7 +74,7 @@ public class FameService {
 	public void saveLatestFarmPlotActivity(SYSUser sysUser, DTFarmPlotActivity dtFarmPlotActivity){
 		SysUserStatActivity sysUserStatActivity = new SysUserStatActivity();
 		sysUserStatActivity.setSysUser(sysUser);
-		sysUserStatActivity.setDtFarmPlotActivity(dtFarmPlotActivity);
+		//sysUserStatActivity.setDtFarmPlotActivity(dtFarmPlotActivity);
 		sysUserStatActivityRepository.save(sysUserStatActivity);
 	}
 

@@ -5,6 +5,7 @@ import com.fairagora.verifik8.v8web.data.domain.dt.DTFarmPlotActivity;
 import com.fairagora.verifik8.v8web.data.domain.dt.DTFarmPondActivity;
 import com.fairagora.verifik8.v8web.data.domain.sys.SYSRole;
 import com.fairagora.verifik8.v8web.data.domain.sys.SYSUser;
+import com.fairagora.verifik8.v8web.data.repo.sys.SYSUserStatActivityRepository;
 import com.fairagora.verifik8.v8web.mvc.infra.dtomapping.EntityDtoMapper;
 import com.fairagora.verifik8.v8web.mvc.infra.dtomapping.commons.V8MeasureDto;
 import com.fairagora.verifik8.v8web.mvc.users.dto.RoleFormDto;
@@ -22,12 +23,12 @@ public interface FameDTOMapper {
 
 	FameUserDto toListing(SYSUser p);
 
-	void toDto(DTFarmPondActivity activity, @MappingTarget FameActivityDto dto);
-
-	FameActivityDto toListing(DTFarmPondActivity p);
-
-	void toDto(DTFarmPlotActivity activity, @MappingTarget FameActivityDto dto);
-
-	FameActivityDto toListing(DTFarmPlotActivity p);
+//	void toDto(SYSUserStatActivityRepository activity, @MappingTarget FameActivityDto dto);
+//
+//	FameActivityDto toListing(SYSUserStatActivityRepository p);
+//
+//	void toDto(SYSUserStatActivityRepository activity, @MappingTarget FameActivityDto dto);
+//
+//	FameActivityDto toListing(SYSUserStatActivityRepository p);
 
 }
