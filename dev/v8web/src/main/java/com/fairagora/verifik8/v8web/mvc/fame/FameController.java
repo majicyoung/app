@@ -1,5 +1,6 @@
 package com.fairagora.verifik8.v8web.mvc.fame;
 
+import com.fairagora.verifik8.v8web.config.helper.DateHelper;
 import com.fairagora.verifik8.v8web.data.application.V8Page;
 import com.fairagora.verifik8.v8web.data.domain.sys.SysUserStatActivity;
 import com.fairagora.verifik8.v8web.data.repo.sys.SYSRoleRepository;
@@ -16,11 +17,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
@@ -38,26 +44,37 @@ public class FameController  extends AbstractV8Controller {
 	private SYSUserStatRepository sysUserStatRepository;
 
 	@Autowired
+	private SYSUserStatActivityRepository sysUserStatActivityRepository;
+
+	@Autowired
 	private SYSRoleRepository sysRoleRepository;
 
 	@SuppressWarnings("OptionalUsedAsFieldOrParameterType")
 	//@PreAuthorize("hasAuthority('R_FAME')")
 	@RequestMapping(value = {"/fame.html"}, method = RequestMethod.GET)
-	public String showHallOfFame(Model mv) {
+	public String showHallOfFame(@RequestParam("startDate") Optional<String> startDate, @RequestParam("endDate") Optional<String> endDate, @RequestParam(value = "roleId") Optional<String> roleId, Model mv) {
 
 		preparePage(mv);
 
-		List<FameUserDto>  mostActiveUsers = fameService.getMostActiveUser().stream().map(p -> fameDTOMapper.toListing(p)).map(p -> p.selfSetLoginNumberCounts(sysUserStatRepository.countAllBySysUserId(p.getId()))).collect(Collectors.toList());
-		List<FameUserDto>  lastActiveUsers = fameService.getLastActiveUser().stream().map(p -> fameDTOMapper.toListing(p)).map(p -> p.selfSetLoginNumberCounts(sysUserStatRepository.countAllBySysUserId(p.getId()))).collect(Collectors.toList());
-		mv.addAttribute("mostActiveUserList", mostActiveUsers);
-		mv.addAttribute("lastActiveUserList", lastActiveUsers);
+		String pStartDate = startDate.orElseGet(() -> DateHelper.DateToSQLDateString(DateHelper.getLastMonthDate()));
+		String pEndDate = endDate.orElseGet(() -> DateHelper.DateToSQLDateString(DateHelper.getCurrentDate()));
+		String pRoleId = (roleId.isPresent() && !roleId.get().isEmpty())? roleId.get() : null;
+
+		List<FameUserDto>  mostActiveUsersByLogin = fameService.getMostActiveUserByLogin(pStartDate, pEndDate, pRoleId).stream().map(p -> fameDTOMapper.toListing(p)).map(p -> p.selfSetLoginNumberCounts(sysUserStatRepository.countAllBySysUserId(p.getId()))).collect(Collectors.toList());
+		List<FameUserDto>  lastActiveUsersByLogin = fameService.getLastActiveUserByLogin(pStartDate, pEndDate, pRoleId).stream().map(p -> fameDTOMapper.toListing(p)).map(p -> p.selfSetLoginNumberCounts(sysUserStatRepository.countAllBySysUserId(p.getId()))).collect(Collectors.toList());
+		List<FameUserDto>  mostActiveUsersByActivity = fameService.getMostActiveUserByActivity(pStartDate, pEndDate, pRoleId).stream().map(p -> fameDTOMapper.toListing(p)).map(p -> p.selfSetLoginNumberCounts(sysUserStatActivityRepository.countAllBySysUserId(p.getId()))).collect(Collectors.toList());
+		List<FameUserDto>  lastActiveUsersByActivity = fameService.getLatestActiveUserByActivity(pStartDate, pEndDate, pRoleId).stream().map(p -> fameDTOMapper.toListing(p)).map(p -> p.selfSetLoginNumberCounts(sysUserStatActivityRepository.countAllBySysUserId(p.getId()))).collect(Collectors.toList());
+
+		mv.addAttribute("mostActiveUserListByLogin", mostActiveUsersByLogin);
+		mv.addAttribute("lastActiveUserListByLogin", lastActiveUsersByLogin);
+		mv.addAttribute("lastActiveUserListByActivity", mostActiveUsersByActivity);
+		mv.addAttribute("lastActiveUserListByActivity", lastActiveUsersByActivity);
 		mv.addAttribute("roleList", sysRoleRepository.findAll());
 
 
 	//	setToReadOnly(mv, "R_FAME");
 		return "fame/listing";
 	}
-
 
 	protected void preparePage(Model mv) {
 

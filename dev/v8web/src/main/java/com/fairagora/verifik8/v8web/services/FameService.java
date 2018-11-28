@@ -25,42 +25,32 @@ public class FameService {
 	private SYSUserRepository userRepository;
 
 	@Autowired
-	private DTFarmPondActivityRepository pondActivityRepository;
-
-	@Autowired
-	private DTFarmPlotActivityRepository plotActivityRepository;
-
-
-	@Autowired
-	private SYSStatActivityRepository sysStatActivityRepository;
-
-	@Autowired
 	private SYSUserStatRepository sysUserStatRepository;
 
 	@Autowired
 	private SYSUserStatActivityRepository sysUserStatActivityRepository;
 
 
-	public List<SYSUser> getMostActiveUser(){
-		return userRepository.findBestRewardUsersByLogin();
+	public List<SYSUser> getMostActiveUserByLogin(String startDate, String endDate, String roleId) {
+		return roleId == null ? userRepository.findBestRewardUsersByLogin(startDate, endDate) : userRepository.findBestRewardUsersByRoleAndByLogin(startDate, endDate, roleId);
+	}
+
+	public List<SYSUser> getLastActiveUserByLogin(String startDate, String endDate, String roleId) {
+		return roleId == null ? userRepository.findLastestUsersByLogin(startDate, endDate) : userRepository.findLastestUsersByRoleByLogin(startDate, endDate, roleId);
+	}
+
+
+	public List<SYSUser> getMostActiveUserByActivity(String startDate, String endDate, String roleId) {
+		return roleId == null ? userRepository.findBestRewardUsersByActivity(startDate, endDate) : userRepository.findBestRewardUsersByRoleByActivity(startDate, endDate, roleId);
 
 	}
 
-	public List<SYSUser> getLastActiveUser(){
-		return userRepository.findLastestUsersByLogin();
+	public List<SYSUser> getLatestActiveUserByActivity(String startDate, String endDate, String roleId) {
+		return roleId == null ? userRepository.findLastestUsersByActivity(startDate, endDate) : userRepository.findLastestUsersByRoleByActivity(startDate, endDate, roleId);
 
 	}
 
-
-	public List<SysUserStatActivity> getListLatestPondActivity(){
-		return sysUserStatActivityRepository.getPondUserStatActivity();
-	}
-
-//	public List<SysUserStatActivity> getListLatestPlotActivity(){
-//		return sysUserStatActivityRepository.getPlotUserStatActivity();
-//	}
-
-	public void saveUserLogin(SYSUser sysUser){
+	public void saveUserLogin(SYSUser sysUser) {
 		SysUserStat sysUserStat = new SysUserStat();
 		sysUserStat.setSysUser(sysUser);
 		sysUserStat.setConnectionTime(new Date());
@@ -68,20 +58,19 @@ public class FameService {
 
 	}
 
-	public void saveLatestFarmPondActivity(SYSUser sysUser, DTFarmPondActivity dtFarmPondActivity){
+	public void saveLatestFarmPondActivity(SYSUser sysUser, DTFarmPondActivity dtFarmPondActivity) {
 		SysUserStatActivity sysUserStatActivity = new SysUserStatActivity();
 		sysUserStatActivity.setSysUser(sysUser);
 		sysUserStatActivity.setDtFarmPondActivity(dtFarmPondActivity);
 		sysUserStatActivityRepository.save(sysUserStatActivity);
 	}
 
-	public void saveLatestFarmPlotActivity(SYSUser sysUser, DTFarmPlotActivity dtFarmPlotActivity){
+	public void saveLatestFarmPlotActivity(SYSUser sysUser, DTFarmPlotActivity dtFarmPlotActivity) {
 		SysUserStatActivity sysUserStatActivity = new SysUserStatActivity();
 		sysUserStatActivity.setSysUser(sysUser);
-		//sysUserStatActivity.setDtFarmPlotActivity(dtFarmPlotActivity);
+		sysUserStatActivity.setDtFarmPlotActivity(dtFarmPlotActivity);
 		sysUserStatActivityRepository.save(sysUserStatActivity);
 	}
-
 
 
 }

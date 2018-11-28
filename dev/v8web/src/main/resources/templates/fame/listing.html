@@ -27,14 +27,14 @@
 						</div>
 
 						<div class="col-xs-4">
-							<select class="form-control" th:attr="data-placeholder=#{farm.ponds}">
-								<option th:text="#{hall_of_fame.all_role}"></option>
+							<select id="role-select" class="form-control" th:attr="data-placeholder=#{farm.ponds}">
+								<option th:text="#{hall_of_fame.all_role}" th:value="null"></option>
 								<option th:each="role : ${roleList}" th:value="${role.id}" th:text="${role.name}"></option>
 							</select>
 						</div>
 
 						<div class="col-xs-4">
-							<button type="button" class="btn btn-block btn-primary" onclick="onProductionSubmitButtonClick()">
+							<button type="button" class="btn btn-block btn-primary" onclick="onFilterSubmitButtonClick()">
 								Submit
 							</button>
 						</div>
@@ -59,7 +59,7 @@
 				</div>
 				<!-- /.box-header -->
 				<div class="box-body">
-					<table id="userList" class="table table-hover table-striped table-bordered datatable">
+					<table id="userList" class="table table-hover table-striped table-bordered datatable order-column">
 						<thead>
 						<tr>
 							<th th:text="#{hall_of_fame.id}"></th>
@@ -69,7 +69,7 @@
 						</tr>
 						</thead>
 						<tbody>
-						<tr th:each="user:${mostActiveUserList}">
+						<tr th:each="user:${mostActiveUserListByLogin}">
 							<td th:text="${user.id}"></td>
 							<td th:text="${user.email}"></td>
 							<td th:text="${user.name}"></td>
@@ -89,7 +89,7 @@
 				</div>
 				<!-- /.box-header -->
 				<div class="box-body">
-					<table id="lastUserList" class="table table-hover table-striped table-bordered datatable">
+					<table id="lastUserList" class="table table-hover table-striped table-bordered datatable order-column">
 						<thead>
 						<tr>
 							<th th:text="#{hall_of_fame.id}"></th>
@@ -99,7 +99,7 @@
 						</tr>
 						</thead>
 						<tbody>
-						<tr th:each="user:${lastActiveUserList}">
+						<tr th:each="user:${lastActiveUserListByLogin}">
 							<td th:text="${user.id}"></td>
 							<td th:text="${user.email}"></td>
 							<td th:text="${user.name}"></td>
@@ -119,15 +119,24 @@
 				</div>
 				<!-- /.box-header -->
 				<div class="box-body">
-					<ul class="products-list product-list-in-box">
-						<li class="item" th:each="activity:${activityList}">
-							<div class="product-info">
-								<a href="javascript:void(0)" class="product-title" th:text="${activity.sysUser.name}"></a>
-								<span class="product-description" th:text="${activity.sysUser.name}"></span>
-							</div>
-						</li>
-						<!-- /.item -->
-					</ul>
+					<table id="mostUserListByLogin" class="table table-hover table-striped table-bordered datatable order-column">
+						<thead>
+						<tr>
+							<th th:text="#{hall_of_fame.id}"></th>
+							<th th:text="#{hall_of_fame.email}"></th>
+							<th th:text="#{hall_of_fame.name}"></th>
+							<th th:text="#{hall_of_fame.activity_count}"></th>
+						</tr>
+						</thead>
+						<tbody>
+						<tr th:each="user:${lastActiveUserListByActivity}">
+							<td th:text="${user.id}"></td>
+							<td th:text="${user.email}"></td>
+							<td th:text="${user.name}"></td>
+							<td th:text="${user.loginNumberCounts}"></td>
+						</tr>
+						</tbody>
+					</table>
 				</div>
 				<!-- /.box-body -->
 			</div>
@@ -141,15 +150,24 @@
 				</div>
 				<!-- /.box-header -->
 				<div class="box-body">
-					<ul class="products-list product-list-in-box">
-						<li class="item" th:each="activity:${activityList}">
-							<div class="product-info">
-								<a href="javascript:void(0)" class="product-title" th:text="${activity.sysUser.name}"></a>
-								<span class="product-description" th:text="${activity.sysUser.name}"></span>
-							</div>
-						</li>
-						<!-- /.item -->
-					</ul>
+					<table id="lastUserListByLogin" class="table table-hover table-striped table-bordered datatable order-column">
+						<thead>
+						<tr>
+							<th th:text="#{hall_of_fame.id}"></th>
+							<th th:text="#{hall_of_fame.email}"></th>
+							<th th:text="#{hall_of_fame.name}"></th>
+							<th th:text="#{hall_of_fame.activity_count}"></th>
+						</tr>
+						</thead>
+						<tbody>
+						<tr th:each="user:${lastActiveUserListByActivity}">
+							<td th:text="${user.id}"></td>
+							<td th:text="${user.email}"></td>
+							<td th:text="${user.name}"></td>
+							<td th:text="${user.loginNumberCounts}"></td>
+						</tr>
+						</tbody>
+					</table>
 				</div>
 				<!-- /.box-body -->
 			</div>
@@ -172,7 +190,13 @@
       $(document).ready(function () {
           initDatePicker('#filter_datepicker');
 
-
+          $('.datatable').DataTable({
+              "responsive": false,
+              "order": [[5, "desc"]],
+              "language": {
+                  "url": langURL
+              }
+          });
       });
 
       function initDatePicker(id) {
@@ -200,18 +224,11 @@
 
 
 
-      function onProductionSubmitButtonClick() {
-          var startDate = $('#production_datepicker').data('daterangepicker').startDate.format('YYYY-MM-DD');
-          var endDate = $('#production_datepicker').data('daterangepicker').endDate.format('YYYY-MM-DD');
-          var selectProductions = $('.production_select2_multiple').val();
-              $.post('/farm/' + farmId + '/dashboard/pond/productions', {
-                  start: startDate,
-                  end: endDate,
-                  'poundIds[]': selectProductions
-              }, function (data) {
-                  $(".result").html(data);
-                  drawChart('production_line_chart', 'Production', data);
-              });
+      function onFilterSubmitButtonClick() {
+          var startDate = $('#filter_datepicker').data('daterangepicker').startDate.format('YYYY-MM-DD');
+          var endDate = $('#filter_datepicker').data('daterangepicker').endDate.format('YYYY-MM-DD');
+          var selectRole = $('#role-select').val();
+          window.location.href = "/fame.html?startDate="+startDate+"&endDate="+endDate+"&roleId="+selectRole;
       }
 
       /*]]>*/

@@ -23,9 +23,9 @@ public class SysUserStatActivity  extends V8Base implements V8Entity {
 	@JoinColumn(nullable = false, name = "SYS_USER_ID")
 	protected SYSUser sysUser;
 
-//	@ManyToOne(targetEntity = DTFarmPlotActivity.class, fetch = FetchType.LAZY)
-//	@JoinColumn(name = "DT_FARM_PLOT_ACTIVITY_ID", nullable = true)
-//	protected DTFarmPlotActivity dtFarmPlotActivity;
+	@ManyToOne(targetEntity = DTFarmPlotActivity.class, fetch = FetchType.LAZY)
+	@JoinColumn(name = "DT_FARM_PLOT_ACTIVITY_ID", nullable = true)
+	protected DTFarmPlotActivity dtFarmPlotActivity;
 
 	@ManyToOne(targetEntity = DTFarmPondActivity.class, fetch = FetchType.EAGER)
 	@JoinColumn(name = "DT_FARM_POND_ACTIVITY_ID", nullable = false)
@@ -58,13 +58,13 @@ public class SysUserStatActivity  extends V8Base implements V8Entity {
 		this.sysUser = sysUser;
 	}
 
-//	public DTFarmPlotActivity getDtFarmPlotActivity() {
-//		return dtFarmPlotActivity;
-//	}
-//
-//	public void setDtFarmPlotActivity(DTFarmPlotActivity dtFarmPlotActivity) {
-//		this.dtFarmPlotActivity = dtFarmPlotActivity;
-//	}
+	public DTFarmPlotActivity getDtFarmPlotActivity() {
+		return dtFarmPlotActivity;
+	}
+
+	public void setDtFarmPlotActivity(DTFarmPlotActivity dtFarmPlotActivity) {
+		this.dtFarmPlotActivity = dtFarmPlotActivity;
+	}
 
 	public DTFarmPondActivity getDtFarmPondActivity() {
 		return dtFarmPondActivity;
@@ -82,13 +82,13 @@ public class SysUserStatActivity  extends V8Base implements V8Entity {
 		this.activityDate = activityDate;
 	}
 
-//	public String getActivityName(){
-//		if (dtFarmPlotActivity != null){
-//			return dtFarmPlotActivity.getActivityType().getName() + "  " + dtFarmPlotActivity.getName();
-//		}else{
-//			return dtFarmPondActivity.getActivityType().getName() + "  " + dtFarmPondActivity.getName();
-//		}
-//	}
+	public String getActivityName(){
+		if (dtFarmPlotActivity != null){
+			return dtFarmPlotActivity.getActivityType().getName() + "  " + dtFarmPlotActivity.getName();
+		}else{
+			return dtFarmPondActivity.getActivityType().getName() + "  " + dtFarmPondActivity.getName();
+		}
+	}
 
 
 }
