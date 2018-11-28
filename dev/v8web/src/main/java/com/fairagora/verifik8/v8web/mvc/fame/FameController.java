@@ -14,6 +14,7 @@ import com.fairagora.verifik8.v8web.mvc.farms.RegFarmDTOMapper;
 import com.fairagora.verifik8.v8web.mvc.ponds.dto.PondActivityDto;
 import com.fairagora.verifik8.v8web.services.FameService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -50,7 +51,7 @@ public class FameController  extends AbstractV8Controller {
 	private SYSRoleRepository sysRoleRepository;
 
 	@SuppressWarnings("OptionalUsedAsFieldOrParameterType")
-	//@PreAuthorize("hasAuthority('R_FAME')")
+	@PreAuthorize("hasAuthority('R_FAMEBROWSER')")
 	@RequestMapping(value = {"/fame.html"}, method = RequestMethod.GET)
 	public String showHallOfFame(@RequestParam("startDate") Optional<String> startDate, @RequestParam("endDate") Optional<String> endDate, @RequestParam(value = "roleId") Optional<String> roleId, Model mv) {
 

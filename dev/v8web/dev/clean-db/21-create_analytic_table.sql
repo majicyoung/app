@@ -56,3 +56,11 @@ CREATE TABLE `sys_users_stats_activity`
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8
   COLLATE = utf8_bin;
+
+
+INSERT INTO sys_pages (ID, ENABLED, CODE, RANKING, NAME, SYS_PAGE_DOMAIN_ID, DESCRIPTION, I18n_DEFAULT, I18N_EN, I18N_FR, I18N_ES, I18N_TH, I18N_VT, I18N_LA, I18N_ID, I18N_KH, UPDATER_ID, COMMENT, CREATED_AT, UPDATED_AT)
+VALUES (43, 1, 'FAMEBROWSER', 43, 'Admin fame browser', 7, 'Admin fame browser', 'Admin fame browser', 'Admin fame browser', 'Admin fame browser', 'Admin fame browser', 'Admin fame browser', 'Admin fame browser', 'Admin fame browser', 'Admin fame browser', 'Admin fame browser', 3, null, '2018-10-18 12:41:20', '2018-10-18 12:41:20');
+
+
+INSERT INTO sys_users_rights (ID, ENABLED, SYS_ROLE_ID, SYS_PAGE_ID, SYS_RIGHT_ID, NAME, DESCRIPTION, UPDATER_ID, COMMENT, CREATED_AT, UPDATED_AT)
+VALUES (232, 1, 1, 43, 1, 'Super Admin - Admin fame browser', 'Management of fame page browser by admin', 3, null, '2018-10-18 12:45:23', '2018-10-18 12:45:23');

@@ -55,8 +55,6 @@
 			<li class="header" th:text="#{default.main_nav}">Main Nav</li>
 			<li th:class="${v8p.getNavActive('/home.html')}"><a th:href="@{'/home.html'}"><i
 					class="fa fa-dashboard"></i> <span th:text="#{default.dashboard}">default.dashboard</span></a></li>
-			<li th:class="${v8p.getNavActive('/fame.html')}"><a th:href="@{'/fame.html'}"><i
-					class="fa fa-trophy"></i> <span th:text="#{default.hall_of_fame}">default.hall_of_fame</span></a></li>
 			<li class="treeview {{ (Request::is('farms*') || Request::is('staff*') || Request::is('ponds*') || Request::is('suppliers*')) || Request::is('buyers*'))?'active':'' }}">
 				<a href="#"><i class="fa fa-home"></i> <span th:text="#{default.farms}">default.farms</span>
 					<span class="pull-right-container">
@@ -122,6 +120,8 @@
 							th:text="#{admin.codeListsManagement}">admin.codeListsManagement</span></a></li>
 					<li th:class="${v8p.getNavActive('/subpage')}"><a th:href="@{'/admin/subpages/listing.html'}"><i
 							class="fa fa-caret-right"></i><span th:text="#{admin.subPage}">admin.subPage</span></a></li>
+					<li th:class="${v8p.getNavActive('/fame.html')}"><a th:href="@{'/fame.html'}"><i
+							class="fa fa-caret-right"></i> <span th:text="#{default.hall_of_fame}">default.hall_of_fame</span></a></li>
 				</ul>
 			</li>
 			<li style="display: none" class="{{ Request::is('/settings')?'active':'' }}"><a href="#"><i
