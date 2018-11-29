@@ -25,7 +25,49 @@
 									</div>
 									<div class="row">
 
+
+										<div class="col-sm-3 col-xs-12 border-right" th:if="${v8App.pondProfile}">
+											<div class="description-block">
+												<h5 class="description-header" th:text="#{farm.area_total}"></h5>
+												<span class="description-text" th:text="${dashboard.topKpisMap['totArea'].value}"></span>
+											</div>
+										</div>
+
+										<div class="col-sm-3 col-xs-12 border-right" th:if="${v8App.pondProfile}">
+											<div class="description-block">
+												<h5 class="description-header" th:text="#{farm.pond_count}"></h5>
+												<span class="description-text" th:text="${dashboard.topKpisMap['nbPonds'].value}"></span>
+											</div>
+										</div>
+
+										<div class="col-sm-3 col-xs-12 border-right" th:if="${v8App.plotProfile}">
+											<div class="description-block">
+												<h5 class="description-header" th:text="#{farm.plot_count}"></h5>
+												<span class="description-text" th:text="${dashboard.topKpisMap['nbPlots'].value}"></span>
+											</div>
+										</div>
+										<div class="clearfix visible-sm-block"></div>
+										<div class="col-sm-3 col-xs-12 border-right" th:if="${v8App.pondProfile}">
+											<div class="description-block">
+												<h5 class="description-header" th:text="#{farm.pond_active_count}"></h5>
+												<span class="description-text" th:text="${dashboard.topKpisMap['nbActivePonds'].value}"></span>
+											</div>
+										</div>
+										<div class="col-sm-3 col-xs-12 border-right" th:if="${v8App.plotProfile}">
+											<div class="description-block">
+												<h5 class="description-header" th:text="#{farm.plot_active_count}"></h5>
+												<span class="description-text" th:text="${dashboard.topKpisMap['nbActivePlots'].value}"></span>
+											</div>
+										</div>
+										<div class="clearfix visible-sm-block"></div>
+										<div class="col-sm-3 col-xs-12 border-right">
+											<div class="description-block">
+												<h5 class="description-header" th:text="#{farm.staff_count}"></h5>
+												<span class="description-text" th:text="${dashboard.topKpisMap['nbEmployees'].value}"></span>
+											</div>
+										</div>
 									</div>
+
 								</div>
 							</div>
 						</div>
