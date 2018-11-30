@@ -13,7 +13,9 @@ public interface CLAppQuantityUnitRepository extends CodeListRepository<CLAppQua
 	@Query(value = "SELECT * FROM cl_app_quantity_units as qu "
 			+ "WHERE qu.CL_QUANTITY_UNIT_TYPE_ID=2 OR "
 			+ "qu.CL_QUANTITY_UNIT_TYPE_ID=3 OR "
-			+ "qu.CL_QUANTITY_UNIT_TYPE_ID=4 AND qu.ENABLED = TRUE ORDER BY qu.NAME", nativeQuery = true)
+			+ "qu.CL_QUANTITY_UNIT_TYPE_ID=4 OR "
+			+ "qu.CL_QUANTITY_UNIT_TYPE_ID=5 "
+			+ "AND qu.ENABLED = TRUE ORDER BY qu.NAME", nativeQuery = true)
 	List<CLAppQuantityUnit> getQuantityUnit();
 
 }
