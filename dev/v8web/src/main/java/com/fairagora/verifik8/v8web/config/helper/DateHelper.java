@@ -22,7 +22,7 @@ public class DateHelper {
 		Date dt = new Date();
 		Calendar c = Calendar.getInstance();
 		c.setTime(dt);
-		c.add(Calendar.DATE, - 1);
+		c.add(Calendar.MONTH, - 1);
 		dt = c.getTime();
 		return dt;
 	}

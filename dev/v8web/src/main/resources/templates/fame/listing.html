@@ -28,8 +28,8 @@
 
 						<div class="col-xs-4">
 							<select id="role-select" class="form-control" th:attr="data-placeholder=#{farm.ponds}">
-								<option th:text="#{hall_of_fame.all_role}" th:value="null"></option>
-								<option th:each="role : ${roleList}" th:value="${role.id}" th:text="${role.name}"></option>
+								<option th:text="#{hall_of_fame.all_role}" th:value="null" th:selected="${roleSelected}==''"></option>
+								<option th:each="role : ${roleList}" th:value="${role.id}" th:text="${role.name}" th:selected="${roleSelected}==${role.id}"></option>
 							</select>
 						</div>
 
@@ -192,7 +192,7 @@
 
           $('.datatable').DataTable({
               "responsive": false,
-              "order": [[5, "desc"]],
+              "order": [[3, "desc"]],
               "language": {
                   "url": langURL
               }
