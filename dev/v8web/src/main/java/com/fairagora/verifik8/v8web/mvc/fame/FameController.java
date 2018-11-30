@@ -72,6 +72,8 @@ public class FameController  extends AbstractV8Controller {
 		mv.addAttribute("lastActiveUserListByActivity", lastActiveUsersByActivity);
 		mv.addAttribute("roleList", sysRoleRepository.findAll());
 		mv.addAttribute("roleSelected", roleId.orElse(null));
+		mv.addAttribute("startDateSelected", pStartDate);
+		mv.addAttribute("endDateSelected", pEndDate);
 
 
 	//	setToReadOnly(mv, "R_FAME");
