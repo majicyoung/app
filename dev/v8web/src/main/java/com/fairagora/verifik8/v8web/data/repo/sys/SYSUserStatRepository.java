@@ -14,4 +14,6 @@ public interface SYSUserStatRepository extends JpaRepository<SysUserStat, Long> 
 	//@Query(value = "SELECT count(*) from sys_users_stats WHERE SYS_USER_ID = 1", nativeQuery = true)
 	int countAllBySysUserId(Long sysUserId);
 
+	List<SysUserStat> findAllBySysUserId(Long sysUserId);
+
 }
