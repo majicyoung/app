@@ -24,7 +24,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -55,7 +60,7 @@ public class GreenCacheController extends AbstractV8Controller {
 	@GetMapping(path = "/cache")
 	public ResponseEntity<Object> getCacheData() {
 		List<CLFarmPlotActivityType> activities = codeListservice.listActiveActivityTypes();
-		List<DTFarmPlotActivity> activitiesMeasures = plotActivityRepository.findAll();
+		List<DTFarmPlotActivity> activitiesMeasures = plotActivityRepository.getAllActivityByDate(this.previousDate(), this.currentDate());
 		List<CLAppQuantityUnit> quantityUnits = clAppQuantityUnitRepository.getQuantityUnit();
 		List<CLAppTilingActivityType> tilingActivityType = codeListservice.listActiveTilingActivityTypes();
 
@@ -117,5 +122,4 @@ public class GreenCacheController extends AbstractV8Controller {
 
 		return measureSettingsMap;
 	}
-
 }
