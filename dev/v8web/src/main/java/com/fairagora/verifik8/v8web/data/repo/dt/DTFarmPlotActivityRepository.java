@@ -27,6 +27,14 @@ public interface DTFarmPlotActivityRepository extends JpaRepository<DTFarmPlotAc
 			@Param("endDate") Date endDate
 		);
 	
+	@Query(value = "SELECT * FROM dt_farmag_plot_management WHERE "
+			+ "dt_farmag_plot_management.ACTIVITY_START_DATE "
+			+ "BETWEEN :previousDate AND :currentDate", nativeQuery= true)
+	List<DTFarmPlotActivity> getAllActivityByDate(
+			@Param("previousDate") Date previousDate,
+			@Param("currentDate") Date currentDate
+		);
+	
 	@Query(value = "SELECT dt_farmag_plot_management.* FROM dt_farmag_plot_management WHERE "
 			+ "dt_farmag_plot_management.REG_ENTITY_FARM_PLOT_ID = :plotId AND "
 			+ "dt_farmag_plot_management.CL_PLOT_ACTIVITY_TYPE_ID = :activityId AND "

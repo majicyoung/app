@@ -3,6 +3,7 @@ package com.fairagora.verifik8.v8web.mvc.farms;
 import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
 
+import com.fairagora.verifik8.v8web.data.repo.reg.RegEntityFarmPlotRepository;
 import com.fairagora.verifik8.v8web.data.repo.reg.RegEntityFarmPondRepository;
 import com.fairagora.verifik8.v8web.mvc.farms.dashboard.FarmDashboardChartSelector;
 import com.fairagora.verifik8.v8web.mvc.farms.dashboard.FarmDashboardSelectorResult;
@@ -46,6 +47,9 @@ public class FarmDashboardController extends AbstractV8Controller {
 
 	@Autowired
 	private RegEntityFarmPondRepository regEntityFarmPondRepository;
+
+	@Autowired
+	private RegEntityFarmPlotRepository regEntityFarmPlotRepository;
 
 
 	/**
@@ -142,7 +146,7 @@ public class FarmDashboardController extends AbstractV8Controller {
 	public List<Object> queryPondProductions(@PathVariable("id") Long id, @RequestParam("start") String startDate, @RequestParam("end") String endDate, @RequestParam(value = "poundIds[]") String[] poundIds, Model mv) {
 		Map<String, Map<String, Double>> dataArray = farmDashboardDataBuilder.getPoundProduction(id, startDate, endDate, poundIds);
 		List<String> dataDate = farmDashboardDataBuilder.getPoundProductionDate(id, startDate, endDate, poundIds);
-		return formatGraphArray(poundIds, dataArray, dataDate);
+		return pondFormatGraphArray(poundIds, dataArray, dataDate);
 	}
 
 
@@ -151,7 +155,7 @@ public class FarmDashboardController extends AbstractV8Controller {
 	public List<Object> queryPlotProductions(@PathVariable("id") Long id, @RequestParam("start") String startDate, @RequestParam("end") String endDate, @RequestParam(value = "plotIds[]") String[] plotIds, Model mv) {
 		Map<String, Map<String, Double>> dataArray = farmDashboardDataBuilder.getPlotProduction(id, startDate, endDate, plotIds);
 		List<String> dataDate = farmDashboardDataBuilder.getPlotProductionDate(id, startDate, endDate, plotIds);
-		return formatGraphArray(plotIds, dataArray, dataDate);
+		return plotFormatGraphArray(plotIds, dataArray, dataDate);
 	}
 
 
@@ -182,7 +186,7 @@ public class FarmDashboardController extends AbstractV8Controller {
 
 		Map<String, Map<String, Double>> dataArray = farmDashboardDataBuilder.getPoundWaterMeasures(startDate, endDate, poundIds, measureId);
 		List<String> dataDate = farmDashboardDataBuilder.getPoundWaterMeasureDate(startDate, endDate, poundIds, measureId);
-		return formatGraphArray(poundIds, dataArray, dataDate);
+		return pondFormatGraphArray(poundIds, dataArray, dataDate);
 	}
 
 
@@ -201,7 +205,7 @@ public class FarmDashboardController extends AbstractV8Controller {
 
 		Map<String, Map<String, Double>> dataArray = farmDashboardDataBuilder.getPlotPesticideMeasures(startDate, endDate, plotIds, activityId);
 		List<String> dataDate = farmDashboardDataBuilder.getPlotPesticideMeasureDate(startDate, endDate, plotIds, activityId);
-		return formatGraphArray(plotIds, dataArray, dataDate);
+		return plotFormatGraphArray(plotIds, dataArray, dataDate);
 	}
 
 
@@ -232,7 +236,7 @@ public class FarmDashboardController extends AbstractV8Controller {
 
 	}
 
-	private List<Object> formatGraphArray(String[] poundIds, Map<String, Map<String, Double>> dataArray, List<String> dataDate){
+	private List<Object> pondFormatGraphArray(String[] poundIds, Map<String, Map<String, Double>> dataArray, List<String> dataDate){
 		List<Object> graphData = new ArrayList<>();
 
 		List<Object> leftColumns = new ArrayList<>();
@@ -256,6 +260,40 @@ public class FarmDashboardController extends AbstractV8Controller {
 			List<Object> colums = new ArrayList<>();
 			colums.add("0");
 			Arrays.stream(poundIds).forEach(s -> colums.add(0));
+			graphData.add(colums);
+		}
+
+
+		graphData.add(0, leftColumns);
+
+
+		return graphData;
+	}
+
+	private List<Object> plotFormatGraphArray(String[] plotIds, Map<String, Map<String, Double>> dataArray, List<String> dataDate){
+		List<Object> graphData = new ArrayList<>();
+
+		List<Object> leftColumns = new ArrayList<>();
+		leftColumns.add("Date");
+		Arrays.stream(plotIds)
+				.map(Long::valueOf)
+				.map(s -> regEntityFarmPlotRepository.findOne(s))
+				.forEach(regEntityFarmPlot -> leftColumns.add(regEntityFarmPlot.getName()));
+
+		for (String date : dataDate) {
+			List<Object> colums = new ArrayList<>();
+			colums.add(date);
+			for (String plotId : plotIds) {
+				colums.add(dataArray.get(date).getOrDefault(plotId, 0d));
+			}
+			graphData.add(colums);
+		}
+
+		//Initialization in case of empty data
+		if (graphData.size() <= 0) {
+			List<Object> colums = new ArrayList<>();
+			colums.add("0");
+			Arrays.stream(plotIds).forEach(s -> colums.add(0));
 			graphData.add(colums);
 		}
 

@@ -76,10 +76,10 @@ public class BlueCacheController extends AbstractV8Controller {
 	public ResponseEntity<Object> getCacheData() {
 		List<CLAppMeasureType> clAppMeasureType = codeListsService.listActiveMeasureTypes();
 		List<CLFarmPondActivityType> activities = codeListservice.listActivePondActivityTypes();
-		List<DTFarmPondActivity> activitiesMeasures = pondActivityRepository.findAll();
+		List<DTFarmPondActivity> activitiesMeasures = pondActivityRepository.findAllActivityByDate(this.previousDate(), this.currentDate());
 		List<?> units = codeListservice.listActiveQuantityUnit();
 		List<CLAppQuantityUnit> quantityUnits = clAppQuantityUnitRepository.getQuantityUnit();
-		List<DTFarmPondMeasurement> measures = pondMeasuresRepository.findAll();
+		List<DTFarmPondMeasurement> measures = pondMeasuresRepository.findAllPondMeasureByDate(this.previousDate(), this.currentDate());
 
 		List<V8Farm> farms = farmService.listFarms();
 

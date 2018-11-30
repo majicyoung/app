@@ -7,7 +7,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import com.fairagora.verifik8.v8web.data.domain.dt.DTFarmPlotActivity;
 import com.fairagora.verifik8.v8web.data.domain.dt.DTFarmPondActivity;
 
 public interface DTFarmPondActivityRepository extends JpaRepository<DTFarmPondActivity, Long> {
@@ -15,6 +14,12 @@ public interface DTFarmPondActivityRepository extends JpaRepository<DTFarmPondAc
 	DTFarmPondActivity findById(Long activityId);
 
 	List<DTFarmPondActivity> findByPondId(Long pondId);
+	
+	@Query(value = "SELECT dt_farmaq_pond_management.* FROM dt_farmaq_pond_management WHERE "
+			+ "dt_farmaq_pond_management.ACTIVITY_START_DATE BETWEEN :previousDate AND :currentDate", nativeQuery = true)
+	List<DTFarmPondActivity> findAllActivityByDate(
+			@Param("previousDate") Date previousDate,
+			@Param("currentDate") Date currentDate);
 	
 	@Query(value = "SELECT dt_farmaq_pond_management.* FROM dt_farmaq_pond_management WHERE "
 			+ "dt_farmaq_pond_management.REG_ENTITY_FARM_POND_ID = :pondId AND "
