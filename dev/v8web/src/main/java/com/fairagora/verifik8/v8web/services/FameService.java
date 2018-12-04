@@ -61,14 +61,14 @@ public class FameService {
 	public void saveLatestFarmPondActivity(SYSUser sysUser, DTFarmPondActivity dtFarmPondActivity) {
 		SysUserStatActivity sysUserStatActivity = new SysUserStatActivity();
 		sysUserStatActivity.setSysUser(sysUser);
-		sysUserStatActivity.setDtFarmPondActivity(dtFarmPondActivity);
+		sysUserStatActivity.setDtFarmPondActivity(dtFarmPondActivity.getId());
 		sysUserStatActivityRepository.save(sysUserStatActivity);
 	}
 
 	public void saveLatestFarmPlotActivity(SYSUser sysUser, DTFarmPlotActivity dtFarmPlotActivity) {
 		SysUserStatActivity sysUserStatActivity = new SysUserStatActivity();
 		sysUserStatActivity.setSysUser(sysUser);
-		sysUserStatActivity.setDtFarmPlotActivity(dtFarmPlotActivity);
+		sysUserStatActivity.setDtFarmPlotActivity(dtFarmPlotActivity.getId());
 		sysUserStatActivityRepository.save(sysUserStatActivity);
 	}
 

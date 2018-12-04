@@ -1,17 +1,18 @@
 package com.fairagora.verifik8.v8web.data.domain.sys;
 
 import com.fairagora.verifik8.v8web.data.domain.V8Entity;
-import com.fairagora.verifik8.v8web.data.domain.dt.DTFarmPlotActivity;
+import com.fairagora.verifik8.v8web.data.domain.V8EntitySupport;
 import com.fairagora.verifik8.v8web.data.domain.dt.DTFarmPondActivity;
 import com.fairagora.verifik8.v8web.data.domain.reg.V8Base;
+import com.fairagora.verifik8.v8web.data.repo.dt.DTFarmPondActivityRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.*;
 import java.util.Date;
 
 @Entity
 @Table(name = "sys_users_stats_activity")
-public class SysUserStatActivity  extends V8Base implements V8Entity {
-
+public class SysUserStatActivity  extends V8EntitySupport {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,13 +24,17 @@ public class SysUserStatActivity  extends V8Base implements V8Entity {
 	@JoinColumn(nullable = false, name = "SYS_USER_ID")
 	protected SYSUser sysUser;
 
-	@ManyToOne(targetEntity = DTFarmPlotActivity.class, fetch = FetchType.LAZY)
-	@JoinColumn(name = "DT_FARM_PLOT_ACTIVITY_ID", nullable = true)
-	protected DTFarmPlotActivity dtFarmPlotActivity;
 
-	@ManyToOne(targetEntity = DTFarmPondActivity.class, fetch = FetchType.EAGER)
-	@JoinColumn(name = "DT_FARM_POND_ACTIVITY_ID", nullable = false)
-	protected DTFarmPondActivity dtFarmPondActivity;
+//	@ManyToOne()
+//	@JoinColumn(name = "DT_FARM_PLOT_ACTIVITY_ID")
+//	@NotFound(action = NotFoundAction.IGNORE)
+	@Column(name = "PLOT_ACTIVITY_ID")
+	protected Long dtFarmPlotActivity;
+
+	//@ManyToOne()
+	//@JoinColumn(name = "POND_ACTIVITY_ID")
+	@Column(name = "POND_ACTIVITY_ID")
+	protected Long dtFarmPondActivity;
 
 	@Column(name = "ACTIVITY_DATE")
 	protected Date activityDate;
@@ -58,19 +63,20 @@ public class SysUserStatActivity  extends V8Base implements V8Entity {
 		this.sysUser = sysUser;
 	}
 
-	public DTFarmPlotActivity getDtFarmPlotActivity() {
+	public Long getDtFarmPlotActivity() {
 		return dtFarmPlotActivity;
 	}
 
-	public void setDtFarmPlotActivity(DTFarmPlotActivity dtFarmPlotActivity) {
+	public void setDtFarmPlotActivity(Long dtFarmPlotActivity) {
 		this.dtFarmPlotActivity = dtFarmPlotActivity;
 	}
 
-	public DTFarmPondActivity getDtFarmPondActivity() {
+
+	public Long getDtFarmPondActivity() {
 		return dtFarmPondActivity;
 	}
 
-	public void setDtFarmPondActivity(DTFarmPondActivity dtFarmPondActivity) {
+	public void setDtFarmPondActivity(Long dtFarmPondActivity) {
 		this.dtFarmPondActivity = dtFarmPondActivity;
 	}
 
@@ -82,13 +88,13 @@ public class SysUserStatActivity  extends V8Base implements V8Entity {
 		this.activityDate = activityDate;
 	}
 
-	public String getActivityName(){
-		if (dtFarmPlotActivity != null){
-			return dtFarmPlotActivity.getActivityType().getName() + "  " + dtFarmPlotActivity.getName();
-		}else{
-			return dtFarmPondActivity.getActivityType().getName() + "  " + dtFarmPondActivity.getName();
-		}
-	}
+//	public String getActivityName(){
+//		if (dtFarmPlotActivity != null){
+//			return dtFarmPlotActivity.getActivityType().getName() + "  " + dtFarmPlotActivity.getName();
+//		}else{
+//			return dtFarmPondActivity.getActivityType().getName() + "  " + dtFarmPondActivity.getName();
+//		}
+//	}
 
 
 }

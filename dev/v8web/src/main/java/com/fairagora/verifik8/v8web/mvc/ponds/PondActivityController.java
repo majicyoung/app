@@ -129,7 +129,7 @@ public class PondActivityController extends AbstractV8Controller {
 	@RequestMapping(value = {"/ponds/{pondId}/activities/{activityId}/edit.html",  "/farm/{farmId}/pond/{pondId}/activities/{activityId}/edit.html"}, method = RequestMethod.GET)
 	public String showPondActivities(@PathVariable("farmId") Optional<Long> farmId, @PathVariable("pondId") Long pondId, @PathVariable("activityId") Long activityId, Model mv) {
 
-		DTFarmPondActivity act = pondActivityRepository.findById(activityId);
+		DTFarmPondActivity act = pondActivityRepository.findOne(activityId);
 
 		PondActivityDto dto = new PondActivityDto();
 		dtoMapper.toDto(act, dto);

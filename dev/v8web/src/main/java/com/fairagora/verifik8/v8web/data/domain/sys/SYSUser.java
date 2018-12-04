@@ -12,6 +12,8 @@ import javax.persistence.Table;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLRefCountry;
 import com.fairagora.verifik8.v8web.data.domain.reg.RegEntity;
 
+import java.util.Date;
+
 @Entity
 @Table(name = "sys_users")
 public class SYSUser {
@@ -57,6 +59,13 @@ public class SYSUser {
     @ManyToOne
     @JoinColumn(name = "REG_ENTITY_BUYER_ID")
     protected RegEntity buyer;
+
+
+    @Column(name = "CREATED_AT")
+    protected Date createdAt;
+
+    @Column(name = "UPDATED_AT")
+    protected Date updatedAt;
 
     public Long getId() {
         return id;
@@ -160,5 +169,21 @@ public class SYSUser {
 
     public void setBuyer(RegEntity buyer) {
         this.buyer = buyer;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Date getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
     }
 }
