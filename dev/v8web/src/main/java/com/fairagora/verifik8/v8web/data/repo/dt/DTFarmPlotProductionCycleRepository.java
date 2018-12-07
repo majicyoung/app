@@ -24,4 +24,7 @@ public interface DTFarmPlotProductionCycleRepository extends JpaRepository<DTFar
 	@Query(value = "SELECT COALESCE(MAX(dt_farmag_plot_production_cycle.PRODUCTION_CYCLE_NUMBER ), 0) FROM dt_farmag_plot_production_cycle where dt_farmag_plot_production_cycle.REG_ENTITY_FARM_PLOT_ID = :plotId", nativeQuery = true)
 	Integer getLastProductionCycleNumber(@Param("plotId") Long plotId);
 
+	Integer deleteByRegEntityFarmPlotId(Long id);
+
+
 }

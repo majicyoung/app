@@ -29,6 +29,8 @@ public class FarmPlotProductionCycleService {
 
 	public void updateAllPlotProductionCycle(Long plotId){
 
+		dtFarmPlotProductionCycleRepository.deleteByRegEntityFarmPlotId(plotId);
+
 		List<DTFarmPlotActivity> dtFarmPlotActivities = plotActivityRepository.findByPlotIdOrderByCreatedAtAsc(plotId);
 
 		dtFarmPlotActivities.forEach(this::updatePlotProductionCycle);

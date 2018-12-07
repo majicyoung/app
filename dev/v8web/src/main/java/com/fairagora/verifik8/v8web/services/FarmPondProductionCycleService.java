@@ -30,9 +30,10 @@ public class FarmPondProductionCycleService {
 	private DTFarmPondActivityRepository dtFarmPondActivityRepository;
 
 
-	public void updateAllPondProductionCycle(Long plotId){
+	public void updateAllPondProductionCycle(Long pondId){
 
-		List<DTFarmPondActivity> dtFarmPondActivities = dtFarmPondActivityRepository.findByPondIdOrderByCreatedAtAsc(plotId);
+		dtFarmPondProductionCycleRepository.deleteByRegEntityFarmPondId(pondId);
+		List<DTFarmPondActivity> dtFarmPondActivities = dtFarmPondActivityRepository.findByPondIdOrderByCreatedAtAsc(pondId);
 
 		dtFarmPondActivities.forEach(this::updatePondProductionCycle);
 
