@@ -15,6 +15,8 @@ public interface DTFarmPlotActivityRepository extends JpaRepository<DTFarmPlotAc
 
 	List<DTFarmPlotActivity> findTop5ByOrderByCreatedAtDesc();
 
+	List<DTFarmPlotActivity> findByPlotIdOrderByCreatedAtAsc(Long plotId);
+
 	@Override
 	@Query(value = "SELECT * FROM dt_farmag_plot_management where ID = :id LIMIT  1", nativeQuery = true)
 	DTFarmPlotActivity getOne(@Param("id") Long id);

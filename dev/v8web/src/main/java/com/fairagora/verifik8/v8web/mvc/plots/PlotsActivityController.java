@@ -175,7 +175,8 @@ public class PlotsActivityController extends AbstractV8Controller {
 
 		plotActivityRepository.save(act);
 
-		farmPlotProductionCycleService.updatePlotProductionCycle(act);
+		farmPlotProductionCycleService.updateAllPlotProductionCycle(plotId);
+		//farmPlotProductionCycleService.updatePlotProductionCycle(act);
 
 
 		fameService.saveLatestFarmPlotActivity(loggedUser(req), act);

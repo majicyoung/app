@@ -90,7 +90,16 @@ public class FarmStatisticDataBuilder {
 
 
 	private Date getLastLogin(List<SYSUser> sysUsers){
-		return sysUsers.size() > 0 ? sysUserStatRepository.findFirstBySysUserId(sysUsers.stream().map(SYSUser::getId).toArray(Long[]::new)).getConnectionTime() : null;
+		if (sysUsers.size() > 0){
+			SysUserStat sysUserStat = sysUserStatRepository.findFirstBySysUserId(sysUsers.stream().map(SYSUser::getId).toArray(Long[]::new));
+			if (sysUserStat != null){
+				return sysUserStat.getConnectionTime();
+			}else {
+				return null;
+			}
+		}else {
+			return null;
+		}
 	}
 
 	private int getLoginCount(List<SYSUser> sysUsers){

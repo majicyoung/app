@@ -2,13 +2,17 @@ package com.fairagora.verifik8.v8web.services;
 
 import com.fairagora.verifik8.v8web.data.domain.dt.DTFarmPondActivity;
 import com.fairagora.verifik8.v8web.data.domain.dt.DTFarmPondProductionCycle;
+import com.fairagora.verifik8.v8web.data.repo.dt.DTFarmPlotActivityRepository;
+import com.fairagora.verifik8.v8web.data.repo.dt.DTFarmPondActivityRepository;
 import com.fairagora.verifik8.v8web.data.repo.dt.DTFarmPondProductionCycleRepository;
+import com.fairagora.verifik8.v8web.mvc.plots.PlotsActivityController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
+import java.util.List;
 
 import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
@@ -22,6 +26,17 @@ public class FarmPondProductionCycleService {
 	@Autowired
 	private DTFarmPondProductionCycleRepository dtFarmPondProductionCycleRepository;
 
+	@Autowired
+	private DTFarmPondActivityRepository dtFarmPondActivityRepository;
+
+
+	public void updateAllPondProductionCycle(Long plotId){
+
+		List<DTFarmPondActivity> dtFarmPondActivities = dtFarmPondActivityRepository.findByPondIdOrderByCreatedAtAsc(plotId);
+
+		dtFarmPondActivities.forEach(this::updatePondProductionCycle);
+
+	}
 
 	public void updatePondProductionCycle(DTFarmPondActivity dtFarmPondActivity) {
 		DTFarmPondProductionCycle dtFarmPondProductionCycle = getDtFarmPondProductionCycle(dtFarmPondActivity);

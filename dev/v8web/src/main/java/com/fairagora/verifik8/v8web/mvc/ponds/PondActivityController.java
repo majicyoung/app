@@ -181,7 +181,8 @@ public class PondActivityController extends AbstractV8Controller {
 
 		pondActivityRepository.save(act);
 
-		farmPondProductionCycleService.updatePondProductionCycle(act);
+		farmPondProductionCycleService.updateAllPondProductionCycle(pondId);
+	//	farmPondProductionCycleService.updatePondProductionCycle(act);
 
 		fameService.saveLatestFarmPondActivity(loggedUser(req), act);
 

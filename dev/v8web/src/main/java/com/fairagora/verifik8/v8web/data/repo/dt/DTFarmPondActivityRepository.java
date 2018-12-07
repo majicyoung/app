@@ -14,6 +14,10 @@ public interface DTFarmPondActivityRepository extends JpaRepository<DTFarmPondAc
 	List<DTFarmPondActivity> findByPondId(Long pondId);
 
 
+	List<DTFarmPondActivity> findByPondIdOrderByCreatedAtAsc(Long plotId);
+
+
+
 	@Override
 	@Query(value = "SELECT * FROM dt_farmaq_pond_management where ID = :id LIMIT  1", nativeQuery = true)
 	DTFarmPondActivity getOne(@Param("id") Long id);
