@@ -9,7 +9,7 @@ import javax.persistence.Table;
 @Table(name = "cl_app_quantity_units")
 public class CLAppQuantityUnit extends CodeListSupport {
 
-	@ManyToOne(optional = false)
+	@ManyToOne(optional = true)
 	@JoinColumn(name = "CL_QUANTITY_UNIT_TYPE_ID")
 	protected CLAppQuantityUnitType  clQuantityUnitTypeId;
 
