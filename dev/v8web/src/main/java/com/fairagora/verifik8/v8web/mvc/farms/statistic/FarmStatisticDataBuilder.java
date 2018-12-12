@@ -60,7 +60,7 @@ public class FarmStatisticDataBuilder {
 		buildUserKpi(dto,sysUser, sysUsers, farmId);
 
 		buildLoginList(dto, sysUsers);
-		buildActivityList(dto,sysUsers);
+		buildActivityList(dto, farmId);
 
 		return dto;
 	}
@@ -82,10 +82,8 @@ public class FarmStatisticDataBuilder {
 		}
 	}
 
-	private void buildActivityList(FarmStatisticsDto dto, List<SYSUser> sysUsers){
-		if (sysUsers.size() > 0){
-			dto.setSysUserStatActivities(getSysUsersStatActivity(sysUsers));
-		}
+	private void buildActivityList(FarmStatisticsDto dto, Long farmId){
+			dto.setSysUserStatActivities(getSysUsersStatActivity(farmId));
 	}
 
 
@@ -112,20 +110,23 @@ public class FarmStatisticDataBuilder {
 		return sysUserRepository.findSYSUserByFarmId(regEntityFarmDetails.getEntity().getId());
 	}
 
-	private List<FarmStatisticActivityDto> getSysUsersStatActivity(List<SYSUser> sysUsers){
+	private List<FarmStatisticActivityDto> getSysUsersStatActivity(Long farmId){
 		List<FarmStatisticActivityDto> farmStatisticActivityDtos = new ArrayList<>();
-		List<SysUserStatActivity> sysUserStatActivities = sysUserStatActivityRepository.findAllBySysUserId(sysUsers.stream().map(SYSUser::getId).toArray(Long[]::new));
-		sysUserStatActivities.forEach(sysUserStatActivity -> {
+		sysUserStatActivityRepository.findAllPlotsByFarmId(farmId).forEach(sysUserStatActivity -> {
 			FarmStatisticActivityDto farmStatisticActivityDto = new FarmStatisticActivityDto();
 			farmStatisticActivityDto.setId(sysUserStatActivity.getId());
 			farmStatisticActivityDto.setActivityDate(sysUserStatActivity.getActivityDate());
 			farmStatisticActivityDto.setSysUser(sysUserStatActivity.getSysUser());
-			if (sysUserStatActivity.getDtFarmPondActivity() != null){
-				farmStatisticActivityDto.setDtFarmPondActivity( dtFarmPondActivityRepository.getOne(sysUserStatActivity.getDtFarmPondActivity()) );
-			}
-			if (sysUserStatActivity.getDtFarmPlotActivity() != null){
-				farmStatisticActivityDto.setDtFarmPlotActivity( dtFarmPlotActivityRepository.getOne(sysUserStatActivity.getDtFarmPlotActivity()) );
-			}
+			farmStatisticActivityDto.setDtFarmPlotActivity( dtFarmPlotActivityRepository.getOne(sysUserStatActivity.getDtFarmPlotActivity()) );
+			farmStatisticActivityDtos.add(farmStatisticActivityDto);
+
+		});
+		sysUserStatActivityRepository.findAllPondByFarmId(farmId).forEach(sysUserStatActivity -> {
+			FarmStatisticActivityDto farmStatisticActivityDto = new FarmStatisticActivityDto();
+			farmStatisticActivityDto.setId(sysUserStatActivity.getId());
+			farmStatisticActivityDto.setActivityDate(sysUserStatActivity.getActivityDate());
+			farmStatisticActivityDto.setSysUser(sysUserStatActivity.getSysUser());
+			farmStatisticActivityDto.setDtFarmPondActivity( dtFarmPondActivityRepository.getOne(sysUserStatActivity.getDtFarmPondActivity()) );
 			farmStatisticActivityDtos.add(farmStatisticActivityDto);
 
 		});

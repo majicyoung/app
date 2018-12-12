@@ -5,9 +5,11 @@ import com.fairagora.verifik8.v8web.data.domain.dt.DTFarmPondProductionCycle;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 
+@Transactional
 public interface DTFarmPlotProductionCycleRepository extends JpaRepository<DTFarmPlotProductionCycle, Long> {
 
 	DTFarmPlotProductionCycle findByRegEntityFarmPlotId(Long regEntityFarmPlotId);

@@ -88,7 +88,7 @@ public class SysUserStatActivity  extends V8EntitySupport {
 		this.activityDate = activityDate;
 	}
 
-//	public String getActivityName(){
+	//	public String getActivityName(){
 //		if (dtFarmPlotActivity != null){
 //			return dtFarmPlotActivity.getActivityType().getName() + "  " + dtFarmPlotActivity.getName();
 //		}else{
