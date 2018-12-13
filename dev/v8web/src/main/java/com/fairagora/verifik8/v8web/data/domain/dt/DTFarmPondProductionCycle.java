@@ -4,6 +4,8 @@ import com.fairagora.verifik8.v8web.data.domain.V8EntitySupport;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLAppQuantityUnit;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLRefSpecies;
 import com.fairagora.verifik8.v8web.data.domain.reg.farm.RegEntityFarmPond;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -20,6 +22,7 @@ public class DTFarmPondProductionCycle  extends V8EntitySupport {
 
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "REG_ENTITY_FARM_POND_ID")
+	@OnDelete(action = OnDeleteAction.NO_ACTION)
 	protected RegEntityFarmPond regEntityFarmPond;
 
 	@Column(name = "PRODUCTION_CYCLE_NUMBER")
@@ -36,6 +39,7 @@ public class DTFarmPondProductionCycle  extends V8EntitySupport {
 
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "CL_FEEDING_VALUE_UNIT_ID")
+	@OnDelete(action = OnDeleteAction.NO_ACTION)
 	protected CLAppQuantityUnit clFeedingValueUnit;
 
 	@Column(name = "SEED_QUANTITY")
@@ -43,6 +47,7 @@ public class DTFarmPondProductionCycle  extends V8EntitySupport {
 
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "CL_SEED_QUANTITY_UNIT_ID")
+	@OnDelete(action = OnDeleteAction.NO_ACTION)
 	protected CLAppQuantityUnit clSeedQuantityUnit;
 
 	@Column(name = "HARVESTED_QUANTITY")
@@ -50,6 +55,7 @@ public class DTFarmPondProductionCycle  extends V8EntitySupport {
 
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "CL_HARVESTED_QUANTITY_UNIT_ID")
+	@OnDelete(action = OnDeleteAction.NO_ACTION)
 	protected CLAppQuantityUnit clHarvestedQuantityUnit;
 
 	@Column(name = "USE_ANTIBIO_IN_CYCLE")
@@ -60,10 +66,12 @@ public class DTFarmPondProductionCycle  extends V8EntitySupport {
 
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "CL_ANTIBIO_QUANTITY_UNIT_ID")
+	@OnDelete(action = OnDeleteAction.NO_ACTION)
 	protected CLAppQuantityUnit clAntibioQuantityUnit;
 
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "CL_REF_SPECIES_ID")
+	@OnDelete(action = OnDeleteAction.NO_ACTION)
 	protected CLRefSpecies clRefSpecies;
 
 
