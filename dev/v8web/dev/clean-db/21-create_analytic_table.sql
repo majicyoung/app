@@ -64,6 +64,3 @@ VALUES (43, 1, 'FAMEBROWSER', 43, 'Admin fame browser', 7, 'Admin fame browser',
 
 INSERT INTO sys_users_rights (ID, ENABLED, SYS_ROLE_ID, SYS_PAGE_ID, SYS_RIGHT_ID, NAME, DESCRIPTION, UPDATER_ID, COMMENT, CREATED_AT, UPDATED_AT)
 VALUES (232, 1, 1, 43, 1, 'Super Admin - Admin fame browser', 'Management of fame page browser by admin', 3, null, '2018-10-18 12:45:23', '2018-10-18 12:45:23');
-
-ALTER TABLE `sys_users_stats_activity`
-  ADD COLUMN `FARM_ID` int(11);
