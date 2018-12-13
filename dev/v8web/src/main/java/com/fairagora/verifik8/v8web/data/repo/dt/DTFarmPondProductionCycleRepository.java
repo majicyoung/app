@@ -2,8 +2,10 @@ package com.fairagora.verifik8.v8web.data.repo.dt;
 
 import com.fairagora.verifik8.v8web.data.domain.dt.DTFarmPondProductionCycle;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.websocket.server.PathParam;
 import javax.xml.crypto.Data;
@@ -24,5 +26,7 @@ public interface DTFarmPondProductionCycleRepository extends JpaRepository<DTFar
 
 	@Query(value = "SELECT COALESCE(MAX(dt_farmaq_pond_production_cycle.PRODUCTION_CYCLE_NUMBER ), 0) FROM dt_farmaq_pond_production_cycle where dt_farmaq_pond_production_cycle.REG_ENTITY_FARM_POND_ID = :pondId", nativeQuery = true)
 	Integer getLastProductionCycleNumber(@Param("pondId") Long pondId);
+
+	Integer deleteByRegEntityFarmPondId(Long id);
 
 }

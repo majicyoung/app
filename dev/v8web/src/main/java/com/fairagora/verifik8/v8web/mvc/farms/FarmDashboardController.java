@@ -228,6 +228,7 @@ public class FarmDashboardController extends AbstractV8Controller {
 		mv.addAttribute("v8p", p);
 
 		mv.addAttribute("activeTab", "dashboard");
+		mv.addAttribute("activeSecondTab", "dashboard");
 
 		mv.addAttribute("dashboard", farmDashboardDataBuilder.get(id));
 		mv.addAttribute("farmName", jdbc.queryForObject("SELECT name FROM reg_entities WHERE id=" + id, String.class));

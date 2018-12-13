@@ -25,6 +25,7 @@
 										<div class="col-xs-12">
 											<script type="text/javascript" th:inline="javascript">
                           var plots = [];
+                          var totalFarmPlotSize = 0;
 											</script>
 											<table id="plotList" class="table table-bordered table-striped table-hover table-farm-staff"
 														 style="margin: 10px 0;">
@@ -64,16 +65,38 @@
 														<script type="text/javascript" th:inline="javascript">
                                 var i = [[${plot.id}]];
                                 plots[i] = ([[${plot}]]);
+                                totalFarmPlotSize = totalFarmPlotSize + [[${plot.size.quantity}]];
 														</script>
 													</td>
 												</tr>
+												<tr class="bg-secondary">
+													<th th:text="#{farm.total_pond_area}"></th>
+													<th></th>
+													<th id="totalFarmPlotSize" class="bg-dark"></th>
+													<th th:text="#{farm.area}"></th>
+													<th th:text="${farmSize}" class="bg-success">farmSize</th>
+													<th width="324"></th>
+												</tr>
+												<script type="text/javascript" th:inline="javascript">
+                            /*<![CDATA[*/
+                            var farmSize = [[${farmSize}]];
+                            if (totalFarmPlotSize.valueOf() > farmSize.valueOf()) {
+                                document.getElementById("totalFarmPlotSize").classList.add('bg-danger');
+                                document.getElementById("totalFarmPlotSize").classList.remove('bg-success');
+                            } else {
+                                document.getElementById("totalFarmPlotSize").classList.remove('bg-danger');
+                                document.getElementById("totalFarmPlotSize").classList.add('bg-success');
+
+                            }
+                            /*]]>*/
+												</script>
 											</table>
 										</div>
 									</div>
 									<div class="col-xs-12">
 										<div class="col-xs-6">
 											<form th:action="@{'/farm/'+${farmId}+'/plot.html'}" th:object="${plotDto}" id="plotEditorForm"
-														method="post">
+														method="post" onsubmit="return addFarmPlot()">
 												<h4 class="form-plot-title" th:text="#{farm.add_plot}"></h4>
 												<input type="hidden" id="plotId" th:field="*{id}"/>
 												<input type="hidden" id="farm" th:field="*{farm}"/>
@@ -136,7 +159,7 @@
 												<div class="form-group row">
 													<div class="col-xs-9 col-xs-offset-3 text-left" style="margin-top: 20px;">
 														<button type="submit" class="btn btn-flat btn-primary btn-form-plot"
-															 onsubmit="return addFarmPlot()"><i class="fa fa-plus"></i> <span
+															 ><i class="fa fa-plus"></i> <span
 																th:text="#{farm.add_plot}"></span></button>
 														<a href="javascript:void(0);" class="btn btn-flat btn-warning btn-form-plot hide"
 															 th:title="#{default.cancel}" onclick="resetForm(5,'plot');"><i class="fa fa-times"></i>
@@ -202,6 +225,8 @@
               +farmId + [[@{'/plots/'}]] + id + '/activities/create.html';
           });
 
+          document.getElementById("totalFarmPlotSize").innerHTML = totalFarmPlotSize;
+
 
           $('#plotList').DataTable({
               "responsive": true,
@@ -213,7 +238,21 @@
       });
 
       function addFarmPlot() {
-          return true;
+          var tempTotalFarmPlotSize = 0;
+          var farmPlotArea = $('#inputFarmPlotArea').val();
+          tempTotalFarmPlotSize = Number(farmPlotArea) + totalFarmPlotSize.valueOf();
+          if (tempTotalFarmPlotSize.valueOf() > farmSize.valueOf()) {
+              if (confirm([[#{farm.msg_sizePond_exceeds_farmSize}]])){
+                  return true;
+              } else{
+                  $('#totalFarmPlotSize').addClass("bg-danger");
+                  $('#totalFarmPlotSize').removeClass("bg-success");
+                  return false;
+              }
+
+          }else{
+              return true;
+          }
       }
 
       /*]]>*/

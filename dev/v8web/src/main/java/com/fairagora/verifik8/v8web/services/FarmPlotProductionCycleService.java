@@ -2,12 +2,14 @@ package com.fairagora.verifik8.v8web.services;
 
 import com.fairagora.verifik8.v8web.data.domain.dt.DTFarmPlotActivity;
 import com.fairagora.verifik8.v8web.data.domain.dt.DTFarmPlotProductionCycle;
+import com.fairagora.verifik8.v8web.data.repo.dt.DTFarmPlotActivityRepository;
 import com.fairagora.verifik8.v8web.data.repo.dt.DTFarmPlotProductionCycleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
+import java.util.List;
 
 import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
@@ -21,6 +23,19 @@ public class FarmPlotProductionCycleService {
 	@Autowired
 	private DTFarmPlotProductionCycleRepository dtFarmPlotProductionCycleRepository;
 
+	@Autowired
+	private DTFarmPlotActivityRepository plotActivityRepository;
+
+
+	public void updateAllPlotProductionCycle(Long plotId){
+
+		dtFarmPlotProductionCycleRepository.deleteByRegEntityFarmPlotId(plotId);
+
+		List<DTFarmPlotActivity> dtFarmPlotActivities = plotActivityRepository.findByPlotIdOrderByCreatedAtAsc(plotId);
+
+		dtFarmPlotActivities.forEach(this::updatePlotProductionCycle);
+
+	}
 
 	public void updatePlotProductionCycle(DTFarmPlotActivity dtFarmPlotActivity) {
 		DTFarmPlotProductionCycle dtFarmPlotProductionCycle = getDtFarmPlotProductionCycle(dtFarmPlotActivity);

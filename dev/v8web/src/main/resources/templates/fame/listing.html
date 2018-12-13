@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html layout:decorator="inc/main-layout" xmlns:th="http://www.thymeleaf.org"
+			xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+			xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<div layout:fragment="content">
+
+
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="box box-primary">
+				<div class="box-header with-border">
+					<h3 class="box-title" th:text="#{hall_of_fame.filters}">hall_of_fame.filters</h3>
+				</div>
+				<!-- /.box-header -->
+				<div class="box-body">
+					<div class="row">
+						<div class="col-xs-4">
+							<div class="input-group">
+								<button type="button" class="btn btn-default pull-right" id="filter_datepicker">
+                    <span>
+                      <i class="fa fa-calendar"></i> Date range picker
+                    </span>
+									<i class="fa fa-caret-down"></i>
+								</button>
+							</div>
+						</div>
+
+						<div class="col-xs-4">
+							<select id="role-select" class="form-control" th:attr="data-placeholder=#{farm.ponds}">
+								<option th:text="#{hall_of_fame.all_role}" th:value="null" th:selected="${roleSelected}==''"></option>
+								<option th:each="role : ${roleList}" th:value="${role.id}" th:text="${role.name}"
+												th:selected="${roleSelected}==${role.id}"></option>
+							</select>
+						</div>
+
+						<div class="col-xs-4">
+							<button type="button" class="btn btn-block btn-primary" onclick="onFilterSubmitButtonClick()">
+								Submit
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="box box-danger">
+				<div class="box-header with-border">
+					<h3 class="box-title pull-left" th:text="#{hall_of_fame.list}">hall_of_fame.list</h3>
+					<div class="alert-wrapper col-xs-6">
+						<div class="alert alert-success alert-dismissible" th:if="${v8p.message != null}">
+							<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+							<h4 class="pull-left"><i class="icon fa fa-check"></i> <span
+									th:text="#{default.success}">default.success</span> &nbsp;&nbsp;</h4> <span th:text="${v8p.message}">{{ Session::get('message') }}</span>
+						</div>
+					</div>
+				</div>
+				<!-- /.box-header -->
+				<div class="box-body">
+					<table id="userList" class="table table-hover table-striped table-bordered datatable order-column">
+						<thead>
+						<tr>
+							<th th:text="#{hall_of_fame.id}"></th>
+							<th th:text="#{hall_of_fame.email}"></th>
+							<th th:text="#{hall_of_fame.name}"></th>
+							<th th:text="#{hall_of_fame.login_count}"></th>
+						</tr>
+						</thead>
+						<tbody>
+						<tr th:each="user:${mostActiveUserListByLogin}">
+							<td th:text="${user.id}"></td>
+							<td th:text="${user.email}"></td>
+							<td th:text="${user.name}"></td>
+							<td th:text="${user.loginNumberCounts}"></td>
+						</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="col-xs-12">
+			<div class="box box-danger">
+				<div class="box-header with-border">
+					<h3 class="box-title pull-left" th:text="#{hall_of_fame.lastest_user}">hall_of_fame.lastest_user</h3>
+				</div>
+				<!-- /.box-header -->
+				<div class="box-body">
+					<table id="lastUserList" class="table table-hover table-striped table-bordered datatable order-column">
+						<thead>
+						<tr>
+							<th th:text="#{hall_of_fame.id}"></th>
+							<th th:text="#{hall_of_fame.email}"></th>
+							<th th:text="#{hall_of_fame.name}"></th>
+							<th th:text="#{hall_of_fame.login_count}"></th>
+						</tr>
+						</thead>
+						<tbody>
+						<tr th:each="user:${lastActiveUserListByLogin}">
+							<td th:text="${user.id}"></td>
+							<td th:text="${user.email}"></td>
+							<td th:text="${user.name}"></td>
+							<td th:text="${user.loginNumberCounts}"></td>
+						</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-xs-6">
+
+			<div class="box box-primary">
+				<div class="box-header with-border">
+					<h3 class="box-title" th:text="#{hall_of_fame.most_activity_user}">hall_of_fame.most_activity_user</h3>
+				</div>
+				<!-- /.box-header -->
+				<div class="box-body">
+					<table id="mostUserListByLogin" class="table table-hover table-striped table-bordered datatable order-column">
+						<thead>
+						<tr>
+							<th th:text="#{hall_of_fame.id}"></th>
+							<th th:text="#{hall_of_fame.email}"></th>
+							<th th:text="#{hall_of_fame.name}"></th>
+							<th th:text="#{hall_of_fame.activity_count}"></th>
+						</tr>
+						</thead>
+						<tbody>
+						<tr th:each="user:${lastActiveUserListByActivity}">
+							<td th:text="${user.id}"></td>
+							<td th:text="${user.email}"></td>
+							<td th:text="${user.name}"></td>
+							<td th:text="${user.loginNumberCounts}"></td>
+						</tr>
+						</tbody>
+					</table>
+				</div>
+				<!-- /.box-body -->
+			</div>
+		</div>
+
+
+		<div class="col-xs-6">
+			<div class="box box-primary">
+				<div class="box-header with-border">
+					<h3 class="box-title" th:text="#{hall_of_fame.latest_activity_user}">hall_of_fame.latest_activity_user</h3>
+				</div>
+				<!-- /.box-header -->
+				<div class="box-body">
+					<table id="lastUserListByLogin" class="table table-hover table-striped table-bordered datatable order-column">
+						<thead>
+						<tr>
+							<th th:text="#{hall_of_fame.id}"></th>
+							<th th:text="#{hall_of_fame.email}"></th>
+							<th th:text="#{hall_of_fame.name}"></th>
+							<th th:text="#{hall_of_fame.activity_count}"></th>
+						</tr>
+						</thead>
+						<tbody>
+						<tr th:each="user:${lastActiveUserListByActivity}">
+							<td th:text="${user.id}"></td>
+							<td th:text="${user.email}"></td>
+							<td th:text="${user.name}"></td>
+							<td th:text="${user.loginNumberCounts}"></td>
+						</tr>
+						</tbody>
+					</table>
+				</div>
+				<!-- /.box-body -->
+			</div>
+		</div>
+
+
+	</div>
+
+</div>
+
+<th:block th:include="inc/includes :: footer-scripts" th:remove="tag"></th:block>
+
+<th:block layout:fragment="page-scripts">
+
+	<script src="http://fairagorav8.pagre-it.com/bower_components/admin-lte/plugins/chartjs/Chart.min.js"></script>
+
+	<script type="text/javascript" th:inline="javascript">
+      /*<![CDATA[*/
+
+			var statDate =/*[[${startDateSelected}]]*/
+			var endDate =/*[[${endDateSelected}]]*/
+
+      $(document).ready(function () {
+          initDatePicker('#filter_datepicker', statDate, endDate);
+
+          $('.datatable').DataTable({
+              "responsive": false,
+              "order": [[3, "desc"]],
+              "language": {
+                  "url": langURL
+              }
+          });
+      });
+
+      function initDatePicker(id, startDate, endDate) {
+          $(id).daterangepicker(
+              {
+                  startDate: moment(statDate, 'YYYY-MM-DD').toDate(),
+                  endDate: moment(endDate, 'YYYY-MM-DD').toDate(),
+                  ranges: {
+                      'Today': [moment(), moment()],
+                      'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                      'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+                      'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                      'This Month': [moment().startOf('month'), moment().endOf('month')],
+                      'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')],
+                      'This Year': [moment().startOf('year'), moment().endOf('year')],
+                      'Last Year': [moment().subtract(1, 'year').startOf('year'), moment().subtract(1, 'year').endOf('year')]
+                  }
+              },
+              function (start, end) {
+                  $(id).html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'))
+              }
+          );
+          $(id).html($(id).data('daterangepicker').startDate.format('MMMM D, YYYY') + ' - ' + $(id).data('daterangepicker').endDate.format('MMMM D, YYYY'))
+      }
+
+
+      function onFilterSubmitButtonClick() {
+          var startDate = $('#filter_datepicker').data('daterangepicker').startDate.format('YYYY-MM-DD');
+          var endDate = $('#filter_datepicker').data('daterangepicker').endDate.format('YYYY-MM-DD');
+          var selectRole = $('#role-select').val();
+          window.location.href = "/fame.html?startDate=" + startDate + "&endDate=" + endDate + "&roleId=" + selectRole;
+      }
+
+      /*]]>*/
+	</script>
+</th:block>
+
+</html>

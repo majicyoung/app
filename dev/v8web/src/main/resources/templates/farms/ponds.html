@@ -256,10 +256,14 @@
           var farmPondArea = $('#inputFarmPondArea').val();
           tempTotalFarmPondSize = Number(farmPondArea) + totalFarmPondSize.valueOf();
           if (tempTotalFarmPondSize.valueOf() > farmSize.valueOf()) {
-              alert([[#{farm.msg_sizePond_exceeds_farmSize}]]);
-              $('#totalFarmPondSize').addClass("bg-danger");
-              $('#totalFarmPondSize').removeClass("bg-success");
-              return false;
+              if (confirm([[#{farm.msg_sizePond_exceeds_farmSize}]])){
+                  return true;
+              } else{
+                  $('#totalFarmPondSize').addClass("bg-danger");
+                  $('#totalFarmPondSize').removeClass("bg-success");
+                  return false;
+              }
+
           }else{
               return true;
           }
