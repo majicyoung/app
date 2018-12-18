@@ -9,6 +9,7 @@ import com.fairagora.verifik8.v8web.data.domain.cl.CLFarmPondActivityType;
 import com.fairagora.verifik8.v8web.data.domain.dt.DTFarmPondActivity;
 import com.fairagora.verifik8.v8web.data.domain.dt.DTFarmPondMeasurement;
 import com.fairagora.verifik8.v8web.data.domain.dt.DTFarmPondProductionCycle;
+import com.fairagora.verifik8.v8web.data.domain.reg.farm.RegEntityFarmPond;
 import com.fairagora.verifik8.v8web.data.domain.reg.staff.RegEntityStaff;
 import com.fairagora.verifik8.v8web.data.domain.sys.SYSUser;
 import com.fairagora.verifik8.v8web.data.repo.cl.CLAppQuantityUnitRepository;
@@ -16,6 +17,7 @@ import com.fairagora.verifik8.v8web.data.repo.cl.CLRefProductRepository;
 import com.fairagora.verifik8.v8web.data.repo.dt.DTFarmPondActivityRepository;
 import com.fairagora.verifik8.v8web.data.repo.dt.DTFarmPondMeasurementRepository;
 import com.fairagora.verifik8.v8web.data.repo.dt.DTFarmPondProductionCycleRepository;
+import com.fairagora.verifik8.v8web.data.repo.reg.RegEntityFarmPondRepository;
 import com.fairagora.verifik8.v8web.data.repo.reg.RegEntityStaffRepository;
 import com.fairagora.verifik8.v8web.mvc.AbstractV8Controller;
 import com.fairagora.verifik8.v8web.mvc.farms.RegFarmDTOMapper;
@@ -76,6 +78,9 @@ public class BlueCacheController extends AbstractV8Controller {
 	
 	@Autowired
 	private DTFarmPondProductionCycleRepository dtFarmPondProductionCycleRepository;
+	
+	@Autowired
+	private RegEntityFarmPondRepository regEntityFarmPondRepository; 
 
 	public BlueCacheController() {
 		pondsApiMeasureSettings = new PondsApiMeasureSettings();
@@ -93,6 +98,7 @@ public class BlueCacheController extends AbstractV8Controller {
 
 		List<RegEntityStaff> listStaff = regEntityStaffRepository.findAll();
 		List<DTFarmPondProductionCycle> listProductionLifeCycle = dtFarmPondProductionCycleRepository.findAll();
+		List<RegEntityFarmPond> listFarmPonds = regEntityFarmPondRepository.findAll();
 		
 		List<V8Farm> farms = farmService.listFarms();
 
@@ -140,8 +146,9 @@ public class BlueCacheController extends AbstractV8Controller {
 		cacheMap.put("measureUnits", clAppQuantityUnitsApiController.listPondAllMeasureUnits());
 		cacheMap.put("units", units);
 		cacheMap.put("activitySettings", listPondActivitySettings());
-		cacheMap.put("employee", listStaff);
+		cacheMap.put("employees", listStaff);
 		cacheMap.put("productions", listProductionLifeCycle);
+		cacheMap.put("fields", listFarmPonds);
 
 		return new ResponseEntity<Object>(cacheMap, HttpStatus.OK);
 	}

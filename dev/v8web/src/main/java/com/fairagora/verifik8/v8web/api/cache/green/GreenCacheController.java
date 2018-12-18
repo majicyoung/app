@@ -6,12 +6,14 @@ import com.fairagora.verifik8.v8web.data.domain.cl.CLAppTilingActivityType;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLFarmPlotActivityType;
 import com.fairagora.verifik8.v8web.data.domain.dt.DTFarmPlotActivity;
 import com.fairagora.verifik8.v8web.data.domain.dt.DTFarmPlotProductionCycle;
+import com.fairagora.verifik8.v8web.data.domain.reg.farm.RegEntityFarmPlot;
 import com.fairagora.verifik8.v8web.data.domain.reg.staff.RegEntityStaff;
 import com.fairagora.verifik8.v8web.data.domain.sys.SYSUser;
 import com.fairagora.verifik8.v8web.data.repo.cl.CLAppQuantityUnitRepository;
 import com.fairagora.verifik8.v8web.data.repo.cl.CLRefProductRepository;
 import com.fairagora.verifik8.v8web.data.repo.dt.DTFarmPlotActivityRepository;
 import com.fairagora.verifik8.v8web.data.repo.dt.DTFarmPlotProductionCycleRepository;
+import com.fairagora.verifik8.v8web.data.repo.reg.RegEntityFarmPlotRepository;
 import com.fairagora.verifik8.v8web.data.repo.reg.RegEntityStaffRepository;
 import com.fairagora.verifik8.v8web.mvc.AbstractV8Controller;
 import com.fairagora.verifik8.v8web.mvc.farms.RegFarmDTOMapper;
@@ -65,6 +67,9 @@ public class GreenCacheController extends AbstractV8Controller {
 	
 	@Autowired
 	private DTFarmPlotProductionCycleRepository dtFarmPlotProductionCycleRepository;
+	
+	@Autowired
+	private RegEntityFarmPlotRepository regEntityFarmPlotRepository;
 
 	@GetMapping(path = "/cache")
 	public ResponseEntity<Object> getCacheData() {
@@ -75,6 +80,7 @@ public class GreenCacheController extends AbstractV8Controller {
 		
 		List<RegEntityStaff> listStaff = regEntityStaffRepository.findAll();
 		List<DTFarmPlotProductionCycle> listProductionLifeCycles = dtFarmPlotProductionCycleRepository.findAll();
+		List<RegEntityFarmPlot> listFarmPlots = regEntityFarmPlotRepository.findAll();
 
 		List<V8Farm> farms = farmService.listFarms();
 
@@ -118,8 +124,9 @@ public class GreenCacheController extends AbstractV8Controller {
 		cacheMap.put("user", userFilter);
 		cacheMap.put("tilingActivityType", tilingActivityType);
 		cacheMap.put("activitySettings", listPlotdActivitySettings());
-		cacheMap.put("employee", listStaff);
+		cacheMap.put("employees", listStaff);
 		cacheMap.put("productions", listProductionLifeCycles);
+		cacheMap.put("fields", listFarmPlots);
 
 		return new ResponseEntity<Object>(cacheMap, HttpStatus.OK);
 	}
