@@ -14,10 +14,10 @@ public interface SYSUserRepository extends JpaRepository<SYSUser, Long> {
 
     SYSUser findByPhoneNumber(String phoneNumber);
 
-    @Query(value = "SELECT sys_users.* From sys_users INNER JOIN ( SELECT * from sys_users_stats WHERE CONNECTION_TIME >= STR_TO_DATE( :startDate, '%Y-%m-%d') AND CONNECTION_TIME <= STR_TO_DATE( :endDate , '%Y-%m-%d') group by SYS_USER_ID order by COUNT(*) desc ) as a ON sys_users.ID = a.SYS_USER_ID", nativeQuery = true)
+    @Query(value = "SELECT sys_users.* From sys_users INNER JOIN ( SELECT SYS_USER_ID from sys_users_stats WHERE CONNECTION_TIME >= STR_TO_DATE( :startDate, '%Y-%m-%d') AND CONNECTION_TIME <= STR_TO_DATE( :endDate , '%Y-%m-%d') group by SYS_USER_ID order by COUNT(*) desc ) as a ON sys_users.ID = a.SYS_USER_ID", nativeQuery = true)
     List<SYSUser> findBestRewardUsersByLogin(@Param("startDate") String startDate, @Param("endDate") String endDate);
 
-    @Query(value = "SELECT sys_users.* From sys_users INNER JOIN ( SELECT * from sys_users_stats WHERE CONNECTION_TIME >= STR_TO_DATE( :startDate, '%Y-%m-%d') AND CONNECTION_TIME <= STR_TO_DATE( :endDate , '%Y-%m-%d') group by SYS_USER_ID order by COUNT(*) desc ) as a ON sys_users.ID = a.SYS_USER_ID WHERE SYS_ROLE_ID = :roleId", nativeQuery = true)
+    @Query(value = "SELECT sys_users.* From sys_users INNER JOIN ( SELECT SYS_USER_ID from sys_users_stats WHERE CONNECTION_TIME >= STR_TO_DATE( :startDate, '%Y-%m-%d') AND CONNECTION_TIME <= STR_TO_DATE( :endDate , '%Y-%m-%d') group by SYS_USER_ID order by COUNT(*) desc ) as a ON sys_users.ID = a.SYS_USER_ID WHERE SYS_ROLE_ID = :roleId", nativeQuery = true)
     List<SYSUser> findBestRewardUsersByRoleAndByLogin(@Param("startDate") String startDate, @Param("endDate") String endDate, @Param("roleId") String roleId);
 
     @Query(value = "SELECT sys_users.* From sys_users INNER  join ( SELECT SYS_USER_ID, max(CONNECTION_TIME) as CONNECTION_TIME from sys_users_stats WHERE CONNECTION_TIME >= STR_TO_DATE( :startDate, '%Y-%m-%d') AND CONNECTION_TIME <= STR_TO_DATE( :endDate , '%Y-%m-%d') group by SYS_USER_ID ) as a  ON sys_users.ID = a.SYS_USER_ID order by a.CONNECTION_TIME desc", nativeQuery = true)
