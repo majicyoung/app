@@ -2,6 +2,7 @@ package com.fairagora.verifik8.v8web.services;
 
 import com.fairagora.verifik8.v8web.data.domain.dt.DTFarmPlotActivity;
 import com.fairagora.verifik8.v8web.data.domain.dt.DTFarmPondActivity;
+import com.fairagora.verifik8.v8web.data.domain.reg.V8Base;
 import com.fairagora.verifik8.v8web.data.domain.sys.SYSUser;
 import com.fairagora.verifik8.v8web.data.domain.sys.SysUserStat;
 import com.fairagora.verifik8.v8web.data.domain.sys.SysUserStatActivity;
@@ -12,6 +13,7 @@ import com.fairagora.verifik8.v8web.data.repo.sys.SYSUserRepository;
 import com.fairagora.verifik8.v8web.data.repo.sys.SYSUserStatActivityRepository;
 import com.fairagora.verifik8.v8web.data.repo.sys.SYSUserStatRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
@@ -20,6 +22,9 @@ import java.util.stream.Collectors;
 
 @Component
 public class FameService {
+
+	@Value("${oauth.clientId}")
+	private String clientId;
 
 	@Autowired
 	private SYSUserRepository userRepository;
@@ -52,6 +57,7 @@ public class FameService {
 
 	public void saveUserLogin(SYSUser sysUser) {
 		SysUserStat sysUserStat = new SysUserStat();
+		sysUserStat.setClientId(clientId);
 		sysUserStat.setSysUser(sysUser);
 		sysUserStat.setConnectionTime(new Date());
 		sysUserStatRepository.save(sysUserStat);
