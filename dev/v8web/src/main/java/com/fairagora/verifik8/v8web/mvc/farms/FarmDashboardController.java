@@ -146,7 +146,8 @@ public class FarmDashboardController extends AbstractV8Controller {
 	public List<Object> queryPondProductions(@PathVariable("id") Long id, @RequestParam("start") String startDate, @RequestParam("end") String endDate, @RequestParam(value = "poundIds[]") String[] poundIds, Model mv) {
 		Map<String, Map<String, Double>> dataArray = farmDashboardDataBuilder.getPoundProduction(id, startDate, endDate, poundIds);
 		List<String> dataDate = farmDashboardDataBuilder.getPoundProductionDate(id, startDate, endDate, poundIds);
-		return pondFormatGraphArray(poundIds, dataArray, dataDate);
+		
+		return formatPondGraphArray(poundIds, dataArray, dataDate);
 	}
 
 
@@ -155,7 +156,8 @@ public class FarmDashboardController extends AbstractV8Controller {
 	public List<Object> queryPlotProductions(@PathVariable("id") Long id, @RequestParam("start") String startDate, @RequestParam("end") String endDate, @RequestParam(value = "plotIds[]") String[] plotIds, Model mv) {
 		Map<String, Map<String, Double>> dataArray = farmDashboardDataBuilder.getPlotProduction(id, startDate, endDate, plotIds);
 		List<String> dataDate = farmDashboardDataBuilder.getPlotProductionDate(id, startDate, endDate, plotIds);
-		return plotFormatGraphArray(plotIds, dataArray, dataDate);
+
+		return formatPlotGraphArray(plotIds, dataArray, dataDate);
 	}
 
 
@@ -186,7 +188,8 @@ public class FarmDashboardController extends AbstractV8Controller {
 
 		Map<String, Map<String, Double>> dataArray = farmDashboardDataBuilder.getPoundWaterMeasures(startDate, endDate, poundIds, measureId);
 		List<String> dataDate = farmDashboardDataBuilder.getPoundWaterMeasureDate(startDate, endDate, poundIds, measureId);
-		return pondFormatGraphArray(poundIds, dataArray, dataDate);
+
+		return formatPondGraphArray(poundIds, dataArray, dataDate);
 	}
 
 
@@ -205,7 +208,8 @@ public class FarmDashboardController extends AbstractV8Controller {
 
 		Map<String, Map<String, Double>> dataArray = farmDashboardDataBuilder.getPlotPesticideMeasures(startDate, endDate, plotIds, activityId);
 		List<String> dataDate = farmDashboardDataBuilder.getPlotPesticideMeasureDate(startDate, endDate, plotIds, activityId);
-		return plotFormatGraphArray(plotIds, dataArray, dataDate);
+
+		return formatPlotGraphArray(plotIds, dataArray, dataDate);
 	}
 
 
@@ -228,6 +232,7 @@ public class FarmDashboardController extends AbstractV8Controller {
 		mv.addAttribute("v8p", p);
 
 		mv.addAttribute("activeTab", "dashboard");
+		mv.addAttribute("activeSecondTab", "dashboard");
 
 		mv.addAttribute("dashboard", farmDashboardDataBuilder.get(id));
 		mv.addAttribute("farmName", jdbc.queryForObject("SELECT name FROM reg_entities WHERE id=" + id, String.class));
@@ -236,14 +241,15 @@ public class FarmDashboardController extends AbstractV8Controller {
 
 	}
 
-	private List<Object> pondFormatGraphArray(String[] poundIds, Map<String, Map<String, Double>> dataArray, List<String> dataDate){
+	private List<Object> formatPondGraphArray(String[] poundIds, Map<String, Map<String, Double>> dataArray, List<String> dataDate){
 		List<Object> graphData = new ArrayList<>();
 
 		List<Object> leftColumns = new ArrayList<>();
 		leftColumns.add("Date");
 		Arrays.stream(poundIds)
 				.map(Long::valueOf)
-				.map(s -> regEntityFarmPondRepository.findOne(s))
+				.map(s -> regEntityFarmPondRepository.findById(s))
+				.filter(Objects::nonNull)
 				.forEach(regEntityFarmPond -> leftColumns.add(regEntityFarmPond.getName()));
 
 		for (String date : dataDate) {
@@ -270,7 +276,8 @@ public class FarmDashboardController extends AbstractV8Controller {
 		return graphData;
 	}
 
-	private List<Object> plotFormatGraphArray(String[] plotIds, Map<String, Map<String, Double>> dataArray, List<String> dataDate){
+
+	private List<Object> formatPlotGraphArray(String[] plotIds, Map<String, Map<String, Double>> dataArray, List<String> dataDate){
 		List<Object> graphData = new ArrayList<>();
 
 		List<Object> leftColumns = new ArrayList<>();

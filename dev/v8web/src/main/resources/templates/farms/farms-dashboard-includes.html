@@ -1,0 +1,19 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<body>
+	<ul th:fragment="farms-tabs" class="nav nav-tabs">
+		<th:block th:if="${farmId!=null AND farmId&gt;0}">
+			<li id="farmsecondtab_dashboard"><a th:href="@{${'/farm/'+farmId+'/dashboard.html'}}" th:text="#{farm.productivity}">farm.productivity</a></li>
+			<li id="farmsecondtab_statistic"><a th:href="@{${'/farm/'+farmId+'/statistic.html'}}" th:text="#{farm.statistic}">farm.statistic</a></li>
+		</th:block>
+		<th:block th:if="${farmId==null OR farmId==0}">
+			<li class="disabled"><a th:text="#{farm.dashboard}">farm.dashboard</a></li>
+			<li class="disabled"><a th:text="#{farm.statistic}">farm.statistic</a></li>
+		</th:block>
+	</ul>
+
+
+</body>
+</html>

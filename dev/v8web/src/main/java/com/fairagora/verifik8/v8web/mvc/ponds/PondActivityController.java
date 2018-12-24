@@ -7,10 +7,13 @@ import com.fairagora.verifik8.v8web.data.domain.cl.CLAppQuantityUnit;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLFarmPondActivityType;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLRefProduct;
 import com.fairagora.verifik8.v8web.data.domain.dt.DTFarmPondProductionCycle;
+import com.fairagora.verifik8.v8web.data.domain.reg.farm.RegEntityFarmPlot;
+import com.fairagora.verifik8.v8web.data.domain.reg.farm.RegEntityFarmPond;
 import com.fairagora.verifik8.v8web.data.repo.cl.CLFarmPondActivityTypeRepository;
 import com.fairagora.verifik8.v8web.data.repo.cl.CLFarmPondTypeRepository;
 import com.fairagora.verifik8.v8web.data.repo.cl.CLRefProductRepository;
 import com.fairagora.verifik8.v8web.data.repo.dt.DTFarmPondProductionCycleRepository;
+import com.fairagora.verifik8.v8web.services.FameService;
 import com.fairagora.verifik8.v8web.services.FarmPondProductionCycleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -54,6 +57,9 @@ public class PondActivityController extends AbstractV8Controller {
 	@Autowired
 	private FarmPondProductionCycleService farmPondProductionCycleService;
 
+	@Autowired
+	private FameService fameService;
+
 	/**
 	 * @param pondId
 	 * @param mv
@@ -65,9 +71,12 @@ public class PondActivityController extends AbstractV8Controller {
 	public String showPondActivities(@PathVariable("farmId") Optional<Long> farmId, @PathVariable("pondId") Long pondId, Model mv) {
 
 		List<DTFarmPondActivity> activities = pondActivityRepository.findByPondId(pondId);
+		RegEntityFarmPond regEntityFarmPond =  farmPondRepository.findOne(pondId);
 		mv.addAttribute("activities", activities);
 		mv.addAttribute("pondId", pondId);
 		mv.addAttribute("farmId", farmId.orElse(null));
+		mv.addAttribute("farmName", regEntityFarmPond.getFarm().getName());
+		mv.addAttribute("pondName", regEntityFarmPond.getDescription());
 		mv.addAttribute("backUrl", farmId.map(id -> "/farm/" + id + "/ponds.html").orElse("/ponds/browser.html"));
 		mv.addAttribute("createActivityUrl", farmId.map(id -> "/farm/" + id + "/pond/"+pondId+"/activities/create.html").orElse("/ponds/"+pondId+"/activities/create.html"));
 		preparePage(pondId, mv);
@@ -108,6 +117,14 @@ public class PondActivityController extends AbstractV8Controller {
 		return "ponds/activities/editor";
 	}
 
+	/**
+	 *
+	 * @param farmId
+	 * @param pondId
+	 * @param activityId
+	 * @param mv
+	 * @return
+	 */
 	@PreAuthorize("hasAuthority('R_PONDACTIVTY')")
 	@RequestMapping(value = {"/ponds/{pondId}/activities/{activityId}/edit.html",  "/farm/{farmId}/pond/{pondId}/activities/{activityId}/edit.html"}, method = RequestMethod.GET)
 	public String showPondActivities(@PathVariable("farmId") Optional<Long> farmId, @PathVariable("pondId") Long pondId, @PathVariable("activityId") Long activityId, Model mv) {
@@ -143,7 +160,7 @@ public class PondActivityController extends AbstractV8Controller {
 	@Transactional
 	@PreAuthorize("hasAuthority('W_PONDACTIVTY')")
 	@RequestMapping(value = {"/ponds/{pondId}/activities/update.html", "/farm/{farmId}/ponds/{pondId}/activities/update.html"}, method = RequestMethod.POST)
-	public String showPondActivities(@PathVariable("farmId") Optional<Long> farmId, @PathVariable("pondId") Long pondId, PondActivityDto dto, BindingResult result, Model mv) {
+	public String createPondActivities(@PathVariable("farmId") Optional<Long> farmId, @PathVariable("pondId") Long pondId, PondActivityDto dto, BindingResult result, Model mv, HttpServletRequest req) {
 
 		DTFarmPondActivity act = null;
 
@@ -164,7 +181,10 @@ public class PondActivityController extends AbstractV8Controller {
 
 		pondActivityRepository.save(act);
 
-		farmPondProductionCycleService.updatePondProductionCycle(act);
+		farmPondProductionCycleService.updateAllPondProductionCycle(pondId);
+	//	farmPondProductionCycleService.updatePondProductionCycle(act);
+
+		fameService.saveLatestFarmPondActivity(loggedUser(req), act);
 
 		preparePage(pondId, mv);
 		return farmId.map(id -> "redirect:/farm/" + id + "/pond/" + pondId + "/activities/browser.html").orElse("redirect:/ponds/" + pondId + "/activities/browser.html");
