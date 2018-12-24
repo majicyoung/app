@@ -8,6 +8,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import com.fairagora.verifik8.v8web.data.domain.dt.DTFarmPondActivity;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 public interface DTFarmPondActivityRepository extends JpaRepository<DTFarmPondActivity, Long> {
 
@@ -46,4 +48,13 @@ public interface DTFarmPondActivityRepository extends JpaRepository<DTFarmPondAc
 			@Param("startDate") Date startDate,
 			@Param("endDate") Date endDate
 		);
+
+
+	List<DTFarmPondActivity> findByPondIdOrderByCreatedAtAsc(Long plotId);
+
+
+
+	@Override
+	@Query(value = "SELECT * FROM dt_farmaq_pond_management where ID = :id LIMIT  1", nativeQuery = true)
+	DTFarmPondActivity getOne(@Param("id") Long id);
 }

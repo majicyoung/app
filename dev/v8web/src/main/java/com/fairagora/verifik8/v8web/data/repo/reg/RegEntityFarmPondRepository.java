@@ -10,4 +10,6 @@ public interface RegEntityFarmPondRepository extends JpaRepository<RegEntityFarm
 
 	List<RegEntityFarmPond> findByFarmId(Long id);
 
+	RegEntityFarmPond findById(Long id);
+
 }

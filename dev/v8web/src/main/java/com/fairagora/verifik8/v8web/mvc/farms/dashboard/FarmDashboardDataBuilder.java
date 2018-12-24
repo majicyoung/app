@@ -193,7 +193,7 @@ public class FarmDashboardDataBuilder {
 			}
 
 			try {
-				farmDashboardPond.setStockingQuantity(jdbc.queryForObject("SELECT a.MEASURE_VALUE FROM (SELECT dt_farmaq_pond_management.MEASURE_VALUE, max(dt_farmaq_pond_management.ACTIVITY_START_DATE) FROM dt_farmaq_pond_management where dt_farmaq_pond_management.REG_ENTITY_FARM_POND_ID = " + regEntityFarmPond.getId() + " AND dt_farmaq_pond_management.CL_POND_ACTIVITY_TYPE_ID = 1) AS a", String.class));
+				farmDashboardPond.setStockingQuantity(jdbc.queryForObject("SELECT a.MEASURE_VALUE FROM (SELECT dt_farmaq_pond_management.MEASURE_VALUE, dt_farmaq_pond_management.ACTIVITY_START_DATE FROM dt_farmaq_pond_management where dt_farmaq_pond_management.ACTIVITY_START_DATE = ( SELECT MAX(dt_farmaq_pond_management.ACTIVITY_START_DATE) FROM  dt_farmaq_pond_management where dt_farmaq_pond_management.REG_ENTITY_FARM_POND_ID = " + regEntityFarmPond.getId() + " AND dt_farmaq_pond_management.CL_POND_ACTIVITY_TYPE_ID = 1)) AS a", String.class));
 			} catch (DataAccessException e) {
 				farmDashboardPond.setStockingQuantity("n/a");
 			}
@@ -235,7 +235,7 @@ public class FarmDashboardDataBuilder {
 			}
 
 			try {
-				farmDashboardPlot.setSowingQuantity(jdbc.queryForObject("SELECT a.MEASURE_VALUE FROM (SELECT dt_farmag_plot_management.MEASURE_VALUE, max(dt_farmag_plot_management.ACTIVITY_START_DATE) FROM dt_farmag_plot_management where dt_farmag_plot_management.REG_ENTITY_FARM_PLOT_ID = " + regEntityFarmPlot.getId() + " AND dt_farmag_plot_management.CL_PLOT_ACTIVITY_TYPE_ID= 1) AS a", String.class));
+				farmDashboardPlot.setSowingQuantity(jdbc.queryForObject("SELECT a.MEASURE_VALUE FROM (SELECT dt_farmag_plot_management.MEASURE_VALUE, dt_farmag_plot_management.ACTIVITY_START_DATE FROM dt_farmag_plot_management where dt_farmag_plot_management.ACTIVITY_START_DATE = ( SELECT  MAX(dt_farmag_plot_management.ACTIVITY_START_DATE) FROM dt_farmag_plot_management WHERE dt_farmag_plot_management.REG_ENTITY_FARM_PLOT_ID = " + regEntityFarmPlot.getId() + " AND dt_farmag_plot_management.CL_PLOT_ACTIVITY_TYPE_ID = 1 )) AS a", String.class));
 			} catch (DataAccessException e) {
 				farmDashboardPlot.setSowingQuantity("n/a");
 			}
