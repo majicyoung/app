@@ -23,7 +23,7 @@ import com.fairagora.verifik8.v8web.data.repo.sys.SYSUserRepository;
 public abstract class V8Base {
 	/**
 	 * when there would be nobody logged, we need to find some machine user
-	 */	
+	 */
 	private static final long DEFAULT_SYSTEM_USER = 1l;
 	/*
 	 * client id for oauth

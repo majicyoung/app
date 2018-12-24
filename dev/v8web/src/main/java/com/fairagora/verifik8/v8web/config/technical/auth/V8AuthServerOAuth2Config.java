@@ -24,16 +24,21 @@ public class V8AuthServerOAuth2Config extends AuthorizationServerConfigurerAdapt
 	
 	@Value("${v8app.url}")
 	private String v8apiUrl;
+	
 	@Value("${oauth.clientId}")
 	private String clientId;
+	
 	@Value("${oauth.clientSecret}")
 	private String clientSecret;
+	
 	@Value("${oauth.grantTypePassword}")
-	private String grantTypePassword = "password";
+	private String grantTypePassword;
+	
 	@Value("${oauth.authorizationCode}")
-	private String authorizationCode = "authorization_code";
+	private String authorizationCode;
+	
 	@Value("${oauth.refreshToken}")
-	private String refreshToken = "refresh_token";
+	private String refreshToken;
 
 	static final String IMPLICIT = "implicit";
 	static final String SCOPE_READ = "read";
