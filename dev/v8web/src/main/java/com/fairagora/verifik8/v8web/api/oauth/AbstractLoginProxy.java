@@ -1,17 +1,15 @@
 package com.fairagora.verifik8.v8web.api.oauth;
 
-import java.io.Console;
 import java.util.Arrays;
 import java.util.Base64;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -43,7 +41,7 @@ public class AbstractLoginProxy {
 	private SYSUserRepository userRepository;
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public Object attemptLogin(@RequestParam("username") String username, @RequestParam("password") String password) {
+	public Object attemptLogin(@RequestParam("username") String username, @RequestParam("password") String password, HttpServletRequest request) {
 		MultiValueMap<String, String> data = new LinkedMultiValueMap<>();
 		SYSUser u = null;
 
@@ -59,21 +57,21 @@ public class AbstractLoginProxy {
 			data.add("username", username);
 			data.add("password", password);
 			
-			return this.proxy("password", data);
+			return this.proxy("password", data, request);
 		}
 		
 		throw new UsernameNotFoundException(username);
 	}
 	
 	@RequestMapping(value = "/login/refresh", method = RequestMethod.POST)
-	public Object attemptRefresh(@RequestParam("token") String token) {
+	public Object attemptRefresh(@RequestParam("token") String token, HttpServletRequest request) {
 		MultiValueMap<String, String> data = new LinkedMultiValueMap<>();
 		data.add("refresh_token", token);
 		
-		return this.proxy("refresh_token", data);
+		return this.proxy("refresh_token", data, request);
 	}
 
-	public ResponseEntity<?> proxy(String grantType, MultiValueMap<String, String> data) {
+	public ResponseEntity<?> proxy(String grantType, MultiValueMap<String, String> data, HttpServletRequest requestUrl) {
 		MultiValueMap<String, String> oauthData = new LinkedMultiValueMap<>();
 		oauthData.add("client_id", clientId);
 		oauthData.add("client_secret", clientSecret);
@@ -81,7 +79,7 @@ public class AbstractLoginProxy {
 		oauthData.putAll(data);
 		
 		RestTemplate restTemplate = new RestTemplate();
-		String uri = "http://localhost:9250/" +v8apiUrl+"/oauth/token";
+		String uri = this.getURL(requestUrl) + "/" +v8apiUrl+"/oauth/token";
 
 		String base64Encode = clientId + ":" + clientSecret;
 		
@@ -94,5 +92,11 @@ public class AbstractLoginProxy {
 		ResponseEntity<String> response = restTemplate.postForEntity(uri, request, String.class);
 		
 		return new ResponseEntity<Object>(response.getBody(), HttpStatus.OK);
+	}
+	
+	public String getURL(HttpServletRequest request){
+		String fullURL = request.getRequestURL().toString();
+		
+		return fullURL.substring(0,StringUtils.ordinalIndexOf(fullURL, "/", 3)); 
 	}
 }
