@@ -55,16 +55,22 @@ public class AbstractLoginProxy {
 			}
 		}
 
-		if (u == null) {
-			throw new UsernameNotFoundException(username);
+		if (u != null) {
+			data.add("username", username);
+			data.add("password", password);
+			
+			return this.proxy("password", data);
 		}
 		
-		data.add("username", username);
-		data.add("password", password);
+		throw new UsernameNotFoundException(username);
+	}
+	
+	@RequestMapping(value = "/login/refresh", method = RequestMethod.POST)
+	public Object attemptRefresh(@RequestParam("token") String token) {
+		MultiValueMap<String, String> data = new LinkedMultiValueMap<>();
+		data.add("refresh_token", token);
 		
-		Object token = this.proxy("password", data);
-		
-		return token;
+		return this.proxy("refresh_token", data);
 	}
 
 	public ResponseEntity<?> proxy(String grantType, MultiValueMap<String, String> data) {
