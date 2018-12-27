@@ -1,13 +1,11 @@
 package com.fairagora.verifik8.v8web.api.oauth;
 
-import java.io.Console;
 import java.util.Arrays;
 import java.util.Base64;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang3.StringUtils;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
@@ -46,7 +44,7 @@ public class AbstractLoginProxy {
 	public Object attemptLogin(@RequestParam("username") String username, @RequestParam("password") String password, HttpServletRequest request) {
 		MultiValueMap<String, String> data = new LinkedMultiValueMap<>();
 		SYSUser u = null;
-
+		
 		if (userRepository.findByEmail(username.toLowerCase()) != null) {
 			u = userRepository.findByEmail(username.toLowerCase());
 		} else {
