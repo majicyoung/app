@@ -69,7 +69,7 @@ public class V8AuthServerOAuth2Config extends AuthorizationServerConfigurerAdapt
 		configurer.inMemory().withClient(clientId).secret(clientSecret)
 				.authorizedGrantTypes(grantTypePassword, authorizationCode, refreshToken, IMPLICIT)
 				.scopes(SCOPE_READ, SCOPE_WRITE, TRUST)
-				.accessTokenValiditySeconds(10)
+				.accessTokenValiditySeconds(Integer.MAX_VALUE)
 				.refreshTokenValiditySeconds(Integer.MAX_VALUE);
 	}
 	
