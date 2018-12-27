@@ -80,13 +80,13 @@ public class AbstractLoginProxy {
 		oauthData.putAll(data);
 		
 		RestTemplate restTemplate = new RestTemplate();
-		String uri = this.getURL(requestUrl) + "/" +v8apiUrl+"/oauth/token";
+		String uri = this.getURL(requestUrl) + "/" + v8apiUrl +"/oauth/token";
 
 		String base64Encode = clientId + ":" + clientSecret;
 		
 		HttpHeaders headers = new HttpHeaders();
-	    headers.setAccept(Arrays.asList(MediaType.ALL));
-	    headers.add("Authorization", "Basic " + Base64.getEncoder().encodeToString(base64Encode.getBytes()));
+		headers.setAccept(Arrays.asList(MediaType.ALL));
+		headers.add("Authorization", "Basic " + Base64.getEncoder().encodeToString(base64Encode.getBytes()));
 	    
 	    HttpEntity<?> request = new HttpEntity<>(oauthData, headers);
 	    

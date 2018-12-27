@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 
 @Controller
 @RequestMapping(value = "oauth")
-public class OauthController extends AbstractV8Controller{
+public class OAuthController extends AbstractV8Controller{
 	
 	@Autowired
     private JdbcTemplate jdbc;
