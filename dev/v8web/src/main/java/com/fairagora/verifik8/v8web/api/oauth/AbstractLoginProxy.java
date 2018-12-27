@@ -45,7 +45,7 @@ public class AbstractLoginProxy {
 	public Object attemptLogin(@RequestParam("username") String username, @RequestParam("password") String password, HttpServletRequest request) {
 		MultiValueMap<String, String> data = new LinkedMultiValueMap<>();
 		SYSUser u = null;
-		
+
 		if (userRepository.findByEmail(username.toLowerCase()) != null) {
 			u = userRepository.findByEmail(username.toLowerCase());
 		} else {
@@ -80,7 +80,7 @@ public class AbstractLoginProxy {
 		oauthData.putAll(data);
 		
 		RestTemplate restTemplate = new RestTemplate();
-		String uri = this.getURL(requestUrl) + "/" + v8apiUrl +"/oauth/token";
+		String uri = this.getURL(requestUrl) + "/" + v8apiUrl + "/oauth/token";
 
 		String base64Encode = clientId + ":" + clientSecret;
 		
