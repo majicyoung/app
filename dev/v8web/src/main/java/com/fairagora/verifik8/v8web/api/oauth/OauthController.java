@@ -18,7 +18,7 @@ import com.fairagora.verifik8.v8web.mvc.AbstractV8Controller;
 import javax.servlet.http.HttpServletRequest;
 
 @Controller
-@RequestMapping(value = {"blue", "green"})
+@RequestMapping(value = "oauth")
 public class OauthController extends AbstractV8Controller{
 	
 	@Autowired
@@ -30,15 +30,14 @@ public class OauthController extends AbstractV8Controller{
 	@PostMapping(value = "/logout")
 	public @ResponseBody
 	ResponseEntity<HttpStatus> logout(HttpServletRequest request) {
-		System.out.println("username : " + this.getLoggedUser());
 		String authHeader = request.getHeader("Authorization");
 		if (authHeader != null) {
 			try {
-				jdbc.update("DELETE FROM oauth_access_token WHERE user_name = ?", new Object[] { this.getLoggedUser().getUsername() });
-				
 				String tokenValue = authHeader.replace("Bearer", "").trim();
 				OAuth2AccessToken accessToken = tokenStore.readAccessToken(tokenValue);
 				tokenStore.removeAccessToken(accessToken);
+				
+				jdbc.update("DELETE FROM oauth_access_token WHERE user_name = ?", new Object[] { this.getLoggedUser().getUsername() });
 			} catch (Exception e) {
 				return new ResponseEntity<HttpStatus>(HttpStatus.NOT_FOUND);
 			}

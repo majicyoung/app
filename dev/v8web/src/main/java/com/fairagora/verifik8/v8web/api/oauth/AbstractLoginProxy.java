@@ -1,11 +1,13 @@
 package com.fairagora.verifik8.v8web.api.oauth;
 
+import java.io.Console;
 import java.util.Arrays;
 import java.util.Base64;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang3.StringUtils;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
@@ -84,8 +86,8 @@ public class AbstractLoginProxy {
 		String base64Encode = clientId + ":" + clientSecret;
 		
 		HttpHeaders headers = new HttpHeaders();
-	    headers.setAccept(Arrays.asList(MediaType.ALL)); 
-		headers.add("Authorization", "Basic " + Base64.getEncoder().encodeToString(base64Encode.getBytes()));
+	    headers.setAccept(Arrays.asList(MediaType.ALL));
+	    headers.add("Authorization", "Basic " + Base64.getEncoder().encodeToString(base64Encode.getBytes()));
 	    
 	    HttpEntity<?> request = new HttpEntity<>(oauthData, headers);
 		
@@ -94,7 +96,7 @@ public class AbstractLoginProxy {
 		return new ResponseEntity<Object>(response.getBody(), HttpStatus.OK);
 	}
 	
-	public String getURL(HttpServletRequest request){
+	private String getURL(HttpServletRequest request){
 		String fullURL = request.getRequestURL().toString();
 		
 		return fullURL.substring(0,StringUtils.ordinalIndexOf(fullURL, "/", 3)); 
