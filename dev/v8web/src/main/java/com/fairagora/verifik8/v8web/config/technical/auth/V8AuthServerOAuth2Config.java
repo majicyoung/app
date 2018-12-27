@@ -47,6 +47,9 @@ public class V8AuthServerOAuth2Config extends AuthorizationServerConfigurerAdapt
 
 	@Autowired
 	private DataSource dataSource;
+
+	@Autowired
+	private V8UserDetailsService userDetailsService;
 	    
 	@Bean
 	public TokenStore tokenStore() {
@@ -73,7 +76,7 @@ public class V8AuthServerOAuth2Config extends AuthorizationServerConfigurerAdapt
 	@Override
 	public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
 		endpoints.tokenStore(tokenStore()).authenticationManager(authenticationManager);
-		
+		endpoints.userDetailsService(userDetailsService);
 		endpoints.pathMapping("/oauth/token", "/"+v8apiUrl+"/oauth/token");
 	}
 }
