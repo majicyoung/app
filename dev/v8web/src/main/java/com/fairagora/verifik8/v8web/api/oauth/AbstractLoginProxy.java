@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import com.fairagora.verifik8.v8web.data.domain.sys.SYSUser;
@@ -88,10 +89,14 @@ public class AbstractLoginProxy {
 	    headers.add("Authorization", "Basic " + Base64.getEncoder().encodeToString(base64Encode.getBytes()));
 	    
 	    HttpEntity<?> request = new HttpEntity<>(oauthData, headers);
-		
-		ResponseEntity<String> response = restTemplate.postForEntity(uri, request, String.class);
-		
-		return new ResponseEntity<Object>(response.getBody(), HttpStatus.OK);
+	    
+	    try {
+	    	ResponseEntity<String> response = restTemplate.postForEntity(uri, request, String.class);
+
+			return new ResponseEntity<Object>(response.getBody(), HttpStatus.OK);
+	    }catch (HttpClientErrorException e) {
+			return new ResponseEntity<Object>(e.getStatusCode());
+	    }
 	}
 	
 	private String getURL(HttpServletRequest request){
