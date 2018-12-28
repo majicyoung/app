@@ -105,10 +105,20 @@ public class AbstractLoginProxy {
 	        }
 		});
 		
+		ResponseEntity<String> response = null;
 		try {
-			ResponseEntity<String> response = restTemplate.postForEntity(uri, request, String.class);
+			response = restTemplate.postForEntity(uri, request, String.class);
 			
 			System.out.println("response : " + response + " : CODE: " + response.getStatusCodeValue());
+			
+			if (response.getStatusCodeValue() == 302) {
+				uri = "https://" + requestUrl.getServerName() + ":" + requestUrl.getServerPort() + "/" + v8apiUrl + "/oauth/token";
+
+				response = restTemplate.postForEntity(uri, request, String.class);
+				
+				return new ResponseEntity<Object>(response.getBody(), HttpStatus.OK);
+			}
+			
 			return new ResponseEntity<Object>(response.getBody(), HttpStatus.OK);
 		}catch (HttpClientErrorException e) {
 			return new ResponseEntity<Object>(e.getStatusCode());
