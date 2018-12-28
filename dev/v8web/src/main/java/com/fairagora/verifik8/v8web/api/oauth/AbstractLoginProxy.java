@@ -62,8 +62,6 @@ public class AbstractLoginProxy {
 			data.add("username", username);
 			data.add("password", password);
 			
-			System.out.println("/login_route : " + username + " : " + password);
-			
 			return this.proxy("password", data, request);
 		}
 		
@@ -85,7 +83,7 @@ public class AbstractLoginProxy {
 		oauthData.add("grant_type", grantType);
 		oauthData.putAll(data);
 		
-		String uri = "https://" + requestUrl.getServerName() + "/" + v8apiUrl + "/oauth/token";
+		String uri = requestUrl.getScheme() + "://" + requestUrl.getServerName() + "/" + v8apiUrl + "/oauth/token";
 
 		String base64Encode = clientId + ":" + clientSecret;
 		
@@ -93,8 +91,6 @@ public class AbstractLoginProxy {
 		headers.add("Authorization", "Basic " + Base64.getEncoder().encodeToString(base64Encode.getBytes()));
 		
 		HttpEntity<?> request = new HttpEntity<>(oauthData, headers);
-		
-		System.out.println("/proxy_route : " + oauthData + " : " + uri + ":" + headers);
 		
 		RestTemplate restTemplate = new RestTemplate(new SimpleClientHttpRequestFactory() {
 			@Override
@@ -107,8 +103,6 @@ public class AbstractLoginProxy {
 		
 		try {
 			ResponseEntity<String> response = restTemplate.postForEntity(uri, request, String.class);
-			
-			System.out.println("response : " + response + " : CODE: " + response.getStatusCodeValue());
 			
 			return new ResponseEntity<Object>(response.getBody(), HttpStatus.OK);
 		}catch (HttpClientErrorException e) {
