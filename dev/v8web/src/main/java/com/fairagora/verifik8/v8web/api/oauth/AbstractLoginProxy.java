@@ -105,9 +105,8 @@ public class AbstractLoginProxy {
 	        }
 		});
 		
-		ResponseEntity<String> response = null;
 		try {
-			response = restTemplate.postForEntity(uri, request, String.class);
+			ResponseEntity<String> response = restTemplate.postForEntity(uri, request, String.class);
 			
 			System.out.println("response : " + response + " : CODE: " + response.getStatusCodeValue());
 			
