@@ -85,12 +85,11 @@ public class AbstractLoginProxy {
 		oauthData.add("grant_type", grantType);
 		oauthData.putAll(data);
 		
-		String uri = this.getURL(requestUrl) + "/" + v8apiUrl + "/oauth/token";
+		String uri = requestUrl.getScheme() + "://" + requestUrl.getServerName() + ":" + requestUrl.getServerPort() + "/" + v8apiUrl + "/oauth/token";
 
 		String base64Encode = clientId + ":" + clientSecret;
 		
 		HttpHeaders headers = new HttpHeaders();
-		headers.setAccept(Arrays.asList(MediaType.ALL));
 		headers.add("Authorization", "Basic " + Base64.getEncoder().encodeToString(base64Encode.getBytes()));
 		
 		HttpEntity<?> request = new HttpEntity<>(oauthData, headers);
@@ -102,28 +101,17 @@ public class AbstractLoginProxy {
 	        protected void prepareConnection(HttpURLConnection connection, String httpMethod) throws IOException
 	        {
 	            super.prepareConnection(connection, httpMethod);
-	            connection.setInstanceFollowRedirects(false);
-	            
-	            if ("GET".equals(httpMethod)) {
-	                connection.setInstanceFollowRedirects(true);
-	            }
+	            connection.setInstanceFollowRedirects(true);
 	        }
 		});
 		
 		try {
 			ResponseEntity<String> response = restTemplate.postForEntity(uri, request, String.class);
 			
-			System.out.println("response : " + response);
+			System.out.println("response : " + response + " : CODE: " + response.getStatusCodeValue());
 			return new ResponseEntity<Object>(response.getBody(), HttpStatus.OK);
 		}catch (HttpClientErrorException e) {
-			System.out.println("HttpClientErrorException : " + e);
 			return new ResponseEntity<Object>(e.getStatusCode());
 		}
-	}
-	
-	private String getURL(HttpServletRequest request){
-		String fullURL = request.getRequestURL().toString();
-		
-		return fullURL.substring(0,StringUtils.ordinalIndexOf(fullURL, "/", 3)); 
 	}
 }
