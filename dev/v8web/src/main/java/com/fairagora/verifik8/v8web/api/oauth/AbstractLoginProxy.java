@@ -1,5 +1,7 @@
 package com.fairagora.verifik8.v8web.api.oauth;
 
+import java.io.IOException;
+import java.net.HttpURLConnection;
 import java.util.Arrays;
 import java.util.Base64;
 
@@ -14,6 +16,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
@@ -41,14 +44,6 @@ public class AbstractLoginProxy {
 
 	@Autowired
 	private SYSUserRepository userRepository;
-	
-	@Bean
-	RestTemplate restTemplate() {
-		return new RestTemplate();
-	}
-	
-	@Autowired
-	RestTemplate restTemplate;
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public Object attemptLogin(@RequestParam("username") String username, @RequestParam("password") String password, HttpServletRequest request) {
@@ -101,6 +96,19 @@ public class AbstractLoginProxy {
 		HttpEntity<?> request = new HttpEntity<>(oauthData, headers);
 		
 		System.out.println("/proxy_route : " + oauthData + " : " + uri + ":" + headers);
+		
+		RestTemplate restTemplate = new RestTemplate(new SimpleClientHttpRequestFactory() {
+			@Override
+	        protected void prepareConnection(HttpURLConnection connection, String httpMethod) throws IOException
+	        {
+	            super.prepareConnection(connection, httpMethod);
+	            connection.setInstanceFollowRedirects(false);
+	            
+	            if ("GET".equals(httpMethod)) {
+	                connection.setInstanceFollowRedirects(true);
+	            }
+	        }
+		});
 		
 		try {
 			ResponseEntity<String> response = restTemplate.postForEntity(uri, request, String.class);
