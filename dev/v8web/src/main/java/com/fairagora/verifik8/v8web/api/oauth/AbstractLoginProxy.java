@@ -85,7 +85,7 @@ public class AbstractLoginProxy {
 		oauthData.add("grant_type", grantType);
 		oauthData.putAll(data);
 		
-		String uri = requestUrl.getScheme() + "://" + requestUrl.getServerName() + ":" + requestUrl.getServerPort() + "/" + v8apiUrl + "/oauth/token";
+		String uri = "https://" + requestUrl.getServerName() + "/" + v8apiUrl + "/oauth/token";
 
 		String base64Encode = clientId + ":" + clientSecret;
 		
@@ -110,14 +110,6 @@ public class AbstractLoginProxy {
 			response = restTemplate.postForEntity(uri, request, String.class);
 			
 			System.out.println("response : " + response + " : CODE: " + response.getStatusCodeValue());
-			
-			if (response.getStatusCodeValue() == 302) {
-				uri = "https://" + requestUrl.getServerName() + ":" + requestUrl.getServerPort() + "/" + v8apiUrl + "/oauth/token";
-
-				response = restTemplate.postForEntity(uri, request, String.class);
-				
-				return new ResponseEntity<Object>(response.getBody(), HttpStatus.OK);
-			}
 			
 			return new ResponseEntity<Object>(response.getBody(), HttpStatus.OK);
 		}catch (HttpClientErrorException e) {

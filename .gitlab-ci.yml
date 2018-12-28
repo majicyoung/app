@@ -47,7 +47,6 @@ develop_build:
   environment: build
   only:
     - "1.0"
-    - "resttemplate"
   script:
     - docker build -t $IMAGE_LOCAL
       --build-arg build=$CI_PIPELINE_ID
@@ -68,7 +67,6 @@ develop_deploy:
     name: develop
   only:
     - "1.0"
-    - "resttemplate"
   script:
     - cd ~/verifik8
     - docker service update verifik8_backend_blue --detach=false --image=$IMAGE_DEVELOP --with-registry-auth
