@@ -22,22 +22,24 @@
           <table class="table table-hover table-striped table-bordered datatable" id="userTable">
             <thead>
             <tr>
-              <tSearchh th:text="#{user.number}">{{ trans('user.number') }}</tSearchh>
+              <th th:text="#{user.number}">{{ trans('user.number') }}</th>
               <th th:text="#{user.name}">{{ trans('user.name') }}</th>
               <th th:text="#{default.email}">{{ trans('default.email') }}</th>
               <th th:text="#{default.role}">{{ trans('default.role') }}</th>
-              <th th:text="#{default.date}">{{ trans('default.date') }}</th>
+              <th th:text="#{default.creation_date}">{{ trans('default.creation_date') }}</th>
+              <th th:text="#{default.updated_date}">{{ trans('default.updated_date') }}</th>
               <th th:text="#{default.status}">{{ trans('default.status') }}</th>
               <th style="max-width:100px;"></th>
             </tr>
             </thead>
             <tbody>
             <tr th:each="user : ${users}">
-              <td th:inline="text">[[${user.id}]]</td>
-              <td th:inline="text">[[${user.name}]]</td>
-              <td th:inline="text">[[${user.email}]]</td>
-              <td th:inline="text">[[${user.role.name}]]</td>
-              <td th:inline="text">?</td>
+              <td th:inline="text" th:text="${user.id}"></td>
+              <td th:inline="text" th:text="${user.name}"></td>
+              <td th:inline="text" th:text="${user.email}"></td>
+              <td th:inline="text" th:text="${user.role.name}"></td>
+              <td th:inline="text" th:text="${#dates.format(user.createdAt, 'dd-MMM-yyyy')}"></td>
+              <td th:inline="text" th:text="${#dates.format(user.updatedAt, 'dd-MMM-yyyy')}"></td>
               <td align="center">
                     <i th:if="${user.active}" class="fa fa-check green"></i>
                     <i th:if="${!user.active}" class="fa fa-times red"></i>
@@ -45,7 +47,7 @@
               <td align="center">
                 <a th:href="@{'/user/'+${user.id}+'/edit.html'}" class="btn btn-sm btn-flat btn-primary"><i class="fa fa-edit"></i></a>
                 <a th:href="@{'/user/'+${user.id}+'/role.html'}" class="btn btn-sm btn-flat btn-warning"><i class="fa fa-lock"></i></a>
-                <form sec:authorize="hasRole('ROLE_sadmin')" class="form-horizontal" th:action="@{'/user/'+${user.id}+'/delete.html'}" method="post" style="display:inline-block;" onsubmit="return confirm('Do you want to delete this user?');">
+                <form sec:authorize="hasAuthority('W_USEREDITOR')" class="form-horizontal" th:action="@{'/user/'+${user.id}+'/delete.html'}" method="post" style="display:inline-block;" onsubmit="return confirm('Do you want to delete this user?');">
                	 	<button type="submit" class="btn btn-sm btn-flat btn-danger"><i class="fa fa-trash"></i></button>
                 </form>
               </td>
