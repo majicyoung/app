@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -40,6 +41,14 @@ public class AbstractLoginProxy {
 
 	@Autowired
 	private SYSUserRepository userRepository;
+	
+	@Bean
+	RestTemplate restTemplate() {
+		return new RestTemplate();
+	}
+	
+	@Autowired
+	RestTemplate restTemplate;
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public Object attemptLogin(@RequestParam("username") String username, @RequestParam("password") String password, HttpServletRequest request) {
@@ -57,6 +66,8 @@ public class AbstractLoginProxy {
 		if (u != null) {
 			data.add("username", username);
 			data.add("password", password);
+			
+			System.out.println("/login_route : " + username + " : " + password);
 			
 			return this.proxy("password", data, request);
 		}
@@ -79,7 +90,6 @@ public class AbstractLoginProxy {
 		oauthData.add("grant_type", grantType);
 		oauthData.putAll(data);
 		
-		RestTemplate restTemplate = new RestTemplate();
 		String uri = this.getURL(requestUrl) + "/" + v8apiUrl + "/oauth/token";
 
 		String base64Encode = clientId + ":" + clientSecret;
@@ -90,11 +100,15 @@ public class AbstractLoginProxy {
 		
 		HttpEntity<?> request = new HttpEntity<>(oauthData, headers);
 		
+		System.out.println("/proxy_route : " + oauthData + " : " + uri + ":" + headers);
+		
 		try {
 			ResponseEntity<String> response = restTemplate.postForEntity(uri, request, String.class);
 			
+			System.out.println("response : " + response);
 			return new ResponseEntity<Object>(response.getBody(), HttpStatus.OK);
 		}catch (HttpClientErrorException e) {
+			System.out.println("HttpClientErrorException : " + e);
 			return new ResponseEntity<Object>(e.getStatusCode());
 		}
 	}
