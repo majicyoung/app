@@ -24,18 +24,23 @@ Change the directory into your project folder
 cd backend/dev/v8web/
 ```
 
+Clone test db repository
+```bash
+git@gitlab.united-asian.com:verifik8/test-db.git
+```
+
+Change directory to get sql file
+```bash
+cd test-db/Fixtures
+```
+Dumb sql file in your mysql server
+
 Database configuration
 
 MySQL
 
 ```bash
 root:<see this in DEMO_SERVERS.txt file>
-```
-
-Added column
-
-```bash
-ALTER TABLE `sys_users` ADD `cache_version` VARCHAR(20) NULL DEFAULT NULL AFTER `active`;
 ```
 
 Install dependencies and build project
@@ -47,15 +52,10 @@ mvn install
 Development run
 
 ```bash
-mvn spring-boot:run -Dspring.config.location=classpath:<application-config-name>.properties
+mvn spring-boot:run -Dspring.config.location=classpath:<application-config-name>.properties -Dspring.profiles.active=<config-name>
 ```
 
-Serve your API
-
-```bash
-java -jar target/v8web-*.jar
- ```
-Now, request http://localhost:8080 from browser.
+Now, request http://localhost:9250 from browser.
 
 
 # On Test Database
@@ -106,18 +106,13 @@ INSERT INTO `cl_app_quantity_units` (`ID`, `ENABLED`, `CODE`, `RANKING`, `NAME`,
 Api login endpoint
 
 ```bash
-https://blueapp.vfk8.united-asian.net/blue/oauth/token
+https://blueapp.vfk8.united-asian.net/oauth/login
 ```
-step1: 
-On Authorization(Basic Auth) enter ->
-username: verifik8-client
-password: verifik8-secret
 
-step2: 
+step1: 
 - on body click x-www-form-urlencoded and enter value ->
 username: [any username from database]
 password: []
-grant_type: password
 
-step3:
+step2:
 click on send to get refresh and access token
