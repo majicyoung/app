@@ -25,7 +25,7 @@
                     </div>
                 </div>
                 <div class="box-body">
-                    <table class="table table-hover table-striped table-bordered datatable" id="userTable">
+                    <table class="table table-hover table-striped table-bordered datatable" id="columnTable">
                         <thead>
                         <tr>
                             <th th:if="${column.id==true}" th:text="#{cl.column.id}" th:inline="text">id</th>
@@ -132,6 +132,9 @@
                             <th th:if="${column.clValueMeasureUnitId==true}" th:text="#{cl.column.clValueMeasureUnitId}"
                                 th:inline="text">clValueMeasureUnitId
                             </th>
+                            <th th:if="${column.regEntityProductSupplierId==true}" th:text="#{cl.column.regEntityProductSupplierId}"
+                                th:inline="text">regEntityProductSupplierId
+                            </th>
                             <th th:inline="text"></th>
 
                         </tr>
@@ -222,6 +225,10 @@
                             <td th:if="${column.clValueMeasureUnitId==true}" th:text="${data.clValueMeasureUnitId}">
                                 [[${data.clValueMeasureUnitId}]]
                             </td>
+                            <td th:if="${column.regEntityProductSupplierId==true}" th:text="${data.regEntityProductSupplier}">
+                                [[${data.regEntityProductSupplier}]]
+                            </td>
+
 
                             <td th:if="${table != 'cl_ref_languages_countries'}" align="center">
                                 <a th:href="@{'/admin/codelists/browser/'+${table}+'/'+${data.id}+'/edit.html'}"
@@ -255,4 +262,25 @@
         </div>
     </div>
 </div>
+
+
+<th:block layout:fragment="page-scripts">
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+
+        $(document).ready(function() {
+            $('#columnTable').DataTable({
+                "responsive": true,
+                "order": [[5, "desc"]],
+                "language": {
+                    "url": langURL
+                }
+            });
+
+        });
+        /*]]>*/
+    </script>
+</th:block>
+
+
 </html>
