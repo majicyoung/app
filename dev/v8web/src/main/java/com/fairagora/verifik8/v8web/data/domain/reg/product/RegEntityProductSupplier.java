@@ -7,6 +7,7 @@ import com.fairagora.verifik8.v8web.data.domain.cl.CLRefProductType;
 import com.fairagora.verifik8.v8web.data.domain.reg.RegEntity;
 import com.fairagora.verifik8.v8web.data.domain.reg.RegPicture;
 import com.fairagora.verifik8.v8web.data.domain.reg.V8Base;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
@@ -28,6 +29,7 @@ public class RegEntityProductSupplier extends V8EntitySupport {
 	protected RegEntity entity;
 
 	@OneToMany(mappedBy="regEntityProductSupplier", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JsonBackReference
 	protected List<CLRefProduct> clRefProducts;
 
 	public Long getId() {
