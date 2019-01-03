@@ -28,6 +28,7 @@
                     <table class="table table-hover table-striped table-bordered datatable" id="columnTable">
                         <thead>
                         <tr>
+                            <th></th>
                             <th th:if="${column.id==true}" th:text="#{cl.column.id}" th:inline="text">id</th>
                             <th th:if="${column.enabled==true}" th:text="#{cl.column.enabled}" th:inline="text">
                                 enabled
@@ -143,7 +144,7 @@
 
 
                         <tr th:each="data : ${datas}">
-
+                            <td></td>
                             <td th:if="${column.id==true}" th:text="${data.id}">[[${data.id}]]</td>
                             <td th:if="${column.enabled==true}" th:text="${data.enabled}">[[${data.enabled}]]</td>
                             <td th:if="${column.code==true}" th:text="${data.code}">[[${data.code}]]</td>
@@ -270,8 +271,18 @@
 
         $(document).ready(function() {
             $('#columnTable').DataTable({
-                "responsive": true,
-                "order": [[5, "desc"]],
+                "responsive": {
+                    details: {
+                        type: 'column',
+                        target: 'tr'
+                    }
+                },
+                "columnDefs": [ {
+                    className: 'control',
+                    orderable: false,
+                    targets:   0
+                } ],
+                "order": [[6, "desc"]],
                 "language": {
                     "url": langURL
                 }

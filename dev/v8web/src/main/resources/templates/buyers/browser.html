@@ -23,6 +23,7 @@
 					<table class="table table-hover table-striped table-bordered datatable" id="datatables-browser">
 						<thead>
 						<tr>
+							<th></th>
 							<th th:text="#{default.farm}">default.farm</th>
 							<th th:text="#{buyer.name}">buyer.name</th>
 							<th th:text="#{default.product_type}">default.product_type</th>
@@ -32,6 +33,7 @@
 						</thead>
 						<tbody>
 						<tr th:each="buyer:${listing}">
+							<td></td>
 							<td th:text="${buyer.farm}"></td>
 							<td th:text="${buyer.buyer}"></td>
 							<td th:text="${buyer.productType}"></td>
@@ -68,9 +70,18 @@
 
 
           $('#datatables-browser').DataTable({
-              "order": [[0, "desc"]],
-              "responsive": true,
-              "columnDefs": [{"orderable": false, "targets": 4}],
+              "responsive": {
+                  details: {
+                      type: 'column',
+                      target: 'tr'
+                  }
+              },
+              "columnDefs": [ {
+                  className: 'control',
+                  orderable: false,
+                  targets:   4
+              } ],
+              "order": [[1, "desc"]],
               "language": {
                   "url": langURL
               }

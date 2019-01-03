@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html layout:decorator="inc/main-layout" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html layout:decorator="inc/main-layout" xmlns:th="http://www.thymeleaf.org"
+			xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+			xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
 <div layout:fragment="content">
 
@@ -13,40 +15,45 @@
 						<!-- messages here -->
 					</div>
 					<div class="box-tools">
-						<a th:href="@{/companies/create.html}" class="btn btn-sm btn-flat btn-success"><i class="fa fa-plus"></i> <span th:text="#{companies.add_company}">farm.add_company</span></a>
+						<a th:href="@{/companies/create.html}" class="btn btn-sm btn-flat btn-success"><i class="fa fa-plus"></i>
+							<span th:text="#{companies.add_company}">farm.add_company</span></a>
 					</div>
 				</div>
 				<div class="box-body">
 					<table class="table table-hover table-striped table-bordered datatable" id="datatables-browser">
 						<thead>
-							<tr>
-								<th th:text="#{company.registration_number}">company.number</th>
-                                <th th:text="#{default.name}">company.name</th>
-								<th th:text="#{default.phone}">default.phone</th>
-								<th th:text="#{default.email}">default.email</th>
-                                <th th:text="#{default.type}">company.type</th>
-                                <th th:text="#{default.city}">default.city</th>
-                                <th width="90"></th>
-							</tr>
+						<tr>
+							<th></th>
+							<th th:text="#{company.registration_number}">company.number</th>
+							<th th:text="#{default.name}">company.name</th>
+							<th th:text="#{default.phone}">default.phone</th>
+							<th th:text="#{default.email}">default.email</th>
+							<th th:text="#{default.type}">company.type</th>
+							<th th:text="#{default.city}">default.city</th>
+							<th width="90"></th>
+						</tr>
 						</thead>
 						<tbody>
-							<tr th:each="company:${listing}">
-								<td th:text="${company.registrationNumber}"></td>
-								<td th:text="${company.name}"></td>
-								<td th:text="${company.phoneNumber}"></td>
-								<td th:text="${company.email}"></td>
-								<td th:text="${company.entityType}"></td>
-								<td th:text="${company.city}"></td>
-								<td align="center">
-									<a href="javascript:void(0);" th:attr="data-id=${company.id}" class="btn btn-xs btn-flat btn-primary editCompanyBtn" th:title="#{tooltip.edit_company}"><i class="fa fa-edit"></i></a>
-									<form th:action="@{/companies/delete.html}" method="post" style="display: inline;">
-										<input type="hidden" th:value="${company.id}" th:name="companyId" />
-										<button type="submit" class="btn btn-xs btn-flat btn-danger" th:title="#{tooltip.delete_company}">
-											<i class="fa fa-trash"></i>
-										</button>
-									</form>
-								</td>
-							</tr>
+						<tr th:each="company:${listing}">
+							<td></td>
+							<td th:text="${company.registrationNumber}"></td>
+							<td th:text="${company.name}"></td>
+							<td th:text="${company.phoneNumber}"></td>
+							<td th:text="${company.email}"></td>
+							<td th:text="${company.entityType}"></td>
+							<td th:text="${company.city}"></td>
+							<td align="center">
+								<a href="javascript:void(0);" th:attr="data-id=${company.id}"
+									 class="btn btn-xs btn-flat btn-primary editCompanyBtn" th:title="#{tooltip.edit_company}"><i
+										class="fa fa-edit"></i></a>
+								<form th:action="@{/companies/delete.html}" method="post" style="display: inline;">
+									<input type="hidden" th:value="${company.id}" th:name="companyId"/>
+									<button type="submit" class="btn btn-xs btn-flat btn-danger" th:title="#{tooltip.delete_company}">
+										<i class="fa fa-trash"></i>
+									</button>
+								</form>
+							</td>
+						</tr>
 						</tbody>
 					</table>
 				</div>
@@ -57,25 +64,36 @@
 
 <th:block layout:fragment="page-scripts">
 	<script type="text/javascript" th:inline="javascript">
-		$(document).ready(function() {
-			
-				$(document).on('click', '.editCompanyBtn', function () {
-						var id = $(this).attr("data-id");
-						document.location=[[@{/companies/}]]+id+'/edit.html';
-				});
+      $(document).ready(function () {
 
-			
-			 $('#datatables-browser').DataTable({
-				"order": [[ 0, "desc" ]],
-           "responsive": true,
-           "columnDefs": [{"orderable":false,"targets":4}],
-				"language": {
-		            "url": langURL
-		        }
-			});
-		 
-		});
-		
+          $(document).on('click', '.editCompanyBtn', function () {
+              var id = $(this).attr("data-id");
+              document.location = [[@{/companies/
+          }]]
+              +id + '/edit.html';
+          });
+
+
+          $('#datatables-browser').DataTable({
+              "responsive": {
+                  details: {
+                      type: 'column',
+                      target: 'tr'
+                  }
+              },
+              "columnDefs": [{
+                  className: 'control',
+                  orderable: false,
+                  targets: 4
+              }],
+              "order": [[1, "desc"]],
+              "language": {
+                  "url": langURL
+              }
+          });
+
+      });
+
 	</script>
 </th:block>
 </html>

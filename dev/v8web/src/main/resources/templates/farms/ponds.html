@@ -29,6 +29,7 @@
                       <table id="pondList" class="table table-bordered table-striped table-hover table-farm-staff"
                              style="margin: 10px 0;">
                         <tr>
+                          <th></th>
                           <th th:text="#{farm.pond_number}">farm.pond_number</th>
                           <th th:text="#{default.area}"></th>
                           <th th:text="#{default.unit}"></th>
@@ -38,6 +39,7 @@
                         </tr>
 
                         <tr th:each="pond:${pondListing}">
+                          <td></td>
                           <td th:text="${pond.number}"></td>
                           <td th:text="${pond.size.quantity}"></td>
                           <td th:text="${pond.size.unit.localisedName}"></td>
@@ -244,7 +246,17 @@
           document.getElementById("totalFarmPondSize").innerHTML = totalFarmPondSize;
 
           $('#pondList').DataTable({
-              "responsive": true,
+              "responsive": {
+                  details: {
+                      type: 'column',
+                      target: 'tr'
+                  }
+              },
+              "columnDefs": [{
+                  className: 'control',
+                  orderable: false,
+                  targets: 0
+              }],
               "language": {
                   "url": langURL
               }

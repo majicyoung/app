@@ -23,6 +23,7 @@
 					<table class="table table-hover table-striped table-bordered datatable" id="datatables-plot-activities">
 						<thead>
 							<tr>
+								<th></th>
 								<th th:text="#{farm.plot_activity_start}">farm.plot_activity_start</th>
 								<th th:text="#{farm.plot_activity_name}">farm.plot_activity_name</th>
 								<th th:text="#{farm.plot_activity_value}">farm.plot_activity_value</th>
@@ -33,6 +34,7 @@
 						</thead>
 						<tbody>
 							<tr th:each="act:${activities}">
+								<td></td>
 								<td th:text="${#dates.format(act.activityStartDate,'yyyy-MM-dd HH:mm:ss')}"></td>
 								<td th:text="${act.activityType.localisedName}"></td>
 								<td th:text="${act.measure.quantity}"></td>
@@ -69,8 +71,18 @@
             }
         });
 			$('#datatables-plot-activities').DataTable({
-				"order": [[ 0, "desc" ]],
-          "responsive": true,
+          "responsive": {
+              details: {
+                  type: 'column',
+                  target: 'tr'
+              }
+          },
+          "columnDefs": [{
+              className: 'control',
+              orderable: false,
+              targets: 0
+          }],
+				"order": [[ 1, "desc" ]],
           "language": {
 		            "url": langURL
 		        }

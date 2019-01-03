@@ -23,6 +23,7 @@
 					<table id="plotList" class="table table-hover table-striped table-bordered datatable">
 						<thead>
 						<tr>
+							<th></th>
 							<th th:text="#{default.name}">farm.plot_number</th>
 							<th th:text="#{farm.plot_number}">farm.plot_number</th>
 							<th th:text="#{default.description}">default.description</th>
@@ -34,6 +35,7 @@
 						</thead>
 						<tbody>
 						<tr th:each="plot:${listing}">
+							<td></td>
 							<td th:text="${plot.farm}"></td>
 							<td th:text="${plot.number}"></td>
 							<td th:text="${plot.description}"></td>
@@ -72,8 +74,18 @@
       $(document).ready(function () {
 
           $('#plotList').DataTable({
+              "responsive": {
+                  details: {
+                      type: 'column',
+                      target: 'tr'
+                  }
+              },
+              "columnDefs": [{
+                  className: 'control',
+                  orderable: false,
+                  targets: 0
+              }],
               "order": [[1, "asc"]],
-              "responsive": true,
               "language": {
                   "url": langURL
               }

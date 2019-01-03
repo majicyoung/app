@@ -20,6 +20,7 @@
 					<table class="table table-hover table-striped table-bordered datatable" id="datatables-browser">
 						<thead>
 							<tr>
+								<th></th>
 								<th th:text="#{individual.registration_number}">individual.number</th>
                                 <th th:text="#{default.name}">individual.name</th>
 								<th th:text="#{default.phone}">default.phone</th>
@@ -31,6 +32,7 @@
 						</thead>
 						<tbody>
 							<tr th:each="individual:${listing}">
+								<td></td>
 								<td th:text="${individual.registrationNumber}"></td>
 								<td th:text="${individual.name}"></td>
 								<td th:text="${individual.phoneNumber}"></td>
@@ -68,9 +70,18 @@
 
 			
 			 $('#datatables-browser').DataTable({
-				"order": [[ 0, "desc" ]],
-           "responsive": true,
-           "columnDefs": [{"orderable":false,"targets":4}],
+           "responsive": {
+               details: {
+                   type: 'column',
+                   target: 'tr'
+               }
+           },
+           "columnDefs": [{
+               className: 'control',
+               orderable: false,
+               targets: 0
+           }],
+				"order": [[ 1, "desc" ]],
 				"language": {
 		            "url": langURL
 		        }

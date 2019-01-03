@@ -70,6 +70,7 @@
 															 class="table table-hover table-striped table-bordered datatable order-column">
 													<thead>
 													<tr>
+														<th></th>
 														<th th:text="#{farm.user_id}"></th>
 														<th th:text="#{farm.user_email}"></th>
 														<th th:text="#{farm.user_name}"></th>
@@ -78,6 +79,7 @@
 													</thead>
 													<tbody>
 													<tr th:each="user:${dto.sysUserStats}">
+														<td></td>
 														<td th:text="${user.id}"></td>
 														<td th:text="${user.sysUser.email}"></td>
 														<td th:text="${user.sysUser.name}"></td>
@@ -101,6 +103,7 @@
 															 class="table table-hover table-striped table-bordered datatable order-column">
 													<thead>
 													<tr>
+														<th></th>
 														<th th:text="#{farm.activity_id}"></th>
 														<th th:text="#{farm.activity_name}"></th>
 														<th th:text="#{farm.activity_date}"></th>
@@ -109,6 +112,7 @@
 													</thead>
 													<tbody>
 													<tr th:each="activity:${dto.sysUserStatActivities}">
+														<td></td>
 														<td th:text="${activity.id}"></td>
 														<td th:text="${activity.sysUser.name}"></td>
 														<td th:text="${activity.dtFarmPondActivity.activityStartDate}" th:if="${activity.dtFarmPondActivity != null}"></td>
@@ -144,8 +148,18 @@
       /*<![CDATA[*/
       $(document).ready(function () {
           $('.datatable').DataTable({
-              "responsive": false,
-              "order": [[3, "desc"]],
+              "responsive": {
+                  details: {
+                      type: 'column',
+                      target: 'tr'
+                  }
+              },
+              "columnDefs": [{
+                  className: 'control',
+                  orderable: false,
+                  targets: 0
+              }],
+              "order": [[5, "desc"]],
               "language": {
                   "url": langURL
               }
