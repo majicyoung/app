@@ -1,21 +1,11 @@
 package com.fairagora.verifik8.v8web.data.domain.dt;
 
 import java.util.Date;
+import java.util.Set;
 
-import javax.persistence.AssociationOverride;
-import javax.persistence.AssociationOverrides;
-import javax.persistence.AttributeOverride;
-import javax.persistence.AttributeOverrides;
-import javax.persistence.Column;
-import javax.persistence.Embedded;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
+import com.fairagora.verifik8.v8web.data.domain.sys.SysUserStatActivity;
 import org.hibernate.annotations.NotFound;
 import org.hibernate.annotations.NotFoundAction;
 
@@ -69,10 +59,6 @@ public class DTFarmPondActivity extends V8EntitySupport {
 			@AssociationOverride(name = "unit", joinColumns = @JoinColumn(name = "CL_ADDITIONNAL_MEASURE_VALUE_UNIT_ID")) })
 	protected V8Measure additionalMeasure;
 
-
-
-
-	
 	@Column(name = "FEED_LOT_NUMBER", length = 216)
 	protected String feedLotNumber;
 
@@ -80,6 +66,7 @@ public class DTFarmPondActivity extends V8EntitySupport {
 	@JoinColumn(name = "CL_REF_SPECIES_ID")
 	@NotFound(action = NotFoundAction.IGNORE)
 	protected CLRefSpecies species;
+
 
 	public Long getId() {
 		return id;

@@ -24,23 +24,32 @@ public class V8AuthServerOAuth2Config extends AuthorizationServerConfigurerAdapt
 	
 	@Value("${v8app.url}")
 	private String v8apiUrl;
-
-	// TODO [UKS 2018-06-25] hardcoded for quick setup only
-	static final String CLIENT_ID = "verifik8-client";
-	static final String CLIENT_SECRET = "verifik8-secret";
-	static final String GRANT_TYPE_PASSWORD = "password";
-	static final String AUTHORIZATION_CODE = "authorization_code";
-	static final String REFRESH_TOKEN = "refresh_token";
+	
+	@Value("${oauth.clientId}")
+	private String clientId;
+	
+	@Value("${oauth.clientSecret}")
+	private String clientSecret;
+	
+	@Value("${oauth.grantTypePassword}")
+	private String grantTypePassword;
+	
+	@Value("${oauth.authorizationCode}")
+	private String authorizationCode;
+	
+	@Value("${oauth.refreshToken}")
+	private String refreshToken;
 
 	static final String IMPLICIT = "implicit";
 	static final String SCOPE_READ = "read";
 	static final String SCOPE_WRITE = "write";
 	static final String TRUST = "trust";
-	static final int ACCESS_TOKEN_VALIDITY_SECONDS = 1 * 60 * 60 * 240;
-	static final int REFRESH_TOKEN_VALIDITY_SECONDS = 6 * 60 * 60 * 240;
 
 	@Autowired
 	private DataSource dataSource;
+
+	@Autowired
+	private V8UserDetailsService userDetailsService;
 	    
 	@Bean
 	public TokenStore tokenStore() {
@@ -57,8 +66,8 @@ public class V8AuthServerOAuth2Config extends AuthorizationServerConfigurerAdapt
 	
 	@Override
 	public void configure(ClientDetailsServiceConfigurer configurer) throws Exception {
-		configurer.inMemory().withClient(CLIENT_ID).secret(CLIENT_SECRET)
-				.authorizedGrantTypes(GRANT_TYPE_PASSWORD, AUTHORIZATION_CODE, REFRESH_TOKEN, IMPLICIT)
+		configurer.inMemory().withClient(clientId).secret(clientSecret)
+				.authorizedGrantTypes(grantTypePassword, authorizationCode, refreshToken, IMPLICIT)
 				.scopes(SCOPE_READ, SCOPE_WRITE, TRUST)
 				.accessTokenValiditySeconds(Integer.MAX_VALUE)
 				.refreshTokenValiditySeconds(Integer.MAX_VALUE);
@@ -67,7 +76,7 @@ public class V8AuthServerOAuth2Config extends AuthorizationServerConfigurerAdapt
 	@Override
 	public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
 		endpoints.tokenStore(tokenStore()).authenticationManager(authenticationManager);
-		
+		endpoints.userDetailsService(userDetailsService);
 		endpoints.pathMapping("/oauth/token", "/"+v8apiUrl+"/oauth/token");
 	}
 }
