@@ -82,6 +82,21 @@
 													</div>
 												</div>
 											</div>
+
+											<div class="form-group row">
+												<label class="col-xs-1 control-label"></label>
+												<div class="col-xs-4">
+													<div class="checkbox">
+														<label><input type="checkbox" th:field="*{filtrationSystem}"/><span
+																th:text="#{farm.presence_of_filtration}">farm.presence_of_filtration</span></label>
+													</div>
+												</div>
+												<div class="col-xs-6">
+													<input type="text" class="form-control" id="inputPresenceOfFiltration" th:field="*{filtrationSystemComment}"
+																 th:placeholder="#{farm.presence_of_filtration}" required="required"/>
+												</div>
+											</div>
+
 											<div class="form-group row">
 												<label class="col-xs-1 control-label"></label>
 												<div class="col-xs-4">
@@ -100,7 +115,7 @@
 												</div>
 											</div>
 											<div class="form-group row">
-												<label for="inputFarmRestauration" class="col-xs-4 control-label"
+												<label for="canalRestorationPlanDz" class="col-xs-4 control-label"
 															 th:text="#{farm.canal_restauration_up}">farm.canal_restauration_up</label>
 												<div class="col-xs-8">
 													<div id="canalRestorationPlanDz" class="dropzone float-left"
@@ -108,15 +123,88 @@
 												</div>
 											</div>
 											<div class="form-group row">
-												<label for="inputFarmCumulStudy" class="col-xs-4 control-label"
+												<label for="cumulativeImpaceStudyDz" class="col-xs-4 control-label"
 															 th:text="#{farm.cummulative_study_up}">farm.cummulative_study_up</label>
 												<div class="col-xs-8">
 													<div id="cumulativeImpaceStudyDz" class="dropzone float-left"
 															 th:attr="data-pictures=${farmDto.getCumulativeImpactStudyUrl()}"/>
 												</div>
 											</div>
+
+											<div class="form-group row">
+												<label for="farmWasteOfWaterDz" class="col-xs-4 control-label"><span
+														th:text="#{farm.waste_of_water}">farm.waste_of_water</span></label>
+												<div class="col-xs-8">
+													<div id="farmWasteOfWaterDz" class="dropzone float-left"
+															 th:attr="data-pictures=${farmDto.getDischargeWasteWaterUrl()}"/>
+												</div>
+											</div>
+
+
+											<div class="form-group row">
+												<label class="col-xs-1 control-label"></label>
+												<div class="col-xs-4">
+													<div class="checkbox">
+														<label><input type="checkbox" name="estimate_escape" value="1"/> <span
+																th:text="#{farm.gps_coordinate}">farm.gps_coordinate</span></label>
+													</div>
+												</div>
+												<div class="col-xs-6">
+													<input type="text" class="form-control" id="inputGPSCoordinate" th:field="*{gpsCoordinate}"
+																 th:placeholder="#{farm.gps_coordinate}" required="required"/>
+												</div>
+											</div>
+
 										</div>
 									</div>
+
+									<div class="col-xs-12">
+										<h4 th:text="#{farm.escape_issue}">farm.escape_issue</h4>
+
+										<div class="form-group row">
+											<label for="escapeReportDz" class="col-xs-4 control-label" th:text="#{farm.upload_escape}">farm.upload_escape</label>
+											<div class="col-xs-8">
+												<div id="escapeReportDz" class="dropzone float-left"
+														 th:attr="data-pictures=${farmDto.getEscapeReportUrl()}"/>
+											</div>
+										</div>
+
+										<div class="form-group row">
+											<label class="col-xs-1 control-label"></label>
+											<div class="col-xs-4">
+												<div class="checkbox">
+													<label><input type="checkbox" name="estimate_escape" value="1"/> <span
+															th:text="#{farm.estimate_escape}">farm.estimate_escape</span></label>
+												</div>
+											</div>
+											<div class="col-xs-6">
+													<input type="text" class="form-control" id="inputNumberOfEscape" th:field="*{numberOfEscape}"
+																 th:placeholder="#{farm.estimate_escape}" required="required"/>
+											</div>
+										</div>
+
+										<div class="form-group row">
+											<label class="col-xs-1 control-label"></label>
+											<div class="col-xs-4">
+												<div class="checkbox">
+													<label><input type="checkbox" name="hvh_hasExpansion" value="1"/> <span
+															th:text="#{farm.expansion_in_hvh}">farm.expansion_in_hvh</span></label>
+												</div>
+											</div>
+											<div class="col-xs-4">
+												<select class="form-control" th:field="*{escapePrevention}">
+													<option value="none" th:text="#{farm.escape.none}">none</option>
+													<option value="nets" th:text="#{farm.escape.nets}">nets</option>
+													<option value="fences" th:text="#{farm.escape.fences}">fences</option>
+													<option value="simple screen" th:text="#{farm.escape.simple_screen}">simple screen</option>
+													<option value="double screen" th:text="#{farm.escape.double_screen}">double screen</option>
+													<option value="dry bed filter" th:text="#{farm.escape.dry_bed_filter}">dry bed filter</option>
+												</select>
+											</div>
+										</div>
+
+									</div>
+
 								</div>
 							</div>
 						</div>
@@ -151,6 +239,8 @@
       $("div#sittingProtectedAreaDz").dropzone(initDropzone("/upload", "/deleteimage", "setting_protected_area", $("div#sittingProtectedAreaDz").data('pictures')));
       $("div#canalRestorationPlanDz").dropzone(initDropzone("/upload", "/deleteimage", "canal_restoration_plan", $("div#canalRestorationPlanDz").data('pictures')));
       $("div#cumulativeImpaceStudyDz").dropzone(initDropzone("/upload", "/deleteimage", "cumulative_impace_study", $("div#cumulativeImpaceStudyDz").data('pictures')));
+      $("div#escapeReportDz").dropzone(initDropzone("/upload", "/deleteimage", "escape_report", $("div#escapeReportDz").data('pictures')));
+      $("div#farmWasteOfWaterDz").dropzone(initDropzone("/upload", "/deleteimage", "place_waste_of_water", $("div#farmWasteOfWaterDz").data('pictures')));
 
 
 	</script>

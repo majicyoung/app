@@ -42,6 +42,8 @@ public class FarmsController extends AbstractV8Controller {
 	private static final String TYPE_ENVIRONMENTAL_SITTING_PROTECTED_AREA = "setting_protected_area";
 	private static final String TYPE_ENVIRONMENTAL_CANAL_RESTORATION_PLAN = "canal_restoration_plan";
 	private static final String TYPE_ENVIRONMENTAL_CUMULATIVE_IMPACE_STUDY = "cumulative_impace_study";
+	private static final String TYPE_ENVIRONMENTAL_ESCAPE_REPORT = "escape_report";
+	private static final String TYPE_ENVIRONMENTAL_PLACE_WASTED_WATER = "place_waste_of_water";
 
 	@Autowired
 	private CLAppQuantityUnitRepository quantityUnitRepository;
@@ -72,6 +74,8 @@ public class FarmsController extends AbstractV8Controller {
 	private Map<String, RegPicture> sittingProtectedAreaAttachments;
 	private Map<String, RegPicture> canalRestorationPlanAttachments;
 	private Map<String, RegPicture> cumulativeImpaceStudyAttachments;
+	private Map<String, RegPicture> escapeReportAttachments;
+	private Map<String, RegPicture> wastedWaterAttachments;
 
 
 	@PreAuthorize("hasAuthority('R_FARMLIST')")
@@ -204,6 +208,16 @@ public class FarmsController extends AbstractV8Controller {
 			cumulativeImpaceStudyAttachments.put(regPicture.getResourcePath(), regPicture);
 		}
 
+		escapeReportAttachments = new HashMap<>();
+		for (RegPicture regPicture : regEntityFarmDetails.getEscapeReports()) {
+			escapeReportAttachments.put(regPicture.getResourcePath(), regPicture);
+		}
+
+		wastedWaterAttachments = new HashMap<>();
+		for (RegPicture regPicture : regEntityFarmDetails.getPlaceOfWastedWater()) {
+			wastedWaterAttachments.put(regPicture.getResourcePath(), regPicture);
+		}
+
 		prepareForFarmEdition(id, dto, mv);
 		mv.addAttribute("farmName", jdbc.queryForObject("SELECT name FROM reg_entities WHERE id=" + id, String.class));
 		return "farms/environmental";
@@ -232,6 +246,8 @@ public class FarmsController extends AbstractV8Controller {
 		if (sittingProtectedAreaAttachments != null) farmDetails.setSittingProtectedAreaDocs(new ArrayList<>(sittingProtectedAreaAttachments.values()));
 		if (canalRestorationPlanAttachments != null) farmDetails.setCanalRestorationPlans(new ArrayList<>(canalRestorationPlanAttachments.values()));
 		if (cumulativeImpaceStudyAttachments != null) farmDetails.setCumulativeImpactStudies(new ArrayList<>(cumulativeImpaceStudyAttachments.values()));
+		if (escapeReportAttachments != null) farmDetails.setEscapeReports(new ArrayList<>(escapeReportAttachments.values()));
+		if (wastedWaterAttachments != null) farmDetails.setPlaceOfWastedWater(new ArrayList<>(wastedWaterAttachments.values()));
 
 		regEntityFarmDetailsRepository.save(farmDetails);
 		// TODO: save files !
@@ -429,6 +445,12 @@ public class FarmsController extends AbstractV8Controller {
 			case TYPE_ENVIRONMENTAL_CUMULATIVE_IMPACE_STUDY:
 				this.cumulativeImpaceStudyAttachments.remove(filename);
 				break;
+			case TYPE_ENVIRONMENTAL_ESCAPE_REPORT:
+				this.escapeReportAttachments.remove(filename);
+				break;
+			case TYPE_ENVIRONMENTAL_PLACE_WASTED_WATER:
+				this.wastedWaterAttachments.remove(filename);
+				break;
 		}
 
 		return "redirect:/";
@@ -461,6 +483,12 @@ public class FarmsController extends AbstractV8Controller {
 				break;
 			case TYPE_ENVIRONMENTAL_CUMULATIVE_IMPACE_STUDY:
 				this.cumulativeImpaceStudyAttachments.put(file.getOriginalFilename(), regPicture);
+				break;
+			case TYPE_ENVIRONMENTAL_ESCAPE_REPORT:
+				this.escapeReportAttachments.put(file.getOriginalFilename(), regPicture);
+				break;
+			case TYPE_ENVIRONMENTAL_PLACE_WASTED_WATER:
+				this.wastedWaterAttachments.put(file.getOriginalFilename(), regPicture);
 				break;
 		}
 
