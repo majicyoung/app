@@ -4,3 +4,5 @@ ALTER TABLE `cl_ref_products`
     FOREIGN KEY (`REG_ENTITY_PRODUCT_SUPPLIER_ID`) REFERENCES `reg_entity_product_suppliers` (`ID`);
 
 ALTER TABLE `cl_columns` ADD `REG_ENTITY_PRODUCT_SUPPLER_ID` BOOLEAN DEFAULT FALSE;
+
+UPDATE `cl_columns` set `REG_ENTITY_PRODUCT_SUPPLER_ID` = true WHERE `TABLE_NAME` = 'cl_ref_products';
