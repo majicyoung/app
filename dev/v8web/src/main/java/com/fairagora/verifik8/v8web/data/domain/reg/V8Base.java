@@ -9,10 +9,6 @@ import javax.persistence.MappedSuperclass;
 import javax.persistence.PrePersist;
 import javax.persistence.Transient;
 
-import com.fairagora.verifik8.v8web.config.technical.auth.V8LoggedUser;
-
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 import com.fairagora.verifik8.v8web.data.domain.sys.SYSUser;
