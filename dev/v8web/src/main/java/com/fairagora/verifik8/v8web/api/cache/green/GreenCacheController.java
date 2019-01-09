@@ -87,11 +87,6 @@ public class GreenCacheController extends AbstractV8Controller {
 		List<PlotListingDto> ponds = farmService.listAllPlotsForLoggedUser(getLoggedUser()).stream().map(p -> regFarmDtoMapper.toListing(p)).collect(Collectors.toList());
 
 		SYSUser user = userService.getUserByEmail();
-		Map<String, Object> userFilter = new HashMap<>();
-		userFilter.put("email", user.getEmail());
-		userFilter.put("id", user.getId());
-		userFilter.put("name", user.getName());
-		userFilter.put("role", user.getRole());
 
 		List<CustomProducts> listProducts = new ArrayList<>();
 		List<CustomProducts> products = clRefProductRepository.getProductAndFarmPondActivityId();
@@ -121,7 +116,7 @@ public class GreenCacheController extends AbstractV8Controller {
 		cacheMap.put("ponds", ponds);
 		cacheMap.put("products", listProducts);
 		cacheMap.put("quantityUnits", quantityUnits);
-		cacheMap.put("user", userFilter);
+		cacheMap.put("user", user);
 		cacheMap.put("tilingActivityType", tilingActivityType);
 		cacheMap.put("activitySettings", listPlotdActivitySettings());
 		cacheMap.put("employees", listStaff);
