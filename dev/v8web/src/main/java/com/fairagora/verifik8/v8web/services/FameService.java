@@ -80,6 +80,7 @@ public class FameService {
 		SysUserStatActivity sysUserStatActivity = new SysUserStatActivity();
 		sysUserStatActivity.setSysUser(sysUser);
 		sysUserStatActivity.setDtFarmPondActivity(dtFarmPondActivity.getId());
+		sysUserStatActivity.setSource(this.getSource(request));
 		sysUserStatActivityRepository.save(sysUserStatActivity);
 	}
 
@@ -87,6 +88,7 @@ public class FameService {
 		SysUserStatActivity sysUserStatActivity = new SysUserStatActivity();
 		sysUserStatActivity.setSysUser(sysUser);
 		sysUserStatActivity.setDtFarmPlotActivity(dtFarmPlotActivity.getId());
+		sysUserStatActivity.setSource(this.getSource(request));
 		sysUserStatActivityRepository.save(sysUserStatActivity);
 	}
 	

@@ -46,6 +46,7 @@ CREATE TABLE `sys_users_stats_activity`
 (
   `ID`              int(11)   NOT NULL AUTO_INCREMENT,
   `SYS_USER_ID`     int(11)   NOT NULL,
+  `SOURCE`          varchar(45) NOT NULL,
   `ID_ADDRESS`      varchar(45) COLLATE utf8_bin   DEFAULT NULL,
   `PLOT_ACTIVITY_ID` int(11),
   `POND_ACTIVITY_ID` int(11),
