@@ -14,6 +14,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextListener;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.Date;
 import java.util.List;
 
@@ -93,16 +95,14 @@ public class FameService {
 	}
 	
 	private String getClientIp(HttpServletRequest request) {
-		String remoteAddr = "";
-		
-		if (request != null) {
-			remoteAddr = request.getHeader("X-FORWARDED-FOR");
-			if (remoteAddr == null || "".equals(remoteAddr)) {
-				remoteAddr = request.getRemoteAddr();
-			}
+		InetAddress inetAddress = null;
+		try {
+			inetAddress = InetAddress.getLocalHost();
+		} catch (UnknownHostException e) {
+			e.printStackTrace();
 		}
 		
-		return remoteAddr;
+		return inetAddress.getHostAddress();
 	}
 
 }
