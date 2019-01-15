@@ -97,7 +97,7 @@ public class FameService {
 	private String getClientIp(HttpServletRequest request) {
 		InetAddress inetAddress = null;
 		try {
-			inetAddress = InetAddress.getLocalHost();
+			inetAddress = InetAddress.getByName(request.getServerName());
 		} catch (UnknownHostException e) {
 			e.printStackTrace();
 		}
