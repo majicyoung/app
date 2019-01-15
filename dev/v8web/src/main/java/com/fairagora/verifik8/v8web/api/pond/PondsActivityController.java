@@ -8,12 +8,16 @@ import com.fairagora.verifik8.v8web.data.repo.reg.RegEntityFarmPondRepository;
 import com.fairagora.verifik8.v8web.mvc.AbstractV8Controller;
 import com.fairagora.verifik8.v8web.mvc.farms.RegFarmDTOMapper;
 import com.fairagora.verifik8.v8web.mvc.ponds.dto.PondActivityDto;
+import com.fairagora.verifik8.v8web.services.FameService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 @RequestMapping("blue")
 @RestController
@@ -27,6 +31,9 @@ public class PondsActivityController extends AbstractV8Controller {
 
 	@Autowired
 	private RegFarmDTOMapper dtoMapper;
+	
+	@Autowired
+	private FameService fameService;
 
 	@GetMapping(path = "/activities")
 	public ResponseEntity<?> showPondActivities() {
@@ -36,7 +43,7 @@ public class PondsActivityController extends AbstractV8Controller {
 	}
 
 	@PostMapping(path = "/ponds/{pondId}/activity")
-	public ResponseEntity<?> createPondActivity(@PathVariable("pondId") Long pondId, PondActivityDto dto) {
+	public ResponseEntity<?> createPondActivity(@PathVariable("pondId") Long pondId, PondActivityDto dto, HttpServletRequest req) {
 		DTFarmPondActivity act = null;
 		
 		if(dto.getProduct() == null || dto.getProduct().intValue() == 0) {
@@ -56,6 +63,8 @@ public class PondsActivityController extends AbstractV8Controller {
 		act.setPond(farmPondRepository.findOne(pondId));
 
 		pondActivityRepository.save(act);
+		
+		fameService.saveLatestFarmPondActivity(loggedUser(req), act);
 
 		return new ResponseEntity<Object>(act, HttpStatus.CREATED);
 	}

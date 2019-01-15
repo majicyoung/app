@@ -23,8 +23,7 @@ public class SysUserStatActivity  extends V8EntitySupport {
 	@ManyToOne(targetEntity = SYSUser.class, fetch = FetchType.EAGER)
 	@JoinColumn(nullable = false, name = "SYS_USER_ID")
 	protected SYSUser sysUser;
-
-
+	
 //	@ManyToOne()
 //	@JoinColumn(name = "DT_FARM_PLOT_ACTIVITY_ID")
 //	@NotFound(action = NotFoundAction.IGNORE)

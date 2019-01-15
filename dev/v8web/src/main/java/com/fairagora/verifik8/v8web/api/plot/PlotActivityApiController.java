@@ -11,6 +11,8 @@ import com.fairagora.verifik8.v8web.data.repo.reg.RegEntityFarmPlotRepository;
 import com.fairagora.verifik8.v8web.mvc.AbstractV8Controller;
 import com.fairagora.verifik8.v8web.mvc.farms.RegFarmDTOMapper;
 import com.fairagora.verifik8.v8web.mvc.plots.dto.PlotActivityDto;
+import com.fairagora.verifik8.v8web.services.FameService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +20,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 @RequestMapping("green")
 @RestController
@@ -37,9 +41,12 @@ public class PlotActivityApiController extends AbstractV8Controller {
 
 	@Autowired
 	private CLAppQuantityUnitRepository clAppQuantityUnitRepository;
+	
+	@Autowired
+	private FameService fameService;
 
 	@PostMapping(value = "/ponds/{plotId}/activity")
-	public ResponseEntity<?> createPlotActivities(@PathVariable("plotId") Long plotId, PlotActivityDto dto) {
+	public ResponseEntity<?> createPlotActivities(@PathVariable("plotId") Long plotId, PlotActivityDto dto, HttpServletRequest req) {
 		DTFarmPlotActivity act = null;
 		
 		if(dto.getProduct() == null || dto.getProduct().intValue() == 0) {
@@ -59,6 +66,8 @@ public class PlotActivityApiController extends AbstractV8Controller {
 		act.setPlot(farmPlotRepository.findOne(plotId));
 
 		plotActivityRepository.save(act);
+		
+		fameService.saveLatestFarmPlotActivity(loggedUser(req), act);
 
 		return new ResponseEntity<Object>(act, HttpStatus.CREATED);
 	}
