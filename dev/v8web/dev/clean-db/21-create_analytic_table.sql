@@ -32,7 +32,7 @@ CREATE TABLE `sys_users_stats`
   `CONNECTION_TIME` timestamp NOT NULL,
   `USER_IP_ADDRESS` varchar(256) NOT NULL,
   `USER_AGENT`      varchar(1024) NOT NULL,
-  `SOURCE`    varchar(256) NOT NULL,
+  `SOURCE`          varchar(256) NOT NULL,
   `UPDATER_ID`      int(11)   NOT NULL             DEFAULT '0',
   `COMMENT`         varchar(1024) COLLATE utf8_bin DEFAULT NULL,
   `CREATED_AT`      timestamp NOT NULL             DEFAULT CURRENT_TIMESTAMP,
