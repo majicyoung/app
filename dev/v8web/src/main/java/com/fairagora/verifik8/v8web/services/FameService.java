@@ -91,7 +91,7 @@ public class FameService {
 	}
 	
 	private String getSource(HttpServletRequest request) {
-		return request.getHeader("User-Agent").indexOf("Mobile") != -1 ? "mobile" : "backend";
+		return request.getServerName().contains("api") ? "mobile" : "backend";
 	}
 	
 	private String getClientIp(HttpServletRequest request) {
