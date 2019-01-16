@@ -62,6 +62,15 @@ Now, request http://localhost:9250 from browser.
 
 Updated Data : Blue Verifik8 database
 
+1.insert_cl_app_measure_types
+```sql
+
+INSERT INTO `cl_app_measure_types` (`ID`, `ENABLED`, `CODE`, `RANKING`, `NAME`, `DESCRIPTION`, `I18n_DEFAULT`, `I18N_EN`, `I18N_FR`, `I18N_ES`, `I18N_TH`, `I18N_VT`, `I18N_LA`, `I18N_ID`, `I18N_KH`, `UPDATER_ID`, `COMMENT`, `CREATED_AT`, `UPDATED_AT`) VALUES
+(6, 1, 'Nitrite', 1, 'Nitrite', 'Nitrite', 'Nitrite', 'Nitrite', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, '2019-01-14 04:07:08', '2019-01-14 04:07:08'),
+(7, 1, 'Phosphate', 1, 'Phosphate', 'Phosphate', 'Phosphate', 'Phosphate', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, '2019-01-16 04:20:27', '2019-01-16 04:20:27');
+
+```
+
 ```sql
 INSERT INTO `cl_ref_products` (`ID`, `ENABLED`, `CODE`, `RANKING`, `NAME`, `DESCRIPTION`, `I18n_DEFAULT`, `I18N_EN`, `I18N_FR`, `I18N_ES`, `I18N_TH`, `I18N_VT`, `I18N_LA`, `I18N_ID`, `I18N_KH`, `CL_PRODUCTS_TYPE_ID`, `CL_RECOMMAND_UNIT_ID`, `UPDATER_ID`, `COMMENT`, `CREATED_AT`, `UPDATED_AT`) VALUES
 (6, 1, 'FERT', 1, 'Fertilizers', 'Fertilizers', 'Fertilizers', 'Fertilizers', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 50, 2, 1, NULL, '2018-08-28 07:34:56', '2018-08-28 07:34:56'),
