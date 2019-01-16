@@ -18,5 +18,13 @@
 	{
 		"id": 17,
 		"name": "temperature"
+	},
+	{
+		"id": 20,
+		"name": "nitrite"
+	},
+	{
+		"id": 20,
+		"name": "phosphate"
 	}
 ]
