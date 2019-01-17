@@ -2,6 +2,8 @@ package com.fairagora.verifik8.v8web.mvc.admin;
 
 import com.fairagora.verifik8.v8web.data.domain.reg.product.RegEntityProductSupplier;
 import com.fairagora.verifik8.v8web.data.repo.cl.CLAppAdministrativeCharacteristicTypeRepository;
+import com.fairagora.verifik8.v8web.data.repo.cl.CLAppQuantityUnitRepository;
+import com.fairagora.verifik8.v8web.data.repo.cl.CLRefProductTypesRepository;
 import com.fairagora.verifik8.v8web.data.repo.reg.RegEntityProductSupplierRepository;
 import com.fairagora.verifik8.v8web.data.repo.reg.RegEntityRepository;
 import com.fairagora.verifik8.v8web.mvc.admin.dto.CLColumnDto;
@@ -40,6 +42,11 @@ public class AdminController extends AbstractV8Controller {
 
     @Autowired
     protected RegEntityRepository regEntityRepository;
+
+    @Autowired
+    protected CLRefProductTypesRepository clRefProductTypesRepository;
+    @Autowired
+    protected CLAppQuantityUnitRepository clAppQuantityUnitRepository;
 
     @RequestMapping(value = "/admin/admin.html", method = RequestMethod.GET)
     public String adminPage(Model mv) {
@@ -196,6 +203,8 @@ public class AdminController extends AbstractV8Controller {
         mv.addAttribute("clColumnDto", clColumnDto);
         mv.addAttribute("clDto", clDto);
         mv.addAttribute("regEntity", regEntityRepository.findPruductSupplier());
+        mv.addAttribute("clRefProductTypes", clRefProductTypesRepository.findAll());
+        mv.addAttribute("clAppQuantityUnit", clAppQuantityUnitRepository.findAll());
     }
 
     /****************** Sub page *****************/

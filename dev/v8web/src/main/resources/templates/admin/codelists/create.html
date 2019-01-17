@@ -260,9 +260,11 @@
                             <div class="col-md-12 col-sm-12 col-xs-12">
                                 <div class="form-group">
                                     <label th:text="#{cl.column.clAppConstructionLocationType}">cl.column.clAppConstructionLocationType</label>
-                                    <input type="text" class="form-control"
-                                           th:placeholder="#{cl.column.clAppConstructionLocationType}"
-                                           th:field="*{clAppConstructionLocationType}"/>
+                                    <select class="form-control" th:field="*{clAppConstructionLocationType}">
+                                        <option value="" th:text="#{cl.column.clAppConstructionLocationType}"></option>
+                                        <option th:each="quantityUnit : ${clAppQuantityUnit}" th:value="${quantityUnit.id}"
+                                                th:text="${quantityUnit.name}"></option>
+                                    </select>
                                 </div>
                             </div>
                         </div>
@@ -306,9 +308,11 @@
                             <div class="col-md-12 col-sm-12 col-xs-12">
                                 <div class="form-group">
                                     <label th:text="#{cl.column.clProductsTypeId}">cl.column.clProductsTypeId</label>
-                                    <input type="text" class="form-control"
-                                           th:placeholder="#{cl.column.clProductsTypeId}"
-                                           th:field="*{clRefProductType}"/>
+                                    <select class="form-control" th:field="*{clRefProductType}">
+                                        <option value="" th:text="#{cl.column.clProductsTypeId}"></option>
+                                        <option th:each="productTypes : ${clRefProductTypes}" th:value="${productTypes.id}"
+                                                th:text="${productTypes.name}"></option>
+                                    </select>
                                 </div>
                             </div>
                         </div>
