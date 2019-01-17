@@ -127,8 +127,8 @@ public class CLColumn {
     @Column(name = "CL_VALUE_QUANTITY_UNIT_ID")
     protected boolean clValueQuantityUnitId;
 
-    @Column(name = "REG_ENTITY_PRODUCT_SUPPLER_ID")
-    protected boolean regEntityProductSupplierId;
+    @Column(name = "REG_ENTITY_ID")
+    protected boolean regEntityId;
 
 
     public String getTableName() {
@@ -451,11 +451,11 @@ public class CLColumn {
         this.clValueQuantityUnitId = clValueQuantityUnitId;
     }
 
-    public boolean isRegEntityProductSupplierId() {
-        return regEntityProductSupplierId;
+    public boolean isRegEntityId() {
+        return regEntityId;
     }
 
-    public void setRegEntityProductSupplierId(boolean regEntityProductSupplierId) {
-        this.regEntityProductSupplierId = regEntityProductSupplierId;
+    public void setRegEntityId(boolean regEntityId) {
+        this.regEntityId = regEntityId;
     }
 }

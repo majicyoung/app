@@ -3,6 +3,7 @@ package com.fairagora.verifik8.v8web.mvc.admin;
 import com.fairagora.verifik8.v8web.data.domain.reg.product.RegEntityProductSupplier;
 import com.fairagora.verifik8.v8web.data.repo.cl.CLAppAdministrativeCharacteristicTypeRepository;
 import com.fairagora.verifik8.v8web.data.repo.reg.RegEntityProductSupplierRepository;
+import com.fairagora.verifik8.v8web.data.repo.reg.RegEntityRepository;
 import com.fairagora.verifik8.v8web.mvc.admin.dto.CLColumnDto;
 import com.fairagora.verifik8.v8web.mvc.admin.dto.CLDto;
 import com.fairagora.verifik8.v8web.mvc.admin.dto.SYSSubPageDto;
@@ -38,7 +39,7 @@ public class AdminController extends AbstractV8Controller {
     protected CLAppAdministrativeCharacteristicTypeRepository clAppAdministrativeCharacteristicTypeRepository;
 
     @Autowired
-    protected RegEntityProductSupplierRepository regEntityProductSupplierRepository;
+    protected RegEntityRepository regEntityRepository;
 
     @RequestMapping(value = "/admin/admin.html", method = RequestMethod.GET)
     public String adminPage(Model mv) {
@@ -194,7 +195,7 @@ public class AdminController extends AbstractV8Controller {
         mv.addAttribute("newEntity", table.equals("cl_ref_languages_countries") ? (clDto.getClLanguageId() == null && clDto.getClCountryId() == null) : clDto.getId() == null);
         mv.addAttribute("clColumnDto", clColumnDto);
         mv.addAttribute("clDto", clDto);
-        mv.addAttribute("regEntityProductSupplier", regEntityProductSupplierRepository.findAll());
+        mv.addAttribute("regEntity", regEntityRepository.findPruductSupplier());
     }
 
     /****************** Sub page *****************/

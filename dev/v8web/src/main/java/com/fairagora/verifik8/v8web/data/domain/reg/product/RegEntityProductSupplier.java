@@ -28,9 +28,7 @@ public class RegEntityProductSupplier extends V8EntitySupport {
 	@JoinColumn(name = "ENTITY_ID")
 	protected RegEntity entity;
 
-	@OneToMany(mappedBy="regEntityProductSupplier", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JsonBackReference
-	protected List<CLRefProduct> clRefProducts;
+
 
 	public Long getId() {
 		return id;
@@ -53,11 +51,4 @@ public class RegEntityProductSupplier extends V8EntitySupport {
 		this.entity = entity;
 	}
 
-	public List<CLRefProduct> getClRefProducts() {
-		return clRefProducts;
-	}
-
-	public void setClRefProducts(List<CLRefProduct> clRefProducts) {
-		this.clRefProducts = clRefProducts;
-	}
 }

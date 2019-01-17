@@ -133,8 +133,8 @@
                             <th th:if="${column.clValueMeasureUnitId==true}" th:text="#{cl.column.clValueMeasureUnitId}"
                                 th:inline="text">clValueMeasureUnitId
                             </th>
-                            <th th:if="${column.regEntityProductSupplierId==true}" th:text="#{cl.column.regEntityProductSupplierId}"
-                                th:inline="text">regEntityProductSupplierId
+                            <th th:if="${column.regEntityId==true}" th:text="#{cl.column.regEntityId}"
+                                th:inline="text">regEntityId
                             </th>
                             <th th:inline="text"></th>
 
@@ -226,8 +226,8 @@
                             <td th:if="${column.clValueMeasureUnitId==true}" th:text="${data.clValueMeasureUnitId}">
                                 [[${data.clValueMeasureUnitId}]]
                             </td>
-                            <td th:if="${column.regEntityProductSupplierId==true}" th:text="${data.regEntityProductSupplier}">
-                                [[${data.regEntityProductSupplier}]]
+                            <td th:if="${column.regEntityId==true}" th:text="${data.regEntity}">
+                                [[${data.regEntity}]]
                             </td>
 
 

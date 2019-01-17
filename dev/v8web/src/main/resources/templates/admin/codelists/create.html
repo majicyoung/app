@@ -371,14 +371,14 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row" th:if="${clColumnDto.regEntityProductSupplierId==true}">
+                        <div class="row" th:if="${clColumnDto.regEntityId==true}">
                             <div class="col-md-12 col-sm-12 col-xs-12">
                                 <div class="form-group">
-                                    <label th:text="#{cl.column.regEntityProductSupplierId}">cl.column.clValueQuantityUnitId</label>
-                                    <select class="form-control" th:field="*{regEntityProductSupplier}">
-                                        <option value="" th:text="#{cl.column.regEntityProductSupplierId}"></option>
-                                        <option th:each="productSupplier : ${regEntityProductSupplier}" th:value="${productSupplier.id}"
-                                                th:text="${productSupplier.comment}"></option>
+                                    <label th:text="#{cl.column.regEntityId}">cl.column.regEntityId</label>
+                                    <select class="form-control" th:field="*{regEntity}">
+                                        <option value="" th:text="#{cl.column.regEntityId}"></option>
+                                        <option th:each="productSupplier : ${regEntity}" th:value="${productSupplier.id}"
+                                                th:text="${productSupplier.name}"></option>
                                     </select>
                                 </div>
                             </div>

@@ -85,7 +85,7 @@ public class CLColumnDto {
 
     protected boolean clValueQuantityUnitId;
 
-    protected boolean regEntityProductSupplierId;
+    protected boolean regEntityId;
 
     public String getTableName() {
         return tableName;
@@ -415,11 +415,11 @@ public class CLColumnDto {
         this.clValueQuantityUnitId = clValueQuantityUnitId;
     }
 
-    public boolean isRegEntityProductSupplierId() {
-        return regEntityProductSupplierId;
+    public boolean isRegEntityId() {
+        return regEntityId;
     }
 
-    public void setRegEntityProductSupplierId(boolean regEntityProductSupplierId) {
-        this.regEntityProductSupplierId = regEntityProductSupplierId;
+    public void setRegEntityId(boolean regEntityId) {
+        this.regEntityId = regEntityId;
     }
 }
