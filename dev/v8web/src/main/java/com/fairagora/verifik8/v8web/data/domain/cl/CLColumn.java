@@ -10,6 +10,9 @@ public class CLColumn {
     @Column(name = "TABLE_NAME")
     protected String tableName;
 
+    @Column(name = "TABLE_DESCRIPTION")
+    protected String tableDescription;
+
     @Column(name = "ID")
     protected boolean id;
 
@@ -137,6 +140,14 @@ public class CLColumn {
 
     public void setTableName(String tableName) {
         this.tableName = tableName;
+    }
+
+    public String getTableDescription() {
+        return tableDescription;
+    }
+
+    public void setTableDescription(String tableDescription) {
+        this.tableDescription = tableDescription;
     }
 
     public boolean isId() {

@@ -22,6 +22,9 @@
                             <th th:text="#{admin.referenceDataManagement.tableName}">
                                 admin.referenceDataManagement.tableName
                             </th>
+                            <th th:text="#{admin.referenceDataManagement.tableDescription}">
+                                admin.referenceDataManagement.tableDescription
+                            </th>
                             <th></th>
                         </tr>
                         </thead>
@@ -29,6 +32,7 @@
                         <tr th:each="table : ${allTables}">
                             <td></td>
                             <td th:inline="text">[[${table.tableName}]]</td>
+                            <td th:inline="text">[[${table.tableDescription}]]</td>
                             <td align="center">
                                 <a th:href="@{'/admin/codelists/browser/'+${table.tableName}}"
                                    class="btn btn-sm btn-flat btn-primary"><i class="fa fa-edit"></i></a>

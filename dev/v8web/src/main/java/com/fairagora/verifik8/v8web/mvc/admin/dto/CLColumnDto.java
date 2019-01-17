@@ -4,6 +4,8 @@ public class CLColumnDto {
 
     protected String tableName;
 
+    protected String tableDescription;
+
     protected boolean id;
 
     protected boolean enabled;
@@ -93,6 +95,14 @@ public class CLColumnDto {
 
     public void setTableName(String tableName) {
         this.tableName = tableName;
+    }
+
+    public String getTableDescription() {
+        return tableDescription;
+    }
+
+    public void setTableDescription(String tableDescription) {
+        this.tableDescription = tableDescription;
     }
 
     public boolean isId() {
