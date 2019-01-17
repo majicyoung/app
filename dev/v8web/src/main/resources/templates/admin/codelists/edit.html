@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html layout:decorator="inc/main-layout" xmlns:th="http://www.thymeleaf.org"
+			xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<div layout:fragment="content">
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="box" id="user-box">
+				<div class="box-header with-border">
+					<h3 class="box-title" th:text="#{cl.edit}">cl.edit</h3>
+					<div class="box-tools">
+						<a th:href="@{'/admin/codelists/browser/'}"
+							 class="btn btn-sm btn-flat btn-warning"><i
+								class="fa fa-backward"></i> <span th:text="#{default.back}"></span></a>
+					</div>
+				</div>
+				<!--<form role="form" class="mainForm"-->
+							<!--th:action="@{'/admin/codelists/browser/'}"-->
+							<!--th:object="${clDto}" method="post" autocomplete="off"-->
+							<!--onsubmit="return !hasEmptyFields('#user-box form .form-control[required]');">-->
+
+					<!--<div class="box-footer text-center">-->
+						<!--<small th:text="'*'+#{default.mandatory_field}">*default.mandatory_field</small>-->
+						<!--<a th:href="@{'/admin/codelists/browser/'+${table}}" class="btn btn-warning"><i-->
+								<!--class="fa fa-times"></i>-->
+							<!--<span th:text="#{default.cancel}">default.cancel</span></a>-->
+
+						<!--<button type="submit" class="btn btn-success">-->
+							<!--<span th:text="#{default.submit}">default.submit</span> <i class="fa fa-check"></i>-->
+						<!--</button>-->
+					<!--</div>-->
+				<!--</form>-->
+			</div>
+		</div>
+	</div>
+</div>
+
+</html>

@@ -60,6 +60,7 @@ public class AdminController extends AbstractV8Controller {
         return "admin/admin";
     }
 
+
     /****************** CL management *****************/
 
     @PreAuthorize("hasAuthority('R_CLBROWSER')")
@@ -76,6 +77,19 @@ public class AdminController extends AbstractV8Controller {
         mv.addAttribute("allTables", clColumnDtos);
 
         return "admin/codelists/browser";
+    }
+
+
+    @RequestMapping(value = "/admin/codelists/{table}/edit.html", method = RequestMethod.GET)
+    public String CLPageEdit(@PathVariable("table") String table ,Model mv) {
+
+        V8Page p = new V8Page();
+        p.setTitle("admin.home");
+        p.setDescription("admin.home");
+        p.setNavBarPrefix("/admin");
+        mv.addAttribute("v8p", p);
+
+        return "admin/codelists/edit";
     }
 
     @PreAuthorize("hasAuthority('R_CLBROWSER')")
