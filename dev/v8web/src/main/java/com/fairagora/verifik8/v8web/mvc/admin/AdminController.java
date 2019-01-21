@@ -1,9 +1,8 @@
 package com.fairagora.verifik8.v8web.mvc.admin;
 
+import com.fairagora.verifik8.v8web.data.domain.cl.CLAppEntityType;
 import com.fairagora.verifik8.v8web.data.domain.reg.product.RegEntityProductSupplier;
-import com.fairagora.verifik8.v8web.data.repo.cl.CLAppAdministrativeCharacteristicTypeRepository;
-import com.fairagora.verifik8.v8web.data.repo.cl.CLAppQuantityUnitRepository;
-import com.fairagora.verifik8.v8web.data.repo.cl.CLRefProductTypesRepository;
+import com.fairagora.verifik8.v8web.data.repo.cl.*;
 import com.fairagora.verifik8.v8web.data.repo.reg.RegEntityProductSupplierRepository;
 import com.fairagora.verifik8.v8web.data.repo.reg.RegEntityRepository;
 import com.fairagora.verifik8.v8web.mvc.admin.dto.CLColumnDto;
@@ -45,8 +44,40 @@ public class AdminController extends AbstractV8Controller {
 
 	@Autowired
 	protected CLRefProductTypesRepository clRefProductTypesRepository;
+
 	@Autowired
 	protected CLAppQuantityUnitRepository clAppQuantityUnitRepository;
+
+	@Autowired
+	protected CLRefCountryRepository clRefCountryRepository;
+
+	@Autowired
+	protected CLAppEntityTypeRepository clAppEntityTypeRepository;
+
+	@Autowired
+	protected CLFarmTypeRepository clFarmTypeRepository;
+
+	@Autowired
+	protected CLRefLanguageRepository clRefLanguageRepository;
+
+	@Autowired
+	protected CLAppQuantityUnitTypeRepository clAppQuantityUnitTypeRepository;
+
+	@Autowired
+	protected CLAppMeasureTypeRepository clAppMeasureTypeRepository;
+
+	@Autowired
+	protected CLRefRegionRepository clRefRegionRepository;
+
+	@Autowired
+	protected CLRefAdminLevel1Repository clRefAdminLevel1Repository;
+
+
+
+	protected Long clAdminLevel1Id;
+
+	protected Long clAppConstructionLocationType;
+
 
 	@RequestMapping(value = "/admin/admin.html", method = RequestMethod.GET)
 	public String adminPage(Model mv) {
@@ -236,6 +267,15 @@ public class AdminController extends AbstractV8Controller {
 		mv.addAttribute("regEntity", regEntityRepository.findPruductSupplier());
 		mv.addAttribute("clRefProductTypes", clRefProductTypesRepository.findAll());
 		mv.addAttribute("clAppQuantityUnit", clAppQuantityUnitRepository.findAll());
+		mv.addAttribute("clRefCountry", clRefCountryRepository.findAll());
+		mv.addAttribute("clFarmType", clFarmTypeRepository.findAll());
+		mv.addAttribute("clRefLanguage", clRefLanguageRepository.findAll());
+		mv.addAttribute("clAppQuantityUnitType", clAppQuantityUnitTypeRepository.findAll());
+		mv.addAttribute("clAppMeasureType", clAppMeasureTypeRepository.findAll());
+		mv.addAttribute("clRefRegion", clRefRegionRepository.findAll());
+		mv.addAttribute("clAppEntityType", clAppEntityTypeRepository.findAll());
+		mv.addAttribute("clRefAdminLevel1", clRefAdminLevel1Repository.findAll());
+
 	}
 
 	/****************** Sub page *****************/
