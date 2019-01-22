@@ -40,4 +40,7 @@ public interface SYSUserRepository extends JpaRepository<SYSUser, Long> {
 
     List<SYSUser> findSYSUserByFarmId(Long farmId);
 
+    @Query(value = "UPDATE sys_users SET active = false WHERE ID = :id", nativeQuery = true)
+    void softDeleteUser(@Param("id") Long  id);
+
 }

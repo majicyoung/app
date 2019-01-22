@@ -18,7 +18,11 @@
 						</div>
 					</div>
 					<div class="box-tools">
-						<a th:href="@{'/users/create.html'}" class="btn btn-sm btn-flat btn-success"><i class="fa fa-plus"></i>
+						<div class="box-tools-checkbox">
+							<label th:text="#{user.display_disabled}">user.display_disabled</label>
+							<input id="activeUsers" type="checkbox" name="mycheckbox"/>
+						</div>
+							<a th:href="@{'/users/create.html'}" class="btn btn-sm btn-flat btn-success"><i class="fa fa-plus"></i>
 							<span th:text="#{user.add}">user.add</span></a>
 					</div>
 				</div>
@@ -33,6 +37,7 @@
 							<th th:text="#{default.role}">{{ trans('default.role') }}</th>
 							<th th:text="#{default.creation_date}">{{ trans('default.creation_date') }}</th>
 							<th th:text="#{default.updated_date}">{{ trans('default.updated_date') }}</th>
+							<th></th>
 							<th th:text="#{default.status}">{{ trans('default.status') }}</th>
 							<th style="max-width:100px;"></th>
 						</tr>
@@ -46,6 +51,7 @@
 							<td th:inline="text" th:text="${user.role.name}"></td>
 							<td th:inline="text" th:text="${#dates.format(user.createdAt, 'dd-MMM-yyyy')}"></td>
 							<td th:inline="text" th:text="${#dates.format(user.updatedAt, 'dd-MMM-yyyy')}"></td>
+							<td th:inline="text" th:text="${user.active}"></td>
 							<td align="center">
 								<i th:if="${user.active}" class="fa fa-check green"></i>
 								<i th:if="${!user.active}" class="fa fa-times red"></i>
@@ -75,8 +81,27 @@
 	<script th:inline="javascript">
       /*<![CDATA[*/
 
+
+      $.fn.dataTable.ext.search.push(
+          function (settings, data, dataIndex) {
+
+              console.log(data);
+
+              if ($('#activeUsers').is(":checked")) {
+                  return true;
+              } else {
+                  if (data[7] == 'true') {
+                      return true;
+                  } else {
+                      return false;
+                  }
+              }
+
+          }
+      );
+
       $(document).ready(function () {
-          $('#userTable').DataTable({
+          var table = $('#userTable').DataTable({
               "responsive": {
                   details: {
                       type: 'column',
@@ -87,11 +112,18 @@
                   className: 'control',
                   orderable: false,
                   targets: 0
+              }, {
+                  "targets": [7],
+                  "visible": false
               }],
               "order": [[1, "desc"]],
               "language": {
                   "url": langURL
               }
+          });
+
+          $('#activeUsers').change(function () {
+              table.draw();
           });
 
       });
