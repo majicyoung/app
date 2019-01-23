@@ -25,7 +25,7 @@ public class SysUserStatActivity  extends V8EntitySupport {
 	protected SYSUser sysUser;
 	
 	@Column(name = "SOURCE")
-	protected String source;
+	protected boolean source;
 	
 //	@ManyToOne()
 //	@JoinColumn(name = "DT_FARM_PLOT_ACTIVITY_ID")
@@ -64,12 +64,12 @@ public class SysUserStatActivity  extends V8EntitySupport {
 	public void setSysUser(SYSUser sysUser) {
 		this.sysUser = sysUser;
 	}
-
-	public String getSource() {
+	
+	public boolean isSource() {
 		return source;
 	}
 
-	public void setSource(String source) {
+	public void setSource(boolean source) {
 		this.source = source;
 	}
 

@@ -31,7 +31,7 @@ public class SysUserStat extends V8Base implements V8Entity {
 	private String userAgent;
 	
 	@Column(name = "SOURCE")
-	private String source;
+	private boolean source;
 
 
 	@Override
@@ -81,12 +81,13 @@ public class SysUserStat extends V8Base implements V8Entity {
 		this.userAgent = userAgent;
 	}
 
-	public String getSource() {
+	public boolean isSource() {
 		return source;
 	}
 
-	public void setSource(String source) {
+	public void setSource(boolean source) {
 		this.source = source;
 	}
+	
 	
 }

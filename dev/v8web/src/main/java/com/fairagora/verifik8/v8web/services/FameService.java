@@ -1,5 +1,6 @@
 package com.fairagora.verifik8.v8web.services;
 
+import com.fairagora.verifik8.v8web.config.helper.BooleanHelper;
 import com.fairagora.verifik8.v8web.data.domain.dt.DTFarmPlotActivity;
 import com.fairagora.verifik8.v8web.data.domain.dt.DTFarmPondActivity;
 import com.fairagora.verifik8.v8web.data.domain.sys.SYSUser;
@@ -92,8 +93,8 @@ public class FameService {
 		sysUserStatActivityRepository.save(sysUserStatActivity);
 	}
 	
-	private String getSource(HttpServletRequest request) {
-		return request.getServerName().contains("api") ? "mobile" : "backend";
+	private boolean getSource(HttpServletRequest request) {
+		return request.getServerName().contains("api") ? BooleanHelper.parseBoolean("2") : BooleanHelper.parseBoolean("1");
 	}
 	
 	private String getClientIp(HttpServletRequest request) {
