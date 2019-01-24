@@ -122,7 +122,7 @@ public class FarmsController extends AbstractV8Controller {
 		setToReadOnly(mv, "W_FARMCREATE");
 
 		regFarmDtoMapper.toDto(regEntityRepository.findOne(id), dto);
-		Optional<RegEntityFarmDetails> details = regEntityFarmDetailsRepository.findByEntityId(id);
+			Optional<RegEntityFarmDetails> details = regEntityFarmDetailsRepository.findByEntityId(id);
 		if (details.isPresent()) {
 			regFarmDtoMapper.toDto(details.get(), dto);
 			aerailAttachments = new HashMap<>();

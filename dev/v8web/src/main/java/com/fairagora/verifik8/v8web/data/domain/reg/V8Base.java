@@ -43,10 +43,14 @@ public abstract class V8Base {
 			this.updatedAt = new Date();
 		}
 
-		if (SecurityContextHolder.getContext().getAuthentication() != null) {
+		if (SecurityContextHolder.getContext().getAuthentication() == null){
+			this.updater = ApplicationContextProvider.getApplicationContext().getBean(SYSUserRepository.class)
+					.findOne(DEFAULT_SYSTEM_USER);
+		}else{
 			this.updater = ApplicationContextProvider.getApplicationContext().getBean(SYSUserRepository.class)
 					.findByEmail(SecurityContextHolder.getContext().getAuthentication().getName());
 		}
+
 
 	}
 
