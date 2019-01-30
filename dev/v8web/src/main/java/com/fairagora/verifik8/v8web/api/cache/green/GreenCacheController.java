@@ -5,10 +5,16 @@ import com.fairagora.verifik8.v8web.data.domain.cl.CLAppQuantityUnit;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLAppTilingActivityType;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLFarmPlotActivityType;
 import com.fairagora.verifik8.v8web.data.domain.dt.DTFarmPlotActivity;
+import com.fairagora.verifik8.v8web.data.domain.dt.DTFarmPlotProductionCycle;
+import com.fairagora.verifik8.v8web.data.domain.reg.farm.RegEntityFarmPlot;
+import com.fairagora.verifik8.v8web.data.domain.reg.staff.RegEntityStaff;
 import com.fairagora.verifik8.v8web.data.domain.sys.SYSUser;
 import com.fairagora.verifik8.v8web.data.repo.cl.CLAppQuantityUnitRepository;
 import com.fairagora.verifik8.v8web.data.repo.cl.CLRefProductRepository;
 import com.fairagora.verifik8.v8web.data.repo.dt.DTFarmPlotActivityRepository;
+import com.fairagora.verifik8.v8web.data.repo.dt.DTFarmPlotProductionCycleRepository;
+import com.fairagora.verifik8.v8web.data.repo.reg.RegEntityFarmPlotRepository;
+import com.fairagora.verifik8.v8web.data.repo.reg.RegEntityStaffRepository;
 import com.fairagora.verifik8.v8web.mvc.AbstractV8Controller;
 import com.fairagora.verifik8.v8web.mvc.farms.RegFarmDTOMapper;
 import com.fairagora.verifik8.v8web.mvc.plots.dto.PlotListingDto;
@@ -24,7 +30,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -51,24 +62,31 @@ public class GreenCacheController extends AbstractV8Controller {
 
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private RegEntityStaffRepository regEntityStaffRepository;
+	
+	@Autowired
+	private DTFarmPlotProductionCycleRepository dtFarmPlotProductionCycleRepository;
+	
+	@Autowired
+	private RegEntityFarmPlotRepository regEntityFarmPlotRepository;
 
 	@GetMapping(path = "/cache")
 	public ResponseEntity<Object> getCacheData() {
 		List<CLFarmPlotActivityType> activities = codeListservice.listActiveActivityTypes();
-		List<DTFarmPlotActivity> activitiesMeasures = plotActivityRepository.findAll();
+		List<DTFarmPlotActivity> activitiesMeasures = plotActivityRepository.getAllActivityByDate(this.previousDate(), this.currentDate());
 		List<CLAppQuantityUnit> quantityUnits = clAppQuantityUnitRepository.getQuantityUnit();
 		List<CLAppTilingActivityType> tilingActivityType = codeListservice.listActiveTilingActivityTypes();
+		
+		List<RegEntityStaff> listStaff = regEntityStaffRepository.findAll();
+		List<DTFarmPlotProductionCycle> listProductionLifeCycles = dtFarmPlotProductionCycleRepository.findAll();
+		List<RegEntityFarmPlot> listFarmPlots = regEntityFarmPlotRepository.findAll();
 
 		List<V8Farm> farms = farmService.listFarms();
 
 		List<PlotListingDto> ponds = farmService.listAllPlotsForLoggedUser(getLoggedUser()).stream().map(p -> regFarmDtoMapper.toListing(p)).collect(Collectors.toList());
 
 		SYSUser user = userService.getUserByEmail();
-		Map<String, Object> userFilter = new HashMap<>();
-		userFilter.put("email", user.getEmail());
-		userFilter.put("id", user.getId());
-		userFilter.put("name", user.getName());
-		userFilter.put("role", user.getRole());
 
 		List<CustomProducts> listProducts = new ArrayList<>();
 		List<CustomProducts> products = clRefProductRepository.getProductAndFarmPondActivityId();
@@ -98,9 +116,12 @@ public class GreenCacheController extends AbstractV8Controller {
 		cacheMap.put("ponds", ponds);
 		cacheMap.put("products", listProducts);
 		cacheMap.put("quantityUnits", quantityUnits);
-		cacheMap.put("user", userFilter);
+		cacheMap.put("user", user);
 		cacheMap.put("tilingActivityType", tilingActivityType);
 		cacheMap.put("activitySettings", listPlotdActivitySettings());
+		cacheMap.put("employees", listStaff);
+		cacheMap.put("productions", listProductionLifeCycles);
+		cacheMap.put("fields", listFarmPlots);
 
 		return new ResponseEntity<Object>(cacheMap, HttpStatus.OK);
 	}
@@ -117,5 +138,4 @@ public class GreenCacheController extends AbstractV8Controller {
 
 		return measureSettingsMap;
 	}
-
 }

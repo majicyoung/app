@@ -11,6 +11,7 @@ import javax.persistence.Table;
 
 import com.fairagora.verifik8.v8web.data.domain.cl.CLRefCountry;
 import com.fairagora.verifik8.v8web.data.domain.reg.RegEntity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.util.Date;
 
@@ -25,6 +26,7 @@ public class SYSUser {
 
     protected String name;
     protected String email;
+    @JsonIgnore
     protected String password;
     protected String cacheVersion;
 

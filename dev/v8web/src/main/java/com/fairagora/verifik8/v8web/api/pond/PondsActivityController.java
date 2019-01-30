@@ -1,6 +1,7 @@
 package com.fairagora.verifik8.v8web.api.pond;
 
 import com.fairagora.verifik8.v8web.data.domain.cl.CLFarmPondActivityType;
+import com.fairagora.verifik8.v8web.data.domain.dt.DTFarmPlotActivity;
 import com.fairagora.verifik8.v8web.data.domain.dt.DTFarmPondActivity;
 import com.fairagora.verifik8.v8web.data.repo.dt.DTFarmPondActivityRepository;
 import com.fairagora.verifik8.v8web.data.repo.reg.RegEntityFarmPondRepository;
@@ -37,11 +38,18 @@ public class PondsActivityController extends AbstractV8Controller {
 	@PostMapping(path = "/ponds/{pondId}/activity")
 	public ResponseEntity<?> createPondActivity(@PathVariable("pondId") Long pondId, PondActivityDto dto) {
 		DTFarmPondActivity act = null;
-
-		if (dto.getId() == null || dto.getId().intValue() == 0) {
+		
+		if(dto.getProduct() == null || dto.getProduct().intValue() == 0) {
+			act = pondActivityRepository.findPondActivityByPondAndActivity(dto.getPond(), dto.getActivityType(), dto.getActivityStartDate(), dto.getActivityEndDate());
+		} else {
+			act = pondActivityRepository.findPondActivityByPondAndActivityAndProduct(dto.getPond(), dto.getActivityType(), dto.getProduct(), dto.getActivityStartDate(), dto.getActivityEndDate());
+		}
+		
+		if (act == null) {
 			act = new DTFarmPondActivity();
-		} else
-			act = pondActivityRepository.findOne(dto.getId());
+		} else {
+			return new ResponseEntity<Object>(act, HttpStatus.CONFLICT);
+		}
 
 		dtoMapper.fillEntity(dto, act);
 

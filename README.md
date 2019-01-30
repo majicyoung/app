@@ -24,18 +24,23 @@ Change the directory into your project folder
 cd backend/dev/v8web/
 ```
 
+Clone test db repository
+```bash
+git@gitlab.united-asian.com:verifik8/test-db.git
+```
+
+Change directory to get sql file
+```bash
+cd test-db/Fixtures
+```
+Dumb sql file in your mysql server
+
 Database configuration
 
 MySQL
 
 ```bash
 root:<see this in DEMO_SERVERS.txt file>
-```
-
-Added column
-
-```bash
-ALTER TABLE `sys_users` ADD `cache_version` VARCHAR(20) NULL DEFAULT NULL AFTER `active`;
 ```
 
 Install dependencies and build project
@@ -47,20 +52,24 @@ mvn install
 Development run
 
 ```bash
-mvn spring-boot:run -Dspring.config.location=classpath:<application-config-name>.properties
+mvn spring-boot:run -Dspring.config.location=classpath:<application-config-name>.properties -Dspring.profiles.active=<config-name>
 ```
 
-Serve your API
-
-```bash
-java -jar target/v8web-*.jar
- ```
-Now, request http://localhost:8080 from browser.
+Now, request http://localhost:9250 from browser.
 
 
 # On Test Database
 
 Updated Data : Blue Verifik8 database
+
+1.insert_cl_app_measure_types
+```sql
+
+INSERT INTO `cl_app_measure_types` (`ID`, `ENABLED`, `CODE`, `RANKING`, `NAME`, `DESCRIPTION`, `I18n_DEFAULT`, `I18N_EN`, `I18N_FR`, `I18N_ES`, `I18N_TH`, `I18N_VT`, `I18N_LA`, `I18N_ID`, `I18N_KH`, `UPDATER_ID`, `COMMENT`, `CREATED_AT`, `UPDATED_AT`) VALUES
+(6, 1, 'Nitrite', 1, 'Nitrite', 'Nitrite', 'Nitrite', 'Nitrite', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, '2019-01-14 04:07:08', '2019-01-14 04:07:08'),
+(7, 1, 'Phosphate', 1, 'Phosphate', 'Phosphate', 'Phosphate', 'Phosphate', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, '2019-01-16 04:20:27', '2019-01-16 04:20:27');
+
+```
 
 ```sql
 INSERT INTO `cl_ref_products` (`ID`, `ENABLED`, `CODE`, `RANKING`, `NAME`, `DESCRIPTION`, `I18n_DEFAULT`, `I18N_EN`, `I18N_FR`, `I18N_ES`, `I18N_TH`, `I18N_VT`, `I18N_LA`, `I18N_ID`, `I18N_KH`, `CL_PRODUCTS_TYPE_ID`, `CL_RECOMMAND_UNIT_ID`, `UPDATER_ID`, `COMMENT`, `CREATED_AT`, `UPDATED_AT`) VALUES
@@ -106,18 +115,13 @@ INSERT INTO `cl_app_quantity_units` (`ID`, `ENABLED`, `CODE`, `RANKING`, `NAME`,
 Api login endpoint
 
 ```bash
-https://blueapp.vfk8.united-asian.net/blue/oauth/token
+https://blueapp.vfk8.united-asian.net/oauth/login
 ```
-step1: 
-On Authorization(Basic Auth) enter ->
-username: verifik8-client
-password: verifik8-secret
 
-step2: 
+step1: 
 - on body click x-www-form-urlencoded and enter value ->
 username: [any username from database]
 password: []
-grant_type: password
 
-step3:
+step2:
 click on send to get refresh and access token
