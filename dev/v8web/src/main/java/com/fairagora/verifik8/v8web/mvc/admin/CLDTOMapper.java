@@ -1,14 +1,12 @@
 package com.fairagora.verifik8.v8web.mvc.admin;
 
 import com.fairagora.verifik8.v8web.data.domain.cl.*;
+import com.fairagora.verifik8.v8web.data.repo.reg.RegEntityProductSupplierRepository;
 import com.fairagora.verifik8.v8web.mvc.admin.dto.CLDto;
 import com.fairagora.verifik8.v8web.mvc.infra.dtomapping.EntityDtoMapper;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.MappingTarget;
-import org.mapstruct.ReportingPolicy;
+import org.mapstruct.*;
 
-@Mapper(componentModel = "spring", uses = EntityDtoMapper.class, unmappedTargetPolicy = ReportingPolicy.IGNORE)
+@Mapper(componentModel = "spring",  uses = EntityDtoMapper.class, unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface CLDTOMapper {
 
     void toDto(CLAppAdministrativeCharacteristicType clAppAdministrativeCharacteristicType, @MappingTarget CLDto dto);
@@ -335,5 +333,7 @@ public interface CLDTOMapper {
 
     @Mapping(target = "id", ignore = true)
     void fillEntity(CLDto dto, @MappingTarget CLRefVesselType clRefVesselType);
+
+
 
 }

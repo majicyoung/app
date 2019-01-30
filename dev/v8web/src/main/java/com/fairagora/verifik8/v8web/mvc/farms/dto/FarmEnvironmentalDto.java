@@ -38,6 +38,20 @@ public class FarmEnvironmentalDto {
 	protected MultipartFile cumulativeImpactStudyMultipart;
 	protected List<String>  cumulativeImpactStudyUrl;
 
+	// att
+	protected MultipartFile escapeReportMultipart;
+	protected List<String>  escapeReportUrl;
+
+	// att
+	protected MultipartFile dischargeWasteWaterMultipart;
+	protected List<String>  dischargeWasteWaterUrl;
+
+	protected String numberOfEscape;
+	protected String escapePrevention;
+	protected String gpsCoordinate;
+	protected String filtrationSystemComment;
+	protected boolean filtrationSystem;
+
 	public boolean isEnvironmentImpactAssessment() {
 		return environmentImpactAssessment;
 	}
@@ -166,4 +180,76 @@ public class FarmEnvironmentalDto {
 		this.sittingProtectedAreaDocMultipart = sittingProtectedAreaDocMultipart;
 	}
 
+	public MultipartFile getEscapeReportMultipart() {
+		return escapeReportMultipart;
+	}
+
+	public void setEscapeReportMultipart(MultipartFile escapeReportMultipart) {
+		this.escapeReportMultipart = escapeReportMultipart;
+	}
+
+	public List<String> getEscapeReportUrl() {
+		return escapeReportUrl;
+	}
+
+	public void setEscapeReportUrl(List<String> escapeReportUrl) {
+		this.escapeReportUrl = escapeReportUrl;
+	}
+
+	public MultipartFile getDischargeWasteWaterMultipart() {
+		return dischargeWasteWaterMultipart;
+	}
+
+	public void setDischargeWasteWaterMultipart(MultipartFile dischargeWasteWaterMultipart) {
+		this.dischargeWasteWaterMultipart = dischargeWasteWaterMultipart;
+	}
+
+	public List<String> getDischargeWasteWaterUrl() {
+		return dischargeWasteWaterUrl;
+	}
+
+	public void setDischargeWasteWaterUrl(List<String> dischargeWasteWaterUrl) {
+		this.dischargeWasteWaterUrl = dischargeWasteWaterUrl;
+	}
+
+	public String getNumberOfEscape() {
+		return numberOfEscape;
+	}
+
+	public void setNumberOfEscape(String numberOfEscape) {
+		this.numberOfEscape = numberOfEscape;
+	}
+
+
+	public String getGpsCoordinate() {
+		return gpsCoordinate;
+	}
+
+	public void setGpsCoordinate(String gpsCoordinate) {
+		this.gpsCoordinate = gpsCoordinate;
+	}
+
+	public String getEscapePrevention() {
+		return escapePrevention;
+	}
+
+	public void setEscapePrevention(String escapePrevention) {
+		this.escapePrevention = escapePrevention;
+	}
+
+	public String getFiltrationSystemComment() {
+		return filtrationSystemComment;
+	}
+
+	public void setFiltrationSystemComment(String filtrationSystemComment) {
+		this.filtrationSystemComment = filtrationSystemComment;
+	}
+
+	public boolean isFiltrationSystem() {
+		return filtrationSystem;
+	}
+
+	public void setFiltrationSystem(boolean filtrationSystem) {
+		this.filtrationSystem = filtrationSystem;
+	}
 }

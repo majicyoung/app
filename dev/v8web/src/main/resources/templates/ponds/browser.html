@@ -23,6 +23,7 @@
 					<table class="table table-hover table-striped table-bordered datatable" id="datatables-browser">
 						<thead>
 						<tr>
+							<th></th>
 							<th th:text="#{default.name}">farm.pond_number</th>
 							<th th:text="#{farm.pond_number}">farm.pond_number</th>
 							<th th:text="#{default.area}"></th>
@@ -34,6 +35,7 @@
 						</thead>
 						<tbody>
 						<tr th:each="pond:${listing}">
+							<td></td>
 							<td th:text="${pond.farm}"></td>
 							<td th:text="${pond.number}"></td>
 							<td th:text="${pond.size.quantity}"></td>
@@ -107,9 +109,18 @@
 
 
           $('#datatables-browser').DataTable({
-              "order": [[0, "desc"]],
-              "responsive": true,
-              "columnDefs": [{"orderable": false, "targets": 4}],
+              "responsive": {
+                  details: {
+                      type: 'column',
+                      target: 'tr'
+                  }
+              },
+              "columnDefs": [{
+                  className: 'control',
+                  orderable: false,
+                  targets: 0
+              }],
+              "order": [[1, "desc"]],
               "language": {
                   "url": langURL
               }

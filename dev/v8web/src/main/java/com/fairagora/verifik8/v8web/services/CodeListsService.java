@@ -912,6 +912,12 @@ public class CodeListsService {
         return clColumnDtos;
     }
 
+    public void editColumns(CLColumnDto clColumnDto) {
+        CLColumn clColumn = new CLColumn();
+        clColumnDTOMapper.fillEntity(clColumnDto, clColumn);
+        columnRepository.save(clColumn);
+    }
+
     public void addCL(String tableName, CLDto clDto, Long id) throws Exception {
         switch (tableName) {
             case "cl_app_administrative_characteristic_types": {

@@ -23,7 +23,7 @@ public abstract class V8Base {
 	 */
 	private static final long DEFAULT_SYSTEM_USER = 1l;
 
-	@ManyToOne(optional = false)
+	@ManyToOne()
 	@JoinColumn(name = "UPDATER_ID")
 	protected SYSUser updater;
 
@@ -39,15 +39,18 @@ public abstract class V8Base {
 	@PrePersist
 	protected void prePersist() {
 		if (this.createdAt == null)
-			this.createdAt = new Date();
-		this.updatedAt = new Date();
+			this.createdAt = new Date();{
+			this.updatedAt = new Date();
+		}
 
-		if (SecurityContextHolder.getContext().getAuthentication() == null)
+		if (SecurityContextHolder.getContext().getAuthentication() == null){
 			this.updater = ApplicationContextProvider.getApplicationContext().getBean(SYSUserRepository.class)
 					.findOne(DEFAULT_SYSTEM_USER);
-		else
+		}else{
 			this.updater = ApplicationContextProvider.getApplicationContext().getBean(SYSUserRepository.class)
 					.findByEmail(SecurityContextHolder.getContext().getAuthentication().getName());
+		}
+
 
 	}
 

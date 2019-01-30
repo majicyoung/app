@@ -20,6 +20,7 @@
 					<table class="table table-hover table-striped table-bordered datatable" id="datatables-plot-data">
 						<thead>
 							<tr>
+								<th></th>
 								<th th:text="#{default.date}">default.date</th>
 								<th class="measure_type" th:text="#{default.measure_type}">default.measure_type</th>
 								<th th:text="#{default.measure_value}">default.measure_value</th>
@@ -29,6 +30,7 @@
 						</thead>
 						<tbody>
 							<tr th:each="mes:${measures}">
+								<td></td>
 								<td th:text="${#dates.format(mes.measureDate,'yyyy-MM-dd HH:mm:ss')}"></td>
 								<td th:text="${mes.measureType.name}"></td>
 								<td th:text="${mes.measure.quantity}"></td>
@@ -137,9 +139,18 @@
 		
 			
 			myDataTableData = $('#datatables-plot-data').DataTable({
-				"order": [[ 0, "desc" ]],
-          "responsive": true,
-          "columnDefs": [{"orderable":false,"targets":4}],
+          "responsive": {
+              details: {
+                  type: 'column',
+                  target: 'tr'
+              }
+          },
+          "columnDefs": [{
+              className: 'control',
+              orderable: false,
+              targets: 0
+          }],
+				"order": [[ 1, "desc" ]],
 				"language": {
 		            "url": langURL
 		        }

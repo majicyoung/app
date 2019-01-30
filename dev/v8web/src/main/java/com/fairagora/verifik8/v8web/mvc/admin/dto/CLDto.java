@@ -82,6 +82,9 @@ public class CLDto {
 
     protected Long clValueQuantityUnitId;
 
+    protected Long regEntity;
+
+
     public Long getId() {
         return id;
     }
@@ -402,4 +405,11 @@ public class CLDto {
         this.clValueQuantityUnitId = clValueQuantityUnitId;
     }
 
+    public Long getRegEntity() {
+        return regEntity;
+    }
+
+    public void setRegEntity(Long regEntity) {
+        this.regEntity = regEntity;
+    }
 }
