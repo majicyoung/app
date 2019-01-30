@@ -23,8 +23,10 @@ public class SysUserStatActivity  extends V8EntitySupport {
 	@ManyToOne(targetEntity = SYSUser.class, fetch = FetchType.EAGER)
 	@JoinColumn(nullable = false, name = "SYS_USER_ID")
 	protected SYSUser sysUser;
-
-
+	
+	@Column(name = "SOURCE")
+	protected boolean source;
+	
 //	@ManyToOne()
 //	@JoinColumn(name = "DT_FARM_PLOT_ACTIVITY_ID")
 //	@NotFound(action = NotFoundAction.IGNORE)
@@ -61,6 +63,14 @@ public class SysUserStatActivity  extends V8EntitySupport {
 
 	public void setSysUser(SYSUser sysUser) {
 		this.sysUser = sysUser;
+	}
+	
+	public boolean isSource() {
+		return source;
+	}
+
+	public void setSource(boolean source) {
+		this.source = source;
 	}
 
 	public Long getDtFarmPlotActivity() {

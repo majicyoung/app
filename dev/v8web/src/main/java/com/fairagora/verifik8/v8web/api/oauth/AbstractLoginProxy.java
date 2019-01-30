@@ -88,6 +88,7 @@ public class AbstractLoginProxy {
 		HttpHeaders headers = new HttpHeaders();
 		headers.setAccept(Arrays.asList(MediaType.ALL));
 		headers.add("Authorization", "Basic " + Base64.getEncoder().encodeToString(base64Encode.getBytes()));
+		headers.add("User-agent", requestUrl.getHeader("User-Agent"));
 		
 		HttpEntity<?> request = new HttpEntity<>(oauthData, headers);
 		

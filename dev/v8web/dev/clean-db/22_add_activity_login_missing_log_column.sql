@@ -1,0 +1,5 @@
+ALTER TABLE sys_users_stats_activity ADD COLUMN SOURCE tinyint(1) NOT NULL AFTER SYS_USER_ID;
+
+ALTER TABLE sys_users_stats ADD COLUMN USER_IP_ADDRESS varchar(256) NOT NULL;
+ALTER TABLE sys_users_stats ADD COLUMN USER_AGENT  varchar(1024) NOT NULL;
+ALTER TABLE sys_users_stats ADD COLUMN SOURCE tinyint(1) NOT NULL;
