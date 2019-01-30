@@ -27,7 +27,7 @@ public abstract class V8Base {
 	@Transient
 	protected String clientId;
 
-	@ManyToOne(optional = false)
+	@ManyToOne()
 	@JoinColumn(name = "UPDATER_ID")
 	protected SYSUser updater;
 
@@ -43,16 +43,19 @@ public abstract class V8Base {
 	@PrePersist
 	protected void prePersist() {
 		if (this.createdAt == null)
-			this.createdAt = new Date();
-		this.updatedAt = new Date();
+			this.createdAt = new Date();{
+			this.updatedAt = new Date();
+		}
 
 		if (SecurityContextHolder.getContext().getAuthentication() == null ||
-				SecurityContextHolder.getContext().getAuthentication().getName().equals(this.clientId))
+				SecurityContextHolder.getContext().getAuthentication().getName().equals(this.clientId)){
 			this.updater = ApplicationContextProvider.getApplicationContext().getBean(SYSUserRepository.class)
 					.findOne(DEFAULT_SYSTEM_USER);
-		else
+		}else{
 			this.updater = ApplicationContextProvider.getApplicationContext().getBean(SYSUserRepository.class)
 					.findByEmail(SecurityContextHolder.getContext().getAuthentication().getName());
+		}
+
 
 	}
 

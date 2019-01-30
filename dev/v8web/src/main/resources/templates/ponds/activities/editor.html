@@ -52,8 +52,8 @@
 										<option value="" th:text="|-- #{farm.pond_activity_select_product} --|">-- default.select_product
 											--
 										</option>
-										<option th:each="actType:${allProducts}" th:value="${actType.id}"
-														th:text="${actType.localisedName}"></option>
+										<option th:each="product:${allProducts}" th:value="${product.id}"
+														th:text="${product.localisedName}"></option>
 									</select>
 								</div>
 								<div class="form-group">
@@ -108,6 +108,7 @@
 
       var farmId =/*[[${farmId}]]*/;
       var pondId =/*[[${pondId}]]*/;
+      var activityDto =/*[[${activityDto}]]*/;
 
       $(document).ready(function () {
           $.datetimepicker.setLocale(lang);
@@ -128,13 +129,13 @@
           activityTypeChanged();
       });
 
-				var noProduct = [2, 6, 7, 8, 10];
+      var noProduct = [2, 6, 7, 8, 10];
+
       function activityTypeChanged() {
 
           $('#actiProductGroup').show();
           $('#feedLotNumber').hide();
           $('#selectSpecie').hide();
-
 
 
           var actVal = $("#activityType").val();
@@ -148,13 +149,13 @@
                   $('#feedLotNumber').show();
               }
 
-              $.get('/ponds/'+pondId+'/activities/'+actVal+'/unit', function (data) {
+              $.get('/ponds/' + pondId + '/activities/' + actVal + '/unit', function (data) {
                   $("#selectMeasureUnit").val(data).change();
-              }).fail(function(){
+              }).fail(function () {
                   $("#selectMeasureUnit").val("").change();
               });
 
-              $.get('/ponds/'+pondId+'/products', {
+              $.get('/ponds/' + pondId + '/products', {
                   activityId: actVal
               }, function (datas) {
                   var pond_activity_select_product = /*[[#{farm.pond_activity_select_product}]]*/ 'Select Product';
@@ -163,26 +164,28 @@
                       .find('option')
                       .remove()
                       .end()
-                      .append('<option value="">-- '+pond_activity_select_product+' --</option>')
+                      .append('<option value="">-- ' + pond_activity_select_product + ' --</option>')
                       .val('');
                   $.each(datas, function (index, value) {
                       $('#selectProductGroup').append($('<option>', {
                           value: value.id,
-                          text: value.name
+                          text: value.name,
+													selected: (value.id == activityDto.product)
                       }));
                   });
+                  productChanged()
               });
 
-					}
+          }
 
       }
 
-      function productChanged(){
+      function productChanged() {
           var productId = $("#selectProductGroup").val();
 
-          $.get('/ponds/'+pondId+'/products/'+productId+'/unit', function (data) {
+          $.get('/ponds/' + pondId + '/products/' + productId + '/unit', function (data) {
               $("#selectMeasureUnit").val(data).change();
-          }).fail(function(){
+          }).fail(function () {
               $("#selectMeasureUnit").val("").change();
           });
       }
@@ -198,6 +201,7 @@
           });
           return hasError;
       }
+
       /*]]>*/
 	</script>
 </th:block>

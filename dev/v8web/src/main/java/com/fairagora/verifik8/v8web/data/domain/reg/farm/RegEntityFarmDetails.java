@@ -136,6 +136,26 @@ public class RegEntityFarmDetails extends V8EntitySupport {
 	@Fetch(value = FetchMode.SUBSELECT)
 	protected List<RegPicture> cumulativeImpactStudies;
 
+	@OneToMany(cascade=CascadeType.ALL,
+			fetch = FetchType.EAGER)
+	@JoinTable(
+			name = "jt_reg_farm_details_escape_report_reg_picture",
+			joinColumns = @JoinColumn(name = "ENTITY_ID"),
+			inverseJoinColumns = @JoinColumn(name = "PICTURE_ID")
+	)
+	@Fetch(value = FetchMode.SUBSELECT)
+	protected List<RegPicture> escapeReports;
+
+	@OneToMany(cascade=CascadeType.ALL,
+			fetch = FetchType.EAGER)
+	@JoinTable(
+			name = "jt_reg_farm_details_wasted_water_reg_picture",
+			joinColumns = @JoinColumn(name = "ENTITY_ID"),
+			inverseJoinColumns = @JoinColumn(name = "PICTURE_ID")
+	)
+	@Fetch(value = FetchMode.SUBSELECT)
+	protected List<RegPicture> placeOfWastedWater;
+
 	@Column(name = "HAS_A_LAB")
 	protected boolean hasALab;
 
@@ -150,8 +170,29 @@ public class RegEntityFarmDetails extends V8EntitySupport {
 
 	@Column(name = "STAKEHOLDER_MEETING_LOCATION")
 	protected String stakeholderMeetingLocation;
-	
-	
+
+
+	@Column(name = "NUMBER_OF_ESCAPE")
+	protected String numberOfEscape;
+
+
+	@Column(name = "ESCAPE_PREVENTION")
+	protected String escapePrevention;
+
+
+	@Column(name = "GPS_COORDINATE")
+	protected String gpsCoordinate;
+
+
+	@Column(name = "FILTRATION_SYSTEM")
+	protected boolean filtrationSystem;
+
+	@Column(name = "FILTRATION_SYSTEM_CEMMENT")
+	protected String filtrationSystemComment;
+
+
+
+
 	public Long getId() {
 		return id;
 	}
@@ -351,5 +392,61 @@ public class RegEntityFarmDetails extends V8EntitySupport {
 
 	public void setCumulativeImpactStudies(List<RegPicture> cumulativeImpactStudies) {
 		this.cumulativeImpactStudies = cumulativeImpactStudies;
+	}
+
+	public List<RegPicture> getEscapeReports() {
+		return escapeReports;
+	}
+
+	public void setEscapeReports(List<RegPicture> escapeReports) {
+		this.escapeReports = escapeReports;
+	}
+
+	public List<RegPicture> getPlaceOfWastedWater() {
+		return placeOfWastedWater;
+	}
+
+	public void setPlaceOfWastedWater(List<RegPicture> placeOfWastedWater) {
+		this.placeOfWastedWater = placeOfWastedWater;
+	}
+
+	public String getNumberOfEscape() {
+		return numberOfEscape;
+	}
+
+	public void setNumberOfEscape(String numberOfEscape) {
+		this.numberOfEscape = numberOfEscape;
+	}
+
+	public String getEscapePrevention() {
+		return escapePrevention;
+	}
+
+	public void setEscapePrevention(String escapePrevention) {
+		this.escapePrevention = escapePrevention;
+	}
+
+	public String getGpsCoordinate() {
+		return gpsCoordinate;
+	}
+
+	public void setGpsCoordinate(String gpsCoordinate) {
+		this.gpsCoordinate = gpsCoordinate;
+	}
+
+	public boolean isFiltrationSystem() {
+		return filtrationSystem;
+	}
+
+	public void setFiltrationSystem(boolean filtrationSystem) {
+		this.filtrationSystem = filtrationSystem;
+	}
+
+	public String getFiltrationSystemComment() {
+		return filtrationSystemComment;
+	}
+
+	public void setFiltrationSystemComment(String filtrationSystemComment) {
+		this.filtrationSystemComment = filtrationSystemComment;
 	}
 }

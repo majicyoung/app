@@ -1,5 +1,7 @@
 package com.fairagora.verifik8.v8web.data.domain.cl;
 
+import com.fairagora.verifik8.v8web.data.domain.reg.RegEntity;
+import com.fairagora.verifik8.v8web.data.domain.reg.product.RegEntityProductSupplier;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
@@ -18,6 +20,11 @@ public class CLRefProduct extends CodeListSupport{
 	@JsonBackReference
 	protected CLAppQuantityUnit clAppConstructionLocationType;
 
+	@ManyToOne
+	@JoinColumn(name = "REG_ENTITY_ID", nullable = true)
+	protected RegEntity regEntity;
+
+
 	public CLRefProductType getClRefProductType() {
 		return clRefProductType;
 	}
@@ -32,5 +39,13 @@ public class CLRefProduct extends CodeListSupport{
 
 	public void setClAppConstructionLocationType(CLAppQuantityUnit clAppConstructionLocationType) {
 		this.clAppConstructionLocationType = clAppConstructionLocationType;
+	}
+
+	public RegEntity getRegEntity() {
+		return regEntity;
+	}
+
+	public void setRegEntity(RegEntity regEntity) {
+		this.regEntity = regEntity;
 	}
 }

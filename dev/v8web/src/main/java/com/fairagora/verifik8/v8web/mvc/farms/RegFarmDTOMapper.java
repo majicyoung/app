@@ -83,6 +83,8 @@ public interface RegFarmDTOMapper {
 	@Mapping(target = "sittingProtectedAreaUrl", source = "sittingProtectedAreaDocs", qualifiedByName = "regPictureDto")
 	@Mapping(target = "canalRestorationPlanUrl", source = "canalRestorationPlans", qualifiedByName = "regPictureDto")
 	@Mapping(target = "cumulativeImpactStudyUrl", source = "cumulativeImpactStudies", qualifiedByName = "regPictureDto")
+	@Mapping(target = "escapeReportUrl", source = "escapeReports", qualifiedByName = "regPictureDto")
+	@Mapping(target = "dischargeWasteWaterUrl", source = "placeOfWastedWater", qualifiedByName = "regPictureDto")
 	void toDto(RegEntityFarmDetails farm, @MappingTarget FarmEnvironmentalDto dto);
 
 	void toDto(Address adr, @MappingTarget AddressDto dto);

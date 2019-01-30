@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html layout:decorator="inc/main-layout" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html layout:decorator="inc/main-layout" xmlns:th="http://www.thymeleaf.org"
+			xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+			xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
 <div layout:fragment="content">
 
@@ -13,36 +15,41 @@
 						<!-- messages here -->
 					</div>
 					<div class="box-tools">
-						<a th:href="@{/suppliers/create.html}" class="btn btn-sm btn-flat btn-success"><i class="fa fa-plus"></i> <span th:text="#{suppliers.add_supplier}">suppliers.add_supplier</span></a>
+						<a th:href="@{/suppliers/create.html}" class="btn btn-sm btn-flat btn-success"><i class="fa fa-plus"></i>
+							<span th:text="#{suppliers.add_supplier}">suppliers.add_supplier</span></a>
 					</div>
 				</div>
 				<div class="box-body">
 					<table class="table table-hover table-striped table-bordered datatable" id="datatables-browser">
 						<thead>
-							<tr>
-								<th th:text="#{default.farm}">default.farm</th>
-                                <th th:text="#{supplier.name}">supplier.name</th>
-								<th th:text="#{default.product_type}">default.product_type</th>
-                                <th th:text="#{default.city}"></th>
-                                <th width="90"></th>
-							</tr>
+						<tr>
+							<th></th>
+							<th th:text="#{default.farm}">default.farm</th>
+							<th th:text="#{supplier.name}">supplier.name</th>
+							<th th:text="#{default.product_type}">default.product_type</th>
+							<th th:text="#{default.city}"></th>
+							<th width="90"></th>
+						</tr>
 						</thead>
 						<tbody>
-							<tr th:each="supplier:${listing}">
-								<td th:text="${supplier.farm}"></td>
-								<td th:text="${supplier.supplier}"></td>
-								<td th:text="${supplier.productType}"></td>
-								<td th:text="${supplier.city}"></td>
-								<td align="center">
-									<a href="javascript:void(0);" th:attr="data-id=${supplier.id}" class="btn btn-xs btn-flat btn-primary editSupplierBtn" th:title="#{tooltip.edit_supplier}"><i class="fa fa-edit"></i></a>
-									<form th:action="@{/suppliers/delete.html}" method="post" style="display: inline;">
-										<input type="hidden" th:value="${supplier.id}" th:name="supplierId" />
-										<button type="submit" class="btn btn-xs btn-flat btn-danger" th:title="#{tooltip.delete_supplier}">
-											<i class="fa fa-trash"></i>
-										</button>
-									</form>
-								</td>
-							</tr>
+						<tr th:each="supplier:${listing}">
+							<td></td>
+							<td th:text="${supplier.farm}"></td>
+							<td th:text="${supplier.supplier}"></td>
+							<td th:text="${supplier.productType}"></td>
+							<td th:text="${supplier.city}"></td>
+							<td align="center">
+								<a href="javascript:void(0);" th:attr="data-id=${supplier.id}"
+									 class="btn btn-xs btn-flat btn-primary editSupplierBtn" th:title="#{tooltip.edit_supplier}"><i
+										class="fa fa-edit"></i></a>
+								<form th:action="@{/suppliers/delete.html}" method="post" style="display: inline;">
+									<input type="hidden" th:value="${supplier.id}" th:name="supplierId"/>
+									<button type="submit" class="btn btn-xs btn-flat btn-danger" th:title="#{tooltip.delete_supplier}">
+										<i class="fa fa-trash"></i>
+									</button>
+								</form>
+							</td>
+						</tr>
 						</tbody>
 					</table>
 				</div>
@@ -53,24 +60,35 @@
 
 <th:block layout:fragment="page-scripts">
 	<script type="text/javascript" th:inline="javascript">
-		$(document).ready(function() {
-		    $(document).on('click', '.editSupplierBtn', function () {
-		        var id = $(this).attr("data-id");
-		        document.location=[[@{/suppliers/}]]+id+'/edit.html';
-		    });
+      $(document).ready(function () {
+          $(document).on('click', '.editSupplierBtn', function () {
+              var id = $(this).attr("data-id");
+              document.location = [[@{/suppliers/
+          }]]
+              +id + '/edit.html';
+          });
 
-			
-			 $('#datatables-browser').DataTable({
-				"order": [[ 0, "desc" ]],
-           "responsive": true,
-           "columnDefs": [{"orderable":false,"targets":4}],
-				"language": {
-		            "url": langURL
-		        }
-			});
-		 
-		});
-		
+
+          $('#datatables-browser').DataTable({
+              "responsive": {
+                  details: {
+                      type: 'column',
+                      target: 'tr'
+                  }
+              },
+              "columnDefs": [{
+                  className: 'control',
+                  orderable: false,
+                  targets: 0
+              }],
+              "order": [[1, "desc"]],
+              "language": {
+                  "url": langURL
+              }
+          });
+
+      });
+
 	</script>
 </th:block>
 </html>

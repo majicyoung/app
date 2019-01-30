@@ -154,6 +154,7 @@
 					<table id="lastUserListByLogin" class="table table-hover table-striped table-bordered datatable order-column">
 						<thead>
 						<tr>
+							<th></th>
 							<th th:text="#{hall_of_fame.id}"></th>
 							<th th:text="#{hall_of_fame.email}"></th>
 							<th th:text="#{hall_of_fame.name}"></th>
@@ -162,6 +163,7 @@
 						</thead>
 						<tbody>
 						<tr th:each="user:${lastActiveUserListByActivity}">
+							<td></td>
 							<td th:text="${user.id}"></td>
 							<td th:text="${user.email}"></td>
 							<td th:text="${user.name}"></td>
@@ -195,8 +197,18 @@
           initDatePicker('#filter_datepicker', statDate, endDate);
 
           $('.datatable').DataTable({
-              "responsive": false,
-              "order": [[3, "desc"]],
+              "responsive": {
+                  details: {
+                      type: 'column',
+                      target: 'tr'
+                  }
+              },
+              "columnDefs": [{
+                  className: 'control',
+                  orderable: false,
+                  targets: 0
+              }],
+              "order": [[4, "desc"]],
               "language": {
                   "url": langURL
               }

@@ -65,7 +65,7 @@ public class FarmPondsController extends AbstractV8Controller {
 			pond = new RegEntityFarmPond();
 			pond.setFarm(farm);
 		} else {
-			pond = regEntityFarmPondRepository.findOne(dto.getId());
+			pond = regEntityFarmPondRepository.getOne(dto.getId());
 		}
 
 		regFarmDtoMapper.fillEntity(dto, pond);
