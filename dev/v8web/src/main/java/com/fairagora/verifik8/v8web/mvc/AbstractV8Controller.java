@@ -1,5 +1,9 @@
 package com.fairagora.verifik8.v8web.mvc;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -83,6 +87,37 @@ public class AbstractV8Controller {
 	@ModelAttribute("applicationRoles")
 	public List<SYSRole> applicationRoles() {
 		return roleRepository.findAll(new Sort("name"));
+	}
+	
+	protected Date previousDate() {
+		Date date = null;
+		DateFormat dateFormat = null;
+		try {
+			dateFormat = new SimpleDateFormat("yyyy-MM-dd 00:00:00");
+			Calendar c = Calendar.getInstance();
+			c.add(Calendar.YEAR, -1);
+			
+			date = new SimpleDateFormat("yyyy-MM-dd 00:00:00").parse(dateFormat.format(c.getTime()));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return date;
+	}
+	
+	protected Date currentDate() {
+		Date date = null;
+		DateFormat dateFormat = null;
+		try {
+			dateFormat = new SimpleDateFormat("yyyy-MM-dd 00:00:00");
+			Calendar c = Calendar.getInstance();
+			
+			date = new SimpleDateFormat("yyyy-MM-dd 00:00:00").parse(dateFormat.format(c.getTime()));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return date;
 	}
 
 }

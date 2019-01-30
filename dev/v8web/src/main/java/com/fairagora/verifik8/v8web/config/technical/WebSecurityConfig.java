@@ -16,20 +16,17 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
+import com.fairagora.verifik8.v8web.config.technical.auth.V8UserDetailsService;
+
 @Configuration
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-
-	static final String CLIENT_SECRET = "verifik8_secret";
-	static final String REMEBER_ME_PARAM = "remember_me";
-	static final String COOKIE_NAME = "verifik8_remember_me";
-
     @Autowired
     private DataSource dataSource;
 
     @Autowired
-    private UserDetailsService userDetailsService;
+    private V8UserDetailsService userDetailsService;
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {

@@ -118,5 +118,33 @@
 			"max": 18,
 			"min": 10
 		}
+	},
+	"Nitrite": {
+		"accept": {
+			"max": 4,
+			"min": 0
+		},
+		"default": 0,
+		"max": 6,
+		"min": 0,
+		"step": 0.01,
+		"warning": {
+			"max": 6,
+			"min": 4
+		}
+	},
+	"Phosphate": {
+		"accept": {
+			"max": 1,
+			"min": 0
+		},
+		"default": 0,
+		"max": 3,
+		"min": 0,
+		"step": 0.01,
+		"warning": {
+			"max": 3,
+			"min": 1
+		}
 	}
 }

@@ -7,9 +7,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.PrePersist;
+import javax.persistence.Transient;
 
-import com.fairagora.verifik8.v8web.config.technical.auth.V8LoggedUser;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 import com.fairagora.verifik8.v8web.data.domain.sys.SYSUser;
@@ -22,6 +21,11 @@ public abstract class V8Base {
 	 * when there would be nobody logged, we need to find some machine user
 	 */
 	private static final long DEFAULT_SYSTEM_USER = 1l;
+	/*
+	 * client id for oauth
+	 */
+	@Transient
+	protected String clientId;
 
 	@ManyToOne()
 	@JoinColumn(name = "UPDATER_ID")
@@ -43,7 +47,8 @@ public abstract class V8Base {
 			this.updatedAt = new Date();
 		}
 
-		if (SecurityContextHolder.getContext().getAuthentication() == null){
+		if (SecurityContextHolder.getContext().getAuthentication() == null ||
+				SecurityContextHolder.getContext().getAuthentication().getName().equals(this.clientId)){
 			this.updater = ApplicationContextProvider.getApplicationContext().getBean(SYSUserRepository.class)
 					.findOne(DEFAULT_SYSTEM_USER);
 		}else{
@@ -85,4 +90,13 @@ public abstract class V8Base {
 	public void setComment(String comment) {
 		this.comment = comment;
 	}
+
+	public String getClientId() {
+		return clientId;
+	}
+
+	public void setClientId(String clientId) {
+		this.clientId = clientId;
+	}
+	
 }

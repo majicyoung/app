@@ -129,7 +129,7 @@ public class PondActivityController extends AbstractV8Controller {
 	@RequestMapping(value = {"/ponds/{pondId}/activities/{activityId}/edit.html",  "/farm/{farmId}/pond/{pondId}/activities/{activityId}/edit.html"}, method = RequestMethod.GET)
 	public String showPondActivities(@PathVariable("farmId") Optional<Long> farmId, @PathVariable("pondId") Long pondId, @PathVariable("activityId") Long activityId, Model mv) {
 
-		DTFarmPondActivity act = pondActivityRepository.getOne(activityId);
+		DTFarmPondActivity act = pondActivityRepository.findById(activityId);
 
 		PondActivityDto dto = new PondActivityDto();
 		dtoMapper.toDto(act, dto);
@@ -171,7 +171,7 @@ public class PondActivityController extends AbstractV8Controller {
 		if (dto.getId() == null || dto.getId().intValue() == 0) {
 			act = new DTFarmPondActivity();
 		} else {
-			act = pondActivityRepository.getOne(dto.getId());
+			act = pondActivityRepository.findById(dto.getId());
 			farmPondProductionCycleService.rollbackPondProductionCycle(act);
 		}
 
@@ -200,7 +200,7 @@ public class PondActivityController extends AbstractV8Controller {
 	@PreAuthorize("hasAuthority('W_PONDACTIVTY')")
 	@RequestMapping(value = {"/ponds/{pondId}/activities/delete.html", "/farm/{farmId}/pond/{pondId}/activities/delete.html"}, method = RequestMethod.POST)
 	public String deletePondActivities(@PathVariable("farmId") Optional<Long> farmId, @PathVariable("pondId") Long pondId, @RequestParam("activityId") Long activityId, Model mv) {
-		DTFarmPondActivity act = pondActivityRepository.findOne(activityId);
+		DTFarmPondActivity act = pondActivityRepository.findById(activityId);
 		if (act != null) {
 			farmPondProductionCycleService.rollbackPondProductionCycle(act);
 		}
