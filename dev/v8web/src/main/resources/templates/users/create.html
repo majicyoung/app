@@ -31,6 +31,12 @@
                                            th:field="*{name}"></input>
                                 </div>
                             </div>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    <label th:text="#{default.enable}+'*'">default.enable*</label>
+                                    <input type="checkbox" name="active" th:checked="${userDto.active}"/>
+                                </div>
+                            </div>
                         </div>
                         <div class="row">
                             <div class="col-md-6 col-sm-6 col-xs-12">

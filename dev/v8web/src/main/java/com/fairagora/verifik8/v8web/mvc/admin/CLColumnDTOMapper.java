@@ -1,9 +1,12 @@
 package com.fairagora.verifik8.v8web.mvc.admin;
 
+import com.fairagora.verifik8.v8web.data.domain.cl.CLAppHazardousTrainingType;
 import com.fairagora.verifik8.v8web.data.domain.cl.CLColumn;
 import com.fairagora.verifik8.v8web.mvc.admin.dto.CLColumnDto;
+import com.fairagora.verifik8.v8web.mvc.admin.dto.CLDto;
 import com.fairagora.verifik8.v8web.mvc.infra.dtomapping.EntityDtoMapper;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.ReportingPolicy;
 
@@ -11,5 +14,7 @@ import org.mapstruct.ReportingPolicy;
 public interface CLColumnDTOMapper {
 
     void toDto(CLColumn clColumn, @MappingTarget CLColumnDto dto);
+
+    void fillEntity(CLColumnDto dto, @MappingTarget CLColumn clColumn);
 
 }

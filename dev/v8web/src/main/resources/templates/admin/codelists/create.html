@@ -250,9 +250,11 @@
                             <div class="col-md-12 col-sm-12 col-xs-12">
                                 <div class="form-group">
                                     <label th:text="#{cl.column.clAdminLevel1Id}">cl.column.clAdminLevel1Id</label>
-                                    <input type="text" class="form-control"
-                                           th:placeholder="#{cl.column.clAdminLevel1Id}"
-                                           th:field="*{clAdminLevel1Id}"/>
+                                    <select class="form-control" th:field="*{clAdminLevel1Id}">
+                                        <option value="" th:text="#{cl.column.clAdminLevel1Id}"></option>
+                                        <option th:each="adminLevel1 : ${clRefAdminLevel1}" th:value="${adminLevel1.id}"
+                                                th:text="${adminLevel1.name}"></option>
+                                    </select>
                                 </div>
                             </div>
                         </div>
@@ -260,9 +262,11 @@
                             <div class="col-md-12 col-sm-12 col-xs-12">
                                 <div class="form-group">
                                     <label th:text="#{cl.column.clAppConstructionLocationType}">cl.column.clAppConstructionLocationType</label>
-                                    <input type="text" class="form-control"
-                                           th:placeholder="#{cl.column.clAppConstructionLocationType}"
-                                           th:field="*{clAppConstructionLocationType}"/>
+                                    <select class="form-control" th:field="*{clAppConstructionLocationType}">
+                                        <option value="" th:text="#{cl.column.clAppConstructionLocationType}"></option>
+                                        <option th:each="quantityUnit : ${clAppQuantityUnit}" th:value="${quantityUnit.id}"
+                                                th:text="${quantityUnit.name}"></option>
+                                    </select>
                                 </div>
                             </div>
                         </div>
@@ -270,8 +274,11 @@
                             <div class="col-md-12 col-sm-12 col-xs-12">
                                 <div class="form-group">
                                     <label th:text="#{cl.column.clCountryId}+'*'">cl.column.clCountryId</label>
-                                    <input type="text" class="form-control" th:placeholder="#{cl.column.clCountryId}"
-                                           required="required" th:field="*{clCountryId}"/>
+                                    <select class="form-control" th:field="*{clCountryId}">
+                                        <option value="" th:text="#{cl.column.clCountryId}"></option>
+                                        <option th:each="country : ${clRefCountry}" th:value="${country.id}"
+                                                th:text="${country.name}"></option>
+                                    </select>
                                 </div>
                             </div>
                         </div>
@@ -279,8 +286,11 @@
                             <div class="col-md-12 col-sm-12 col-xs-12">
                                 <div class="form-group">
                                     <label th:text="#{cl.column.clEntityTypeId}">cl.column.clEntityTypeId</label>
-                                    <input type="text" class="form-control" th:placeholder="#{cl.column.clEntityTypeId}"
-                                           th:field="*{clEntityTypeId}"/>
+                                    <select class="form-control" th:field="*{clEntityTypeId}">
+                                        <option value="" th:text="#{cl.column.clEntityTypeId}"></option>
+                                        <option th:each="entityType : ${clAppEntityType}" th:value="${entityType.id}"
+                                                th:text="${entityType.name}"></option>
+                                    </select>
                                 </div>
                             </div>
                         </div>
@@ -297,8 +307,11 @@
                             <div class="col-md-12 col-sm-12 col-xs-12">
                                 <div class="form-group">
                                     <label th:text="#{cl.column.clLanguageId}">cl.column.clLanguageId</label>
-                                    <input type="text" class="form-control" th:placeholder="#{cl.column.clLanguageId}"
-                                           th:field="*{clLanguageId}"/>
+                                    <select class="form-control" th:field="*{clLanguageId}">
+                                        <option value="" th:text="#{cl.column.clLanguageId}"></option>
+                                        <option th:each="refLanguage : ${clRefLanguage}" th:value="${refLanguage.id}"
+                                                th:text="${refLanguage.name}"></option>
+                                    </select>
                                 </div>
                             </div>
                         </div>
@@ -306,9 +319,11 @@
                             <div class="col-md-12 col-sm-12 col-xs-12">
                                 <div class="form-group">
                                     <label th:text="#{cl.column.clProductsTypeId}">cl.column.clProductsTypeId</label>
-                                    <input type="text" class="form-control"
-                                           th:placeholder="#{cl.column.clProductsTypeId}"
-                                           th:field="*{clRefProductType}"/>
+                                    <select class="form-control" th:field="*{clRefProductType}">
+                                        <option value="" th:text="#{cl.column.clProductsTypeId}"></option>
+                                        <option th:each="productTypes : ${clRefProductTypes}" th:value="${productTypes.id}"
+                                                th:text="${productTypes.name}"></option>
+                                    </select>
                                 </div>
                             </div>
                         </div>
@@ -316,9 +331,11 @@
                             <div class="col-md-12 col-sm-12 col-xs-12">
                                 <div class="form-group">
                                     <label th:text="#{cl.column.clQuantityUnitTypeId}">cl.column.clQuantityUnitTypeId</label>
-                                    <input type="text" class="form-control"
-                                           th:placeholder="#{cl.column.clQuantityUnitTypeId}"
-                                           th:field="*{clQuantityUnitTypeId}"/>
+                                    <select class="form-control" th:field="*{clQuantityUnitTypeId}">
+                                        <option value="" th:text="#{cl.column.clQuantityUnitTypeId}"></option>
+                                        <option th:each="quantityUnitType : ${clAppQuantityUnitType}" th:value="${quantityUnitType.id}"
+                                                th:text="${quantityUnitType.name}"></option>
+                                    </select>
                                 </div>
                             </div>
                         </div>
@@ -326,9 +343,11 @@
                             <div class="col-md-12 col-sm-12 col-xs-12">
                                 <div class="form-group">
                                     <label th:text="#{cl.column.clRecommandUnitId}">cl.column.clRecommandUnitId</label>
-                                    <input type="text" class="form-control"
-                                           th:placeholder="#{cl.column.clRecommandUnitId}"
-                                           th:field="*{clRecommandUnitId}"/>
+                                    <select class="form-control" th:field="*{clRecommandUnitId}">
+                                        <option value="" th:text="#{cl.column.clRecommandUnitId}"></option>
+                                        <option th:each="quantityUnit : ${clAppQuantityUnit}" th:value="${quantityUnit.id}"
+                                                th:text="${quantityUnit.name}"></option>
+                                    </select>
                                 </div>
                             </div>
                         </div>
@@ -336,9 +355,11 @@
                             <div class="col-md-12 col-sm-12 col-xs-12">
                                 <div class="form-group">
                                     <label th:text="#{cl.column.clRecomandQuantityUnitId}">cl.column.clRecomandQuantityUnitId</label>
-                                    <input type="text" class="form-control"
-                                           th:placeholder="#{cl.column.clRecomandQuantityUnitId}"
-                                           th:field="*{clRecomandQuantityUnitId}"/>
+                                    <select class="form-control" th:field="*{clRecomandQuantityUnitId}">
+                                        <option value="" th:text="#{cl.column.clRecomandQuantityUnitId}"></option>
+                                        <option th:each="quantityUnit : ${clAppQuantityUnit}" th:value="${quantityUnit.id}"
+                                                th:text="${quantityUnit.name}"></option>
+                                    </select>
                                 </div>
                             </div>
                         </div>
@@ -346,8 +367,11 @@
                             <div class="col-md-12 col-sm-12 col-xs-12">
                                 <div class="form-group">
                                     <label th:text="#{cl.column.clRefRegionId}">cl.column.clRefRegionId</label>
-                                    <input type="text" class="form-control" th:placeholder="#{cl.column.clRefRegionId}"
-                                           th:field="*{clRefRegionId}"/>
+                                    <select class="form-control" th:field="*{clRefRegionId}">
+                                        <option value="" th:text="#{cl.column.clRefRegionId}"></option>
+                                        <option th:each="region : ${clRefRegion}" th:value="${region.id}"
+                                                th:text="${region.name}"></option>
+                                    </select>
                                 </div>
                             </div>
                         </div>
@@ -355,9 +379,11 @@
                             <div class="col-md-12 col-sm-12 col-xs-12">
                                 <div class="form-group">
                                     <label th:text="#{cl.column.clValueMeasureUnitId}">cl.column.clValueMeasureUnitId</label>
-                                    <input type="text" class="form-control"
-                                           th:placeholder="#{cl.column.clValueMeasureUnitId}"
-                                           th:field="*{clValueMeasureUnitId}"/>
+                                    <select class="form-control" th:field="*{clValueMeasureUnitId}">
+                                        <option value="" th:text="#{cl.column.clValueMeasureUnitId}"></option>
+                                        <option th:each="measureType : ${clAppMeasureType}" th:value="${measureType.id}"
+                                                th:text="${measureType.name}"></option>
+                                    </select>
                                 </div>
                             </div>
                         </div>
@@ -365,9 +391,23 @@
                             <div class="col-md-12 col-sm-12 col-xs-12">
                                 <div class="form-group">
                                     <label th:text="#{cl.column.clValueQuantityUnitId}">cl.column.clValueQuantityUnitId</label>
-                                    <input type="text" class="form-control"
-                                           th:placeholder="#{cl.column.clValueQuantityUnitId}"
-                                           th:field="*{clValueQuantityUnitId}"/>
+                                    <select class="form-control" th:field="*{clValueQuantityUnitId}">
+                                        <option value="" th:text="#{cl.column.clValueQuantityUnitId}"></option>
+                                        <option th:each="quantityUnit : ${clAppQuantityUnit}" th:value="${quantityUnit.id}"
+                                                th:text="${quantityUnit.name}"></option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" th:if="${clColumnDto.regEntityId==true}">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="form-group">
+                                    <label th:text="#{cl.column.regEntityId}">cl.column.regEntityId</label>
+                                    <select class="form-control" th:field="*{regEntity}">
+                                        <option value="" th:text="#{cl.column.regEntityId}"></option>
+                                        <option th:each="productSupplier : ${regEntity}" th:value="${productSupplier.id}"
+                                                th:text="${productSupplier.name}"></option>
+                                    </select>
                                 </div>
                             </div>
                         </div>

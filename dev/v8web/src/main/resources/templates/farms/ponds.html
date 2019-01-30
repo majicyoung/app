@@ -29,6 +29,7 @@
                       <table id="pondList" class="table table-bordered table-striped table-hover table-farm-staff"
                              style="margin: 10px 0;">
                         <tr>
+                          <th></th>
                           <th th:text="#{farm.pond_number}">farm.pond_number</th>
                           <th th:text="#{default.area}"></th>
                           <th th:text="#{default.unit}"></th>
@@ -38,6 +39,7 @@
                         </tr>
 
                         <tr th:each="pond:${pondListing}">
+                          <td></td>
                           <td th:text="${pond.number}"></td>
                           <td th:text="${pond.size.quantity}"></td>
                           <td th:text="${pond.size.unit.localisedName}"></td>
@@ -80,8 +82,8 @@
                           </td>
                         </tr>
                         <tr class="bg-secondary">
-                          <th th:text="#{farm.total_pond_area}"></th>
                           <th></th>
+                          <th th:text="#{farm.total_pond_area}"></th>
                           <th id="totalFarmPondSize" class="bg-dark"></th>
                           <th th:text="#{farm.area}"></th>
                           <th th:text="${farmSize}" class="bg-success">farmSize</th>
@@ -107,7 +109,7 @@
                     <div class="col-xs-6">
                       <form th:action="@{'/farm/'+${farmId}+'/pond.html'}" th:object="${pondDto}" id="pondEditorForm"
                             method="post" onsubmit="return addFarmPond()">
-                        <h4 class="form-pond-title" th:text="#{farm.add_pond}"></h4>
+                        <h4 id="pond-title" class="form-pond-title" th:text="#{farm.add_pond}"></h4>
                         <input type="hidden" id="pondId" th:field="*{id}"/>
                         <input type="hidden" id="farm" th:field="*{farm}"/>
                         <div class="form-group row">
@@ -169,7 +171,7 @@
                         <div class="form-group row">
                           <div class="col-xs-9 col-xs-offset-3 text-left" style="margin-top: 20px;">
                             <button type="submit" class="btn btn-flat btn-primary btn-form-pond">
-                              <i class="fa fa-plus"></i> <span
+                              <i class="fa fa-plus"></i> <span id="span-submit"
                                 th:text="#{farm.add_pond}"></span></button>
                             <a href="javascript:void(0);" class="btn btn-flat btn-warning btn-form-pond hide"
                                th:title="#{default.cancel}" onclick="resetForm(5,'pond');"><i class="fa fa-times"></i>
@@ -198,6 +200,8 @@
       var farmSize = [[${farmSize}]];
       var farmId = [[${farmId}]];
 
+			var modifyPond = [[#{farm.modify_pond}]];
+			var addPond = [[#{farm.add_pond}]];
 
 
       $(document).ready(function () {
@@ -224,6 +228,8 @@
           });
 
           $(document).on('click', '.editPondBtn', function () {
+              $("#pond-title").text(modifyPond);
+							$("#span-submit").text(modifyPond);
               var id = $(this).attr("data-id");
               var p = ponds[id];
               if (p != null) {
@@ -244,7 +250,17 @@
           document.getElementById("totalFarmPondSize").innerHTML = totalFarmPondSize;
 
           $('#pondList').DataTable({
-              "responsive": true,
+              "responsive": {
+                  details: {
+                      type: 'column',
+                      target: 'tr'
+                  }
+              },
+              "columnDefs": [{
+                  className: 'control',
+                  orderable: false,
+                  targets: 0
+              }],
               "language": {
                   "url": langURL
               }

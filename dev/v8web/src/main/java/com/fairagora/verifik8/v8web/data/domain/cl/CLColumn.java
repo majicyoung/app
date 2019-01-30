@@ -10,6 +10,9 @@ public class CLColumn {
     @Column(name = "TABLE_NAME")
     protected String tableName;
 
+    @Column(name = "TABLE_DESCRIPTION")
+    protected String tableDescription;
+
     @Column(name = "ID")
     protected boolean id;
 
@@ -127,12 +130,24 @@ public class CLColumn {
     @Column(name = "CL_VALUE_QUANTITY_UNIT_ID")
     protected boolean clValueQuantityUnitId;
 
+    @Column(name = "REG_ENTITY_ID")
+    protected boolean regEntityId;
+
+
     public String getTableName() {
         return tableName;
     }
 
     public void setTableName(String tableName) {
         this.tableName = tableName;
+    }
+
+    public String getTableDescription() {
+        return tableDescription;
+    }
+
+    public void setTableDescription(String tableDescription) {
+        this.tableDescription = tableDescription;
     }
 
     public boolean isId() {
@@ -445,5 +460,13 @@ public class CLColumn {
 
     public void setClValueQuantityUnitId(boolean clValueQuantityUnitId) {
         this.clValueQuantityUnitId = clValueQuantityUnitId;
+    }
+
+    public boolean isRegEntityId() {
+        return regEntityId;
+    }
+
+    public void setRegEntityId(boolean regEntityId) {
+        this.regEntityId = regEntityId;
     }
 }

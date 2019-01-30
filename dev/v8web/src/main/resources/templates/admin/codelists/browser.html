@@ -1,42 +1,81 @@
 <!DOCTYPE html>
 <html layout:decorator="inc/main-layout" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+			xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+			xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
 <div layout:fragment="content">
 
-    <div class="row">
-        <div class="col-xs-12">
-            <div class="box">
-                <div class="box-header with-border">
-                    <h3 class="box-title pull-left" th:text="#{admin.referenceDataManagement.list}">
-                        admin.referenceDataManagement.list</h3>
-                    <div class="box-tools">
-                    </div>
-                </div>
-                <div class="box-body">
-                    <table class="table table-hover table-striped table-bordered datatable" id="userTable">
-                        <thead>
-                        <tr>
-                            <th th:text="#{admin.referenceDataManagement.tableName}">
-                                admin.referenceDataManagement.tableName
-                            </th>
-                            <th></th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr th:each="table : ${allTables}">
-                            <td th:inline="text">[[${table.tableName}]]</td>
-                            <td align="center">
-                                <a th:href="@{'/admin/codelists/browser/'+${table.tableName}}"
-                                   class="btn btn-sm btn-flat btn-primary"><i class="fa fa-edit"></i></a>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="box">
+				<div class="box-header with-border">
+					<h3 class="box-title pull-left" th:text="#{admin.referenceDataManagement.list}">
+						admin.referenceDataManagement.list</h3>
+					<div class="box-tools">
+					</div>
+				</div>
+				<div class="box-body">
+					<table class="table table-hover table-striped table-bordered datatable" id="columnTable">
+						<thead>
+						<tr>
+							<th></th>
+							<th th:text="#{admin.referenceDataManagement.tableName}">
+								admin.referenceDataManagement.tableName
+							</th>
+							<th th:text="#{admin.referenceDataManagement.tableDescription}">
+								admin.referenceDataManagement.tableDescription
+							</th>
+							<th></th>
+						</tr>
+						</thead>
+						<tbody>
+						<tr th:each="table : ${allTables}">
+							<td></td>
+							<td th:inline="text">[[${table.tableName}]]</td>
+							<td th:inline="text">[[${table.tableDescription}]]</td>
+							<td align="center">
+								<a th:href="@{'/admin/codelists/browser/'+${table.tableName}}"
+									 class="btn btn-sm btn-flat btn-warning"><i class="fa fa-plus-square"></i></a>
+								<a th:href="@{'/admin/codelists/'+${table.tableName}+'/edit.html'}"
+									 class="btn btn-sm btn-flat btn-primary"><i class="fa fa-edit"></i></a>
+							</td>
+						</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
+
+
+<th:block layout:fragment="page-scripts">
+	<script th:inline="javascript">
+      /*<![CDATA[*/
+
+      $(document).ready(function () {
+          $('#columnTable').DataTable({
+              "responsive": {
+                  details: {
+                      type: 'column',
+                      target: 'tr'
+                  }
+              },
+              "columnDefs": [{
+                  className: 'control',
+                  orderable: false,
+                  targets: 0
+              }],
+              "order": [[1, "desc"]],
+              "language": {
+                  "url": langURL
+              }
+          });
+
+      });
+      /*]]>*/
+	</script>
+</th:block>
+
+
 </html>

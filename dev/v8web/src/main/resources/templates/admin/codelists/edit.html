@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html layout:decorator="inc/main-layout" xmlns:th="http://www.thymeleaf.org"
+			xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<div layout:fragment="content">
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="box" id="user-box">
+				<div class="box-header with-border">
+					<h3 class="box-title" th:text="#{cl.edit}">cl.edit</h3>
+					<div class="box-tools">
+						<a th:href="@{'/admin/codelists/browser.html'}"
+							 class="btn btn-sm btn-flat btn-warning"><i
+								class="fa fa-backward"></i> <span th:text="#{default.back}"></span></a>
+					</div>
+				</div>
+				<form role="form" class="mainForm"
+							th:action="@{'/admin/codelists/'+${table}+'/edit.html'}"
+							th:object="${column}" method="post" autocomplete="off"
+							onsubmit="return !hasEmptyFields('#user-box form .form-control[required]');">
+					<div class="box-body" id="bloc-user-form">
+
+						<div class="row">
+							<div class="col-md-6 col-sm-6 col-xs-12">
+								<label class="control-label" th:for="${#ids.next('column.tableName')}"
+											 th:text="#{cl.column.tableName}"></label>
+								<input type="text" class="form-control" th:field="${column.tableName}"/>
+							</div>
+
+							<div class="col-md-6 col-sm-6 col-xs-12">
+								<label class="control-label" th:for="${#ids.next('column.tableDescription')}"
+											 th:text="#{cl.column.tableDescription}"></label>
+								<input type="text" class="form-control" th:field="${column.tableDescription}"/>
+
+							</div>
+						</div>
+
+
+						<div class="row">
+							<div class="col-md-6 col-sm-6 col-xs-12">
+								<input type="checkbox" name="column.id" th:field="${column.id}" th:checked="${column.id}"/>
+								<label class="control-label"
+											 th:text="#{cl.column.id}"></label>
+							</div>
+
+
+							<div class="col-md-6 col-sm-6 col-xs-12">
+								<input type="checkbox" name="column.enabled" th:field="${column.enabled}"
+											 th:checked="${column.enabled}"/>
+								<label class="control-label"
+											 th:text="#{cl.column.enabled}"></label>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-md-6 col-sm-6 col-xs-12">
+								<input type="checkbox" name="column.code" th:field="${column.code}" th:checked="${column.code}"/>
+								<label class="control-label" th:text="#{cl.column.code}"></label>
+							</div>
+
+							<div class="col-md-6 col-sm-6 col-xs-12">
+								<input type="checkbox" name="column.ranking}" th:field="${column.ranking}"
+											 th:checked="${column.ranking}"/>
+								<label class="control-label"
+											 th:text="#{cl.column.ranking}"></label>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-md-6 col-sm-6 col-xs-12">
+								<input type="checkbox" name="estimate_escape" th:field="${column.name}" th:checked="${column.name}"/>
+								<label class="control-label" th:text="#{cl.column.name}"></label>
+							</div>
+							<div class="col-md-6 col-sm-6 col-xs-12">
+								<input type="checkbox" name="estimate_escape" th:field="${column.description}"
+											 th:checked="${column.description}"/>
+								<label class="control-label" th:text="#{cl.column.description}"></label>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-md-6 col-sm-6 col-xs-12">
+								<input type="checkbox" name="estimate_escape" th:field="${column.i18nDefault}"
+											 th:checked="${column.i18nDefault}"/>
+								<label class="control-label" th:text="#{cl.column.i18nDefault}"></label>
+							</div>
+
+							<div class="col-md-6 col-sm-6 col-xs-12">
+								<input type="checkbox" name="estimate_escape" th:field="${column.i18nEn}"
+											 th:checked="${column.i18nEn}"/>
+								<label class="control-label" th:text="#{cl.column.i18nEn}"></label>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-md-6 col-sm-6 col-xs-12">
+								<input type="checkbox" name="estimate_escape" th:field="${column.i18nFr}"
+											 th:checked="${column.i18nFr}"/>
+								<label class="control-label" th:text="#{cl.column.i18nFr}"></label>
+							</div>
+							<div class="col-md-6 col-sm-6 col-xs-12">
+								<input type="checkbox" name="estimate_escape" th:field="${column.i18nEs}"
+											 th:checked="${column.i18nEs}"/>
+								<label class="control-label" th:text="#{cl.column.i18nEs}"></label>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-md-6 col-sm-6 col-xs-12">
+								<input type="checkbox" name="estimate_escape" th:field="${column.i18nTh}"
+											 th:checked="${column.i18nTh}"/>
+								<label class="control-label" th:text="#{cl.column.i18nTh}"></label>
+
+							</div>
+							<div class="col-md-6 col-sm-6 col-xs-12">
+								<input type="checkbox" name="estimate_escape" th:field="${column.i18nVt}"
+											 th:checked="${column.i18nVt}"/>
+								<label class="control-label" th:text="#{cl.column.i18nVt}"></label>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-md-6 col-sm-6 col-xs-12">
+								<input type="checkbox" name="estimate_escape" th:field="${column.i18nLa}"
+											 th:checked="${column.i18nLa}"/>
+								<label class="control-label" th:text="#{cl.column.i18nLa}"></label>
+							</div>
+							<div class="col-md-6 col-sm-6 col-xs-12">
+								<input type="checkbox" name="estimate_escape" th:field="${column.i18nId}"
+											 th:checked="${column.i18nId}"/>
+								<label class="control-label" th:text="#{cl.column.i18nId}"></label>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-md-6 col-sm-6 col-xs-12">
+								<input type="checkbox" name="estimate_escape" th:field="${column.i18nKh}"
+											 th:checked="${column.i18nKh}"/>
+								<label class="control-label" th:text="#{cl.column.i18nKh}"></label>
+							</div>
+							<div class="col-md-6 col-sm-6 col-xs-12">
+								<input type="checkbox" name="estimate_escape" th:field="${column.company}"
+											 th:checked="${column.company}"/>
+								<label class="control-label" th:text="#{cl.column.company}"></label>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-md-6 col-sm-6 col-xs-12">
+								<input type="checkbox" name="estimate_escape" th:field="${column.valueMeasure}"
+											 th:checked="${column.valueMeasure}"/>
+								<label class="control-label" th:text="#{cl.column.valueMeasure}"></label>
+							</div>
+							<div class="col-md-6 col-sm-6 col-xs-12">
+								<input type="checkbox" name="estimate_escape" th:field="${column.valueText}"
+											 th:checked="${column.valueText}"/>
+								<label class="control-label" th:text="#{cl.column.valueText}"></label>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-md-6 col-sm-6 col-xs-12">
+								<input type="checkbox" name="estimate_escape" th:field="${column.valueCode}"
+											 th:checked="${column.valueCode}"/>
+								<label class="control-label" th:text="#{cl.column.valueCode}"></label>
+							</div>
+							<div class="col-md-6 col-sm-6 col-xs-12">
+								<input type="checkbox" name="estimate_escape" th:field="${column.valueDate}"
+											 th:checked="${column.valueDate}"/>
+								<label class="control-label" th:text="#{cl.column.valueDate}"></label>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-md-6 col-sm-6 col-xs-12">
+								<input type="checkbox" name="estimate_escape" th:field="${column.valueIndicator}"
+											 th:checked="${column.valueIndicator}"/>
+								<label class="control-label" th:text="#{cl.column.valueIndicator}"></label>
+							</div>
+							<div class="col-md-6 col-sm-6 col-xs-12">
+								<input type="checkbox" name="estimate_escape" th:field="${column.valueQuantity}"
+											 th:checked="${column.valueQuantity}"/>
+								<label class="control-label" th:text="#{cl.column.valueQuantity}"></label>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-md-6 col-sm-6 col-xs-12">
+								<input type="checkbox" name="estimate_escape" th:field="${column.cpcCode}"
+											 th:checked="${column.cpcCode}"/>
+								<label class="control-label" th:text="#{cl.column.cpcCode}"></label>
+							</div>
+							<div class="col-md-6 col-sm-6 col-xs-12">
+								<input type="checkbox" name="estimate_escape" th:field="${column.hsCode}"
+											 th:checked="${column.hsCode}"/>
+								<label class="control-label" th:text="#{cl.column.hsCode}"></label>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-md-6 col-sm-6 col-xs-12">
+								<input type="checkbox" name="estimate_escape" th:field="${column.iso3Code}"
+											 th:checked="${column.iso3Code}"/>
+								<label class="control-label" th:text="#{cl.column.iso3Code}"></label>
+							</div>
+							<div class="col-md-6 col-sm-6 col-xs-12">
+								<input type="checkbox" name="estimate_escape" th:field="${column.scientificName}"
+											 th:checked="${column.scientificName}"/>
+								<label class="control-label" th:text="#{cl.column.scientificName}"></label>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-md-6 col-sm-6 col-xs-12">
+								<input type="checkbox" name="estimate_escape" th:field="${column.clAdminLevel1Id}"
+											 th:checked="${column.clAdminLevel1Id}"/>
+								<label class="control-label" th:text="#{cl.column.clAdminLevel1Id}"></label>
+							</div>
+
+							<div class="col-md-6 col-sm-6 col-xs-12">
+								<input type="checkbox" name="estimate_escape" th:field="${column.clAppConstructionLocationType}"
+											 th:checked="${column.clAppConstructionLocationType}"/>
+								<label class="control-label" th:text="#{cl.column.clAppConstructionLocationType}"></label>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-md-6 col-sm-6 col-xs-12">
+								<input type="checkbox" name="estimate_escape" th:field="${column.clAppQuantityUnit}"
+											 th:checked="${column.clAppQuantityUnit}"/>
+								<label class="control-label" th:text="#{cl.column.clAppQuantityUnit}"></label>
+							</div>
+							<div class="col-md-6 col-sm-6 col-xs-12">
+								<input type="checkbox" name="estimate_escape" th:field="${column.clCountryId}"
+											 th:checked="${column.clCountryId}"/>
+								<label class="control-label" th:text="#{cl.column.clCountryId}"></label>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-md-6 col-sm-6 col-xs-12">
+								<input type="checkbox" name="estimate_escape" th:field="${column.clEntityTypeId}"
+											 th:checked="${column.clEntityTypeId}"/>
+								<label class="control-label" th:text="#{cl.column.clEntityTypeId}"></label>
+							</div>
+							<div class="col-md-6 col-sm-6 col-xs-12">
+								<input type="checkbox" name="estimate_escape" th:field="${column.clFarmTypeId}"
+											 th:checked="${column.clFarmTypeId}"/>
+								<label class="control-label" th:text="#{cl.column.clFarmTypeId}"></label>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-md-6 col-sm-6 col-xs-12">
+								<input type="checkbox" name="estimate_escape" th:field="${column.clLanguageId}"
+											 th:checked="${column.clLanguageId}"/>
+								<label class="control-label" th:text="#{cl.column.clLanguageId}"></label>
+							</div>
+							<div class="col-md-6 col-sm-6 col-xs-12">
+								<input type="checkbox" name="estimate_escape" th:field="${column.clProductsTypeId}"
+											 th:checked="${column.clProductsTypeId}"/>
+								<label class="control-label" th:text="#{cl.column.clProductsTypeId}"></label>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-md-6 col-sm-6 col-xs-12">
+								<input type="checkbox" name="estimate_escape" th:field="${column.clQuantityUnitTypeId}"
+											 th:checked="${column.clQuantityUnitTypeId}"/>
+								<label class="control-label" th:text="#{cl.column.clQuantityUnitTypeId}"></label>
+							</div>
+							<div class="col-md-6 col-sm-6 col-xs-12">
+								<input type="checkbox" name="estimate_escape" th:field="${column.clRecommandUnitId}"
+											 th:checked="${column.clRecommandUnitId}"/>
+								<label class="control-label" th:text="#{cl.column.clRecommandUnitId}"></label>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-md-6 col-sm-6 col-xs-12">
+								<input type="checkbox" name="estimate_escape" th:field="${column.clRecomandQuantityUnitId}"
+											 th:checked="${column.clRecomandQuantityUnitId}"/>
+								<label class="control-label" th:text="#{cl.column.clRecomandQuantityUnitId}"></label>
+							</div>
+							<div class="col-md-6 col-sm-6 col-xs-12">
+								<input type="checkbox" name="estimate_escape" th:field="${column.clRefRegionId}"
+											 th:checked="${column.clRefRegionId}"/>
+								<label class="control-label" th:text="#{cl.column.clRefRegionId}"></label>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-md-6 col-sm-6 col-xs-12">
+								<input type="checkbox" name="estimate_escape" th:field="${column.clValueMeasureUnitId}"
+											 th:checked="${column.clValueMeasureUnitId}"/>
+								<label class="control-label" th:text="#{cl.column.clValueMeasureUnitId}"></label>
+							</div>
+							<div class="col-md-6 col-sm-6 col-xs-12">
+								<input type="checkbox" name="estimate_escape" th:field="${column.clValueQuantityUnitId}"
+											 th:checked="${column.clValueQuantityUnitId}"/>
+								<label class="control-label" th:text="#{cl.column.clValueQuantityUnitId}"></label>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-md-6 col-sm-6 col-xs-12">
+								<input type="checkbox" name="estimate_escape" th:field="${column.regEntityId}"
+											 th:checked="${column.regEntityId}"/>
+								<label class="control-label" th:text="#{cl.column.regEntityId}"></label>
+							</div>
+						</div>
+					</div>
+
+					<div class="box-footer text-center">
+						<small th:text="'*'+#{default.mandatory_field}">*default.mandatory_field</small>
+						<a th:href="@{'/admin/codelists/browser.html'}" class="btn btn-warning"><i
+								class="fa fa-times"></i>
+							<span th:text="#{default.cancel}">default.cancel</span></a>
+
+						<button type="submit" class="btn btn-success">
+							<span th:text="#{default.submit}">default.submit</span> <i class="fa fa-check"></i>
+						</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+</html>

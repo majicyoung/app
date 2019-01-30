@@ -87,7 +87,15 @@ public class UsersController extends AbstractV8Controller {
     @PreAuthorize("hasAuthority('W_USEREDITOR')")
     @RequestMapping(value = "/user/{id}/delete.html", method = RequestMethod.POST)
     public String deleteUser(@PathVariable("id") Long id, Model mv) {
-        userRepository.delete(id);
+        try {
+            userRepository.delete(id);
+        }catch (Exception e){
+            SYSUser user =  userRepository.findOne(id);
+            if (user != null){
+                user.setActive(false);
+                userRepository.save(user);
+            }
+        }
         return "redirect:/users.html";
     }
 

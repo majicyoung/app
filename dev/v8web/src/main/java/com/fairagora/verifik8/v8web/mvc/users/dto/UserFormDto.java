@@ -20,6 +20,9 @@ public class UserFormDto {
 
 	protected String phoneNumber;
 
+	protected boolean active;
+
+
 	/**
 	 * id of the country, optional
 	 */
@@ -143,5 +146,13 @@ public class UserFormDto {
 
 	public void setBuyer(Long buyer) {
 		this.buyer = buyer;
+	}
+
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
 	}
 }

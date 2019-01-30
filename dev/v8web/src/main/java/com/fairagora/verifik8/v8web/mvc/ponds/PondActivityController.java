@@ -129,7 +129,7 @@ public class PondActivityController extends AbstractV8Controller {
 	@RequestMapping(value = {"/ponds/{pondId}/activities/{activityId}/edit.html",  "/farm/{farmId}/pond/{pondId}/activities/{activityId}/edit.html"}, method = RequestMethod.GET)
 	public String showPondActivities(@PathVariable("farmId") Optional<Long> farmId, @PathVariable("pondId") Long pondId, @PathVariable("activityId") Long activityId, Model mv) {
 
-		DTFarmPondActivity act = pondActivityRepository.findOne(activityId);
+		DTFarmPondActivity act = pondActivityRepository.getOne(activityId);
 
 		PondActivityDto dto = new PondActivityDto();
 		dtoMapper.toDto(act, dto);
@@ -171,7 +171,7 @@ public class PondActivityController extends AbstractV8Controller {
 		if (dto.getId() == null || dto.getId().intValue() == 0) {
 			act = new DTFarmPondActivity();
 		} else {
-			act = pondActivityRepository.findOne(dto.getId());
+			act = pondActivityRepository.getOne(dto.getId());
 			farmPondProductionCycleService.rollbackPondProductionCycle(act);
 		}
 

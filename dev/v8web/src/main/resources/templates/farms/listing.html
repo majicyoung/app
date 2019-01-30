@@ -26,6 +26,7 @@
 					<table id="farmlist" class="table table-hover table-striped table-bordered datatable order-column">
 						<thead>
 						<tr>
+							<th></th>
 							<th>#</th>
 							<th th:text="#{farm.name}">farm.name</th>
 							<th th:text="#{default.location}">default.location</th>
@@ -39,6 +40,7 @@
 						</thead>
 						<tbody>
 						<tr th:each="farm : ${farms}">
+							<td></td>
 							<td th:inline="text" th:text="${farm.id}">[[${farm.id}]]</td>
 							<td th:inline="text" th:text="${farm.name}">[[${farm.name}]]</td>
 							<td th:inline="text">[[${farm.address.city}]]</td>
@@ -73,8 +75,18 @@
 
       $(document).ready(function () {
           $('#farmlist').DataTable({
-              "responsive": true,
-              "order": [[5, "desc"]],
+              "responsive": {
+                  details: {
+                      type: 'column',
+                      target: 'tr'
+                  }
+              },
+              "columnDefs": [ {
+                  className: 'control',
+                  orderable: false,
+                  targets:   0
+              } ],
+              "order": [[6, "desc"]],
               "language": {
                   "url": langURL
               }

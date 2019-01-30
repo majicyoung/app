@@ -49,6 +49,10 @@ public class V8UserDetailsService implements UserDetailsService, ApplicationList
             throw new UsernameNotFoundException(username);
         }
 
+        if (!u.isActive()){
+            throw new UsernameNotFoundException(username);
+        }
+
         fameService.saveUserLogin(u);
 
         V8LoggedUser loggedUser = new V8LoggedUser(u);
