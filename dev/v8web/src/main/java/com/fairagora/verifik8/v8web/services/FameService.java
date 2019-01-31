@@ -1,24 +1,26 @@
 package com.fairagora.verifik8.v8web.services;
 
+import com.fairagora.verifik8.v8web.config.helper.BooleanHelper;
 import com.fairagora.verifik8.v8web.data.domain.dt.DTFarmPlotActivity;
 import com.fairagora.verifik8.v8web.data.domain.dt.DTFarmPondActivity;
-import com.fairagora.verifik8.v8web.data.domain.reg.V8Base;
 import com.fairagora.verifik8.v8web.data.domain.sys.SYSUser;
 import com.fairagora.verifik8.v8web.data.domain.sys.SysUserStat;
 import com.fairagora.verifik8.v8web.data.domain.sys.SysUserStatActivity;
-import com.fairagora.verifik8.v8web.data.repo.dt.DTFarmPlotActivityRepository;
-import com.fairagora.verifik8.v8web.data.repo.dt.DTFarmPondActivityRepository;
-import com.fairagora.verifik8.v8web.data.repo.sys.SYSStatActivityRepository;
 import com.fairagora.verifik8.v8web.data.repo.sys.SYSUserRepository;
 import com.fairagora.verifik8.v8web.data.repo.sys.SYSUserStatActivityRepository;
 import com.fairagora.verifik8.v8web.data.repo.sys.SYSUserStatRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
+import org.springframework.web.context.request.RequestContextListener;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
+
+import javax.servlet.http.HttpServletRequest;
 
 @Component
 public class FameService {
@@ -34,6 +36,14 @@ public class FameService {
 
 	@Autowired
 	private SYSUserStatActivityRepository sysUserStatActivityRepository;
+	
+	@Autowired
+	private HttpServletRequest request;
+	
+	@Bean
+	public RequestContextListener requestContextListener(){
+		return new RequestContextListener();
+	} 
 
 
 	public List<SYSUser> getMostActiveUserByLogin(String startDate, String endDate, String roleId) {
@@ -60,6 +70,9 @@ public class FameService {
 		sysUserStat.setClientId(clientId);
 		sysUserStat.setSysUser(sysUser);
 		sysUserStat.setConnectionTime(new Date());
+		sysUserStat.setIpAddress(this.getClientIp(request));
+		sysUserStat.setUserAgent(request.getHeader("User-Agent"));
+		sysUserStat.setSource(this.getSource(request));
 		sysUserStatRepository.save(sysUserStat);
 
 	}
@@ -68,6 +81,7 @@ public class FameService {
 		SysUserStatActivity sysUserStatActivity = new SysUserStatActivity();
 		sysUserStatActivity.setSysUser(sysUser);
 		sysUserStatActivity.setDtFarmPondActivity(dtFarmPondActivity.getId());
+		sysUserStatActivity.setSource(this.getSource(request));
 		sysUserStatActivityRepository.save(sysUserStatActivity);
 	}
 
@@ -75,8 +89,23 @@ public class FameService {
 		SysUserStatActivity sysUserStatActivity = new SysUserStatActivity();
 		sysUserStatActivity.setSysUser(sysUser);
 		sysUserStatActivity.setDtFarmPlotActivity(dtFarmPlotActivity.getId());
+		sysUserStatActivity.setSource(this.getSource(request));
 		sysUserStatActivityRepository.save(sysUserStatActivity);
 	}
-
+	
+	private boolean getSource(HttpServletRequest request) {
+		return request.getServerName().contains("api") ? BooleanHelper.parseBoolean("2") : BooleanHelper.parseBoolean("1");
+	}
+	
+	private String getClientIp(HttpServletRequest request) {
+		InetAddress inetAddress = null;
+		try {
+			inetAddress = InetAddress.getByName(request.getServerName());
+		} catch (UnknownHostException e) {
+			e.printStackTrace();
+		}
+		
+		return inetAddress.getHostAddress();
+	}
 
 }

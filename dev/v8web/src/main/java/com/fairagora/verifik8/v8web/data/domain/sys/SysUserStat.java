@@ -22,6 +22,16 @@ public class SysUserStat extends V8Base implements V8Entity {
 
 	@Column(name = "CONNECTION_TIME")
 	private Date connectionTime;
+	
+	@Column(name = "USER_IP_ADDRESS")
+	private String ipAddress;
+	
+	@Column(name = "USER_AGENT")
+	@Lob
+	private String userAgent;
+	
+	@Column(name = "SOURCE")
+	private boolean source;
 
 
 	@Override
@@ -39,7 +49,6 @@ public class SysUserStat extends V8Base implements V8Entity {
 		return id.toString();
 	}
 
-
 	public SYSUser getSysUser() {
 		return sysUser;
 	}
@@ -55,4 +64,30 @@ public class SysUserStat extends V8Base implements V8Entity {
 	public void setConnectionTime(Date connectionTime) {
 		this.connectionTime = connectionTime;
 	}
+
+	public String getIpAddress() {
+		return ipAddress;
+	}
+
+	public void setIpAddress(String ipAddress) {
+		this.ipAddress = ipAddress;
+	}
+
+	public String getUserAgent() {
+		return userAgent;
+	}
+
+	public void setUserAgent(String userAgent) {
+		this.userAgent = userAgent;
+	}
+
+	public boolean isSource() {
+		return source;
+	}
+
+	public void setSource(boolean source) {
+		this.source = source;
+	}
+	
+	
 }
